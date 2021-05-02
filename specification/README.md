@@ -1,0 +1,2 @@
+- product-vision/ Zuarbeiten zur Produktvision
+- customer-discussion/ Korrespondenz mit dem Kunden
