@@ -51,6 +51,6 @@ Scrumpoker (https://planningpokeronline.com) (https://www.scrumpoker-online.org)
 20 und 40 -> zu umfangreich für einen Sprint und müssen für spätere Runden noch kleinteiliger formuliert werden.
 100 -> eine sehr umfangreiche Aufgabe wie bspw. ein Epic, die sich zum derzeitigen Zeitpunkt und ohne weitere Detaillierung nicht schätzen lässt.
 
-Sprintziel: Irgendetwaswas sehen
+Sprintziel: Irgendetwas sehen
 
 geführt von: Christoph Pascal Ahlner 19INB-1
