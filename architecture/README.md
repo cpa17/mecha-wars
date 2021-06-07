@@ -1,4 +1,4 @@
- -> Die komplette Strecke ist für den Einstieg gedacht (von *Set Up a Dev Environment* bis *A Simple Game*)https://gradle.org/releases/#6.9# Architektur
+# Architektur
 
 In diesem Verzeichnis liegen alle Dokoumente, die im Zusammenhang mit der Softwarearchitektur Mecha-Wars' stehen.
 
