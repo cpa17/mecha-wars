@@ -12,6 +12,12 @@ In diesem Verzeichnis liegen alle Dokoumente, die im Zusammenhang mit der Softwa
 - [libGDX](https://libgdx.com) mit dem [lwjgl3 Backend](https://gist.github.com/crykn/eb37cb4f7a03d006b3a0ecad27292a2d). Das wird in nächster Zeit sowieso der Standard und das lwjgl2 Backend macht bei mindestens zwei Projektteilnehmern Probleme.
 - [picocli](https://picocli.info)
 
+## CI Pipeline
+
+- **style**:
+- **build**: ```gradle --build-cache assemble```
+- **test**: ```gradle check``` (führt JUnit5 und [spotbugs](https://spotbugs.github.io) aus)
+
 ## Dokumentation und Tutorials
 
 ### Gradle
