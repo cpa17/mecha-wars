@@ -9,7 +9,7 @@ In diesem Verzeichnis liegen alle Dokoumente, die im Zusammenhang mit der Softwa
 - [OpenJDK 11 LTS](https://adoptopenjdk.net) (die aktuelleste Version 16 wird von libGDX nicht unterstützt)
 - [Gradle 6.7.1](https://gradle.org)
 - [JUnit 5](https://junit.org/junit5/)
-- [libGDX](https://libgdx.com)
+- [libGDX](https://libgdx.com) mit dem [lwjgl3 Backend](https://gist.github.com/crykn/eb37cb4f7a03d006b3a0ecad27292a2d). Das wird in nächster Zeit sowieso der Standard und das lwjgl2 Backend macht bei mindestens zwei Projektteilnehmern Probleme.
 - [picocli](https://picocli.info)
 
 ## Dokumentation und Tutorials
