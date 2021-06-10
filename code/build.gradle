@@ -40,8 +40,12 @@ allprojects {
 
 project(":desktop") {
     apply plugin: "java-library"
+    apply plugin: "com.github.spotbugs"
+	apply plugin: "checkstyle"
 
-
+    spotbugs {
+        showProgress = true
+    }
     dependencies {
         implementation project(":core")
         api "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
@@ -54,6 +58,7 @@ project(":desktop") {
 project(":core") {
     apply plugin: "java-library"
     apply plugin: "com.github.spotbugs"
+	apply plugin: "checkstyle"
 
     spotbugs {
         showProgress = true
