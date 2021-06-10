@@ -14,9 +14,8 @@ In diesem Verzeichnis liegen alle Dokoumente, die im Zusammenhang mit der Softwa
 
 ## CI Pipeline
 
-- **style**:
 - **build**: ```gradle --build-cache assemble```
-- **test**: ```gradle check``` (führt JUnit5 und [spotbugs](https://spotbugs.github.io) aus)
+- **test**: ```gradle check``` (führt JUnit5, [stylecheck](https://checkstyle.org) und [spotbugs](https://spotbugs.github.io) aus)
 
 ## Dokumentation und Tutorials
 
