@@ -28,9 +28,11 @@ In diesem Verzeichnis liegen alle Dokoumente, die im Zusammenhang mit der Softwa
 ### libGDX
 
 - [Installation](https://libgdx.com/dev/setup/) -> Die komplette Strecke ist für den Einstieg gedacht (von *Set Up a Dev Environment* bis *A Simple Game*)
-- [offizielle Dokumentation](h9s://libgdx.com/dev/)
+- [offizielle Dokumentation](https://libgdx.com/dev/)
+- [offizielles Wiki](https://github.com/libgdx/libgdx/wiki)
 - [Liste von libGDX-Ressourcen](https://github.com/rafaskb/awesome-libgdx#read)
 - [lwjgl3 Backend](https://github.com/libgdx/libgdx/tree/master/backends/gdx-backend-lwjgl3/src/com/badlogic/gdx/backends/lwjgl3)
+- [libgdx.info](https://libgdx.info) - Ein Haufen einfacher Tutorials zu häufigen Problemen und Anwendungen. Sehr zu empfehlen!
 
 ### JUnit
 
