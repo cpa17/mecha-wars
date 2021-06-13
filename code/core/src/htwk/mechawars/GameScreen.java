@@ -29,6 +29,7 @@ public class GameScreen implements Screen {
     final MechaWars game;
 
     Texture industrialTile;
+    Texture robot;
     OrthographicCamera camera;
     Stage stage;
     Table container;
@@ -39,6 +40,7 @@ public class GameScreen implements Screen {
         this.game = game;
 
         industrialTile = new Texture("industrialTile.png");
+        robot = new Texture("robot.png");
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, cameraWidth, cameraHeight);
@@ -48,11 +50,14 @@ public class GameScreen implements Screen {
 
         Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         addButtonsToStage(skin);
+        addScrollPanelToStage(skin);
+    }
 
-
+    public void addScrollPanelToStage(Skin skin) {
         int containerBoundsX = (cameraWidth - ((cameraWidth-cameraHeight)/2))+10;
         int containerBoundsY = 10;
         int containerWidth = ((cameraWidth-cameraHeight)/2)-20;
+
         container = new Table();
         stage.addActor(container);
         container.setBounds(containerBoundsX, containerBoundsY, containerWidth,600);
@@ -127,15 +132,24 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(1, 1, 1, 1);
+        ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
         camera.update();
  //       game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
         drawPlayingField();
+        drawRobot();
         game.batch.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }
+
+    public void drawRobot() {
+        int tileSize = (cameraHeight/12);
+        int reihe = 6;
+        int spalte = 6;
+        game.batch.draw(robot, tileSize*(spalte-1), (tileSize*(reihe-1))+5);
+    }
+
 
     public void drawPlayingField(){
         int x = 0;
@@ -171,6 +185,7 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         industrialTile.dispose();
+        robot.dispose();
     }
 
     @Override
