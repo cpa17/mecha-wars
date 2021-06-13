@@ -5,12 +5,22 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
@@ -21,18 +31,50 @@ public class GameScreen implements Screen {
     Texture industrialTile;
     OrthographicCamera camera;
     Stage stage;
+    Table container;
     private static final int cameraWidth = 1280;
     private static final int cameraHeight = 720;
 
     public GameScreen(final MechaWars game) {
         this.game = game;
+
         industrialTile = new Texture("industrialTile.png");
+
         camera = new OrthographicCamera();
         camera.setToOrtho(false, cameraWidth, cameraHeight);
+
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
+
         Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         addButtonsToStage(skin);
+
+
+        int containerBoundsX = (cameraWidth - ((cameraWidth-cameraHeight)/2))+10;
+        int containerBoundsY = 10;
+        int containerWidth = ((cameraWidth-cameraHeight)/2)-20;
+        container = new Table();
+        stage.addActor(container);
+        container.setBounds(containerBoundsX, containerBoundsY, containerWidth,600);
+
+        Table table = new Table();
+
+        final ScrollPane scrollPanel = new ScrollPane(table, skin);
+
+        for (int i = 1; i < 101; i++) {
+            TextButton button;
+            button = new TextButton(i +". Karte", skin);
+            table.row();
+            table.add(button);
+            String buttonText = i+". Karte angeklickt";
+            button.addListener(new ClickListener() {
+                public void clicked(InputEvent event, float x, float y) {
+                    System.out.println(buttonText);
+                }
+            });
+        }
+
+        container.add(scrollPanel).expand().fill();
     }
 
     public void addButtonsToStage(Skin skin) {
@@ -91,7 +133,7 @@ public class GameScreen implements Screen {
         game.batch.begin();
         drawPlayingField();
         game.batch.end();
-        stage.act();
+        stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }
 
