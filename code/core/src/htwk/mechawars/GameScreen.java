@@ -33,7 +33,6 @@ public class GameScreen implements Screen {
 
     /**
      * Constructor of class GameScreen.
-     * @param g Object of class Game.
      */
     public GameScreen() {
         industrialTile = new Texture("industrialTile.png");
