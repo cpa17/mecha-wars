@@ -29,7 +29,7 @@ public class GameScreen implements Screen {
     Stage stage;
     Table container;
     private SpriteBatch batch;
-    private Game game; //used for later
+    private Game game; //used for later usage
     private static final int cameraWidth = 1280;
     private static final int cameraHeight = 720;
 
