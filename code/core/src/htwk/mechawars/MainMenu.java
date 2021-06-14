@@ -1,6 +1,5 @@
 package htwk.mechawars;
 
-
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -13,13 +12,21 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+/**
+* Class that presents the surface of the MainMenu screen.
+*/
 public class MainMenu implements Screen {
 	private MechaWars mecha;
 	private Game game;
 	private Stage stage;
 	private SpriteBatch batch; //The SpriteBatch is a special class that is used to draw 2D images.
 	private Texture img; 
-	 
+	
+	/**
+    * Constructor of class GameScreen.
+    * @param g Object of class Game
+    * @param m Object of class MechaWars.
+    */
 	public MainMenu(Game g, MechaWars m) {
 		mecha = m;
 		game = g;	
@@ -61,6 +68,9 @@ public class MainMenu implements Screen {
 		stage.addActor(endGame);
 	}
 	
+	/**
+    * changeScreen function to switch to GameScreen.
+    */
 	public void changeScreen() {
 		game.setScreen(new GameScreen(mecha));	
 		stage.dispose();
