@@ -82,7 +82,7 @@ public class GameScreen implements Screen {
             button = new TextButton(i + ". Karte", skin);
             table.row();
             table.add(button);
-            String buttonText = i + ". Karte angeklickt";
+            final String buttonText = i + ". Karte angeklickt";
             button.addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
                     System.out.println(buttonText);
