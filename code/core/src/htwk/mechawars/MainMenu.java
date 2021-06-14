@@ -16,7 +16,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
  * Class that presents the surface of the MainMenu screen.
  */
 public class MainMenu implements Screen {
-    private MechaWars mecha;
     private Game game;
     private Stage stage;
     private SpriteBatch batch; //The SpriteBatch is a special class that is used to draw 2D images.
@@ -25,10 +24,8 @@ public class MainMenu implements Screen {
     /**
      * Constructor of class GameScreen.
      * @param g Object of class Game
-     * @param m Object of class MechaWars.
      */
-    public MainMenu(Game g, MechaWars m) {
-        mecha = m;
+    public MainMenu(Game g) {
         game = g;
         img = new Texture(Gdx.files.internal("background.png"));
 
@@ -72,7 +69,7 @@ public class MainMenu implements Screen {
      * changeScreen function to switch to GameScreen.
      */
     public void changeScreen() {
-        game.setScreen(new GameScreen(mecha));
+        game.setScreen(new GameScreen(game));
         stage.dispose();
     }
 
