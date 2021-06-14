@@ -29,7 +29,7 @@ public class MainMenu implements Screen {
      */
     public MainMenu(Game g, MechaWars m) {
         mecha = m;
-        game = g;	
+        game = g;
         img = new Texture(Gdx.files.internal("background.png"));
 
         //Its like a new window (The stage will use its own Batch)
@@ -51,7 +51,7 @@ public class MainMenu implements Screen {
             public void touchUp(InputEvent e, float x, float y, int point, int button) {
                 changeScreen();
             }
-        });	
+        });
 
         TextButton endGame = new TextButton("Spiel beenden", skin);
         endGame.setPosition(440, 100);
@@ -72,7 +72,7 @@ public class MainMenu implements Screen {
      * changeScreen function to switch to GameScreen.
      */
     public void changeScreen() {
-        game.setScreen(new GameScreen(mecha));	
+        game.setScreen(new GameScreen(mecha));
         stage.dispose();
     }
 
@@ -85,9 +85,9 @@ public class MainMenu implements Screen {
     public void render(float delta) {
         //specify clear values for the color buffers
         Gdx.gl.glClearColor(0, 0, 0, 0);
-        //clear buffers to preset values, Parameter: Bitwise OR of masks that indicate the buffers to be cleared
+        //clear buffers to preset values
         //GL_COLOR_BUFFER_BIT - Indicates the buffers currently enabled for color writing.
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);		
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         //now the screen is cleared
 
         //the stage uses its own batch so i store this batch in the global batch
