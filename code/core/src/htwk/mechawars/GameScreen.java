@@ -1,6 +1,5 @@
 package htwk.mechawars;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -29,7 +28,6 @@ public class GameScreen implements Screen {
     Stage stage;
     Table container;
     private SpriteBatch batch;
-    //private Game game; //used for later usage
     private static final int cameraWidth = 1280;
     private static final int cameraHeight = 720;
 
@@ -37,9 +35,7 @@ public class GameScreen implements Screen {
      * Constructor of class GameScreen.
      * @param g Object of class Game.
      */
-    public GameScreen(Game g) {
-        //game = g;
-
+    public GameScreen() {
         industrialTile = new Texture("industrialTile.png");
         robot = new Texture("robot.png");
 
