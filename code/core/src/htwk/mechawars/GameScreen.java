@@ -1,26 +1,19 @@
 package htwk.mechawars;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
@@ -29,23 +22,19 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
  */
 public class GameScreen implements Screen {
 
-    final MechaWars game;
-
     Texture industrialTile;
     Texture robot;
     OrthographicCamera camera;
     Stage stage;
     Table container;
+    private SpriteBatch batch;
     private static final int cameraWidth = 1280;
     private static final int cameraHeight = 720;
 
     /**
      * Constructor of class GameScreen.
-     * @param game Object of class MechaWars.
      */
-    public GameScreen(final MechaWars game) {
-        this.game = game;
-
+    public GameScreen() {
         industrialTile = new Texture("industrialTile.png");
         robot = new Texture("robot.png");
 
@@ -82,7 +71,7 @@ public class GameScreen implements Screen {
             button = new TextButton(i + ". Karte", skin);
             table.row();
             table.add(button);
-            String buttonText = i + ". Karte angeklickt";
+            final String buttonText = i + ". Karte angeklickt";
             button.addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
                     System.out.println(buttonText);
@@ -153,11 +142,12 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
         camera.update();
-        game.batch.setProjectionMatrix(camera.combined);
-        game.batch.begin();
+        batch = (SpriteBatch) stage.getBatch();
+        batch.setProjectionMatrix(camera.combined);
+        batch.begin();
         drawPlayingField();
         drawRobot();
-        game.batch.end();
+        batch.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }
@@ -169,7 +159,7 @@ public class GameScreen implements Screen {
         int tileSize = (cameraHeight / 12);
         int reihe = 6;
         int spalte = 6;
-        game.batch.draw(robot, tileSize * (spalte - 1), (tileSize * (reihe - 1)) + 5);
+        batch.draw(robot, tileSize * (spalte - 1), (tileSize * (reihe - 1)) + 5);
     }
 
 
@@ -183,7 +173,7 @@ public class GameScreen implements Screen {
             int y = 0;
             int j = 0;
             while (j < 12) {
-                game.batch.draw(industrialTile, x, y);
+                batch.draw(industrialTile, x, y);
                 y = y + (cameraHeight / 12);
                 j++;
             }
