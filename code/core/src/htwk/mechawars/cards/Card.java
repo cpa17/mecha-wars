@@ -1,6 +1,6 @@
-package cards;
+package htwk.mechawars.cards;
 
-public abstract class Card {
+public class Card {
 	
 	protected Type cardAttributeType;
 	protected Name cardAttributeName;
@@ -16,8 +16,11 @@ public abstract class Card {
 	/**
 	 * Constructor of a Card
 	 */
-	public Card() {
+	public Card(Name cardAttributeName, Type cardAttributeType, byte cardAttributeMovCount) {
 		super();
+		this.cardAttributeType = cardAttributeType;
+		this.cardAttributeName = cardAttributeName;
+		this.cardAttributeMovCount = cardAttributeMovCount;
 	}
 	
 	// getter functions --------------------------------------------------------

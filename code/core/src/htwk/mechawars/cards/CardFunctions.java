@@ -1,17 +1,10 @@
-package cards;
+package htwk.mechawars.cards;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import cardTypes.Mov1;
-import cardTypes.Mov2;
-import cardTypes.Mov3;
-import cardTypes.MovB;
-import cardTypes.TurnL;
-import cardTypes.TurnR;
-import cardTypes.TurnU;
 
 public class CardFunctions{
 	
@@ -27,17 +20,17 @@ public class CardFunctions{
 	 */
 	public static Card[] initDeck(Card[] cardDeck) {
 		for (int i = 0; i < 18; i+=1) {
-			cardDeck[i] 	= new Mov1();
-			cardDeck[i+18] 	= new TurnR();
-			cardDeck[i+36] 	= new TurnL();
+			cardDeck[i] 	= new Card(Name.mov1, Type.mov, (byte) 1 );
+			cardDeck[i+18] 	= new Card(Name.turnR, Type.turn, (byte) 1);
+			cardDeck[i+36] 	= new Card(Name.turnL, Type.turn, (byte) 3);
 		}
 		for (int i = 54; i < 60; i+=1) {
-			cardDeck[i] 	= new Mov3();
-			cardDeck[i+6] 	= new MovB();
-			cardDeck[i+12] 	= new TurnU();
+			cardDeck[i] 	= new Card(Name.mov3, Type.mov, (byte) 3);
+			cardDeck[i+6] 	= new Card(Name.movB, Type.mov, (byte) -1);
+			cardDeck[i+12] 	= new Card(Name.turnU, Type.turn, (byte) 2);
 		}
 		for (int i = 72; i < 84; i+=1) {
-			cardDeck[i] 	= new Mov2();
+			cardDeck[i] 	= new Card(Name.mov2, Type.mov, (byte) 2);
 		}
 		return cardDeck;
 	}

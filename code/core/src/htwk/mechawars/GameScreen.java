@@ -1,28 +1,23 @@
 package htwk.mechawars;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+
+import htwk.mechawars.cards.Card;
+import htwk.mechawars.cards.CardFunctions;
 
 /**
  * Class that presents the surface of the game screen.
@@ -38,7 +33,10 @@ public class GameScreen implements Screen {
     Table container;
     private static final int cameraWidth = 1280;
     private static final int cameraHeight = 720;
-
+    
+    int[] cardOrder = new int[5];
+    int pressCounter = 0;
+    
     /**
      * Constructor of class GameScreen.
      * @param game Object of class MechaWars.
@@ -76,16 +74,35 @@ public class GameScreen implements Screen {
         Table table = new Table();
 
         final ScrollPane scrollPanel = new ScrollPane(table, skin);
+        
+        // Array of Cards created
+        Card[] deck = new Card[84];
+        deck = CardFunctions.initDeck(deck);
+        // shuffle Deck
+        deck = CardFunctions.shuffle(deck);
+        
 
-        for (int i = 1; i < 101; i++) {
+        
+        for (int cardPrintCounter = 0; cardPrintCounter < 84; cardPrintCounter+=1) {
             TextButton button;
-            button = new TextButton(i + ". Karte", skin);
+            button = new TextButton((cardPrintCounter+1) + " - " + deck[cardPrintCounter].getCardAttributeName().get_Name(), skin);
             table.row();
             table.add(button);
-            String buttonText = i + ". Karte angeklickt";
+            String buttonText = (cardPrintCounter+1) + ". Karte angeklickt";
+            int buttonNumber = (cardPrintCounter+1);
             button.addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
-                    System.out.println(buttonText);
+                    System.out.print(buttonText + " ");
+                    System.out.println(buttonNumber);
+                    // can also be done with Try&Catch
+                    if(pressCounter<5) {
+                    	cardOrder[pressCounter] = buttonNumber;
+                    	System.out.println(cardOrder[pressCounter]);
+                        pressCounter+=1;
+                    }
+                    else {
+                    	// NOP
+                    }
                 }
             });
         }

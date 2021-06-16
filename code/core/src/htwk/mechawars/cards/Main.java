@@ -1,4 +1,4 @@
-package cards;
+package htwk.mechawars.cards;
 
 public class Main {
 
