@@ -95,40 +95,7 @@ public class GameScreen implements Screen {
             // Button-ClickListener
             buttons[cardPrintCounter].addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
-//                    System.out.print(buttonText + " ");
-//                    System.out.println(buttonNumber);
-                    
-                    // can also be done with Try&Catch
-                    if(pressCounter<5) {
-                    	cardOrder[pressCounter] = buttonNumber;			// write the number of the button in cardOrder at pressCounter
-//                    	System.out.println(cardOrder[pressCounter] + " JO");
-
-                        pressCounter+=1;
-                        
-                        boolean testung = true;
-                        
-                        for(int i=pressCounter-2; i>=0; i-=1) {
-//                        	System.out.println("FOR " + i);
-//                        	System.out.println(cardOrder[i]);
-                        	if(cardOrder[i]==buttonNumber) {
-//                        		System.out.println("Durchlauf" + i);
-                        		testung = false;
-                                pressCounter-=1;
-                        	}
-                        }
-                        
-//                        System.out.println("vor if testung");
-                        
-                        if(testung) {
-//                        	System.out.println("Juha testung");
-                    		buttons[buttonNumber-1].setColor(Color.GREEN);
-                            buttons[buttonNumber-1].setText(buttons[buttonNumber-1].getText() + " | Nr: " + (pressCounter));
-                        } 
-                    }
-                    else {
-                    	// NOP
-                    }
-//                    System.out.println("");
+                    buttonClickOrder(buttonNumber);
                 }
             });
         }
@@ -136,6 +103,58 @@ public class GameScreen implements Screen {
         container.add(scrollPanel).expand().fill();
     }
     
+    
+    private void buttonClickOrder(int buttonNumber) {
+//      System.out.print(buttonText + " ");
+//      System.out.println(buttonNumber);
+      
+      // can also be done with Try&Catch
+      if(pressCounter<5) {
+          cardOrder[pressCounter] = buttonNumber;         // write the number of the button in cardOrder at pressCounter
+//        System.out.println(cardOrder[pressCounter] + " JO");
+
+          pressCounter+=1;
+          
+          boolean testung = true;
+          
+          for(int i=pressCounter-2; i>=0; i-=1) {
+//            System.out.println("FOR " + i);
+//            System.out.println(cardOrder[i]);
+              if(cardOrder[i]==buttonNumber) {
+//                System.out.println("Durchlauf" + i);
+                  testung = false;
+                  pressCounter-=1;
+              }
+          }
+          
+//          System.out.println("vor if testung");
+          
+          if(testung) {
+//            System.out.println("Juha testung");
+              buttons[buttonNumber-1].setColor(Color.GREEN);
+              buttons[buttonNumber-1].setText(buttons[buttonNumber-1].getText() + " | Nr: " + (pressCounter));
+          } 
+      }
+      else {
+          // NOP
+      }
+//      System.out.println("");
+    }
+    
+    private void cardOrderClear() {
+        int[] cardOrder = {566, 567, 568, 569, 570};
+        for(int i=0; i<84; i+=1) {
+            buttons[i].setText((i+1) + " - " + deck[i].getCardAttributeName().get_Name());
+        }
+        buttonsColourClean();
+        pressCounter = 0;
+    }
+    
+    private void buttonsColourClean() {
+        for(int i=0; i<84; i+=1) {
+            buttons[i].setColor(Color.LIGHT_GRAY);
+        }
+    }
 
     /**
      * Function that adds the buttons to the Stage.
@@ -153,9 +172,11 @@ public class GameScreen implements Screen {
         int startExecutionButtonY = cameraHeight - 100;
         int endGameButtonX = cameraHeight + (((cameraWidth - cameraHeight) * 2) / 3) - 64;
         int endGameButtonY = cameraHeight - 100;
+        
 
         startExecutionButton.setPosition(startExecutionButtonX, startExecutionButtonY);
         endGameButton.setPosition(endGameButtonX, endGameButtonY);
+        
 
         startExecutionButton.addListener(new InputListener() {
             @Override
@@ -186,6 +207,31 @@ public class GameScreen implements Screen {
 
         stage.addActor(startExecutionButton);
         stage.addActor(endGameButton);
+        
+        // add Button to remove cardOrder
+        Button removeCardOrder = new TextButton("Loesche\nKartenreihenfolge", skin);
+        
+        removeCardOrder.setSize(128, 43);
+        int removeCardOrderX = cameraHeight + (cameraWidth - cameraHeight)/3 - 64;
+        int removeCardOrderY = cameraHeight - 200;
+        
+        removeCardOrder.setPosition(removeCardOrderX, removeCardOrderY);
+        
+        removeCardOrder.addListener(new InputListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("Rauf");
+                cardOrderClear();
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("Runter");
+                return true;
+            }
+        });
+        
+        stage.addActor(removeCardOrder);
     }
 
     @Override
