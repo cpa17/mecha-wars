@@ -29,16 +29,26 @@ import htwk.mechawars.cards.CardFunctions;
  */
 public class GameScreen implements Screen {
 
+<<<<<<< Upstream, based on origin/MW13
     Texture industrialTile;
     Texture robot;
     OrthographicCamera camera;
     Stage stage;
     Table container;
     private SpriteBatch batch;
+=======
+    final MechaWars game;
+
+    private Texture industrialTile;
+    private Texture robot;
+    private OrthographicCamera camera;
+    private Stage stage;
+    private Table container;
+>>>>>>> 5afb8c1 attribute private gemacht
     private static final int cameraWidth = 1280;
     private static final int cameraHeight = 720;
 
-    ZugInitialisierung zugInititalisierung = new ZugInitialisierung();
+    private ZugInitialisierung zugInititalisierung = new ZugInitialisierung();
 
     private int[] cardOrder = { -1, -1, -1, -1, -1};
     private int pressCounter = 0;
