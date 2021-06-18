@@ -107,11 +107,13 @@ public class GameScreen implements Screen {
                         
                         boolean testung = true;
                         
-                        for(int i=pressCounter; i>=0; i-=1) {
+                        for(int i=pressCounter-2; i>=0; i-=1) {
                         	System.out.println("FOR " + i);
+                        	System.out.println(cardOrder[i]);
                         	if(cardOrder[i]==buttonNumber) {
                         		System.out.println("Durchlauf" + i);
                         		testung = false;
+                                pressCounter-=1;
                         	}
                         }
                         
