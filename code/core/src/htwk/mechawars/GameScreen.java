@@ -35,8 +35,10 @@ public class GameScreen implements Screen {
     private static final int cameraWidth = 1280;
     private static final int cameraHeight = 720;
     
-    int[] cardOrder = new int[5];
+    int[] cardOrder = {566, 567, 568, 569, 570};
     int pressCounter = 0;
+    
+    Card[] deck = new Card[84];
     
     TextButton[] buttons = new TextButton[84];
     
@@ -79,7 +81,6 @@ public class GameScreen implements Screen {
         final ScrollPane scrollPanel = new ScrollPane(table, skin);
         
         // Array of Cards created
-        Card[] deck = new Card[84];
         deck = CardFunctions.initDeck(deck);
         // shuffle Deck
         deck = CardFunctions.shuffle(deck);
@@ -90,6 +91,8 @@ public class GameScreen implements Screen {
             table.add(buttons[cardPrintCounter]);
             String buttonText = (cardPrintCounter+1) + ". Karte angeklickt";
             int buttonNumber = (cardPrintCounter+1);
+            
+            // Button-ClickListener
             buttons[cardPrintCounter].addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
                     System.out.print(buttonText + " ");
@@ -98,19 +101,24 @@ public class GameScreen implements Screen {
                     // can also be done with Try&Catch
                     if(pressCounter<5) {
                     	cardOrder[pressCounter] = buttonNumber;			// write the number of the button in cardOrder at pressCounter
-                    	System.out.println(cardOrder[pressCounter]);
+                    	System.out.println(cardOrder[pressCounter] + " JO");
 
                         pressCounter+=1;
                         
                         boolean testung = true;
                         
-                        for(int i=pressCounter; i==0; i-=1) {
+                        for(int i=pressCounter; i>=0; i-=1) {
+                        	System.out.println("FOR " + i);
                         	if(cardOrder[i]==buttonNumber) {
+                        		System.out.println("Durchlauf" + i);
                         		testung = false;
                         	}
                         }
                         
+                        System.out.println("vor if testung");
+                        
                         if(testung) {
+                        	System.out.println("Juha testung");
                     		buttons[buttonNumber-1].setColor(Color.GREEN);
                             buttons[buttonNumber-1].setText(buttons[buttonNumber-1].getText() + " | Nr: " + (pressCounter));
                         } 
@@ -118,6 +126,7 @@ public class GameScreen implements Screen {
                     else {
                     	// NOP
                     }
+                    System.out.println("");
                 }
             });
         }
