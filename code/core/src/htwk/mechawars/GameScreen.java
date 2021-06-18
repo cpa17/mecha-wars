@@ -95,32 +95,32 @@ public class GameScreen implements Screen {
             // Button-ClickListener
             buttons[cardPrintCounter].addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
-                    System.out.print(buttonText + " ");
-                    System.out.println(buttonNumber);
+//                    System.out.print(buttonText + " ");
+//                    System.out.println(buttonNumber);
                     
                     // can also be done with Try&Catch
                     if(pressCounter<5) {
                     	cardOrder[pressCounter] = buttonNumber;			// write the number of the button in cardOrder at pressCounter
-                    	System.out.println(cardOrder[pressCounter] + " JO");
+//                    	System.out.println(cardOrder[pressCounter] + " JO");
 
                         pressCounter+=1;
                         
                         boolean testung = true;
                         
                         for(int i=pressCounter-2; i>=0; i-=1) {
-                        	System.out.println("FOR " + i);
-                        	System.out.println(cardOrder[i]);
+//                        	System.out.println("FOR " + i);
+//                        	System.out.println(cardOrder[i]);
                         	if(cardOrder[i]==buttonNumber) {
-                        		System.out.println("Durchlauf" + i);
+//                        		System.out.println("Durchlauf" + i);
                         		testung = false;
                                 pressCounter-=1;
                         	}
                         }
                         
-                        System.out.println("vor if testung");
+//                        System.out.println("vor if testung");
                         
                         if(testung) {
-                        	System.out.println("Juha testung");
+//                        	System.out.println("Juha testung");
                     		buttons[buttonNumber-1].setColor(Color.GREEN);
                             buttons[buttonNumber-1].setText(buttons[buttonNumber-1].getText() + " | Nr: " + (pressCounter));
                         } 
@@ -128,7 +128,7 @@ public class GameScreen implements Screen {
                     else {
                     	// NOP
                     }
-                    System.out.println("");
+//                    System.out.println("");
                 }
             });
         }
