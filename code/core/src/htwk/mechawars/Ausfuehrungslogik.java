@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 import htwk.mechawars.cards.Card;
 
-public class Ausführungslogik {
+public class Ausfuehrungslogik {
     
     private static LinkedList<Card>  kartenListe;
 
@@ -13,7 +13,7 @@ public class Ausführungslogik {
     }
 
     public void setKartenListe(LinkedList<Card> kartenListe) {
-        Ausführungslogik.kartenListe = kartenListe;
+        Ausfuehrungslogik.kartenListe = kartenListe;
     }
 
 
