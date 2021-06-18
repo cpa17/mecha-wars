@@ -2,6 +2,7 @@ package htwk.mechawars;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -36,6 +37,8 @@ public class GameScreen implements Screen {
     
     int[] cardOrder = new int[5];
     int pressCounter = 0;
+    
+    TextButton[] buttons = new TextButton[84];
     
     /**
      * Constructor of class GameScreen.
@@ -81,24 +84,36 @@ public class GameScreen implements Screen {
         // shuffle Deck
         deck = CardFunctions.shuffle(deck);
         
-
-        
         for (int cardPrintCounter = 0; cardPrintCounter < 84; cardPrintCounter+=1) {
-            TextButton button;
-            button = new TextButton((cardPrintCounter+1) + " - " + deck[cardPrintCounter].getCardAttributeName().get_Name(), skin);
+            buttons[cardPrintCounter] = new TextButton((cardPrintCounter+1) + " - " + deck[cardPrintCounter].getCardAttributeName().get_Name(), skin);
             table.row();
-            table.add(button);
+            table.add(buttons[cardPrintCounter]);
             String buttonText = (cardPrintCounter+1) + ". Karte angeklickt";
             int buttonNumber = (cardPrintCounter+1);
-            button.addListener(new ClickListener() {
+            buttons[cardPrintCounter].addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
                     System.out.print(buttonText + " ");
                     System.out.println(buttonNumber);
+                    
                     // can also be done with Try&Catch
                     if(pressCounter<5) {
-                    	cardOrder[pressCounter] = buttonNumber;
+                    	cardOrder[pressCounter] = buttonNumber;			// write the number of the button in cardOrder at pressCounter
                     	System.out.println(cardOrder[pressCounter]);
+
                         pressCounter+=1;
+                        
+                        boolean testung = true;
+                        
+                        for(int i=pressCounter; i==0; i-=1) {
+                        	if(cardOrder[i]==buttonNumber) {
+                        		testung = false;
+                        	}
+                        }
+                        
+                        if(testung) {
+                    		buttons[buttonNumber-1].setColor(Color.GREEN);
+                            buttons[buttonNumber-1].setText(buttons[buttonNumber-1].getText() + " | Nr: " + (pressCounter));
+                        } 
                     }
                     else {
                     	// NOP
@@ -109,6 +124,7 @@ public class GameScreen implements Screen {
 
         container.add(scrollPanel).expand().fill();
     }
+    
 
     /**
      * Function that adds the buttons to the Stage.
