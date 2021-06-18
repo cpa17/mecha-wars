@@ -1,5 +1,7 @@
 package htwk.mechawars;
 
+import java.util.LinkedList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -9,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -34,6 +37,7 @@ public class GameScreen implements Screen {
     private SpriteBatch batch;
     private static final int cameraWidth = 1280;
     private static final int cameraHeight = 720;
+<<<<<<< Upstream, based on origin/MW13
     
     private int[] cardOrder = { -1, -1, -1, -1, -1};
     private int pressCounter = 0;
@@ -42,8 +46,22 @@ public class GameScreen implements Screen {
     
     private TextButton[] buttons = new TextButton[84];
     
+=======
+
+    ZugInitialisierung zugInititalisierung = new ZugInitialisierung();
+
+    int[] cardOrder = new int[5];
+    int pressCounter = 0;
+    LinkedList<TextButton> buttons = new LinkedList<TextButton>();
+
+>>>>>>> f886b17 tabs ersetzt
     /**
      * Constructor of class GameScreen.
+<<<<<<< Upstream, based on origin/MW13
+=======
+     * 
+     * @param game Object of class MechaWars.
+>>>>>>> f886b17 tabs ersetzt
      */
     public GameScreen() {
         industrialTile = new Texture("industrialTile.png");
@@ -62,6 +80,7 @@ public class GameScreen implements Screen {
 
     /**
      * Function that adds the scroll panel to the Stage.
+     * 
      * @param skin Object of class Skin which was initialized in the constructor.
      */
     public void addScrollPanelToStage(Skin skin) {
@@ -76,24 +95,57 @@ public class GameScreen implements Screen {
         Table table = new Table();
 
         final ScrollPane scrollPanel = new ScrollPane(table, skin);
-        
+
         // Array of Cards created
         deck = CardFunctions.initDeck(deck);
         // shuffle Deck
         deck = CardFunctions.shuffle(deck);
+<<<<<<< Upstream, based on origin/MW13
         
         for (int cardPrintCounter = 0; cardPrintCounter < 84; cardPrintCounter += 1) {
             buttons[cardPrintCounter] = new TextButton((cardPrintCounter + 1) + " - "
                     + deck[cardPrintCounter], skin);
+=======
+
+        for (int cardPrintCounter = 0; cardPrintCounter < 84; cardPrintCounter += 1) {
+            TextButton button;
+            Card aktuelleKarte = deck[cardPrintCounter];
+            button = new TextButton((cardPrintCounter + 1) + " - " + aktuelleKarte.getCardAttributeName().get_Name(),
+                    skin);
+>>>>>>> f886b17 tabs ersetzt
             table.row();
+<<<<<<< Upstream, based on origin/MW13
             table.add(buttons[cardPrintCounter]);
             int buttonNumber = (cardPrintCounter + 1);
             
             // Button-ClickListener
             buttons[cardPrintCounter].addListener(new ClickListener() {
+=======
+            table.add(button);
+            String buttonText = (cardPrintCounter + 1) + ". Karte angeklickt";
+            int buttonNumber = (cardPrintCounter + 1);
+            buttons.add(button);
+            button.addListener(new ClickListener() {
+>>>>>>> f886b17 tabs ersetzt
                 public void clicked(InputEvent event, float x, float y) {
+<<<<<<< Upstream, based on origin/MW13
                     buttonClickOrder(buttonNumber);
+=======
+                    System.out.print(buttonText + " ");
+                    System.out.println(buttonNumber);
+// can also be done with Try&Catch
+                    if (pressCounter < 5) {
+                        cardOrder[pressCounter] = buttonNumber;
+                        System.out.println(cardOrder[pressCounter]);
+                        pressCounter += 1;
+                    } else {
+// NOP
+                    }
+                    zugInititalisierung.addCard(aktuelleKarte);
+
+>>>>>>> f886b17 tabs ersetzt
                 }
+
             });
         }
 
@@ -164,8 +216,17 @@ public class GameScreen implements Screen {
         }
     }
 
+    private void deaktiviereButtons() {
+        for (int i = 0; i < buttons.size(); i++) {
+            buttons.get(i).setTouchable(Touchable.disabled);
+        }
+// TODO Auto-generated method stub
+
+    }
+
     /**
      * Function that adds the buttons to the Stage.
+     * 
      * @param skin Object of class Skin which was initialized in the constructor.
      */
     public void addButtonsToStage(Skin skin) {
@@ -195,6 +256,8 @@ public class GameScreen implements Screen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 System.out.println("startExecutionButton touchDown ausgelöst!");
+                deaktiviereButtons();
+                zugInititalisierung.initialiereBewegung();
                 return true;
             }
         });
@@ -270,7 +333,6 @@ public class GameScreen implements Screen {
         int spalte = 6;
         batch.draw(robot, tileSize * (spalte - 1), (tileSize * (reihe - 1)) + 5);
     }
-
 
     /**
      * Function that draws the playing field.

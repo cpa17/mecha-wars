@@ -6,4 +6,8 @@ package htwk.mechawars.cards;
 public enum Type {
     mov,
     turn;
+<<<<<<< Upstream, based on origin/MW13
 }
+=======
+}
+>>>>>>> f886b17 tabs ersetzt
