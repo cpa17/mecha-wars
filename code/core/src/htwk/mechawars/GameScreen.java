@@ -37,31 +37,20 @@ public class GameScreen implements Screen {
     private SpriteBatch batch;
     private static final int cameraWidth = 1280;
     private static final int cameraHeight = 720;
-<<<<<<< Upstream, based on origin/MW13
-    
+
+    ZugInitialisierung zugInititalisierung = new ZugInitialisierung();
+
     private int[] cardOrder = { -1, -1, -1, -1, -1};
     private int pressCounter = 0;
     
     private Card[] deck = new Card[84];
     
     private TextButton[] buttons = new TextButton[84];
-    
-=======
-
-    ZugInitialisierung zugInititalisierung = new ZugInitialisierung();
-
-    int[] cardOrder = new int[5];
-    int pressCounter = 0;
     LinkedList<TextButton> buttons = new LinkedList<TextButton>();
 
->>>>>>> f886b17 tabs ersetzt
     /**
      * Constructor of class GameScreen.
-<<<<<<< Upstream, based on origin/MW13
-=======
      * 
-     * @param game Object of class MechaWars.
->>>>>>> f886b17 tabs ersetzt
      */
     public GameScreen() {
         industrialTile = new Texture("industrialTile.png");
@@ -100,37 +89,17 @@ public class GameScreen implements Screen {
         deck = CardFunctions.initDeck(deck);
         // shuffle Deck
         deck = CardFunctions.shuffle(deck);
-<<<<<<< Upstream, based on origin/MW13
-        
         for (int cardPrintCounter = 0; cardPrintCounter < 84; cardPrintCounter += 1) {
             buttons[cardPrintCounter] = new TextButton((cardPrintCounter + 1) + " - "
                     + deck[cardPrintCounter], skin);
-=======
-
-        for (int cardPrintCounter = 0; cardPrintCounter < 84; cardPrintCounter += 1) {
-            TextButton button;
-            Card aktuelleKarte = deck[cardPrintCounter];
-            button = new TextButton((cardPrintCounter + 1) + " - " + aktuelleKarte.getCardAttributeName().get_Name(),
-                    skin);
->>>>>>> f886b17 tabs ersetzt
             table.row();
-<<<<<<< Upstream, based on origin/MW13
             table.add(buttons[cardPrintCounter]);
             int buttonNumber = (cardPrintCounter + 1);
             
             // Button-ClickListener
             buttons[cardPrintCounter].addListener(new ClickListener() {
-=======
-            table.add(button);
-            String buttonText = (cardPrintCounter + 1) + ". Karte angeklickt";
-            int buttonNumber = (cardPrintCounter + 1);
-            buttons.add(button);
-            button.addListener(new ClickListener() {
->>>>>>> f886b17 tabs ersetzt
                 public void clicked(InputEvent event, float x, float y) {
-<<<<<<< Upstream, based on origin/MW13
                     buttonClickOrder(buttonNumber);
-=======
                     System.out.print(buttonText + " ");
                     System.out.println(buttonNumber);
 // can also be done with Try&Catch
@@ -143,7 +112,6 @@ public class GameScreen implements Screen {
                     }
                     zugInititalisierung.addCard(aktuelleKarte);
 
->>>>>>> f886b17 tabs ersetzt
                 }
 
             });
