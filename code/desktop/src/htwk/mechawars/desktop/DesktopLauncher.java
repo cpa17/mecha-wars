@@ -38,17 +38,12 @@ public class DesktopLauncher implements Runnable {
      */
     @Override 
     public void run() {
-        if (skip == true) {
-            Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-            config.setWindowedMode(1280, 720);
-            MechaWars.setSkip(skip);
-            new Lwjgl3Application(new MechaWars(), config);
-        } else {
-            Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-            config.setWindowedMode(1280, 720);
-            new Lwjgl3Application(new MechaWars(), config);
-        }
+        MechaWars.setSkip(skip);
+        Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
+        config.setWindowedMode(1280, 720);
+        new Lwjgl3Application(new MechaWars(), config);
     }
 }
+
 
 
