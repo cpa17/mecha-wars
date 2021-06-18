@@ -12,9 +12,10 @@ import picocli.CommandLine.Option;
 /**
 * Class containing the runner for the desktop frontend.
 */
-@Command(name = "Mecha Wars",
+@Command(
 version = "Mecha Wars 1.0",
-description =  "@||fg(red) Stores the current contents of the index in a new commit " + "along with a log message from the user describing the changes.|@")
+header = "%Mecha Wars%n",
+mixinStandardHelpOptions = true)
 public class DesktopLauncher implements Runnable{
 	
 	@Option(names = { "-s", "--skip"}, description="Starts the Game, without showing the MainMenu at first." )
@@ -23,13 +24,9 @@ public class DesktopLauncher implements Runnable{
 	/**
 	* Main class, for the new CommandLine
 	*/
-    public static void main(String[] arg) {
-		new CommandLine(new DesktopLauncher()).execute(arg);
+    public static void main(String[] args) {
+	System.exit(new CommandLine(new DesktopLauncher()).execute(args));
     }
-    
-    @Option(names = {"-h", "--help"}, usageHelp = true,
-    description = "Print usage help and exit.")
-    boolean usageHelpRequested;
     
     /**
 	* Method, running the desktop frontend.
@@ -39,7 +36,7 @@ public class DesktopLauncher implements Runnable{
 	if(skip == true) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setWindowedMode(1280, 720);
-		MechaWars.isSkip = true;
+		MechaWars.setSkip(skip);
 		new Lwjgl3Application(new MechaWars(), config);
 	}
 	else {
@@ -50,5 +47,8 @@ public class DesktopLauncher implements Runnable{
 }
 }
 
-//JAR: .\gradlew.bat desktop:dist in der Konsole, im Code Ordner
-//die JAR-File liegt dann unter -> code -> desktop -> build -> libs
+/**
+ * JAR: .\gradlew.bat desktop:dist in der Konsole, im Code Ordner
+ * die JAR-File liegt dann unter -> code -> desktop -> build -> libs
+ */
+

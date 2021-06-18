@@ -6,19 +6,27 @@ import com.badlogic.gdx.Game;
 * Main game class.
 */
 public class MechaWars extends Game {
-
-	public static boolean isSkip = false; //Variable zum Skippen
+	
 	
 	/**
-	 * Method to start either from the main menu or the gamescreen
+	 * Method & Attribute for skipping the MainMenu when executing the Program
+	 */
+	private static boolean isSkip = false; //Variable zum Skippen
+	
+	public static void setSkip(boolean skip){
+		isSkip=skip;
+	}
+	
+	/**
+	 * Method to start either from the main menu or the game screen
 	 */
     @Override
     public void create() {
-    	if(isSkip==false) {
-            this.setScreen(new MainMenu(this));
+    	if(isSkip==true) {
+    		this.setScreen(new GameScreen());
         }
         else {
-            this.setScreen(new GameScreen());
+        	this.setScreen(new MainMenu(this));
         }
     }
 
