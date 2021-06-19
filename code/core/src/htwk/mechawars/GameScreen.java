@@ -2,7 +2,6 @@ package htwk.mechawars;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -24,7 +23,6 @@ public class GameScreen implements Screen {
 
     Texture industrialTile;
     Texture robot;
-    OrthographicCamera camera;
     Stage stage;
     Table container;
     private SpriteBatch batch;
@@ -37,9 +35,6 @@ public class GameScreen implements Screen {
     public GameScreen() {
         industrialTile = new Texture("industrialTile.png");
         robot = new Texture("robot.png");
-
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, cameraWidth, cameraHeight);
 
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
@@ -141,9 +136,7 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
-        camera.update();
         batch = (SpriteBatch) stage.getBatch();
-        batch.setProjectionMatrix(camera.combined);
         batch.begin();
         drawPlayingField();
         drawRobot();
