@@ -99,7 +99,11 @@ public class GameScreen implements Screen {
         container.add(scrollPanel).expand().fill();
     }
     
-    
+    /**
+     * if there were less than 5 valid button clicks: paints button greend and adds
+     *  " | Nr: " with the corresponding Number of at what time it was clicked
+     * @param buttonNumber -> ID-number of clicked button
+     */
     private void buttonClickOrder(int buttonNumber) {
 //      System.out.print(buttonText + " ");
 //      System.out.println(buttonNumber);
@@ -132,23 +136,31 @@ public class GameScreen implements Screen {
           } 
       }
       else {
-          // NOP
+//        NOP
       }
 //      System.out.println("");
     }
     
+    /**
+     * initialize cardOrder[] to non reachable values.
+     */
     private void cardOrderClear() {
-        int[] cardOrder = {566, 567, 568, 569, 570};
-        for(int i=0; i<84; i+=1) {
-            buttons[i].setText((i+1) + " - " + deck[i].getCardAttributeName().get_Name());
-        }
-        buttonsColourClean();
+        cardOrder[0] = 566;
+        cardOrder[1] = 567;
+        cardOrder[2] = 568;
+        cardOrder[3] = 569;
+        cardOrder[4] = 570;
+        buttonsClean();
         pressCounter = 0;
     }
     
-    private void buttonsColourClean() {
+    /**
+     *  Renames every button to " - " and sets the button color to light grey
+     */
+    private void buttonsClean() {
         for(int i=0; i<84; i+=1) {
             buttons[i].setColor(Color.LIGHT_GRAY);
+            buttons[i].setText((i+1) + " - " + deck[i].getCardAttributeName().get_Name());
         }
     }
 
