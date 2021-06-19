@@ -86,7 +86,6 @@ public class GameScreen implements Screen {
             buttons[cardPrintCounter] = new TextButton((cardPrintCounter+1) + " - " + deck[cardPrintCounter].getCardAttributeName().get_Name(), skin);
             table.row();
             table.add(buttons[cardPrintCounter]);
-            String buttonText = (cardPrintCounter+1) + ". Karte angeklickt";
             int buttonNumber = (cardPrintCounter+1);
             
             // Button-ClickListener
