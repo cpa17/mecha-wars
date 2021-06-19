@@ -26,8 +26,6 @@ public class GameScreen implements Screen {
     Stage stage;
     Table container;
     private SpriteBatch batch;
-    private static final int cameraWidth = 1280;
-    private static final int cameraHeight = 720;
 
     /**
      * Constructor of class GameScreen.
@@ -49,9 +47,9 @@ public class GameScreen implements Screen {
      * @param skin Object of class Skin which was initialized in the constructor.
      */
     public void addScrollPanelToStage(Skin skin) {
-        int containerBoundsX = (cameraWidth - ((cameraWidth - cameraHeight) / 2)) + 10;
+        int containerBoundsX = (Gdx.graphics.getWidth() - ((Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 2)) + 10;
         int containerBoundsY = 10;
-        int containerWidth = ((cameraWidth - cameraHeight) / 2) - 20;
+        int containerWidth = ((Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 2) - 20;
 
         container = new Table();
         stage.addActor(container);
@@ -89,10 +87,10 @@ public class GameScreen implements Screen {
         startExecutionButton.setSize(128, 43);
         endGameButton.setSize(128, 43);
 
-        int startExecutionButtonX = cameraHeight + (cameraWidth - cameraHeight) / 3 - 64;
-        int startExecutionButtonY = cameraHeight - 100;
-        int endGameButtonX = cameraHeight + (((cameraWidth - cameraHeight) * 2) / 3) - 64;
-        int endGameButtonY = cameraHeight - 100;
+        int startExecutionButtonX = Gdx.graphics.getHeight() + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
+        int startExecutionButtonY = Gdx.graphics.getHeight() - 100;
+        int endGameButtonX = Gdx.graphics.getHeight() + (((Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) * 2) / 3) - 64;
+        int endGameButtonY = Gdx.graphics.getHeight() - 100;
 
         startExecutionButton.setPosition(startExecutionButtonX, startExecutionButtonY);
         endGameButton.setPosition(endGameButtonX, endGameButtonY);
@@ -149,7 +147,7 @@ public class GameScreen implements Screen {
      * Function that draws the robot on the playing field.
      */
     public void drawRobot() {
-        int tileSize = (cameraHeight / 12);
+        int tileSize = (Gdx.graphics.getHeight() / 12);
         int reihe = 6;
         int spalte = 6;
         batch.draw(robot, tileSize * (spalte - 1), (tileSize * (reihe - 1)) + 5);
@@ -167,10 +165,10 @@ public class GameScreen implements Screen {
             int j = 0;
             while (j < 12) {
                 batch.draw(industrialTile, x, y);
-                y = y + (cameraHeight / 12);
+                y = y + (Gdx.graphics.getHeight() / 12);
                 j++;
             }
-            x = x + (cameraHeight / 12);
+            x = x + (Gdx.graphics.getHeight() / 12);
             i++;
         }
     }
