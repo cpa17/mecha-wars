@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -25,13 +26,12 @@ import htwk.mechawars.cards.CardFunctions;
  */
 public class GameScreen implements Screen {
 
-    final MechaWars game;
-
     Texture industrialTile;
     Texture robot;
     OrthographicCamera camera;
     Stage stage;
     Table container;
+    private SpriteBatch batch;
     private static final int cameraWidth = 1280;
     private static final int cameraHeight = 720;
     
@@ -44,11 +44,8 @@ public class GameScreen implements Screen {
     
     /**
      * Constructor of class GameScreen.
-     * @param game Object of class MechaWars.
      */
-    public GameScreen(final MechaWars game) {
-        this.game = game;
-
+    public GameScreen() {
         industrialTile = new Texture("industrialTile.png");
         robot = new Texture("robot.png");
 
@@ -220,13 +217,13 @@ public class GameScreen implements Screen {
         removeCardOrder.addListener(new InputListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("Rauf");
+                // System.out.println("Rauf");
                 cardOrderClear();
             }
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("Runter");
+                // System.out.println("Runter");
                 return true;
             }
         });
@@ -243,11 +240,12 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
         camera.update();
-        game.batch.setProjectionMatrix(camera.combined);
-        game.batch.begin();
+        batch = (SpriteBatch) stage.getBatch();
+        batch.setProjectionMatrix(camera.combined);
+        batch.begin();
         drawPlayingField();
         drawRobot();
-        game.batch.end();
+        batch.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }
@@ -259,7 +257,7 @@ public class GameScreen implements Screen {
         int tileSize = (cameraHeight / 12);
         int reihe = 6;
         int spalte = 6;
-        game.batch.draw(robot, tileSize * (spalte - 1), (tileSize * (reihe - 1)) + 5);
+        batch.draw(robot, tileSize * (spalte - 1), (tileSize * (reihe - 1)) + 5);
     }
 
 
@@ -273,7 +271,7 @@ public class GameScreen implements Screen {
             int y = 0;
             int j = 0;
             while (j < 12) {
-                game.batch.draw(industrialTile, x, y);
+                batch.draw(industrialTile, x, y);
                 y = y + (cameraHeight / 12);
                 j++;
             }

@@ -1,0 +1,22 @@
+# 16.6.2021 - 14:00 - Daily
+
+Entschuldigt: Felix
+Anwesend: Alle anderen
+Protokollführung: Lukas Brüggemann
+
+## Runde
+- Marc: Implementierung separat fertig, muss noch in Projekt eingebunden werden
+- Tim: Fehler Import zu Eclipse, erste Gedanken wie implementiert werden soll umgesetzt
+- Bernhard: Grundlagen fertig, Fehlende Struktur Information für weitere Implementierung, IDE Probleme -> holt sich nötige Informationen
+- Pascal: Spielfeldmatrix, Fehlerbehandlung, Tests abgeschlossen. 
+- Ihor: keine Zeit
+- Konstantn: mit Tim, Theoretischer Umsatz fertig
+- Marc: Fertig mit Ticket
+
+
+
+## Problembehandlung
+- IDE Problem gelöst mit live Session
+- Gespräch mit Ihor und Pascal zu weiterem Vorgehen.
+ 
+
