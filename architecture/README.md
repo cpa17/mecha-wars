@@ -19,6 +19,10 @@ In diesem Verzeichnis liegen alle Dokoumente, die im Zusammenhang mit der Softwa
 
 ## Dokumentation und Tutorials
 
+### Styleguide
+
+Wir folgen in dem Projekt weitestgehend dem [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html). Wir nutzen als Standareinrückung allerdings 4 statt 2 Leerzeichen.
+
 ### Gradle
 
 - [Installation](https://gradle.org/releases/#6.7.1) -> Es ist keine eigene Installation notwendig, da Gradle schon in der libGDX-Installation enthalten ist.
