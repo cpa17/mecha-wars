@@ -35,12 +35,12 @@ public class GameScreen implements Screen {
     private static final int cameraWidth = 1280;
     private static final int cameraHeight = 720;
     
-    int[] cardOrder = {566, 567, 568, 569, 570};
-    int pressCounter = 0;
+    private int[] cardOrder = { -1, -1, -1, -1, -1,};
+    private int pressCounter = 0;
     
-    Card[] deck = new Card[84];
+    private Card[] deck = new Card[84];
     
-    TextButton[] buttons = new TextButton[84];
+    private TextButton[] buttons = new TextButton[84];
     
     /**
      * Constructor of class GameScreen.
@@ -145,11 +145,11 @@ public class GameScreen implements Screen {
      * Initialize cardOrder[] to non reachable values.
      */
     private void cardOrderClear() {
-        cardOrder[0] = 566;
-        cardOrder[1] = 567;
-        cardOrder[2] = 568;
-        cardOrder[3] = 569;
-        cardOrder[4] = 570;
+        cardOrder[0] = -1;
+        cardOrder[1] = -1;
+        cardOrder[2] = -1;
+        cardOrder[3] = -1;
+        cardOrder[4] = -1;
         buttonsClean();
         pressCounter = 0;
     }

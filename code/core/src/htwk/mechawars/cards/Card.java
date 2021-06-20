@@ -5,9 +5,9 @@ package htwk.mechawars.cards;
  */
 public class Card {
  
-    protected Type cardAttributeType;
-    protected Name cardAttributeName;
-    protected byte cardAttributeMovCount;
+    private Type cardAttributeType;
+    private Name cardAttributeName;
+    private byte cardAttributeMovCount;
     /*
      * amount of moves forward or amount of turns
      * -1:              backwards           -----
