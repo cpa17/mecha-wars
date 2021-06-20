@@ -42,7 +42,7 @@ public class Card {
     }
     
     /**
-     * To print the correct Code
+     * To print the correct Code.
      * @return Returns the Name of the Card
      */
     public String toString() {
@@ -66,8 +66,7 @@ public class Card {
                 default:    xyz = "Fehler";
                             break;
             }
-        }
-        else {
+        } else {
             switch (this.cardAttributeMovCount) {
             
                 case 1 :    xyz = "Rechtsdrehung";
