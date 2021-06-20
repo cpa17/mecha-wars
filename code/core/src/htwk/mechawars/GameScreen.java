@@ -132,9 +132,9 @@ public class GameScreen implements Screen {
      */
     public void drawRobot() {
         int tileSize = (Gdx.graphics.getHeight() / 12);
-        int reihe = 6;
-        int spalte = 6;
-        batch.draw(robot, tileSize * (spalte - 1), (tileSize * (reihe - 1)) + 5);
+        int row = 6;
+        int column = 6;
+        batch.draw(robot, tileSize * (column - 1), (tileSize * (row - 1)) + 5);
     }
 
 
