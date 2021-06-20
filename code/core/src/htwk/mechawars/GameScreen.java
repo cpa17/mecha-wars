@@ -111,7 +111,8 @@ public class GameScreen implements Screen {
       
         // can also be done with Try&Catch
         if (pressCounter < 5) {
-            cardOrder[pressCounter] = buttonNumber;         // write the number of the button in cardOrder at pressCounter
+            cardOrder[pressCounter] = buttonNumber;  // write the number of the button (next line)
+                                                     // in cardOrder at pressCounter
             //System.out.println(cardOrder[pressCounter] + " JO");
 
             pressCounter += 1;
@@ -121,7 +122,7 @@ public class GameScreen implements Screen {
             for (int i = (pressCounter - 2); i >= 0; i -= 1) {
                 //System.out.println("FOR " + i);
                 //System.out.println(cardOrder[i]);
-                if(cardOrder[i] == buttonNumber) {
+                if (cardOrder[i] == buttonNumber) {
                     //System.out.println("Durchlauf" + i);
                     testung = false;
                     pressCounter -= 1;
@@ -133,7 +134,8 @@ public class GameScreen implements Screen {
             if (testung) {
                 //System.out.println("Juha testung");
                 buttons[buttonNumber - 1].setColor(Color.GREEN);
-                buttons[buttonNumber - 1].setText(buttons[buttonNumber - 1].getText() + " | Nr: " + (pressCounter));
+                buttons[buttonNumber - 1].setText(buttons[buttonNumber - 1].getText() 
+                        + " | Nr: " + (pressCounter));
             } 
         }
         else {
@@ -221,7 +223,7 @@ public class GameScreen implements Screen {
         Button removeCardOrder = new TextButton("Loesche\nKartenreihenfolge", skin);
         
         removeCardOrder.setSize(128, 43);
-        int removeCardOrderX = cameraHeight + (cameraWidth - cameraHeight)/3 - 64;
+        int removeCardOrderX = cameraHeight + (cameraWidth - cameraHeight) / 3 - 64;
         int removeCardOrderY = cameraHeight - 200;
         
         removeCardOrder.setPosition(removeCardOrderX, removeCardOrderY);

@@ -8,10 +8,10 @@ import java.util.List;
 public class CardFunctions{
 
     /**
-     * Fill the empty cardDeck-Array with 
+     * Fill the empty cardDeck-Array with:
      * # 18 Mov1, TurnR, TurnL
      * # 12 Mov2
-     * # 6  Mov3, MovB, TurnU
+     * # 6  Mov3, MovB, TurnU   .
      * 
      * @param cardDeck
      * @return The initial cardDeck
@@ -32,7 +32,7 @@ public class CardFunctions{
         }
         return cardDeck;
     }
-	
+ 
     /**
      * Shuffles the cards, which were created before.
      * 
