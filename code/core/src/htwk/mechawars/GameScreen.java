@@ -35,7 +35,7 @@ public class GameScreen implements Screen {
     private static final int cameraWidth = 1280;
     private static final int cameraHeight = 720;
     
-    private int[] cardOrder = { -1, -1, -1, -1, -1,};
+    private int[] cardOrder = { -1 , -1 , -1 , -1 , -1};
     private int pressCounter = 0;
     
     private Card[] deck = new Card[84];
