@@ -83,10 +83,11 @@ public class GameScreen implements Screen {
         deck = CardFunctions.shuffle(deck);
         
         for (int cardPrintCounter = 0; cardPrintCounter < 84; cardPrintCounter += 1) {
-            buttons[cardPrintCounter] = new TextButton((cardPrintCounter+1) + " - " + deck[cardPrintCounter].getCardAttributeName().get_Name(), skin);
+            buttons[cardPrintCounter] = new TextButton((cardPrintCounter + 1) + " - " +
+                        deck[cardPrintCounter].getCardAttributeName().get_Name(), skin);
             table.row();
             table.add(buttons[cardPrintCounter]);
-            int buttonNumber = (cardPrintCounter+1);
+            int buttonNumber = (cardPrintCounter + 1);
             
             // Button-ClickListener
             buttons[cardPrintCounter].addListener(new ClickListener() {
@@ -100,49 +101,49 @@ public class GameScreen implements Screen {
     }
     
     /**
-     * if there were less than 5 valid button clicks: paints button greend and adds
-     *  " | Nr: " with the corresponding Number of at what time it was clicked
+     * If there were less than 5 valid button clicks: paints button greend and adds
+     *  " | Nr: " with the corresponding Number of at what time it was clicked.
      * @param buttonNumber -> ID-number of clicked button
      */
     private void buttonClickOrder(int buttonNumber) {
 //      System.out.print(buttonText + " ");
 //      System.out.println(buttonNumber);
       
-      // can also be done with Try&Catch
-      if(pressCounter < 5) {
-          cardOrder[pressCounter] = buttonNumber;         // write the number of the button in cardOrder at pressCounter
-//        System.out.println(cardOrder[pressCounter] + " JO");
+        // can also be done with Try&Catch
+        if(pressCounter < 5) {
+            cardOrder[pressCounter] = buttonNumber;         // write the number of the button in cardOrder at pressCounter
+//          System.out.println(cardOrder[pressCounter] + " JO");
 
-          pressCounter += 1;
+            pressCounter += 1;
           
-          boolean testung = true;
+            boolean testung = true;
           
-          for(int i = (pressCounter - 2); i >= 0; i -= 1) {
-//            System.out.println("FOR " + i);
-//            System.out.println(cardOrder[i]);
-              if(cardOrder[i] == buttonNumber) {
-//                System.out.println("Durchlauf" + i);
-                  testung = false;
-                  pressCounter -= 1;
-              }
-          }
+            for(int i = (pressCounter - 2); i >= 0; i -= 1) {
+//              System.out.println("FOR " + i);
+//              System.out.println(cardOrder[i]);
+                if(cardOrder[i] == buttonNumber) {
+//                  System.out.println("Durchlauf" + i);
+                    testung = false;
+                    pressCounter -= 1;
+                }
+            }
           
 //          System.out.println("vor if testung");
           
-          if(testung) {
-//            System.out.println("Juha testung");
-              buttons[buttonNumber - 1].setColor(Color.GREEN);
-              buttons[buttonNumber - 1].setText(buttons[buttonNumber - 1].getText() + " | Nr: " + (pressCounter));
-          } 
-      }
-      else {
-//        NOP
-      }
+            if(testung) {
+//              System.out.println("Juha testung");
+                buttons[buttonNumber - 1].setColor(Color.GREEN);
+                buttons[buttonNumber - 1].setText(buttons[buttonNumber - 1].getText() + " | Nr: " + (pressCounter));
+            } 
+        }
+        else {
+//          NOP
+        }
 //      System.out.println("");
     }
     
     /**
-     * initialize cardOrder[] to non reachable values.
+     * Initialize cardOrder[] to non reachable values.
      */
     private void cardOrderClear() {
         cardOrder[0] = 566;
@@ -155,7 +156,7 @@ public class GameScreen implements Screen {
     }
     
     /**
-     *  Renames every button to " - " and sets the button color to light grey
+     *  Renames every button to " - " and sets the button color to light grey.
      */
     private void buttonsClean() {
         for(int i = 0; i < 84; i += 1) {
