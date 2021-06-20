@@ -42,45 +42,46 @@ public class Card {
     }
     
     /**
-     * 
+     * To print the correct Code
      * @return Returns the Name of the Card
      */
     public String toString() {
         String xyz;
         
-        if (this.cardAttributeType==Type.mov) {
+        if (this.cardAttributeType == Type.mov) {
             switch (this.cardAttributeMovCount) {
             
-            case -1 :   xyz = "Rueckwaerts";
-                        break;
-                
-            case 1 :    xyz = "1 Vor";
-                        break;
-                
-            case 2 :    xyz = "2 Vor";
-                        break;
-                
-            case 3 :    xyz = "3 Vor";
-                        break;
-                        
-            default:    xyz = "Fehler";
-                        break;
+                case -1 :   xyz = "Rueckwaerts";
+                            break;
+                    
+                case 1 :    xyz = "1 Vor";
+                            break;
+                    
+                case 2 :    xyz = "2 Vor";
+                            break;
+                    
+                case 3 :    xyz = "3 Vor";
+                            break;
+                            
+                default:    xyz = "Fehler";
+                            break;
             }
         }
         else {
             switch (this.cardAttributeMovCount) {
             
-            case 1 :   xyz = "Rechtsdrehung";
-                        break;
-                
-            case 2 :    xyz = "Kehrtwendung";
-                        break;
-                
-            case 3 :    xyz = "Linksdrehung";
-                        break;
-                        
-            default:    xyz = "Fehler";
-                        break;
+                case 1 :    xyz = "Rechtsdrehung";
+                            break;
+                    
+                case 2 :    xyz = "Kehrtwendung";
+                            break;
+                    
+                case 3 :    xyz = "Linksdrehung";
+                            break;
+                            
+                default:    xyz = "Fehler";
+                            break;
+                            
             }
         }
         
