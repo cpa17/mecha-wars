@@ -20,24 +20,24 @@ public class CardTests {
     @Test
     public void testMovCount() {
         Card[] testCards = new Card[84];
-        
+
         testCards = CardFunctions.initDeck(testCards);
-        
+
         for (int i = 0; i < 84; i += 1) {
             int x = testCards[i].getCardAttributeMovCount();
             assertTrue(-1 == x || 1 == x || 2 == x || 3 == x);
         }
     }
-    
+
     /**
      * Tests if the names of the Buttons are the Strings of the enum "Name".
      */
     @Test
     public void testName() {
         Card[] testCards = new Card[84];
-        
+
         testCards = CardFunctions.initDeck(testCards);
-        
+
         for (int i = 0; i < 84; i += 1) {
             assertTrue(testCards[i].getCardAttributeName().get_Name() == "1 Vor"
                     || testCards[i].getCardAttributeName().get_Name() == "2 Vor"
@@ -48,51 +48,51 @@ public class CardTests {
                     || testCards[i].getCardAttributeName().get_Name() == "Linksdrehung");
         }
     }
-    
+
     /**
      * When initializing Card[] before shuffling the first 18 cards are mov1 (of type Name).
-     * We have a total of 84 Cards. If the shuffle() function works 
+     * We have a total of 84 Cards. If the shuffle() function works
      * less than half of the first 18 cards (9) should be mov1 (of type Name)
      */
     @Test
     public void testCardShuffle1() {
         Card[] testCards = new Card[84];
         int internTest = 0;
-        
+
         testCards = CardFunctions.initDeck(testCards);
         testCards = CardFunctions.shuffle(testCards);
-        
+
         for (int i = 0; i < 18; i += 1) {
             if (testCards[i].getCardAttributeName() == Name.mov1) {
                 internTest += 1;
             }
         }
-        
+
         assertTrue(internTest < 9);        //statistically possible to be false
-        
+
     }
-    
+
     /**
-     * Tests if at least one Card is different in testCardsShuffled[]. 
+     * Tests if at least one Card is different in testCardsShuffled[].
      * compared to testCardsUnshuffled[]
      */
     @Test
     public void testCardShuffle2() {
         Card[] testCardsUnshuffled = new Card[84];
-        Card[] testCardsShuffled = new Card[84];
+        Card[] testCardsShuffled;
         boolean isEqual = true;
-        
+
         testCardsUnshuffled =  CardFunctions.initDeck(testCardsUnshuffled);
 
         testCardsShuffled = CardFunctions.shuffle(testCardsUnshuffled);
-        
+
         for (int i = 0; i < 84; i += 1) {
-            if (testCardsUnshuffled[i].getCardAttributeName() 
+            if (testCardsUnshuffled[i].getCardAttributeName()
                     != testCardsShuffled[i].getCardAttributeName()) {
                 isEqual = false;
             }
         }
         assertFalse(isEqual);
     }
-    
+
 }
