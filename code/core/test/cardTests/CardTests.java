@@ -12,7 +12,7 @@ import htwk.mechawars.cards.Name;
 public class CardTests {
 
     /**
-     * Tests if the movCount is only -1, 1, 2 or 3
+     * Tests if the movCount is only -1, 1, 2 or 3 .
      */
     @Test
     public void testMovCount() {
@@ -22,12 +22,15 @@ public class CardTests {
         
         for (int i = 0; i < 84; i += 1) {
             int x = testCards[i].getCardAttributeMovCount();
-            assertTrue(-1 == x || 1 == x || 2 == x || 3 == x);
+            assertTrue(-1 == x 
+                    || 1 == x 
+                    || 2 == x 
+                    || 3 == x);
         }
     }
     
     /**
-     * Tests if the names of the Buttons are the Strings of the enum "Name"
+     * Tests if the names of the Buttons are the Strings of the enum "Name".
      */
     @Test
     public void testName() {
@@ -42,7 +45,7 @@ public class CardTests {
                        testCards[i].getCardAttributeName().get_Name() == "Rueckwaerts" ||
                        testCards[i].getCardAttributeName().get_Name() == "Rechtsdrehung" ||
                        testCards[i].getCardAttributeName().get_Name() == "Kehrtwendung" ||
-                       testCards[i].getCardAttributeName().get_Name() == "Linksdrehung" );
+                       testCards[i].getCardAttributeName().get_Name() == "Linksdrehung");
         }
     }
     
