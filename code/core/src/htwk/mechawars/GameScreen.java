@@ -34,7 +34,7 @@ public class GameScreen implements Screen {
         industrialTile = new Texture("industrialTile.png");
         robot = new Texture("robot.png");
 
-        stage = new Stage(new ScreenViewport());
+        stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
         Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
@@ -50,10 +50,11 @@ public class GameScreen implements Screen {
         int containerBoundsX = (Gdx.graphics.getWidth() - ((Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 2)) + 10;
         int containerBoundsY = 10;
         int containerWidth = ((Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 2) - 20;
+        int containerHeight = 600;
 
         container = new Table();
         stage.addActor(container);
-        container.setBounds(containerBoundsX, containerBoundsY, containerWidth, 600);
+        container.setBounds(containerBoundsX, containerBoundsY, containerWidth, containerHeight);
 
         Table table = new Table();
 
@@ -72,7 +73,7 @@ public class GameScreen implements Screen {
             });
         }
 
-        container.add(scrollPanel).expand().fill();
+        container.add(scrollPanel).grow();
     }
 
     /**
