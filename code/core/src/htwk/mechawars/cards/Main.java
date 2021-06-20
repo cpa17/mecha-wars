@@ -6,7 +6,7 @@ package htwk.mechawars.cards;
 public class Main {
 
     /**
-     * Testfunction (Cards) for the developers
+     * Testfunction (Cards) for the developers.
      * @param args -
      */
     public static void main(String[] args) {

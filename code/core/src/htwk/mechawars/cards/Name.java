@@ -18,7 +18,7 @@ public enum Name {
     }
     
     /**
-     * getter function for the Enum-content
+     * getter function for the Enum-content.
      * @return the String of the Enumeration
      */
     public String get_Name() {

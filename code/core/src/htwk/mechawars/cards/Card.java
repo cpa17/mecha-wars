@@ -50,5 +50,5 @@ public class Card {
      */
     public byte getCardAttributeMovCount() {
         return cardAttributeMovCount;
-    } 	
+    }
 }

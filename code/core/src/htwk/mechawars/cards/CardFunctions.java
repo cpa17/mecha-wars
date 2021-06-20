@@ -16,7 +16,7 @@ public class CardFunctions {
      * # 12 Mov2
      * # 6  Mov3, MovB, TurnU   .
      * 
-     * @param cardDeck
+     * @param cardDeck  -> Array, that should be initialized
      * @return The initial cardDeck
      */
     public static Card[] initDeck(Card[] cardDeck) {
