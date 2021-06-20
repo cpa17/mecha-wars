@@ -1,4 +1,5 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -6,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import htwk.mechawars.cards.Card;
 
 import htwk.mechawars.cards.CardFunctions;
+import htwk.mechawars.cards.Name;
 
 class BasicTest {
     @Test
@@ -48,8 +50,13 @@ class BasicTest {
         }
     }
     
+    /**
+     * When initializing Card[] before shuffling the first 18 cards are mov1 (of type Name).
+     * We have a total of 84 Cards. If the shuffle() function works 
+     * less than half of the first 18 cards (9) should be mov1 (of type Name)
+     */
     @Test
-    public void testCardShuffle() {
+    public void testCardShuffle1() {
         Card[] testCards = new Card[84];
         int iTest=0;
         
@@ -57,12 +64,34 @@ class BasicTest {
         testCards = CardFunctions.shuffle(testCards);
         
         for(int i = 0; i<18; i+=1) {
-            if(testCards[i].getCardAttributeName().get_Name()=="1 Vor") {
+            if(testCards[i].getCardAttributeName() == Name.mov1) {
                 iTest+=1;
             }
         }
         
-        assertTrue(iTest<9);
+        assertTrue(iTest<9);        //statistically possible to be false
         
+    }
+    
+    /**
+     * Tests if at least one Card is different in testCardsShuffled[] 
+     * compared to testCardsUnshuffled[]
+     */
+    @Test
+    public void testCardShuffle2() {
+        Card[] testCardsUnshuffled = new Card[84];
+        Card[] testCardsShuffled = new Card[84];
+        boolean isEqual = true;
+        
+        testCardsUnshuffled =  CardFunctions.initDeck(testCardsUnshuffled);
+
+        testCardsShuffled = CardFunctions.shuffle(testCardsUnshuffled);
+        
+        for(int i = 0; i < 84; i+=1) {
+            if(testCardsUnshuffled[i].getCardAttributeName() != testCardsShuffled[i].getCardAttributeName()) {
+                isEqual = false;
+            }
+        }
+        assertFalse(isEqual);
     }
 }
