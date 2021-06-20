@@ -82,11 +82,11 @@ public class GameScreen implements Screen {
      */
     public void addButtonsToStage(Skin skin) {
 
-        Button startExecutionButton = new TextButton("Start Execution", skin);
-        Button endGameButton = new TextButton("End Game", skin);
+        Button startExecutionButton = new TextButton("Ausfuehrung starten", skin);
+        Button endGameButton = new TextButton("Spiel beenden", skin);
 
-        startExecutionButton.setSize(128, 43);
-        endGameButton.setSize(128, 43);
+        startExecutionButton.setSize(160, 43);
+        endGameButton.setSize(160, 43);
 
         int startExecutionButtonX = Gdx.graphics.getHeight() + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
         int startExecutionButtonY = Gdx.graphics.getHeight() - 100;
