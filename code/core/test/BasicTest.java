@@ -17,7 +17,7 @@ class BasicTest {
      * Tests if the movCount is only -1, 1, 2 or 3
      */
     @Test
-    public void kartenAnzahlTest() {
+    public void testMovCount() {
         Card[] testCards = new Card[84];
         
         testCards = CardFunctions.initDeck(testCards);
@@ -37,7 +37,7 @@ class BasicTest {
         
         testCards = CardFunctions.initDeck(testCards);
         
-        for (int i = 0; i < 84; i+=1) {
+        for(int i = 0; i < 84; i+=1) {
             assertTrue(testCards[i].getCardAttributeName().get_Name() == "1 Vor" ||
                        testCards[i].getCardAttributeName().get_Name() == "2 Vor" ||
                        testCards[i].getCardAttributeName().get_Name() == "3 Vor" ||
@@ -46,5 +46,23 @@ class BasicTest {
                        testCards[i].getCardAttributeName().get_Name() == "Kehrtwendung" ||
                        testCards[i].getCardAttributeName().get_Name() == "Linksdrehung" );
         }
+    }
+    
+    @Test
+    public void testCardShuffle() {
+        Card[] testCards = new Card[84];
+        int iTest=0;
+        
+        testCards = CardFunctions.initDeck(testCards);
+        testCards = CardFunctions.shuffle(testCards);
+        
+        for(int i = 0; i<18; i+=1) {
+            if(testCards[i].getCardAttributeName().get_Name()=="1 Vor") {
+                iTest+=1;
+            }
+        }
+        
+        assertTrue(iTest<9);
+        
     }
 }
