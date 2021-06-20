@@ -9,6 +9,9 @@ import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.CardFunctions;
 import htwk.mechawars.cards.Name;
 
+/**
+ * Testclass.
+ */
 public class CardTests {
 
     /**
@@ -22,7 +25,7 @@ public class CardTests {
         
         for (int i = 0; i < 84; i += 1) {
             int x = testCards[i].getCardAttributeMovCount();
-            assertTrue(-1 == x || 1 == x || 2 == x|| 3 == x);
+            assertTrue(-1 == x || 1 == x || 2 == x || 3 == x);
         }
     }
     
@@ -54,7 +57,7 @@ public class CardTests {
     @Test
     public void testCardShuffle1() {
         Card[] testCards = new Card[84];
-        int internTest=0;
+        int internTest = 0;
         
         testCards = CardFunctions.initDeck(testCards);
         testCards = CardFunctions.shuffle(testCards);
@@ -70,7 +73,7 @@ public class CardTests {
     }
     
     /**
-     * Tests if at least one Card is different in testCardsShuffled[] 
+     * Tests if at least one Card is different in testCardsShuffled[]. 
      * compared to testCardsUnshuffled[]
      */
     @Test
