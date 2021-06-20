@@ -20,7 +20,7 @@ public class CardTests {
         
         testCards = CardFunctions.initDeck(testCards);
         
-        for(int i=0; i<84; i+=1) {
+        for(int i = 0; i < 84; i += 1) {
             int x = testCards[i].getCardAttributeMovCount();
             assertTrue(-1 == x || 1 == x || 2 == x || 3 == x);
         }
@@ -35,7 +35,7 @@ public class CardTests {
         
         testCards = CardFunctions.initDeck(testCards);
         
-        for(int i = 0; i < 84; i+=1) {
+        for(int i = 0; i < 84; i += 1) {
             assertTrue(testCards[i].getCardAttributeName().get_Name() == "1 Vor" ||
                        testCards[i].getCardAttributeName().get_Name() == "2 Vor" ||
                        testCards[i].getCardAttributeName().get_Name() == "3 Vor" ||
@@ -59,13 +59,13 @@ public class CardTests {
         testCards = CardFunctions.initDeck(testCards);
         testCards = CardFunctions.shuffle(testCards);
         
-        for(int i = 0; i<18; i+=1) {
+        for(int i = 0; i < 18; i += 1) {
             if(testCards[i].getCardAttributeName() == Name.mov1) {
-                iTest+=1;
+                iTest += 1;
             }
         }
         
-        assertTrue(iTest<9);        //statistically possible to be false
+        assertTrue(iTest < 9);        //statistically possible to be false
         
     }
     
@@ -83,7 +83,7 @@ public class CardTests {
 
         testCardsShuffled = CardFunctions.shuffle(testCardsUnshuffled);
         
-        for(int i = 0; i < 84; i+=1) {
+        for(int i = 0; i < 84; i += 1) {
             if(testCardsUnshuffled[i].getCardAttributeName() != testCardsShuffled[i].getCardAttributeName()) {
                 isEqual = false;
             }

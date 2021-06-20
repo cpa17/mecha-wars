@@ -82,7 +82,7 @@ public class GameScreen implements Screen {
         // shuffle Deck
         deck = CardFunctions.shuffle(deck);
         
-        for (int cardPrintCounter = 0; cardPrintCounter < 84; cardPrintCounter+=1) {
+        for (int cardPrintCounter = 0; cardPrintCounter < 84; cardPrintCounter += 1) {
             buttons[cardPrintCounter] = new TextButton((cardPrintCounter+1) + " - " + deck[cardPrintCounter].getCardAttributeName().get_Name(), skin);
             table.row();
             table.add(buttons[cardPrintCounter]);
@@ -109,21 +109,21 @@ public class GameScreen implements Screen {
 //      System.out.println(buttonNumber);
       
       // can also be done with Try&Catch
-      if(pressCounter<5) {
+      if(pressCounter < 5) {
           cardOrder[pressCounter] = buttonNumber;         // write the number of the button in cardOrder at pressCounter
 //        System.out.println(cardOrder[pressCounter] + " JO");
 
-          pressCounter+=1;
+          pressCounter += 1;
           
           boolean testung = true;
           
-          for(int i=pressCounter-2; i>=0; i-=1) {
+          for(int i = (pressCounter - 2); i >= 0; i -= 1) {
 //            System.out.println("FOR " + i);
 //            System.out.println(cardOrder[i]);
-              if(cardOrder[i]==buttonNumber) {
+              if(cardOrder[i] == buttonNumber) {
 //                System.out.println("Durchlauf" + i);
                   testung = false;
-                  pressCounter-=1;
+                  pressCounter -= 1;
               }
           }
           
@@ -131,8 +131,8 @@ public class GameScreen implements Screen {
           
           if(testung) {
 //            System.out.println("Juha testung");
-              buttons[buttonNumber-1].setColor(Color.GREEN);
-              buttons[buttonNumber-1].setText(buttons[buttonNumber-1].getText() + " | Nr: " + (pressCounter));
+              buttons[buttonNumber - 1].setColor(Color.GREEN);
+              buttons[buttonNumber - 1].setText(buttons[buttonNumber - 1].getText() + " | Nr: " + (pressCounter));
           } 
       }
       else {
@@ -158,9 +158,9 @@ public class GameScreen implements Screen {
      *  Renames every button to " - " and sets the button color to light grey
      */
     private void buttonsClean() {
-        for(int i=0; i<84; i+=1) {
+        for(int i = 0; i < 84; i += 1) {
             buttons[i].setColor(Color.LIGHT_GRAY);
-            buttons[i].setText((i+1) + " - " + deck[i].getCardAttributeName().get_Name());
+            buttons[i].setText((i + 1) + " - " + deck[i].getCardAttributeName().get_Name());
         }
     }
 
