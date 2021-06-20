@@ -5,7 +5,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -14,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 /**
  * Class that presents the surface of the game screen.
@@ -96,30 +94,15 @@ public class GameScreen implements Screen {
         startExecutionButton.setPosition(startExecutionButtonX, startExecutionButtonY);
         endGameButton.setPosition(endGameButtonX, endGameButtonY);
 
-        startExecutionButton.addListener(new InputListener() {
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("startExecutionButton touchUp ausgelöst!");
-            }
-
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("startExecutionButton touchDown ausgelöst!");
-                return true;
+        startExecutionButton.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("startExecutionButton angeklickt!");
             }
         });
 
-        endGameButton.addListener(new InputListener() {
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("endGameButton touchUp ausgelöst!");
+        endGameButton.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.exit();
-            }
-
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("endGameButton touchDown ausgelöst!");
-                return true;
             }
         });
 
@@ -140,7 +123,7 @@ public class GameScreen implements Screen {
         drawPlayingField();
         drawRobot();
         batch.end();
-        stage.act(Gdx.graphics.getDeltaTime());
+        stage.act();
         stage.draw();
     }
 
