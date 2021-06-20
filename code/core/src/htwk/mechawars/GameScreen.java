@@ -84,7 +84,7 @@ public class GameScreen implements Screen {
         
         for (int cardPrintCounter = 0; cardPrintCounter < 84; cardPrintCounter += 1) {
             buttons[cardPrintCounter] = new TextButton((cardPrintCounter + 1) + " - "
-                    + deck[cardPrintCounter].getCardAttributeName().get_Name(), skin);
+                    + deck[cardPrintCounter], skin);
             table.row();
             table.add(buttons[cardPrintCounter]);
             int buttonNumber = (cardPrintCounter + 1);
@@ -160,7 +160,7 @@ public class GameScreen implements Screen {
     private void buttonsClean() {
         for (int i = 0; i < 84; i += 1) {
             buttons[i].setColor(Color.LIGHT_GRAY);
-            buttons[i].setText((i + 1) + " - " + deck[i].getCardAttributeName().get_Name());
+            buttons[i].setText((i + 1) + " - " + deck[i]);
         }
     }
 

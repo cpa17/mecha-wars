@@ -1,7 +1,7 @@
 package htwk.mechawars.cards;
 
 /**
- * Enumeration for the Cards.
+ * Enumeration for the Cards. Zurzeit ungenutzt
  */
 public enum Name {
     mov1("1 Vor"),

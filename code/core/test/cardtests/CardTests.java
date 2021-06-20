@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.CardFunctions;
-import htwk.mechawars.cards.Name;
 
 /**
  * Testclass.
@@ -39,13 +38,13 @@ public class CardTests {
         testCards = CardFunctions.initDeck(testCards);
 
         for (int i = 0; i < 84; i += 1) {
-            assertTrue(testCards[i].getCardAttributeName().get_Name() == "1 Vor"
-                    || testCards[i].getCardAttributeName().get_Name() == "2 Vor"
-                    || testCards[i].getCardAttributeName().get_Name() == "3 Vor"
-                    || testCards[i].getCardAttributeName().get_Name() == "Rueckwaerts"
-                    || testCards[i].getCardAttributeName().get_Name() == "Rechtsdrehung"
-                    || testCards[i].getCardAttributeName().get_Name() == "Kehrtwendung"
-                    || testCards[i].getCardAttributeName().get_Name() == "Linksdrehung");
+            assertTrue(testCards[i].toString() == "1 Vor"
+                    || testCards[i].toString() == "2 Vor"
+                    || testCards[i].toString() == "3 Vor"
+                    || testCards[i].toString() == "Rueckwaerts"
+                    || testCards[i].toString() == "Rechtsdrehung"
+                    || testCards[i].toString() == "Kehrtwendung"
+                    || testCards[i].toString() == "Linksdrehung");
         }
     }
 
@@ -63,7 +62,7 @@ public class CardTests {
         testCards = CardFunctions.shuffle(testCards);
 
         for (int i = 0; i < 18; i += 1) {
-            if (testCards[i].getCardAttributeName() == Name.mov1) {
+            if (testCards[i].toString() == "1 Vor") {
                 internTest += 1;
             }
         }
@@ -87,8 +86,8 @@ public class CardTests {
         testCardsShuffled = CardFunctions.shuffle(testCardsUnshuffled);
 
         for (int i = 0; i < 84; i += 1) {
-            if (testCardsUnshuffled[i].getCardAttributeName()
-                    != testCardsShuffled[i].getCardAttributeName()) {
+            if (testCardsUnshuffled[i]
+                    != testCardsShuffled[i]) {
                 isEqual = false;
             }
         }
