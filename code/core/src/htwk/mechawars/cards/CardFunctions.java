@@ -6,9 +6,9 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Includes the functions, that are needed for working with an cardDeck
+ * Includes the functions, that are needed for working with an cardDeck.
  */
-public class CardFunctions{
+public class CardFunctions {
 
     /**
      * Fill the empty cardDeck-Array with:
@@ -21,7 +21,7 @@ public class CardFunctions{
      */
     public static Card[] initDeck(Card[] cardDeck) {
         for (int i = 0; i < 18; i += 1) {
-            cardDeck[i]      = new Card(Name.mov1, Type.mov, (byte) 1 );
+            cardDeck[i]      = new Card(Name.mov1, Type.mov, (byte) 1);
             cardDeck[i + 18] = new Card(Name.turnR, Type.turn, (byte) 1);
             cardDeck[i + 36] = new Card(Name.turnL, Type.turn, (byte) 3);
         }
@@ -39,11 +39,11 @@ public class CardFunctions{
     /**
      * Shuffles the cards, which were created before.
      * 
-     * @param oDeck -> includes the cards to shuffle
+     * @param originalDeck -> includes the cards to shuffle
      * @return Array of cards, that are shuffled
      */
-    public static Card[] shuffle(Card[] oDeck) {
-        List<Card> deck = new ArrayList<>(Arrays.asList(oDeck));
+    public static Card[] shuffle(Card[] originalDeck) {
+        List<Card> deck = new ArrayList<>(Arrays.asList(originalDeck));
         List<Card> shuffled = new ArrayList<>();
 
         Collections.shuffle(deck);

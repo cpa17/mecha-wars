@@ -1,5 +1,8 @@
 package htwk.mechawars.cards;
 
+/**
+ * Class of a single Card.
+ */
 public class Card {
  
     protected Type cardAttributeType;

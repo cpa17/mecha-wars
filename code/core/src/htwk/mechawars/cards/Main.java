@@ -1,7 +1,7 @@
 package htwk.mechawars.cards;
 
 /**
- * .
+ * Testclass. Only for internals.
  */
 public class Main {
 
