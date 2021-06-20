@@ -1,5 +1,8 @@
 package htwk.mechawars.cards;
 
+/**
+ * Enumeration for the Cards.
+ */
 public enum Name {
     mov1("1 Vor"),
     mov2("2 Vor"),

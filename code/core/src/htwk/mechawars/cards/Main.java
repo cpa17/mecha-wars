@@ -1,7 +1,14 @@
 package htwk.mechawars.cards;
 
+/**
+ * .
+ */
 public class Main {
 
+    /**
+     * Testfunction (Cards) for the developers
+     * @param args -
+     */
     public static void main(String[] args) {
         Card[] cardDeck = new Card[84];
         cardDeck = CardFunctions.initDeck(cardDeck);

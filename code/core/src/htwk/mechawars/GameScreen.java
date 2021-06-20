@@ -111,8 +111,8 @@ public class GameScreen implements Screen {
       
         // can also be done with Try&Catch
         if (pressCounter < 5) {
-            cardOrder[pressCounter] = buttonNumber;  // write the number of the button (next line)
-                                                     // in cardOrder at pressCounter
+            // write the number of the button in cardOrder at pressCounter
+            cardOrder[pressCounter] = buttonNumber;  
             //System.out.println(cardOrder[pressCounter] + " JO");
 
             pressCounter += 1;
@@ -137,9 +137,6 @@ public class GameScreen implements Screen {
                 buttons[buttonNumber - 1].setText(buttons[buttonNumber - 1].getText() 
                         + " | Nr: " + (pressCounter));
             } 
-        }
-        else {
-            //NOP
         }
         //System.out.println("");
     }
