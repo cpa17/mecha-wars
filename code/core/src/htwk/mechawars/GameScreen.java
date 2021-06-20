@@ -45,8 +45,8 @@ public class GameScreen implements Screen {
      * @param skin Object of class Skin which was initialized in the constructor.
      */
     public void addScrollPanelToStage(Skin skin) {
-        int containerBoundsX = (Gdx.graphics.getWidth() -
-                ((Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 2)) + 10;
+        int containerBoundsX = (Gdx.graphics.getWidth()
+                - ((Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 2)) + 10;
         int containerBoundsY = 10;
         int containerWidth = ((Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 2) - 20;
         int containerHeight = 600;
@@ -87,11 +87,11 @@ public class GameScreen implements Screen {
         startExecutionButton.setSize(160, 43);
         endGameButton.setSize(160, 43);
 
-        int startExecutionButtonX = Gdx.graphics.getHeight() +
-                (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
+        int startExecutionButtonX = Gdx.graphics.getHeight()
+                + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
         int startExecutionButtonY = Gdx.graphics.getHeight() - 100;
-        int endGameButtonX = Gdx.graphics.getHeight() +
-                (((Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) * 2) / 3) - 64;
+        int endGameButtonX = Gdx.graphics.getHeight()
+                + (((Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) * 2) / 3) - 64;
         int endGameButtonY = Gdx.graphics.getHeight() - 100;
 
         startExecutionButton.setPosition(startExecutionButtonX, startExecutionButtonY);
