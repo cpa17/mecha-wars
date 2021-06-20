@@ -101,7 +101,7 @@ public class GameScreen implements Screen {
     }
     
     /**
-     * If there were less than 5 valid button clicks: paints button greend and adds
+     * If there were less than 5 valid button clicks: paints button green and adds
      *  " | Nr: " with the corresponding Number of at what time it was clicked.
      * @param buttonNumber -> ID-number of clicked button
      */
