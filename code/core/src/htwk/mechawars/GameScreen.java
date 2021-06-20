@@ -110,7 +110,7 @@ public class GameScreen implements Screen {
         //System.out.println(buttonNumber);
       
         // can also be done with Try&Catch
-        if(pressCounter < 5) {
+        if (pressCounter < 5) {
             cardOrder[pressCounter] = buttonNumber;         // write the number of the button in cardOrder at pressCounter
             //System.out.println(cardOrder[pressCounter] + " JO");
 
@@ -118,7 +118,7 @@ public class GameScreen implements Screen {
           
             boolean testung = true;
           
-            for(int i = (pressCounter - 2); i >= 0; i -= 1) {
+            for (int i = (pressCounter - 2); i >= 0; i -= 1) {
                 //System.out.println("FOR " + i);
                 //System.out.println(cardOrder[i]);
                 if(cardOrder[i] == buttonNumber) {
@@ -130,7 +130,7 @@ public class GameScreen implements Screen {
           
             //System.out.println("vor if testung");
           
-            if(testung) {
+            if (testung) {
                 //System.out.println("Juha testung");
                 buttons[buttonNumber - 1].setColor(Color.GREEN);
                 buttons[buttonNumber - 1].setText(buttons[buttonNumber - 1].getText() + " | Nr: " + (pressCounter));
@@ -159,7 +159,7 @@ public class GameScreen implements Screen {
      *  Renames every button to " - " and sets the button color to light grey.
      */
     private void buttonsClean() {
-        for(int i = 0; i < 84; i += 1) {
+        for (int i = 0; i < 84; i += 1) {
             buttons[i].setColor(Color.LIGHT_GRAY);
             buttons[i].setText((i + 1) + " - " + deck[i].getCardAttributeName().get_Name());
         }
