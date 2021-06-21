@@ -200,7 +200,8 @@ public class GameScreen implements Screen {
         Button removeCardOrder = new TextButton("Loesche\nKartenreihenfolge", skin);
         
         removeCardOrder.setSize(128, 43);
-        int removeCardOrderX = Gdx.graphics.getHeight() + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
+        int removeCardOrderX = Gdx.graphics.getHeight()
+                + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
         int removeCardOrderY = Gdx.graphics.getHeight() - 200;
         
         removeCardOrder.setPosition(removeCardOrderX, removeCardOrderY);
