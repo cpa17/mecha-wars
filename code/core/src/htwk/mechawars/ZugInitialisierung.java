@@ -7,7 +7,7 @@ import htwk.mechawars.cards.Card;
 public class ZugInitialisierung {
 
     private static LinkedList<Card> kartenListe = new LinkedList<Card>();
-    private Ausfuehrungslogik ausführungsLogik = new Ausfuehrungslogik();
+    private Ausfuehrungslogik ausfuehrungsLogik = new Ausfuehrungslogik();
 
     public ZugInitialisierung() {
 
@@ -20,7 +20,7 @@ public class ZugInitialisierung {
     }
 
     private void uebergebeKarten() {
-        ausführungsLogik.setKartenListe(kartenListe);
+        ausfuehrungsLogik.setKartenListe(kartenListe);
     }
 
     public void initialiereBewegung() {
