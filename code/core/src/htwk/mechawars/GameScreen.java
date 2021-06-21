@@ -50,6 +50,7 @@ public class GameScreen implements Screen {
 
     private ZugInitialisierung zugInititalisierung = new ZugInitialisierung();
 
+<<<<<<< Upstream, based on origin/MW13
     private int[] cardOrder = { -1, -1, -1, -1, -1};
     private int pressCounter = 0;
     
@@ -57,6 +58,11 @@ public class GameScreen implements Screen {
     
     private TextButton[] buttons = new TextButton[84];
     LinkedList<TextButton> buttons = new LinkedList<TextButton>();
+=======
+    int[] cardOrder = new int[5];
+    int pressCounter = 0;
+    private LinkedList<TextButton> buttons = new LinkedList<TextButton>();
+>>>>>>> 0915ef1 letzter commit for merge
 
     /**
      * Constructor of class GameScreen.
@@ -117,9 +123,7 @@ public class GameScreen implements Screen {
                         cardOrder[pressCounter] = buttonNumber;
                         System.out.println(cardOrder[pressCounter]);
                         pressCounter += 1;
-                    } else {
-// NOP
-                    }
+                    } 
                     zugInititalisierung.addCard(aktuelleKarte);
 
                 }
