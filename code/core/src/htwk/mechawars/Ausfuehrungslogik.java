@@ -9,7 +9,7 @@ import htwk.mechawars.cards.Card;
  */
 public class Ausfuehrungslogik {
     
-    private static LinkedList<Card>  kartenListe;
+    private LinkedList<Card>  kartenListe;
 
     
     /**
@@ -21,7 +21,7 @@ public class Ausfuehrungslogik {
      * 
      * @return The initial cardDeck
      */
-    public static LinkedList<Card> getKartenListe() {
+    public LinkedList<Card> getKartenListe() {
         return kartenListe;
     }
 
@@ -33,7 +33,7 @@ public class Ausfuehrungslogik {
      */
 
     public void setKartenListe(LinkedList<Card> kartenListe) {
-        Ausfuehrungslogik.kartenListe = kartenListe;
+        this.kartenListe = kartenListe;
     }
 
 
