@@ -3,7 +3,6 @@ package htwk.mechawars;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -16,8 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
-
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.CardFunctions;
 
@@ -28,12 +25,9 @@ public class GameScreen implements Screen {
 
     Texture industrialTile;
     Texture robot;
-    OrthographicCamera camera;
     Stage stage;
     Table container;
     private SpriteBatch batch;
-    private static final int cameraWidth = 1280;
-    private static final int cameraHeight = 720;
     
     private int[] cardOrder = { -1, -1, -1, -1, -1};
     private int pressCounter = 0;
@@ -41,7 +35,8 @@ public class GameScreen implements Screen {
     private Card[] deck = new Card[84];
     
     private TextButton[] buttons = new TextButton[84];
-    
+
+
     /**
      * Constructor of class GameScreen.
      */
@@ -49,10 +44,7 @@ public class GameScreen implements Screen {
         industrialTile = new Texture("industrialTile.png");
         robot = new Texture("robot.png");
 
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, cameraWidth, cameraHeight);
-
-        stage = new Stage(new ScreenViewport());
+        stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
         Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
@@ -65,13 +57,15 @@ public class GameScreen implements Screen {
      * @param skin Object of class Skin which was initialized in the constructor.
      */
     public void addScrollPanelToStage(Skin skin) {
-        int containerBoundsX = (cameraWidth - ((cameraWidth - cameraHeight) / 2)) + 10;
+        int containerBoundsX = (Gdx.graphics.getWidth()
+                - ((Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 2)) + 10;
         int containerBoundsY = 10;
-        int containerWidth = ((cameraWidth - cameraHeight) / 2) - 20;
+        int containerWidth = ((Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 2) - 20;
+        int containerHeight = 600;
 
         container = new Table();
         stage.addActor(container);
-        container.setBounds(containerBoundsX, containerBoundsY, containerWidth, 600);
+        container.setBounds(containerBoundsX, containerBoundsY, containerWidth, containerHeight);
 
         Table table = new Table();
 
@@ -97,7 +91,7 @@ public class GameScreen implements Screen {
             });
         }
 
-        container.add(scrollPanel).expand().fill();
+        container.add(scrollPanel).grow();
     }
     
     /**
@@ -170,46 +164,32 @@ public class GameScreen implements Screen {
      */
     public void addButtonsToStage(Skin skin) {
 
-        Button startExecutionButton = new TextButton("Start Execution", skin);
-        Button endGameButton = new TextButton("End Game", skin);
+        Button startExecutionButton = new TextButton("Ausfuehrung starten", skin);
+        Button endGameButton = new TextButton("Spiel beenden", skin);
 
-        startExecutionButton.setSize(128, 43);
-        endGameButton.setSize(128, 43);
+        startExecutionButton.setSize(160, 43);
+        endGameButton.setSize(160, 43);
 
-        int startExecutionButtonX = cameraHeight + (cameraWidth - cameraHeight) / 3 - 64;
-        int startExecutionButtonY = cameraHeight - 100;
-        int endGameButtonX = cameraHeight + (((cameraWidth - cameraHeight) * 2) / 3) - 64;
-        int endGameButtonY = cameraHeight - 100;
-        
+        int startExecutionButtonX = Gdx.graphics.getHeight()
+                + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
+        int startExecutionButtonY = Gdx.graphics.getHeight() - 100;
+        int endGameButtonX = Gdx.graphics.getHeight()
+                + (((Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) * 2) / 3) - 64;
+        int endGameButtonY = Gdx.graphics.getHeight() - 100;
 
         startExecutionButton.setPosition(startExecutionButtonX, startExecutionButtonY);
         endGameButton.setPosition(endGameButtonX, endGameButtonY);
         
 
-        startExecutionButton.addListener(new InputListener() {
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("startExecutionButton touchUp ausgelöst!");
-            }
-
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("startExecutionButton touchDown ausgelöst!");
-                return true;
+        startExecutionButton.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("startExecutionButton angeklickt!");
             }
         });
 
-        endGameButton.addListener(new InputListener() {
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("endGameButton touchUp ausgelöst!");
+        endGameButton.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.exit();
-            }
-
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("endGameButton touchDown ausgelöst!");
-                return true;
             }
         });
 
@@ -220,11 +200,12 @@ public class GameScreen implements Screen {
         Button removeCardOrder = new TextButton("Loesche\nKartenreihenfolge", skin);
         
         removeCardOrder.setSize(128, 43);
-        int removeCardOrderX = cameraHeight + (cameraWidth - cameraHeight) / 3 - 64;
-        int removeCardOrderY = cameraHeight - 200;
+        int removeCardOrderX = Gdx.graphics.getHeight()
+                + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
+        int removeCardOrderY = Gdx.graphics.getHeight() - 200;
         
         removeCardOrder.setPosition(removeCardOrderX, removeCardOrderY);
-        
+
         removeCardOrder.addListener(new InputListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
@@ -250,14 +231,12 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
-        camera.update();
         batch = (SpriteBatch) stage.getBatch();
-        batch.setProjectionMatrix(camera.combined);
         batch.begin();
         drawPlayingField();
         drawRobot();
         batch.end();
-        stage.act(Gdx.graphics.getDeltaTime());
+        stage.act();
         stage.draw();
     }
 
@@ -265,10 +244,10 @@ public class GameScreen implements Screen {
      * Function that draws the robot on the playing field.
      */
     public void drawRobot() {
-        int tileSize = (cameraHeight / 12);
-        int reihe = 6;
-        int spalte = 6;
-        batch.draw(robot, tileSize * (spalte - 1), (tileSize * (reihe - 1)) + 5);
+        int tileSize = (Gdx.graphics.getHeight() / 12);
+        int row = 6;
+        int column = 6;
+        batch.draw(robot, tileSize * (column - 1), (tileSize * (row - 1)) + 5);
     }
 
 
@@ -283,10 +262,10 @@ public class GameScreen implements Screen {
             int j = 0;
             while (j < 12) {
                 batch.draw(industrialTile, x, y);
-                y = y + (cameraHeight / 12);
+                y = y + (Gdx.graphics.getHeight() / 12);
                 j++;
             }
-            x = x + (cameraHeight / 12);
+            x = x + (Gdx.graphics.getHeight() / 12);
             i++;
         }
     }
