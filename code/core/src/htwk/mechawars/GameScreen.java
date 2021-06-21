@@ -2,6 +2,7 @@ package htwk.mechawars;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -17,6 +18,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+import htwk.mechawars.cards.Card;
+import htwk.mechawars.cards.CardFunctions;
+
 /**
  * Class that presents the surface of the game screen.
  */
@@ -30,7 +34,14 @@ public class GameScreen implements Screen {
     private SpriteBatch batch;
     private static final int cameraWidth = 1280;
     private static final int cameraHeight = 720;
-
+    
+    private int[] cardOrder = { -1, -1, -1, -1, -1};
+    private int pressCounter = 0;
+    
+    private Card[] deck = new Card[84];
+    
+    private TextButton[] buttons = new TextButton[84];
+    
     /**
      * Constructor of class GameScreen.
      */
@@ -65,21 +76,92 @@ public class GameScreen implements Screen {
         Table table = new Table();
 
         final ScrollPane scrollPanel = new ScrollPane(table, skin);
-
-        for (int i = 1; i < 101; i++) {
-            TextButton button;
-            button = new TextButton(i + ". Karte", skin);
+        
+        // Array of Cards created
+        deck = CardFunctions.initDeck(deck);
+        // shuffle Deck
+        deck = CardFunctions.shuffle(deck);
+        
+        for (int cardPrintCounter = 0; cardPrintCounter < 84; cardPrintCounter += 1) {
+            buttons[cardPrintCounter] = new TextButton((cardPrintCounter + 1) + " - "
+                    + deck[cardPrintCounter], skin);
             table.row();
-            table.add(button);
-            final String buttonText = i + ". Karte angeklickt";
-            button.addListener(new ClickListener() {
+            table.add(buttons[cardPrintCounter]);
+            int buttonNumber = (cardPrintCounter + 1);
+            
+            // Button-ClickListener
+            buttons[cardPrintCounter].addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
-                    System.out.println(buttonText);
+                    buttonClickOrder(buttonNumber);
                 }
             });
         }
 
         container.add(scrollPanel).expand().fill();
+    }
+    
+    /**
+     * If there were less than 5 valid button clicks: paints button green and adds
+     *  " | Nr: " with the corresponding Number of at what time it was clicked.
+     * @param buttonNumber -> ID-number of clicked button
+     */
+    private void buttonClickOrder(int buttonNumber) {
+        //System.out.print(buttonText + " ");
+        //System.out.println(buttonNumber);
+      
+        // can also be done with Try&Catch
+        if (pressCounter < 5) {
+            // write the number of the button in cardOrder at pressCounter
+            cardOrder[pressCounter] = buttonNumber;  
+            //System.out.println(cardOrder[pressCounter] + " JO");
+
+            pressCounter += 1;
+          
+            boolean testung = true;
+          
+            for (int i = (pressCounter - 2); i >= 0; i -= 1) {
+                //System.out.println("FOR " + i);
+                //System.out.println(cardOrder[i]);
+                if (cardOrder[i] == buttonNumber) {
+                    //System.out.println("Durchlauf" + i);
+                    testung = false;
+                    pressCounter -= 1;
+                }
+            }
+          
+            //System.out.println("vor if testung");
+          
+            if (testung) {
+                //System.out.println("Juha testung");
+                buttons[buttonNumber - 1].setColor(Color.GREEN);
+                buttons[buttonNumber - 1].setText(buttons[buttonNumber - 1].getText() 
+                        + " | Nr: " + (pressCounter));
+            } 
+        }
+        //System.out.println("");
+    }
+    
+    /**
+     * Initialize cardOrder[] to non reachable values.
+     */
+    private void cardOrderClear() {
+        cardOrder[0] = -1;
+        cardOrder[1] = -1;
+        cardOrder[2] = -1;
+        cardOrder[3] = -1;
+        cardOrder[4] = -1;
+        buttonsClean();
+        pressCounter = 0;
+    }
+    
+    /**
+     *  Renames every button to " - " and sets the button color to light grey.
+     */
+    private void buttonsClean() {
+        for (int i = 0; i < 84; i += 1) {
+            buttons[i].setColor(Color.LIGHT_GRAY);
+            buttons[i].setText((i + 1) + " - " + deck[i]);
+        }
     }
 
     /**
@@ -98,9 +180,11 @@ public class GameScreen implements Screen {
         int startExecutionButtonY = cameraHeight - 100;
         int endGameButtonX = cameraHeight + (((cameraWidth - cameraHeight) * 2) / 3) - 64;
         int endGameButtonY = cameraHeight - 100;
+        
 
         startExecutionButton.setPosition(startExecutionButtonX, startExecutionButtonY);
         endGameButton.setPosition(endGameButtonX, endGameButtonY);
+        
 
         startExecutionButton.addListener(new InputListener() {
             @Override
@@ -131,6 +215,31 @@ public class GameScreen implements Screen {
 
         stage.addActor(startExecutionButton);
         stage.addActor(endGameButton);
+        
+        // add Button to remove cardOrder
+        Button removeCardOrder = new TextButton("Loesche\nKartenreihenfolge", skin);
+        
+        removeCardOrder.setSize(128, 43);
+        int removeCardOrderX = cameraHeight + (cameraWidth - cameraHeight) / 3 - 64;
+        int removeCardOrderY = cameraHeight - 200;
+        
+        removeCardOrder.setPosition(removeCardOrderX, removeCardOrderY);
+        
+        removeCardOrder.addListener(new InputListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                // System.out.println("Rauf");
+                cardOrderClear();
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                // System.out.println("Runter");
+                return true;
+            }
+        });
+        
+        stage.addActor(removeCardOrder);
     }
 
     @Override
