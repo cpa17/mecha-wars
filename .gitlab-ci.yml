@@ -30,10 +30,10 @@ test:
   stage: test
   script: gradle check
   after_script:
-    - test -f core/build/reports/spotbugs/main.txt && cat core/build/reports/spotbugs/main.txt
-    - test -f core/build/reports/spotbugs/test.txt && cat core/build/reports/spotbugs/test.txt
-    - test -f desktop/build/reports/spotbugs/main.txt && cat desktop/build/reports/spotbugs/main.txt
-    - test -f desktop/build/reports/spotbugs/test.txt && cat desktop/build/reports/spotbugs/test.txt
+    - test -f /builds/weicker/mecha-wars/code/core/build/reports/spotbugs/main.txt && cat /builds/weicker/mecha-wars/code/core/build/reports/spotbugs/main.txt
+    - test -f /builds/weicker/mecha-wars/code/core/build/reports/spotbugs/test.txt && cat /builds/weicker/mecha-wars/code/core/build/reports/spotbugs/test.txt
+    - test -f /builds/weicker/mecha-wars/code/desktop/build/reports/spotbugs/main.txt && cat /builds/weicker/mecha-wars/code/desktop/build/reports/spotbugs/main.txt
+    - test -f /builds/weicker/mecha-wars/code/desktop/build/reports/spotbugs/test.txt && cat /builds/weicker/mecha-wars/code/desktop/build/reports/spotbugs/test.txt
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: pull
