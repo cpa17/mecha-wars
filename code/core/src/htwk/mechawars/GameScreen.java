@@ -95,7 +95,7 @@ public class GameScreen implements Screen {
         // shuffle Deck
         deck = CardFunctions.shuffle(deck);
         for (int cardPrintCounter = 0; cardPrintCounter < 84; cardPrintCounter += 1) {
-        	Card aktuelleKarte = deck[cardPrintCounter];
+            Card aktuelleKarte = deck[cardPrintCounter];
             buttons[cardPrintCounter] = new TextButton((cardPrintCounter + 1) + " - "
                     + aktuelleKarte, skin);
             table.row();
@@ -185,7 +185,7 @@ public class GameScreen implements Screen {
         for (int i = 0; i < buttons.length; i++) {
             buttons[i].setTouchable(Touchable.disabled);
         }
-// TODO Auto-generated method stub
+        // TODO Auto-generated method stub
 
     }
 
