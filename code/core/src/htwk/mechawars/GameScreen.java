@@ -29,14 +29,8 @@ import htwk.mechawars.cards.CardFunctions;
  */
 public class GameScreen implements Screen {
 
-<<<<<<< Upstream, based on origin/MW13
-    Texture industrialTile;
-    Texture robot;
-    OrthographicCamera camera;
-    Stage stage;
-    Table container;
-    private SpriteBatch batch;
-=======
+
+
     final MechaWars game;
 
     private Texture industrialTile;
@@ -44,25 +38,21 @@ public class GameScreen implements Screen {
     private OrthographicCamera camera;
     private Stage stage;
     private Table container;
->>>>>>> 5afb8c1 attribute private gemacht
+
     private static final int cameraWidth = 1280;
     private static final int cameraHeight = 720;
 
     private ZugInitialisierung zugInititalisierung = new ZugInitialisierung();
 
-<<<<<<< Upstream, based on origin/MW13
+
     private int[] cardOrder = { -1, -1, -1, -1, -1};
     private int pressCounter = 0;
     
     private Card[] deck = new Card[84];
     
     private TextButton[] buttons = new TextButton[84];
-    LinkedList<TextButton> buttons = new LinkedList<TextButton>();
-=======
-    int[] cardOrder = new int[5];
-    int pressCounter = 0;
-    private LinkedList<TextButton> buttons = new LinkedList<TextButton>();
->>>>>>> 0915ef1 letzter commit for merge
+
+
 
     /**
      * Constructor of class GameScreen.
@@ -106,8 +96,9 @@ public class GameScreen implements Screen {
         // shuffle Deck
         deck = CardFunctions.shuffle(deck);
         for (int cardPrintCounter = 0; cardPrintCounter < 84; cardPrintCounter += 1) {
+        	Card aktuelleKarte = deck[cardPrintCounter];
             buttons[cardPrintCounter] = new TextButton((cardPrintCounter + 1) + " - "
-                    + deck[cardPrintCounter], skin);
+                    + aktuelleKarte, skin);
             table.row();
             table.add(buttons[cardPrintCounter]);
             int buttonNumber = (cardPrintCounter + 1);
@@ -116,7 +107,6 @@ public class GameScreen implements Screen {
             buttons[cardPrintCounter].addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
                     buttonClickOrder(buttonNumber);
-                    System.out.print(buttonText + " ");
                     System.out.println(buttonNumber);
 // can also be done with Try&Catch
                     if (pressCounter < 5) {
@@ -199,8 +189,8 @@ public class GameScreen implements Screen {
     }
 
     private void deaktiviereButtons() {
-        for (int i = 0; i < buttons.size(); i++) {
-            buttons.get(i).setTouchable(Touchable.disabled);
+        for (int i = 0; i < buttons.length; i++) {
+            buttons[i].setTouchable(Touchable.disabled);
         }
 // TODO Auto-generated method stub
 
