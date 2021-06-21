@@ -4,6 +4,10 @@ import java.util.LinkedList;
 
 import htwk.mechawars.cards.Card;
 
+/**
+ * 
+ *
+ */
 public class ZugInitialisierung {
 
     private static LinkedList<Card> kartenListe = new LinkedList<Card>();
@@ -13,10 +17,10 @@ public class ZugInitialisierung {
 
     }
 
-    public void addCard(Card Karte) {
+    public void addCard(Card karte) {
 // TODO Auto-generated method stub
 
-        kartenListe.add(Karte);
+        kartenListe.add(karte);
     }
 
     private void uebergebeKarten() {

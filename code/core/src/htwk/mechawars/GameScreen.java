@@ -31,7 +31,6 @@ public class GameScreen implements Screen {
 
 
 
-    final MechaWars game;
 
     private Texture industrialTile;
     private Texture robot;
@@ -41,7 +40,7 @@ public class GameScreen implements Screen {
 
     private static final int cameraWidth = 1280;
     private static final int cameraHeight = 720;
-
+    private SpriteBatch batch;
     private ZugInitialisierung zugInititalisierung = new ZugInitialisierung();
 
 
@@ -108,12 +107,6 @@ public class GameScreen implements Screen {
                 public void clicked(InputEvent event, float x, float y) {
                     buttonClickOrder(buttonNumber);
                     System.out.println(buttonNumber);
-// can also be done with Try&Catch
-                    if (pressCounter < 5) {
-                        cardOrder[pressCounter] = buttonNumber;
-                        System.out.println(cardOrder[pressCounter]);
-                        pressCounter += 1;
-                    } 
                     zugInititalisierung.addCard(aktuelleKarte);
 
                 }
