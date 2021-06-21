@@ -1,0 +1,42 @@
+# CI configuration based on https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Gradle.gitlab-ci.yml
+
+# This is the Gradle build system for JVM applications
+# https://gradle.org/
+# https://github.com/gradle/gradle
+image: gradle:6-jdk11-hotspot
+
+# Disable the Gradle daemon for Continuous Integration servers as correctness
+# is usually a priority over speed in CI environments. Using a fresh
+# runtime for each build is more reliable since the runtime is completely
+# isolated from any previous builds.
+variables:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+before_script:
+  - cd code
+  - export GRADLE_USER_HOME=`pwd`/.gradle
+
+build:
+  stage: build
+  script: gradle --build-cache assemble
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: push
+    paths:
+      - build
+      - .gradle
+
+test:
+  stage: test
+  script: gradle check
+  after_script:
+    - test -f /builds/weicker/mecha-wars/code/core/build/reports/spotbugs/main.txt && cat /builds/weicker/mecha-wars/code/core/build/reports/spotbugs/main.txt
+    - test -f /builds/weicker/mecha-wars/code/core/build/reports/spotbugs/test.txt && cat /builds/weicker/mecha-wars/code/core/build/reports/spotbugs/test.txt
+    - test -f /builds/weicker/mecha-wars/code/desktop/build/reports/spotbugs/main.txt && cat /builds/weicker/mecha-wars/code/desktop/build/reports/spotbugs/main.txt
+    - test -f /builds/weicker/mecha-wars/code/desktop/build/reports/spotbugs/test.txt && cat /builds/weicker/mecha-wars/code/desktop/build/reports/spotbugs/test.txt
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: pull
+    paths:
+      - build
+      - .gradle

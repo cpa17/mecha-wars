@@ -11,3 +11,5 @@ etc. betrifft – auch Zuarbeiten
 - process/ alles, was TM, Zeitpl¨ane, Prozess etc.
 betrifft
 - minutes/ Protokoll zu jedem Meeting
+
+
