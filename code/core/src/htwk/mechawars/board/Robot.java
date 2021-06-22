@@ -8,6 +8,8 @@ public class Robot {
     private Dir dir;
     private int x;
     private int y;
+    private int startX;
+    private int startY;
 
     public void robot() {
     }
@@ -64,5 +66,21 @@ public class Robot {
 
     public int getX() {
         return x;
+    }
+
+    public int getStartX() {
+        return startX;
+    }
+
+    public int getStartY() {
+        return startY;
+    }
+
+    public void setStartX(int startX) {
+        this.startX = startX;
+    }
+
+    public void setStartY(int startY) {
+        this.startY = startY;
     }
 }
