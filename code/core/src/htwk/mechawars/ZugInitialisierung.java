@@ -7,7 +7,7 @@ import htwk.mechawars.cards.Card;
 
 /**
  * initializes the execution of the turn.
- * @author Bernhard
+ * 
  *
  */
 public class ZugInitialisierung {
@@ -43,9 +43,14 @@ public class ZugInitialisierung {
     /**initializes the Movement of the Player.
      * 
      */
-    public void initialiereBewegung() {
+    public void initialisiereBewegung() {
         uebergebeKarten();
         System.out.println(kartenListe.toString());
     }
+
+	public void resetList() {
+		kartenListe = new LinkedList<Card>();
+		
+	}
 
 }

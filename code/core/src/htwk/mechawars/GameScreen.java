@@ -222,7 +222,7 @@ public class GameScreen implements Screen {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 System.out.println("startExecutionButton touchDown ausgelöst!");
                 deaktiviereButtons();
-                zugInititalisierung.initialiereBewegung();
+                zugInititalisierung.initialisiereBewegung();
                 return true;
             }
         });
@@ -258,6 +258,7 @@ public class GameScreen implements Screen {
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 // System.out.println("Rauf");
                 cardOrderClear();
+                zugInititalisierung.resetList();
             }
 
             @Override
