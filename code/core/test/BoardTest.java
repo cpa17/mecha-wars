@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
  */
 
 public class BoardTest {
-    private Board board = new Board(4, 4);
+    private Board board = new Board();
     private Robot robot = new Robot();
 
     public int[][] startMatrix = {
@@ -37,7 +37,7 @@ public class BoardTest {
             {0, 0, 0, 0},
             {0, 0, 0, 0},
             {0, 0, 0, 0},
-            {0, 0, 0, 2}
+            {0, 0, 0, 1}
     };
 
 
@@ -45,24 +45,15 @@ public class BoardTest {
     @Test
     public void boardTest() {
         LinkedList<Card> phase1 = new LinkedList<>();
-        phase1.add(new Card(Type.mov, (byte) 3));
-        phase1.add(new Card(Type.turn, (byte) 3));
-        phase1.add(new Card(Type.mov, (byte) 1));
-        phase1.add(new Card(Type.turn, (byte) 1));
-        phase1.add(new Card(Type.turn, (byte) 2));
-
-        LinkedList<Card> phase2 = new LinkedList<>();
-        phase2.add(new Card(Type.mov, (byte) 2));
-        phase2.add(new Card(Type.turn, (byte) 2));
-        phase2.add(new Card(Type.mov, (byte) -1));
-        phase2.add(new Card(Type.turn, (byte) 1));
-        phase2.add(new Card(Type.mov, (byte) 2));
+        phase1.add(new Card( Type.mov, (byte) 3));
+        phase1.add(new Card( Type.turn, (byte) 3));
+        phase1.add(new Card( Type.mov, (byte) 1));
+        phase1.add(new Card( Type.turn, (byte) 1));
+        phase1.add(new Card( Type.turn, (byte) 2));
 
         assertArrayEquals(startMatrix, board.matrix);
         board.move(phase1, robot);
         assertArrayEquals(midMatrix, board.matrix);
-        board.move(phase2, robot);
-        assertArrayEquals(endMatrix, board.matrix);
     }
 
     /**
@@ -70,6 +61,7 @@ public class BoardTest {
      */
     @BeforeEach
     public void initBoard() {
+        board.board(4, 4);
         board.startRobot(3, 3, Dir.NORTH, robot);
     }
 
