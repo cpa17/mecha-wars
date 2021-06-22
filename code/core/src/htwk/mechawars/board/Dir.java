@@ -20,11 +20,6 @@ public enum Dir {
         return value;
     }
 
-    public Dir turn(byte rightTurnCount) {
-        this.value = ((this.value + rightTurnCount) % 4) + 1;
-        return intToDirection(this.value);
-    }
-
     public Dir intToDirection(int value){
         switch (value){
             case 1:
