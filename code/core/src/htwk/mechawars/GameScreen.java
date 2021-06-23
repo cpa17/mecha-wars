@@ -185,7 +185,7 @@ public class GameScreen implements Screen {
         startExecutionButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 //If All Cards are chosen
-                if(cardOrder[4 - damagePoints] != -1) {
+                if (cardOrder[4 - damagePoints] != -1) {
                     System.out.println("startExecutionButton angeklickt!");
                 }
             }
