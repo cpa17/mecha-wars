@@ -72,7 +72,7 @@ public class CardTests {
     }
     
     /**
-     * Test the amoung of Turn-Left-Cards in the Array, which have to be 18.
+     * Test the amount of Turn-Left-Cards in the Array, which have to be 18.
      */
     @Test
     public void testCardCount() {
