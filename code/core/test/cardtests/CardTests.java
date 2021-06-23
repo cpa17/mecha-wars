@@ -104,7 +104,8 @@ public class CardTests {
         testCards = CardFunctions.initDeck(testCards);
 
         //for (int x = 0; x < 84; x += 1) {
-        //    System.out.println( testCards[x].toString() + "  " + testCards[x].getCardAttributePriority());
+        //    System.out.println( testCards[x].toString() + "  " 
+        //          + testCards[x].getCardAttributePriority());
         //} -> Manuel Test of Priority
         
         for (int i = 0; i < 84; i += 1) {
@@ -119,8 +120,8 @@ public class CardTests {
             if (testCards[i].getCardAttributePriority() == 410) {
                 System.out.println("Hallo Prio");
                 if (testCards[i].toString() == "Linksdrehung") {
-                prio1 = true;
-                System.out.println("1");
+                    prio1 = true;
+                    System.out.println("1");
                 }
             }
             if (testCards[i].getCardAttributePriority() == 510
