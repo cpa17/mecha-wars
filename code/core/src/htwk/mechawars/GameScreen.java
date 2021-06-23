@@ -31,6 +31,7 @@ public class GameScreen implements Screen {
     
     private int[] cardOrder = { -1, -1, -1, -1, -1};
     private int pressCounter = 0;
+    private int damagePoints = 0;
     
     private Card[] deck = new Card[84];
     
@@ -104,7 +105,7 @@ public class GameScreen implements Screen {
         //System.out.println(buttonNumber);
       
         // can also be done with Try&Catch
-        if (pressCounter < 5) {
+        if (pressCounter < 5 - damagePoints) {
             // write the number of the button in cardOrder at pressCounter
             cardOrder[pressCounter] = buttonNumber;  
             //System.out.println(cardOrder[pressCounter] + " JO");
@@ -183,7 +184,10 @@ public class GameScreen implements Screen {
 
         startExecutionButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("startExecutionButton angeklickt!");
+                //If All Cards are chosen
+                if(cardOrder[4 - damagePoints] != -1) {
+                    System.out.println("startExecutionButton angeklickt!");
+                }
             }
         });
 
