@@ -20,7 +20,8 @@ public class CardFunctions {
      * @return The initial cardDeck
      */
     public static Card[] initDeck(Card[] cardDeck) {
-        byte x = 10;
+        
+        int x = 10;
         // List<Card> deck = new ArrayList<>(Arrays.asList(cardDeck));
         // First 6 cards (U-Turn)
         for (int i = 0; i < 6; i += 1) {
@@ -30,13 +31,13 @@ public class CardFunctions {
         }
         // x = 70;
         // Card 7, 9, 11 .. 41 (Left-Turn)
-        for (int i = 6; i < 40; i += 2) {
+        for (int i = 6; i < 41; i += 2) {
             cardDeck[i]      = new Card(Type.turn, (byte) 3, x);
             x += 20;
         }
         x = 80;
         // Card 8, 10 .. 42 (Right-Turn)
-        for (int i = 7; i < 41; i += 2) {
+        for (int i = 7; i < 42; i += 2) {
             cardDeck[i]      = new Card(Type.turn, (byte) 1, x);
             x += 20;
         }
@@ -48,7 +49,7 @@ public class CardFunctions {
         }
         // x = 490
         // Card 49 .. 66
-        for (int i = 49; i < 66; i += 1) {
+        for (int i = 48; i < 66; i += 1) {
             cardDeck[i]      = new Card(Type.mov, (byte) 1, x);
             x += 10;
         }

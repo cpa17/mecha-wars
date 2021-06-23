@@ -14,12 +14,12 @@ public class Card {
      *  2:              2                   u-turn
      *  3:              3                   left
      */
-    private byte cardAttributePriority;
+    private int cardAttributePriority;
 
     /**
      * Constructor of a Card.
      */
-    public Card(Type cardAttributeType, byte cardAttributeMovCount, byte cardAttributePriority) {
+    public Card(Type cardAttributeType, byte cardAttributeMovCount, int cardAttributePriority) {
         this.cardAttributeType = cardAttributeType;
         this.cardAttributeMovCount = cardAttributeMovCount;
         this.cardAttributePriority = cardAttributePriority;
@@ -43,7 +43,7 @@ public class Card {
         return cardAttributeMovCount;
     }
     
-    public byte getCardAttributePriority() {
+    public int getCardAttributePriority() {
         return cardAttributePriority;
     }
     
