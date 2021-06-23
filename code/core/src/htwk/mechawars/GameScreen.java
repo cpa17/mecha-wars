@@ -187,6 +187,9 @@ public class GameScreen implements Screen {
                 //If All Cards are chosen
                 if (cardOrder[4 - damagePoints] != -1) {
                     System.out.println("startExecutionButton angeklickt!");
+                    startExecutionButton.setColor(Color.LIGHT_GRAY);
+                } else {
+                    startExecutionButton.setColor(Color.RED);
                 }
             }
         });
