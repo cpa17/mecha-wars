@@ -55,9 +55,9 @@ public class GameScreen implements Screen {
      */
     public GameScreen() {
         industrialTile = new Texture("industrialTile.png");
-        
+
         robot = new Texture("robot.png");
-        
+
         batch = new SpriteBatch();
         sprite = new Sprite(robot);
 
@@ -257,6 +257,32 @@ public class GameScreen implements Screen {
         });
 
         stage.addActor(removeCardOrder);
+        
+        // add Button for tipps and infos
+        Button buttonInfo = new TextButton("Info's", skin);
+        
+        int a = 60;     // width
+        int b = 40;     // height
+        
+        buttonInfo.setSize(a, b);
+        int buttonInfoX = Gdx.graphics.getWidth() - (a + 10);
+        int buttonInfoY = Gdx.graphics.getHeight() - (b + 10);
+        
+        buttonInfo.setPosition(buttonInfoX, buttonInfoY);
+
+        buttonInfo.addListener(new InputListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                // GUI/POPup start
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+        });
+        
+        stage.addActor(buttonInfo);
     }
 
     @Override
@@ -268,7 +294,7 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
         batch.begin();
-        
+
         drawPlayingField();
         drawRobot();
         //player.drawParameters(batch);
@@ -309,14 +335,14 @@ public class GameScreen implements Screen {
         //für das "normale" Spielfeld boardtxt mit board ersetzen
         for (int i = 0; i < board.matrix.length; i++) {
             for (int j = 0; j < board.matrix[i].length; j++) {
-                
+
                 int p = board.matrix[i][j];
-                
+
                 int t = Gdx.graphics.getHeight() / board.matrix.length; //height of one tile
                 int b = Gdx.graphics.getHeight(); //height of the entire board
                 int c = (i + 1) * t; //the current height in the loop
                 int r = b - c; //the result of the board height minus the current height
-                    
+
                 switch (p) {
                     case(0):
                         batch.draw(industrialTile, x, r);
@@ -328,11 +354,11 @@ public class GameScreen implements Screen {
 
                 x = x + (Gdx.graphics.getHeight() / board.matrix.length);
             }
-            
+
             x = 0;
         }
     }
-    
+
     @Override
     public void resize(int width, int height) {
 
@@ -340,7 +366,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void pause() {
-        
+
     }
 
     @Override
