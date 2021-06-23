@@ -231,8 +231,8 @@ public class GameScreen implements Screen {
         int b = 40;
         
         buttonInfo.setSize(a, b);
-        int buttonInfoX = Gdx.graphics.getWidth() - (a+10);
-        int buttonInfoY = Gdx.graphics.getHeight() - (b+10);
+        int buttonInfoX = Gdx.graphics.getWidth() - (a + 10);
+        int buttonInfoY = Gdx.graphics.getHeight() - (b + 10);
         
         buttonInfo.setPosition(buttonInfoX, buttonInfoY);
 
