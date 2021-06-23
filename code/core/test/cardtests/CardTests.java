@@ -96,28 +96,47 @@ public class CardTests {
     @Test
     public void testPriority() {
         Card[] testCards = new Card[84];
+        boolean prio0 = false;
         boolean prio1 = false;
         boolean prio2 = false;
         boolean prio3 = false;
         
         testCards = CardFunctions.initDeck(testCards);
+
+        //for (int x = 0; x < 84; x += 1) {
+        //    System.out.println( testCards[x].toString() + "  " + testCards[x].getCardAttributePriority());
+        //} -> Manuel Test of Priority
         
         for (int i = 0; i < 84; i += 1) {
-            if (testCards[i].getCardAttributePriority() == 410
-                    && testCards[i].getCardAttributeType().toString() == "Linksdrehung") {
+            System.out.println("e" + i);
+            if (testCards[i].toString() == "Kehrtwendung") {
+                System.out.println("1 ja");
+                if (testCards[i].getCardAttributePriority() == 70) {
+                    prio0 = true;
+                    System.out.println("2 Ja");
+                }
+            }
+            if (testCards[i].getCardAttributePriority() == 410) {
+                System.out.println("Hallo Prio");
+                if (testCards[i].toString() == "Linksdrehung") {
                 prio1 = true;
+                System.out.println("1");
+                }
             }
             if (testCards[i].getCardAttributePriority() == 510
-                    && testCards[i].getCardAttributeType().toString() == "1 Vor") {
+                    && testCards[i].toString() == "1 Vor") {
                 prio2 = true;
+                System.out.println("2");
             }
-            if (testCards[i].getCardAttributePriority() == 90
-                    && testCards[i].getCardAttributeType().toString() == "Rechtsdrehung") {
+            if (testCards[i].getCardAttributePriority() == 80
+                    && testCards[i].toString() == "Rechtsdrehung") {
                 prio3 = true;
+                System.out.println("3");
             }
         }
-        assertTrue(prio1);
-        assertTrue(prio2);
-        assertTrue(prio3);
+        assertFalse(prio0 == true);
+        assertTrue(prio1 == true);
+        assertTrue(prio2 == true);
+        assertTrue(prio3 == true);
     }
 }
