@@ -43,6 +43,10 @@ public class Card {
         return cardAttributeMovCount;
     }
     
+    /**
+     * Take the Priority of the Card.
+     * @return the priority
+     */
     public int getCardAttributePriority() {
         return cardAttributePriority;
     }
