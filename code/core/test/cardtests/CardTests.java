@@ -103,15 +103,15 @@ public class CardTests {
         testCards = CardFunctions.initDeck(testCards);
         
         for (int i = 0; i < 84; i += 1) {
-            if( testCards[i].getCardAttributePriority() == 410
+            if (testCards[i].getCardAttributePriority() == 410
                     && testCards[i].getCardAttributeType().toString() == "Linksdrehung") {
                 prio1 = true;
             }
-            if( testCards[i].getCardAttributePriority() == 510
+            if (testCards[i].getCardAttributePriority() == 510
                     && testCards[i].getCardAttributeType().toString() == "1 Vor") {
                 prio2 = true;
             }
-            if( testCards[i].getCardAttributePriority() == 90
+            if (testCards[i].getCardAttributePriority() == 90
                     && testCards[i].getCardAttributeType().toString() == "Rechtsdrehung") {
                 prio3 = true;
             }
