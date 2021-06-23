@@ -76,7 +76,7 @@ public class GameScreen implements Screen {
         // shuffle Deck
         deck = CardFunctions.shuffle(deck);
         
-        for (int cardPrintCounter = 0; cardPrintCounter < 84; cardPrintCounter += 1) {
+        for (int cardPrintCounter = 0; cardPrintCounter < 9; cardPrintCounter += 1) {
             buttons[cardPrintCounter] = new TextButton((cardPrintCounter + 1) + " - "
                     + deck[cardPrintCounter], skin);
             table.row();
@@ -152,7 +152,7 @@ public class GameScreen implements Screen {
      *  Renames every button to " - " and sets the button color to light grey.
      */
     private void buttonsClean() {
-        for (int i = 0; i < 84; i += 1) {
+        for (int i = 0; i < 9; i += 1) {
             buttons[i].setColor(Color.LIGHT_GRAY);
             buttons[i].setText((i + 1) + " - " + deck[i]);
         }
