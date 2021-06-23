@@ -1,0 +1,34 @@
+Protokoll: 22.06.2021
+
+Anwesend: Alle
+
+Thema: Planung für den zweiten Sprint, inkl. Scrumpoker
+
+geführt von: Mark Fiedler, 19MIB-1
+
+## noch nicht fertige Tickets
+
+- MW-16 offen
+- MW-15 in Bearbeitung
+
+## sonstige Informationen
+
+- assets bereitgestellt als zip, für das Design-Meeting
+- existierendes Scroll-Problem welches behoben ist durch geringere Anzahl an Karten die angezeigt werden
+  im letztendlichen Spiel, kein Scrollen nötig
+
+## Ziel zweiter Sprint
+
+- Basis ausbauen
+- Stück für Stück neue Funktionen implementieren
+
+## kleine Informationen aus dem Scrumpoker
+
+- MW-33 hohe Priorität, für Kodierung der Spielpläne, eines der wichtigeren Tickets für diesen Sprint
+- Überlegung ob Bug Behebung im sprint passieren soll oder als extra Bug Sprint -> Fazit lautet im Sprint
+- Behebung durch die Person die an dem Ticket gearbeitet hat wo der Bug auftrat
+- Ticket mit dem Schaden bekommen durch Laser muss erstmal die Lebenspunkte des Spielers implementieren
+- Ticket zum Merkblatt hat noch Zeit
+- Kartentickets in Kombination gelöst werden
+- Ticket mit dem Abschalten des Roboters muss auch implementieren das man nicht nur eine Runde spielt
+- Richtung des Roboters nach dem er zerstört wurde wird zu einem späteren Zeitpunkt implementiert
