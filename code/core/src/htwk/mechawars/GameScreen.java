@@ -225,8 +225,8 @@ public class GameScreen implements Screen {
         // add Button for tipps and infos
         Button buttonInfo = new TextButton("Info's", skin);
         
-        int a = 60;
-        int b = 40;
+        int a = 60;     // width
+        int b = 40;     // height
         
         buttonInfo.setSize(a, b);
         int buttonInfoX = Gdx.graphics.getWidth() - (a + 10);
