@@ -86,7 +86,7 @@ public class CardTests {
                 counter += 1;
             }
         }
-        assertTrue(counter<18);
+        assertTrue(counter < 18);
     }
 
 }
