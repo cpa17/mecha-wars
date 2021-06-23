@@ -89,4 +89,35 @@ public class CardTests {
         assertTrue(counter < 18);
     }
 
+    
+    /**
+     * Test, that show, that the priority of cards are correct.
+     */
+    @Test
+    public void testPriority() {
+        Card[] testCards = new Card[84];
+        boolean prio1 = false;
+        boolean prio2 = false;
+        boolean prio3 = false;
+        
+        testCards = CardFunctions.initDeck(testCards);
+        
+        for (int i = 0; i < 84; i += 1) {
+            if( testCards[i].getCardAttributePriority() == 410
+                    && testCards[i].getCardAttributeType().toString() == "Linksdrehung") {
+                prio1 = true;
+            }
+            if( testCards[i].getCardAttributePriority() == 510
+                    && testCards[i].getCardAttributeType().toString() == "1 Vor") {
+                prio2 = true;
+            }
+            if( testCards[i].getCardAttributePriority() == 90
+                    && testCards[i].getCardAttributeType().toString() == "Rechtsdrehung") {
+                prio3 = true;
+            }
+        }
+        assertTrue(prio1);
+        assertTrue(prio2);
+        assertTrue(prio3);
+    }
 }
