@@ -21,8 +21,10 @@ public class CardFunctions {
      */
     public static Card[] initDeck(Card[] cardDeck) {
         byte x = 10;
+        // List<Card> deck = new ArrayList<>(Arrays.asList(cardDeck));
         // First 6 cards (U-Turn)
         for (int i = 0; i < 6; i += 1) {
+            //MUSTER : deck.add(new Card(Type.turn, (byte) 2, x));
             cardDeck[i]      = new Card(Type.turn, (byte) 2, x);
             x += 10;
         }
