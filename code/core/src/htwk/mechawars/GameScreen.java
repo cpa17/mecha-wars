@@ -222,31 +222,6 @@ public class GameScreen implements Screen {
         
         stage.addActor(removeCardOrder);
         
-        // add Button for tipps and infos
-        Button buttonInfo = new TextButton("Info's", skin);
-        
-        int a = 60;
-        int b = 40;
-        
-        buttonInfo.setSize(a, b);
-        int buttonInfoX = Gdx.graphics.getWidth() - (a + 10);
-        int buttonInfoY = Gdx.graphics.getHeight() - (b + 10);
-        
-        buttonInfo.setPosition(buttonInfoX, buttonInfoY);
-
-        buttonInfo.addListener(new InputListener() {
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                // GUI/POPup start
-            }
-
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-        });
-        
-        stage.addActor(buttonInfo);
     }
 
     @Override
