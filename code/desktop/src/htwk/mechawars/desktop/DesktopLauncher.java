@@ -37,7 +37,7 @@ public class DesktopLauncher implements Runnable {
      * Main class, for the new CommandLine.
      */
     public static void main(String[] args) {
-        if (restartJVM()) {
+        if (restartJvm()) {
             return;
         }
         System.exit(new CommandLine(new DesktopLauncher()).execute(args));
@@ -55,9 +55,9 @@ public class DesktopLauncher implements Runnable {
     }
 
     /**
-     * Method, for fixing bug with macOS
+     * Method, for fixing bug with macOS.
      */
-    public static boolean restartJVM() {
+    public static boolean restartJvm() {
 
         String osName = System.getProperty("os.name");
 
