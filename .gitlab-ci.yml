@@ -12,12 +12,11 @@ image: gradle:6-jdk11-hotspot
 variables:
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
 
-before_script:
-  - cd code
-  - export GRADLE_USER_HOME=`pwd`/.gradle
-
 build:
   stage: build
+  before_script:
+    - cd code
+    - export GRADLE_USER_HOME=`pwd`/.gradle
   script: gradle --build-cache assemble
   cache:
     key: "$CI_COMMIT_REF_NAME"
@@ -30,6 +29,8 @@ test:
   stage: test
   before_script:
     - apt-get update -qq && apt-get install -y -qq elinks
+    - cd code
+    - export GRADLE_USER_HOME=`pwd`/.gradle
   script: gradle check
   after_script:
     - test -f /builds/weicker/mecha-wars/code/core/build/reports/spotbugs/main.html && elinks -dump /builds/weicker/mecha-wars/code/core/build/reports/spotbugs/main.html
