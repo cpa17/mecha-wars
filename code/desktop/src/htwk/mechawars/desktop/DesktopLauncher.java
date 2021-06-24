@@ -13,13 +13,14 @@ import java.io.InputStreamReader;
 import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.List;
+import java.nio.charset.Charset;
 
 /**
  * Class containing the runner for the desktop frontend.
- * Write .\gradlew.bat desktop:dist in your console, 
+ * Write .\gradlew.bat desktop:dist in your console,
  * in the writer code in order to provide the jar-file.
  * One can find the jar-file under mecha-wars -> code -> desktop -> build -> libs.
- * Execute the file in your shell with the command 
+ * Execute the file in your shell with the command
  * java -jar mw.jar, get all options with the command java -jar mw.jar -h.
  */
 
@@ -29,7 +30,7 @@ import java.util.List;
         mixinStandardHelpOptions = true)
 public class DesktopLauncher implements Runnable {
 
-    @Option(names = { "-s", "--skip" }, 
+    @Option(names = { "-s", "--skip" },
             description = "Starts the Game, without showing the MainMenu at first.")
     boolean skip;
 
@@ -46,7 +47,7 @@ public class DesktopLauncher implements Runnable {
     /**
      * Method, running the desktop frontend.
      */
-    @Override 
+    @Override
     public void run() {
         MechaWars.setSkip(skip);
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
@@ -103,15 +104,15 @@ public class DesktopLauncher implements Runnable {
             processBuilder.redirectErrorStream(true);
             Process process = processBuilder.start();
 
-            InputStream is = process.getInputStream();
-            InputStreamReader isr = new InputStreamReader(is);
-            BufferedReader br = new BufferedReader(isr);
+            BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream(),
+                                                                         Charset.forName("UTF-8")));
             String line;
 
             while ((line = br.readLine()) != null) {
                 System.out.println(line);
             }
 
+            br.close();
             process.waitFor();
         } catch (Exception e) {
             e.printStackTrace();
