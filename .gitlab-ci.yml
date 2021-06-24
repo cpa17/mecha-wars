@@ -29,7 +29,7 @@ build:
 test:
   stage: test
   before_script:
-    - apt-get install -y elinks
+    - apt-get update -qq && apt-get install -y -qq elinks
   script: gradle check
   after_script:
     - test -f /builds/weicker/mecha-wars/code/core/build/reports/spotbugs/main.html && elinks -dump /builds/weicker/mecha-wars/code/core/build/reports/spotbugs/main.html
