@@ -59,12 +59,14 @@ project(":desktop") {
     spotbugsMain {
         reports {
             xml.enabled = false
+            html.enabled = true
             text.enabled = true
         }
     }
     spotbugsTest {
         reports {
             xml.enabled = false
+            html.enabled = true
             text.enabled = true
         }
     }
@@ -96,12 +98,14 @@ project(":core") {
     spotbugsMain {
         reports {
             xml.enabled = false
+            html.enabled = true
             text.enabled = true
         }
     }
     spotbugsTest {
         reports {
             xml.enabled = false
+            html.enabled = true
             text.enabled = true
         }
     }
