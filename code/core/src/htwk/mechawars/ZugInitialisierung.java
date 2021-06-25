@@ -48,9 +48,11 @@ public class ZugInitialisierung {
         System.out.println(kartenListe.toString());
     }
 
-	public void resetList() {
-		kartenListe = new LinkedList<Card>();
-		
-	}
+    /**resets the List of Cards.
+     * 
+     */
+    public void resetList() {
+        kartenListe = new LinkedList<Card>(); 
+    }
 
 }
