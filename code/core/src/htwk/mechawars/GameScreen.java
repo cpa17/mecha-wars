@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -15,6 +16,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
+import htwk.mechawars.board.Board;
+import htwk.mechawars.board.Dir;
+import htwk.mechawars.board.Robot;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.CardFunctions;
 
@@ -35,6 +39,11 @@ public class GameScreen implements Screen {
     private Card[] deck = new Card[84];
     
     private TextButton[] buttons = new TextButton[84];
+
+    private Board board = new Board(12, 12);
+    private Robot player = new Robot();
+
+
 
 
     /**
@@ -233,6 +242,7 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
         batch = (SpriteBatch) stage.getBatch();
         batch.begin();
+        board.startRobot(0, 0, Dir.NORTH, player);
         drawPlayingField();
         drawRobot();
         batch.end();
@@ -244,10 +254,10 @@ public class GameScreen implements Screen {
      * Function that draws the robot on the playing field.
      */
     public void drawRobot() {
-        int tileSize = (Gdx.graphics.getHeight() / 12);
-        int row = 6;
-        int column = 6;
-        batch.draw(robot, tileSize * (column - 1), (tileSize * (row - 1)) + 5);
+        int tileSize = (Gdx.graphics.getHeight() / board.matrix.length);
+        int x = player.getStartX();
+        int y = Math.abs(player.getStartY() - (board.matrix.length - 1));
+        batch.draw(robot, tileSize * x, tileSize * y);
     }
 
 
@@ -256,17 +266,15 @@ public class GameScreen implements Screen {
      */
     public void drawPlayingField() {
         int x = 0;
-        int i = 0;
-        while (i < 12) {
-            int y = 0;
-            int j = 0;
-            while (j < 12) {
+        int y = 0;
+
+        for (int i = 0; i < board.matrix.length; i++) {
+            for (int j = 0; j < board.matrix[i].length; j++) {
                 batch.draw(industrialTile, x, y);
-                y = y + (Gdx.graphics.getHeight() / 12);
-                j++;
+                x = x + (Gdx.graphics.getHeight() / board.matrix[i].length);
             }
-            x = x + (Gdx.graphics.getHeight() / 12);
-            i++;
+            y = y + (Gdx.graphics.getHeight() / board.matrix.length);
+            x = 0;
         }
     }
 
