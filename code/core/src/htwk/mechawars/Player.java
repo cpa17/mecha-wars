@@ -1,5 +1,8 @@
 package htwk.mechawars;
 
+/**
+ * Class that represents the Player.
+ */
 public class Player {
     private int lifePoints;
     private int damagePoints;
