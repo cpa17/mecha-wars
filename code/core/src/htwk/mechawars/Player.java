@@ -9,27 +9,27 @@ public class Player {
         
     }
     
-    void setDP() {
+    void setDp() {
         damagePoints += 1;
     }
     
-    void setLP(int damage) {
+    void setLp(int damage) {
         lifePoints -= damage;
     }
     
-    void setSD() {
+    void setSd() {
         shutDown = true;
     }
     
-    int getDP() {
+    int getDp() {
         return damagePoints;
     }
     
-    int getLP() {
+    int getLp() {
         return lifePoints;
     }
     
-    boolean getSD() {
+    boolean getSd() {
         return shutDown;
     }  
 }
