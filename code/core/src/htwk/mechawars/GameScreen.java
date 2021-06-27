@@ -44,6 +44,8 @@ public class GameScreen implements Screen {
         industrialTile = new Texture("industrialTile.png");
         robot = new Texture("robot.png");
 
+        batch = new SpriteBatch();
+
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
@@ -231,7 +233,6 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
-        batch = (SpriteBatch) stage.getBatch();
         batch.begin();
         drawPlayingField();
         drawRobot();
