@@ -4,7 +4,9 @@ import java.util.ListIterator;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.loaders.AssetLoader;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,11 +16,15 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import htwk.mechawars.board.Board;
 import htwk.mechawars.board.Dir;
@@ -278,6 +284,56 @@ public class GameScreen implements Screen {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 // GUI/POPup start
+                //InfoDialog infoDia = new InfoDialog("Beenden?", skin);
+                //infoDia.show(stage);    // shows the dialog
+
+                new Dialog("Infos und Hinweise", skin) {
+
+                    // best constructor for Dialog in LibGDX
+                    {
+
+                        Label nameLabel = new Label("Name:", skin);
+                        TextField nameText = new TextField("", skin);
+                        Label addressLabel = new Label("Address:", skin);
+                        TextField addressText = new TextField("", skin);
+
+                        Table table = new Table();
+                        table.center();
+                        table.add(nameLabel);
+                        table.add(nameText).width(100);
+                        table.row();
+                        table.add(addressLabel);
+                        table.add(addressText).width(100);
+                        table.row();
+
+                        add(table);
+
+//                        //TableModel a = new TableModel();
+//                        Table tableDialog = new Table(skin);
+//                        Image robot = new Image();
+//                        robot.setDrawable(new TextureRegionDrawable(AssetLoader.load()));
+//                        //Pixmap pixmapEins = new Pixmap(AssetLoader.robot);
+//                        tableDialog.add(pixmapEins);
+//                        tableDialog.add(new Label("Hallo", skin));
+//                        tableDialog.row();
+//                        tableDialog.add(new Label("Hallo", skin));
+//                        tableDialog.row();
+//
+//                        tableDialog.center();
+//                        add(tableDialog);
+
+
+                        button("Schliessen", "Button pressed");
+                    }
+
+                    @Override
+                    protected void result(Object object) {
+                        //super.result(object);
+                        System.out.println(object);
+                    }
+
+                }.show(stage).setHeight(600);
+
             }
 
             @Override
@@ -329,6 +385,7 @@ public class GameScreen implements Screen {
             sprite.setRotation(90);
         }
     }
+
 
     /**
      * Function that draws the playing field.
