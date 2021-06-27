@@ -1,5 +1,7 @@
 package htwk.mechawars;
 
+import java.util.ListIterator;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -9,12 +11,14 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
+
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.CardFunctions;
 
@@ -238,6 +242,7 @@ public class GameScreen implements Screen {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 // GUI/POPup start
+                
             }
 
             @Override
