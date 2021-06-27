@@ -74,7 +74,7 @@ public class GameScreen implements Screen {
         final ScrollPane scrollPanel = new ScrollPane(table, skin);
         
         // Array of Cards created
-        deck = CardFunctions.initDeck(deck);
+        deck = CardFunctions.initDeck();
         // shuffle Deck
         deck = CardFunctions.shuffle(deck);
         

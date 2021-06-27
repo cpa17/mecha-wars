@@ -19,7 +19,8 @@ public class CardFunctions {
      * @param cardDeck  -> Array, that should be initialized
      * @return The initial cardDeck
      */
-    public static Card[] initDeck(Card[] cardDeck) {
+    public static Card[] initDeck() {
+        Card[] cardDeck = new Card[84];
         
         int x = 10;
         // List<Card> deck = new ArrayList<>(Arrays.asList(cardDeck));

@@ -20,7 +20,7 @@ public class CardTests {
     public void testMovCount() {
         Card[] testCards = new Card[84];
 
-        testCards = CardFunctions.initDeck(testCards);
+        testCards = CardFunctions.initDeck();
 
         for (int i = 0; i < 84; i += 1) {
             int x = testCards[i].getCardAttributeMovCount();
@@ -35,7 +35,7 @@ public class CardTests {
     public void testName() {
         Card[] testCards = new Card[84];
 
-        testCards = CardFunctions.initDeck(testCards);
+        testCards = CardFunctions.initDeck();
 
         for (int i = 0; i < 84; i += 1) {
             assertTrue(testCards[i].toString() == "1 Vor"
@@ -58,7 +58,7 @@ public class CardTests {
         Card[] testCardsShuffled;
         boolean isEqual = true;
 
-        testCardsUnshuffled =  CardFunctions.initDeck(testCardsUnshuffled);
+        testCardsUnshuffled =  CardFunctions.initDeck();
 
         testCardsShuffled = CardFunctions.shuffle(testCardsUnshuffled);
 
@@ -79,7 +79,7 @@ public class CardTests {
         Card[] testCards = new Card[84];
         int counter = 0;
         
-        testCards = CardFunctions.initDeck(testCards);
+        testCards = CardFunctions.initDeck();
         
         for (int i = 0; i < 84; i += 1) {
             if (testCards[i].getCardAttributeType().toString() == "Linksdrehung") {
@@ -101,7 +101,7 @@ public class CardTests {
         boolean prio2 = false;
         boolean prio3 = false;
         
-        testCards = CardFunctions.initDeck(testCards);
+        testCards = CardFunctions.initDeck();
 
         //for (int x = 0; x < 84; x += 1) {
         //    System.out.println( testCards[x].toString() + "  " 
