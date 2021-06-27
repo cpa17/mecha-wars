@@ -32,7 +32,7 @@ public class GameScreen implements Screen {
     private int[] cardOrder = { -1, -1, -1, -1, -1};
     private int pressCounter = 0;
     
-    private Card[] deck = new Card[84];
+    private Card[] deck;
     
     private TextButton[] buttons = new TextButton[84];
 
