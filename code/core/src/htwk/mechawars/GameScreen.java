@@ -1,5 +1,7 @@
 package htwk.mechawars;
 
+import java.util.ListIterator;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -11,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -20,6 +23,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import htwk.mechawars.board.Board;
 import htwk.mechawars.board.Dir;
 import htwk.mechawars.board.Robot;
+
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.CardFunctions;
 
