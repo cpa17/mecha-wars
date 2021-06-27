@@ -18,9 +18,7 @@ public class CardTests {
      */
     @Test
     public void testMovCount() {
-        Card[] testCards = new Card[84];
-
-        testCards = CardFunctions.initDeck();
+        Card[] testCards = CardFunctions.initDeck();
 
         for (int i = 0; i < 84; i += 1) {
             int x = testCards[i].getCardAttributeMovCount();
@@ -33,9 +31,7 @@ public class CardTests {
      */
     @Test
     public void testName() {
-        Card[] testCards = new Card[84];
-
-        testCards = CardFunctions.initDeck();
+        Card[] testCards = CardFunctions.initDeck();
 
         for (int i = 0; i < 84; i += 1) {
             assertTrue(testCards[i].toString() == "1 Vor"
@@ -54,11 +50,9 @@ public class CardTests {
      */
     @Test
     public void testCardShuffle() {
-        Card[] testCardsUnshuffled = new Card[84];
+        Card[] testCardsUnshuffled = CardFunctions.initDeck();
         Card[] testCardsShuffled;
         boolean isEqual = true;
-
-        testCardsUnshuffled =  CardFunctions.initDeck();
 
         testCardsShuffled = CardFunctions.shuffle(testCardsUnshuffled);
 
@@ -76,10 +70,8 @@ public class CardTests {
      */
     @Test
     public void testCardCount() {
-        Card[] testCards = new Card[84];
+        Card[] testCards = CardFunctions.initDeck();
         int counter = 0;
-        
-        testCards = CardFunctions.initDeck();
         
         for (int i = 0; i < 84; i += 1) {
             if (testCards[i].getCardAttributeType().toString() == "Linksdrehung") {
@@ -95,14 +87,12 @@ public class CardTests {
      */
     @Test
     public void testPriority() {
-        Card[] testCards = new Card[84];
+        Card[] testCards = CardFunctions.initDeck();
         boolean prio0 = false;
         boolean prio1 = false;
         boolean prio2 = false;
         boolean prio3 = false;
         
-        testCards = CardFunctions.initDeck();
-
         //for (int x = 0; x < 84; x += 1) {
         //    System.out.println( testCards[x].toString() + "  " 
         //          + testCards[x].getCardAttributePriority());
