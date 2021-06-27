@@ -16,7 +16,6 @@ public class CardFunctions {
      * # 12 Mov2
      * # 6  Mov3, MovB, TurnU   . Also their priority this function will give them.
      * 
-     * @param cardDeck  -> Array, that should be initialized
      * @return The initial cardDeck
      */
     public static Card[] initDeck() {
