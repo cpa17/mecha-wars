@@ -1,5 +1,7 @@
 package htwk.mechawars;
 
+import java.util.LinkedList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -8,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -23,21 +26,22 @@ import htwk.mechawars.cards.CardFunctions;
  */
 public class GameScreen implements Screen {
 
-    Texture industrialTile;
-    Texture robot;
-    Stage stage;
-    Table container;
+    private Texture industrialTile;
+    private Texture robot;
+    private Stage stage;
+    private Table container;
+
     private SpriteBatch batch;
-    
+    private ZugInitialisierung zugInititalisierung = new ZugInitialisierung();
+
     private int[] cardOrder = { -1, -1, -1, -1, -1};
     private int pressCounter = 0;
     private int damagePoints = 0;
     private int choosableCardCount = 9;
-    
+
     private Card[] deck = new Card[84];
     
     private TextButton[] buttons = new TextButton[84];
-
 
     /**
      * Constructor of class GameScreen.
@@ -45,6 +49,8 @@ public class GameScreen implements Screen {
     public GameScreen() {
         industrialTile = new Texture("industrialTile.png");
         robot = new Texture("robot.png");
+
+        batch = new SpriteBatch();
 
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
@@ -56,6 +62,7 @@ public class GameScreen implements Screen {
 
     /**
      * Function that adds the scroll panel to the Stage.
+     *
      * @param skin Object of class Skin which was initialized in the constructor.
      */
     public void addScrollPanelToStage(Skin skin) {
@@ -72,7 +79,7 @@ public class GameScreen implements Screen {
         Table table = new Table();
 
         final ScrollPane scrollPanel = new ScrollPane(table, skin);
-        
+
         // Array of Cards created
         deck = CardFunctions.initDeck(deck);
         // shuffle Deck
@@ -80,8 +87,9 @@ public class GameScreen implements Screen {
         
         for (int cardPrintCounter = 0; cardPrintCounter < choosableCardCount;
                 cardPrintCounter += 1) {
+            Card aktuelleKarte = deck[cardPrintCounter];
             buttons[cardPrintCounter] = new TextButton((cardPrintCounter + 1) + " - "
-                    + deck[cardPrintCounter], skin);
+                    + aktuelleKarte, skin);
             table.row();
             table.add(buttons[cardPrintCounter]);
             int buttonNumber = (cardPrintCounter + 1);
@@ -90,6 +98,7 @@ public class GameScreen implements Screen {
             buttons[cardPrintCounter].addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
                     buttonClickOrder(buttonNumber);
+                    zugInititalisierung.addCard(aktuelleKarte);
                 }
             });
         }
@@ -161,8 +170,15 @@ public class GameScreen implements Screen {
         }
     }
 
+    private void deaktiviereButtons() {
+        for (int i = 0; i < buttons.length; i++) {
+            buttons[i].setTouchable(Touchable.disabled);
+        }
+    }
+
     /**
      * Function that adds the buttons to the Stage.
+     *
      * @param skin Object of class Skin which was initialized in the constructor.
      */
     public void addButtonsToStage(Skin skin) {
@@ -188,7 +204,8 @@ public class GameScreen implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 //If All Cards are chosen
                 if (cardOrder[4 - damagePoints] != -1) {
-                    System.out.println("startExecutionButton angeklickt!");
+                    deaktiviereButtons();
+                    zugInititalisierung.initialisiereBewegung();
                     startExecutionButton.setColor(Color.LIGHT_GRAY);
                 } else {
                     startExecutionButton.setColor(Color.RED);
@@ -220,6 +237,7 @@ public class GameScreen implements Screen {
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 // System.out.println("Rauf");
                 cardOrderClear();
+                zugInititalisierung.resetList();
             }
 
             @Override
@@ -240,7 +258,6 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
-        batch = (SpriteBatch) stage.getBatch();
         batch.begin();
         drawPlayingField();
         drawRobot();
@@ -258,7 +275,6 @@ public class GameScreen implements Screen {
         int column = 6;
         batch.draw(robot, tileSize * (column - 1), (tileSize * (row - 1)) + 5);
     }
-
 
     /**
      * Function that draws the playing field.
