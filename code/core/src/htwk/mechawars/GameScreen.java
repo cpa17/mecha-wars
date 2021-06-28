@@ -1,7 +1,5 @@
 package htwk.mechawars;
 
-import java.util.LinkedList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -41,7 +39,7 @@ public class GameScreen implements Screen {
 
     private Card[] deck = new Card[84];
     
-    private TextButton[] buttons = new TextButton[84];
+    private TextButton[] buttons = new TextButton[choosableCardCount];
 
     /**
      * Constructor of class GameScreen.
@@ -171,8 +169,8 @@ public class GameScreen implements Screen {
     }
 
     private void deaktiviereButtons() {
-        for (int i = 0; i < buttons.length; i++) {
-            buttons[i].setTouchable(Touchable.disabled);
+        for (TextButton button : buttons) {
+            button.setTouchable(Touchable.disabled);
         }
     }
 
