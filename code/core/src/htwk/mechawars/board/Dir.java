@@ -1,7 +1,7 @@
 package htwk.mechawars.board;
 
 /**
- * Enum class for the directions of movement.
+ * Enum class for the directions.
  */
 public enum Dir {
 
@@ -20,13 +20,13 @@ public enum Dir {
         return value;
     }
 
-    public Dir turn(byte rightTurnCount) {
-        this.value = ((this.value + rightTurnCount) % 4) + 1;
-        return intToDirection(this.value);
-    }
-
-    public Dir intToDirection(int value){
-        switch (value){
+    /**
+     * Method that transforms value in direction.
+     * @param value of the direction
+     * @return direction
+     */
+    public Dir intToDirection(int value) {
+        switch (value) {
             case 1:
                 return Dir.NORTH;
             case 2:

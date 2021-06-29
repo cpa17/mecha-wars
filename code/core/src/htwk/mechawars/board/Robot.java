@@ -6,8 +6,10 @@ package htwk.mechawars.board;
 
 public class Robot {
     private Dir dir;
-    private int x;
-    private int y;
+    private int xcoor;
+    private int ycoor;
+    private int startX;
+    private int startY;
 
     public void robot() {
     }
@@ -20,28 +22,38 @@ public class Robot {
         this.dir = dir;
     }
 
+    /**
+     * Method that lets the robot run forward.
+     * @param mov byte of move
+     * @return new position
+     */
     public Robot moveInDirection(byte mov) {
         switch (getDir()) {
             case NORTH:
-                setY(getY() - mov);
+                setYcoor(getYcoor() - mov);
                 return this;
             case SOUTH:
-                setY(getY() + mov);
+                setYcoor(getYcoor() + mov);
                 return this;
             case EAST:
-                setX(getX() + mov);
+                setXcoor(getXcoor() + mov);
                 return this;
             case WEST:
-                setX(getX() - mov);
+                setXcoor(getXcoor() - mov);
                 return this;
             default:
                 return this;
         }
     }
 
+    /**
+     * Method that makes robots turn.
+     * @param rightTurnCount byte of turn moves
+     * @return new direction
+     */
     public Robot turn(byte rightTurnCount) {
         int t = (getDir().getValue() + rightTurnCount);
-        if (t < 5){
+        if (t < 5) {
             setDir(getDir().intToDirection(t % 5));
         } else {
             setDir(getDir().intToDirection((t % 5) + 1));
@@ -50,19 +62,36 @@ public class Robot {
         return this;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public void setYcoor(int ycoor) {
+        this.ycoor = ycoor;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public void setXcoor(int xcoor) {
+        this.xcoor = xcoor;
     }
 
-    public int getY() {
-        return y;
+    public int getYcoor() {
+        return ycoor;
     }
 
-    public int getX() {
-        return x;
+    public int getXcoor() {
+        return xcoor;
+    }
+
+    public int getStartX() {
+        return startX;
+    }
+
+    public int getStartY() {
+        return startY;
+    }
+
+    public void setStartX(int startX) {
+        this.startX = startX;
+    }
+
+    public void setStartY(int startY) {
+        this.startY = startY;
     }
 }
+
