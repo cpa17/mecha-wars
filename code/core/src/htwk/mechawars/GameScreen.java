@@ -1,7 +1,5 @@
 package htwk.mechawars;
 
-import java.util.LinkedList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -30,7 +28,10 @@ import htwk.mechawars.cards.CardFunctions;
 public class GameScreen implements Screen {
 
     private Texture industrialTile;
-    private Texture robot;
+    private Texture robotU;
+    private Texture robotR;
+    private Texture robotL;
+    private Texture robotD;
     private Stage stage;
     private Table container;
 
@@ -52,7 +53,10 @@ public class GameScreen implements Screen {
      */
     public GameScreen() {
         industrialTile = new Texture("industrialTile.png");
-        robot = new Texture("robot.png");
+        robotU = new Texture("robotU.png");
+        robotR = new Texture("robotR.png");
+        robotL = new Texture("robotL.png");
+        robotD = new Texture("robotD.png");
 
         batch = new SpriteBatch();
 
@@ -62,6 +66,7 @@ public class GameScreen implements Screen {
         Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         addButtonsToStage(skin);
         addScrollPanelToStage(skin);
+        board.startRobot(5, 5, Dir.NORTH, player);
     }
 
     /**
@@ -179,6 +184,12 @@ public class GameScreen implements Screen {
         }
     }
 
+    private void aktiviereButtons() {
+        for (int i = 0; i < buttons.length; i++) {
+            buttons[i].setTouchable(Touchable.enabled);
+        }
+    }
+
     /**
      * Function that adds the buttons to the Stage.
      *
@@ -207,6 +218,10 @@ public class GameScreen implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 deaktiviereButtons();
                 zugInititalisierung.initialisiereBewegung();
+                board.move(zugInititalisierung.getList(), player);
+                zugInititalisierung.resetList();
+                cardOrderClear();
+                aktiviereButtons();
             }
         });
 
@@ -232,14 +247,14 @@ public class GameScreen implements Screen {
         removeCardOrder.addListener(new InputListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                // System.out.println("Rauf");
+                System.out.println("Rauf");
                 cardOrderClear();
                 zugInititalisierung.resetList();
             }
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                // System.out.println("Runter");
+                System.out.println("Runter");
                 return true;
             }
         });
@@ -255,9 +270,7 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
-        batch = (SpriteBatch) stage.getBatch();
         batch.begin();
-        board.startRobot(0, 0, Dir.NORTH, player);
         drawPlayingField();
         drawRobot();
         batch.end();
@@ -272,7 +285,16 @@ public class GameScreen implements Screen {
         int tileSize = (Gdx.graphics.getHeight() / board.matrix.length);
         int x = player.getXcoor();
         int y = Math.abs(player.getYcoor() - (board.matrix.length - 1));
-        batch.draw(robot, tileSize * x, tileSize * y);
+
+        if (player.getDir() == Dir.NORTH) {
+            batch.draw(robotU, tileSize * x, tileSize * y);
+        } else if (player.getDir() == Dir.EAST) {
+            batch.draw(robotR, tileSize * x, tileSize * y);
+        } else if (player.getDir() == Dir.SOUTH) {
+            batch.draw(robotD, tileSize * x, tileSize * y);
+        } else if (player.getDir() == Dir.WEST) {
+            batch.draw(robotL, tileSize * x, tileSize * y);
+        }
     }
 
 
@@ -311,7 +333,10 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         industrialTile.dispose();
-        robot.dispose();
+        robotU.dispose();
+        robotD.dispose();
+        robotR.dispose();
+        robotL.dispose();
     }
 
     @Override

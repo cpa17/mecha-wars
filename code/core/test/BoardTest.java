@@ -37,7 +37,7 @@ public class BoardTest {
             {0, 0, 0, 0},
             {0, 0, 0, 0},
             {0, 0, 0, 0},
-            {0, 0, 0, 1}
+            {0, 0, 0, 2}
     };
 
 
@@ -45,15 +45,25 @@ public class BoardTest {
     @Test
     public void boardTest() {
         LinkedList<Card> phase1 = new LinkedList<>();
-        phase1.add(new Card( Type.mov, (byte) 3));
-        phase1.add(new Card( Type.turn, (byte) 3));
-        phase1.add(new Card( Type.mov, (byte) 1));
-        phase1.add(new Card( Type.turn, (byte) 1));
-        phase1.add(new Card( Type.turn, (byte) 2));
+        phase1.add(new Card(Type.mov, (byte) 3));
+        phase1.add(new Card(Type.turn, (byte) 3));
+        phase1.add(new Card(Type.mov, (byte) 1));
+        phase1.add(new Card(Type.turn, (byte) 1));
+        phase1.add(new Card(Type.turn, (byte) 2));
+
+        LinkedList<Card> phase2 = new LinkedList<>();
+        phase2.add(new Card(Type.mov, (byte) 2));
+        phase2.add(new Card(Type.turn, (byte) 2));
+        phase2.add(new Card(Type.mov, (byte) -1));
+        phase2.add(new Card(Type.turn, (byte) 1));
+        phase2.add(new Card(Type.mov, (byte) 2));
 
         assertArrayEquals(startMatrix, board.matrix);
         board.move(phase1, robot);
         assertArrayEquals(midMatrix, board.matrix);
+        board.move(phase2, robot);
+        assertArrayEquals(endMatrix, board.matrix);
+
     }
 
     /**

@@ -11,7 +11,7 @@ public class Robot {
     private int startX;
     private int startY;
 
-    public void robot() {
+    public Robot() {
     }
 
     public Dir getDir() {
