@@ -247,14 +247,14 @@ public class GameScreen implements Screen {
         removeCardOrder.addListener(new InputListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("Rauf");
+                // System.out.println("Rauf");
                 cardOrderClear();
                 zugInititalisierung.resetList();
             }
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("Runter");
+                // System.out.println("Runter");
                 return true;
             }
         });

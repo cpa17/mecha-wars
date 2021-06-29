@@ -49,18 +49,17 @@ public class Board {
      * @param robot the robot that should move
      */
 
-    public int[][] move(LinkedList<Card> phase, Robot robot) {
+    public void move(LinkedList<Card> phase, Robot robot) {
         try {
-            for (int i = 0; i < phase.size(); i++) {
+            for (Card card : phase) {
 
-                if (phase.get(i).getCardAttributeType() == Type.mov) {
+                if (card.getCardAttributeType() == Type.mov) {
                     this.matrix[robot.getYcoor()][robot.getXcoor()] = 0;
-                    robot.moveInDirection(phase.get(i).getCardAttributeMovCount());
-                    this.matrix[robot.getYcoor()][robot.getXcoor()] = robot.getDir().getValue();
+                    robot.moveInDirection(card.getCardAttributeMovCount());
                 } else {
-                    robot.turn(phase.get(i).getCardAttributeMovCount());
-                    this.matrix[robot.getYcoor()][robot.getXcoor()] = robot.getDir().getValue();
+                    robot.turn(card.getCardAttributeMovCount());
                 }
+                this.matrix[robot.getYcoor()][robot.getXcoor()] = robot.getDir().getValue();
 
             }
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -68,7 +67,6 @@ public class Board {
             robot.setYcoor(robot.getStartY());
             this.matrix[robot.getYcoor()][robot.getXcoor()] = robot.getDir().getValue();
         }
-        return this.matrix;
     }
 
 }

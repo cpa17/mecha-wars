@@ -1,4 +1,3 @@
-import static htwk.mechawars.cards.Type.mov;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import htwk.mechawars.board.Board;
