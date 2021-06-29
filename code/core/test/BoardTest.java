@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
  */
 
 public class BoardTest {
-    private Board board = new Board();
+    private Board board = new Board(4, 4);
     private Robot robot = new Robot();
 
     public int[][] startMatrix = {
@@ -61,7 +61,6 @@ public class BoardTest {
      */
     @BeforeEach
     public void initBoard() {
-        board.board(4, 4);
         board.startRobot(3, 3, Dir.NORTH, robot);
     }
 

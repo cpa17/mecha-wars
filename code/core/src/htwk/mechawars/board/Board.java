@@ -18,7 +18,7 @@ public class Board {
      * @param height height of the game board
      */
 
-    public void board(int weight, int height) {
+    public Board(int weight, int height) {
         this.matrix = new int[height][weight];
 
         for (int[] ints : matrix) {
