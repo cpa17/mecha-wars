@@ -291,21 +291,54 @@ public class GameScreen implements Screen {
 
                     // best constructor for Dialog in LibGDX
                     {
-
-                        Label nameLabel = new Label("Name:", skin);
-                        TextField nameText = new TextField("", skin);
-                        Label addressLabel = new Label("Address:", skin);
-                        TextField addressText = new TextField("", skin);
+                        Label headlineFirst = new Label("Karten", skin);
+                        Label headlineSecond = new Label("\nFelder", skin);
+                        Label newLine = new Label("", skin);
+                        Label movOne = new Label("1 Vor", skin);
+                        Label movTwo = new Label("2 Vor", skin);
+                        Label movThree = new Label("3 Vor", skin);
+                        Label movBack = new Label("Rueckwaerts", skin);
+                        Label turnL = new Label("Linksdrehung", skin);
+                        Label turnR = new Label("Rechtsdrehung", skin);
+                        Label turnU = new Label("Kehrtwendung", skin);
+                        TextField movOneText = new TextField("Bewegt den Roboter 1 Feld in Blickrichtung vor.", skin);
+                        TextField movTwoText = new TextField("Bewegt den Roboter 2 Felder Blickrichtung vor.", skin);
+                        TextField movThreeText = new TextField("Bewegt den Roboter 3 Felder Blickrichtung vor.", skin);
+                        TextField movBackText = new TextField("Bewegt den Roboter 1 Feld Blickrichtung zurueck.", skin);
+                        TextField turnLText = new TextField("Dreht den Roboter nach Links.", skin);
+                        TextField turnRText = new TextField("Dreht den Roboter nach Rechts.", skin);
+                        TextField turnUText = new TextField("Dreht den Roboter um.", skin);
 
                         Table table = new Table();
                         table.center();
-                        table.add(nameLabel);
-                        table.add(nameText).width(100);
+                        table.add(headlineFirst);
                         table.row();
-                        table.add(addressLabel);
-                        table.add(addressText).width(100);
+                        table.add(movOne);
+                        table.add(movOneText).width(500);
+                        table.row();
+                        table.add(movTwo);
+                        table.add(movTwoText).width(500);
+                        table.row();
+                        table.add(movThree);
+                        table.add(movThreeText).width(500);
+                        table.row();
+                        table.add(movBack);
+                        table.add(movBackText).width(500);
+                        table.row();
+                        table.add(turnL);
+                        table.add(turnLText).width(500);
+                        table.row();
+                        table.add(turnR);
+                        table.add(turnRText).width(500);
+                        table.row();
+                        table.add(turnU);
+                        table.add(turnUText).width(500);
+                        table.row();
+                        table.add(newLine);
                         table.row();
 
+                        table.add(headlineSecond);
+                        table.row();
                         add(table);
 
 //                        //TableModel a = new TableModel();
@@ -330,10 +363,10 @@ public class GameScreen implements Screen {
                     protected void result(Object object) {
                         //super.result(object);
                         System.out.println(object);
-                    }
-
-                }.show(stage).setHeight(600);
-
+                    } 
+                    
+                }.show(stage);//.setHeight(600);
+                
             }
 
             @Override
@@ -353,12 +386,10 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
+        batch = (SpriteBatch) stage.getBatch();
         batch.begin();
-
         drawPlayingField();
         drawRobot();
-        //player.drawParameters(batch);
-        sprite.draw(batch);
         batch.end();
         stage.act();
         stage.draw();
@@ -368,22 +399,10 @@ public class GameScreen implements Screen {
      * Function that draws the robot on the playing field.
      */
     public void drawRobot() {
-        int tileSize = (Gdx.graphics.getHeight() / board.matrix.length);
-        int x = player.getXcoor();
-        int y = Math.abs(player.getYcoor() - (board.matrix.length - 1));
-
-        if (player.getDir() == Dir.NORTH) {
-            sprite.setRotation(0);
-        } else if (player.getDir() == Dir.EAST) {
-            sprite.setPosition(tileSize * x, tileSize * y);
-            sprite.setRotation(270);
-        } else if (player.getDir() == Dir.SOUTH) {
-            sprite.setPosition(tileSize * x, tileSize * y);
-            sprite.setRotation(180);
-        } else if (player.getDir() == Dir.WEST) {
-            sprite.setPosition(tileSize * x, tileSize * y);
-            sprite.setRotation(90);
-        }
+        int tileSize = (Gdx.graphics.getHeight() / 12);
+        int row = 6;
+        int column = 6;
+        batch.draw(robot, tileSize * (column - 1), (tileSize * (row - 1)) + 5);
     }
 
 
@@ -392,31 +411,17 @@ public class GameScreen implements Screen {
      */
     public void drawPlayingField() {
         int x = 0;
-
-        //für das "normale" Spielfeld boardtxt mit board ersetzen
-        for (int i = 0; i < board.matrix.length; i++) {
-            for (int j = 0; j < board.matrix[i].length; j++) {
-
-                int p = board.matrix[i][j];
-
-                int t = Gdx.graphics.getHeight() / board.matrix.length; //height of one tile
-                int b = Gdx.graphics.getHeight(); //height of the entire board
-                int c = (i + 1) * t; //the current height in the loop
-                int r = b - c; //the result of the board height minus the current height
-
-                switch (p) {
-                    case(0):
-                        batch.draw(industrialTile, x, r);
-                        break;
-                    default:
-                        batch.draw(industrialTile, x, r);
-                        break;
-                }
-
-                x = x + (Gdx.graphics.getHeight() / board.matrix.length);
+        int i = 0;
+        while (i < 12) {
+            int y = 0;
+            int j = 0;
+            while (j < 12) {
+                batch.draw(industrialTile, x, y);
+                y = y + (Gdx.graphics.getHeight() / 12);
+                j++;
             }
-
-            x = 0;
+            x = x + (Gdx.graphics.getHeight() / 12);
+            i++;
         }
     }
 
@@ -445,5 +450,5 @@ public class GameScreen implements Screen {
     public void hide() {
 
     }
-
+    
 }
