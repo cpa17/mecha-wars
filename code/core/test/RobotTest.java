@@ -51,6 +51,9 @@ public class RobotTest {
 
     }
 
+    /**
+     * Methode that initialized the robot.
+     */
     @BeforeEach
     public void initRobot() {
         robot.setDir(Dir.NORTH);

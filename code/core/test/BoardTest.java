@@ -66,7 +66,7 @@ public class BoardTest {
     }
 
     /**
-     * Function that generates the board and places the robot.
+     * Methode that generates the board and places the robot.
      */
     @BeforeEach
     public void initBoard() {
