@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -28,14 +29,12 @@ import htwk.mechawars.cards.CardFunctions;
 public class GameScreen implements Screen {
 
     private Texture industrialTile;
-    private Texture robotU;
-    private Texture robotR;
-    private Texture robotL;
-    private Texture robotD;
+    private Texture robot;
     private Stage stage;
     private Table container;
 
     private SpriteBatch batch;
+    private Sprite sprite;
     private ZugInitialisierung zugInititalisierung = new ZugInitialisierung();
 
     private int[] cardOrder = { -1, -1, -1, -1, -1};
@@ -53,12 +52,10 @@ public class GameScreen implements Screen {
      */
     public GameScreen() {
         industrialTile = new Texture("industrialTile.png");
-        robotU = new Texture("robotU.png");
-        robotR = new Texture("robotR.png");
-        robotL = new Texture("robotL.png");
-        robotD = new Texture("robotD.png");
+        robot = new Texture("robot.png");
 
         batch = new SpriteBatch();
+        sprite = new Sprite(robot);
 
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
@@ -273,6 +270,7 @@ public class GameScreen implements Screen {
         batch.begin();
         drawPlayingField();
         drawRobot();
+        sprite.draw(batch);
         batch.end();
         stage.act();
         stage.draw();
@@ -287,13 +285,17 @@ public class GameScreen implements Screen {
         int y = Math.abs(player.getYcoor() - (board.matrix.length - 1));
 
         if (player.getDir() == Dir.NORTH) {
-            batch.draw(robotU, tileSize * x, tileSize * y);
+            sprite.setPosition(tileSize * x, tileSize * y);
+            sprite.setRotation(0);
         } else if (player.getDir() == Dir.EAST) {
-            batch.draw(robotR, tileSize * x, tileSize * y);
+            sprite.setPosition(tileSize * x, tileSize * y);
+            sprite.setRotation(270);
         } else if (player.getDir() == Dir.SOUTH) {
-            batch.draw(robotD, tileSize * x, tileSize * y);
+            sprite.setPosition(tileSize * x, tileSize * y);
+            sprite.setRotation(180);
         } else if (player.getDir() == Dir.WEST) {
-            batch.draw(robotL, tileSize * x, tileSize * y);
+            sprite.setPosition(tileSize * x, tileSize * y);
+            sprite.setRotation(90);
         }
     }
 
@@ -333,10 +335,7 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         industrialTile.dispose();
-        robotU.dispose();
-        robotD.dispose();
-        robotR.dispose();
-        robotL.dispose();
+        robot.dispose();
     }
 
     @Override
