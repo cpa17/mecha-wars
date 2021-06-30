@@ -308,7 +308,13 @@ public class GameScreen implements Screen {
                         TextField turnLText = new TextField("Dreht den Roboter nach Links.", skin);
                         TextField turnRText = new TextField("Dreht den Roboter nach Rechts.", skin);
                         TextField turnUText = new TextField("Dreht den Roboter um.", skin);
-
+                        movOneText.setDisabled(true);
+                        movTwoText.setDisabled(true);
+                        movThreeText.setDisabled(true);
+                        movBackText.setDisabled(true);
+                        turnLText.setDisabled(true);
+                        turnRText.setDisabled(true);
+                        turnUText.setDisabled(true);
                         Table table = new Table();
                         table.center();
                         table.add(headlineFirst);
