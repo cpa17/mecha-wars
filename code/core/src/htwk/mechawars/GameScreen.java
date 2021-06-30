@@ -1,12 +1,8 @@
 package htwk.mechawars;
 
-import javax.swing.table.TableModel;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.loaders.AssetLoader;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -14,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -22,7 +17,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import htwk.mechawars.cards.Card;
@@ -255,21 +249,53 @@ public class GameScreen implements Screen {
                     
                     // best constructor for Dialog in LibGDX
                     {
-                        
-                        Label nameLabel = new Label("Name:", skin);
-                        TextField nameText = new TextField("", skin);
-                        Label addressLabel = new Label("Address:", skin);
-                        TextField addressText = new TextField("", skin);
+                        Label headlineFirst = new Label("Karten", skin);
+                        Label headlineSecond = new Label("\nFelder", skin);
+                        Label newLine = new Label("", skin);
+                        Label movOne = new Label("1 Vor", skin);
+                        Label movTwo = new Label("2 Vor", skin);
+                        Label movThree = new Label("3 Vor", skin);
+                        Label movBack = new Label("Rueckwaerts", skin);
+                        Label turnL = new Label("Linksdrehung", skin);
+                        Label turnR = new Label("Rechtsdrehung", skin);
+                        Label turnU = new Label("Kehrtwendung", skin);
+                        TextField movOneText = new TextField("Bewegt den Roboter 1 Feld in Blickrichtung vor.", skin);
+                        TextField movTwoText = new TextField("Bewegt den Roboter 2 Felder Blickrichtung vor.", skin);
+                        TextField movThreeText = new TextField("Bewegt den Roboter 3 Felder Blickrichtung vor.", skin);
+                        TextField movBackText = new TextField("Bewegt den Roboter 1 Feld Blickrichtung zurueck.", skin);
+                        TextField turnLText = new TextField("Dreht den Roboter nach Links.", skin);
+                        TextField turnRText = new TextField("Dreht den Roboter nach Rechts.", skin);
+                        TextField turnUText = new TextField("Dreht den Roboter um.", skin);
 
                         Table table = new Table();
                         table.center();
-                        table.add(nameLabel);
-                        table.add(nameText).width(100);
+                        table.add(headlineFirst);
                         table.row();
-                        table.add(addressLabel);
-                        table.add(addressText).width(100);
+                        table.add(movOne);
+                        table.add(movOneText).width(500);
                         table.row();
-                        
+                        table.add(movTwo);
+                        table.add(movTwoText).width(500);
+                        table.row();
+                        table.add(movThree);
+                        table.add(movThreeText).width(500);
+                        table.row();
+                        table.add(movBack);
+                        table.add(movBackText).width(500);
+                        table.row();
+                        table.add(turnL);
+                        table.add(turnLText).width(500);
+                        table.row();
+                        table.add(turnR);
+                        table.add(turnRText).width(500);
+                        table.row();
+                        table.add(turnU);
+                        table.add(turnUText).width(500);
+                        table.row();
+                        table.add(newLine);
+                        table.row();
+                        table.add(headlineSecond);
+                        table.row();
                         add(table);
                         
 //                        //TableModel a = new TableModel();
@@ -296,7 +322,7 @@ public class GameScreen implements Screen {
                         System.out.println(object);
                     } 
                     
-                }.show(stage).setHeight(600);
+                }.show(stage);//.setHeight(600);
                 
             }
 
