@@ -221,7 +221,11 @@ public class GameScreen implements Screen {
                 if (cardOrder[4 - damagePoints] != -1) {
                     deaktiviereButtons();
                     zugInititalisierung.initialisiereBewegung();
+                    board.move(zugInititalisierung.getList(), player);
+                    zugInititalisierung.resetList();
                     startExecutionButton.setColor(Color.LIGHT_GRAY);
+                    cardOrderClear();
+                    aktiviereButtons();
                 } else {
                     startExecutionButton.setColor(Color.RED);
                 }
