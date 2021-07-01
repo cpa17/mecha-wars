@@ -39,13 +39,16 @@ public class GameScreen implements Screen {
 
     private int[] cardOrder = { -1, -1, -1, -1, -1};
     private int pressCounter = 0;
+    private int damagePoints = 0;
+    private int choosableCardCount = 9;
 
     private Card[] deck = new Card[84];
 
-    private TextButton[] buttons = new TextButton[84];
-
     private Board board = new Board(12, 12);
     private Robot player = new Robot();
+
+    
+    private TextButton[] buttons = new TextButton[choosableCardCount];
 
     /**
      * Constructor of class GameScreen.
@@ -90,8 +93,9 @@ public class GameScreen implements Screen {
         deck = CardFunctions.initDeck(deck);
         // shuffle Deck
         deck = CardFunctions.shuffle(deck);
-
-        for (int cardPrintCounter = 0; cardPrintCounter < 84; cardPrintCounter += 1) {
+        
+        for (int cardPrintCounter = 0; cardPrintCounter < choosableCardCount;
+                cardPrintCounter += 1) {
             Card aktuelleKarte = deck[cardPrintCounter];
             buttons[cardPrintCounter] = new TextButton((cardPrintCounter + 1) + " - "
                     + aktuelleKarte, skin);
@@ -121,7 +125,7 @@ public class GameScreen implements Screen {
         //System.out.println(buttonNumber);
 
         // can also be done with Try&Catch
-        if (pressCounter < 5) {
+        if (pressCounter < 5 - damagePoints) {
             // write the number of the button in cardOrder at pressCounter
             cardOrder[pressCounter] = buttonNumber;
             //System.out.println(cardOrder[pressCounter] + " JO");
@@ -169,15 +173,15 @@ public class GameScreen implements Screen {
      *  Renames every button to " - " and sets the button color to light grey.
      */
     private void buttonsClean() {
-        for (int i = 0; i < 84; i += 1) {
+        for (int i = 0; i < choosableCardCount; i += 1) {
             buttons[i].setColor(Color.LIGHT_GRAY);
             buttons[i].setText((i + 1) + " - " + deck[i]);
         }
     }
 
     private void deaktiviereButtons() {
-        for (int i = 0; i < buttons.length; i++) {
-            buttons[i].setTouchable(Touchable.disabled);
+        for (TextButton button : buttons) {
+            button.setTouchable(Touchable.disabled);
         }
     }
 
@@ -213,12 +217,14 @@ public class GameScreen implements Screen {
 
         startExecutionButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                deaktiviereButtons();
-                zugInititalisierung.initialisiereBewegung();
-                board.move(zugInititalisierung.getList(), player);
-                zugInititalisierung.resetList();
-                cardOrderClear();
-                aktiviereButtons();
+                //If All Cards are chosen
+                if (cardOrder[4 - damagePoints] != -1) {
+                    deaktiviereButtons();
+                    zugInititalisierung.initialisiereBewegung();
+                    startExecutionButton.setColor(Color.LIGHT_GRAY);
+                } else {
+                    startExecutionButton.setColor(Color.RED);
+                }
             }
         });
 
