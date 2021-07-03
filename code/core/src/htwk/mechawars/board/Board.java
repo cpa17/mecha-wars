@@ -34,21 +34,20 @@ public class Board {
         this.matrix = new int[0][0];
     }
 
-    public static Board FromFile (String fileName) {
-        ArrayList <ArrayList<Integer>> tempLayout = new ArrayList<>();
+    public static Board fromFile(String fileName) {
+        ArrayList <ArrayList <Integer>> tempLayout = new ArrayList<>();
 
-        try(BufferedReader br = new BufferedReader (new FileReader(fileName))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String currentLine;
 
-            while((currentLine = br.readLine()) != null) {
-                if(currentLine.isEmpty()) {
+            while ((currentLine = br.readLine()) != null) {
+                if (currentLine.isEmpty()) {
                     continue;
                 }
                 ArrayList<Integer> row = new ArrayList<>();
                 String[] values = currentLine.trim().split(" ");
-                for (String string : values)
-                {
-                    if(!string.isEmpty()) {
+                for (String string : values) {
+                    if (!string.isEmpty()) {
                         int id = Integer.parseInt(string);
                         row.add(id);
                     }
@@ -56,9 +55,8 @@ public class Board {
                 tempLayout.add(row);
             }
         }
-        catch(IOException e)
-        {
-
+        catch (IOException e) {
+            System.out.println("Error reading the map:" + e);
         }
 
         int width = tempLayout.get(0).size();
@@ -66,8 +64,8 @@ public class Board {
 
         Board board = new Board(width, height);
 
-        for(int y = 0; y < height; y++) {
-            for(int x = 0; x < width; x++) {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
                 board.matrix[y][x] = tempLayout.get(y).get(x);
             }
         }

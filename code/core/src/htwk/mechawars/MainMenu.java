@@ -67,7 +67,7 @@ public class MainMenu implements Screen {
         stage.addActor(endGame);
 
         Board board = new Board();
-        board = board.FromFile("map.txt");
+        board = board.fromFile("map.txt");
 
         for (int i = 0; i < board.matrix.length; i++) {
             for (int j = 0; j < board.matrix[i].length; j++) {
