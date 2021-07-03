@@ -12,6 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+import htwk.mechawars.board.Board;
+
 /**
  * Class that presents the surface of the MainMenu screen.
  */
@@ -63,6 +65,9 @@ public class MainMenu implements Screen {
         //add the buttons
         stage.addActor(startGame);
         stage.addActor(endGame);
+
+        Board board = new Board();
+        board.FromFile("map.txt");
     }
 
     /**
