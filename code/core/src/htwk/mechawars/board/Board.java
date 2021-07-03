@@ -34,8 +34,13 @@ public class Board {
         this.matrix = new int[0][0];
     }
 
+    /**
+     * Method that reads the game plan as a matrix from a text file.
+     * @param fileName Name of the text file to be read in.
+     * @return New board with the matrix from the text file.
+     */
     public static Board fromFile(String fileName) {
-        ArrayList <ArrayList <Integer>> tempLayout = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> tempLayout = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String currentLine;
@@ -54,8 +59,7 @@ public class Board {
                 }
                 tempLayout.add(row);
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("Error reading the map:" + e);
         }
 
