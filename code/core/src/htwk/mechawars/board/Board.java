@@ -3,7 +3,6 @@ package htwk.mechawars.board;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.Type;
 
-import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -36,7 +35,6 @@ public class Board {
     }
 
     public static Board FromFile (String fileName) {
-//        Board board = null;
         ArrayList <ArrayList<Integer>> tempLayout = new ArrayList<>();
 
         try(BufferedReader br = new BufferedReader (new FileReader(fileName))) {
@@ -71,12 +69,8 @@ public class Board {
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
                 board.matrix[y][x] = tempLayout.get(y).get(x);
-                System.out.print(board.matrix[y][x]);
             }
-            System.out.println();
         }
-
- //       board.tileSheet = board.LoadTileSheet();
 
         return board;
     }
