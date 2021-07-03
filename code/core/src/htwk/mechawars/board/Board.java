@@ -6,6 +6,7 @@ import htwk.mechawars.cards.Type;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -42,7 +43,8 @@ public class Board {
     public static Board fromFile(String fileName) {
         ArrayList<ArrayList<Integer>> tempLayout = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+        try (BufferedReader br
+                     = new BufferedReader(new FileReader(fileName, Charset.forName("UTF-8")))) {
             String currentLine;
 
             while ((currentLine = br.readLine()) != null) {
