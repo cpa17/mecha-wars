@@ -14,23 +14,19 @@ public class Player {
     private Texture life;
     private Texture damage;
     private Texture shutDown;
-
+    
+    /**
+     * Constructor of class Player.
+     */
     public Player() {
-
+        lifePoints = 0;
+        damagePoints = 0;
+        shutDownMark = false;
     }
-
-    public void setDp() {
-        damagePoints += 1;
-    }
-
-    public void setLp() {
-        lifePoints -= 1;
-    }
-
-    public void setSd() {
-        shutDownMark = true;
-    }
-
+    
+    /**
+     * Getters.
+     */
     public int getDp() {
         return damagePoints;
     }
@@ -42,7 +38,25 @@ public class Player {
     public boolean getSd() {
         return shutDownMark;
     }
+    
+    /**
+     * Setters.
+     */
+    public void setDp() {
+        damagePoints += 1;
+    }
 
+    public void setLp() {
+        lifePoints -= 1;
+    }
+
+    public void setSd(boolean on) {
+        shutDownMark = on;
+    }
+
+    /**
+     * Updates the life texture depening on the current lifePoints of the robot.
+     */
     private void updateLife() {
         switch (lifePoints) {
             case 0 :    life = new Texture(Gdx.files.internal("background1.png"));
@@ -60,7 +74,10 @@ public class Player {
             default:    break;
         }
     }
-
+    
+    /**
+     * Updates the damage texture depening on the current damagePoints of the robot.
+     */
     private void updateDamage() {
         switch (damagePoints) {
             case 0 :    damage = new Texture(Gdx.files.internal("background5.png"));
@@ -96,7 +113,10 @@ public class Player {
             default:    break;
         }
     }
-
+    
+    /**
+     * Updates the shutDown texture depending on the state of the shutDownMark.
+     */
     private void updateShutDown() {
         if (shutDownMark) {
             shutDown = new Texture(Gdx.files.internal("background15.png"));
@@ -104,8 +124,11 @@ public class Player {
             shutDown = new Texture(Gdx.files.internal("background16.png"));
         }
     }
-
-    void drawParameters(SpriteBatch batch) {
+    
+    /**
+     * Draws the parameter textures. 
+     */
+    public void drawParameters(SpriteBatch batch) {
         updateLife();
         updateDamage();
         updateShutDown();
