@@ -42,15 +42,23 @@ public class Player {
     /**
      * Setters.
      */
-    public void setDp() {
+    public void damageUp() {
         damagePoints += 1;
     }
+    
+    public void damageReset() {
+        damagePoints = 0;
+    }
 
-    public void setLp() {
+    public void lifeUp() {
+        lifePoints += 1;
+    }
+    
+    public void lifeDown() {
         lifePoints -= 1;
     }
 
-    public void setSd(boolean on) {
+    public void setShutDown(boolean on) {
         shutDownMark = on;
     }
 
