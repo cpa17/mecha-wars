@@ -249,6 +249,7 @@ public class GameScreen implements Screen {
                     
                     // best constructor for Dialog in LibGDX
                     {
+                        //
                         Label headlineFirst = new Label("Karten", skin);
                         Label headlineSecond = new Label("\nFelder", skin);
                         Label newLine = new Label("", skin);
@@ -259,6 +260,7 @@ public class GameScreen implements Screen {
                         Label turnL = new Label("Linksdrehung", skin);
                         Label turnR = new Label("Rechtsdrehung", skin);
                         Label turnU = new Label("Kehrtwendung", skin);
+                        // Feld
                         Label freeTile = new Label("Freies Feld", skin);
                         Label pitTile = new Label("Grube", skin);
                         Label wallTile = new Label("Wand", skin);
@@ -281,6 +283,21 @@ public class GameScreen implements Screen {
                         TextField turnLText = new TextField("Dreht den Roboter nach Links.", skin);
                         TextField turnRText = new TextField("Dreht den Roboter nach Rechts.", skin);
                         TextField turnUText = new TextField("Dreht den Roboter um.", skin);
+                        TextField freeTileText = new TextField("", skin);
+                        TextField pitTileText = new TextField("", skin);
+                        TextField wallTileText = new TextField("", skin);
+                        TextField conveyorTileText = new TextField("", skin);
+                        TextField expressConveyorTileText = new TextField("", skin);
+                        TextField rotatingConveyorTileText = new TextField("", skin);
+                        TextField rotatingMergingConveyorTileText = new TextField("", skin);
+                        TextField rotatingDoubleMergingConveyorTileText = new TextField("", skin);
+                        TextField pusherTileText = new TextField("", skin);
+                        TextField clockwiseTileText = new TextField("", skin);
+                        TextField counterClockwiseTileText = new TextField("", skin);
+                        TextField laserTileText = new TextField("", skin);
+                        TextField checkpointFlagTileText = new TextField("", skin);
+                        TextField repairTileText = new TextField("", skin);
+                        TextField dockTileText = new TextField("", skin);
                         movOneText.setDisabled(true);
                         movTwoText.setDisabled(true);
                         movThreeText.setDisabled(true);
@@ -317,35 +334,51 @@ public class GameScreen implements Screen {
                         table.row();
                         table.add(headlineSecond);
                         table.row();
+                        //
                         table.add(freeTile);
+                        table.add(freeTileText).width(500);
                         table.row();
                         table.add(pitTile);
+                        table.add(pitTileText).width(500);
                         table.row();
                         table.add(wallTile);
+                        table.add(wallTileText).width(500);
                         table.row();
                         table.add(conveyorTile);
+                        table.add(conveyorTileText).width(500);
                         table.row();
                         table.add(expressConveyorTile);
+                        table.add(expressConveyorTileText).width(500);
                         table.row();
                         table.add(rotatingConveyorTile);
+                        table.add(rotatingConveyorTileText).width(500);
                         table.row();
                         table.add(rotatingMergingConveyorTile);
+                        table.add(rotatingMergingConveyorTileText).width(500);
                         table.row();
                         table.add(rotatingDoubleMergingConveyorTile);
+                        table.add(rotatingDoubleMergingConveyorTileText).width(500);
                         table.row();
                         table.add(pusherTile);
+                        table.add(pusherTileText).width(500);
                         table.row();
                         table.add(clockwiseTile);
+                        table.add(clockwiseTileText).width(500);
                         table.row();
                         table.add(counterClockwiseTile);
+                        table.add(counterClockwiseTileText).width(500);
                         table.row();
                         table.add(laserTile);
+                        table.add(laserTileText).width(500);
                         table.row();
                         table.add(checkpointFlagTile);
+                        table.add(checkpointFlagTileText).width(500);
                         table.row();
                         table.add(repairTile);
+                        table.add(repairTileText).width(500);
                         table.row();
                         table.add(dockTile);
+                        table.add(dockTileText).width(500);
                         table.row();
                         add(table);
                         
