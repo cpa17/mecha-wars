@@ -45,66 +45,63 @@ public class Player {
 
     private void updateLife() {
         switch (lifePoints) {
-        case 0:
-            life = new Texture(Gdx.files.internal("background.png"));
-            break;
-        case 1:
-            life = new Texture(Gdx.files.internal("background.png"));
-            break;
-        case 2:
-            life = new Texture(Gdx.files.internal("background.png"));
-            break;
-        case 3:
-            life = new Texture(Gdx.files.internal("background.png"));
-            break;
-        default:
-            break;
+            case 0 :    life = new Texture(Gdx.files.internal("background1.png"));
+                        break;
+                        
+            case 1 :    life = new Texture(Gdx.files.internal("background2.png"));
+                        break;
+                        
+            case 2 :    life = new Texture(Gdx.files.internal("background3.png"));
+                        break;
+                        
+            case 3 :    life = new Texture(Gdx.files.internal("background4.png"));
+                        break;
+                        
+            default:    break;
         }
     }
 
     private void updateDamage() {
         switch (damagePoints) {
-        case 0:
-            damage = new Texture(Gdx.files.internal("background.png"));
-            break;
-        case 1:
-            damage = new Texture(Gdx.files.internal("background.png"));
-            break;
-        case 2:
-            damage = new Texture(Gdx.files.internal("background.png"));
-            break;
-        case 3:
-            damage = new Texture(Gdx.files.internal("background.png"));
-            break;
-        case 4:
-            damage = new Texture(Gdx.files.internal("background.png"));
-            break;
-        case 5:
-            damage = new Texture(Gdx.files.internal("background.png"));
-            break;
-        case 6:
-            damage = new Texture(Gdx.files.internal("background.png"));
-            break;
-        case 7:
-            damage = new Texture(Gdx.files.internal("background.png"));
-            break;
-        case 8:
-            damage = new Texture(Gdx.files.internal("background.png"));
-            break;
-        case 9:
-            damage = new Texture(Gdx.files.internal("background.png"));
-            break;
-        default:
-            break;
+            case 0 :    damage = new Texture(Gdx.files.internal("background5.png"));
+                        break;
+                        
+            case 1 :    damage = new Texture(Gdx.files.internal("background6.png"));
+                        break;
+                        
+            case 2 :    damage = new Texture(Gdx.files.internal("background7.png"));
+                        break;
+                        
+            case 3 :    damage = new Texture(Gdx.files.internal("background8.png"));
+                        break;
+                        
+            case 4 :    damage = new Texture(Gdx.files.internal("background9.png"));
+                        break;
+                        
+            case 5 :    damage = new Texture(Gdx.files.internal("background10.png"));
+                        break;
+                        
+            case 6 :    damage = new Texture(Gdx.files.internal("background11.png"));
+                        break;
+                        
+            case 7 :    damage = new Texture(Gdx.files.internal("background12.png"));
+                        break;
+                        
+            case 8 :    damage = new Texture(Gdx.files.internal("background13.png"));
+                        break;
+                        
+            case 9 :    damage = new Texture(Gdx.files.internal("background14.png"));
+                        break;
+                        
+            default:    break;
         }
     }
 
     private void updateShutDown() {
         if (shutDownMark) {
-            shutDown = new Texture(Gdx.files.internal("background.png"));
-        }
-        else {
-            shutDown = new Texture(Gdx.files.internal("background.png"));
+            shutDown = new Texture(Gdx.files.internal("background15.png"));
+        } else {
+            shutDown = new Texture(Gdx.files.internal("background16.png"));
         }
     }
 
