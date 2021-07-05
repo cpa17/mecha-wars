@@ -77,8 +77,8 @@ public class GameScreen implements Screen {
         deck = CardFunctions.shuffle(deck);
         
         for (int cardPrintCounter = 0; cardPrintCounter < 84; cardPrintCounter += 1) {
-            buttons[cardPrintCounter] = new TextButton((cardPrintCounter + 1) + " - "
-                    + deck[cardPrintCounter], skin);
+            buttons[cardPrintCounter] = new TextButton(deck[cardPrintCounter] + " - "
+                    + deck[cardPrintCounter].getCardAttributePriority(), skin);
             table.row();
             table.add(buttons[cardPrintCounter]);
             int buttonNumber = (cardPrintCounter + 1);
