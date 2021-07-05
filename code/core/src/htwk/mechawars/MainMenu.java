@@ -67,7 +67,8 @@ public class MainMenu implements Screen {
         stage.addActor(endGame);
 
         Board board = new Board();
-        board = board.fromFile("map.txt");
+        board = 
+                board.fromFile("C:\\Users\\fiedl\\OneDrive\\Desktop\\ordner\\Medieninformatik\\4_Semester\\Computergrafiken\\Abgaben\\map.txt");
 
         for (int i = 0; i < board.matrix.length; i++) {
             for (int j = 0; j < board.matrix[i].length; j++) {

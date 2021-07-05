@@ -29,6 +29,8 @@ import htwk.mechawars.cards.CardFunctions;
 public class GameScreen implements Screen {
 
     private Texture industrialTile;
+    private Texture startTile;
+    private Texture checkpointTile;
     private Texture robot;
     private Stage stage;
     private Table container;
@@ -46,8 +48,10 @@ public class GameScreen implements Screen {
 
     private Board board = new Board(12, 12);
     private Robot player = new Robot();
-
     
+    private Board boardtxt = 
+               Board.fromFile("C:\\CodeRepository\\mecha-wars\\code\\core\\assets\\map.txt");
+ 
     private TextButton[] buttons = new TextButton[choosableCardCount];
 
     /**
@@ -55,6 +59,9 @@ public class GameScreen implements Screen {
      */
     public GameScreen() {
         industrialTile = new Texture("industrialTile.png");
+        startTile = new Texture("start.png");
+        checkpointTile = new Texture("checkpoint.png");
+        
         robot = new Texture("robot.png");
 
         batch = new SpriteBatch();
@@ -67,6 +74,8 @@ public class GameScreen implements Screen {
         addButtonsToStage(skin);
         addScrollPanelToStage(skin);
         board.startRobot(5, 5, Dir.NORTH, player);
+        
+        //try to read matrix in 
     }
 
     /**
@@ -319,7 +328,36 @@ public class GameScreen implements Screen {
 
         for (int i = 0; i < board.matrix.length; i++) {
             for (int j = 0; j < board.matrix[i].length; j++) {
+                
+                
+                int p = boardtxt.matrix[i][j];
+                
+                switch (p) {
+                    case(0):
+                        batch.draw(industrialTile, x, y);
+                        break;
+                    case(1):     
+                        batch.draw(startTile, x, y);
+                        break;
+                    case(2):
+                        batch.draw(checkpointTile, x, y);
+                        break;
+                    default:
+                        batch.draw(industrialTile, x, y);
+                        break;
+                }
+                
+                
+                /*
+                if(boardtxt.matrix[i][j]==2) {
                 batch.draw(industrialTile, x, y);
+                }
+                else if(boardtxt.matrix[i][j]==1) {
+                batch.draw(startTile, x, y);
+                }
+                */
+                
+            
                 x = x + (Gdx.graphics.getHeight() / board.matrix[i].length);
             }
             y = y + (Gdx.graphics.getHeight() / board.matrix.length);
@@ -345,6 +383,8 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         industrialTile.dispose();
+        checkpointTile.dispose();
+        startTile.dispose();
         robot.dispose();
     }
 
