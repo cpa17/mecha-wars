@@ -46,11 +46,10 @@ public class GameScreen implements Screen {
 
     private Card[] deck = new Card[84];
 
-    private Board board = new Board(12, 12);
+    private Board board = Board.fromFile("mapStd.txt");
+    private Board boardtxt = Board.fromFile("map.txt");
+
     private Robot player = new Robot();
-    
-    private Board boardtxt = 
-               Board.fromFile("C:\\CodeRepository\\mecha-wars\\code\\core\\assets\\map.txt");
  
     private TextButton[] buttons = new TextButton[choosableCardCount];
 
@@ -74,8 +73,6 @@ public class GameScreen implements Screen {
         addButtonsToStage(skin);
         addScrollPanelToStage(skin);
         board.startRobot(5, 5, Dir.NORTH, player);
-        
-        //try to read matrix in 
     }
 
     /**
@@ -326,9 +323,8 @@ public class GameScreen implements Screen {
         int x = 0;
         int y = 0;
 
-        for (int i = 0; i < board.matrix.length; i++) {
-            for (int j = 0; j < board.matrix[i].length; j++) {
-                
+        for (int i = 0; i < boardtxt.matrix.length; i++) {
+            for (int j = 0; j < boardtxt.matrix[i].length; j++) {
                 
                 int p = boardtxt.matrix[i][j];
                 
@@ -346,21 +342,11 @@ public class GameScreen implements Screen {
                         batch.draw(industrialTile, x, y);
                         break;
                 }
-                
-                
-                /*
-                if(boardtxt.matrix[i][j]==2) {
-                batch.draw(industrialTile, x, y);
-                }
-                else if(boardtxt.matrix[i][j]==1) {
-                batch.draw(startTile, x, y);
-                }
-                */
-                
-            
-                x = x + (Gdx.graphics.getHeight() / board.matrix[i].length);
+
+                x = x + (Gdx.graphics.getHeight() / boardtxt.matrix[i].length);
             }
-            y = y + (Gdx.graphics.getHeight() / board.matrix.length);
+
+            y = y + (Gdx.graphics.getHeight() / boardtxt.matrix.length);
             x = 0;
         }
     }
