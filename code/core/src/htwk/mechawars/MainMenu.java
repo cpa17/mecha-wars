@@ -66,7 +66,7 @@ public class MainMenu implements Screen {
         stage.addActor(startGame);
         stage.addActor(endGame);
 
-        //zum Ausgeben der Board-Matrix in der Konsole für Testzwecke
+        //zum Ausgeben einer beliebigen .txt-Matrix in der Konsole für Testzwecke
         Board board = new Board();
         board = board.fromFile("map.txt");
         for (int i = 0; i < board.matrix.length; i++) {

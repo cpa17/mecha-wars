@@ -70,8 +70,8 @@ public class Board {
 
         Board board = new Board(width, height);
 
-        for (int y = 0; y < width; y++) {
-            for (int x = 0; x < height; x++) {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
                 board.matrix[y][x] = tempLayout.get(y).get(x);
             }
         }
