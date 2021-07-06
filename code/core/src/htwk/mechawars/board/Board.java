@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+
 /**
  * Class that presents the game board.
  */
@@ -41,28 +44,25 @@ public class Board {
      * @return New board with the matrix from the text file.
      */
     public static Board fromFile(String fileName) {
+        FileHandle file = Gdx.files.internal(fileName);
+        String text = file.readString();
+    
         ArrayList<ArrayList<Integer>> tempLayout = new ArrayList<>();
+           
+        String[] linesArray = text.split("\\r?\\n");
+        String currentLine;
 
-        try (BufferedReader br
-                     = new BufferedReader(new FileReader(fileName, Charset.forName("UTF-8")))) {
-            String currentLine;
-
-            while ((currentLine = br.readLine()) != null) {
-                if (currentLine.isEmpty()) {
-                    continue;
+        for (int i = 0; i < linesArray.length; i++) {
+            currentLine = linesArray[i];
+            ArrayList<Integer> row = new ArrayList<>();
+            String[] values = currentLine.trim().split(" ");
+            for (String string : values) {
+                if (!string.isEmpty()) {
+                    int id = Integer.parseInt(string);
+                    row.add(id);
                 }
-                ArrayList<Integer> row = new ArrayList<>();
-                String[] values = currentLine.trim().split(" ");
-                for (String string : values) {
-                    if (!string.isEmpty()) {
-                        int id = Integer.parseInt(string);
-                        row.add(id);
-                    }
-                }
-                tempLayout.add(row);
             }
-        } catch (IOException e) {
-            System.out.println("Error reading the map:" + e);
+            tempLayout.add(row);              
         }
 
         int width = tempLayout.get(0).size();
