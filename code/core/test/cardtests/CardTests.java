@@ -18,9 +18,7 @@ public class CardTests {
      */
     @Test
     public void testMovCount() {
-        Card[] testCards = new Card[84];
-
-        testCards = CardFunctions.initDeck(testCards);
+        Card[] testCards = CardFunctions.initDeck();
 
         for (int i = 0; i < 84; i += 1) {
             int x = testCards[i].getCardAttributeMovCount();
@@ -33,9 +31,7 @@ public class CardTests {
      */
     @Test
     public void testName() {
-        Card[] testCards = new Card[84];
-
-        testCards = CardFunctions.initDeck(testCards);
+        Card[] testCards = CardFunctions.initDeck();
 
         for (int i = 0; i < 84; i += 1) {
             assertTrue(testCards[i].toString() == "1 Vor"
@@ -49,39 +45,14 @@ public class CardTests {
     }
 
     /**
-     * When initializing Card[] before shuffling the first 18 cards are mov1 (of type Name).
-     * We have a total of 84 Cards. If the shuffle() function works
-     * less than half of the first 18 cards (9) should be mov1 (of type Name)
-     */
-    @Test
-    public void testCardShuffle1() {
-        Card[] testCards = new Card[84];
-        int internTest = 0;
-
-        testCards = CardFunctions.initDeck(testCards);
-        testCards = CardFunctions.shuffle(testCards);
-
-        for (int i = 0; i < 18; i += 1) {
-            if (testCards[i].toString() == "1 Vor") {
-                internTest += 1;
-            }
-        }
-
-        assertTrue(internTest < 9);        //statistically possible to be false
-
-    }
-
-    /**
      * Tests if at least one Card is different in testCardsShuffled[].
      * compared to testCardsUnshuffled[]
      */
     @Test
-    public void testCardShuffle2() {
-        Card[] testCardsUnshuffled = new Card[84];
+    public void testCardShuffle() {
+        Card[] testCardsUnshuffled = CardFunctions.initDeck();
         Card[] testCardsShuffled;
         boolean isEqual = true;
-
-        testCardsUnshuffled =  CardFunctions.initDeck(testCardsUnshuffled);
 
         testCardsShuffled = CardFunctions.shuffle(testCardsUnshuffled);
 
@@ -93,5 +64,70 @@ public class CardTests {
         }
         assertFalse(isEqual);
     }
+    
+    /**
+     * Test the amount of Turn-Left-Cards in the Array, which have to be 18.
+     */
+    @Test
+    public void testCardCount() {
+        Card[] testCards = CardFunctions.initDeck();
+        int counter = 0;
+        
+        for (int i = 0; i < 84; i += 1) {
+            if (testCards[i].getCardAttributeType().toString() == "Linksdrehung") {
+                counter += 1;
+            }
+        }
+        assertTrue(counter < 18);
+    }
 
+    
+    /**
+     * Test, that show, that the priority of cards are correct.
+     */
+    @Test
+    public void testPriority() {
+        Card[] testCards = CardFunctions.initDeck();
+        boolean prio0 = false;
+        boolean prio1 = false;
+        boolean prio2 = false;
+        boolean prio3 = false;
+        
+        //for (int x = 0; x < 84; x += 1) {
+        //    System.out.println( testCards[x].toString() + "  " 
+        //          + testCards[x].getCardAttributePriority());
+        //} -> Manuel Test of Priority
+        
+        for (int i = 0; i < 84; i += 1) {
+            System.out.println("e" + i);
+            if (testCards[i].toString() == "Kehrtwendung") {
+                System.out.println("1 ja");
+                if (testCards[i].getCardAttributePriority() == 70) {
+                    prio0 = true;
+                    System.out.println("2 Ja");
+                }
+            }
+            if (testCards[i].getCardAttributePriority() == 410) {
+                System.out.println("Hallo Prio");
+                if (testCards[i].toString() == "Linksdrehung") {
+                    prio1 = true;
+                    System.out.println("1");
+                }
+            }
+            if (testCards[i].getCardAttributePriority() == 510
+                    && testCards[i].toString() == "1 Vor") {
+                prio2 = true;
+                System.out.println("2");
+            }
+            if (testCards[i].getCardAttributePriority() == 80
+                    && testCards[i].toString() == "Rechtsdrehung") {
+                prio3 = true;
+                System.out.println("3");
+            }
+        }
+        assertFalse(prio0 == true);
+        assertTrue(prio1 == true);
+        assertTrue(prio2 == true);
+        assertTrue(prio3 == true);
+    }
 }

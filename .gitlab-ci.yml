@@ -12,11 +12,12 @@ image: gradle:6-jdk11-hotspot
 variables:
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
 
+before_script:
+  - cd code
+  - export GRADLE_USER_HOME=`pwd`/.gradle
+
 build:
   stage: build
-  before_script:
-    - cd code
-    - export GRADLE_USER_HOME=`pwd`/.gradle
   script: gradle --build-cache assemble
   cache:
     key: "$CI_COMMIT_REF_NAME"
@@ -27,16 +28,12 @@ build:
 
 test:
   stage: test
-  before_script:
-    - apt-get update -qq && apt-get install -y -qq elinks
-    - cd code
-    - export GRADLE_USER_HOME=`pwd`/.gradle
   script: gradle check
   after_script:
-    - test -f /builds/weicker/mecha-wars/code/core/build/reports/spotbugs/main.html && elinks -dump /builds/weicker/mecha-wars/code/core/build/reports/spotbugs/main.html
-    - test -f /builds/weicker/mecha-wars/code/core/build/reports/spotbugs/test.html && elinks -dump /builds/weicker/mecha-wars/code/core/build/reports/spotbugs/test.html
-    - test -f /builds/weicker/mecha-wars/code/desktop/build/reports/spotbugs/main.html && elinks -dump /builds/weicker/mecha-wars/code/desktop/build/reports/spotbugs/main.html
-    - test -f /builds/weicker/mecha-wars/code/desktop/build/reports/spotbugs/test.html && elinks -dump /builds/weicker/mecha-wars/code/desktop/build/reports/spotbugs/test.html
+    - test -f /builds/weicker/mecha-wars/code/core/build/reports/spotbugs/main.txt && cat /builds/weicker/mecha-wars/code/core/build/reports/spotbugs/main.txt
+    - test -f /builds/weicker/mecha-wars/code/core/build/reports/spotbugs/test.txt && cat /builds/weicker/mecha-wars/code/core/build/reports/spotbugs/test.txt
+    - test -f /builds/weicker/mecha-wars/code/desktop/build/reports/spotbugs/main.txt && cat /builds/weicker/mecha-wars/code/desktop/build/reports/spotbugs/main.txt
+    - test -f /builds/weicker/mecha-wars/code/desktop/build/reports/spotbugs/test.txt && cat /builds/weicker/mecha-wars/code/desktop/build/reports/spotbugs/test.txt
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: pull

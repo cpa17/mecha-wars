@@ -39,10 +39,10 @@ public class GameScreen implements Screen {
 
     private int[] cardOrder = { -1, -1, -1, -1, -1};
     private int pressCounter = 0;
+    
+    private Card[] deck;
     private int damagePoints = 0;
     private int choosableCardCount = 9;
-
-    private Card[] deck = new Card[84];
 
     private Board board = new Board(12, 12);
     private Robot player = new Robot();
@@ -90,15 +90,15 @@ public class GameScreen implements Screen {
         final ScrollPane scrollPanel = new ScrollPane(table, skin);
 
         // Array of Cards created
-        deck = CardFunctions.initDeck(deck);
+        deck = CardFunctions.initDeck();
         // shuffle Deck
         deck = CardFunctions.shuffle(deck);
         
         for (int cardPrintCounter = 0; cardPrintCounter < choosableCardCount;
                 cardPrintCounter += 1) {
             Card aktuelleKarte = deck[cardPrintCounter];
-            buttons[cardPrintCounter] = new TextButton((cardPrintCounter + 1) + " - "
-                    + aktuelleKarte, skin);
+            buttons[cardPrintCounter] = new TextButton(deck[cardPrintCounter] + " - "
+                    + deck[cardPrintCounter].getCardAttributePriority(), skin);
             table.row();
             table.add(buttons[cardPrintCounter]);
             int buttonNumber = (cardPrintCounter + 1);
@@ -175,7 +175,8 @@ public class GameScreen implements Screen {
     private void buttonsClean() {
         for (int i = 0; i < choosableCardCount; i += 1) {
             buttons[i].setColor(Color.LIGHT_GRAY);
-            buttons[i].setText((i + 1) + " - " + deck[i]);
+            buttons[i].setText(deck[i] + " - "
+                    + deck[i].getCardAttributePriority());
         }
     }
 
@@ -267,6 +268,7 @@ public class GameScreen implements Screen {
         });
 
         stage.addActor(removeCardOrder);
+        
     }
 
     @Override
@@ -277,6 +279,7 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
+        batch = (SpriteBatch) stage.getBatch();
         batch.begin();
         drawPlayingField();
         drawRobot();
