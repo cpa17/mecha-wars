@@ -66,6 +66,7 @@ public class MainMenu implements Screen {
         stage.addActor(startGame);
         stage.addActor(endGame);
 
+        /*
         //zum Ausgeben einer beliebigen .txt-Matrix in der Konsole für Testzwecke
         Board board = new Board();
         board = board.fromFile("map.txt");
@@ -75,7 +76,7 @@ public class MainMenu implements Screen {
             }
             System.out.println();
         }
-        //System.out.println(board.matrix[11][5]);
+        */
     }
 
     /**
