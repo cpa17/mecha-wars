@@ -321,36 +321,76 @@ public class GameScreen implements Screen {
      */
     public void drawPlayingField() {
         int x = 0;
-        int y = 0;
 
         for (int i = 0; i < boardtxt.matrix.length; i++) {
             for (int j = 0; j < boardtxt.matrix[i].length; j++) {
                 
                 int p = boardtxt.matrix[i][j];
                 
+                int t = Gdx.graphics.getHeight() / boardtxt.matrix.length; //height of one tile
+                int b = boardtxt.matrix.length * t; //height of the entire board
+                int c = (i + 1) * t; //the current height in the loop
+                int r = b - c; //the result of the board height minus the current height
+                    
                 switch (p) {
                     case(0):
-                        batch.draw(industrialTile, x, y);
+                        batch.draw(industrialTile, x, r);
                         break;
                     case(1):     
-                        batch.draw(startTile, x, y);
+                        batch.draw(startTile, x, r);
                         break;
                     case(2):
-                        batch.draw(checkpointTile, x, y);
+                        batch.draw(checkpointTile, x, r);
                         break;
                     default:
-                        batch.draw(industrialTile, x, y);
+                        batch.draw(industrialTile, x, r);
                         break;
                 }
 
-                x = x + (Gdx.graphics.getHeight() / boardtxt.matrix[i].length);
+                x = x + (Gdx.graphics.getHeight() / boardtxt.matrix.length);
             }
-
-            y = y + (Gdx.graphics.getHeight() / boardtxt.matrix.length);
+            
             x = 0;
         }
     }
+      
+    /*
+     * alternative version, with the board upside down
+     * 
+     * 
+      public void drawPlayingField() {
+          int x = 0;
+          int y = 0;
 
+          for (int i = 0; i < boardtxt.matrix.length; i++) {
+              for (int j = 0; j < boardtxt.matrix[i].length; j++) {
+                  
+                  int p = boardtxt.matrix[i][j];
+                  
+                  switch (p) {
+                      case(0):
+                          batch.draw(industrialTile, x, y);
+                          break;
+                      case(1):     
+                          batch.draw(startTile, x, y);
+                          break;
+                      case(2):
+                          batch.draw(checkpointTile, x, y);
+                          break;
+                      default:
+                          batch.draw(industrialTile, x, y);
+                          break;
+                  }
+
+                  x = x + (Gdx.graphics.getHeight() / boardtxt.matrix.length);
+              }
+              
+              y = y + (Gdx.graphics.getHeight() / boardtxt.matrix.length);
+              x = 0;
+          }
+      }
+      */
+    
     @Override
     public void resize(int width, int height) {
 

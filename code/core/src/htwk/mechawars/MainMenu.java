@@ -75,6 +75,7 @@ public class MainMenu implements Screen {
             }
             System.out.println();
         }
+        //System.out.println(board.matrix[11][5]);
     }
 
     /**
