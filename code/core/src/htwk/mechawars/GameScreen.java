@@ -154,7 +154,8 @@ public class GameScreen implements Screen {
     private void buttonsClean() {
         for (int i = 0; i < 84; i += 1) {
             buttons[i].setColor(Color.LIGHT_GRAY);
-            buttons[i].setText((i + 1) + " - " + deck[i]);
+            buttons[i].setText(deck[i] + " - "
+                    + deck[i].getCardAttributePriority());
         }
     }
 
