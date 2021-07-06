@@ -14,15 +14,13 @@ public class Card {
      *  2:              2                   u-turn
      *  3:              3                   left
      */
-    private int cardAttributePriority;
 
     /**
      * Constructor of a Card.
      */
-    public Card(Type cardAttributeType, byte cardAttributeMovCount, int cardAttributePriority) {
+    public Card(Type cardAttributeType, byte cardAttributeMovCount) {
         this.cardAttributeType = cardAttributeType;
         this.cardAttributeMovCount = cardAttributeMovCount;
-        this.cardAttributePriority = cardAttributePriority;
     }
  
     // getter functions --------------------------------------------------------
@@ -41,14 +39,6 @@ public class Card {
      */
     public byte getCardAttributeMovCount() {
         return cardAttributeMovCount;
-    }
-    
-    /**
-     * Take the Priority of the Card.
-     * @return the priority
-     */
-    public int getCardAttributePriority() {
-        return cardAttributePriority;
     }
     
     /**

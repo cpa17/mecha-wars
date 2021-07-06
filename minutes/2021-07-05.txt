@@ -1,0 +1,18 @@
+# 5.7.2021 - 17:00 - Daily
+
+Entschuldigt: Bernhard, Felix
+Anwesend: Alle anderen
+Protokollführung: Lukas Brüggemann
+
+## Runde
+- Marc: weiter an Ticket, Frage zu große der Elemente -> Layout ähneln
+- Tim: info Menü weiter, Frage zu MW 22 Merge klären mit Felix
+- Pascal: wiki angelegt, bug als nächstes
+- Ihor: noch nicht weitergemacht
+- Konstantin: Text zu Beschreibung der Felder fehlt noch und Bilder
+- Mark: weiter am Ticket, Klärung zu Ticket Abgrenzungen (Format)
+- Antonia: weiter am Ticket, Klärung zu Ticket Abgrenzungen (Format)
+
+
+## Problembehandlung
+- 

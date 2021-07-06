@@ -49,7 +49,6 @@ public class GameScreen implements Screen {
 
     private TextButton[] buttons = new TextButton[choosableCardCount];
 
-
     /**
      * Constructor of class GameScreen.
      */
@@ -93,7 +92,7 @@ public class GameScreen implements Screen {
         deck = CardFunctions.initDeck();
         // shuffle Deck
         deck = CardFunctions.shuffle(deck);
-        
+
         for (int cardPrintCounter = 0; cardPrintCounter < choosableCardCount;
                 cardPrintCounter += 1) {
             Card aktuelleKarte = deck[cardPrintCounter];
@@ -256,7 +255,6 @@ public class GameScreen implements Screen {
         });
 
         stage.addActor(removeCardOrder);
-
     }
 
     @Override
@@ -267,7 +265,6 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
-        batch = (SpriteBatch) stage.getBatch();
         batch.begin();
         drawPlayingField();
         drawRobot();
