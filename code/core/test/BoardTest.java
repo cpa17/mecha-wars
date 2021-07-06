@@ -40,22 +40,21 @@ public class BoardTest {
     };
 
 
-
     @Test
     public void boardTest() {
         LinkedList<Card> phase1 = new LinkedList<>();
-        phase1.add(new Card(Type.mov, (byte) 3));
-        phase1.add(new Card(Type.turn, (byte) 3));
-        phase1.add(new Card(Type.mov, (byte) 1));
-        phase1.add(new Card(Type.turn, (byte) 1));
-        phase1.add(new Card(Type.turn, (byte) 2));
+        phase1.add(new Card(Type.mov, (byte) 3, 0));
+        phase1.add(new Card(Type.turn, (byte) 3, 0));
+        phase1.add(new Card(Type.mov, (byte) 1, 0));
+        phase1.add(new Card(Type.turn, (byte) 1, 0));
+        phase1.add(new Card(Type.turn, (byte) 2, 0));
 
         LinkedList<Card> phase2 = new LinkedList<>();
-        phase2.add(new Card(Type.mov, (byte) 2));
-        phase2.add(new Card(Type.turn, (byte) 2));
-        phase2.add(new Card(Type.mov, (byte) -1));
-        phase2.add(new Card(Type.turn, (byte) 1));
-        phase2.add(new Card(Type.mov, (byte) 2));
+        phase2.add(new Card(Type.mov, (byte) 2, 0));
+        phase2.add(new Card(Type.turn, (byte) 2, 0));
+        phase2.add(new Card(Type.mov, (byte) -1, 0));
+        phase2.add(new Card(Type.turn, (byte) 1, 0));
+        phase2.add(new Card(Type.mov, (byte) 2, 0));
 
         assertArrayEquals(startMatrix, board.matrix);
         board.move(phase1, robot);
