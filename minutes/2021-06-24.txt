@@ -1,0 +1,33 @@
+# 24.6.2021 - 17:00 - Design Meeting
+
+Entschuldigt: Tim
+Anwesend: Alle anderen
+Protokollführung: Lukas Brüggemann
+
+## Agenda
+- Layout für Menü 
+- Layout Spiel 
+- Assets für karte
+- Assets für Roboter 
+- Assets für Karten
+
+## Ablauf 
+- Diskussion über Spielablauf
+- Diskussion über Darstellung der Planung 
+- Diskussion über Darstellung der Karte, Erweiterbarkeit, Movemenet
+- Diskussion über Darstellung von Lebensinformationen und Map infos
+
+ 
+## Entscheidungen
+- Spiel Layout erstellt -> git 
+- Karteninfo Screen nach Start
+- gewählte Karten werden nacheinander Aufgelistet für bessere Übersicht
+- freies Movement auf der Karte (Anno artig)
+- Lebensinformationen für alle Spieler in Feld neben Karte 
+- Assets von Antonia bleiben
+- Fehlende Assets werden erstellt
+
+## Fehlend 
+- Assets für Roboter 
+ 
+
