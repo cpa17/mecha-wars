@@ -1,0 +1,22 @@
+# 28.6.2021 - 17:00 - Daily
+
+Entschuldigt: Bernhard
+Anwesend: Alle anderen
+Protokollführung: Lukas Brüggemann
+
+## Runde
+- Marc: mit Ticket angefangen, Assets größten Teils fertig, 
+- Tim: angefangen mit Dialog Feld umgesetztung
+- Bernhard: noch nicht angefangen
+- Pascal: Position des Roboters aus Matrix übernommen, Logic ausführen fehlt noch
+- Ihor: noch nicht angefangen
+- Konstantin: Pipeline Fail fixed bei merge, angefangen mit Dialog Feld umgesetztung, Feinheiten ausarbeiten
+- Mark: Ticket noch nicht ganz klar, Termin für Klärung festgelegt
+- Antonia: Bug fix fertig, Ticket noch nicht ganz klar, Termin für Klärung festgelegt
+
+
+
+## Problembehandlung
+- 
+ 
+

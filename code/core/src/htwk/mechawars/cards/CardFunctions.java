@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class CardFunctions {
 
+
     /**
      * Fill the empty cardDeck-Array with:
      * # 18 Mov1, TurnR, TurnL
@@ -94,10 +95,12 @@ public class CardFunctions {
      * @param originalDeck -> includes the cards to shuffle
      * @return Array of cards, that are shuffled
      */
+
     public static Card[] shuffle(Card[] originalDeck) {
         List<Card> deck = new ArrayList<>(Arrays.asList(originalDeck));
         List<Card> shuffled = new ArrayList<>();
 
+ 
         Collections.shuffle(deck);
         shuffled.addAll(deck);
     
