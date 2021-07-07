@@ -34,10 +34,10 @@ public class ZugInitialisierung {
     }
 
     /**
-     * Method that checks whether the card has already been selected.
+     * Method that checks whether a card can be added.
      * @param card to check
-     * @return true: if the card has not already been selected,
-     *         false: if the card has already been selected
+     * @return true: if the card can be added
+     *         false: if the card can't be added
      */
     public boolean checkCard(Card card) {
         boolean cardCheck = true;
@@ -45,6 +45,9 @@ public class ZugInitialisierung {
             if (kartenListe.get(i).getCardAttributePriority() == card.getCardAttributePriority()) {
                 cardCheck = false;
             }
+        }
+        if (kartenListe.size() >= 5) {
+            cardCheck = false;
         }
         return cardCheck;
     }
