@@ -42,7 +42,7 @@ public class ZugInitialisierung {
     public boolean checkCard(Card card) {
         boolean cardCheck = true;
         for (int i = 0; i < kartenListe.size(); i++) {
-            if (kartenListe.get(i).getCardAttributePriority() == card.getCardAttributePriority()) {
+            if (kartenListe.get(i).equals(card)) {
                 cardCheck = false;
             }
         }
