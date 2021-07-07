@@ -28,8 +28,25 @@ public class ZugInitialisierung {
      * @param karte -> card to be added to the list
      */
     public void addCard(Card karte) {
+        if (checkCard(karte) == true) {
+            kartenListe.add(karte);
+        }
+    }
 
-        kartenListe.add(karte);
+    /**
+     * Method that checks whether the card has already been selected.
+     * @param card to check
+     * @return true: if the card has not already been selected,
+     *         false: if the card has already been selected
+     */
+    public boolean checkCard(Card card) {
+        boolean cardCheck = true;
+        for (int i = 0; i < kartenListe.size(); i++) {
+            if (kartenListe.get(i).getCardAttributePriority() == card.getCardAttributePriority()) {
+                cardCheck = false;
+            }
+        }
+        return cardCheck;
     }
 
     /**
