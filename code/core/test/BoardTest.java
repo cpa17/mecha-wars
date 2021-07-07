@@ -19,6 +19,7 @@ public class BoardTest {
     private Board boardtxt = Board.fromFile("testMap.txt");
 
     private Robot robot = new Robot();
+    private Robot robottxt = new Robot();
 
     public int[][] startMatrix = {
             {0, 0, 0, 0},
@@ -65,11 +66,10 @@ public class BoardTest {
         assertArrayEquals(endMatrix, board.matrix);
 
         assertArrayEquals(startMatrix, boardtxt.matrix);
-        board.move(phase1, robot);
+        boardtxt.move(phase1, robottxt);
         assertArrayEquals(midMatrix, boardtxt.matrix);
-        board.move(phase2, robot);
+        boardtxt.move(phase2, robottxt);
         assertArrayEquals(endMatrix, boardtxt.matrix);
-
     }
 
     /**
@@ -78,7 +78,7 @@ public class BoardTest {
     @BeforeEach
     public void initBoard() {
         board.startRobot(3, 3, Dir.NORTH, robot);
+        boardtxt.startRobot(3, 3, Dir.NORTH, robottxt);
     }
 
 }
-
