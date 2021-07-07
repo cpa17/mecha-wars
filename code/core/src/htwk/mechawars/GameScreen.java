@@ -21,6 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -318,28 +319,85 @@ public class GameScreen implements Screen {
                         Label checkpointFlagTile = new Label("Checkpoint", skin);
                         Label repairTile = new Label("Reparaturfeld", skin);
                         Label dockTile = new Label("Dock", skin);
-                        TextField movOneText = new TextField("Bewegt den Roboter 1 Feld in Blickrichtung vor.", skin);
-                        TextField movTwoText = new TextField("Bewegt den Roboter 2 Felder Blickrichtung vor.", skin);
-                        TextField movThreeText = new TextField("Bewegt den Roboter 3 Felder Blickrichtung vor.", skin);
-                        TextField movBackText = new TextField("Bewegt den Roboter 1 Feld Blickrichtung zurueck.", skin);
+                        TextField movOneText = new TextField("Bewegt den Roboter 1 Feld in "
+                                + "Blickrichtung vor.", skin);
+                        TextField movTwoText = new TextField("Bewegt den Roboter 2 Felder "
+                                + "Blickrichtung vor.", skin);
+                        TextField movThreeText = new TextField("Bewegt den Roboter 3 Felder "
+                                + "Blickrichtung vor.", skin);
+                        TextField movBackText = new TextField("Bewegt den Roboter 1 Feld "
+                                + "Blickrichtung zurueck.", skin);
                         TextField turnLText = new TextField("Dreht den Roboter nach Links.", skin);
                         TextField turnRText = new TextField("Dreht den Roboter nach Rechts.", skin);
                         TextField turnUText = new TextField("Dreht den Roboter um.", skin);
-                        TextField freeTileText = new TextField("Durch diese Felder koennen sich Roboter ungehindert bewegen.", skin);
-                        TextField pitTileText = new TextField("Roboter werden zerstoert, wenn sie sich auf diese Felder bewegen oder auf sie bewegt werden. Offene Raender des Spielplans werden ebenfalls wie Gruben behandelt.", skin);
-                        TextField wallTileText = new TextField("Roboter können sich nicht durch Waende bewegen oder durch sie hindurchschießen. Roboter, die versuchen, sich durch Waende zu bewegen, bleiben stehen. Benachbarte Waende zwischen zwei Spielplänen zählen als eine Wand, nicht als zwei.", skin);
-                        TextField conveyorTileText = new TextField("Normale Foerderbaender bewegen sich in jedem Programmschritt einmal.", skin);
-                        TextField expressConveyorTileText = new TextField("Expressbaender bewegen sich in jedem Programmschritt zweimal.", skin);
-                        TextField rotatingConveyorTileText = new TextField("Wenn ein Foerderband einen Roboter auf ein solches Feld bewegt, drehe den Roboter um 90° in Pfeilrichtung.", skin);
-                        TextField rotatingMergingConveyorTileText = new TextField("Wenn ein ineinander übergehendes Foerderband einen Roboter von der Seite, aus der der gekruemmte Pfeil kommt, auf ein solches Feld bewegt, drehe den Roboter um 90° in Pfeilrichtung.", skin);
-                        TextField rotatingDoubleMergingConveyorTileText = new TextField("Wenn ein Foerderband einen Roboter von einer beliebigen Seite auf ein solches Feld bewegt, drehe den Roboter um 90° in Pfeilrichtung.", skin);
-                        TextField pusherTileText = new TextField("Wenn sich ein Roboter auf diesem Feld befindet, wenn der Schieber aktiv ist, wird der Roboter auf das naechste gegenüberliegende Feld geschoben. Schieber können mehre-re Roboter bewegen und sind nur in den Programmschritten aktiv, die auf dem Schieber angegeben sind. (Dieser Schieber ist im zweiten und vierten Programmschritt aktiv.)", skin);
-                        TextField clockwiseTileText = new TextField("Diese Zahnraeder drehen einen Roboter um 90° im Uhrzeigersinn in Richtung der Pfeile.", skin);
-                        TextField counterClockwiseTileText = new TextField("Diese Zahnraeder drehen einen Roboter um 90° gegen den Uhrzeigersinn in Richtung der Pfeile.", skin);
-                        TextField laserTileText = new TextField("Roboter, die am Ende eines Programmschritts in einem Laserstrahl ste-hen, erhalten für jeden Laserstrahl in diesem Feld 1 Schadenspunkt [Damage Token]. Beenden zwei oder mehr Roboter ihre Bewegung im selben Laserstrahl, so erhält nur derjenige einen Schadenspunkt, der der Abschussvorrichtung des Lasers am naechsten steht.", skin);
-                        TextField checkpointFlagTileText = new TextField(" Ein Roboter, der sich am Ende eines Programm-schritts auf einem Feld mit einem Checkpoint [Flag] befindet, legt seine Sicherheitskopie [Archive Marker] auf dieses Feld und der Checkpoint [Flag] zaehlt für das Erreichen des Sieges im Rennen.\nEin Roboter, der sich am Ende eines Zuges auf einem Feld mit einem Checkpoint befindet, legt 1 Schadenspunkt [Damage Token] ab.", skin);
-                        TextField repairTileText = new TextField("Ein Roboter, der sich am Ende eines Programm-schritts auf einem beliebigen Reparaturfeld befindet, legt seine Sicherheitskopie [Archive Marker] auf dieses Feld.\nEin Roboter, der sich am Ende eines Zuges auf einem Feld mit einem einzelnen Schraubenschlüssel befindet, legt 1 Schadenspunkt [Damage Token] ab. Ein Roboter, der sich auf einem Feld mit gekreuztem Schraubenschlüssel und Hammer befindet, legt 1 Scha-denspunkt [Damage Token] ab und zieht 1 Optionskarte.", skin);
-                        TextField dockTileText = new TextField("Die nummerierten Docks auf dem Spielplan „Andockstation“ [Docking Bay Board] werden als Startfelder für die Roboter und ihre Sicherheitskopien verwendet. Sie dienen keinem weiteren Zweck und gelten ansonsten als freie Felder.", skin);
+                        TextField freeTileText = new TextField("Durch diese Felder koennen "
+                                + "sich Roboter ungehindert bewegen.", skin);
+                        TextArea pitTileText = new TextArea("Roboter werden zerstoert, "
+                                + "wenn sie sich auf diese Felder bewegen oder "
+                                + "auf sie bewegt werden. Offene Raender des Spielplans "
+                                + "werden ebenfalls wie Gruben behandelt.", skin);
+                        TextArea wallTileText = new TextArea("Roboter können sich nicht durch"
+                                + " Waende bewegen oder durch sie hindurch schießen. "
+                                + "Roboter, die versuchen, sich durch Waende zu bewegen, "
+                                + "bleiben stehen. Benachbarte Waende zwischen zwei Spielplänen "
+                                + "zählen als eine Wand,nicht als zwei.", skin);
+                        TextArea conveyorTileText = new TextArea("Normale Foerderbaender "
+                                + "bewegen sich in jedem Programmschritt einmal.", skin);
+                        TextArea expressConveyorTileText = new TextArea("Expressbaender "
+                                + "bewegen sich in jedem Programmschritt zweimal.", skin);
+                        TextArea rotatingConveyorTileText = new TextArea("Wenn ein Foerderband "
+                                + "einen Roboter auf ein solches Feld bewegt, drehe den Roboter "
+                                + "um 90° in Pfeilrichtung.", skin);
+                        TextArea rotatingMergingConveyorTileText = new TextArea("Wenn ein "
+                                + "ineinander übergehendes Foerderband einen Roboter von der "
+                                + "Seite, aus der der gekruemmte Pfeil kommt, auf ein solches "
+                                + "Feld bewegt, drehe den Roboter um 90° in Pfeilrichtung.", skin);
+                        TextArea rotatingDoubleMergingConveyorTileText = new TextArea("Wenn "
+                                + "ein Foerderband einen Roboter von einer beliebigen Seite auf "
+                                + "ein solches Feld bewegt, drehe den Roboter um 90° in "
+                                + "Pfeilrichtung.", skin);
+                        TextArea pusherTileText = new TextArea("Wenn sich ein Roboter auf diesem "
+                                + "Feld befindet, wenn der Schieber aktiv ist, wird der Roboter auf "
+                                + "das naechste gegenüberliegende Feld geschoben. Schieber koennen "
+                                + "mehrere Roboter bewegen und sind nur in den Programmschritten "
+                                + "aktiv, die auf dem Schieber angegeben sind. "
+                                + "(Dieser Schieber ist im zweiten und vierten Programmschritt "
+                                + "aktiv.)", skin);
+                        TextArea clockwiseTileText = new TextArea("Diese Zahnraeder drehen einen"
+                                + "Roboter um 90° im Uhrzeigersinn in Richtung der Pfeile.", skin);
+                        TextArea counterClockwiseTileText = new TextArea("Diese Zahnraeder drehen "
+                                + "einen Roboter um 90° gegen den Uhrzeigersinn in Richtung der "
+                                + "Pfeile.", skin);
+                        TextArea laserTileText = new TextArea("Roboter, die am Ende eines "
+                                + "Programmschritts in einem Laserstrahl ste-hen, erhalten "
+                                + "für jeden Laserstrahl in diesem Feld 1 Schadenspunkt "
+                                + "[Damage Token]."
+                                + " Beenden zwei oder mehr Roboter ihre Bewegung im selben "
+                                + "Laserstrahl,"
+                                + " so erhält nur derjenige einen Schadenspunkt, der der "
+                                + "Abschussvorrichtung des Lasers am naechsten steht.", skin);
+                        TextArea checkpointFlagTileText = new TextArea(" Ein Roboter, der sich"
+                                + " am Ende eines Programm-schritts auf einem Feld mit einem "
+                                + "Checkpoint [Flag] befindet, legt seine Sicherheitskopie "
+                                + "[Archive Marker] auf dieses Feld und der Checkpoint [Flag] "
+                                + "zaehlt für das Erreichen des Sieges im Rennen.\nEin Roboter, "
+                                + "der sich am Ende eines Zuges auf einem Feld mit einem "
+                                + "Checkpoint befindet, legt 1 Schadenspunkt [Damage Token] "
+                                + "ab.", skin);
+                        TextArea repairTileText = new TextArea("Ein Roboter, der sich am Ende "
+                                + "eines Programm-schritts auf einem beliebigen Reparaturfeld "
+                                + "befindet, legt seine Sicherheitskopie [Archive Marker] auf "
+                                + "dieses Feld.\nEin Roboter, der sich am Ende eines Zuges auf "
+                                + "einem Feld mit einem einzelnen Schraubenschlüssel befindet, "
+                                + "legt 1 Schadenspunkt [Damage Token] ab. Ein Roboter, der sich "
+                                + "auf einem Feld mit gekreuztem Schraubenschlüssel und Hammer "
+                                + "befindet, legt 1 Scha-denspunkt [Damage Token] ab und zieht "
+                                + "1 Optionskarte.", skin);
+                        TextArea dockTileText = new TextArea("Die nummerierten Docks auf dem "
+                                + "Spielplan „Andockstation“ [Docking Bay Board] werden als "
+                                + "Startfelder für die Roboter und ihre Sicherheitskopien "
+                                + "verwendet. Sie dienen keinem weiteren Zweck und gelten "
+                                + "ansonsten als freie Felder.", skin);
                         movOneText.setDisabled(true);
                         movTwoText.setDisabled(true);
                         movThreeText.setDisabled(true);
@@ -397,46 +455,46 @@ public class GameScreen implements Screen {
                         table.add(freeTileText).width(500);
                         table.row();
                         table.add(pitTile);
-                        table.add(pitTileText).width(500);
+                        table.add(pitTileText).width(500).height(44);
                         table.row();
                         table.add(wallTile);
-                        table.add(wallTileText).width(500);
+                        table.add(wallTileText).width(500).height(58);
                         table.row();
                         table.add(conveyorTile);
-                        table.add(conveyorTileText).width(500);
+                        table.add(conveyorTileText).width(500).height(58);
                         table.row();
                         table.add(expressConveyorTile);
-                        table.add(expressConveyorTileText).width(500);
+                        table.add(expressConveyorTileText).width(500).height(58);
                         table.row();
                         table.add(rotatingConveyorTile);
-                        table.add(rotatingConveyorTileText).width(500);
+                        table.add(rotatingConveyorTileText).width(500).height(58);
                         table.row();
                         table.add(rotatingMergingConveyorTile);
-                        table.add(rotatingMergingConveyorTileText).width(500);
+                        table.add(rotatingMergingConveyorTileText).width(500).height(58);
                         table.row();
                         table.add(rotatingDoubleMergingConveyorTile);
-                        table.add(rotatingDoubleMergingConveyorTileText).width(500);
+                        table.add(rotatingDoubleMergingConveyorTileText).width(500).height(58);
                         table.row();
                         table.add(pusherTile);
-                        table.add(pusherTileText).width(500);
+                        table.add(pusherTileText).width(500).height(58);
                         table.row();
                         table.add(clockwiseTile);
-                        table.add(clockwiseTileText).width(500);
+                        table.add(clockwiseTileText).width(500).height(58);
                         table.row();
                         table.add(counterClockwiseTile);
-                        table.add(counterClockwiseTileText).width(500);
+                        table.add(counterClockwiseTileText).width(500).height(58);
                         table.row();
                         table.add(laserTile);
-                        table.add(laserTileText).width(500);
+                        table.add(laserTileText).width(500).height(58);
                         table.row();
                         table.add(checkpointFlagTile);
-                        table.add(checkpointFlagTileText).width(500);
+                        table.add(checkpointFlagTileText).width(500).height(58);
                         table.row();
                         table.add(repairTile);
-                        table.add(repairTileText).width(500);
+                        table.add(repairTileText).width(500).height(58);
                         table.row();
                         table.add(dockTile);
-                        table.add(dockTileText).width(500);
+                        table.add(dockTileText).width(500).height(58);
                         table.row();
                         add(table);
 
