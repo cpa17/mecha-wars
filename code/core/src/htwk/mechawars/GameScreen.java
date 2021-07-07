@@ -419,7 +419,7 @@ public class GameScreen implements Screen {
                         dockTileText.setDisabled(true);
                         Table table = new Table();
                         table.center();
-                        // Tabel add
+                        // add elements to table
                         table.add(movOne).align(Align.right);
                         table.add(movOneText).width(650);
                         table.row();
