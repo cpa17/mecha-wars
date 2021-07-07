@@ -6,6 +6,7 @@ import htwk.mechawars.cards.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -52,12 +53,32 @@ public class Board {
            
         String[] linesArray = text.split("\\r?\\n");
         String currentLine;
+        
+        Scanner scn = new Scanner(text);
+        String s = ""; 
+        while (scn.hasNext()) {
+            s = scn.next();
+            try {
+                Integer.parseInt(s); 
+            } catch (NumberFormatException z) {
+                System.out.println("The map obtains elements which are not integer!");
+                Gdx.app.exit();
+                System.exit(-1);
+            }
+        }
 
         for (int i = 0; i < linesArray.length; i++) {
             currentLine = linesArray[i];
             ArrayList<Integer> row = new ArrayList<>();
             String[] values = currentLine.trim().split(" ");
             for (String string : values) {
+                
+                if (values.length > 12) {
+                    System.out.println("The map has too many columns, only 12 are allowed!");
+                    Gdx.app.exit();
+                    System.exit(-1);
+                } 
+                
                 if (!string.isEmpty()) {
                     int id = Integer.parseInt(string);
                     row.add(id);
@@ -69,6 +90,13 @@ public class Board {
         int width = tempLayout.get(0).size();
         int height = tempLayout.size();
 
+        
+        if (height > 12) {
+            System.out.println("The map has too many rows, only 12 are allowed!");
+            Gdx.app.exit();
+            System.exit(-1);
+        }                       
+        
         Board board = new Board(width, height);
 
         for (int y = 0; y < height; y++) {

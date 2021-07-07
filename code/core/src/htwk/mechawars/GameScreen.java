@@ -29,8 +29,6 @@ import htwk.mechawars.cards.CardFunctions;
 public class GameScreen implements Screen {
 
     private Texture industrialTile;
-    private Texture startTile;
-    private Texture checkpointTile;
     private Texture robot;
     private Stage stage;
     private Table container;
@@ -57,8 +55,6 @@ public class GameScreen implements Screen {
      */
     public GameScreen() {
         industrialTile = new Texture("industrialTile.png");
-        startTile = new Texture("start.png");
-        checkpointTile = new Texture("checkpoint.png");
         
         robot = new Texture("robot.png");
 
@@ -303,7 +299,6 @@ public class GameScreen implements Screen {
         }
     }
 
-
     /**
      * Function that draws the playing field.
      */
@@ -325,12 +320,6 @@ public class GameScreen implements Screen {
                     case(0):
                         batch.draw(industrialTile, x, r);
                         break;
-                    case(1):
-                        batch.draw(startTile, x, r);
-                        break;
-                    case(2):
-                        batch.draw(checkpointTile, x, r);
-                        break;
                     default:
                         batch.draw(industrialTile, x, r);
                         break;
@@ -350,7 +339,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void pause() {
-
+        
     }
 
     @Override
@@ -361,8 +350,6 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         industrialTile.dispose();
-        checkpointTile.dispose();
-        startTile.dispose();
         robot.dispose();
     }
 
