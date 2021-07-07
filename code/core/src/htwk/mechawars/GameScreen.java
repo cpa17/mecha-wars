@@ -46,8 +46,8 @@ public class GameScreen implements Screen {
 
     private Card[] deck = new Card[84];
 
-    private Board board = Board.fromFile("mapStd.txt");
-    private Board boardtxt = Board.fromFile("map.txt");
+    //zum Ausgeben der bisherigen, "normalen" Spielfelds map mit mapStd ersetzen
+    private Board board = Board.fromFile("map.txt");
 
     private Robot player = new Robot();
  
@@ -323,12 +323,12 @@ public class GameScreen implements Screen {
         int x = 0;
 
         //für das "normale" Spielfeld boardtxt mit board ersetzen
-        for (int i = 0; i < boardtxt.matrix.length; i++) {
-            for (int j = 0; j < boardtxt.matrix[i].length; j++) {
+        for (int i = 0; i < board.matrix.length; i++) {
+            for (int j = 0; j < board.matrix[i].length; j++) {
                 
-                int p = boardtxt.matrix[i][j];
+                int p = board.matrix[i][j];
                 
-                int t = Gdx.graphics.getHeight() / boardtxt.matrix.length; //height of one tile
+                int t = Gdx.graphics.getHeight() / board.matrix.length; //height of one tile
                 int b = Gdx.graphics.getHeight(); //height of the entire board
                 int c = (i + 1) * t; //the current height in the loop
                 int r = b - c; //the result of the board height minus the current height
@@ -337,10 +337,10 @@ public class GameScreen implements Screen {
                     case(0):
                         batch.draw(industrialTile, x, r);
                         break;
-                    case(1):     
+                    case(2):
                         batch.draw(startTile, x, r);
                         break;
-                    case(2):
+                    case(3):
                         batch.draw(checkpointTile, x, r);
                         break;
                     default:
@@ -348,7 +348,7 @@ public class GameScreen implements Screen {
                         break;
                 }
 
-                x = x + (Gdx.graphics.getHeight() / boardtxt.matrix.length);
+                x = x + (Gdx.graphics.getHeight() / board.matrix.length);
             }
             
             x = 0;

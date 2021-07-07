@@ -3,10 +3,6 @@ package htwk.mechawars.board;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.Type;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -34,6 +30,10 @@ public class Board {
         }
     }
 
+    /**
+     * Method that constructs the game board as a null matrix.
+     */
+
     public Board() {
         this.matrix = new int[0][0];
     }
@@ -43,6 +43,7 @@ public class Board {
      * @param fileName Name of the text file to be read in.
      * @return New board with the matrix from the text file.
      */
+
     public static Board fromFile(String fileName) {
         FileHandle file = Gdx.files.internal(fileName);
         String text = file.readString();
@@ -77,6 +78,22 @@ public class Board {
         }
 
         return board;
+    }
+
+    /**
+     * Method that outputs any board matrix in the console for tests.
+     * @param board Board whose matrix is to be output
+     * @return null
+     */
+
+    public String toString(Board board) {
+        for (int i = 0; i < board.matrix.length; i++) {
+            for (int j = 0; j < board.matrix[i].length; j++) {
+                System.out.print(board.matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+        return null;
     }
 
     /**
