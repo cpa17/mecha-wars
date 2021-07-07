@@ -317,11 +317,11 @@ public class GameScreen implements Screen {
                                 + "Blickrichtung vor.", skin);
                         TextField movBackText = new TextField("Bewegt den Roboter 1 Feld "
                                 + "Blickrichtung zurueck.", skin);
-                        TextField turnLText = new TextField("Dreht den Roboter "
+                        TextField turnLtext = new TextField("Dreht den Roboter "
                                 + "nach Links.", skin);
-                        TextField turnRText = new TextField("Dreht den Roboter "
+                        TextField turnRtext = new TextField("Dreht den Roboter "
                                 + "nach Rechts.", skin);
-                        TextField turnUText = new TextField("Dreht den Roboter um.", skin);
+                        TextField turnUtext = new TextField("Dreht den Roboter um.", skin);
                         TextField freeTileText = new TextField("Durch diese Felder koennen "
                                 + "sich Roboter ungehindert bewegen.", skin);
                         TextArea pitTileText = new TextArea("Roboter werden zerstoert, "
@@ -329,52 +329,54 @@ public class GameScreen implements Screen {
                                 + "auf sie bewegt werden. Offene Raender des Spielplans "
                                 + "werden ebenfalls wie Gruben behandelt.", skin);
                         TextArea wallTileText = new TextArea("Roboter können sich nicht durch"
-                                + " Waende bewegen oder durch sie hindurch schießen. "
+                                + " Waende bewegen oder durch sie hindurch schiessen. "
                                 + "Roboter, die versuchen, sich durch Waende zu bewegen, "
-                                + "bleiben stehen. Benachbarte Waende zwischen zwei Spielplänen "
-                                + "zählen als eine Wand,nicht als zwei.", skin);
+                                + "bleiben stehen. Benachbarte Waende zwischen zwei Spielplaenen "
+                                + "zaehlen als eine Wand, nicht als zwei.", skin);
                         TextArea conveyorTileText = new TextArea("Normale Foerderbaender "
                                 + "bewegen sich in jedem Programmschritt einmal.", skin);
                         TextArea expressConveyorTileText = new TextArea("Expressbaender "
                                 + "bewegen sich in jedem Programmschritt zweimal.", skin);
                         TextArea rotatingConveyorTileText = new TextArea("Wenn ein Foerderband "
                                 + "einen Roboter auf ein solches Feld bewegt, drehe den Roboter "
-                                + "um 90° in Pfeilrichtung.", skin);
+                                + "um 90 Grad in Pfeilrichtung.", skin);
                         TextArea rotatingMergingConveyorTileText = new TextArea("Wenn ein "
-                                + "ineinander übergehendes Foerderband einen Roboter von der "
+                                + "ineinander uebergehendes Foerderband einen Roboter von der "
                                 + "Seite, aus der der gekruemmte Pfeil kommt, auf ein solches "
-                                + "Feld bewegt, drehe den Roboter um 90° in Pfeilrichtung.", skin);
+                                + "Feld bewegt, drehe den Roboter um 90 Grad in Pfeilrichtung.", skin);
                         TextArea rotatingDoubleMergingConveyorTileText = new TextArea("Wenn "
                                 + "ein Foerderband einen Roboter von einer beliebigen Seite auf "
-                                + "ein solches Feld bewegt, drehe den Roboter um 90° in "
+                                + "ein solches Feld bewegt, drehe den Roboter um 90 Grad in "
                                 + "Pfeilrichtung.", skin);
                         TextArea pusherTileText = new TextArea("Wenn sich ein Roboter auf diesem "
                                 + "Feld befindet, wenn der Schieber aktiv ist, wird der Roboter "
                                 + "auf "
-                                + "das naechste gegenüberliegende Feld geschoben. Schieber "
+                                + "das naechste gegenueberliegende Feld geschoben. Schieber "
                                 + "koennen "
                                 + "mehrere Roboter bewegen und sind nur in den Programmschritten "
                                 + "aktiv, die auf dem Schieber angegeben sind. "
                                 + "(Dieser Schieber ist im zweiten und vierten Programmschritt "
                                 + "aktiv.)", skin);
                         TextArea clockwiseTileText = new TextArea("Diese Zahnraeder drehen einen"
-                                + "Roboter um 90° im Uhrzeigersinn in Richtung der Pfeile.", skin);
+                                + "Roboter um 90 Grad im "
+                                + "Uhrzeigersinn in Richtung der Pfeile.", skin);
                         TextArea counterClockwiseTileText = new TextArea("Diese Zahnraeder drehen "
-                                + "einen Roboter um 90° gegen den Uhrzeigersinn in Richtung der "
+                                + "einen Roboter um 90 Grad gegen den "
+                                + "Uhrzeigersinn in Richtung der "
                                 + "Pfeile.", skin);
                         TextArea laserTileText = new TextArea("Roboter, die am Ende eines "
                                 + "Programmschritts in einem Laserstrahl ste-hen, erhalten "
-                                + "für jeden Laserstrahl in diesem Feld 1 Schadenspunkt "
+                                + "fuer jeden Laserstrahl in diesem Feld 1 Schadenspunkt "
                                 + "[Damage Token]."
                                 + " Beenden zwei oder mehr Roboter ihre Bewegung im selben "
                                 + "Laserstrahl,"
-                                + " so erhält nur derjenige einen Schadenspunkt, der der "
+                                + " so erhaelt nur derjenige einen Schadenspunkt, der der "
                                 + "Abschussvorrichtung des Lasers am naechsten steht.", skin);
                         TextArea checkpointFlagTileText = new TextArea("Ein Roboter, der sich"
                                 + " am Ende eines Programm-schritts auf einem Feld mit einem "
                                 + "Checkpoint [Flag] befindet, legt seine Sicherheitskopie "
                                 + "[Archive Marker] auf dieses Feld und der Checkpoint [Flag] "
-                                + "zaehlt für das Erreichen des Sieges im Rennen.\nEin Roboter, "
+                                + "zaehlt fuer das Erreichen des Sieges im Rennen.\nEin Roboter, "
                                 + "der sich am Ende eines Zuges auf einem Feld mit einem "
                                 + "Checkpoint befindet, legt 1 Schadenspunkt [Damage Token] "
                                 + "ab.", skin);
@@ -382,13 +384,13 @@ public class GameScreen implements Screen {
                                 + "eines Programm-schritts auf einem beliebigen Reparaturfeld "
                                 + "befindet, legt seine Sicherheitskopie [Archive Marker] auf "
                                 + "dieses Feld.\nEin Roboter, der sich am Ende eines Zuges auf "
-                                + "einem Feld mit einem einzelnen Schraubenschlüssel befindet, "
+                                + "einem Feld mit einem einzelnen Schraubenschluessel befindet, "
                                 + "legt 1 Schadenspunkt [Damage Token] ab. Ein Roboter, der sich "
-                                + "auf einem Feld mit gekreuztem Schraubenschlüssel und Hammer "
+                                + "auf einem Feld mit gekreuztem Schraubenschluessel und Hammer "
                                 + "befindet, legt 1 Scha-denspunkt [Damage Token] ab und zieht "
                                 + "1 Optionskarte.", skin);
                         TextArea dockTileText = new TextArea("Die nummerierten Docks auf dem "
-                                + "Spielplan „Andockstation“ [Docking Bay Board] werden als "
+                                + "Spielplan Andockstation [Docking Bay Board] werden als "
                                 + "Startfelder fuer die Roboter und ihre Sicherheitskopien "
                                 + "verwendet. Sie dienen keinem weiteren Zweck und gelten "
                                 + "ansonsten als freie Felder.", skin);
@@ -397,9 +399,9 @@ public class GameScreen implements Screen {
                         movTwoText.setDisabled(true);
                         movThreeText.setDisabled(true);
                         movBackText.setDisabled(true);
-                        turnLText.setDisabled(true);
-                        turnRText.setDisabled(true);
-                        turnUText.setDisabled(true);
+                        turnLtext.setDisabled(true);
+                        turnRtext.setDisabled(true);
+                        turnUtext.setDisabled(true);
                         freeTileText.setDisabled(true);
                         pitTileText.setDisabled(true);
                         wallTileText.setDisabled(true);
@@ -431,13 +433,13 @@ public class GameScreen implements Screen {
                         table.add(movBackText).width(650);
                         table.row();
                         table.add(turnL).align(Align.right);
-                        table.add(turnLText).width(650);
+                        table.add(turnLtext).width(650);
                         table.row();
                         table.add(turnR).align(Align.right);
-                        table.add(turnRText).width(650);
+                        table.add(turnRtext).width(650);
                         table.row();
                         table.add(turnU).align(Align.right);
-                        table.add(turnUText).width(650);
+                        table.add(turnUtext).width(650);
                         table.row();
                         //
                         table.add(freeTile).align(Align.right);
@@ -462,8 +464,8 @@ public class GameScreen implements Screen {
                         table.add(rotatingMergingConveyorTileText).width(650).height(twoLine);
                         table.row();
                         table.add(rotatingDoubleMergingConveyorTile).align(Align.right);
-                        table.add(rotatingDoubleMergingConveyorTileText).width(650).
-                        height(twoLine);
+                        table.add(rotatingDoubleMergingConveyorTileText).width(650)
+                        .height(twoLine);
                         table.row();
                         table.add(pusherTile).align(Align.right);
                         table.add(pusherTileText).width(650).height(fourLine);
@@ -497,7 +499,7 @@ public class GameScreen implements Screen {
                         System.out.println(object);
                     } 
                     
-                }.show(stage);//.setHeight(600);
+                }.show(stage); //.setHeight(600);
                 
             }
 
