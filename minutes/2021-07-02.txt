@@ -1,0 +1,22 @@
+# 2.7.2021 - 13:00 - Daily
+
+Entschuldigt: Antonia
+Anwesend: Alle anderen
+Protokollführung: Lukas Brüggemann
+
+## Runde
+- Marc: Ticket fertig, Design am Wachende
+- Tim: Studien Aufgaben
+- Bernhard: weiter an Design gearbeitet
+- Pascal: neues Ticket bekommen
+- Ihor: weitere Ticket Klärung, angefangen mit Lösung
+- Konstantin: Studien Aufgaben
+- Mark: map aus txt Datei lesen angefangen, abspräche mit Antonia
+
+## Design
+- Ein Roboter mit Animationen
+- Abstimmung zu Design von Roboter
+
+
+## Problembehandlung
+- 
