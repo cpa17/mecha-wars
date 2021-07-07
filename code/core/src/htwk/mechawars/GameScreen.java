@@ -337,10 +337,10 @@ public class GameScreen implements Screen {
                     case(0):
                         batch.draw(industrialTile, x, r);
                         break;
-                    case(2):
+                    case(1):
                         batch.draw(startTile, x, r);
                         break;
-                    case(3):
+                    case(2):
                         batch.draw(checkpointTile, x, r);
                         break;
                     default:
