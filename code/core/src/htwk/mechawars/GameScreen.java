@@ -343,7 +343,8 @@ public class GameScreen implements Screen {
                         TextArea rotatingMergingConveyorTileText = new TextArea("Wenn ein "
                                 + "ineinander uebergehendes Foerderband einen Roboter von der "
                                 + "Seite, aus der der gekruemmte Pfeil kommt, auf ein solches "
-                                + "Feld bewegt, drehe den Roboter um 90 Grad in Pfeilrichtung.", skin);
+                                + "Feld bewegt, drehe den Roboter "
+                                + "um 90 Grad in Pfeilrichtung.", skin);
                         TextArea rotatingDoubleMergingConveyorTileText = new TextArea("Wenn "
                                 + "ein Foerderband einen Roboter von einer beliebigen Seite auf "
                                 + "ein solches Feld bewegt, drehe den Roboter um 90 Grad in "
