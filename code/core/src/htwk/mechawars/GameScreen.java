@@ -257,10 +257,7 @@ public class GameScreen implements Screen {
                         int fourLine = 58;
                         int fiveLine = 69;
                         int sixLine = 83;
-                        //
-                        //Label headlineFirst = new Label("Karten", skin);
-                        //Label headlineSecond = new Label("\nFelder", skin);
-                        //Label newLine = new Label("", skin);
+                        // Cards
                         Label movOne = new Label("1 Vor  ", skin);
                         movOne.setColor(Color.CHARTREUSE);
                         Label movTwo = new Label("2 Vor  ", skin);
@@ -275,7 +272,7 @@ public class GameScreen implements Screen {
                         turnR.setColor(Color.CHARTREUSE);
                         Label turnU = new Label("Kehrtwendung  ", skin);
                         turnU.setColor(Color.CHARTREUSE);
-                        // Feld
+                        // Field
                         Label freeTile = new Label("Freies Feld  ", skin);
                         freeTile.setColor(Color.CORAL);
                         Label pitTile = new Label("Grube  ", skin);
@@ -311,6 +308,7 @@ public class GameScreen implements Screen {
                         repairTile.setColor(Color.CORAL);
                         Label dockTile = new Label("Dock  ", skin);
                         dockTile.setColor(Color.CORAL);
+                        // Field Text
                         TextField movOneText = new TextField("Bewegt den Roboter 1 Feld in "
                                 + "Blickrichtung vor.", skin);
                         TextField movTwoText = new TextField("Bewegt den Roboter 2 Felder "
@@ -394,6 +392,7 @@ public class GameScreen implements Screen {
                                 + "Startfelder fuer die Roboter und ihre Sicherheitskopien "
                                 + "verwendet. Sie dienen keinem weiteren Zweck und gelten "
                                 + "ansonsten als freie Felder.", skin);
+                        // TextArea/Field not changeable -> disable
                         movOneText.setDisabled(true);
                         movTwoText.setDisabled(true);
                         movThreeText.setDisabled(true);
@@ -418,8 +417,7 @@ public class GameScreen implements Screen {
                         dockTileText.setDisabled(true);
                         Table table = new Table();
                         table.center();
-                        //table.add(headlineFirst);
-                        //table.row();
+                        // Tabel add
                         table.add(movOne).align(Align.right);
                         table.add(movOneText).width(650);
                         table.row();
@@ -441,10 +439,6 @@ public class GameScreen implements Screen {
                         table.add(turnU).align(Align.right);
                         table.add(turnUText).width(650);
                         table.row();
-                        //table.add(newLine);
-                        //table.row();
-                        //table.add(headlineSecond);
-                        //table.row();
                         //
                         table.add(freeTile).align(Align.right);
                         table.add(freeTileText).width(650);
@@ -468,7 +462,8 @@ public class GameScreen implements Screen {
                         table.add(rotatingMergingConveyorTileText).width(650).height(twoLine);
                         table.row();
                         table.add(rotatingDoubleMergingConveyorTile).align(Align.right);
-                        table.add(rotatingDoubleMergingConveyorTileText).width(650).height(twoLine);
+                        table.add(rotatingDoubleMergingConveyorTileText).width(650).
+                        height(twoLine);
                         table.row();
                         table.add(pusherTile).align(Align.right);
                         table.add(pusherTileText).width(650).height(fourLine);
@@ -492,6 +487,7 @@ public class GameScreen implements Screen {
                         table.add(dockTileText).width(650).height(threeLine);
                         table.row();
                         add(table);
+                        
                         button("Schliessen", "Button pressed");
                     }
                     
