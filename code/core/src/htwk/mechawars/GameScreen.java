@@ -44,13 +44,12 @@ public class GameScreen implements Screen {
     private int damagePoints = 0;
     private int choosableCardCount = 9;
 
-    private Card[] deck = new Card[84];
+    private Card[] deck;
 
     //zum Ausgeben der bisherigen, "normalen" Spielfelds map mit mapStd ersetzen
     private Board board = Board.fromFile("map.txt");
-
     private Robot player = new Robot();
- 
+
     private TextButton[] buttons = new TextButton[choosableCardCount];
 
     /**
@@ -96,15 +95,15 @@ public class GameScreen implements Screen {
         final ScrollPane scrollPanel = new ScrollPane(table, skin);
 
         // Array of Cards created
-        deck = CardFunctions.initDeck(deck);
+        deck = CardFunctions.initDeck();
         // shuffle Deck
         deck = CardFunctions.shuffle(deck);
-        
+
         for (int cardPrintCounter = 0; cardPrintCounter < choosableCardCount;
                 cardPrintCounter += 1) {
             Card aktuelleKarte = deck[cardPrintCounter];
-            buttons[cardPrintCounter] = new TextButton((cardPrintCounter + 1) + " - "
-                    + aktuelleKarte, skin);
+            buttons[cardPrintCounter] = new TextButton(aktuelleKarte.getCardAttributePriority()
+                    + " - " + aktuelleKarte, skin);
             table.row();
             table.add(buttons[cardPrintCounter]);
             int buttonNumber = (cardPrintCounter + 1);
@@ -127,39 +126,27 @@ public class GameScreen implements Screen {
      * @param buttonNumber -> ID-number of clicked button
      */
     private void buttonClickOrder(int buttonNumber) {
-        //System.out.print(buttonText + " ");
-        //System.out.println(buttonNumber);
-
-        // can also be done with Try&Catch
         if (pressCounter < 5 - damagePoints) {
             // write the number of the button in cardOrder at pressCounter
             cardOrder[pressCounter] = buttonNumber;
-            //System.out.println(cardOrder[pressCounter] + " JO");
 
             pressCounter += 1;
 
-            boolean testung = true;
+            boolean clicked = true;
 
             for (int i = (pressCounter - 2); i >= 0; i -= 1) {
-                //System.out.println("FOR " + i);
-                //System.out.println(cardOrder[i]);
                 if (cardOrder[i] == buttonNumber) {
-                    //System.out.println("Durchlauf" + i);
-                    testung = false;
+                    clicked = false;
                     pressCounter -= 1;
                 }
             }
 
-            //System.out.println("vor if testung");
-
-            if (testung) {
-                //System.out.println("Juha testung");
+            if (clicked) {
                 buttons[buttonNumber - 1].setColor(Color.GREEN);
                 buttons[buttonNumber - 1].setText(buttons[buttonNumber - 1].getText()
                         + " | Nr: " + (pressCounter));
             }
         }
-        //System.out.println("");
     }
 
     /**
@@ -181,7 +168,8 @@ public class GameScreen implements Screen {
     private void buttonsClean() {
         for (int i = 0; i < choosableCardCount; i += 1) {
             buttons[i].setColor(Color.LIGHT_GRAY);
-            buttons[i].setText((i + 1) + " - " + deck[i]);
+            buttons[i].setText(deck[i].getCardAttributePriority() + " - "
+                    + deck[i]);
         }
     }
 
@@ -192,8 +180,8 @@ public class GameScreen implements Screen {
     }
 
     private void aktiviereButtons() {
-        for (int i = 0; i < buttons.length; i++) {
-            buttons[i].setTouchable(Touchable.enabled);
+        for (TextButton button : buttons) {
+            button.setTouchable(Touchable.enabled);
         }
     }
 
