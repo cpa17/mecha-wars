@@ -16,6 +16,8 @@ import org.junit.jupiter.api.Test;
 
 public class BoardTest {
     private Board board = new Board(4, 4);
+    private Board boardtxt = Board.fromFile("testMap.txt");
+
     private Robot robot = new Robot();
 
     public int[][] startMatrix = {
@@ -61,6 +63,12 @@ public class BoardTest {
         assertArrayEquals(midMatrix, board.matrix);
         board.move(phase2, robot);
         assertArrayEquals(endMatrix, board.matrix);
+
+        assertArrayEquals(startMatrix, boardtxt.matrix);
+        board.move(phase1, robot);
+        assertArrayEquals(midMatrix, boardtxt.matrix);
+        board.move(phase2, robot);
+        assertArrayEquals(endMatrix, boardtxt.matrix);
 
     }
 
