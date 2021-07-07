@@ -82,18 +82,20 @@ public class Board {
 
     /**
      * Method that outputs any board matrix in the console for tests.
-     * @param board Board whose matrix is to be output
-     * @return null
+     *
+     * @param board Board whose matrix is to be converted into a string
+     * @return matrix Matrix of the board as a string
      */
 
-    public String toString(Board board) {
+    public static String toString(Board board) {
+        String matrix = "";
         for (int i = 0; i < board.matrix.length; i++) {
             for (int j = 0; j < board.matrix[i].length; j++) {
-                System.out.print(board.matrix[i][j] + " ");
+                matrix = matrix + board.matrix[i][j] + " ";
             }
-            System.out.println();
+            matrix = matrix + "\n";
         }
-        return null;
+        return matrix;
     }
 
     /**
