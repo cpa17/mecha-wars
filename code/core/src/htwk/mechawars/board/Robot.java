@@ -21,9 +21,9 @@ public class Robot {
     private Texture damage;
     private Texture shutDown;
     
-    
-    
-    
+    /**
+     * constructor of the robot class
+     */
     public Robot() {
         lifePoints = 0;
         damagePoints = 0;
