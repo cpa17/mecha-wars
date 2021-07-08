@@ -57,7 +57,7 @@ public class GameScreen implements Screen {
         industrialTile = new Texture("industrialTile.png");
         
         robot = new Texture("robot.png");
-
+        
         batch = new SpriteBatch();
         sprite = new Sprite(robot);
 
@@ -268,8 +268,10 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
         batch.begin();
+        
         drawPlayingField();
         drawRobot();
+        //player.drawParameters(batch);
         sprite.draw(batch);
         batch.end();
         stage.act();
@@ -285,7 +287,6 @@ public class GameScreen implements Screen {
         int y = Math.abs(player.getYcoor() - (board.matrix.length - 1));
 
         if (player.getDir() == Dir.NORTH) {
-            sprite.setPosition(tileSize * x, tileSize * y);
             sprite.setRotation(0);
         } else if (player.getDir() == Dir.EAST) {
             sprite.setPosition(tileSize * x, tileSize * y);
