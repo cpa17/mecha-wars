@@ -32,7 +32,7 @@ public class Board {
     }
 
     /**
-     * Method that constructs the game board as a null matrix.
+     * Method that constructs a game board with a null matrix.
      */
 
     public Board() {
@@ -40,21 +40,35 @@ public class Board {
     }
 
     /**
-     * Method that reads the game plan as a matrix from a text file.
+     * Method that reads the game plan as a string from a text file.
+     *
      * @param fileName Name of the text file to be read in.
-     * @return New board with the matrix from the text file.
+     * @return Board.fromString(mapString) Method fromString with the string from the text file as parameter
      */
 
     public static Board fromFile(String fileName) {
         FileHandle file = Gdx.files.internal(fileName);
-        String text = file.readString();
+        String mapString = file.readString();
+        System.out.println(mapString);
+
+        return Board.fromString(mapString);
+    }
+
+    /**
+     * Method that reads the game plan as a matrix from a string.
+     *
+     * @param mapString String that is to be saved as the matrix of a board
+     * @return board Board which contains the game plan as a matrix
+     */
+
+    public static Board fromString(String mapString) {
     
         ArrayList<ArrayList<Integer>> tempLayout = new ArrayList<>();
            
-        String[] linesArray = text.split("\\r?\\n");
+        String[] linesArray = mapString.split("\\r?\\n");
         String currentLine;
         
-        Scanner scn = new Scanner(text);
+        Scanner scn = new Scanner(mapString);
         String s = ""; 
         while (scn.hasNext()) {
             s = scn.next();

@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 public class BoardTest {
     private Board board = new Board(4, 4);
-    private Board boardtxt = Board.fromFile("testMap.txt");
+    private Board boardtxt = new Board();
 
     private Robot robot = new Robot();
     private Robot robottxt = new Robot();
@@ -42,6 +42,7 @@ public class BoardTest {
             {0, 0, 0, 2}
     };
 
+    public String boardString = "0 0 0 0 \n0 0 0 0 \n0 0 0 0 \n0 0 0 0";
 
     @Test
     public void boardTest() {
@@ -78,6 +79,8 @@ public class BoardTest {
     @BeforeEach
     public void initBoard() {
         board.startRobot(3, 3, Dir.NORTH, robot);
+
+        boardtxt = Board.fromString(boardString);
         boardtxt.startRobot(3, 3, Dir.NORTH, robottxt);
     }
 
