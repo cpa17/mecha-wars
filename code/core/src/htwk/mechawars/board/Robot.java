@@ -22,7 +22,7 @@ public class Robot {
     private Texture shutDown;
     
     /**
-     * constructor of the robot class
+     * Constructor of the robot class.
      */
     public Robot() {
         lifePoints = 0;
