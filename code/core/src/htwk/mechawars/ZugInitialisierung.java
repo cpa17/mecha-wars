@@ -28,8 +28,28 @@ public class ZugInitialisierung {
      * @param karte -> card to be added to the list
      */
     public void addCard(Card karte) {
+        if (checkCard(karte) == true) {
+            kartenListe.add(karte);
+        }
+    }
 
-        kartenListe.add(karte);
+    /**
+     * Method that checks whether a card can be added.
+     * @param card to check
+     * @return true: if the card can be added
+     *         false: if the card can't be added
+     */
+    public boolean checkCard(Card card) {
+        boolean cardCheck = true;
+        for (int i = 0; i < kartenListe.size(); i++) {
+            if (kartenListe.get(i).equals(card)) {
+                cardCheck = false;
+            }
+        }
+        if (kartenListe.size() >= 5) {
+            cardCheck = false;
+        }
+        return cardCheck;
     }
 
     /**
