@@ -43,7 +43,8 @@ public class Board {
      * Method that reads the game plan as a string from a text file.
      *
      * @param fileName Name of the text file to be read in.
-     * @return Board.fromString(mapString) Method fromString with the string from the text file as parameter
+     * @return Board.fromString(mapString) Method fromString
+     *         with the string from the text file as parameter
      */
 
     public static Board fromFile(String fileName) {
