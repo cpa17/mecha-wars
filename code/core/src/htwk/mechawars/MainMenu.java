@@ -24,7 +24,7 @@ public class MainMenu implements Screen {
     private Texture img; 
 
     /**
-     * Constructor of class GameScreen.
+     * Constructor of class MainMenue.
      * @param g Object of class Game
      */
     public MainMenu(Game g) {
