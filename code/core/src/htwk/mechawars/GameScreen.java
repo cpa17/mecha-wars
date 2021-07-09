@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -37,11 +36,10 @@ public class GameScreen implements Screen {
     private Texture industrialTile;
     private Texture robot;
     private Stage stage;
-    private Table container;
 
     private SpriteBatch batch;
     private Sprite sprite;
-    private ZugInitialisierung zugInititalisierung = new ZugInitialisierung();
+    private ZugInitialisierung zugInitialisierung = new ZugInitialisierung();
 
     private int[] cardOrder = { -1, -1, -1, -1, -1};
     private int pressCounter = 0;
@@ -50,7 +48,6 @@ public class GameScreen implements Screen {
 
     private Card[] deck;
 
-    //zum Ausgeben der bisherigen, "normalen" Spielfelds map mit mapStd ersetzen
     private Board board = Board.fromFile("map.txt");
     private Robot player = new Robot();
 
@@ -88,7 +85,7 @@ public class GameScreen implements Screen {
         int containerWidth = ((Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 2) - 20;
         int containerHeight = 600;
 
-        container = new Table();
+        Table container = new Table();
         stage.addActor(container);
         container.setBounds(containerBoundsX, containerBoundsY, containerWidth, containerHeight);
 
@@ -103,9 +100,9 @@ public class GameScreen implements Screen {
 
         for (int cardPrintCounter = 0; cardPrintCounter < choosableCardCount;
                 cardPrintCounter += 1) {
-            Card aktuelleKarte = deck[cardPrintCounter];
-            buttons[cardPrintCounter] = new TextButton(aktuelleKarte.getCardAttributePriority()
-                    + " - " + aktuelleKarte, skin);
+            Card currentCard = deck[cardPrintCounter];
+            buttons[cardPrintCounter] = new TextButton(currentCard.getCardAttributePriority()
+                    + " - " + currentCard, skin);
             table.row();
             table.add(buttons[cardPrintCounter]);
             int buttonNumber = (cardPrintCounter + 1);
@@ -114,7 +111,7 @@ public class GameScreen implements Screen {
             buttons[cardPrintCounter].addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
                     buttonClickOrder(buttonNumber);
-                    zugInititalisierung.addCard(aktuelleKarte);
+                    zugInitialisierung.addCard(currentCard);
                 }
             });
         }
@@ -175,13 +172,13 @@ public class GameScreen implements Screen {
         }
     }
 
-    private void deaktiviereButtons() {
+    private void deactivateButtons() {
         for (TextButton button : buttons) {
             button.setTouchable(Touchable.disabled);
         }
     }
 
-    private void aktiviereButtons() {
+    private void activateButtons() {
         for (TextButton button : buttons) {
             button.setTouchable(Touchable.enabled);
         }
@@ -215,13 +212,13 @@ public class GameScreen implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 //If All Cards are chosen
                 if (cardOrder[4 - damagePoints] != -1) {
-                    deaktiviereButtons();
-                    zugInititalisierung.initialisiereBewegung();
-                    board.move(zugInititalisierung.getList(), player);
-                    zugInititalisierung.resetList();
+                    deactivateButtons();
+                    zugInitialisierung.initialisiereBewegung();
+                    board.move(zugInitialisierung.getList(), player);
+                    zugInitialisierung.resetList();
                     startExecutionButton.setColor(Color.LIGHT_GRAY);
                     cardOrderClear();
-                    aktiviereButtons();
+                    activateButtons();
                 } else {
                     startExecutionButton.setColor(Color.RED);
                 }
@@ -247,25 +244,17 @@ public class GameScreen implements Screen {
 
         removeCardOrder.setPosition(removeCardOrderX, removeCardOrderY);
 
-        removeCardOrder.addListener(new InputListener() {
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                // System.out.println("Rauf");
+        removeCardOrder.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
                 cardOrderClear();
-                zugInititalisierung.resetList();
-            }
-
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                // System.out.println("Runter");
-                return true;
+                zugInitialisierung.resetList();
             }
         });
 
         stage.addActor(removeCardOrder);
 
-        // add Button for tipps and infos
-        Button buttonInfo = new TextButton("Info's", skin);
+        // add Button for hint and infos
+        Button buttonInfo = new TextButton("Infos", skin);
 
         int a = 60;     // width
         int b = 40;     // height
@@ -276,15 +265,9 @@ public class GameScreen implements Screen {
 
         buttonInfo.setPosition(buttonInfoX, buttonInfoY);
 
-        buttonInfo.addListener(new InputListener() {
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                // GUI/POPup start
-                //InfoDialog infoDia = new InfoDialog("Beenden?", skin);
-                //infoDia.show(stage);    // shows the dialog
-
+        buttonInfo.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
                 new Dialog("Infos und Hinweise", skin) {
-
                     // best constructor for Dialog in LibGDX
                     {
                         int oneLine = 17;
@@ -537,12 +520,6 @@ public class GameScreen implements Screen {
                     }
 
                 }.show(stage); //.setHeight(600);
-
-            }
-
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
             }
         });
 
@@ -597,7 +574,6 @@ public class GameScreen implements Screen {
     public void drawPlayingField() {
         int x = 0;
 
-        //für das "normale" Spielfeld boardtxt mit board ersetzen
         for (int i = 0; i < board.matrix.length; i++) {
             for (int j = 0; j < board.matrix[i].length; j++) {
 
