@@ -10,17 +10,18 @@ import java.util.List;
  */
 public class CardFunctions {
 
+
     /**
      * Fill the empty cardDeck-Array with:
      * # 18 Mov1, TurnR, TurnL
      * # 12 Mov2
      * # 6  Mov3, MovB, TurnU   . Also their priority this function will give them.
-     * 
-     * @param cardDeck  -> Array, that should be initialized
+     *
      * @return The initial cardDeck
      */
-    public static Card[] initDeck(Card[] cardDeck) {
-        
+    public static Card[] initDeck() {
+        Card[] cardDeck = new Card[84];
+
         int x = 10;
         // List<Card> deck = new ArrayList<>(Arrays.asList(cardDeck));
         // First 6 cards (U-Turn)
@@ -35,17 +36,19 @@ public class CardFunctions {
             cardDeck[i]      = new Card(Type.turn, (byte) 3, x);
             x += 20;
         }
+
         x = 80;
         // Card 8, 10 .. 42 (Right-Turn)
         for (int i = 7; i < 42; i += 2) {
             cardDeck[i]      = new Card(Type.turn, (byte) 1, x);
             x += 20;
         }
-        // x = 430;
+
+        x = 430;
         // Card 43 .. 48
         for (int i = 42; i < 48; i += 1) {
             cardDeck[i]      = new Card(Type.mov, (byte) -1, x);
-            x += 10; 
+            x += 10;
         }
         // x = 490
         // Card 49 .. 66
@@ -65,7 +68,7 @@ public class CardFunctions {
             cardDeck[i]      = new Card(Type.mov, (byte) 3, x);
             x += 10;
         }
-        
+
         //-------------------------------------------------------------
         /*
         for (int i = 0; i < 18; i += 1) {
@@ -85,20 +88,20 @@ public class CardFunctions {
         //-------------------------------------------------------------
         return cardDeck;
     }
- 
+
     /**
      * Shuffles the cards, which were created before.
-     * 
+     *
      * @param originalDeck -> includes the cards to shuffle
      * @return Array of cards, that are shuffled
      */
+
     public static Card[] shuffle(Card[] originalDeck) {
         List<Card> deck = new ArrayList<>(Arrays.asList(originalDeck));
-        List<Card> shuffled = new ArrayList<>();
 
         Collections.shuffle(deck);
-        shuffled.addAll(deck);
-    
+        List<Card> shuffled = new ArrayList<>(deck);
+
         return shuffled.toArray(new Card[shuffled.size()]);
     }
 }

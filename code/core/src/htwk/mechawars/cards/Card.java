@@ -4,7 +4,7 @@ package htwk.mechawars.cards;
  * Class of a single Card.
  */
 public class Card {
- 
+
     private Type cardAttributeType;
     private byte cardAttributeMovCount;
     /*
@@ -24,9 +24,9 @@ public class Card {
         this.cardAttributeMovCount = cardAttributeMovCount;
         this.cardAttributePriority = cardAttributePriority;
     }
- 
+
     // getter functions --------------------------------------------------------
-  
+
     /**
      * Take the content of the enumeration Type.
      * @return the enumeration-type
@@ -34,7 +34,7 @@ public class Card {
     public Type getCardAttributeType() {
         return cardAttributeType;
     }
- 
+
     /**
      * Take the content of movCount.
      * @return the amount of movCount (as a byte (8Bit Datatype))
@@ -42,54 +42,60 @@ public class Card {
     public byte getCardAttributeMovCount() {
         return cardAttributeMovCount;
     }
-    
+
+    /**
+     * Take the Priority of the Card.
+     * @return the priority
+     */
     public int getCardAttributePriority() {
         return cardAttributePriority;
     }
-    
+
     /**
      * To print the correct Code.
      * @return Returns the Name of the Card
      */
     public String toString() {
         String xyz;
-        
+
         if (this.cardAttributeType == Type.mov) {
             switch (this.cardAttributeMovCount) {
-            
+
                 case -1 :   xyz = "Rueckwaerts";
-                            break;
-                    
+                    break;
+
                 case 1 :    xyz = "1 Vor";
-                            break;
-                    
+                    break;
+
                 case 2 :    xyz = "2 Vor";
-                            break;
-                    
+                    break;
+
                 case 3 :    xyz = "3 Vor";
-                            break;
-                            
+                    break;
+
                 default:    xyz = "Fehler";
-                            break;
+                    break;
             }
         } else {
             switch (this.cardAttributeMovCount) {
-            
+
                 case 1 :    xyz = "Rechtsdrehung";
-                            break;
-                    
+                    break;
+
                 case 2 :    xyz = "Kehrtwendung";
-                            break;
-                    
+                    break;
+
                 case 3 :    xyz = "Linksdrehung";
-                            break;
-                            
+                    break;
+
                 default:    xyz = "Fehler";
-                            break;
-                            
+                    break;
+
             }
         }
-        
+
         return xyz;
     }
+
+
 }

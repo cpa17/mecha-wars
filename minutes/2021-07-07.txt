@@ -1,0 +1,19 @@
+# 7.7.2021 - 15:00 - Daily
+
+Entschuldigt: 
+Anwesend: Alle
+Protokollführung: Lukas Brüggemann
+
+## Runde
+- Marc: Ticket fast fertig -> Bernhard
+- Tim: kleine Anpassungen nötig, Ticket fertig
+- Pascal: Bug gefixed, Ticket abgeschlossen 
+- Ihor: MW 19 in arbeit, Ziel heute Abend PR stellen
+- Konstantin: kleine Anpassungen nötig, Ticket fertig
+- Mark: PR steht, Anpassungen noch nötig
+- Antonia: PR steht, Anpassungen noch nötig
+- Bernhard: MW 20 noch, Buttons noch in Arbeit. MW 17 weiter geklärt 
+
+
+## Problembehandlung
+- 
