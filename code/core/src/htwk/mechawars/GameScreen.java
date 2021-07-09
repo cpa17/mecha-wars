@@ -16,6 +16,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -25,9 +27,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
+
 import htwk.mechawars.board.Board;
 import htwk.mechawars.board.Dir;
 import htwk.mechawars.board.Robot;
@@ -532,7 +536,7 @@ public class GameScreen implements Screen {
                         table.add(dockTileText).width(650).height(threeLine);
                         table.row();
                         add(table);
-                        
+
                         button("Schliessen", "Button pressed");
                     }
 
@@ -540,10 +544,10 @@ public class GameScreen implements Screen {
                     protected void result(Object object) {
                         //super.result(object);
                         System.out.println(object);
-                    } 
-                    
+                    }
+
                 }.show(stage); //.setHeight(600);
-                
+
             }
 
             @Override
@@ -554,6 +558,7 @@ public class GameScreen implements Screen {
         
         stage.addActor(buttonInfo);
     }
+
 
     @Override
     public void show() {
@@ -627,5 +632,5 @@ public class GameScreen implements Screen {
     public void hide() {
 
     }
-    
+
 }

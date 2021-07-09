@@ -16,10 +16,7 @@ import org.junit.jupiter.api.Test;
 
 public class BoardTest {
     private Board board = new Board(4, 4);
-    private Board boardtxt = new Board();
-
     private Robot robot = new Robot();
-    private Robot robottxt = new Robot();
 
     public int[][] startMatrix = {
             {0, 0, 0, 0},
@@ -42,7 +39,6 @@ public class BoardTest {
             {0, 0, 0, 2}
     };
 
-    public String boardString = "0 0 0 0 \n0 0 0 0 \n0 0 0 0 \n0 0 0 0";
 
     @Test
     public void boardTest() {
@@ -66,11 +62,6 @@ public class BoardTest {
         board.move(phase2, robot);
         assertArrayEquals(endMatrix, board.matrix);
 
-        assertArrayEquals(startMatrix, boardtxt.matrix);
-        boardtxt.move(phase1, robottxt);
-        assertArrayEquals(midMatrix, boardtxt.matrix);
-        boardtxt.move(phase2, robottxt);
-        assertArrayEquals(endMatrix, boardtxt.matrix);
     }
 
     /**
@@ -79,9 +70,7 @@ public class BoardTest {
     @BeforeEach
     public void initBoard() {
         board.startRobot(3, 3, Dir.NORTH, robot);
-
-        boardtxt = Board.fromString(boardString);
-        boardtxt.startRobot(3, 3, Dir.NORTH, robottxt);
     }
 
 }
+

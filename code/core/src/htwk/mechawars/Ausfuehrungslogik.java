@@ -14,10 +14,13 @@ public class Ausfuehrungslogik {
     
     /**
      * returns the list of cards.
-     *
+     * 
+     * 
+     * 
+     * 
+     * 
      * @return The initial cardDeck
      */
-
     public LinkedList<Card> getKartenListe() {
         return kartenListe;
     }
@@ -25,11 +28,14 @@ public class Ausfuehrungslogik {
     /**
      * setter for list of cards field.
      * 
+     * 
      * @param kartenListe  -> the list of cards that will be set to be the new list
      */
 
     public void setKartenListe(LinkedList<Card> kartenListe) {
         this.kartenListe = kartenListe;
     }
+
+
 
 }
