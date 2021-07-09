@@ -44,7 +44,8 @@ public class GameScreen implements Screen {
 
     private Card[] deck;
 
-    private Board board = new Board(12, 12);
+    //zum Ausgeben der bisherigen, "normalen" Spielfelds map mit mapStd ersetzen
+    private Board board = Board.fromFile("map.txt");
     private Robot player = new Robot();
 
     private TextButton[] buttons = new TextButton[choosableCardCount];
@@ -54,6 +55,7 @@ public class GameScreen implements Screen {
      */
     public GameScreen() {
         industrialTile = new Texture("industrialTile.png");
+        
         robot = new Texture("robot.png");
 
         batch = new SpriteBatch();
@@ -297,24 +299,39 @@ public class GameScreen implements Screen {
         }
     }
 
-
     /**
      * Function that draws the playing field.
      */
     public void drawPlayingField() {
         int x = 0;
-        int y = 0;
 
+        //für das "normale" Spielfeld boardtxt mit board ersetzen
         for (int i = 0; i < board.matrix.length; i++) {
             for (int j = 0; j < board.matrix[i].length; j++) {
-                batch.draw(industrialTile, x, y);
-                x = x + (Gdx.graphics.getHeight() / board.matrix[i].length);
+                
+                int p = board.matrix[i][j];
+                
+                int t = Gdx.graphics.getHeight() / board.matrix.length; //height of one tile
+                int b = Gdx.graphics.getHeight(); //height of the entire board
+                int c = (i + 1) * t; //the current height in the loop
+                int r = b - c; //the result of the board height minus the current height
+                    
+                switch (p) {
+                    case(0):
+                        batch.draw(industrialTile, x, r);
+                        break;
+                    default:
+                        batch.draw(industrialTile, x, r);
+                        break;
+                }
+
+                x = x + (Gdx.graphics.getHeight() / board.matrix.length);
             }
-            y = y + (Gdx.graphics.getHeight() / board.matrix.length);
+            
             x = 0;
         }
     }
-
+    
     @Override
     public void resize(int width, int height) {
 
@@ -322,7 +339,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void pause() {
-
+        
     }
 
     @Override
