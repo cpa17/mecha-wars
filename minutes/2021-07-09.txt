@@ -1,0 +1,28 @@
+09.07. 17:00 Retro + Review 
+
+Anwesenheit: Alle(Tim ist spät)
+
+Phase 1: 
+Was ist schon geschafft:	
+	- MW17 besprochen (offen)
+	- MW21 besprochen (erledigt)
+	- MW18 besprochen (in Bearbeitung)	
+	- MW19 besprochen (in Bearbeitung)	
+	- MW20 besprochen (in Bearbeitung)
+	- MW34 besprochen (Verifiziert)
+	- MW35 besprochen (Verifiziert)
+	- MW38 besprochen
+
+Phase 2:
+Retro
+Well:	
+	- Wir haben sehr viel geschafft
+	- Regelmäßßsige, schnelle Klärung von Fregen durch die Dailies
+Not Well	
+	- Planning meeting zu lang
+Change 
+	- Zusammenarbeit zwischen aufeinander aufbauenden Tickets
+
+Protokollant: Ihor Charnozhytskyi
+		
+
