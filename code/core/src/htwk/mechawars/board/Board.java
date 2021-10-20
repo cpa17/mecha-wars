@@ -10,13 +10,13 @@ import java.util.Scanner;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Texture;
 
 /**
  * Class that presents the game board.
  */
 public class Board {
     public int[][] matrix;
-
     /**
      * Method that constructs the game board as a matrix.
      * @param width width of the game board
@@ -140,7 +140,29 @@ public class Board {
         }
         return matrix;
     }
-
+    
+    public Texture toAsset(int matrixEntry) {
+        Texture fieldAsset = new Texture(Gdx.files.internal("industrialTile.png"));
+        switch (matrixEntry) {
+        case 1 :    fieldAsset = new Texture(Gdx.files.internal("mapAssets/startField1.png"));
+                    break;
+                    
+        case 2 :    fieldAsset = new Texture(Gdx.files.internal("mapAssets/startField2.png"));
+                    break;
+                    
+        case 3 :    fieldAsset = new Texture(Gdx.files.internal("mapAssets/startField3.png"));
+                    break;
+                    
+        case 4 :    fieldAsset = new Texture(Gdx.files.internal("mapAssets/startField4.png"));
+                    break;
+                 
+        default:    break;
+        
+        }
+        return fieldAsset;
+    }
+    
+    
     /**
      * Method that places a robot in the matrix --> starting position.
      * @param x x-coordinate of the robot
