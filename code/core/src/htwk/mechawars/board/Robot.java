@@ -16,7 +16,11 @@ public class Robot {
     private int startY;
     private int lifePoints;
     private int damagePoints;
+    private int backupCopyX;
+    private int backupCopyY;
     private boolean shutDownMark;
+    private boolean backupCopy;
+    private boolean backupDraw;
     private Texture life;
     private Texture damage;
     private Texture shutDown;
@@ -203,7 +207,14 @@ public class Robot {
                         
             case 9 :    damage = new Texture(Gdx.files.internal("background14.png"));
                         break;
-                        
+            case 10:    damage = new Texture(Gdx.files.internal("background15.png"));
+            
+                        if (backupCopy) {
+                            backupCopy = false;
+                            backupDraw = true;
+                        }
+            
+            break;          
             default:    break;
         }
     }
@@ -226,6 +237,12 @@ public class Robot {
         updateLife();
         updateDamage();
         updateShutDown();
+        
+        if (backupDraw) {
+            backupDraw = false;
+            batch.draw(new Texture(Gdx.files.internal("robot.png")), backupCopyX, backupCopyY);
+        }
+        
         batch.draw(life, 0, 0, 200, 200);
         batch.draw(damage, 400, 0, 200, 200);
         batch.draw(shutDown, 600, 0, 200, 200);
