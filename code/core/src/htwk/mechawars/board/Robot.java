@@ -210,10 +210,10 @@ public class Robot {
                         
             case 10:    damage = new Texture(Gdx.files.internal("background15.png"));
             
-            if (backupCopy) {
-                backupCopy = false;
-                backupDraw = true;
-            }
+        if (backupCopy) {
+            backupCopy = false;
+            backupDraw = true;
+        }
             break;      
             
             default:    break;
