@@ -539,7 +539,7 @@ public class GameScreen implements Screen {
 
         drawPlayingField();
         drawRobot();
-        //player.drawParameters(batch);
+        player.drawParameters(batch);
         sprite.draw(batch);
         batch.end();
         stage.act();
