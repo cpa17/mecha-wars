@@ -141,6 +141,13 @@ public class Board {
         return matrix;
     }
     
+    /**
+     * Method that changes integers to textures
+     *
+     * @param integer from the matrix 
+     * @return Texture 
+     */
+    
     public Texture toAsset(int matrixEntry) {
         Texture fieldAsset = new Texture(Gdx.files.internal("industrialTile.png"));
         switch (matrixEntry) {
