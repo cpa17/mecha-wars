@@ -142,7 +142,7 @@ public class Board {
     }
     
     /**
-     * Method that changes integers to textures
+     * Method that changes integers to textures.
      *
      * @param matrixEntry Entry in the Matrix that need to get converted
      * @return fieldAsset The texture
