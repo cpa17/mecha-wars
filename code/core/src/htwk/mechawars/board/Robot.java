@@ -25,8 +25,8 @@ public class Robot {
      * Constructor of the robot class.
      */
     public Robot() {
-        lifePoints = 1;
-        damagePoints = 1;
+        lifePoints = 0;
+        damagePoints = 0;
         shutDownMark = true;
     }
 
@@ -153,16 +153,16 @@ public class Robot {
      */
     private void updateLife() {
         switch (lifePoints) {
-            case 0 :    life = new Texture(Gdx.files.internal("life0.png"));
+            case 0 :    life = new Texture(Gdx.files.internal("parameters/hp0.png"));
                         break;
                         
-            case 1 :    life = new Texture(Gdx.files.internal("life1.png"));
+            case 1 :    life = new Texture(Gdx.files.internal("parameters/hp1.png"));
                         break;
                         
-            case 2 :    life = new Texture(Gdx.files.internal("life2.png"));
+            case 2 :    life = new Texture(Gdx.files.internal("parameters/hp2.png"));
                         break;
                         
-            case 3 :    life = new Texture(Gdx.files.internal("life3.png"));
+            case 3 :    life = new Texture(Gdx.files.internal("parameters/hp3.png"));
                         break;
                         
             default:    break;
@@ -174,7 +174,7 @@ public class Robot {
      */
     private void updateDamage() {
         switch (damagePoints) {
-            case 0 :    damage = new Texture(Gdx.files.internal("damage0.png"));
+            case 0 :    damage = new Texture(Gdx.files.internal("parameters/hp1.png"));
                         break;
                         
             case 1 :    damage = new Texture(Gdx.files.internal("damage1.png"));
@@ -213,9 +213,9 @@ public class Robot {
      */
     private void updateShutDown() {
         if (shutDownMark) {
-            shutDown = new Texture(Gdx.files.internal("shutdownOn.png"));
+            shutDown = new Texture(Gdx.files.internal("parameters/sleep.png"));
         } else {
-            shutDown = new Texture(Gdx.files.internal("shutdownOff.png"));
+            shutDown = new Texture(Gdx.files.internal("parameters/wakeup.png"));
         }
     }
     
@@ -226,8 +226,8 @@ public class Robot {
         updateLife();
         updateDamage();
         updateShutDown();
-        batch.draw(life, 730, 0, 50, 50);
-        batch.draw(damage, 730, 80, 50, 50);
-        batch.draw(shutDown, 730, 160, 50, 50);
+        batch.draw(life, 740, 20, 80, 80);
+        batch.draw(damage, 830, 20, 80, 80);
+        batch.draw(shutDown, 920, 20, 80, 80);
     }
 }
