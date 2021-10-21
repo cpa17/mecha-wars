@@ -144,8 +144,8 @@ public class Board {
     /**
      * Method that changes integers to textures
      *
-     * @param integer from the matrix 
-     * @return Texture 
+     * @param matrixEntry Entry in the Matrix that need to get converted
+     * @return fieldAsset The texture
      */
     
     public Texture toAsset(int matrixEntry) {
