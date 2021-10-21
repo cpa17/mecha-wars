@@ -124,9 +124,21 @@ public class Robot {
     public int getLp() {
         return lifePoints;
     }
+    
+    public int getbackupCopyX() {
+        return backupCopyX;
+    }
+    
+    public int getbackupCopyY() {
+        return backupCopyY;
+    }
 
     public boolean getSd() {
         return shutDownMark;
+    }
+    
+    public boolean getbackupCopy() {
+        return backupCopy;
     }
     
     /**
@@ -147,9 +159,21 @@ public class Robot {
     public void lifeDown() {
         lifePoints -= 1;
     }
+    
+    public void getbackupCopyX(int position) {
+        backupCopyX = position;
+    }
+    
+    public void getbackupCopyY(int position) {
+        backupCopyY = position;
+    }
 
     public void setShutDown(boolean on) {
         shutDownMark = on;
+    }
+    
+    public void setbackupCopy() {
+        backupCopy = true;
     }
 
     /**
@@ -209,12 +233,11 @@ public class Robot {
                         break;
                         
             case 10:    damage = new Texture(Gdx.files.internal("background15.png"));
-            
-        if (backupCopy) {
-            backupCopy = false;
-            backupDraw = true;
-        }
-            break;      
+                        if (backupCopy) {
+                            backupCopy = false;
+                            backupDraw = true;
+                        }
+                        break;      
             
             default:    break;
         }
@@ -237,13 +260,11 @@ public class Robot {
     public void drawParameters(SpriteBatch batch) {
         updateLife();
         updateDamage();
-        updateShutDown();
-        
+        updateShutDown();     
         if (backupDraw) {
             backupDraw = false;
             batch.draw(new Texture(Gdx.files.internal("robot.png")), backupCopyX, backupCopyY);
-        }
-        
+        }    
         batch.draw(life, 0, 0, 200, 200);
         batch.draw(damage, 400, 0, 200, 200);
         batch.draw(shutDown, 600, 0, 200, 200);
