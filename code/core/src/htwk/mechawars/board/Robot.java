@@ -174,34 +174,37 @@ public class Robot {
      */
     private void updateDamage() {
         switch (damagePoints) {
-            case 0 :    damage = new Texture(Gdx.files.internal("parameters/hp1.png"));
+            case 0 :    damage = new Texture(Gdx.files.internal("parameters/damage0.png"));
                         break;
                         
-            case 1 :    damage = new Texture(Gdx.files.internal("damage1.png"));
+            case 1 :    damage = new Texture(Gdx.files.internal("parameters/damage1.png"));
                         break;
                         
-            case 2 :    damage = new Texture(Gdx.files.internal("damage2.png"));
+            case 2 :    damage = new Texture(Gdx.files.internal("parameters/damage2.png"));
                         break;
                         
-            case 3 :    damage = new Texture(Gdx.files.internal("damage3.png"));
+            case 3 :    damage = new Texture(Gdx.files.internal("parameters/damage3.png"));
                         break;
                         
-            case 4 :    damage = new Texture(Gdx.files.internal("damage4.png"));
+            case 4 :    damage = new Texture(Gdx.files.internal("parameters/damage4.png"));
                         break;
                         
-            case 5 :    damage = new Texture(Gdx.files.internal("damage5.png"));
+            case 5 :    damage = new Texture(Gdx.files.internal("parameters/damage5.png"));
                         break;
                         
-            case 6 :    damage = new Texture(Gdx.files.internal("damage6.png"));
+            case 6 :    damage = new Texture(Gdx.files.internal("parameters/damage6.png"));
                         break;
                         
-            case 7 :    damage = new Texture(Gdx.files.internal("damage7.png"));
+            case 7 :    damage = new Texture(Gdx.files.internal("parameters/damage7.png"));
                         break;
                         
-            case 8 :    damage = new Texture(Gdx.files.internal("damage8.png"));
+            case 8 :    damage = new Texture(Gdx.files.internal("parameters/damage8.png"));
                         break;
                         
-            case 9 :    damage = new Texture(Gdx.files.internal("damage9.png"));
+            case 9 :    damage = new Texture(Gdx.files.internal("parameters/damage9.png"));
+                        break;
+            
+            case 10 :   damage = new Texture(Gdx.files.internal("parameters/damage10.png"));
                         break;
                         
             default:    break;
