@@ -135,10 +135,6 @@ public class Robot {
     public void damageReset() {
         damagePoints = 0;
     }
-
-    public void lifeUp() {
-        lifePoints += 1;
-    }
     
     public void lifeDown() {
         lifePoints -= 1;
