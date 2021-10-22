@@ -137,10 +137,6 @@ public class Robot {
         return shutDownMark;
     }
     
-    public boolean getbackupCopy() {
-        return backupCopy;
-    }
-    
     /**
      * Setters.
      */
@@ -152,10 +148,6 @@ public class Robot {
         damagePoints = 0;
     }
 
-    public void lifeUp() {
-        lifePoints += 1;
-    }
-    
     public void lifeDown() {
         lifePoints -= 1;
     }
@@ -171,10 +163,7 @@ public class Robot {
     public void setShutDown(boolean on) {
         shutDownMark = on;
     }
-    
-    public void setbackupCopy() {
-        backupCopy = true;
-    }
+
 
     /**
      * Updates the life texture depening on the current lifePoints of the robot.
@@ -233,10 +222,7 @@ public class Robot {
                         break;
                         
             case 10:    damage = new Texture(Gdx.files.internal("background15.png"));
-                        if (backupCopy) {
-                            backupCopy = false;
-                            backupDraw = true;
-                        }
+                        backupDraw = true;
                         break;      
             
             default:    break;
