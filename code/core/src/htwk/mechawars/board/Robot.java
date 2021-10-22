@@ -19,7 +19,6 @@ public class Robot {
     private int backupCopyX;
     private int backupCopyY;
     private boolean shutDownMark;
-    private boolean backupCopy;
     private boolean backupDraw;
     private Texture life;
     private Texture damage;
