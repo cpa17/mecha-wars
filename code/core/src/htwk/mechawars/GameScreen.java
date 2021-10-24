@@ -128,7 +128,6 @@ public class GameScreen implements Screen {
     private boolean buttonClickOrder(int buttonNumber) {
         if (pressCounter < 5 - damagePoints) {
             // write the number of the button in cardOrder at pressCounter
-            cardOrder[pressCounter] = buttonNumber;
 
             boolean clicked = true;
 
@@ -137,7 +136,8 @@ public class GameScreen implements Screen {
                     return false;
                 }
             }
-            
+
+            cardOrder[pressCounter] = buttonNumber;
             pressCounter += 1;
             
             if (clicked) {
