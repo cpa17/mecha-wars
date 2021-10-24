@@ -134,14 +134,12 @@ public class GameScreen implements Screen {
 
             for (int i = (pressCounter - 1); i >= 0; i -= 1) {
                 if (cardOrder[i] == buttonNumber) {
-                    clicked = false;
-                    pressCounter -= 1;
+                    return false;
                 }
             }
             
             pressCounter += 1;
-
-
+            
             if (clicked) {
                 buttons[buttonNumber - 1].setColor(Color.GREEN);
                 buttons[buttonNumber - 1].setText(buttons[buttonNumber - 1].getText()
