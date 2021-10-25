@@ -32,7 +32,6 @@ public class GameScreen implements Screen {
     private Texture robot;
     private Stage stage;
     private Table container;
-
     private SpriteBatch batch;
     private Sprite sprite;
     private ZugInitialisierung zugInititalisierung = new ZugInitialisierung();
@@ -63,7 +62,7 @@ public class GameScreen implements Screen {
 
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
-
+        
         Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         addButtonsToStage(skin);
         addScrollPanelToStage(skin);
@@ -268,7 +267,7 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
         batch.begin();
-        Board.toAsset(batch, board);
+        Board.toAsset(batch, board); 
         drawRobot();
         //player.drawParameters(batch);
         sprite.draw(batch);
@@ -299,39 +298,6 @@ public class GameScreen implements Screen {
         }
     }
 
-    /**
-     * Function that draws the playing field.
-     */
-    public void drawPlayingField() {
-        int x = 0;
-
-        //für das "normale" Spielfeld boardtxt mit board ersetzen
-        for (int i = 0; i < board.matrix.length; i++) {
-            for (int j = 0; j < board.matrix[i].length; j++) {
-                
-                int p = board.matrix[i][j];
-                
-                int t = Gdx.graphics.getHeight() / board.matrix.length; //height of one tile
-                int b = Gdx.graphics.getHeight(); //height of the entire board
-                int c = (i + 1) * t; //the current height in the loop
-                int r = b - c; //the result of the board height minus the current height
-                    
-                switch (p) {
-                    case(0):
-                        batch.draw(industrialTile, x, r);
-                        break;
-                    default:
-                        batch.draw(industrialTile, x, r);
-                        break;
-                }
-
-                x = x + (Gdx.graphics.getHeight() / board.matrix.length);
-            }
-            
-            x = 0;
-        }
-    }
-    
     @Override
     public void resize(int width, int height) {
 

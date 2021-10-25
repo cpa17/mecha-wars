@@ -137,24 +137,16 @@ public class Board {
     public static void toAsset(SpriteBatch batch, Board board) {
         int x = 0;
         for (int i = 0; i < board.matrix.length; i++) {
-            for (int j = 0; j < board.matrix[0].length; j++) {
-                int p = board.matrix[i][j];    
+            for (int j = 0; j < board.matrix[i].length; j++) {
+                System.out.print(board.matrix[i][j] + " ");
                 int t = Gdx.graphics.getHeight() / board.matrix.length; //height of one tile
                 int b = Gdx.graphics.getHeight(); //height of the entire board
                 int c = (i + 1) * t; //the current height in the loop
                 int r = b - c; //the result of the board height minus the current height
-                    
-                switch (p) {
-                    case(0):
-                        batch.draw(fieldAssets[board.matrix[i][j]], x, r);
-                        break;
-                    default:
-                        batch.draw(fieldAssets[board.matrix[i][j]], x, r);
-                        break;
-                }
-                
+                batch.draw(fieldAssets[board.matrix[i][j]], x, r);
                 x = x + (Gdx.graphics.getHeight() / board.matrix.length);
             } 
+            System.out.println("");
             x = 0;
         }
     }
