@@ -11,12 +11,14 @@ import java.util.Scanner;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
  * Class that presents the game board.
  */
 public class Board {
     public int[][] matrix;
+    public static Texture[] fieldAssets = new Texture[36];
     /**
      * Method that constructs the game board as a matrix.
      * @param width width of the game board
@@ -51,7 +53,9 @@ public class Board {
         FileHandle file = Gdx.files.internal(fileName);
         String mapString = file.readString();
         System.out.println(mapString);
-
+        for(int i = 0; i < fieldAssets.length; i++) {
+            fieldAssets[i] = new Texture(Gdx.files.internal("mapAssets/" + i + ".png"));
+        }
         return Board.fromString(mapString);
     }
 
@@ -124,21 +128,22 @@ public class Board {
     }
 
     /**
-     * Method that outputs any board matrix in the console for tests.
+     * Method that draws any board matrix as Textures.
      *
+     * @param batch SpriteBatch to draw the Textures 
      * @param board Board whose matrix is to be converted into a string
-     * @return matrix Matrix of the board as a string
      */
 
-    public static String toString(Board board) {
-        String matrix = "";
+    public static void toAsset(SpriteBatch batch, Board board) {
+        int x = 0, y = 0;
         for (int i = 0; i < board.matrix.length; i++) {
             for (int j = 0; j < board.matrix[i].length; j++) {
-                matrix = matrix + board.matrix[i][j] + " ";
+                batch.draw(fieldAssets[board.matrix[i][j]], x, y); 
+                x += 64;
             }
-            matrix = matrix + "\n";
+            x = 0;
+            y += 64;
         }
-        return matrix;
     }
     
     /**
@@ -147,28 +152,6 @@ public class Board {
      * @param matrixEntry Entry in the Matrix that need to get converted
      * @return fieldAsset The texture
      */
-    
-    public Texture toAsset(int matrixEntry) {
-        Texture fieldAsset = new Texture(Gdx.files.internal("industrialTile.png"));
-        switch (matrixEntry) {
-            case 1 :    fieldAsset = new Texture(Gdx.files.internal("mapAssets/startField1.png"));
-                        break;
-                    
-            case 2 :    fieldAsset = new Texture(Gdx.files.internal("mapAssets/startField2.png"));
-                        break;
-                    
-            case 3 :    fieldAsset = new Texture(Gdx.files.internal("mapAssets/startField3.png"));
-                        break;
-                    
-            case 4 :    fieldAsset = new Texture(Gdx.files.internal("mapAssets/startField4.png"));
-                        break;
-                 
-            default:    break;
-        
-        }
-        return fieldAsset;
-    }
-    
     
     /**
      * Method that places a robot in the matrix --> starting position.
