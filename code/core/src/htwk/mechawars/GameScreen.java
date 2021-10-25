@@ -54,7 +54,7 @@ public class GameScreen implements Screen {
      * Constructor of class GameScreen.
      */
     public GameScreen() {
-        industrialTile = new Texture("industrialTile.png");
+        industrialTile = new Texture("mapAssets/0.png");
         
         robot = new Texture("robot.png");
         
@@ -268,8 +268,7 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
         batch.begin();
-        
-        drawPlayingField();
+        Board.toAsset(batch, board);
         drawRobot();
         //player.drawParameters(batch);
         sprite.draw(batch);

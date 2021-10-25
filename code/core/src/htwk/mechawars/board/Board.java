@@ -18,7 +18,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 public class Board {
     public int[][] matrix;
-    public static Texture[] fieldAssets = new Texture[36];
+    public static Texture[] fieldAssets = new Texture[37];
     /**
      * Method that constructs the game board as a matrix.
      * @param width width of the game board
@@ -135,14 +135,27 @@ public class Board {
      */
 
     public static void toAsset(SpriteBatch batch, Board board) {
-        int x = 0, y = 0;
+        int x = 0;
         for (int i = 0; i < board.matrix.length; i++) {
-            for (int j = 0; j < board.matrix[i].length; j++) {
-                batch.draw(fieldAssets[board.matrix[i][j]], x, y); 
-                x += 64;
-            }
+            for (int j = 0; j < board.matrix[0].length; j++) {
+                int p = board.matrix[i][j];    
+                int t = Gdx.graphics.getHeight() / board.matrix.length; //height of one tile
+                int b = Gdx.graphics.getHeight(); //height of the entire board
+                int c = (i + 1) * t; //the current height in the loop
+                int r = b - c; //the result of the board height minus the current height
+                    
+                switch (p) {
+                    case(0):
+                        batch.draw(fieldAssets[board.matrix[i][j]], x, r);
+                        break;
+                    default:
+                        batch.draw(fieldAssets[board.matrix[i][j]], x, r);
+                        break;
+                }
+                
+                x = x + (Gdx.graphics.getHeight() / board.matrix.length);
+            } 
             x = 0;
-            y += 64;
         }
     }
     
