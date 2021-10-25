@@ -151,19 +151,18 @@ public class Robot {
         lifePoints -= 1;
     }
     
-    public void getbackupCopyX(int position) {
-        backupCopyX = position;
-    }
-    
-    public void getbackupCopyY(int position) {
-        backupCopyY = position;
-    }
-
     public void setShutDown(boolean on) {
         shutDownMark = on;
     }
 
-
+    public void setbackupCopyX(int position) {
+        backupCopyX = position;
+    }
+    
+    public void setbackupCopyY(int position) {
+        backupCopyY = position;
+    }
+    
     /**
      * Updates the life texture depening on the current lifePoints of the robot.
      */
