@@ -53,7 +53,7 @@ public class Board {
         FileHandle file = Gdx.files.internal(fileName);
         String mapString = file.readString();
         System.out.println(mapString);
-        for(int i = 0; i < fieldAssets.length; i++) {
+        for (int i = 0; i < fieldAssets.length; i++) {
             fieldAssets[i] = new Texture(Gdx.files.internal("mapAssets/" + i + ".png"));
         }
         return Board.fromString(mapString);
@@ -158,13 +158,6 @@ public class Board {
             x = 0;
         }
     }
-    
-    /**
-     * Method that changes integers to textures.
-     *
-     * @param matrixEntry Entry in the Matrix that need to get converted
-     * @return fieldAsset The texture
-     */
     
     /**
      * Method that places a robot in the matrix --> starting position.
