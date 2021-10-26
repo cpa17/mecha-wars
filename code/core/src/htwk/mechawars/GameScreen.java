@@ -110,8 +110,9 @@ public class GameScreen implements Screen {
             // Button-ClickListener
             buttons[cardPrintCounter].addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
-                    buttonClickOrder(buttonNumber);
-                    zugInitialisierung.addCard(currentCard);
+                    if (buttonClickOrder(buttonNumber)) {
+                        zugInitialisierung.addCard(currentCard);
+                    }
                 }
             });
         }
@@ -124,28 +125,24 @@ public class GameScreen implements Screen {
      *  " | Nr: " with the corresponding Number of at what time it was clicked.
      * @param buttonNumber -> ID-number of clicked button
      */
-    private void buttonClickOrder(int buttonNumber) {
+    private boolean buttonClickOrder(int buttonNumber) {
         if (pressCounter < 5 - damagePoints) {
             // write the number of the button in cardOrder at pressCounter
-            cardOrder[pressCounter] = buttonNumber;
-
-            pressCounter += 1;
-
-            boolean clicked = true;
-
-            for (int i = (pressCounter - 2); i >= 0; i -= 1) {
+            for (int i = (pressCounter - 1); i >= 0; i -= 1) {
                 if (cardOrder[i] == buttonNumber) {
-                    clicked = false;
-                    pressCounter -= 1;
+                    return false;
                 }
             }
 
-            if (clicked) {
-                buttons[buttonNumber - 1].setColor(Color.GREEN);
-                buttons[buttonNumber - 1].setText(buttons[buttonNumber - 1].getText()
-                        + " | Nr: " + (pressCounter));
-            }
+            cardOrder[pressCounter] = buttonNumber;
+            pressCounter += 1;
+            
+            buttons[buttonNumber - 1].setColor(Color.GREEN);
+            buttons[buttonNumber - 1].setText(buttons[buttonNumber - 1].getText()
+                    + " | Nr: " + (pressCounter));
+            return true;
         }
+        return false;
     }
 
     /**
