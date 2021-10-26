@@ -16,9 +16,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 /**
  * Class that presents the game board.
  */
+
 public class Board {
     public int[][] matrix;
-    private static final Texture[] fieldAssets = new Texture[37];
+    private static final Texture[] fieldAssets = new Texture[36];
+    
     /**
      * Method that constructs the game board as a matrix.
      * @param width width of the game board
