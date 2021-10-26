@@ -110,7 +110,7 @@ public class GameScreen implements Screen {
             // Button-ClickListener
             buttons[cardPrintCounter].addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
-                    if(buttonClickOrder(buttonNumber)) {
+                    if (buttonClickOrder(buttonNumber)) {
                         zugInitialisierung.addCard(currentCard);
                     }
                 }
