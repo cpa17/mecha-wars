@@ -18,7 +18,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 public class Board {
     public int[][] matrix;
-    private final static Texture[] fieldAssets = new Texture[37];
+    private static final Texture[] fieldAssets = new Texture[37];
     /**
      * Method that constructs the game board as a matrix.
      * @param width width of the game board
@@ -54,7 +54,7 @@ public class Board {
     public static Board fromFile(String fileName) {
         FileHandle file = Gdx.files.internal(fileName);
         String mapString = file.readString();
-        System.out.println(mapString);
+        //System.out.println(mapString);
         return Board.fromString(mapString);
     }
 
@@ -122,6 +122,7 @@ public class Board {
                 board.matrix[y][x] = tempLayout.get(y).get(x);
             }
         }
+        scn.close();
         return board;
     }
 
@@ -161,7 +162,6 @@ public class Board {
         robot.setYcoor(y);
         robot.setStartY(y);
         robot.setDir(dir);
-        this.matrix[y][x] = robot.getDir().getValue(); //hier wird diese komische 1 in die Matrix geschrieben    
     }
 
     /**
@@ -175,18 +175,15 @@ public class Board {
             for (Card card : phase) {
 
                 if (card.getCardAttributeType() == Type.mov) {
-                    this.matrix[robot.getYcoor()][robot.getXcoor()] = 0;
                     robot.moveInDirection(card.getCardAttributeMovCount());
                 } else {
                     robot.turn(card.getCardAttributeMovCount());
                 }
-                this.matrix[robot.getYcoor()][robot.getXcoor()] = robot.getDir().getValue();
 
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             robot.setXcoor(robot.getStartX());
             robot.setYcoor(robot.getStartY());
-            this.matrix[robot.getYcoor()][robot.getXcoor()] = robot.getDir().getValue();
         }
     }
 
