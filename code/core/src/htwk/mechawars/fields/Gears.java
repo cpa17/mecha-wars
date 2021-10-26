@@ -1,4 +1,7 @@
 package htwk.mechawars.fields;
 
-public class Gears {
+public class Gears extends FieldsMainClass {
+    public Gears() {
+        super(xcoor);
+    }
 }

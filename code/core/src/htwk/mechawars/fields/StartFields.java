@@ -1,4 +1,7 @@
 package htwk.mechawars.fields;
 
-public class StartFields {
+public class StartFields extends FieldsMainClass {
+    public StartFields() {
+        super(xcoor);
+    }
 }

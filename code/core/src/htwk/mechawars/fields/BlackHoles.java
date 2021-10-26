@@ -1,4 +1,7 @@
 package htwk.mechawars.fields;
 
-public class BlackHoles {
+public class BlackHoles extends FieldsMainClass {
+    public BlackHoles() {
+        super(xcoor);
+    }
 }

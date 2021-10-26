@@ -1,4 +1,7 @@
 package htwk.mechawars.fields;
 
-public class RepairSites {
+public class RepairSites extends FieldsMainClass {
+    public RepairSites() {
+        super(xcoor);
+    }
 }

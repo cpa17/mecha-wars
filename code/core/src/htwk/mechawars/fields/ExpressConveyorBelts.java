@@ -1,4 +1,7 @@
 package htwk.mechawars.fields;
 
-public class ExpressConveyorBelts {
+public class ExpressConveyorBelts extends FieldsMainClass {
+    public ExpressConveyorBelts() {
+        super(xcoor);
+    }
 }
