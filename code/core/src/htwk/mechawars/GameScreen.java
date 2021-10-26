@@ -128,9 +128,6 @@ public class GameScreen implements Screen {
     private boolean buttonClickOrder(int buttonNumber) {
         if (pressCounter < 5 - damagePoints) {
             // write the number of the button in cardOrder at pressCounter
-
-            boolean clicked = true;
-
             for (int i = (pressCounter - 1); i >= 0; i -= 1) {
                 if (cardOrder[i] == buttonNumber) {
                     return false;
@@ -140,17 +137,12 @@ public class GameScreen implements Screen {
             cardOrder[pressCounter] = buttonNumber;
             pressCounter += 1;
             
-            if (clicked) {
-                buttons[buttonNumber - 1].setColor(Color.GREEN);
-                buttons[buttonNumber - 1].setText(buttons[buttonNumber - 1].getText()
-                        + " | Nr: " + (pressCounter));
-                return true;
-            }
-            
+            buttons[buttonNumber - 1].setColor(Color.GREEN);
+            buttons[buttonNumber - 1].setText(buttons[buttonNumber - 1].getText()
+                    + " | Nr: " + (pressCounter));
+            return true;
         }
-        
         return false;
-        
     }
 
     /**
