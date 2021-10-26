@@ -18,7 +18,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 public class Board {
     public int[][] matrix;
-    protected static final Texture[] fieldAssets = new Texture[37];
+    private final static Texture[] fieldAssets = new Texture[37];
     /**
      * Method that constructs the game board as a matrix.
      * @param width width of the game board
@@ -27,7 +27,9 @@ public class Board {
 
     public Board(int width, int height) {
         this.matrix = new int[height][width];
-
+        for (int i = 0; i < fieldAssets.length; i++) {
+            fieldAssets[i] = new Texture(Gdx.files.internal("mapAssets/" + i + ".png"));
+        }
         for (int[] ints : matrix) {
             Arrays.fill(ints, 0);
         }
@@ -53,9 +55,6 @@ public class Board {
         FileHandle file = Gdx.files.internal(fileName);
         String mapString = file.readString();
         System.out.println(mapString);
-        for (int i = 0; i < fieldAssets.length; i++) {
-            fieldAssets[i] = new Texture(Gdx.files.internal("mapAssets/" + i + ".png"));
-        }
         return Board.fromString(mapString);
     }
 
@@ -123,7 +122,6 @@ public class Board {
                 board.matrix[y][x] = tempLayout.get(y).get(x);
             }
         }
-
         return board;
     }
 
@@ -138,7 +136,6 @@ public class Board {
         int x = 0;
         for (int i = 0; i < board.matrix.length; i++) {
             for (int j = 0; j < board.matrix[i].length; j++) {
-                System.out.print(board.matrix[i][j] + " ");
                 int t = Gdx.graphics.getHeight() / board.matrix.length; //height of one tile
                 int b = Gdx.graphics.getHeight(); //height of the entire board
                 int c = (i + 1) * t; //the current height in the loop
@@ -146,7 +143,6 @@ public class Board {
                 batch.draw(fieldAssets[board.matrix[i][j]], x, r);
                 x = x + (Gdx.graphics.getHeight() / board.matrix.length);
             } 
-            System.out.println("");
             x = 0;
         }
     }
@@ -165,7 +161,7 @@ public class Board {
         robot.setYcoor(y);
         robot.setStartY(y);
         robot.setDir(dir);
-        this.matrix[y][x] = robot.getDir().getValue();
+        this.matrix[y][x] = robot.getDir().getValue(); //hier wird diese komische 1 in die Matrix geschrieben    
     }
 
     /**
