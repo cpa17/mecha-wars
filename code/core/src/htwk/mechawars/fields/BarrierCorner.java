@@ -1,5 +1,8 @@
 package htwk.mechawars.fields;
 
+/**
+ * Class of a Corner Barrier.
+ */
 public class BarrierCorner extends Field{
 
     // Attribut was angibt in welcher Ecke sich die Barriere befindet
@@ -7,7 +10,7 @@ public class BarrierCorner extends Field{
     private int corner;
 
     /**
-     * Constructor of a Corner Barrier
+     * Constructor of a Corner Barrier.
      */
     public BarrierCorner(int xcoor, int ycoor, int corner) {
         this.xcoor = xcoor;
@@ -15,6 +18,10 @@ public class BarrierCorner extends Field{
         this.corner = corner;
     }
 
+    /**
+     * Take the Corner where the Barrier is.
+     * @return the Corner
+     */
     public int getCorner(){
         return this.corner;
     }

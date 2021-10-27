@@ -1,5 +1,8 @@
 package htwk.mechawars.fields;
 
+/**
+ * Class of a Repair Site.
+ */
 public class RepairSite extends Field {
 
     // Attribut was angibt um welche Art Reparaturfeld es sich handelt
@@ -7,7 +10,7 @@ public class RepairSite extends Field {
     private int type;
 
     /**
-     * Constructor of a Repair Site
+     * Constructor of a Repair Site.
      */
     public RepairSite(int xcoor, int ycoor, int type) {
         this.xcoor = xcoor;
@@ -15,6 +18,10 @@ public class RepairSite extends Field {
         this.type = type;
     }
 
+    /**
+     * Take the Type of the Repair Site, either simple or double.
+     * @return the Type
+     */
     public int getType(){
         return this.type;
     }

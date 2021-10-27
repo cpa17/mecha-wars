@@ -1,5 +1,8 @@
 package htwk.mechawars.fields;
 
+/**
+ * Class of a Gear.
+ */
 public class Gear extends Field {
 
     // Attribut was angibt in welche Richtung sich das Zahnrad dreht
@@ -7,7 +10,7 @@ public class Gear extends Field {
     private int direction;
 
     /**
-     * Constructor of a Gear
+     * Constructor of a Gear.
      */
     public Gear(int xcoor, int ycoor, int direction) {
         this.xcoor = xcoor;
@@ -15,6 +18,10 @@ public class Gear extends Field {
         this.direction = direction;
     }
 
+    /**
+     * Take the Direction of the rotation of the Gear.
+     * @return the Direction
+     */
     public int getDirection(){
         return this.direction;
     }

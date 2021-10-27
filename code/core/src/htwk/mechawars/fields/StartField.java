@@ -1,5 +1,8 @@
 package htwk.mechawars.fields;
 
+/**
+ * Class of a Start Field.
+ */
 public class StartField extends Field {
 
     // Attribut was angibt welche Nummer das Startfeld hat
@@ -7,7 +10,7 @@ public class StartField extends Field {
     private int number;
 
     /**
-     * Constructor of a Start Field
+     * Constructor of a Start Field.
      */
     public StartField(int xcoor, int ycoor, int number) {
         this.xcoor = xcoor;
@@ -15,6 +18,10 @@ public class StartField extends Field {
         this.number = number;
     }
 
+    /**
+     * Take the Number of the Start Field.
+     * @return the Number
+     */
     public int getNumber(){
         return this.number;
     }

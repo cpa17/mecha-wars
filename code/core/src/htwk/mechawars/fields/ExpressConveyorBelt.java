@@ -1,5 +1,8 @@
 package htwk.mechawars.fields;
 
+/**
+ * Class of a Express Conveyor Belt.
+ */
 public class ExpressConveyorBelt extends Field {
 
     // Attribute die angeben aus welcher Richtung das Express-Förderband kommt und in welche Richtung es führt
@@ -8,7 +11,7 @@ public class ExpressConveyorBelt extends Field {
     private int end;
 
     /**
-     * Constructor of a Express Conveyor Belt
+     * Constructor of a Express Conveyor Belt.
      */
     public ExpressConveyorBelt(int xcoor, int ycoor, int start, int end) {
         this.xcoor = xcoor;
@@ -17,10 +20,18 @@ public class ExpressConveyorBelt extends Field {
         this.end = end;
     }
 
+    /**
+     * Take from where the Express Conveyor Belt come from.
+     * @return the Start
+     */
     public int getStart(){
         return this.start;
     }
 
+    /**
+     * Take where the Express Conveyor Belt goes.
+     * @return the End
+     */
     public int getEnd(){
         return this.end;
     }

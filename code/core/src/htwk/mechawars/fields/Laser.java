@@ -1,5 +1,8 @@
 package htwk.mechawars.fields;
 
+/**
+ * Class of a Laser.
+ */
 public class Laser extends Field {
 
     // Attribut was angibt um welche Art Laser es sich andelt
@@ -9,7 +12,7 @@ public class Laser extends Field {
     private int type;
 
     /**
-     * Constructor of a Laser
+     * Constructor of a Laser.
      */
     public Laser(int xcoor, int ycoor, int type) {
         this.xcoor = xcoor;
@@ -17,6 +20,10 @@ public class Laser extends Field {
         this.type = type;
     }
 
+    /**
+     * Take what Type of laser piece it is.
+     * @return the Type
+     */
     public int getType(){
         return this.type;
     }

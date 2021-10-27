@@ -1,5 +1,8 @@
 package htwk.mechawars.fields;
 
+/**
+ * Class of a Blockade.
+ */
 public class Blockade extends Field {
 
     // Attribut was angibt um welche der beiden Blockaden es sich handelt
@@ -7,7 +10,7 @@ public class Blockade extends Field {
     private int type;
 
     /**
-     * Constructor of a Blockade
+     * Constructor of a Blockade.
      */
     public Blockade(int xcoor, int ycoor, int type) {
         this.xcoor = xcoor;
@@ -15,6 +18,10 @@ public class Blockade extends Field {
         this.type = type;
     }
 
+    /**
+     * Take the Type of the Blockade.
+     * @return the Type
+     */
     public int getType(){
         return this.type;
     }

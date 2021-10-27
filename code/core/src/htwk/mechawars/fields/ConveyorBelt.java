@@ -1,5 +1,8 @@
 package htwk.mechawars.fields;
 
+/**
+ * Class of a Conveyor Belt.
+ */
 public class ConveyorBelt extends Field {
 
     // Attribute die angeben aus welcher Richtung das Förderband kommt und in welche Richtung es führt
@@ -8,7 +11,7 @@ public class ConveyorBelt extends Field {
     private int end;
 
     /**
-     * Constructor of a Conveyor Belt
+     * Constructor of a Conveyor Belt.
      */
     public ConveyorBelt(int xcoor, int ycoor, int start, int end) {
         this.xcoor = xcoor;
@@ -17,10 +20,18 @@ public class ConveyorBelt extends Field {
         this.end = end;
     }
 
+    /**
+     * Take from where the Conveyor Belt come from.
+     * @return the Start
+     */
     public int getStart(){
         return this.start;
     }
 
+    /**
+     * Take where the Conveyor Belt goes.
+     * @return the End
+     */
     public int getEnd(){
         return this.end;
     }

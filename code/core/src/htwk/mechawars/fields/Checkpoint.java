@@ -1,5 +1,8 @@
 package htwk.mechawars.fields;
 
+/**
+ * Class of a Checkpoint.
+ */
 public class Checkpoint extends Field {
 
     // Attribut was angibt um den wievielten Checkpoint es sich handelt
@@ -7,7 +10,7 @@ public class Checkpoint extends Field {
     private int number;
 
     /**
-     * Constructor of a Checkpoint
+     * Constructor of a Checkpoint.
      */
     public Checkpoint(int xcoor, int ycoor, int number) {
         this.xcoor = xcoor;
@@ -15,6 +18,10 @@ public class Checkpoint extends Field {
         this.number = number;
     }
 
+    /**
+     * Take the Number of the Checkpoint.
+     * @return the Number
+     */
     public int getNumber(){
         return this.number;
     }
