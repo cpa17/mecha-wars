@@ -1,11 +1,11 @@
 package htwk.mechawars.fields;
 
-public class Pusher extends Field {
+public class Gear extends Field {
 
     /**
-     * Constructor of a Pusher
+     * Constructor of a Gear
      */
-    public Pusher(int xcoor, int ycoor) {
+    public Gear(int xcoor, int ycoor) {
         this.xcoor = xcoor;
         this.ycoor = ycoor;
     }

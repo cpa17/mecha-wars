@@ -1,11 +1,11 @@
 package htwk.mechawars.fields;
 
-public class Pusher extends Field {
+public class Barrier extends Field {
 
     /**
-     * Constructor of a Pusher
+     * Constructor of a Barrier
      */
-    public Pusher(int xcoor, int ycoor) {
+    public Barrier(int xcoor, int ycoor) {
         this.xcoor = xcoor;
         this.ycoor = ycoor;
     }
