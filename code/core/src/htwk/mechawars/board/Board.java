@@ -35,6 +35,7 @@ public class Board {
      * Method that constructs the game board as a matrix, but can skip creating the assets.
      * @param width width of the game board
      * @param height height of the game board
+     * @param isTest allows to skip creating the assets
      */
     public Board(int width, int height, boolean isTest) {
         this.matrix = new int[height][width];
@@ -56,26 +57,26 @@ public class Board {
     }
 
     /**
-     * Method that reads the game plan as a string from a text file.
-     *
-     * @param fileName Name of the text file to be read in.
-     * @return Board.fromString(mapString) Method fromString
-     *         with the string from the text file as parameter
+     * Method that reads the game plan as a matrix from a file.
+     * @param fileName Path to a file containing a map
      */
-    public static Board fromFile(String fileName) {
+    public Board(String fileName) {
         FileHandle file = Gdx.files.internal(fileName);
         String mapString = file.readString();
-        //System.out.println(mapString);
-        return Board.fromString(mapString);
+
+        Board wrappedBoard = new Board(mapString, false);
+        this.matrix = wrappedBoard.matrix;
+        this.fieldAssets = wrappedBoard.fieldAssets;
     }
 
     /**
-     * Method that reads the game plan as a matrix from a string.
+     * Method that reads the game plan as a matrix from a file, but can skip the creating the
+     * assets.
      *
-     * @param mapString String that is to be saved as the matrix of a board
-     * @return board Board which contains the game plan as a matrix
+     * @param mapString String containing a map
+     * @param isTest allows to skip creating the assets
      */
-    public static Board fromString(String mapString) {
+    public Board(String mapString, boolean isTest) {
         ArrayList<ArrayList<Integer>> tempLayout = new ArrayList<>();
            
         String[] linesArray = mapString.split("\\r?\\n");
@@ -111,6 +112,7 @@ public class Board {
             }
             tempLayout.add(row);
         }
+        scn.close();
 
         int width = tempLayout.get(0).size();
         int height = tempLayout.size();
@@ -119,17 +121,18 @@ public class Board {
             System.out.println("The map has too many rows, only 12 are allowed!");
             Gdx.app.exit();
             System.exit(-1);
-        }                       
-        
-        Board board = new Board(width, height, true);
+        }
+
+        Board wrappedBoard = new Board(width, height, isTest);
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                board.matrix[y][x] = tempLayout.get(y).get(x);
+                wrappedBoard.matrix[y][x] = tempLayout.get(y).get(x);
             }
         }
-        scn.close();
-        return board;
+
+        this.matrix = wrappedBoard.matrix;
+        this.fieldAssets = wrappedBoard.fieldAssets;
     }
 
     /**

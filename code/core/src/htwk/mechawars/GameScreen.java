@@ -44,7 +44,7 @@ public class GameScreen implements Screen {
     private Card[] deck;
 
     //zum Ausgeben der bisherigen, "normalen" Spielfelds map mit mapStd ersetzen
-    private Board board = Board.fromFile("map.txt");
+    private Board board = new Board("map.txt");
     private Robot player = new Robot();
 
     private TextButton[] buttons = new TextButton[choosableCardCount];

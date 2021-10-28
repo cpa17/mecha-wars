@@ -80,7 +80,7 @@ public class BoardTest {
     public void initBoard() {
         board.startRobot(3, 3, Dir.NORTH, robot);
 
-        boardtxt = Board.fromString(boardString);
+        boardtxt = new Board(boardString, true);
         boardtxt.startRobot(3, 3, Dir.NORTH, robottxt);
     }
 
