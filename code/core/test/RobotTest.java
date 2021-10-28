@@ -19,8 +19,8 @@ public class RobotTest {
         assert robot.getbackupCopyX() >= 0;
         assert robot.getbackupCopyY() >= 0;
         
-        assert robot.getbackupCopyX() < Gdx.graphics.getWidth() / 2;
-        assert robot.getbackupCopyY() < Gdx.graphics.getHeight();
+        assert robot.getbackupCopyX() <= Gdx.graphics.getWidth();
+        assert robot.getbackupCopyY() <= Gdx.graphics.getHeight();
 
         assertEquals(5, robot.getXcoor());
         assertEquals(5, robot.getYcoor());
