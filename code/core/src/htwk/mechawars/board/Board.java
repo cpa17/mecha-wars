@@ -16,21 +16,32 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 /**
  * Class that presents the game board.
  */
-
 public class Board {
     public int[][] matrix;
-    private static final Texture[] fieldAssets = new Texture[36];
+    private static Texture[] fieldAssets = new Texture[36];
     
     /**
      * Method that constructs the game board as a matrix.
      * @param width width of the game board
      * @param height height of the game board
      */
-
     public Board(int width, int height) {
+        Board wrappedBoard = new Board(width, height, false);
+        this.matrix = wrappedBoard.matrix;
+        this.fieldAssets = wrappedBoard.fieldAssets;
+    }
+
+    /**
+     * Method that constructs the game board as a matrix, but can skip creating the assets.
+     * @param width width of the game board
+     * @param height height of the game board
+     */
+    public Board(int width, int height, boolean isTest) {
         this.matrix = new int[height][width];
-        for (int i = 0; i < fieldAssets.length; i++) {
-            fieldAssets[i] = new Texture(Gdx.files.internal("mapAssets/" + i + ".png"));
+        if (!isTest) {
+            for (int i = 0; i < fieldAssets.length; i++) {
+                fieldAssets[i] = new Texture(Gdx.files.internal("mapAssets/" + i + ".png"));
+            }
         }
         for (int[] ints : matrix) {
             Arrays.fill(ints, 0);
@@ -40,7 +51,6 @@ public class Board {
     /**
      * Method that constructs a game board with a null matrix.
      */
-
     public Board() {
         this.matrix = new int[0][0];
     }
@@ -52,7 +62,6 @@ public class Board {
      * @return Board.fromString(mapString) Method fromString
      *         with the string from the text file as parameter
      */
-
     public static Board fromFile(String fileName) {
         FileHandle file = Gdx.files.internal(fileName);
         String mapString = file.readString();
@@ -66,16 +75,14 @@ public class Board {
      * @param mapString String that is to be saved as the matrix of a board
      * @return board Board which contains the game plan as a matrix
      */
-
     public static Board fromString(String mapString) {
-    
         ArrayList<ArrayList<Integer>> tempLayout = new ArrayList<>();
            
         String[] linesArray = mapString.split("\\r?\\n");
         String currentLine;
         
         Scanner scn = new Scanner(mapString);
-        String s = ""; 
+        String s;
         while (scn.hasNext()) {
             s = scn.next();
             try {
@@ -87,29 +94,26 @@ public class Board {
             }
         }
 
-        for (int i = 0; i < linesArray.length; i++) {
-            currentLine = linesArray[i];
+        for (String value : linesArray) {
+            currentLine = value;
             ArrayList<Integer> row = new ArrayList<>();
             String[] values = currentLine.trim().split(" ");
             for (String string : values) {
-                
                 if (values.length > 12) {
                     System.out.println("The map has too many columns, only 12 are allowed!");
                     Gdx.app.exit();
                     System.exit(-1);
-                } 
-                
+                }
                 if (!string.isEmpty()) {
                     int id = Integer.parseInt(string);
                     row.add(id);
                 }
             }
-            tempLayout.add(row);              
+            tempLayout.add(row);
         }
 
         int width = tempLayout.get(0).size();
         int height = tempLayout.size();
-
         
         if (height > 12) {
             System.out.println("The map has too many rows, only 12 are allowed!");
@@ -117,7 +121,7 @@ public class Board {
             System.exit(-1);
         }                       
         
-        Board board = new Board(width, height);
+        Board board = new Board(width, height, true);
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
@@ -134,7 +138,6 @@ public class Board {
      * @param batch SpriteBatch to draw the Textures 
      * @param board Board whose matrix is to be converted into a string
      */
-
     public static void toAsset(SpriteBatch batch, Board board) {
         int x = 0;
         for (int i = 0; i < board.matrix.length; i++) {
@@ -157,7 +160,6 @@ public class Board {
      * @param dir direction of the robot
      * @param robot robot to which this applies
      */
-
     public void startRobot(int x, int y, Dir dir, Robot robot) {
         robot.setXcoor(x);
         robot.setStartX(x);
@@ -171,22 +173,18 @@ public class Board {
      * @param phase List of cards
      * @param robot the robot that should move
      */
-
     public void move(LinkedList<Card> phase, Robot robot) {
         try {
             for (Card card : phase) {
-
                 if (card.getCardAttributeType() == Type.mov) {
                     robot.moveInDirection(card.getCardAttributeMovCount());
                 } else {
                     robot.turn(card.getCardAttributeMovCount());
                 }
-
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             robot.setXcoor(robot.getStartX());
             robot.setYcoor(robot.getStartY());
         }
     }
-
 }

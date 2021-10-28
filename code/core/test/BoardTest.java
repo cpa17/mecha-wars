@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
  */
 
 public class BoardTest {
-    private Board board = new Board(4, 4);
+    private Board board = new Board(4, 4, true);
     private Board boardtxt = new Board();
 
     private Robot robot = new Robot();
