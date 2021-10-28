@@ -28,6 +28,8 @@ public class Robot {
      * Constructor of the robot class.
      */
     public Robot() {
+        backupCopyX = 0;
+        backupCopyY = 0;
         lifePoints = 0;
         damagePoints = 0;
         shutDownMark = false;
