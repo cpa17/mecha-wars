@@ -17,6 +17,8 @@ public class Robot {
     private int lifePoints;
     private int damagePoints;
     private boolean shutDownMark;
+    private boolean lastRound;
+    private boolean destroyed;
     private Texture life;
     private Texture damage;
     private Texture shutDown;
@@ -25,9 +27,11 @@ public class Robot {
      * Constructor of the robot class.
      */
     public Robot() {
-        lifePoints = 0;
+        lifePoints = 3;
         damagePoints = 0;
         shutDownMark = false;
+        lastRound = false;
+        destroyed = false;
     }
 
     public Dir getDir() {
@@ -108,6 +112,23 @@ public class Robot {
 
     public void setStartY(int startY) {
         this.startY = startY;
+    }
+
+
+    public boolean getLr() {
+        return lastRound;
+    }
+
+    public boolean getDe() {
+        return destroyed;
+    }
+
+    public void setLr(boolean lastRound) {
+        this.lastRound = lastRound;
+    }
+
+    public void setDe(boolean destroyed) {
+        this.destroyed = destroyed;
     }
     
     /**

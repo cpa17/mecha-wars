@@ -165,6 +165,11 @@ public class Board {
      */
 
     public void move(LinkedList<Card> phase, Robot robot) {
+
+        checkDoubleDamage(robot);
+
+        checkShutDown(robot);
+
         try {
             for (Card card : phase) {
 
@@ -183,5 +188,38 @@ public class Board {
             this.matrix[robot.getYcoor()][robot.getXcoor()] = robot.getDir().getValue();
         }
     }
+
+    /**
+     * Method that checks whether the robot receives 2 damage points.
+     * @param robot the robot that should check
+     */
+
+    private void checkDoubleDamage(Robot robot) {
+        if ((!robot.getSd() && robot.getLr()) || robot.getDe()) {
+
+            robot.damageUp();
+            robot.damageUp();
+
+            if (robot.getDe()) {
+                robot.setDe(false);
+            } else {
+                robot.setLr(false);
+            }
+        }
+    }
+
+    /**
+     * Method that checks whether the robot is in shutdown mode.
+     * @param robot the robot that should check
+     */
+
+    private void checkShutDown(Robot robot) {
+
+        if (robot.getSd()) {
+            robot.damageReset();
+            robot.setLr(true);
+        }
+    }
+
 
 }
