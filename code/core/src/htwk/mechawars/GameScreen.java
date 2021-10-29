@@ -27,6 +27,7 @@ import htwk.mechawars.board.Dir;
 import htwk.mechawars.board.Robot;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.CardFunctions;
+import htwk.mechawars.fields.FieldsMainClass;
 
 /**
  * Class that presents the surface of the game screen.
@@ -52,6 +53,8 @@ public class GameScreen implements Screen {
     private Robot player = new Robot();
 
     private TextButton[] buttons = new TextButton[choosableCardCount];
+    
+    FieldsMainClass obj[] = new FieldsMainClass[144]; //hier der Objekt-Array -> MW37
 
     /**
      * Constructor of class GameScreen.
@@ -70,7 +73,7 @@ public class GameScreen implements Screen {
         Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         addButtonsToStage(skin);
         addScrollPanelToStage(skin);
-        board.startRobot(5, 5, Dir.NORTH, player);
+        board.startRobot(5, 5, Dir.NORTH, player);       
     }
 
     /**
@@ -598,6 +601,24 @@ public class GameScreen implements Screen {
 
             x = 0;
         }
+    }
+    
+    //MW37
+    public void getObjects(){
+        
+        //FieldsMainClass obj[] = new FieldsMainClass[144]; //hier der Objekt-Array -> MW37
+        int objZähler = 0;
+        
+        for (int i = 0; i < board.matrix.length; i++) {
+            for (int j = 0; j < board.matrix[i].length; j++) {
+                //int CurrentObj = board.matrix[i][j];;
+                int type = board.matrix[i][j];
+                obj[objZähler] = new FieldsMainClass(type, i, j);
+                objZähler++;
+                }
+            }
+        
+        obj[19].showData();
     }
 
     @Override

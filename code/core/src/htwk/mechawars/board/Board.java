@@ -2,6 +2,7 @@ package htwk.mechawars.board;
 
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.Type;
+import htwk.mechawars.fields.FieldsMainClass;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -69,6 +70,8 @@ public class Board {
         String[] linesArray = mapString.split("\\r?\\n");
         String currentLine;
         
+        //glaube das kann weg, sollen ja nicht nur integer sein 
+        /*
         Scanner scn = new Scanner(mapString);
         String s = ""; 
         while (scn.hasNext()) {
@@ -81,6 +84,10 @@ public class Board {
                 System.exit(-1);
             }
         }
+        */
+        
+        //dafür aber vllt nur das ?
+        Scanner scn = new Scanner(mapString);
 
         for (int i = 0; i < linesArray.length; i++) {
             currentLine = linesArray[i];
@@ -88,7 +95,7 @@ public class Board {
             String[] values = currentLine.trim().split(" ");
             for (String string : values) {
                 
-                if (values.length > 12) {
+                if (values.length > 12) { //sollte auch passen weil es ja trotzdem 12 Strings sind
                     System.out.println("The map has too many columns, only 12 are allowed!");
                     Gdx.app.exit();
                     System.exit(-1);
@@ -99,7 +106,8 @@ public class Board {
                     row.add(id);
                 }
             }
-            tempLayout.add(row);              
+            tempLayout.add(row);
+            
         }
 
         int width = tempLayout.get(0).size();
@@ -119,7 +127,7 @@ public class Board {
                 board.matrix[y][x] = tempLayout.get(y).get(x);
             }
         }
-
+        
         return board;
     }
 
