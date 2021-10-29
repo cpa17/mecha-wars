@@ -22,54 +22,54 @@ public class DamageTest {
     @Test
     public void damageTest() {
 
-        assertEquals(0, robot.getDp());
-        assertFalse(robot.getSd());
-        assertEquals(3, robot.getLp());
+        assertEquals(0, robot.getDamagePoints());
+        assertFalse(robot.getShutDown());
+        assertEquals(3, robot.getLifePoints());
 
         robot.damageUp();
         robot.damageUp();
         robot.damageUp();
         robot.setShutDown(true);
 
-        assertEquals(3, robot.getDp());
-        assertTrue(robot.getSd());
-        assertFalse(robot.getDe());
-        assertEquals(3, robot.getLp());
+        assertEquals(3, robot.getDamagePoints());
+        assertTrue(robot.getShutDown());
+        assertFalse(robot.getDestroyed());
+        assertEquals(3, robot.getLifePoints());
 
         board.move(karten, robot);
         robot.setShutDown(false);
 
-        assertEquals(0, robot.getDp());
-        assertFalse(robot.getSd());
-        assertFalse(robot.getDe());
-        assertEquals(3, robot.getLp());
+        assertEquals(0, robot.getDamagePoints());
+        assertFalse(robot.getShutDown());
+        assertFalse(robot.getDestroyed());
+        assertEquals(3, robot.getLifePoints());
 
         board.move(karten, robot);
 
-        assertEquals(2, robot.getDp());
-        assertFalse(robot.getSd());
-        assertFalse(robot.getDe());
-        assertEquals(3, robot.getLp());
+        assertEquals(2, robot.getDamagePoints());
+        assertFalse(robot.getShutDown());
+        assertFalse(robot.getDestroyed());
+        assertEquals(3, robot.getLifePoints());
 
 
-        robot.setDe(true);
-        assertTrue(robot.getDe());
+        robot.setDestroyed(true);
+        assertTrue(robot.getDestroyed());
         board.move(karten, robot);
 
-        assertEquals(4, robot.getDp());
-        assertFalse(robot.getSd());
-        assertFalse(robot.getDe());
-        assertEquals(3, robot.getLp());
+        assertEquals(4, robot.getDamagePoints());
+        assertFalse(robot.getShutDown());
+        assertFalse(robot.getDestroyed());
+        assertEquals(3, robot.getLifePoints());
 
         robot.setShutDown(true);
-        robot.setDe(true);
-        assertTrue(robot.getDe());
+        robot.setDestroyed(true);
+        assertTrue(robot.getDestroyed());
         board.move(karten, robot);
 
-        assertEquals(0, robot.getDp());
-        assertTrue(robot.getSd());
-        assertFalse(robot.getDe());
-        assertEquals(3, robot.getLp());
+        assertEquals(0, robot.getDamagePoints());
+        assertTrue(robot.getShutDown());
+        assertFalse(robot.getDestroyed());
+        assertEquals(3, robot.getLifePoints());
 
 
     }

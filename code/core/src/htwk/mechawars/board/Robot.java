@@ -34,14 +34,6 @@ public class Robot {
         destroyed = false;
     }
 
-    public Dir getDir() {
-        return dir;
-    }
-
-    public void setDir(Dir dir) {
-        this.dir = dir;
-    }
-
     /**
      * Method that lets the robot run forward.
      * @param mov byte of move
@@ -82,12 +74,23 @@ public class Robot {
         return this;
     }
 
-    public void setYcoor(int ycoor) {
-        this.ycoor = ycoor;
+    /**
+     * Getters.
+     */
+    public int getDamagePoints() {
+        return damagePoints;
     }
 
-    public void setXcoor(int xcoor) {
-        this.xcoor = xcoor;
+    public int getLifePoints() {
+        return lifePoints;
+    }
+
+    public boolean getShutDown() {
+        return shutDownMark;
+    }
+
+    public Dir getDir() {
+        return dir;
     }
 
     public int getYcoor() {
@@ -106,6 +109,33 @@ public class Robot {
         return startY;
     }
 
+    public boolean getLastRound() {
+        return lastRound;
+    }
+
+    public boolean getDestroyed() {
+        return destroyed;
+    }
+
+    /**
+     * Setters.
+     */
+    public void setDir(Dir dir) {
+        this.dir = dir;
+    }
+
+    public void setShutDown(boolean on) {
+        shutDownMark = on;
+    }
+
+    public void setYcoor(int ycoor) {
+        this.ycoor = ycoor;
+    }
+
+    public void setXcoor(int xcoor) {
+        this.xcoor = xcoor;
+    }
+
     public void setStartX(int startX) {
         this.startX = startX;
     }
@@ -114,41 +144,16 @@ public class Robot {
         this.startY = startY;
     }
 
-
-    public boolean getLr() {
-        return lastRound;
-    }
-
-    public boolean getDe() {
-        return destroyed;
-    }
-
-    public void setLr(boolean lastRound) {
+    public void setLastRound(boolean lastRound) {
         this.lastRound = lastRound;
     }
 
-    public void setDe(boolean destroyed) {
+    public void setDestroyed(boolean destroyed) {
         this.destroyed = destroyed;
     }
-    
-    /**
-     * Getters.
-     */
-    public int getDp() {
-        return damagePoints;
-    }
 
-    public int getLp() {
-        return lifePoints;
-    }
 
-    public boolean getSd() {
-        return shutDownMark;
-    }
-    
-    /**
-     * Setters.
-     */
+
     public void damageUp() {
         damagePoints += 1;
     }
@@ -163,10 +168,6 @@ public class Robot {
     
     public void lifeDown() {
         lifePoints -= 1;
-    }
-
-    public void setShutDown(boolean on) {
-        shutDownMark = on;
     }
 
     /**

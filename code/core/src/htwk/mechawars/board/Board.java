@@ -195,15 +195,15 @@ public class Board {
      */
 
     private void checkDoubleDamage(Robot robot) {
-        if ((!robot.getSd() && robot.getLr()) || robot.getDe()) {
+        if ((!robot.getShutDown() && robot.getLastRound()) || robot.getDestroyed()) {
 
             robot.damageUp();
             robot.damageUp();
 
-            if (robot.getDe()) {
-                robot.setDe(false);
+            if (robot.getDestroyed()) {
+                robot.setDestroyed(false);
             } else {
-                robot.setLr(false);
+                robot.setLastRound(false);
             }
         }
     }
@@ -215,9 +215,9 @@ public class Board {
 
     private void checkShutDown(Robot robot) {
 
-        if (robot.getSd()) {
+        if (robot.getShutDown()) {
             robot.damageReset();
-            robot.setLr(true);
+            robot.setLastRound(true);
         }
     }
 
