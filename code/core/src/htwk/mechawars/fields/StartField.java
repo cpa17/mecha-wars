@@ -13,8 +13,7 @@ public class StartField extends Field {
      * Constructor of a Start Field.
      */
     public StartField(int xcoor, int ycoor, int number) {
-        this.xcoor = xcoor;
-        this.ycoor = ycoor;
+        super(xcoor, ycoor);
         this.number = number;
     }
 

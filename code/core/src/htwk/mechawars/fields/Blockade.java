@@ -14,8 +14,7 @@ public class Blockade extends Field {
      * Constructor of a Blockade.
      */
     public Blockade(int xcoor, int ycoor, int type) {
-        this.xcoor = xcoor;
-        this.ycoor = ycoor;
+        super(xcoor, ycoor);
         this.type = type;
     }
 

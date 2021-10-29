@@ -15,8 +15,7 @@ public class ConveyorBelt extends Field {
      * Constructor of a Conveyor Belt.
      */
     public ConveyorBelt(int xcoor, int ycoor, int start, int end) {
-        this.xcoor = xcoor;
-        this.ycoor = ycoor;
+        super(xcoor, ycoor);
         this.start = start;
         this.end = end;
     }

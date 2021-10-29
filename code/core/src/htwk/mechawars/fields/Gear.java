@@ -13,8 +13,7 @@ public class Gear extends Field {
      * Constructor of a Gear.
      */
     public Gear(int xcoor, int ycoor, int direction) {
-        this.xcoor = xcoor;
-        this.ycoor = ycoor;
+        super(xcoor, ycoor);
         this.direction = direction;
     }
 

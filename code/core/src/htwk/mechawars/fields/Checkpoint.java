@@ -13,8 +13,7 @@ public class Checkpoint extends Field {
      * Constructor of a Checkpoint.
      */
     public Checkpoint(int xcoor, int ycoor, int number) {
-        this.xcoor = xcoor;
-        this.ycoor = ycoor;
+        super(xcoor, ycoor);
         this.number = number;
     }
 

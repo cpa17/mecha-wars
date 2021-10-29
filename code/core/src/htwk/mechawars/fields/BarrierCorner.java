@@ -13,8 +13,7 @@ public class BarrierCorner extends Field{
      * Constructor of a Corner Barrier.
      */
     public BarrierCorner(int xcoor, int ycoor, int corner) {
-        this.xcoor = xcoor;
-        this.ycoor = ycoor;
+        super(xcoor, ycoor);
         this.corner = corner;
     }
 

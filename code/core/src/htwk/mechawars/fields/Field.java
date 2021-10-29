@@ -9,6 +9,14 @@ public class Field {
     protected int ycoor;
 
     /**
+     * Constructor of a Field.
+     */
+    public Field(int xcoor, int ycoor) {
+        this.xcoor = xcoor;
+        this.ycoor = ycoor;
+    }
+
+    /**
      * Take the x coordinate.
      * @return xcoor The x coordinate
      */

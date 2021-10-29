@@ -14,8 +14,7 @@ public class ExpressConveyorBelt extends Field {
      * Constructor of a Express Conveyor Belt.
      */
     public ExpressConveyorBelt(int xcoor, int ycoor, int start, int end) {
-        this.xcoor = xcoor;
-        this.ycoor = ycoor;
+        super(xcoor, ycoor);
         this.start = start;
         this.end = end;
     }

@@ -13,8 +13,7 @@ public class BarrierSide extends Field {
      * Constructor of a Side Barrier.
      */
     public BarrierSide(int xcoor, int ycoor, int site) {
-        this.xcoor = xcoor;
-        this.ycoor = ycoor;
+        super(xcoor, ycoor);
         this.site = site;
     }
 

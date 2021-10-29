@@ -15,8 +15,7 @@ public class Laser extends Field {
      * Constructor of a Laser.
      */
     public Laser(int xcoor, int ycoor, int type) {
-        this.xcoor = xcoor;
-        this.ycoor = ycoor;
+        super(xcoor, ycoor);
         this.type = type;
     }
 
