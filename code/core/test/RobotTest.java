@@ -19,8 +19,8 @@ public class RobotTest {
         assert robot.getbackupCopyX() >= 0;
         assert robot.getbackupCopyY() >= 0;
         
-        assert robot.getbackupCopyX() <= 720;
-        assert robot.getbackupCopyY() <= 1280;
+        assert robot.getbackupCopyX() <= 12;
+        assert robot.getbackupCopyY() <= 12;
 
         assertEquals(5, robot.getXcoor());
         assertEquals(5, robot.getYcoor());
