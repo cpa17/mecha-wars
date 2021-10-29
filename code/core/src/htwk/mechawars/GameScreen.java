@@ -54,7 +54,8 @@ public class GameScreen implements Screen {
 
     private TextButton[] buttons = new TextButton[choosableCardCount];
     
-    FieldsMainClass obj[] = new FieldsMainClass[144]; //hier der Objekt-Array -> MW37
+    //FieldsMainClass obj[] = new FieldsMainClass[144]; //hier der Objekt-Array -> MW37
+    public static final FieldsMainClass[] obj = new FieldsMainClass[144]; 
 
     /**
      * Constructor of class GameScreen.
@@ -73,7 +74,9 @@ public class GameScreen implements Screen {
         Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         addButtonsToStage(skin);
         addScrollPanelToStage(skin);
-        board.startRobot(5, 5, Dir.NORTH, player);       
+        board.startRobot(5, 5, Dir.NORTH, player); 
+        
+        obj[2].showData();
     }
 
     /**
@@ -604,6 +607,7 @@ public class GameScreen implements Screen {
     }
     
     //MW37
+    
     public void getObjects(){
         
         //FieldsMainClass obj[] = new FieldsMainClass[144]; //hier der Objekt-Array -> MW37
@@ -613,13 +617,13 @@ public class GameScreen implements Screen {
             for (int j = 0; j < board.matrix[i].length; j++) {
                 //int CurrentObj = board.matrix[i][j];;
                 int type = board.matrix[i][j];
-                obj[objZähler] = new FieldsMainClass(type, i, j);
-                objZähler++;
+                obj[2] = new FieldsMainClass(1, 1, 1);
+               
                 }
             }
-        
-        obj[19].showData();
+        obj[2].showData();
     }
+    
 
     @Override
     public void resize(int width, int height) {
@@ -646,5 +650,4 @@ public class GameScreen implements Screen {
     public void hide() {
 
     }
-
 }

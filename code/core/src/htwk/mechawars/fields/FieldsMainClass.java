@@ -5,8 +5,8 @@ import com.badlogic.gdx.Gdx;
 import htwk.mechawars.board.Board;
 
 public class FieldsMainClass {
-    private final int xcoor;
-    private final int ycoor;
+    private int xcoor;
+    private int ycoor;
     private int type;
     /**
      * Constructor of a Field
@@ -17,8 +17,11 @@ public class FieldsMainClass {
         this.ycoor = ycoor;
     }
     
+    public FieldsMainClass() {
+        
+    }
+    
    public void showData(){
-      System.out.print(xcoor + "  " + ycoor);
-      System.out.println();
+      System.out.println(type + "  " + xcoor + "  " + ycoor);
     }
 }
