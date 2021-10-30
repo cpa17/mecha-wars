@@ -22,7 +22,6 @@ public class Board {
      * @param width width of the game board
      * @param height height of the game board
      */
-
     public Board(int width, int height) {
         this.matrix = new int[height][width];
 
@@ -34,7 +33,6 @@ public class Board {
     /**
      * Method that constructs a game board with a null matrix.
      */
-
     public Board() {
         this.matrix = new int[0][0];
     }
@@ -46,7 +44,6 @@ public class Board {
      * @return Board.fromString(mapString) Method fromString
      *         with the string from the text file as parameter
      */
-
     public static Board fromFile(String fileName) {
         FileHandle file = Gdx.files.internal(fileName);
         String mapString = file.readString();
@@ -61,7 +58,6 @@ public class Board {
      * @param mapString String that is to be saved as the matrix of a board
      * @return board Board which contains the game plan as a matrix
      */
-
     public static Board fromString(String mapString) {
     
         ArrayList<ArrayList<Integer>> tempLayout = new ArrayList<>();
@@ -129,7 +125,6 @@ public class Board {
      * @param board Board whose matrix is to be converted into a string
      * @return matrix Matrix of the board as a string
      */
-
     public static String toString(Board board) {
         String matrix = "";
         for (int i = 0; i < board.matrix.length; i++) {
@@ -148,7 +143,6 @@ public class Board {
      * @param dir direction of the robot
      * @param robot robot to which this applies
      */
-
     public void startRobot(int x, int y, Dir dir, Robot robot) {
         robot.setXcoor(x);
         robot.setStartX(x);
@@ -163,7 +157,6 @@ public class Board {
      * @param phase List of cards
      * @param robot the robot that should move
      */
-
     public void move(LinkedList<Card> phase, Robot robot) {
         try {
             for (Card card : phase) {
