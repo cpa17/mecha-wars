@@ -69,8 +69,8 @@ public class Board {
            
         String[] linesArray = mapString.split("\\r?\\n");
         String currentLine;
-        
-        //glaube das kann weg, sollen ja nicht nur integer sein 
+
+        //glaube das kann weg, sollen ja nicht nur integer sein
         /*
         Scanner scn = new Scanner(mapString);
         String s = ""; 
@@ -86,7 +86,7 @@ public class Board {
         }
         */
         
-        //dafür aber vllt nur das ?
+        //dafÃ¼r aber vllt nur das ?
         Scanner scn = new Scanner(mapString);
 
         for (int i = 0; i < linesArray.length; i++) {

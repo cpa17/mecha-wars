@@ -28,6 +28,7 @@ import htwk.mechawars.board.Robot;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.CardFunctions;
 import htwk.mechawars.fields.FieldsMainClass;
+import htwk.mechawars.fields.Field;
 
 /**
  * Class that presents the surface of the game screen.
@@ -55,7 +56,7 @@ public class GameScreen implements Screen {
     private TextButton[] buttons = new TextButton[choosableCardCount];
     
     //FieldsMainClass obj[] = new FieldsMainClass[144]; //hier der Objekt-Array -> MW37
-    public static final FieldsMainClass[] obj = new FieldsMainClass[144]; 
+    //public static final FieldsMainClass[] obj = new FieldsMainClass[144];
 
     /**
      * Constructor of class GameScreen.
@@ -76,7 +77,8 @@ public class GameScreen implements Screen {
         addScrollPanelToStage(skin);
         board.startRobot(5, 5, Dir.NORTH, player); 
         
-        obj[2].showData();
+        //obj[2].showData();
+        getObjects();
     }
 
     /**
@@ -608,10 +610,10 @@ public class GameScreen implements Screen {
     
     //MW37
     
-    public void getObjects(){
+/*    public void getObjects(){
         
         //FieldsMainClass obj[] = new FieldsMainClass[144]; //hier der Objekt-Array -> MW37
-        int objZähler = 0;
+        int objZï¿½hler = 0;
         
         for (int i = 0; i < board.matrix.length; i++) {
             for (int j = 0; j < board.matrix[i].length; j++) {
@@ -622,6 +624,25 @@ public class GameScreen implements Screen {
                 }
             }
         obj[2].showData();
+    }*/
+
+    public void getObjects(){
+        Board testboard = new Board(5,10);
+        for (int i = 0; i < testboard.matrix.length; i++) {
+            for (int j = 0; j < testboard.matrix[i].length; j++) {
+                testboard.matrix[i][j] = 9000+(10*i)+j;
+                System.out.print(testboard.matrix[i][j] + "  ");
+            }
+            System.out.println();
+        }
+        Field[][] testfieldmatrix = new Field[testboard.matrix.length][testboard.matrix[0].length];
+        for (int i = 0; i < testboard.matrix.length; i++) {
+            for (int j = 0; j < testboard.matrix[i].length; j++) {
+                testfieldmatrix[i][j] = new Field(i, j);
+                System.out.print("("+ testboard.matrix[i][j] + ", x=" + testfieldmatrix[i][j].getXcoor() + ", y=" + testfieldmatrix[i][j].getYcoor()+ ")  ");
+            }
+            System.out.println();
+        }
     }
     
 
