@@ -551,6 +551,7 @@ public class GameScreen implements Screen {
         int y = Math.abs(player.getYcoor() - (board.matrix.length - 1));
 
         if (player.getDir() == Dir.NORTH) {
+            sprite.setPosition(tileSize * x, tileSize * y);
             sprite.setRotation(0);
         } else if (player.getDir() == Dir.EAST) {
             sprite.setPosition(tileSize * x, tileSize * y);

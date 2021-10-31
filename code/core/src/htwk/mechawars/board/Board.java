@@ -19,7 +19,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Board {
     public int[][] matrix;
     private Texture[] fieldAssets = new Texture[36];
-    
+
     /**
      * Method that constructs the game board as a matrix.
      * @param width width of the game board
@@ -138,7 +138,7 @@ public class Board {
     /**
      * Method that draws any board matrix as Textures.
      *
-     * @param batch SpriteBatch to draw the Textures 
+     * @param batch SpriteBatch to draw the Textures
      * @param board Board whose matrix is to be converted into a string
      */
     public static void toAsset(SpriteBatch batch, Board board) {
@@ -151,11 +151,11 @@ public class Board {
                 int r = b - c; //the result of the board height minus the current height
                 batch.draw(board.fieldAssets[board.matrix[i][j]], x, r);
                 x = x + (Gdx.graphics.getHeight() / board.matrix.length);
-            } 
+            }
             x = 0;
         }
     }
-    
+
     /**
      * Method that places a robot in the matrix --> starting position.
      * @param x x-coordinate of the robot
@@ -177,6 +177,11 @@ public class Board {
      * @param robot the robot that should move
      */
     public void move(LinkedList<Card> phase, Robot robot) {
+
+        checkDoubleDamage(robot);
+
+        checkShutDown(robot);
+
         try {
             for (Card card : phase) {
                 if (card.getCardAttributeType() == Type.mov) {
@@ -190,4 +195,38 @@ public class Board {
             robot.setYcoor(robot.getStartY());
         }
     }
+
+    /**
+     * Method that checks whether the robot receives 2 damage points.
+     * @param robot the robot that should check
+     */
+
+    private void checkDoubleDamage(Robot robot) {
+        if ((!robot.getShutDown() && robot.getLastRound()) || robot.getDestroyed()) {
+
+            robot.damageUp();
+            robot.damageUp();
+
+            if (robot.getDestroyed()) {
+                robot.setDestroyed(false);
+            } else {
+                robot.setLastRound(false);
+            }
+        }
+    }
+
+    /**
+     * Method that checks whether the robot is in shutdown mode.
+     * @param robot the robot that should check
+     */
+
+    private void checkShutDown(Robot robot) {
+
+        if (robot.getShutDown()) {
+            robot.damageReset();
+            robot.setLastRound(true);
+        }
+    }
+
+
 }
