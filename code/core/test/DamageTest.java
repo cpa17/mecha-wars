@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DamageTest {
     private Robot robot = new Robot();
-    private Board board = new Board(2, 2);
+    private Board board = new Board(2, 2, true);
     private LinkedList<Card> karten = new LinkedList<>();
 
     @Test
