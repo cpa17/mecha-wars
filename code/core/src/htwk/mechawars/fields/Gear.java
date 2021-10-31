@@ -1,5 +1,7 @@
 package htwk.mechawars.fields;
 
+import com.badlogic.gdx.graphics.Texture;
+
 /**
  * Class of a Gear.
  */
@@ -8,6 +10,7 @@ public class Gear extends Field {
     // Attribut was angibt in welche Richtung sich das Zahnrad dreht
     // 1 = rechtsrum, 2 = linksrum
     private int direction;
+    private Texture tile;
 
     /**
      * Constructor of a Gear.
@@ -15,6 +18,13 @@ public class Gear extends Field {
     public Gear(int xcoor, int ycoor, int direction) {
         super(xcoor, ycoor);
         this.direction = direction;
+        
+        if(direction == 1) {
+            this.tile = new Texture("mapAssets/11.png");
+        }
+        else {
+            this.tile = new Texture("mapAssets/10.png");
+        }
     }
 
     @Override
@@ -29,5 +39,9 @@ public class Gear extends Field {
      */
     public int getDirection(){
         return this.direction;
+    }
+    
+    public Texture getTile(){
+        return this.tile;
     }
 }

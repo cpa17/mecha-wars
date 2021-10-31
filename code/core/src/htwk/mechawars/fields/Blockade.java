@@ -1,5 +1,7 @@
 package htwk.mechawars.fields;
 
+import com.badlogic.gdx.graphics.Texture;
+
 /**
  * Class of a Blockade.
  */
@@ -9,6 +11,7 @@ public class Blockade extends Field {
     // 1 = horizontale Blockade mit Ziffern 2 und 4, 2 = horizontale Blockade mit Ziffern 1, 3 und 5
     // 3 = vertikale Blockade mit Ziffern 2 und 4, 4 = vertikale Blockade mit Ziffern 1, 3 und 5
     private int type;
+    private Texture tile;
 
     /**
      * Constructor of a Blockade.
@@ -16,6 +19,22 @@ public class Blockade extends Field {
     public Blockade(int xcoor, int ycoor, int type) {
         super(xcoor, ycoor);
         this.type = type;
+        
+        switch(type){
+        
+        case 1:
+            this.tile = new Texture("mapAssets/4.png"); //horizontal 2,4
+            break;
+        case 2:
+            this.tile = new Texture("mapAssets/4.png"); //vertikal 2,4
+            break;
+        case 3:
+            this.tile = new Texture("mapAssets/5.png"); //horizontal 1,3,5
+            break;
+        case 4:
+            this.tile = new Texture("mapAssets/5.png"); //vertikal 1,3,5
+            break; 
+        }
     }
 
     @Override
@@ -30,5 +49,9 @@ public class Blockade extends Field {
      */
     public int getType(){
         return this.type;
+    }
+    
+    public Texture getTile(){
+        return this.tile;
     }
 }

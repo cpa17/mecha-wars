@@ -54,7 +54,7 @@ public class Board {
         this.matrix = new int[height][width];
         if (!isTest) {
             for (int i = 0; i < fieldAssets.length; i++) {
-                fieldAssets[i] = new Texture(Gdx.files.internal("mapAssets/" + i + ".png"));
+                fieldAssets[i] = new Texture(Gdx.files.internal("mapAssets/" + i + ".png")); 
             }
         }
         for (int[] ints : matrix) {

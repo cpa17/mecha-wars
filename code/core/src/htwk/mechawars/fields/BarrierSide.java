@@ -1,5 +1,7 @@
 package htwk.mechawars.fields;
 
+import com.badlogic.gdx.graphics.Texture;
+
 /**
  * Class of a Side Barrier.
  */
@@ -8,6 +10,7 @@ public class BarrierSide extends Field {
     // Attribut was angibt auf welcher Seite sich die Barriere befindet
     // 1 = links, 2 = oben, 3 = rechts, 4 = unten
     private int site;
+    private Texture tile;
 
     /**
      * Constructor of a Side Barrier.
@@ -15,6 +18,22 @@ public class BarrierSide extends Field {
     public BarrierSide(int xcoor, int ycoor, int site) {
         super(xcoor, ycoor);
         this.site = site;
+        
+        switch(site){
+        
+        case 1:
+            this.tile = new Texture("mapAssets/1.png");
+            break;
+        case 2:
+            this.tile = new Texture("mapAssets/1.png");
+            break;
+        case 3:
+            this.tile = new Texture("mapAssets/1.png");
+            break;
+        case 4:
+            this.tile = new Texture("mapAssets/1.png");
+            break; 
+        }
     }
 
     @Override
@@ -29,5 +48,9 @@ public class BarrierSide extends Field {
      */
     public int getSite(){
         return this.site;
+    }
+    
+    public Texture getTile(){
+        return this.tile;
     }
 }
