@@ -19,7 +19,7 @@ public class Gear extends Field {
 
     @Override
     public String showAttributes(){
-        String attributes = "xcoor: " + this.xcoor + "ycoor: " + this.ycoor + "direction: " + this.direction;
+        String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor + ", direction: " + this.direction;
         return attributes;
     }
 

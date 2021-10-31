@@ -27,7 +27,6 @@ import htwk.mechawars.board.Dir;
 import htwk.mechawars.board.Robot;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.CardFunctions;
-import htwk.mechawars.fields.Field;
 
 /**
  * Class that presents the surface of the game screen.
@@ -77,7 +76,7 @@ public class GameScreen implements Screen {
         board.startRobot(5, 5, Dir.NORTH, player);
 
         //MW37
-        Field.createObjektMatrix(testboard);
+        Board.showFieldMatrix(Board.createFieldMatrix(testboard));
     }
 
     /**

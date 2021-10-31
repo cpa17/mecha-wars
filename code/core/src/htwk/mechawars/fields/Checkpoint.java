@@ -19,7 +19,7 @@ public class Checkpoint extends Field {
 
     @Override
     public String showAttributes(){
-        String attributes = "xcoor: " + this.xcoor + "ycoor: " + this.ycoor + "number: " + this.number;
+        String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor + ", number: " + this.number;
         return attributes;
     }
 

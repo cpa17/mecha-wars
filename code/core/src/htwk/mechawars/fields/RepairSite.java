@@ -19,7 +19,7 @@ public class RepairSite extends Field {
 
     @Override
     public String showAttributes(){
-        String attributes = "xcoor: " + this.xcoor + "ycoor: " + this.ycoor + "type: " + this.type;
+        String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor + ", type: " + this.type;
         return attributes;
     }
 
