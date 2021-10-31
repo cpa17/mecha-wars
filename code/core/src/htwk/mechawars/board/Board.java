@@ -2,7 +2,6 @@ package htwk.mechawars.board;
 
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.Type;
-import htwk.mechawars.fields.FieldsMainClass;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -70,8 +69,6 @@ public class Board {
         String[] linesArray = mapString.split("\\r?\\n");
         String currentLine;
 
-        //glaube das kann weg, sollen ja nicht nur integer sein
-        /*
         Scanner scn = new Scanner(mapString);
         String s = ""; 
         while (scn.hasNext()) {
@@ -84,10 +81,9 @@ public class Board {
                 System.exit(-1);
             }
         }
-        */
         
         //dafür aber vllt nur das ?
-        Scanner scn = new Scanner(mapString);
+        //Scanner scn = new Scanner(mapString);
 
         for (int i = 0; i < linesArray.length; i++) {
             currentLine = linesArray[i];

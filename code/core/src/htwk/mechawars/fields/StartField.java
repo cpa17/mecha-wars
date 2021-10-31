@@ -17,6 +17,12 @@ public class StartField extends Field {
         this.number = number;
     }
 
+    @Override
+    public String showAttributes(){
+        String attributes = "xcoor: " + this.xcoor + "ycoor: " + this.ycoor + "number: " + this.number;
+        return attributes;
+    }
+
     /**
      * Take the Number of the Start Field.
      * @return the Number

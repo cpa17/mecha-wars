@@ -6,7 +6,7 @@ package htwk.mechawars.fields;
 public class RepairSite extends Field {
 
     // Attribut was angibt um welche Art Reparaturfeld es sich handelt
-    // 1 = einfaches Reparaturfeld, 2 = Doppeltes Reparaturfeld
+    // 1 = einfaches Reparaturfeld, 2 = doppeltes Reparaturfeld
     private int type;
 
     /**
@@ -15,6 +15,12 @@ public class RepairSite extends Field {
     public RepairSite(int xcoor, int ycoor, int type) {
         super(xcoor, ycoor);
         this.type = type;
+    }
+
+    @Override
+    public String showAttributes(){
+        String attributes = "xcoor: " + this.xcoor + "ycoor: " + this.ycoor + "type: " + this.type;
+        return attributes;
     }
 
     /**

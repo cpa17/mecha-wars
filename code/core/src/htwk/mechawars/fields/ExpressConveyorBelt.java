@@ -19,6 +19,12 @@ public class ExpressConveyorBelt extends Field {
         this.end = end;
     }
 
+    @Override
+    public String showAttributes(){
+        String attributes = "xcoor: " + this.xcoor + "ycoor: " + this.ycoor + "start: " + this.start + "end: " + this.end;
+        return attributes;
+    }
+
     /**
      * Take from where the Express Conveyor Belt come from.
      * @return the Start

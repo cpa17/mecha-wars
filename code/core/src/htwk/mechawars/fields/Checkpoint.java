@@ -6,7 +6,7 @@ package htwk.mechawars.fields;
 public class Checkpoint extends Field {
 
     // Attribut was angibt um den wievielten Checkpoint es sich handelt
-    // 0 = Checkpoint ohne Nummer, 1 = 1. Checkpoint, 2 = 2. Checkpoint, 3 = 3. Checkpoint, 4 = 4. Checkpoint
+    // 0 = Checkpoint ohne Nummer, 1 = 1. Checkpoint, 2 = 2. Checkpoint, 3 = 3. Checkpoint, 4 = 4. Checkpoint, 5 = 5. Checkpoint
     private int number;
 
     /**
@@ -15,6 +15,12 @@ public class Checkpoint extends Field {
     public Checkpoint(int xcoor, int ycoor, int number) {
         super(xcoor, ycoor);
         this.number = number;
+    }
+
+    @Override
+    public String showAttributes(){
+        String attributes = "xcoor: " + this.xcoor + "ycoor: " + this.ycoor + "number: " + this.number;
+        return attributes;
     }
 
     /**

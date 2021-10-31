@@ -18,6 +18,12 @@ public class Blockade extends Field {
         this.type = type;
     }
 
+    @Override
+    public String showAttributes(){
+        String attributes = "xcoor: " + this.xcoor + "ycoor: " + this.ycoor + "type: " + this.type;
+        return attributes;
+    }
+
     /**
      * Take the Type of the Blockade.
      * @return the Type

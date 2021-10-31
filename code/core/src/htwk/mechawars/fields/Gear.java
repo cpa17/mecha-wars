@@ -17,6 +17,12 @@ public class Gear extends Field {
         this.direction = direction;
     }
 
+    @Override
+    public String showAttributes(){
+        String attributes = "xcoor: " + this.xcoor + "ycoor: " + this.ycoor + "direction: " + this.direction;
+        return attributes;
+    }
+
     /**
      * Take the Direction of the rotation of the Gear.
      * @return the Direction

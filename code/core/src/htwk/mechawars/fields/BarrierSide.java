@@ -17,6 +17,12 @@ public class BarrierSide extends Field {
         this.site = site;
     }
 
+    @Override
+    public String showAttributes(){
+        String attributes = "xcoor: " + this.xcoor + "ycoor: " + this.ycoor + "site: " + this.site;
+        return attributes;
+    }
+
     /**
      * Take the Side where the Barrier is.
      * @return the Side

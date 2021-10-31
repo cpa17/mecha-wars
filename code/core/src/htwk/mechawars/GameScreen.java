@@ -27,7 +27,6 @@ import htwk.mechawars.board.Dir;
 import htwk.mechawars.board.Robot;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.CardFunctions;
-import htwk.mechawars.fields.FieldsMainClass;
 import htwk.mechawars.fields.Field;
 
 /**
@@ -54,9 +53,9 @@ public class GameScreen implements Screen {
     private Robot player = new Robot();
 
     private TextButton[] buttons = new TextButton[choosableCardCount];
-    
-    //FieldsMainClass obj[] = new FieldsMainClass[144]; //hier der Objekt-Array -> MW37
-    //public static final FieldsMainClass[] obj = new FieldsMainClass[144];
+
+    //MW37
+    private Board testboard = Board.fromFile("testmap.txt");
 
     /**
      * Constructor of class GameScreen.
@@ -75,10 +74,10 @@ public class GameScreen implements Screen {
         Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         addButtonsToStage(skin);
         addScrollPanelToStage(skin);
-        board.startRobot(5, 5, Dir.NORTH, player); 
-        
-        //obj[2].showData();
-        getObjects();
+        board.startRobot(5, 5, Dir.NORTH, player);
+
+        //MW37
+        Field.createObjektMatrix(testboard);
     }
 
     /**
@@ -607,44 +606,6 @@ public class GameScreen implements Screen {
             x = 0;
         }
     }
-    
-    //MW37
-    
-/*    public void getObjects(){
-        
-        //FieldsMainClass obj[] = new FieldsMainClass[144]; //hier der Objekt-Array -> MW37
-        int objZ�hler = 0;
-        
-        for (int i = 0; i < board.matrix.length; i++) {
-            for (int j = 0; j < board.matrix[i].length; j++) {
-                //int CurrentObj = board.matrix[i][j];;
-                int type = board.matrix[i][j];
-                obj[2] = new FieldsMainClass(1, 1, 1);
-               
-                }
-            }
-        obj[2].showData();
-    }*/
-
-    public void getObjects(){
-        Board testboard = new Board(5,10);
-        for (int i = 0; i < testboard.matrix.length; i++) {
-            for (int j = 0; j < testboard.matrix[i].length; j++) {
-                testboard.matrix[i][j] = 9000+(10*i)+j;
-                System.out.print(testboard.matrix[i][j] + "  ");
-            }
-            System.out.println();
-        }
-        Field[][] testfieldmatrix = new Field[testboard.matrix.length][testboard.matrix[0].length];
-        for (int i = 0; i < testboard.matrix.length; i++) {
-            for (int j = 0; j < testboard.matrix[i].length; j++) {
-                testfieldmatrix[i][j] = new Field(i, j);
-                System.out.print("("+ testboard.matrix[i][j] + ", x=" + testfieldmatrix[i][j].getXcoor() + ", y=" + testfieldmatrix[i][j].getYcoor()+ ")  ");
-            }
-            System.out.println();
-        }
-    }
-    
 
     @Override
     public void resize(int width, int height) {

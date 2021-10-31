@@ -11,4 +11,5 @@ public class StandardField extends Field {
     public StandardField(int xcoor, int ycoor) {
         super(xcoor, ycoor);
     }
+
 }

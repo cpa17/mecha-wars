@@ -11,4 +11,5 @@ public class BlackHole extends Field {
     public BlackHole(int xcoor, int ycoor) {
         super(xcoor, ycoor);
     }
+
 }
