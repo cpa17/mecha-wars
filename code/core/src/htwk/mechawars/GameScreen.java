@@ -36,7 +36,6 @@ public class GameScreen implements Screen {
     private Texture industrialTile;
     private Texture robot;
     private Stage stage;
-
     private SpriteBatch batch;
     private Sprite sprite;
     private ZugInitialisierung zugInitialisierung = new ZugInitialisierung();
@@ -48,7 +47,8 @@ public class GameScreen implements Screen {
 
     private Card[] deck;
 
-    private Board board = Board.fromFile("map.txt");
+    //zum Ausgeben der bisherigen, "normalen" Spielfelds map mit mapStd ersetzen
+    private Board board = new Board("map.txt");
     private Robot player = new Robot();
 
     private TextButton[] buttons = new TextButton[choosableCardCount];
@@ -57,8 +57,8 @@ public class GameScreen implements Screen {
      * Constructor of class GameScreen.
      */
     public GameScreen() {
-        industrialTile = new Texture("industrialTile.png");
-
+        industrialTile = new Texture("mapAssets/0.png");
+        
         robot = new Texture("robot.png");
 
         batch = new SpriteBatch();
@@ -136,7 +136,7 @@ public class GameScreen implements Screen {
 
             cardOrder[pressCounter] = buttonNumber;
             pressCounter += 1;
-            
+
             buttons[buttonNumber - 1].setColor(Color.GREEN);
             buttons[buttonNumber - 1].setText(buttons[buttonNumber - 1].getText()
                     + " | Nr: " + (pressCounter));
@@ -533,8 +533,7 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
         batch.begin();
-
-        drawPlayingField();
+        Board.toAsset(batch, board);
         drawRobot();
         //player.drawParameters(batch);
         sprite.draw(batch);
