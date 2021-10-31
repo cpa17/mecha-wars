@@ -36,7 +36,6 @@ public class GameScreen implements Screen {
     private Texture industrialTile;
     private Texture robot;
     private Stage stage;
-
     private SpriteBatch batch;
     private Sprite sprite;
     private ZugInitialisierung zugInitialisierung = new ZugInitialisierung();
@@ -48,20 +47,21 @@ public class GameScreen implements Screen {
 
     private Card[] deck;
 
-    private Board board = Board.fromFile("map.txt");
+    //zum Ausgeben der bisherigen, "normalen" Spielfelds map mit mapStd ersetzen
+    private Board board = new Board("map.txt");
     private Robot player = new Robot();
 
     private TextButton[] buttons = new TextButton[choosableCardCount];
 
     //MW37
-    private Board testboard = Board.fromFile("testmap.txt");
+    private Board testboard = new Board("testmap.txt");
 
     /**
      * Constructor of class GameScreen.
      */
     public GameScreen() {
-        industrialTile = new Texture("industrialTile.png");
-
+        industrialTile = new Texture("mapAssets/0.png");
+        
         robot = new Texture("robot.png");
 
         batch = new SpriteBatch();
@@ -116,8 +116,9 @@ public class GameScreen implements Screen {
             // Button-ClickListener
             buttons[cardPrintCounter].addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
-                    buttonClickOrder(buttonNumber);
-                    zugInitialisierung.addCard(currentCard);
+                    if (buttonClickOrder(buttonNumber)) {
+                        zugInitialisierung.addCard(currentCard);
+                    }
                 }
             });
         }
@@ -130,28 +131,24 @@ public class GameScreen implements Screen {
      *  " | Nr: " with the corresponding Number of at what time it was clicked.
      * @param buttonNumber -> ID-number of clicked button
      */
-    private void buttonClickOrder(int buttonNumber) {
+    private boolean buttonClickOrder(int buttonNumber) {
         if (pressCounter < 5 - damagePoints) {
             // write the number of the button in cardOrder at pressCounter
-            cardOrder[pressCounter] = buttonNumber;
-
-            pressCounter += 1;
-
-            boolean clicked = true;
-
-            for (int i = (pressCounter - 2); i >= 0; i -= 1) {
+            for (int i = (pressCounter - 1); i >= 0; i -= 1) {
                 if (cardOrder[i] == buttonNumber) {
-                    clicked = false;
-                    pressCounter -= 1;
+                    return false;
                 }
             }
 
-            if (clicked) {
-                buttons[buttonNumber - 1].setColor(Color.GREEN);
-                buttons[buttonNumber - 1].setText(buttons[buttonNumber - 1].getText()
-                        + " | Nr: " + (pressCounter));
-            }
+            cardOrder[pressCounter] = buttonNumber;
+            pressCounter += 1;
+
+            buttons[buttonNumber - 1].setColor(Color.GREEN);
+            buttons[buttonNumber - 1].setText(buttons[buttonNumber - 1].getText()
+                    + " | Nr: " + (pressCounter));
+            return true;
         }
+        return false;
     }
 
     /**
@@ -542,8 +539,7 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
         batch.begin();
-
-        drawPlayingField();
+        Board.toAsset(batch, board);
         drawRobot();
         //player.drawParameters(batch);
         sprite.draw(batch);
@@ -561,6 +557,7 @@ public class GameScreen implements Screen {
         int y = Math.abs(player.getYcoor() - (board.matrix.length - 1));
 
         if (player.getDir() == Dir.NORTH) {
+            sprite.setPosition(tileSize * x, tileSize * y);
             sprite.setRotation(0);
         } else if (player.getDir() == Dir.EAST) {
             sprite.setPosition(tileSize * x, tileSize * y);
@@ -631,4 +628,5 @@ public class GameScreen implements Screen {
     public void hide() {
 
     }
+
 }

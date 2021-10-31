@@ -14,7 +14,7 @@ public class StandardField extends Field {
      */
     public StandardField(int xcoor, int ycoor) {
         super(xcoor, ycoor);
-        this.tile = new Texture("industrialTile.png");
+        this.tile = new Texture("mapAssets/0.png");
     }
 
 }
