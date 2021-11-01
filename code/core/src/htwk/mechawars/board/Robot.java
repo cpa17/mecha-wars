@@ -20,6 +20,7 @@ public class Robot {
     private Texture life;
     private Texture damage;
     private Texture shutDown;
+    private Texture hud;
     
     /**
      * Constructor of the robot class.
@@ -219,14 +220,23 @@ public class Robot {
     }
     
     /**
+     * Updates the shutDown texture depending on the amout of players.
+     */
+    private void createHud() {
+        hud = new Texture(Gdx.files.internal("parameters/hudrr.png"));
+    }
+    
+    /**
      * Draws the parameter textures. 
      */
     public void drawParameters(SpriteBatch batch) {
+        createHud();
         updateLife();
         updateDamage();
         updateShutDown();
-        batch.draw(life, 740, 20, 80, 80);
-        batch.draw(damage, 830, 20, 80, 80);
-        batch.draw(shutDown, 920, 20, 80, 80);
+        batch.draw(hud, 740, 15);
+        batch.draw(life, 750, 20);
+        batch.draw(damage, 825, 20);
+        batch.draw(shutDown, 900, 20);
     }
 }
