@@ -38,14 +38,14 @@ public class MechaWars extends Game {
     @Override
     public void dispose() {
 
-        if (JOptionPane.showConfirmDialog(null, 
-                "Programm wird beendet.", "Schließen?", 
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION){
-            // tu was - nicht beenden
-            dispose();
-        }//Ende Aktion des if-Teils
-        // falls ja ausgewaehlt -> beenden
+//        if (JOptionPane.showConfirmDialog(null, 
+//                "Programm wird beendet.", "Schließen?", 
+//                JOptionPane.YES_NO_OPTION,
+//                JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION){
+//            // tu was - nicht beenden
+//            dispose();
+//        }//Ende Aktion des if-Teils
+//        // falls ja ausgewaehlt -> beenden
 
     }
 }

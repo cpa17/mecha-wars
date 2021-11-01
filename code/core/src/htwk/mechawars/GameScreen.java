@@ -1,5 +1,7 @@
 package htwk.mechawars;
 
+import javax.swing.JOptionPane;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -227,7 +229,14 @@ public class GameScreen implements Screen {
 
         endGameButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.exit();
+                if (JOptionPane.showConfirmDialog(null, 
+                        "Programm wird beendet.", "Schlieﬂen?", 
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+                    // tu was - beenden
+                    Gdx.app.exit();
+                }//Ende Aktion des if-Teils
+                // sonst nichts
             }
         });
 

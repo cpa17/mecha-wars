@@ -1,5 +1,7 @@
 package htwk.mechawars;
 
+import javax.swing.JOptionPane;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -56,9 +58,16 @@ public class MainMenu implements Screen {
         endGame.setPosition(440, 100);
         endGame.setSize(400, 100);
         endGame.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button) {
-                Gdx.app.exit();
+            @SuppressWarnings("unused")
+            public void clicked(InputEvent e, float x, float y) {
+                if (JOptionPane.showConfirmDialog(null, 
+                        "Programm wird beendet.", "Schlieﬂen?", 
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+                    // tu was - beenden
+                    Gdx.app.exit();
+                }//Ende Aktion des if-Teils
+                // sonst nichts
             }
         });
 
