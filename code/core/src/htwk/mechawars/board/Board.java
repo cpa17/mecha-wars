@@ -182,18 +182,19 @@ public class Board {
 
         checkShutDown(robot);
 
-        try {
             for (Card card : phase) {
                 if (card.getCardAttributeType() == Type.mov) {
                     robot.moveInDirection(card.getCardAttributeMovCount());
                 } else {
                     robot.turn(card.getCardAttributeMovCount());
                 }
+                if (robot.getXcoor() >= matrix[1].length || robot.getYcoor() >= matrix.length
+                        || robot.getXcoor() < 0 || robot.getYcoor() < 0){
+                    robot.setXcoor(robot.getStartX());
+                    robot.setYcoor(robot.getStartY());
+                    return;
+                }
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            robot.setXcoor(robot.getStartX());
-            robot.setYcoor(robot.getStartY());
-        }
     }
 
     /**
