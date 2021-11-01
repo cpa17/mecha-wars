@@ -42,7 +42,7 @@ public class GameScreen implements Screen {
     private int damagePoints = 0;
     private int choosableCardCount = 9;
     
-    private int timer = 59;
+    public int timer = 59;
 
     private Card[] deck;
 
@@ -65,7 +65,7 @@ public class GameScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-        addButtonsToStage(skin);
+        addButtonsToStage(skin, this);
         addScrollPanelToStage(skin);
         board.startRobot(5, 5, Dir.NORTH, player);
     }
@@ -186,7 +186,7 @@ public class GameScreen implements Screen {
      *
      * @param skin Object of class Skin which was initialized in the constructor.
      */
-    public void addButtonsToStage(Skin skin) {
+    public void addButtonsToStage(Skin skin, GameScreen screen) {
 
         Button startExecutionButton = new TextButton("Ausfuehrung starten", skin);
         Button endGameButton = new TextButton("Spiel beenden", skin);
@@ -211,7 +211,7 @@ public class GameScreen implements Screen {
                 if (cardOrder[4 - damagePoints] != -1) {
                     deaktiviereButtons();
                     zugInititalisierung.initialisiereBewegung();
-                    board.move(zugInititalisierung.getList(), player);
+                    board.move(zugInititalisierung.getList(), player, screen);
                     zugInititalisierung.resetList();
                     startExecutionButton.setColor(Color.LIGHT_GRAY);
                     cardOrderClear();

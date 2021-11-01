@@ -1,12 +1,14 @@
 package htwk.mechawars.board;
 
+import htwk.mechawars.GameScreen;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.Type;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -59,12 +61,12 @@ public class Board {
      * @return board Board which contains the game plan as a matrix
      */
     public static Board fromString(String mapString) {
-    
+
         ArrayList<ArrayList<Integer>> tempLayout = new ArrayList<>();
-           
+
         String[] linesArray = mapString.split("\\r?\\n");
         String currentLine;
-        
+
         Scanner scn = new Scanner(mapString);
         String s = ""; 
         while (scn.hasNext()) {
@@ -83,13 +85,13 @@ public class Board {
             ArrayList<Integer> row = new ArrayList<>();
             String[] values = currentLine.trim().split(" ");
             for (String string : values) {
-                
+
                 if (values.length > 12) {
                     System.out.println("The map has too many columns, only 12 are allowed!");
                     Gdx.app.exit();
                     System.exit(-1);
                 } 
-                
+
                 if (!string.isEmpty()) {
                     int id = Integer.parseInt(string);
                     row.add(id);
@@ -101,13 +103,13 @@ public class Board {
         int width = tempLayout.get(0).size();
         int height = tempLayout.size();
 
-        
+
         if (height > 12) {
             System.out.println("The map has too many rows, only 12 are allowed!");
             Gdx.app.exit();
             System.exit(-1);
         }                       
-        
+
         Board board = new Board(width, height);
 
         for (int y = 0; y < height; y++) {
@@ -157,19 +159,20 @@ public class Board {
      * @param phase List of cards
      * @param robot the robot that should move
      */
-    public void move(LinkedList<Card> phase, Robot robot) {
+    public void move(LinkedList<Card> phase, Robot robot, GameScreen screen) {
         try {
             for (Card card : phase) {
-
                 if (card.getCardAttributeType() == Type.mov) {
-                    this.matrix[robot.getYcoor()][robot.getXcoor()] = 0;
+                    matrix[robot.getYcoor()][robot.getXcoor()] = 0;
                     robot.moveInDirection(card.getCardAttributeMovCount());
                 } else {
                     robot.turn(card.getCardAttributeMovCount());
                 }
-                this.matrix[robot.getYcoor()][robot.getXcoor()] = robot.getDir().getValue();
 
+                matrix[robot.getYcoor()][robot.getXcoor()] = robot.getDir().getValue();
+                screen.drawRobot();
             }
+
         } catch (ArrayIndexOutOfBoundsException e) {
             robot.setXcoor(robot.getStartX());
             robot.setYcoor(robot.getStartY());
