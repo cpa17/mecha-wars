@@ -34,7 +34,6 @@ public class Robot {
         lastRound = false;
         nextRound = false;
         destroyed = false;
-
     }
 
     /**
