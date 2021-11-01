@@ -39,6 +39,7 @@ public class GameScreen implements Screen {
     private SpriteBatch batch;
     private Sprite sprite;
     private ZugInitialisierung zugInitialisierung = new ZugInitialisierung();
+    private Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
     private int[] cardOrder = { -1, -1, -1, -1, -1};
     private int pressCounter = 0;
@@ -67,7 +68,6 @@ public class GameScreen implements Screen {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
-        Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         addButtonsToStage(skin);
         addScrollPanelToStage(skin);
         board.startRobot(5, 5, Dir.NORTH, player);
@@ -173,7 +173,7 @@ public class GameScreen implements Screen {
 
     private void deactivateButtons() {
         for (TextButton button : buttons) {
-                button.setTouchable(Touchable.disabled);
+            button.setTouchable(Touchable.disabled);
         }
     }
 
@@ -181,6 +181,12 @@ public class GameScreen implements Screen {
         for (TextButton button : buttons) {
             button.setTouchable(Touchable.enabled);
         }
+    }
+
+    private void updateButtons() {
+        stage.clear();
+        addButtonsToStage(skin);
+        addScrollPanelToStage(skin);
     }
 
     /**
@@ -219,6 +225,7 @@ public class GameScreen implements Screen {
                         startExecutionButton.setColor(Color.LIGHT_GRAY);
                         cardOrderClear();
                         activateButtons();
+                        updateButtons();
                     } else {
                         startExecutionButton.setColor(Color.RED);
                     }
@@ -227,6 +234,7 @@ public class GameScreen implements Screen {
                     board.move(zugInitialisierung.getList(), player);
                     zugInitialisierung.resetList();
                     startExecutionButton.setColor(Color.LIGHT_GRAY);
+                    updateButtons();
                 }
             }
         });
@@ -540,6 +548,51 @@ public class GameScreen implements Screen {
         });
 
         stage.addActor(buttonInfo);
+
+        Button shutDownButton = new TextButton("ShutDown", skin);
+        Button wakeUpButton = new TextButton("WakeUp", skin);
+
+        shutDownButton.setSize(160, 43);
+        wakeUpButton.setSize(160, 43);
+
+        int shutDownButtonX = Gdx.graphics.getHeight()
+                + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
+        int shutDownButtonY = Gdx.graphics.getHeight() - 400;
+        int wakeUpButtonX = Gdx.graphics.getHeight()
+                + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
+        int wakeUpButtonY = Gdx.graphics.getHeight() - 600;
+
+        shutDownButton.setPosition(shutDownButtonX, shutDownButtonY);
+        wakeUpButton.setPosition(wakeUpButtonX, wakeUpButtonY);
+
+        shutDownButton.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                player.setNextRound(true);
+                shutDownButton.setColor(Color.GREEN);
+            }
+        });
+        wakeUpButton.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                player.setNextRound(false);
+                wakeUpButton.setColor(Color.GREEN);
+            }
+        });
+
+        if(player.getShutDown()){
+            shutDownButton.setTouchable(Touchable.disabled);
+            wakeUpButton.setTouchable(Touchable.enabled);
+            shutDownButton.setDisabled(true);
+            wakeUpButton.setDisabled(false);
+        } else{
+            shutDownButton.setTouchable(Touchable.enabled);
+            wakeUpButton.setTouchable(Touchable.disabled);
+            shutDownButton.setDisabled(false);
+            wakeUpButton.setDisabled(true);
+        }
+
+        stage.addActor(shutDownButton);
+        stage.addActor(wakeUpButton);
+
     }
 
 

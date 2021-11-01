@@ -194,6 +194,8 @@ public class Board {
             robot.setXcoor(robot.getStartX());
             robot.setYcoor(robot.getStartY());
         }
+
+        robot.setShutDown(robot.getNextRound());
     }
 
     /**
