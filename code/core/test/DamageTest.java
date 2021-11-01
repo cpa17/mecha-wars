@@ -37,7 +37,6 @@ public class DamageTest {
         assertEquals(3, robot.getLifePoints());
 
         board.move(karten, robot);
-        robot.setShutDown(false);
 
         assertEquals(0, robot.getDamagePoints());
         assertFalse(robot.getShutDown());
@@ -61,17 +60,22 @@ public class DamageTest {
         assertFalse(robot.getDestroyed());
         assertEquals(3, robot.getLifePoints());
 
-        robot.setShutDown(true);
+        robot.setNextRound(true);
         robot.setDestroyed(true);
         assertTrue(robot.getDestroyed());
+        board.move(karten, robot);
+
+        assertEquals(6, robot.getDamagePoints());
+        assertTrue(robot.getShutDown());
+        assertFalse(robot.getDestroyed());
+        assertEquals(3, robot.getLifePoints());
+
         board.move(karten, robot);
 
         assertEquals(0, robot.getDamagePoints());
         assertTrue(robot.getShutDown());
         assertFalse(robot.getDestroyed());
         assertEquals(3, robot.getLifePoints());
-
-
     }
 
     /**
