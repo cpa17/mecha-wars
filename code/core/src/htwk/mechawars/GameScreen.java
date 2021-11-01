@@ -567,14 +567,28 @@ public class GameScreen implements Screen {
 
         shutDownButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                player.setNextRound(true);
-                shutDownButton.setColor(Color.GREEN);
+                if(!player.getNextRound()) {
+                    player.setNextRound(true);
+                    shutDownButton.setColor(Color.GREEN);
+                    System.out.println("shutdown");
+                } else {
+                    player.setNextRound(false);
+                    shutDownButton.setColor(Color.LIGHT_GRAY);
+                    System.out.println("awake");
+                }
             }
         });
         wakeUpButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                player.setNextRound(false);
-                wakeUpButton.setColor(Color.GREEN);
+                if(player.getNextRound()) {
+                    player.setNextRound(false);
+                    wakeUpButton.setColor(Color.GREEN);
+                    System.out.println("wake up");
+                } else {
+                    player.setNextRound(true);
+                    wakeUpButton.setColor(Color.LIGHT_GRAY);
+                    System.out.println("off");
+                }
             }
         });
 
