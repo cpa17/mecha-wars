@@ -100,7 +100,7 @@ public class GameScreen implements Screen {
 
         if (!player.getShutDown()) {
             for (int cardPrintCounter = 0; cardPrintCounter < choosableCardCount;
-                 cardPrintCounter += 1) {
+                    cardPrintCounter += 1) {
                 Card currentCard = deck[cardPrintCounter];
                 buttons[cardPrintCounter] = new TextButton(currentCard.getCardAttributePriority()
                         + " - " + currentCard, skin);
@@ -215,7 +215,7 @@ public class GameScreen implements Screen {
 
         startExecutionButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                if(!player.getShutDown()) {
+                if (!player.getShutDown()) {
                     //If All Cards are chosen
                     if (cardOrder[4 - damagePoints] != -1) {
                         deactivateButtons();
@@ -259,8 +259,7 @@ public class GameScreen implements Screen {
         removeCardOrder.setPosition(removeCardOrderX, removeCardOrderY);
 
         removeCardOrder.addListener(new ClickListener() {
-
-                public void clicked (InputEvent event,float x, float y){
+            public void clicked(InputEvent event, float x, float y) {
                 cardOrderClear();
                 zugInitialisierung.resetList();
             }
@@ -269,10 +268,10 @@ public class GameScreen implements Screen {
 
         stage.addActor(removeCardOrder);
 
-        if(player.getShutDown()){
+        if (player.getShutDown()) {
             removeCardOrder.setTouchable(Touchable.disabled);
             removeCardOrder.setDisabled(true);
-        } else{
+        } else {
             removeCardOrder.setTouchable(Touchable.enabled);
             removeCardOrder.setDisabled(false);
         }
@@ -567,7 +566,7 @@ public class GameScreen implements Screen {
 
         shutDownButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                if(!player.getNextRound()) {
+                if (!player.getNextRound()) {
                     player.setNextRound(true);
                     shutDownButton.setColor(Color.GREEN);
                     System.out.println("shutdown");
@@ -580,7 +579,7 @@ public class GameScreen implements Screen {
         });
         wakeUpButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                if(player.getNextRound()) {
+                if (player.getNextRound()) {
                     player.setNextRound(false);
                     wakeUpButton.setColor(Color.GREEN);
                     System.out.println("wake up");
@@ -592,12 +591,12 @@ public class GameScreen implements Screen {
             }
         });
 
-        if(player.getShutDown()){
+        if (player.getShutDown()) {
             shutDownButton.setTouchable(Touchable.disabled);
             wakeUpButton.setTouchable(Touchable.enabled);
             shutDownButton.setDisabled(true);
             wakeUpButton.setDisabled(false);
-        } else{
+        } else {
             shutDownButton.setTouchable(Touchable.enabled);
             wakeUpButton.setTouchable(Touchable.disabled);
             shutDownButton.setDisabled(false);
