@@ -29,7 +29,7 @@ public class Robot {
     public Robot() {
         lifePoints = 3;
         damagePoints = 0;
-        shutDownMark = false;
+        shutDownMark = true;
         lastRound = false;
         destroyed = false;
     }

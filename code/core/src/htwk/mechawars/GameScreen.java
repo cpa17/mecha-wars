@@ -98,23 +98,25 @@ public class GameScreen implements Screen {
         // shuffle Deck
         deck = CardFunctions.shuffle(deck);
 
-        for (int cardPrintCounter = 0; cardPrintCounter < choosableCardCount;
-                cardPrintCounter += 1) {
-            Card currentCard = deck[cardPrintCounter];
-            buttons[cardPrintCounter] = new TextButton(currentCard.getCardAttributePriority()
-                    + " - " + currentCard, skin);
-            table.row();
-            table.add(buttons[cardPrintCounter]);
-            int buttonNumber = (cardPrintCounter + 1);
+        if (!player.getShutDown()) {
+            for (int cardPrintCounter = 0; cardPrintCounter < choosableCardCount;
+                 cardPrintCounter += 1) {
+                Card currentCard = deck[cardPrintCounter];
+                buttons[cardPrintCounter] = new TextButton(currentCard.getCardAttributePriority()
+                        + " - " + currentCard, skin);
+                table.row();
+                table.add(buttons[cardPrintCounter]);
+                int buttonNumber = (cardPrintCounter + 1);
 
-            // Button-ClickListener
-            buttons[cardPrintCounter].addListener(new ClickListener() {
-                public void clicked(InputEvent event, float x, float y) {
-                    if (buttonClickOrder(buttonNumber)) {
-                        zugInitialisierung.addCard(currentCard);
+                // Button-ClickListener
+                buttons[cardPrintCounter].addListener(new ClickListener() {
+                    public void clicked(InputEvent event, float x, float y) {
+                        if (buttonClickOrder(buttonNumber)) {
+                            zugInitialisierung.addCard(currentCard);
+                        }
                     }
-                }
-            });
+                });
+            }
         }
 
         container.add(scrollPanel).grow();
@@ -171,7 +173,7 @@ public class GameScreen implements Screen {
 
     private void deactivateButtons() {
         for (TextButton button : buttons) {
-            button.setTouchable(Touchable.disabled);
+                button.setTouchable(Touchable.disabled);
         }
     }
 
@@ -207,17 +209,24 @@ public class GameScreen implements Screen {
 
         startExecutionButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                //If All Cards are chosen
-                if (cardOrder[4 - damagePoints] != -1) {
-                    deactivateButtons();
+                if(!player.getShutDown()) {
+                    //If All Cards are chosen
+                    if (cardOrder[4 - damagePoints] != -1) {
+                        deactivateButtons();
+                        zugInitialisierung.initialisiereBewegung();
+                        board.move(zugInitialisierung.getList(), player);
+                        zugInitialisierung.resetList();
+                        startExecutionButton.setColor(Color.LIGHT_GRAY);
+                        cardOrderClear();
+                        activateButtons();
+                    } else {
+                        startExecutionButton.setColor(Color.RED);
+                    }
+                } else {
                     zugInitialisierung.initialisiereBewegung();
                     board.move(zugInitialisierung.getList(), player);
                     zugInitialisierung.resetList();
                     startExecutionButton.setColor(Color.LIGHT_GRAY);
-                    cardOrderClear();
-                    activateButtons();
-                } else {
-                    startExecutionButton.setColor(Color.RED);
                 }
             }
         });
@@ -242,13 +251,23 @@ public class GameScreen implements Screen {
         removeCardOrder.setPosition(removeCardOrderX, removeCardOrderY);
 
         removeCardOrder.addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y) {
+
+                public void clicked (InputEvent event,float x, float y){
                 cardOrderClear();
                 zugInitialisierung.resetList();
             }
+
         });
 
         stage.addActor(removeCardOrder);
+
+        if(player.getShutDown()){
+            removeCardOrder.setTouchable(Touchable.disabled);
+            removeCardOrder.setDisabled(true);
+        } else{
+            removeCardOrder.setTouchable(Touchable.enabled);
+            removeCardOrder.setDisabled(false);
+        }
 
         // add Button for hint and infos
         Button buttonInfo = new TextButton("Infos", skin);
