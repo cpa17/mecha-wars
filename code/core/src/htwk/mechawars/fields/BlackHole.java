@@ -13,7 +13,7 @@ public class BlackHole extends Field {
      */
     public BlackHole(int xcoor, int ycoor) {
         super(xcoor, ycoor);
-        this.tile = new Texture("mapAssets/3.png");
+        this.tile = new Texture("mapAssets/BlackHole.png");
     }
     
     public Texture getTile(){

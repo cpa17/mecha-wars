@@ -60,7 +60,7 @@ public class GameScreen implements Screen {
      * Constructor of class GameScreen.
      */
     public GameScreen() {
-        industrialTile = new Texture("mapAssets/0.png");
+        industrialTile = new Texture("mapAssets/StandardField.png");
         
         robot = new Texture("robot.png");
 

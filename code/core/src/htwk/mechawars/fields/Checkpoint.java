@@ -18,7 +18,7 @@ public class Checkpoint extends Field {
     public Checkpoint(int xcoor, int ycoor, int number) {
         super(xcoor, ycoor);
         this.number = number;
-        this.tile = new Texture("mapAssets/12.png");
+        this.tile = new Texture("mapAssets/Checkpoint.png");
     }
 
     @Override

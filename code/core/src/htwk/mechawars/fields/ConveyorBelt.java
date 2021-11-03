@@ -27,6 +27,10 @@ public class ConveyorBelt extends Field {
         //15.png -> von oben und rechts nach unten
         //16.png -> von unten nach oben
         
+        String internalPath = "mapAssets/" + "conveyorBelt/" + "ConveyorBelt" + String.valueOf(start) + String.valueOf(end) + ".png";
+        this.tile = new Texture(internalPath);
+        
+        /*
         switch(end){
         //nach links 
         case 1:
@@ -144,7 +148,8 @@ public class ConveyorBelt extends Field {
                     this.tile = new Texture("mapAssets/8.png");
                     break;       
           };
-    }
+        }
+        */
     }
 
     @Override
