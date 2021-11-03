@@ -152,8 +152,9 @@ public class ExpressConveyorBelt extends Field {
     }
 
     @Override
-    public String showAttributes(){
-        String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor + ", start: " + this.start + ", end: " + this.end;
+    public String showAttributes() {
+        String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor
+                + ", start: " + this.start + ", end: " + this.end;
         return attributes;
     }
 
@@ -161,7 +162,7 @@ public class ExpressConveyorBelt extends Field {
      * Take from where the Express Conveyor Belt come from.
      * @return the Start
      */
-    public int getStart(){
+    public int getStart() {
         return this.start;
     }
 
@@ -169,11 +170,11 @@ public class ExpressConveyorBelt extends Field {
      * Take where the Express Conveyor Belt goes.
      * @return the End
      */
-    public int getEnd(){
+    public int getEnd() {
         return this.end;
     }
     
-    public Texture getTile(){
+    public Texture getTile() {
         return this.tile;
     }
 }

@@ -26,6 +26,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+
 /**
  * Class that presents the game board.
  */
@@ -106,7 +107,7 @@ public class Board {
             } catch (NumberFormatException z) {
                 System.out.println("The map obtains elements which are not integer!");
                 Gdx.app.exit();
-                //System.exit(-1);
+                System.exit(-1);
             }
         }
 
@@ -185,320 +186,172 @@ public class Board {
         robot.setDir(dir);
     }
 
-    public static Field[][] createFieldMatrix(Board testboard){
-        Field[][] testfieldmatrix = new Field[testboard.matrix.length][testboard.matrix[0].length];
-        for (int i = 0; i < testboard.matrix.length; i++) {
-            for (int j = 0; j < testboard.matrix[i].length; j++) {
-                switch(testboard.matrix[i][j]){
+    /**
+     * Method that creates a matrix with field objects from a int matrix.
+     *
+     * @param board Object which contains the int matrix as a parameter
+     * @return fieldmatrix A matrix with field objects
+     */
+    public static Field[][] createFieldMatrix(Board board) {
+        Field[][] fieldmatrix = new Field[board.matrix.length][board.matrix[0].length];
+        int[] allowed;
+        for (int i = 0; i < board.matrix.length; i++) {
+            for (int j = 0; j < board.matrix[i].length; j++) {
+                //Switch mit den ersten drei Ziffern die für die Klasse stehen
+                switch (board.matrix[i][j] / 100) {
 
                     //BarrierCorner
-                    case 10001:
-                        testfieldmatrix[i][j] = new BarrierCorner(j,i,1);
-                        break;
-                    case 10002:
-                        testfieldmatrix[i][j] = new BarrierCorner(j,i,2);
-                        break;
-                    case 10003:
-                        testfieldmatrix[i][j] = new BarrierCorner(j,i,3);
-                        break;
-                    case 10004:
-                        testfieldmatrix[i][j] = new BarrierCorner(j,i,4);
+                    case 100:
+                        //für das Attribut wird über Modulo auf die letze Ziffer zugegriffen
+                        int corner = board.matrix[i][j] % 10;
+                        allowed = new int[]{1, 2, 3, 4};
+                        //Test ob ausgelesener Attributwert in Menge der erlaubten Attributwerte enthalten ist mittels Lambda-Ausdruck
+                        if (Arrays.stream(allowed).anyMatch(x -> x == corner)) {
+                            fieldmatrix[i][j] = new BarrierCorner(j, i, corner);
+                        } else {
+                            System.out.println("Codierung " + board.matrix[i][j]
+                                    + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
+                        }
                         break;
 
                     //BarrierSide
-                    case 10101:
-                        testfieldmatrix[i][j] = new BarrierSide(j,i,1);
-                        break;
-                    case 10102:
-                        testfieldmatrix[i][j] = new BarrierSide(j,i,2);
-                        break;
-                    case 10103:
-                        testfieldmatrix[i][j] = new BarrierSide(j,i,3);
-                        break;
-                    case 10104:
-                        testfieldmatrix[i][j] = new BarrierSide(j,i,4);
+                    case 101:
+                        int side = board.matrix[i][j] % 10;
+                        allowed = new int[]{1, 2, 3, 4};
+                        if (Arrays.stream(allowed).anyMatch(x -> x == side)) {
+                            fieldmatrix[i][j] = new BarrierSide(j, i, side);
+                        } else {
+                            System.out.println("Codierung " + board.matrix[i][j]
+                                    + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
+                        }
                         break;
 
                     //BlackHole
-                    case 10200:
-                        testfieldmatrix[i][j] = new BlackHole(j,i);
+                    case 102:
+                        fieldmatrix[i][j] = new BlackHole(j, i);
                         break;
 
                     //Blockade
-                    case 10301:
-                        testfieldmatrix[i][j] = new Blockade(j,i,1);
-                        break;
-                    case 10302:
-                        testfieldmatrix[i][j] = new Blockade(j,i,2);
-                        break;
-                    case 10303:
-                        testfieldmatrix[i][j] = new Blockade(j,i,3);
-                        break;
-                    case 10304:
-                        testfieldmatrix[i][j] = new Blockade(j,i,4);
+                    case 103:
+                        int typeB = board.matrix[i][j] % 10;
+                        allowed = new int[]{1, 2, 3, 4};
+                        if (Arrays.stream(allowed).anyMatch(x -> x == typeB)) {
+                            fieldmatrix[i][j] = new Blockade(j, i, typeB);
+                        } else {
+                            System.out.println("Codierung " + board.matrix[i][j]
+                                    + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
+                        }
                         break;
 
                     //Checkpoint
-                    case 10400:
-                        testfieldmatrix[i][j] = new Checkpoint(j,i,0);
-                        break;
-                    case 10401:
-                        testfieldmatrix[i][j] = new Checkpoint(j,i,1);
-                        break;
-                    case 10402:
-                        testfieldmatrix[i][j] = new Checkpoint(j,i,2);
-                        break;
-                    case 10403:
-                        testfieldmatrix[i][j] = new Checkpoint(j,i,3);
-                        break;
-                    case 10404:
-                        testfieldmatrix[i][j] = new Checkpoint(j,i,4);
-                        break;
-                    case 10405:
-                        testfieldmatrix[i][j] = new Checkpoint(j,i,5);
+                    case 104:
+                        int numberC = board.matrix[i][j] % 10;
+                        allowed = new int[]{0, 1, 2, 3, 4, 5};
+                        if (Arrays.stream(allowed).anyMatch(x -> x == numberC)) {
+                            fieldmatrix[i][j] = new Checkpoint(j, i, numberC);
+                        } else {
+                            System.out.println("Codierung " + board.matrix[i][j]
+                                    + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
+                        }
                         break;
 
                     //ConveyorBelt
-                    case 10521:
-                        testfieldmatrix[i][j] = new ConveyorBelt(j,i,2,1);
-                        break;
-                    case 10531:
-                        testfieldmatrix[i][j] = new ConveyorBelt(j,i,3,1);
-                        break;
-                    case 10541:
-                        testfieldmatrix[i][j] = new ConveyorBelt(j,i,4,1);
-                        break;
-                    case 10561:
-                        testfieldmatrix[i][j] = new ConveyorBelt(j,i,6,1);
-                        break;
-                    case 10571:
-                        testfieldmatrix[i][j] = new ConveyorBelt(j,i,7,1);
-                        break;
-                    case 10591:
-                        testfieldmatrix[i][j] = new ConveyorBelt(j,i,9,1);
-                        break;
-                    case 10502:
-                        testfieldmatrix[i][j] = new ConveyorBelt(j,i,0,2);
-                        break;
-                    case 10512:
-                        testfieldmatrix[i][j] = new ConveyorBelt(j,i,1,2);
-                        break;
-                    case 10532:
-                        testfieldmatrix[i][j] = new ConveyorBelt(j,i,3,2);
-                        break;
-                    case 10542:
-                        testfieldmatrix[i][j] = new ConveyorBelt(j,i,4,2);
-                        break;
-                    case 10552:
-                        testfieldmatrix[i][j] = new ConveyorBelt(j,i,5,2);
-                        break;
-                    case 10592:
-                        testfieldmatrix[i][j] = new ConveyorBelt(j,i,9,2);
-                        break;
-                    case 10503:
-                        testfieldmatrix[i][j] = new ConveyorBelt(j,i,0,3);
-                        break;
-                    case 10513:
-                        testfieldmatrix[i][j] = new ConveyorBelt(j,i,1,3);
-                        break;
-                    case 10523:
-                        testfieldmatrix[i][j] = new ConveyorBelt(j,i,2,3);
-                        break;
-                    case 10543:
-                        testfieldmatrix[i][j] = new ConveyorBelt(j,i,4,3);
-                        break;
-                    case 10563:
-                        testfieldmatrix[i][j] = new ConveyorBelt(j,i,6,3);
-                        break;
-                    case 10583:
-                        testfieldmatrix[i][j] = new ConveyorBelt(j,i,8,3);
-                        break;
-                    case 10514:
-                        testfieldmatrix[i][j] = new ConveyorBelt(j,i,1,4);
-                        break;
-                    case 10524:
-                        testfieldmatrix[i][j] = new ConveyorBelt(j,i,2,4);
-                        break;
-                    case 10534:
-                        testfieldmatrix[i][j] = new ConveyorBelt(j,i,3,4);
-                        break;
-                    case 10554:
-                        testfieldmatrix[i][j] = new ConveyorBelt(j,i,5,4);
-                        break;
-                    case 10574:
-                        testfieldmatrix[i][j] = new ConveyorBelt(j,i,7,4);
-                        break;
-                    case 10584:
-                        testfieldmatrix[i][j] = new ConveyorBelt(j,i,8,4);
+                    case 105:
+                        // zum Angeben des Attributes, dass an vorletzter Stelle steht, wird über das Teilen durch 10 und Modulo zugegriffen
+                        int startC = (board.matrix[i][j] / 10) % 10;
+                        int endC = board.matrix[i][j] % 10;
+                        allowed = new int[]{21, 31, 41, 61, 71, 91, 2, 12, 32, 42, 52, 92,
+                                3, 13, 23, 43, 63, 83, 14, 24, 34, 54, 74, 84};
+                        if (Arrays.stream(allowed).anyMatch(x -> x == (10 * startC) + endC)) {
+                            fieldmatrix[i][j] = new ConveyorBelt(j, i, startC, endC);
+                        } else {
+                            System.out.println("Codierung " + board.matrix[i][j]
+                                    + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
+                        }
                         break;
 
                     //ExpressConveyorBelt
-                    case 10621:
-                        testfieldmatrix[i][j] = new ExpressConveyorBelt(j,i,2,1);
-                        break;
-                    case 10631:
-                        testfieldmatrix[i][j] = new ExpressConveyorBelt(j,i,3,1);
-                        break;
-                    case 10641:
-                        testfieldmatrix[i][j] = new ExpressConveyorBelt(j,i,4,1);
-                        break;
-                    case 10661:
-                        testfieldmatrix[i][j] = new ExpressConveyorBelt(j,i,6,1);
-                        break;
-                    case 10671:
-                        testfieldmatrix[i][j] = new ExpressConveyorBelt(j,i,7,1);
-                        break;
-                    case 10691:
-                        testfieldmatrix[i][j] = new ExpressConveyorBelt(j,i,9,1);
-                        break;
-                    case 10602:
-                        testfieldmatrix[i][j] = new ExpressConveyorBelt(j,i,0,2);
-                        break;
-                    case 10612:
-                        testfieldmatrix[i][j] = new ExpressConveyorBelt(j,i,1,2);
-                        break;
-                    case 10632:
-                        testfieldmatrix[i][j] = new ExpressConveyorBelt(j,i,3,2);
-                        break;
-                    case 10642:
-                        testfieldmatrix[i][j] = new ExpressConveyorBelt(j,i,4,2);
-                        break;
-                    case 10652:
-                        testfieldmatrix[i][j] = new ExpressConveyorBelt(j,i,5,2);
-                        break;
-                    case 10692:
-                        testfieldmatrix[i][j] = new ExpressConveyorBelt(j,i,9,2);
-                        break;
-                    case 10603:
-                        testfieldmatrix[i][j] = new ExpressConveyorBelt(j,i,0,3);
-                        break;
-                    case 10613:
-                        testfieldmatrix[i][j] = new ExpressConveyorBelt(j,i,1,3);
-                        break;
-                    case 10623:
-                        testfieldmatrix[i][j] = new ExpressConveyorBelt(j,i,2,3);
-                        break;
-                    case 10643:
-                        testfieldmatrix[i][j] = new ExpressConveyorBelt(j,i,4,3);
-                        break;
-                    case 10663:
-                        testfieldmatrix[i][j] = new ExpressConveyorBelt(j,i,6,3);
-                        break;
-                    case 10683:
-                        testfieldmatrix[i][j] = new ExpressConveyorBelt(j,i,8,3);
-                        break;
-                    case 10614:
-                        testfieldmatrix[i][j] = new ExpressConveyorBelt(j,i,1,4);
-                        break;
-                    case 10624:
-                        testfieldmatrix[i][j] = new ExpressConveyorBelt(j,i,2,4);
-                        break;
-                    case 10634:
-                        testfieldmatrix[i][j] = new ExpressConveyorBelt(j,i,3,4);
-                        break;
-                    case 10654:
-                        testfieldmatrix[i][j] = new ExpressConveyorBelt(j,i,5,4);
-                        break;
-                    case 10674:
-                        testfieldmatrix[i][j] = new ExpressConveyorBelt(j,i,7,4);
-                        break;
-                    case 10684:
-                        testfieldmatrix[i][j] = new ExpressConveyorBelt(j,i,8,4);
+                    case 106:
+                        int startEc = (board.matrix[i][j] / 10) % 10;
+                        int endEc = board.matrix[i][j] % 10;
+                        allowed = new int[]{21, 31, 41, 61, 71, 91, 2, 12, 32, 42, 52, 92,
+                                3, 13, 23, 43, 63, 83, 14, 24, 34, 54, 74, 84};
+                        if (Arrays.stream(allowed).anyMatch(x -> x == (10 * startEc) + endEc)) {
+                            fieldmatrix[i][j] = new ExpressConveyorBelt(j, i, startEc, endEc);
+                        } else {
+                            System.out.println("Codierung " + board.matrix[i][j]
+                                    + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
+                        }
                         break;
 
                     //Gear
-                    case 10701:
-                        testfieldmatrix[i][j] = new Gear(j,i,1);
-                        break;
-                    case 10702:
-                        testfieldmatrix[i][j] = new Gear(j,i,2);
+                    case 107:
+                        int direction = board.matrix[i][j] % 10;
+                        allowed = new int[]{1, 2};
+                        if (Arrays.stream(allowed).anyMatch(x -> x == direction)) {
+                            fieldmatrix[i][j] = new Gear(j, i, direction);
+                        } else {
+                            System.out.println("Codierung " + board.matrix[i][j]
+                                    + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
+                        }
                         break;
 
                     //Laser
-                    case 10800:
-                        testfieldmatrix[i][j] = new Laser(j,i,0);
-                        break;
-                    case 10801:
-                        testfieldmatrix[i][j] = new Laser(j,i,1);
-                        break;
-                    case 10802:
-                        testfieldmatrix[i][j] = new Laser(j,i,2);
-                        break;
-                    case 10803:
-                        testfieldmatrix[i][j] = new Laser(j,i,3);
-                        break;
-                    case 10804:
-                        testfieldmatrix[i][j] = new Laser(j,i,4);
-                        break;
-                    case 10805:
-                        testfieldmatrix[i][j] = new Laser(j,i,5);
-                        break;
-                    case 10806:
-                        testfieldmatrix[i][j] = new Laser(j,i,6);
-                        break;
-                    case 10807:
-                        testfieldmatrix[i][j] = new Laser(j,i,7);
-                        break;
-                    case 10808:
-                        testfieldmatrix[i][j] = new Laser(j,i,8);
-                        break;
-                    case 10809:
-                        testfieldmatrix[i][j] = new Laser(j,i,9);
+                    case 108:
+                        int typeL = board.matrix[i][j] % 10;
+                        allowed = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+                        if (Arrays.stream(allowed).anyMatch(x -> x == typeL)) {
+                            fieldmatrix[i][j] = new Laser(j, i, typeL);
+                        } else {
+                            System.out.println("Codierung " + board.matrix[i][j]
+                                    + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
+                        }
                         break;
 
                     //RepairSite
-                    case 10901:
-                        testfieldmatrix[i][j] = new RepairSite(j,i,1);
-                        break;
-                    case 10902:
-                        testfieldmatrix[i][j] = new RepairSite(j,i,2);
+                    case 109:
+                        int typeR = board.matrix[i][j] % 10;
+                        allowed = new int[]{1, 2};
+                        if (Arrays.stream(allowed).anyMatch(x -> x == typeR)) {
+                            fieldmatrix[i][j] = new RepairSite(j, i, typeR);
+                        } else {
+                            System.out.println("Codierung " + board.matrix[i][j]
+                                    + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
+                        }
                         break;
 
                     //StandardField
-                    case 11000:
-                        testfieldmatrix[i][j] = new StandardField(j,i);
+                    case 110:
+                        fieldmatrix[i][j] = new StandardField(j, i);
                         break;
 
                     //StartField
-                    case 11101:
-                        testfieldmatrix[i][j] = new StartField(j,i,1);
-                        break;
-                    case 11102:
-                        testfieldmatrix[i][j] = new StartField(j,i,2);
-                        break;
-                    case 11103:
-                        testfieldmatrix[i][j] = new StartField(j,i,3);
-                        break;
-                    case 11104:
-                        testfieldmatrix[i][j] = new StartField(j,i,4);
-                        break;
-                    case 11105:
-                        testfieldmatrix[i][j] = new StartField(j,i,5);
-                        break;
-                    case 11106:
-                        testfieldmatrix[i][j] = new StartField(j,i,6);
-                        break;
-                    case 11107:
-                        testfieldmatrix[i][j] = new StartField(j,i,7);
-                        break;
-                    case 11108:
-                        testfieldmatrix[i][j] = new StartField(j,i,8);
+                    case 111:
+                        int numberS = board.matrix[i][j] % 10;
+                        allowed = new int[]{1, 2, 3, 4, 5, 6, 7, 8};
+                        if (Arrays.stream(allowed).anyMatch(x -> x == numberS)) {
+                            fieldmatrix[i][j] = new StartField(j, i, numberS);
+                        } else {
+                            System.out.println("Codierung " + board.matrix[i][j]
+                                    + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
+                        }
                         break;
 
                     default:
-                        System.out.println("Codierung beschreibt kein gültiges Feldobjekt");
+                        System.out.println("Codierung beschreibt kein gueltige Feldklasse");
                         break;
                 }
             }
         }
-        return testfieldmatrix;
+        return fieldmatrix;
     }
 
     //zum Ausgeben der Objektmatrix mit Klasse und Attributwerten je Objekt
     public static void showFieldMatrix(Field[][] fieldmatrix) {
         for (int i = 0; i < fieldmatrix.length; i++) {
             for (int j = 0; j < fieldmatrix[i].length; j++) {
-                System.out.print("(class: " + fieldmatrix[i][j].getClass() + ", " + fieldmatrix[i][j].showAttributes() + ") ");
+                System.out.print("(class: " + fieldmatrix[i][j].getClass() + ", "
+                        + fieldmatrix[i][j].showAttributes() + ") ");
             }
             System.out.println();
         }

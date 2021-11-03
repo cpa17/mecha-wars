@@ -42,8 +42,9 @@ public class Blockade extends Field {
     }
 
     @Override
-    public String showAttributes(){
-        String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor + ", type: " + this.type;
+    public String showAttributes() {
+        String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor
+                + ", type: " + this.type;
         return attributes;
     }
 
@@ -51,11 +52,11 @@ public class Blockade extends Field {
      * Take the Type of the Blockade.
      * @return the Type
      */
-    public int getType(){
+    public int getType() {
         return this.type;
     }
     
-    public Texture getTile(){
+    public Texture getTile() {
         return this.tile;
     }
 }

@@ -29,8 +29,9 @@ public class RepairSite extends Field {
     }
 
     @Override
-    public String showAttributes(){
-        String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor + ", type: " + this.type;
+    public String showAttributes() {
+        String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor
+                + ", type: " + this.type;
         return attributes;
     }
 
@@ -38,11 +39,11 @@ public class RepairSite extends Field {
      * Take the Type of the Repair Site, either simple or double.
      * @return the Type
      */
-    public int getType(){
+    public int getType() {
         return this.type;
     }
     
-    public Texture getTile(){
+    public Texture getTile() {
         return this.tile;
     }
 }

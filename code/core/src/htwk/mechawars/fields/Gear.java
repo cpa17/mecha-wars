@@ -28,8 +28,9 @@ public class Gear extends Field {
     }
 
     @Override
-    public String showAttributes(){
-        String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor + ", direction: " + this.direction;
+    public String showAttributes() {
+        String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor
+                + ", direction: " + this.direction;
         return attributes;
     }
 
@@ -37,11 +38,11 @@ public class Gear extends Field {
      * Take the Direction of the rotation of the Gear.
      * @return the Direction
      */
-    public int getDirection(){
+    public int getDirection() {
         return this.direction;
     }
     
-    public Texture getTile(){
+    public Texture getTile() {
         return this.tile;
     }
 }

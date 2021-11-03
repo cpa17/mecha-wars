@@ -16,7 +16,7 @@ public class Field {
         this.ycoor = ycoor;
     }
 
-    public String showAttributes(){
+    public String showAttributes() {
         String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor;
         return attributes;
     }
@@ -25,7 +25,7 @@ public class Field {
      * Take the x coordinate.
      * @return xcoor The x coordinate
      */
-    public int getXcoor(){
+    public int getXcoor() {
         return this.xcoor;
     }
 
@@ -33,7 +33,7 @@ public class Field {
      * Take the y coordinate.
      * @return ycoor The y coordinate
      */
-    public int getYcoor(){
+    public int getYcoor() {
         return this.ycoor;
     }
     

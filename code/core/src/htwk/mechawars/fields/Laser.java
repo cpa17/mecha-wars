@@ -72,8 +72,9 @@ public class Laser extends Field {
     }
 
     @Override
-    public String showAttributes(){
-        String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor + ", type: " + this.type;
+    public String showAttributes() {
+        String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor
+                + ", type: " + this.type;
         return attributes;
     }
 
@@ -81,11 +82,11 @@ public class Laser extends Field {
      * Take what Type of laser piece it is.
      * @return the Type
      */
-    public int getType(){
+    public int getType() {
         return this.type;
     }
     
-    public Texture getTile(){
+    public Texture getTile() {
         return this.tile;
     }
 }

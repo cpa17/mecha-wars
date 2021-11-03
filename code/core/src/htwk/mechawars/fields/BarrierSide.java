@@ -10,19 +10,20 @@ public class BarrierSide extends Field {
 
     // Attribut was angibt auf welcher Seite sich die Barriere befindet
     // 1 = links, 2 = oben, 3 = rechts, 4 = unten
-    private int site;
+    private int side;
     private Texture tile;
 
     /**
      * Constructor of a Side Barrier.
      */
-    public BarrierSide(int xcoor, int ycoor, int site) {
+    public BarrierSide(int xcoor, int ycoor, int side) {
         super(xcoor, ycoor);
-        this.site = site;
+        this.side = side;
         
-        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "barrierside/" + "BarrierSide" + String.valueOf(site) + ".png"));
+        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "barrierside/" + "BarrierSide" + String.valueOf(side) + ".png"));
         /*
-        switch(site){
+         * 
+        switch(side){
         
         case 1:
             this.tile = new Texture("mapAssets/1.png");
@@ -41,8 +42,9 @@ public class BarrierSide extends Field {
     }
 
     @Override
-    public String showAttributes(){
-        String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor + ", site: " + this.site;
+    public String showAttributes() {
+        String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor
+                + ", side: " + this.side;
         return attributes;
     }
 
@@ -50,11 +52,11 @@ public class BarrierSide extends Field {
      * Take the Side where the Barrier is.
      * @return the Side
      */
-    public int getSite(){
-        return this.site;
+    public int getSide() {
+        return this.side;
     }
     
-    public Texture getTile(){
+    public Texture getTile() {
         return this.tile;
     }
 }
