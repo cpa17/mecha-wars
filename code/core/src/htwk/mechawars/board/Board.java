@@ -159,9 +159,11 @@ public class Board {
      * @param phase List of cards
      * @param robot the robot that should move
      */
-    public void move(LinkedList<Card> phase, Robot robot, GameScreen screen) {
-        
+    public void move(LinkedList<Card> phase, Robot robot) {
+
         try {
+            // delay in seconds, increments for each phase in the linked list for another second
+            int i = 0;
             for (Card card : phase) {
                 Timer.schedule(new Task() {
 
@@ -174,13 +176,13 @@ public class Board {
                             robot.turn(card.getCardAttributeMovCount());
                         }
                         matrix[robot.getYcoor()][robot.getXcoor()] = robot.getDir().getValue();
-                        screen.drawRobot();
                     }
-                
-                }, 1);
+
+                }, i);
+                i += 1;
             }
-         }
-            catch (ArrayIndexOutOfBoundsException e) {
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
             robot.setXcoor(robot.getStartX());
             robot.setYcoor(robot.getStartY());
             this.matrix[robot.getYcoor()][robot.getXcoor()] = robot.getDir().getValue();
