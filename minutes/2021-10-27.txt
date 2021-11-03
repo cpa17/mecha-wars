@@ -1,0 +1,21 @@
+# 27.10.2021 - 12:00 - Daily
+
+Entschuldigt: Pascal, Mark
+Anwesend: Alle anderen
+Fehlend: Ihor
+Protokollführung: Lukas Brüggemann
+
+## Runde
+- Marc: MW-18 fertig, Pipeline failed noch, MW-28, PR, MW-20 HUD fehlt noch (Beschriftung)
+- Tim: MW-30, angefangen, 
+- Pascal: …
+- Ihor: (Artzt)
+- Konstantin: MW-30, angefangen, 
+- Mark: MW-37, Einlesen der Karte überarbeiten damit Feldertypen möglich sind
+- Antonia: MW-37, Grundlagen geklärt, Aufbau angefangen der Klassen angefangen 
+- Bernhard:  MW-17 angefangen, Frage zur Umsetzung
+
+
+## Allgemein 
+Ticket Unklarheit klären MW-17 / MW-30 unterschied unklar
+Tickets haben selbes Ziel, Bernhard wählt neues Ticket
