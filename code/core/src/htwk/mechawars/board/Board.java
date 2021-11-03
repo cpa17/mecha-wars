@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 
 /**
  * Class that presents the game board.
@@ -160,20 +160,27 @@ public class Board {
      * @param robot the robot that should move
      */
     public void move(LinkedList<Card> phase, Robot robot, GameScreen screen) {
+        
         try {
             for (Card card : phase) {
-                if (card.getCardAttributeType() == Type.mov) {
-                    matrix[robot.getYcoor()][robot.getXcoor()] = 0;
-                    robot.moveInDirection(card.getCardAttributeMovCount());
-                } else {
-                    robot.turn(card.getCardAttributeMovCount());
-                }
+                Timer.schedule(new Task() {
 
-                matrix[robot.getYcoor()][robot.getXcoor()] = robot.getDir().getValue();
-                screen.drawRobot();
+                    @Override
+                    public void run() {
+                        if (card.getCardAttributeType() == Type.mov) {
+                            matrix[robot.getYcoor()][robot.getXcoor()] = 0;
+                            robot.moveInDirection(card.getCardAttributeMovCount());
+                        } else {
+                            robot.turn(card.getCardAttributeMovCount());
+                        }
+                        matrix[robot.getYcoor()][robot.getXcoor()] = robot.getDir().getValue();
+                        screen.drawRobot();
+                    }
+                
+                }, 1);
             }
-
-        } catch (ArrayIndexOutOfBoundsException e) {
+         }
+            catch (ArrayIndexOutOfBoundsException e) {
             robot.setXcoor(robot.getStartX());
             robot.setYcoor(robot.getStartY());
             this.matrix[robot.getYcoor()][robot.getXcoor()] = robot.getDir().getValue();
