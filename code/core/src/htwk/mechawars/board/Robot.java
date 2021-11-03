@@ -22,6 +22,7 @@ public class Robot {
     private Texture life;
     private Texture damage;
     private Texture shutDown;
+    private Texture hud;
     
     /**
      * Constructor of the robot class.
@@ -161,10 +162,6 @@ public class Robot {
     public void damageReset() {
         damagePoints = 0;
     }
-
-    public void lifeUp() {
-        lifePoints += 1;
-    }
     
     public void lifeDown() {
         lifePoints -= 1;
@@ -175,16 +172,16 @@ public class Robot {
      */
     private void updateLife() {
         switch (lifePoints) {
-            case 0 :    life = new Texture(Gdx.files.internal("platzhalter.png"));
+            case 0 :    life = new Texture(Gdx.files.internal("parameters/hp0.png"));
                         break;
                         
-            case 1 :    life = new Texture(Gdx.files.internal("background2.png"));
+            case 1 :    life = new Texture(Gdx.files.internal("parameters/hp1.png"));
                         break;
                         
-            case 2 :    life = new Texture(Gdx.files.internal("background3.png"));
+            case 2 :    life = new Texture(Gdx.files.internal("parameters/hp2.png"));
                         break;
                         
-            case 3 :    life = new Texture(Gdx.files.internal("background4.png"));
+            case 3 :    life = new Texture(Gdx.files.internal("parameters/hp3.png"));
                         break;
                         
             default:    break;
@@ -196,34 +193,37 @@ public class Robot {
      */
     private void updateDamage() {
         switch (damagePoints) {
-            case 0 :    damage = new Texture(Gdx.files.internal("platzhalter.png"));
+            case 0 :    damage = new Texture(Gdx.files.internal("parameters/damage0.png"));
                         break;
                         
-            case 1 :    damage = new Texture(Gdx.files.internal("background6.png"));
+            case 1 :    damage = new Texture(Gdx.files.internal("parameters/damage1.png"));
                         break;
                         
-            case 2 :    damage = new Texture(Gdx.files.internal("background7.png"));
+            case 2 :    damage = new Texture(Gdx.files.internal("parameters/damage2.png"));
                         break;
                         
-            case 3 :    damage = new Texture(Gdx.files.internal("background8.png"));
+            case 3 :    damage = new Texture(Gdx.files.internal("parameters/damage3.png"));
                         break;
                         
-            case 4 :    damage = new Texture(Gdx.files.internal("background9.png"));
+            case 4 :    damage = new Texture(Gdx.files.internal("parameters/damage4.png"));
                         break;
                         
-            case 5 :    damage = new Texture(Gdx.files.internal("background10.png"));
+            case 5 :    damage = new Texture(Gdx.files.internal("parameters/damage5.png"));
                         break;
                         
-            case 6 :    damage = new Texture(Gdx.files.internal("background11.png"));
+            case 6 :    damage = new Texture(Gdx.files.internal("parameters/damage6.png"));
                         break;
                         
-            case 7 :    damage = new Texture(Gdx.files.internal("background12.png"));
+            case 7 :    damage = new Texture(Gdx.files.internal("parameters/damage7.png"));
                         break;
                         
-            case 8 :    damage = new Texture(Gdx.files.internal("background13.png"));
+            case 8 :    damage = new Texture(Gdx.files.internal("parameters/damage8.png"));
                         break;
                         
-            case 9 :    damage = new Texture(Gdx.files.internal("background14.png"));
+            case 9 :    damage = new Texture(Gdx.files.internal("parameters/damage9.png"));
+                        break;
+            
+            case 10 :   damage = new Texture(Gdx.files.internal("parameters/damage10.png"));
                         break;
                         
             default:    break;
@@ -235,21 +235,30 @@ public class Robot {
      */
     private void updateShutDown() {
         if (shutDownMark) {
-            shutDown = new Texture(Gdx.files.internal("12.jpg"));
+            shutDown = new Texture(Gdx.files.internal("parameters/sleep.png"));
         } else {
-            shutDown = new Texture(Gdx.files.internal("platzhalter.png"));
+            shutDown = new Texture(Gdx.files.internal("parameters/wakeup.png"));
         }
+    }
+    
+    /**
+     * Updates the shutDown texture depending on the amout of players.
+     */
+    private void createHud() {
+        hud = new Texture(Gdx.files.internal("parameters/hudrr.png"));
     }
     
     /**
      * Draws the parameter textures. 
      */
     public void drawParameters(SpriteBatch batch) {
+        createHud();
         updateLife();
         updateDamage();
         updateShutDown();
-        batch.draw(life, 0, 0, 200, 200);
-        batch.draw(damage, 400, 0, 200, 200);
-        batch.draw(shutDown, 600, 0, 200, 200);
+        batch.draw(hud, 740, 15);
+        batch.draw(life, 750, 20);
+        batch.draw(damage, 825, 20);
+        batch.draw(shutDown, 900, 20);
     }
 }

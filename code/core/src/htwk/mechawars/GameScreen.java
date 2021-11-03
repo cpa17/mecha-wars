@@ -21,7 +21,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
-
 import htwk.mechawars.board.Board;
 import htwk.mechawars.board.Dir;
 import htwk.mechawars.board.Robot;
@@ -535,7 +534,7 @@ public class GameScreen implements Screen {
         batch.begin();
         Board.toAsset(batch, board);
         drawRobot();
-        //player.drawParameters(batch);
+        player.drawParameters(batch);
         sprite.draw(batch);
         batch.end();
         stage.act();
@@ -622,5 +621,4 @@ public class GameScreen implements Screen {
     public void hide() {
 
     }
-
 }
