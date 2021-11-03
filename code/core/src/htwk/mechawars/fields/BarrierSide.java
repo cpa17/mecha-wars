@@ -37,8 +37,9 @@ public class BarrierSide extends Field {
     }
 
     @Override
-    public String showAttributes(){
-        String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor + ", side: " + this.side;
+    public String showAttributes() {
+        String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor
+                + ", side: " + this.side;
         return attributes;
     }
 
@@ -46,11 +47,11 @@ public class BarrierSide extends Field {
      * Take the Side where the Barrier is.
      * @return the Side
      */
-    public int getSide(){
+    public int getSide() {
         return this.side;
     }
     
-    public Texture getTile(){
+    public Texture getTile() {
         return this.tile;
     }
 }

@@ -48,8 +48,9 @@ public class StartField extends Field {
     }
 
     @Override
-    public String showAttributes(){
-        String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor + ", number: " + this.number;
+    public String showAttributes() {
+        String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor
+                + ", number: " + this.number;
         return attributes;
     }
 
@@ -57,11 +58,11 @@ public class StartField extends Field {
      * Take the Number of the Start Field.
      * @return the Number
      */
-    public int getNumber(){
+    public int getNumber() {
         return this.number;
     }
     
-    public Texture getTile(){
+    public Texture getTile() {
         return this.tile;
     }
 }

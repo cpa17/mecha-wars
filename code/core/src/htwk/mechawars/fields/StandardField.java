@@ -18,7 +18,7 @@ public class StandardField extends Field {
         this.tile = new Texture("mapAssets/0.png"); // = new Texture(Gdx.files.internal("mapAssets/" + i + ".png"));
     }
     
-    public Texture getTile(){
+    public Texture getTile() {
         return this.tile;
     }
 }

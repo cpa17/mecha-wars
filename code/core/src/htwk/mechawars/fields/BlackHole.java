@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 public class BlackHole extends Field {
 
     private Texture tile;
+
     /**
      * Constructor of a Black Hole.
      */
@@ -16,7 +17,7 @@ public class BlackHole extends Field {
         this.tile = new Texture("mapAssets/3.png");
     }
     
-    public Texture getTile(){
+    public Texture getTile() {
         return this.tile;
     }
 }
