@@ -1,5 +1,6 @@
 package htwk.mechawars.board;
 
+import htwk.mechawars.cards.AICardGeneration;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.Type;
 
@@ -156,6 +157,7 @@ public class Board {
         robot.setStartY(y);
         robot.setDir(dir);
         this.matrix[y][x] = robot.getDir().getValue();
+        System.out.println(robot.getYcoor()+"   "+robot.getXcoor());
     }
 
     /**
@@ -188,7 +190,37 @@ public class Board {
             this.matrix[robot.getYcoor()][robot.getXcoor()] = robot.getDir().getValue();
         }
     }
+	public void move(LinkedList<Card> phase, Robot[] players) {
 
+		for(int i = 0; i < players.length; i++) {
+			if(i > 0)
+			{
+				phase = AICardGeneration.generateRandomAICards(i);
+			}
+        checkDoubleDamage(players[i]);
+
+        checkShutDown(players[i]);
+        
+        try {
+            for (Card card : phase) {
+
+                if (card.getCardAttributeType() == Type.mov) {
+                    this.matrix[players[i].getYcoor()][players[i].getXcoor()] = 0;
+                    players[i].moveInDirection(card.getCardAttributeMovCount());
+                } else {
+                	players[i].turn(card.getCardAttributeMovCount());
+                }
+                this.matrix[players[i].getYcoor()][players[i].getXcoor()] = players[i].getDir().getValue();
+
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+        	players[i].setXcoor(players[i].getStartX());
+        	players[i].setYcoor(players[i].getStartY());
+            this.matrix[players[i].getYcoor()][players[i].getXcoor()] = players[i].getDir().getValue();
+        }
+        
+		} 
+	}
     /**
      * Method that checks whether the robot receives 2 damage points.
      * @param robot the robot that should check
@@ -220,6 +252,8 @@ public class Board {
             robot.setLastRound(true);
         }
     }
+
+
 
 
 }

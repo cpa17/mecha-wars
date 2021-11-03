@@ -1,5 +1,7 @@
 package htwk.mechawars;
 
+import java.io.IOException;
+
 import com.badlogic.gdx.Game;
 
 /**
@@ -7,12 +9,16 @@ import com.badlogic.gdx.Game;
  */
 public class MechaWars extends Game {
 
+
     /**
      * Method & Attribute for skipping the MainMenu when executing the Program.
      */
     private static boolean isSkip = false; 
+    
 
-    public static void setSkip(boolean skip) {
+
+
+	public static void setSkip(boolean skip) {
         isSkip = skip;
     }
 
@@ -21,10 +27,16 @@ public class MechaWars extends Game {
      */
     @Override
     public void create() {
+    	
         if (isSkip == true) {
             this.setScreen(new GameScreen());
         } else {
-            this.setScreen(new MainMenu(this));
+            try {
+				this.setScreen(new MainMenu(this));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
     }
 

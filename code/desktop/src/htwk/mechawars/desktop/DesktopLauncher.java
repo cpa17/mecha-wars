@@ -1,6 +1,7 @@
 package htwk.mechawars.desktop;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.management.ManagementFactory;
 import java.nio.charset.Charset;
@@ -10,6 +11,7 @@ import java.util.List;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 
+import htwk.mechawars.ConfigReader;
 import htwk.mechawars.MechaWars;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
@@ -33,15 +35,18 @@ public class DesktopLauncher implements Runnable {
     @Option(names = { "-s", "--skip" },
             description = "Starts the Game, without showing the MainMenu at first.")
     boolean skip;
+    
 
     /**
      * Main class, for the new CommandLine.
+     * @throws IOException 
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         if (restartJvm()) {
             return;
         }
         System.exit(new CommandLine(new DesktopLauncher()).execute(args));
+        
     }
 
     /**
