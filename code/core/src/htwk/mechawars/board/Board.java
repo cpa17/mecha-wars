@@ -336,7 +336,8 @@ public class Board {
                         break;
 
                     default:
-                        System.out.println("Codierung beschreibt kein gueltige Feldklasse");
+                        System.out.println("Codierung " + board.matrix[i][j]
+                                + " beschreibt kein gueltige Feldklasse");
                         break;
                 }
             }
