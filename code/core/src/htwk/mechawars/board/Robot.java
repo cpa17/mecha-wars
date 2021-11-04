@@ -18,6 +18,7 @@ public class Robot {
     private int damagePoints;
     private boolean shutDownMark;
     private boolean lastRound;
+    private boolean nextRound;
     private boolean destroyed;
     private Texture life;
     private Texture damage;
@@ -32,6 +33,7 @@ public class Robot {
         damagePoints = 0;
         shutDownMark = false;
         lastRound = false;
+        nextRound = false;
         destroyed = false;
     }
 
@@ -114,6 +116,10 @@ public class Robot {
         return lastRound;
     }
 
+    public boolean getNextRound() {
+        return nextRound;
+    }
+
     public boolean getDestroyed() {
         return destroyed;
     }
@@ -147,6 +153,10 @@ public class Robot {
 
     public void setLastRound(boolean lastRound) {
         this.lastRound = lastRound;
+    }
+
+    public void setNextRound(boolean nextRound) {
+        this.nextRound = nextRound;
     }
 
     public void setDestroyed(boolean destroyed) {

@@ -21,6 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
+
 import htwk.mechawars.board.Board;
 import htwk.mechawars.board.Dir;
 import htwk.mechawars.board.Robot;
@@ -38,6 +39,7 @@ public class GameScreen implements Screen {
     private SpriteBatch batch;
     private Sprite sprite;
     private ZugInitialisierung zugInitialisierung = new ZugInitialisierung();
+    private Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
     private int[] cardOrder = { -1, -1, -1, -1, -1};
     private int pressCounter = 0;
@@ -66,7 +68,6 @@ public class GameScreen implements Screen {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
-        Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         addButtonsToStage(skin);
         addScrollPanelToStage(skin);
         board.startRobot(5, 5, Dir.NORTH, player);
@@ -97,23 +98,25 @@ public class GameScreen implements Screen {
         // shuffle Deck
         deck = CardFunctions.shuffle(deck);
 
-        for (int cardPrintCounter = 0; cardPrintCounter < choosableCardCount;
-                cardPrintCounter += 1) {
-            Card currentCard = deck[cardPrintCounter];
-            buttons[cardPrintCounter] = new TextButton(currentCard.getCardAttributePriority()
-                    + " - " + currentCard, skin);
-            table.row();
-            table.add(buttons[cardPrintCounter]);
-            int buttonNumber = (cardPrintCounter + 1);
+        if (!player.getShutDown()) {
+            for (int cardPrintCounter = 0; cardPrintCounter < choosableCardCount;
+                    cardPrintCounter += 1) {
+                Card currentCard = deck[cardPrintCounter];
+                buttons[cardPrintCounter] = new TextButton(currentCard.getCardAttributePriority()
+                        + " - " + currentCard, skin);
+                table.row();
+                table.add(buttons[cardPrintCounter]);
+                int buttonNumber = (cardPrintCounter + 1);
 
-            // Button-ClickListener
-            buttons[cardPrintCounter].addListener(new ClickListener() {
-                public void clicked(InputEvent event, float x, float y) {
-                    if (buttonClickOrder(buttonNumber)) {
-                        zugInitialisierung.addCard(currentCard);
+                // Button-ClickListener
+                buttons[cardPrintCounter].addListener(new ClickListener() {
+                    public void clicked(InputEvent event, float x, float y) {
+                        if (buttonClickOrder(buttonNumber)) {
+                            zugInitialisierung.addCard(currentCard);
+                        }
                     }
-                }
-            });
+                });
+            }
         }
 
         container.add(scrollPanel).grow();
@@ -180,6 +183,12 @@ public class GameScreen implements Screen {
         }
     }
 
+    private void updateButtons() {
+        stage.clear();
+        addButtonsToStage(skin);
+        addScrollPanelToStage(skin);
+    }
+
     /**
      * Function that adds the buttons to the Stage.
      *
@@ -206,17 +215,26 @@ public class GameScreen implements Screen {
 
         startExecutionButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                //If All Cards are chosen
-                if (cardOrder[4 - damagePoints] != -1) {
-                    deactivateButtons();
+                if (!player.getShutDown()) {
+                    //If All Cards are chosen
+                    if (cardOrder[4 - damagePoints] != -1) {
+                        deactivateButtons();
+                        zugInitialisierung.initialisiereBewegung();
+                        board.move(zugInitialisierung.getList(), player);
+                        zugInitialisierung.resetList();
+                        startExecutionButton.setColor(Color.LIGHT_GRAY);
+                        cardOrderClear();
+                        activateButtons();
+                        updateButtons();
+                    } else {
+                        startExecutionButton.setColor(Color.RED);
+                    }
+                } else {
                     zugInitialisierung.initialisiereBewegung();
                     board.move(zugInitialisierung.getList(), player);
                     zugInitialisierung.resetList();
                     startExecutionButton.setColor(Color.LIGHT_GRAY);
-                    cardOrderClear();
-                    activateButtons();
-                } else {
-                    startExecutionButton.setColor(Color.RED);
+                    updateButtons();
                 }
             }
         });
@@ -245,9 +263,18 @@ public class GameScreen implements Screen {
                 cardOrderClear();
                 zugInitialisierung.resetList();
             }
+
         });
 
         stage.addActor(removeCardOrder);
+
+        if (player.getShutDown()) {
+            removeCardOrder.setTouchable(Touchable.disabled);
+            removeCardOrder.setDisabled(true);
+        } else {
+            removeCardOrder.setTouchable(Touchable.enabled);
+            removeCardOrder.setDisabled(false);
+        }
 
         // add Button for hint and infos
         Button buttonInfo = new TextButton("Infos", skin);
@@ -520,6 +547,65 @@ public class GameScreen implements Screen {
         });
 
         stage.addActor(buttonInfo);
+
+        Button shutDownButton = new TextButton("ShutDown", skin);
+        Button wakeUpButton = new TextButton("WakeUp", skin);
+
+        shutDownButton.setSize(160, 43);
+        wakeUpButton.setSize(160, 43);
+
+        int shutDownButtonX = Gdx.graphics.getHeight()
+                + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
+        int shutDownButtonY = Gdx.graphics.getHeight() - 400;
+        int wakeUpButtonX = Gdx.graphics.getHeight()
+                + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
+        int wakeUpButtonY = Gdx.graphics.getHeight() - 600;
+
+        shutDownButton.setPosition(shutDownButtonX, shutDownButtonY);
+        wakeUpButton.setPosition(wakeUpButtonX, wakeUpButtonY);
+
+        shutDownButton.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                if (!player.getNextRound()) {
+                    player.setNextRound(true);
+                    shutDownButton.setColor(Color.GREEN);
+                    System.out.println("shutdown");
+                } else {
+                    player.setNextRound(false);
+                    shutDownButton.setColor(Color.LIGHT_GRAY);
+                    System.out.println("awake");
+                }
+            }
+        });
+        wakeUpButton.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                if (player.getNextRound()) {
+                    player.setNextRound(false);
+                    wakeUpButton.setColor(Color.GREEN);
+                    System.out.println("wake up");
+                } else {
+                    player.setNextRound(true);
+                    wakeUpButton.setColor(Color.LIGHT_GRAY);
+                    System.out.println("off");
+                }
+            }
+        });
+
+        if (player.getShutDown()) {
+            shutDownButton.setTouchable(Touchable.disabled);
+            wakeUpButton.setTouchable(Touchable.enabled);
+            shutDownButton.setDisabled(true);
+            wakeUpButton.setDisabled(false);
+        } else {
+            shutDownButton.setTouchable(Touchable.enabled);
+            wakeUpButton.setTouchable(Touchable.disabled);
+            shutDownButton.setDisabled(false);
+            wakeUpButton.setDisabled(true);
+        }
+
+        stage.addActor(shutDownButton);
+        stage.addActor(wakeUpButton);
+
     }
 
 
@@ -534,7 +620,7 @@ public class GameScreen implements Screen {
         batch.begin();
         Board.toAsset(batch, board);
         drawRobot();
-        player.drawParameters(batch);
+        //player.drawParameters(batch);
         sprite.draw(batch);
         batch.end();
         stage.act();
@@ -621,4 +707,5 @@ public class GameScreen implements Screen {
     public void hide() {
 
     }
+
 }

@@ -195,6 +195,8 @@ public class Board {
                 return;
             }
         }
+
+        robot.setShutDown(robot.getNextRound());
     }
 
     /**
