@@ -1,5 +1,6 @@
 package htwk.mechawars.fields;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
 /**
@@ -20,7 +21,9 @@ public class Laser extends Field {
     public Laser(int xcoor, int ycoor, int type) {
         super(xcoor, ycoor);
         this.type = type;
-        
+
+        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "laser/" + "Laser0" + String.valueOf(type) + ".png"));
+        /*
         switch(type) {  
             //beginn links
             case 0:
@@ -64,7 +67,8 @@ public class Laser extends Field {
             case 9:
                 this.tile = new Texture("mapAssets/21.png");
                 break;
-    }
+        }
+        */
     }
 
     @Override

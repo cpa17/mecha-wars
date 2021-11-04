@@ -1,5 +1,6 @@
 package htwk.mechawars.fields;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
@@ -20,8 +21,10 @@ public class BarrierCorner extends Field {
         super(xcoor, ycoor);
         this.corner = corner;
         
+        //String internalPath = "mapAssets/" + "barriercorner/" + "BarrierCorner" + String.valueOf(corner) + ".png";
+        this.tile = new Texture(Gdx.files.internal( "mapAssets/" + "barriercorner/" + "BarrierCorner0" + String.valueOf(corner) + ".png"));
+     /*   
         switch(corner){
-            
             case 1:
                 this.tile = new Texture("mapAssets/2.png");
                 break;
@@ -35,6 +38,7 @@ public class BarrierCorner extends Field {
                 this.tile = new Texture("mapAssets/2.png");
                 break; 
         }
+      */
     }
 
     @Override

@@ -1,5 +1,6 @@
 package htwk.mechawars.fields;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
 /**
@@ -17,8 +18,11 @@ public class StartField extends Field {
      */
     public StartField(int xcoor, int ycoor, int number) {
         super(xcoor, ycoor);
-        this.number = number;
+        this.number = number; 
         
+        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "startfield/" + "StartField0" + String.valueOf(number) + ".png"));
+        
+        /*
         switch(number){
         case 1:
             this.tile = new Texture("mapAssets/27.png");
@@ -45,6 +49,7 @@ public class StartField extends Field {
             this.tile = new Texture("mapAssets/34.png"); //6
             break; 
         }
+        */
     }
 
     @Override

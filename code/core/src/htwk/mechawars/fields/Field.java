@@ -36,4 +36,8 @@ public class Field {
     public int getYcoor() {
         return this.ycoor;
     }
+    
+    public void rotateImg() {
+        
+    }
 }

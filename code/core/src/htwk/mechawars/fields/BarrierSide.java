@@ -1,5 +1,6 @@
 package htwk.mechawars.fields;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
 /**
@@ -19,6 +20,9 @@ public class BarrierSide extends Field {
         super(xcoor, ycoor);
         this.side = side;
         
+        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "barrierside/" + "BarrierSide" + String.valueOf(side) + ".png"));
+        /*
+         * 
         switch(side){
         
         case 1:
@@ -34,6 +38,7 @@ public class BarrierSide extends Field {
             this.tile = new Texture("mapAssets/1.png");
             break; 
         }
+        */
     }
 
     @Override

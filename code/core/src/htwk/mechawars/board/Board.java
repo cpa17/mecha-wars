@@ -32,7 +32,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 public class Board {
     public int[][] matrix;
-    private Texture[] fieldAssets = new Texture[36];
+    private Texture[] fieldAssets = new Texture[85]; 
 
     /**
      * Method that constructs the game board as a matrix.
@@ -53,11 +53,13 @@ public class Board {
      */
     public Board(int width, int height, boolean isTest) {
         this.matrix = new int[height][width];
+        
         if (!isTest) {
             for (int i = 0; i < fieldAssets.length; i++) {
-                fieldAssets[i] = new Texture(Gdx.files.internal("mapAssets/" + i + ".png")); 
+                fieldAssets[i] = new Texture(Gdx.files.internal("mapAssets/StandardField.png")); 
             }
         }
+        
         for (int[] ints : matrix) {
             Arrays.fill(ints, 0);
         }

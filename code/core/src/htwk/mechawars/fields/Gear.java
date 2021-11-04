@@ -20,10 +20,10 @@ public class Gear extends Field {
         this.direction = direction;
         
         if(direction == 1) {
-            this.tile = new Texture("mapAssets/11.png");
+            this.tile = new Texture("mapAssets/gear/Gear01.png");
         }
         else {
-            this.tile = new Texture("mapAssets/10.png");
+            this.tile = new Texture("mapAssets/gear/Gear02.png");
         }
     }
 

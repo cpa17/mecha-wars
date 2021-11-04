@@ -21,10 +21,10 @@ public class RepairSite extends Field {
         this.type = type;
         
         if (type == 1) {
-            this.tile = new Texture("mapAssets/35.png");
+            this.tile = new Texture("mapAssets/repairsite/RepairSite01.png");
         }
         else {
-            this.tile = new Texture("mapAssets/17.png");
+            this.tile = new Texture("mapAssets/repairsite/RepairSite02.png");
         }
     }
 
