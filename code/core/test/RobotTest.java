@@ -3,8 +3,6 @@ import htwk.mechawars.board.Robot;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.badlogic.gdx.Gdx;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -16,12 +14,6 @@ public class RobotTest {
 
     @Test
     public void robotTest() {
-        assert robot.getbackupCopyX() >= 0;
-        assert robot.getbackupCopyY() >= 0;
-        
-        assert robot.getbackupCopyX() <= 12;
-        assert robot.getbackupCopyY() <= 12;
-
         assertEquals(5, robot.getXcoor());
         assertEquals(5, robot.getYcoor());
         assertEquals(Dir.NORTH, robot.getDir());

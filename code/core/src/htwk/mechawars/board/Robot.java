@@ -16,13 +16,10 @@ public class Robot {
     private int startY;
     private int lifePoints;
     private int damagePoints;
-    private int backupCopyX;
-    private int backupCopyY;
     private boolean shutDownMark;
     private boolean lastRound;
     private boolean nextRound;
     private boolean destroyed;
-    private boolean backupDraw;
     private Texture life;
     private Texture damage;
     private Texture shutDown;
@@ -32,9 +29,7 @@ public class Robot {
      * Constructor of the robot class.
      */
     public Robot() {
-        backupCopyX = 0;
-        backupCopyY = 0;
-        lifePoints = 0;
+        lifePoints = 3;
         damagePoints = 0;
         shutDownMark = false;
         lastRound = false;
@@ -163,14 +158,6 @@ public class Robot {
     public void setNextRound(boolean nextRound) {
         this.nextRound = nextRound;
     }
-    
-    public int getbackupCopyX() {
-        return backupCopyX;
-    }
-    
-    public int getbackupCopyY() {
-        return backupCopyY;
-    }
 
     public void setDestroyed(boolean destroyed) {
         this.destroyed = destroyed;
@@ -185,23 +172,11 @@ public class Robot {
     public void damageReset() {
         damagePoints = 0;
     }
-
+    
     public void lifeDown() {
         lifePoints -= 1;
     }
-    
-    public void setShutDown(boolean on) {
-        shutDownMark = on;
-    }
 
-    public void setbackupCopyX(int position) {
-        backupCopyX = position;
-    }
-    
-    public void setbackupCopyY(int position) {
-        backupCopyY = position;
-    }
-    
     /**
      * Updates the life texture depening on the current lifePoints of the robot.
      */
@@ -261,10 +236,6 @@ public class Robot {
             case 10 :   damage = new Texture(Gdx.files.internal("parameters/damage10.png"));
                         break;
                         
-            case 10:    damage = new Texture(Gdx.files.internal("background15.png"));
-                        backupDraw = true;
-                        break;      
-            
             default:    break;
         }
     }
@@ -294,13 +265,10 @@ public class Robot {
         createHud();
         updateLife();
         updateDamage();
-        updateShutDown();     
-        if (backupDraw) {
-            backupDraw = false;
-            batch.draw(new Texture(Gdx.files.internal("robot.png")), backupCopyX, backupCopyY);
-        }    
-        batch.draw(life, 0, 0, 200, 200);
-        batch.draw(damage, 400, 0, 200, 200);
-        batch.draw(shutDown, 600, 0, 200, 200);
+        updateShutDown();
+        batch.draw(hud, 740, 15);
+        batch.draw(life, 750, 20);
+        batch.draw(damage, 825, 20);
+        batch.draw(shutDown, 900, 20);
     }
 }
