@@ -197,15 +197,15 @@ public class Board {
         int[] allowed;
         for (int i = 0; i < board.matrix.length; i++) {
             for (int j = 0; j < board.matrix[i].length; j++) {
-                //Switch mit den ersten drei Ziffern die für die Klasse stehen
+                //Switch with the first three digits that represent the class
                 switch (board.matrix[i][j] / 100) {
 
                     //BarrierCorner
                     case 100:
-                        //für das Attribut wird über Modulo auf die letze Ziffer zugegriffen
+                        //Modulo 10 takes the last digit that represents the attribute
                         int corner = board.matrix[i][j] % 10;
                         allowed = new int[]{1, 2, 3, 4};
-                        //Test ob ausgelesener Attributwert in Menge der erlaubten Attributwerte enthalten ist mittels Lambda-Ausdruck
+                        //Test that the read-out attribute value is in the set of allowed attribute values
                         if (Arrays.stream(allowed).anyMatch(x -> x == corner)) {
                             fieldmatrix[i][j] = new BarrierCorner(j, i, corner);
                         } else {
@@ -257,7 +257,7 @@ public class Board {
 
                     //ConveyorBelt
                     case 105:
-                        // zum Angeben des Attributes, dass an vorletzter Stelle steht, wird über das Teilen durch 10 und Modulo zugegriffen
+                        //Divide by 10 and module 10 takes the next-to-last digit, which represents another attribute
                         int startC = (board.matrix[i][j] / 10) % 10;
                         int endC = board.matrix[i][j] % 10;
                         allowed = new int[]{21, 31, 41, 61, 71, 91, 2, 12, 32, 42, 52, 92,
@@ -347,11 +347,15 @@ public class Board {
         return fieldmatrix;
     }
 
-    //zum Ausgeben der Objektmatrix mit Klasse und Attributwerten je Objekt
+    /**
+     * Method that outputs for each object the class and the attribute values.
+     *
+     * @param fieldmatrix A matrix with field objects
+     */
     public static void showFieldMatrix(Field[][] fieldmatrix) {
         for (int i = 0; i < fieldmatrix.length; i++) {
             for (int j = 0; j < fieldmatrix[i].length; j++) {
-                System.out.print("(class: " + fieldmatrix[i][j].getClass() + ", "
+                System.out.print("(" + fieldmatrix[i][j].getClass() + ", "
                         + fieldmatrix[i][j].showAttributes() + ") ");
             }
             System.out.println();
