@@ -13,7 +13,7 @@ public class ConfigReader {
 
 	public static int[] readConfigs() throws IOException {
 		System.out.println("sheesh");
-	BufferedReader br = new BufferedReader(new FileReader("C://Users//Nutzer//git//repository//mecha-wars//code//core//configs//Startupconfig.txt"));
+	BufferedReader br = new BufferedReader(new FileReader("..//configs//Startupconfig.txt"));
 	try {
 	    StringBuilder sb = new StringBuilder();
 	    String line = br.readLine();
