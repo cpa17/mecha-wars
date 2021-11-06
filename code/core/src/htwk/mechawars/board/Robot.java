@@ -32,10 +32,9 @@ public class Robot {
      * Constructor of the robot class.
      */
     public Robot() {
-        lifePoints = 3;
         backupCopyX = 0;
         backupCopyY = 0;
-        lifePoints = 0;
+        lifePoints = 3;
         damagePoints = 0;
         shutDownMark = false;
         lastRound = false;
@@ -130,6 +129,14 @@ public class Robot {
         return destroyed;
     }
 
+    public int getbackupCopyX() {
+        return backupCopyX;
+    }
+
+    public int getbackupCopyY() {
+        return backupCopyY;
+    }
+
     /**
      * Setters.
      */
@@ -165,17 +172,18 @@ public class Robot {
         this.nextRound = nextRound;
     }
 
-    public int getbackupCopyX() {
-        return backupCopyX;
+    public void setbackupCopyX(int position) {
+        backupCopyX = position;
     }
 
-    public int getbackupCopyY() {
-        return backupCopyY;
+    public void setbackupCopyY(int position) {
+        backupCopyY = position;
     }
 
     public void setDestroyed(boolean destroyed) {
         this.destroyed = destroyed;
     }
+
 
     public void damageUp() {
         damagePoints += 1;
@@ -185,18 +193,10 @@ public class Robot {
         damagePoints = 0;
     }
 
-
     public void lifeDown() {
         lifePoints -= 1;
     }
 
-    public void setbackupCopyX(int position) {
-        backupCopyX = position;
-    }
-
-    public void setbackupCopyY(int position) {
-        backupCopyY = position;
-    }
 
     /**
      * Updates the life texture depening on the current lifePoints of the robot.
@@ -253,11 +253,8 @@ public class Robot {
                         
             case 9 :    damage = new Texture(Gdx.files.internal("parameters/damage9.png"));
                         break;
-
-            case 10 :   damage = new Texture(Gdx.files.internal("parameters/damage10.png"));
-                        break;
                         
-            case 10:    damage = new Texture(Gdx.files.internal("background15.png"));
+            case 10:    damage = new Texture(Gdx.files.internal("parameters/damage10.png"));
                         backupDraw = true;
                         break;
 
@@ -292,9 +289,6 @@ public class Robot {
         updateDamage();
         updateShutDown();
         batch.draw(hud, 740, 15);
-        batch.draw(life, 750, 20);
-        batch.draw(damage, 825, 20);
-        batch.draw(shutDown, 900, 20);
         updateShutDown();
         if (backupDraw) {
             backupDraw = false;
