@@ -233,10 +233,10 @@ public class GameScreen implements Screen {
                         "Programm wird beendet.", "Schlieﬂen?", 
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
-                    // tu was - beenden
+                    // do something - close
                     Gdx.app.exit();
-                }//Ende Aktion des if-Teils
-                // sonst nichts
+                }// end of the if-part
+                // else nothing
             }
         });
 
