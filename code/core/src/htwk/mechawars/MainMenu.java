@@ -61,12 +61,12 @@ public class MainMenu implements Screen {
             @SuppressWarnings("unused")
             public void clicked(InputEvent e, float x, float y) {
                 if (JOptionPane.showConfirmDialog(null, 
-                        "Programm wird beendet.", "Schlieﬂen?", 
+                        "Programm wird beendet.", "Schliessen?", 
                         JOptionPane.YES_NO_OPTION,
-                        JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+                        JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     // tu was - beenden
                     Gdx.app.exit();
-                }//Ende Aktion des if-Teils
+                } //Ende Aktion des if-Teils
                 // sonst nichts
             }
         });

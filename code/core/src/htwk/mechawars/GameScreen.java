@@ -230,12 +230,12 @@ public class GameScreen implements Screen {
         endGameButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 if (JOptionPane.showConfirmDialog(null, 
-                        "Programm wird beendet.", "Schlieﬂen?", 
+                        "Programm wird beendet.", "Schliessen?", 
                         JOptionPane.YES_NO_OPTION,
-                        JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+                        JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     // do something - close
                     Gdx.app.exit();
-                }// end of the if-part
+                } // end of the if-part
                 // else nothing
             }
         });
@@ -594,12 +594,12 @@ public class GameScreen implements Screen {
                 int r = b - c; //the result of the board height minus the current height
 
                 switch (p) {
-                    case(0):
-                        batch.draw(industrialTile, x, r);
-                        break;
-                    default:
-                        batch.draw(industrialTile, x, r);
-                        break;
+                case(0):
+                    batch.draw(industrialTile, x, r);
+                break;
+                default:
+                    batch.draw(industrialTile, x, r);
+                    break;
                 }
 
                 x = x + (Gdx.graphics.getHeight() / board.matrix.length);
