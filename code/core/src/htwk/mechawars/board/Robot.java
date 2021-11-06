@@ -23,6 +23,7 @@ public class Robot {
     private boolean lastRound;
     private boolean nextRound;
     private boolean destroyed;
+>>>>>>>>> Temporary merge branch 2
     private Texture life;
     private Texture damage;
     private Texture shutDown;
@@ -253,7 +254,7 @@ public class Robot {
                         
             case 9 :    damage = new Texture(Gdx.files.internal("parameters/damage9.png"));
                         break;
-                        
+
             case 10:    damage = new Texture(Gdx.files.internal("parameters/damage10.png"));
                         backupDraw = true;
                         break;
