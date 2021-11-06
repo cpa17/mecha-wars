@@ -23,7 +23,6 @@ public class Robot {
     private boolean lastRound;
     private boolean nextRound;
     private boolean destroyed;
->>>>>>>>> Temporary merge branch 2
     private Texture life;
     private Texture damage;
     private Texture shutDown;
