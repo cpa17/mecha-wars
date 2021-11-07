@@ -1,0 +1,16 @@
+# 1.11.2021 - 13:00 - Daily
+
+Entschuldigt: Till, 
+Anwesend: Alle anderen
+Fehlend: Ihor
+Protokollführung: Lukas Brüggemann
+
+## Runde
+- Marc: MW-18 fertig, MW-28 merke in Arbeit, MW-20 in Arbeit, Felix frage nach Spieler anzahl
+- Tim: Probleme mit move Funktion und Timer, lösen Fehler aus bei Benutzung, weiteres Testen nötig
+- Pascal: MW- 26, 29 fertig, MW-27 angefangen, bug gefunden (karten liste aktualisiert sich nicht)
+- Ihor: …
+- Konstantin: Probleme mit move Funktion und Timer, lösen Fehler aus bei Benutzung, weiteres Testen nötig
+- Mark: mit Antonia MW-37, Konduktoren bearbeitet, Felder Richtungen noch in Arbeit 
+- Antonia: erstelle von Objectarray Funktion, Überarbeitung der map Erstellung mit Mark
+- Bernhard: code Überarbeitung, erste Gedanken zu Multiplayer Umsetzung, Umsetzung der Initialisierung von Multiplayer modus

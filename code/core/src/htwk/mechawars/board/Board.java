@@ -1,8 +1,7 @@
 package htwk.mechawars.board;
-
-import htwk.mechawars.GameScreen;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.Type;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -12,12 +11,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
  * Class that presents the game board.
  */
 public class Board {
     public int[][] matrix;
+    private Texture[] fieldAssets = new Texture[36];
 
     /**
      * Method that constructs the game board as a matrix.
@@ -25,8 +27,24 @@ public class Board {
      * @param height height of the game board
      */
     public Board(int width, int height) {
-        this.matrix = new int[height][width];
+        Board wrappedBoard = new Board(width, height, false);
+        this.matrix = wrappedBoard.matrix;
+        this.fieldAssets = wrappedBoard.fieldAssets;
+    }
 
+    /**
+     * Method that constructs the game board as a matrix, but can skip creating the assets.
+     * @param width width of the game board
+     * @param height height of the game board
+     * @param isTest allows to skip creating the assets
+     */
+    public Board(int width, int height, boolean isTest) {
+        this.matrix = new int[height][width];
+        if (!isTest) {
+            for (int i = 0; i < fieldAssets.length; i++) {
+                fieldAssets[i] = new Texture(Gdx.files.internal("mapAssets/" + i + ".png"));
+            }
+        }
         for (int[] ints : matrix) {
             Arrays.fill(ints, 0);
         }
@@ -40,35 +58,33 @@ public class Board {
     }
 
     /**
-     * Method that reads the game plan as a string from a text file.
-     *
-     * @param fileName Name of the text file to be read in.
-     * @return Board.fromString(mapString) Method fromString
-     *         with the string from the text file as parameter
+     * Method that reads the game plan as a matrix from a file.
+     * @param fileName Path to a file containing a map
      */
-    public static Board fromFile(String fileName) {
+    public Board(String fileName) {
         FileHandle file = Gdx.files.internal(fileName);
         String mapString = file.readString();
-        System.out.println(mapString);
 
-        return Board.fromString(mapString);
+        Board wrappedBoard = new Board(mapString, false);
+        this.matrix = wrappedBoard.matrix;
+        this.fieldAssets = wrappedBoard.fieldAssets;
     }
 
     /**
-     * Method that reads the game plan as a matrix from a string.
+     * Method that reads the game plan as a matrix from a file, but can skip the creating the
+     * assets.
      *
-     * @param mapString String that is to be saved as the matrix of a board
-     * @return board Board which contains the game plan as a matrix
+     * @param mapString String containing a map
+     * @param isTest allows to skip creating the assets
      */
-    public static Board fromString(String mapString) {
-
+    public Board(String mapString, boolean isTest) {
         ArrayList<ArrayList<Integer>> tempLayout = new ArrayList<>();
-
+           
         String[] linesArray = mapString.split("\\r?\\n");
         String currentLine;
-
+        
         Scanner scn = new Scanner(mapString);
-        String s = ""; 
+        String s;
         while (scn.hasNext()) {
             s = scn.next();
             try {
@@ -76,66 +92,70 @@ public class Board {
             } catch (NumberFormatException z) {
                 System.out.println("The map obtains elements which are not integer!");
                 Gdx.app.exit();
-                System.exit(-1);
+                //System.exit(-1);
             }
         }
 
-        for (int i = 0; i < linesArray.length; i++) {
-            currentLine = linesArray[i];
+        for (String value : linesArray) {
+            currentLine = value;
             ArrayList<Integer> row = new ArrayList<>();
             String[] values = currentLine.trim().split(" ");
             for (String string : values) {
-
                 if (values.length > 12) {
                     System.out.println("The map has too many columns, only 12 are allowed!");
                     Gdx.app.exit();
-                    System.exit(-1);
-                } 
+                    //System.exit(-1);
+                }
 
                 if (!string.isEmpty()) {
                     int id = Integer.parseInt(string);
                     row.add(id);
                 }
             }
-            tempLayout.add(row);              
+            tempLayout.add(row);
         }
+        scn.close();
 
         int width = tempLayout.get(0).size();
         int height = tempLayout.size();
-
-
+        
         if (height > 12) {
             System.out.println("The map has too many rows, only 12 are allowed!");
             Gdx.app.exit();
-            System.exit(-1);
-        }                       
+            //System.exit(-1);
+        }
 
-        Board board = new Board(width, height);
+        Board wrappedBoard = new Board(width, height, isTest);
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                board.matrix[y][x] = tempLayout.get(y).get(x);
+                wrappedBoard.matrix[y][x] = tempLayout.get(y).get(x);
             }
         }
 
-        return board;
+        this.matrix = wrappedBoard.matrix;
+        this.fieldAssets = wrappedBoard.fieldAssets;
     }
 
     /**
-     * Method that outputs any board matrix in the console for tests.
+     * Method that draws any board matrix as Textures.
      *
+     * @param batch SpriteBatch to draw the Textures
      * @param board Board whose matrix is to be converted into a string
-     * @return matrix Matrix of the board as a string
      */
-    public static String toString(Board board) {
-        String matrix = "";
+    public static void toAsset(SpriteBatch batch, Board board) {
+        int x = 0;
         for (int i = 0; i < board.matrix.length; i++) {
             for (int j = 0; j < board.matrix[i].length; j++) {
-                matrix = matrix + board.matrix[i][j] + " ";
+                int t = Gdx.graphics.getHeight() / board.matrix.length; //height of one tile
+                int b = Gdx.graphics.getHeight(); //height of the entire board
+                int c = (i + 1) * t; //the current height in the loop
+                int r = b - c; //the result of the board height minus the current height
+                batch.draw(board.fieldAssets[board.matrix[i][j]], x, r);
+                x = x + (Gdx.graphics.getHeight() / board.matrix.length);
             }
-            matrix = matrix + "\n";
+            x = 0;
         }
-        return matrix;
     }
 
     /**
@@ -151,7 +171,6 @@ public class Board {
         robot.setYcoor(y);
         robot.setStartY(y);
         robot.setDir(dir);
-        this.matrix[y][x] = robot.getDir().getValue();
     }
 
     /**
@@ -188,5 +207,37 @@ public class Board {
             this.matrix[robot.getYcoor()][robot.getXcoor()] = robot.getDir().getValue();
         }
     }
+    
+    /**
+     * Method that checks whether the robot receives 2 damage points.
+     * @param robot the robot that should check
+     */
+    private void checkDoubleDamage(Robot robot) {
+        if ((!robot.getShutDown() && robot.getLastRound()) || robot.getDestroyed()) {
+
+            robot.damageUp();
+            robot.damageUp();
+
+            if (robot.getDestroyed()) {
+                robot.setDestroyed(false);
+            } else {
+                robot.setLastRound(false);
+            }
+        }
+    }
+
+    /**
+     * Method that checks whether the robot is in shutdown mode.
+     * @param robot the robot that should check
+     */
+
+    private void checkShutDown(Robot robot) {
+
+        if (robot.getShutDown()) {
+            robot.damageReset();
+            robot.setLastRound(true);
+        }
+    }
+
 
 }
