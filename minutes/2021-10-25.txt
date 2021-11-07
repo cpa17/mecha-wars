@@ -1,0 +1,15 @@
+Protokoll Daily 25.10.2021-14:00
+
+Protokollführer: Christoph Pascal Ahlner
+Anwesenheit: Nur Felix fehlt
+
+Marc: MW28 fertig, MW18 fast fertig, MW20 fast fertig
+Tim: MW41 (Bugfix) fertig, MW30 begonnen, MW40 funktioniert noch nicht
+Pascal: MW26 fertig + Test angefangen
+Ihor: war auf Arbeit, hatte keine Zeit
+Konstantin: MW41 (Bugfix) fertig, MW30 begonnen
+Mark + Antonia: abgesprochen, morgen wird angefangen mit MW37
+Bernhard: keine Zeit am Wochenende
+
+
+

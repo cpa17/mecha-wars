@@ -229,14 +229,7 @@ public class GameScreen implements Screen {
 
         endGameButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                if (JOptionPane.showConfirmDialog(null, 
-                        "Programm wird beendet.", "Schliessen?", 
-                        JOptionPane.YES_NO_OPTION,
-                        JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-                    // do something - close
-                    Gdx.app.exit();
-                } // end of the if-part
-                // else nothing
+                
             }
         });
 
@@ -636,3 +629,4 @@ public class GameScreen implements Screen {
     }
 
 }
+
