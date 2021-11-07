@@ -26,7 +26,7 @@ public class DamageTest {
         Card[] tempKarten = new Card[84];
         tempKarten = CardFunctions.initDeck();
         tempKarten = CardFunctions.shuffle(tempKarten);
-        for(int i = 0; i <= tempKarten.length; i+=1) {
+        for (int i = 0; i <= tempKarten.length; i += 1) {
             karten.add(tempKarten[i]);
         }
 
