@@ -36,6 +36,10 @@ public class Checkpoint extends Field {
         return this.number;
     }
     
+    /**
+     * Take the Texture of the tile
+     * @return the tile
+     */
     public Texture getTile() {
         return this.tile;
     }

@@ -21,54 +21,7 @@ public class Laser extends Field {
     public Laser(int xcoor, int ycoor, int type) {
         super(xcoor, ycoor);
         this.type = type;
-
         this.tile = new Texture(Gdx.files.internal("mapAssets/" + "laser/" + "Laser0" + String.valueOf(type) + ".png"));
-        /*
-        switch(type) {  
-            //beginn links
-            case 0:
-                this.tile = new Texture("mapAssets/24.png");
-                break;
-            //beginn oben
-            case 1:
-                this.tile = new Texture("mapAssets/24.png");
-                break;
-            //beginn rechts
-            case 2:
-                this.tile = new Texture("mapAssets/24.png");
-                break;
-            //beginn unten
-            case 3:
-                this.tile = new Texture("mapAssets/24.png");
-                break;
-                
-            //mitte horizontal    
-            case 4:
-                this.tile = new Texture("mapAssets/18.png");
-                break;
-            //mitte vertikal
-            case 5:
-                this.tile = new Texture("mapAssets/18.png");
-                break;
-            
-            //ende links
-            case 6:
-                this.tile = new Texture("mapAssets/21.png");
-                break;
-            //ende oben
-            case 7:
-                this.tile = new Texture("mapAssets/21.png");
-                break;  
-            //ende rechts
-            case 8:
-                this.tile = new Texture("mapAssets/21.png");
-                break;
-            //ende unten
-            case 9:
-                this.tile = new Texture("mapAssets/21.png");
-                break;
-        }
-        */
     }
 
     @Override
@@ -86,6 +39,10 @@ public class Laser extends Field {
         return this.type;
     }
     
+    /**
+     * Take the Texture of the tile
+     * @return the tile
+     */
     public Texture getTile() {
         return this.tile;
     }

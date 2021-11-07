@@ -42,6 +42,10 @@ public class Gear extends Field {
         return this.direction;
     }
     
+    /**
+     * Take the Texture of the tile
+     * @return the tile
+     */
     public Texture getTile() {
         return this.tile;
     }

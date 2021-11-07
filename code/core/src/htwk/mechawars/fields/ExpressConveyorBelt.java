@@ -1,5 +1,6 @@
 package htwk.mechawars.fields;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
 /**
@@ -20,135 +21,7 @@ public class ExpressConveyorBelt extends Field {
         super(xcoor, ycoor);
         this.start = start;
         this.end = end;
-        //6.png -> von oben und unten nach rechts
-        //7.png -> von unten nach rechts 
-        //8.png -> von oben und rechts nach unten
-        //9.png -> von unten nach oben
-        
-        String internalPath = "mapAssets/" + "expressconveyorBelt/" + "ExpressConveyorBelt" + String.valueOf(start) + String.valueOf(end) + ".png";
-        this.tile = new Texture(internalPath);
-        
-        /*
-        switch(end){
-        //nach links 
-        case 1:
-            switch(start) {
-                //von oben
-                case 2:
-                    this.tile = new Texture("mapAssets/7.png");
-                    break;
-                //von rechts
-                case 3:
-                    this.tile = new Texture("mapAssets/9.png");
-                    break; 
-                //von unten
-                case 4:
-                    this.tile = new Texture("mapAssets/7.png");
-                    break;
-                //von oben und unten
-                case 6:
-                    this.tile = new Texture("mapAssets/6.png");
-                    break;
-                //von rechts und oben
-                case 7:
-                    this.tile = new Texture("mapAssets/8.png");
-                    break;
-                //von rechts und unten
-                case 9:
-                    this.tile = new Texture("mapAssets/8.png");
-                    break;       
-            };
-            
-        //nach oben
-        case 2:
-            switch(start) {
-                //von links und unten
-                case 0:
-                    this.tile = new Texture("mapAssets/8.png");
-                    break;
-                //von links
-                case 1:
-                    this.tile = new Texture("mapAssets/7.png");
-                    break; 
-                //von recht
-                case 3:
-                    this.tile = new Texture("mapAssets/7.png");
-                    break;
-                //von unten
-                case 4:
-                    this.tile = new Texture("mapAssets/9.png");
-                    break;
-                //von links und rechts
-                case 5:
-                    this.tile = new Texture("mapAssets/6.png");
-                    break;
-                //von rechts und unten
-                case 9:
-                    this.tile = new Texture("mapAssets/8.png");
-                    break;
-            
-            };
-            
-        //nach rechts
-        case 3:
-            switch(start) {
-                //von links und unten
-                case 0:
-                    this.tile = new Texture("mapAssets/8.png");
-                    break;
-                //von links
-                case 1:
-                    this.tile = new Texture("mapAssets/9.png");
-                    break; 
-                //von oben
-                case 2:
-                    this.tile = new Texture("mapAssets/7.png");
-                    break;
-                //von unten
-                case 4:
-                    this.tile = new Texture("mapAssets/7.png");
-                    break;
-                //von oben und unten
-                case 6:
-                    this.tile = new Texture("mapAssets/6.png");
-                    break;
-                //von links und oben
-                case 8:
-                    this.tile = new Texture("mapAssets/8.png");
-                    break;  
-            };
-
-        //nach unten
-        case 4:
-            switch(start) {
-                //von links 
-                case 1:
-                    this.tile = new Texture("mapAssets/7.png");
-                    break;
-                //von oben
-                case 2:
-                    this.tile = new Texture("mapAssets/9.png");
-                    break; 
-                //von rechts
-                case 3:
-                    this.tile = new Texture("mapAssets/7.png");
-                    break;
-                //von links und rechts
-                case 5:
-                    this.tile = new Texture("mapAssets/6.png");
-                    break;
-                //von rechts und oben
-                case 7:
-                    this.tile = new Texture("mapAssets/8.png");
-                    break;
-                //von links und oben
-                case 8:
-                    this.tile = new Texture("mapAssets/8.png");
-                    break;       
-          };
-        }
-        */
-
+        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "expressconveyorBelt/" + "ExpressConveyorBelt" + String.valueOf(start) + String.valueOf(end) + ".png"));
     }
 
     @Override
@@ -174,6 +47,10 @@ public class ExpressConveyorBelt extends Field {
         return this.end;
     }
     
+    /**
+     * Take the Texture of the tile
+     * @return the tile
+     */
     public Texture getTile() {
         return this.tile;
     }

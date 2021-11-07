@@ -43,6 +43,10 @@ public class RepairSite extends Field {
         return this.type;
     }
     
+    /**
+     * Take the Texture of the tile
+     * @return the tile
+     */
     public Texture getTile() {
         return this.tile;
     }

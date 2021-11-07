@@ -19,26 +19,7 @@ public class BarrierSide extends Field {
     public BarrierSide(int xcoor, int ycoor, int side) {
         super(xcoor, ycoor);
         this.side = side;
-        
         this.tile = new Texture(Gdx.files.internal("mapAssets/" + "barrierside/" + "BarrierSide" + String.valueOf(side) + ".png"));
-        /*
-         * 
-        switch(side){
-        
-        case 1:
-            this.tile = new Texture("mapAssets/1.png");
-            break;
-        case 2:
-            this.tile = new Texture("mapAssets/1.png");
-            break;
-        case 3:
-            this.tile = new Texture("mapAssets/1.png");
-            break;
-        case 4:
-            this.tile = new Texture("mapAssets/1.png");
-            break; 
-        }
-        */
     }
 
     @Override
@@ -56,6 +37,10 @@ public class BarrierSide extends Field {
         return this.side;
     }
     
+    /**
+     * Take the Texture of the tile
+     * @return the tile
+     */
     public Texture getTile() {
         return this.tile;
     }

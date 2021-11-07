@@ -20,25 +20,7 @@ public class Blockade extends Field {
     public Blockade(int xcoor, int ycoor, int type) {
         super(xcoor, ycoor);
         this.type = type;
-        
         this.tile = new Texture(Gdx.files.internal("mapAssets/" + "blockade/" + "Blockade0" + String.valueOf(type) + ".png"));
-        
-        /*
-        switch(type){
-        case 1:
-            this.tile = new Texture("mapAssets/4.png"); //horizontal 2,4
-            break;
-        case 2:
-            this.tile = new Texture("mapAssets/4.png"); //vertikal 2,4
-            break;
-        case 3:
-            this.tile = new Texture("mapAssets/5.png"); //horizontal 1,3,5
-            break;
-        case 4:
-            this.tile = new Texture("mapAssets/5.png"); //vertikal 1,3,5
-            break; 
-        }
-        */
     }
 
     @Override
@@ -56,6 +38,10 @@ public class Blockade extends Field {
         return this.type;
     }
     
+    /**
+     * Take the Texture of the tile
+     * @return the tile
+     */
     public Texture getTile() {
         return this.tile;
     }

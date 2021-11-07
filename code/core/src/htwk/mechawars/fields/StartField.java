@@ -19,37 +19,7 @@ public class StartField extends Field {
     public StartField(int xcoor, int ycoor, int number) {
         super(xcoor, ycoor);
         this.number = number; 
-        
         this.tile = new Texture(Gdx.files.internal("mapAssets/" + "startfield/" + "StartField0" + String.valueOf(number) + ".png"));
-        
-        /*
-        switch(number){
-        case 1:
-            this.tile = new Texture("mapAssets/27.png");
-            break;
-        case 2:
-            this.tile = new Texture("mapAssets/28.png");
-            break;
-        case 3:
-            this.tile = new Texture("mapAssets/29.png");
-            break;
-        case 4:
-            this.tile = new Texture("mapAssets/30.png");
-            break; 
-        case 5:
-            this.tile = new Texture("mapAssets/31.png"); //6
-            break; 
-        case 6:
-            this.tile = new Texture("mapAssets/32.png");
-            break;
-        case 7:
-            this.tile = new Texture("mapAssets/33.png");
-            break; 
-        case 8:
-            this.tile = new Texture("mapAssets/34.png"); //6
-            break; 
-        }
-        */
     }
 
     @Override
@@ -67,6 +37,10 @@ public class StartField extends Field {
         return this.number;
     }
     
+    /**
+     * Take the Texture of the tile
+     * @return the tile
+     */
     public Texture getTile() {
         return this.tile;
     }
