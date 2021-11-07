@@ -7,8 +7,6 @@ import com.badlogic.gdx.graphics.Texture;
  */
 public class Gear extends Field {
 
-    // Attribut was angibt in welche Richtung sich das Zahnrad dreht
-    // 1 = rechtsrum, 2 = linksrum
     private int direction;
     private Texture tile;
 
@@ -19,10 +17,9 @@ public class Gear extends Field {
         super(xcoor, ycoor);
         this.direction = direction;
         
-        if(direction == 1) {
+        if (direction == 1) {
             this.tile = new Texture("mapAssets/gear/Gear01.png");
-        }
-        else {
+        } else {
             this.tile = new Texture("mapAssets/gear/Gear02.png");
         }
     }
@@ -41,11 +38,7 @@ public class Gear extends Field {
     public int getDirection() {
         return this.direction;
     }
-    
-    /**
-     * Take the Texture of the tile
-     * @return the tile
-     */
+
     public Texture getTile() {
         return this.tile;
     }

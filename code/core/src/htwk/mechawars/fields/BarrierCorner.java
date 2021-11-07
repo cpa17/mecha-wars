@@ -9,8 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
  */
 public class BarrierCorner extends Field {
 
-    // Attribut was angibt in welcher Ecke sich die Barriere befindet
-    // 1 = linksoben, 2 = rechtsoben, 3 = rechtsunten, 4 = linksunten
+    // attribute which shows where the coner of the barrier is located
+    // 1 = top-left, 2 = top-right, 3 = bottom-right, 4 = bottom-left
     private int corner;
     private Texture tile;
 
@@ -20,7 +20,9 @@ public class BarrierCorner extends Field {
     public BarrierCorner(int xcoor, int ycoor, int corner) {
         super(xcoor, ycoor);
         this.corner = corner;
-        this.tile = new Texture(Gdx.files.internal( "mapAssets/" + "barriercorner/" + "BarrierCorner0" + String.valueOf(corner) + ".png"));
+        this.tile = 
+                new Texture(Gdx.files.internal("mapAssets/" 
+        + "barriercorner/" + "BarrierCorner0" + String.valueOf(corner) + ".png"));
     }
 
     @Override
@@ -31,17 +33,14 @@ public class BarrierCorner extends Field {
     }
 
     /**
-     * Take the Corner where the Barrier is.
+     * Takes the Corner where the Barrier is.
      * @return the Corner
      */
     public int getCorner() {
         return this.corner;
     }
-    
-    /**
-     * Take the Texture of the tile
-     * @return the tile
-     */
+
+    @Override
     public Texture getTile() {
         return this.tile;
     }

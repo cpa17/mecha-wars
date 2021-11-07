@@ -8,8 +8,8 @@ import com.badlogic.gdx.graphics.Texture;
  */
 public class BarrierSide extends Field {
 
-    // Attribut was angibt auf welcher Seite sich die Barriere befindet
-    // 1 = links, 2 = oben, 3 = rechts, 4 = unten
+    // attribute which locates the side of the barrier
+    // 1 = left, 2 = top, 3 = right, 4 = bottom
     private int side;
     private Texture tile;
 
@@ -19,7 +19,9 @@ public class BarrierSide extends Field {
     public BarrierSide(int xcoor, int ycoor, int side) {
         super(xcoor, ycoor);
         this.side = side;
-        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "barrierside/" + "BarrierSide" + String.valueOf(side) + ".png"));
+        this.tile = 
+                new Texture(Gdx.files.internal("mapAssets/" + 
+        "barrierside/" + "BarrierSide" + String.valueOf(side) + ".png"));
     }
 
     @Override
@@ -36,11 +38,7 @@ public class BarrierSide extends Field {
     public int getSide() {
         return this.side;
     }
-    
-    /**
-     * Take the Texture of the tile
-     * @return the tile
-     */
+
     public Texture getTile() {
         return this.tile;
     }

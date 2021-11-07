@@ -19,7 +19,9 @@ public class StartField extends Field {
     public StartField(int xcoor, int ycoor, int number) {
         super(xcoor, ycoor);
         this.number = number; 
-        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "startfield/" + "StartField0" + String.valueOf(number) + ".png"));
+        this.tile = 
+                new Texture(Gdx.files.internal("mapAssets/" + 
+        "startfield/" + "StartField0" + String.valueOf(number) + ".png"));
     }
 
     @Override
@@ -36,11 +38,7 @@ public class StartField extends Field {
     public int getNumber() {
         return this.number;
     }
-    
-    /**
-     * Take the Texture of the tile
-     * @return the tile
-     */
+
     public Texture getTile() {
         return this.tile;
     }

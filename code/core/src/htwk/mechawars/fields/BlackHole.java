@@ -16,11 +16,7 @@ public class BlackHole extends Field {
         super(xcoor, ycoor);
         this.tile = new Texture("mapAssets/BlackHole.png");
     }
-    
-    /**
-     * Take the Texture of the tile
-     * @return the tile
-     */
+
     public Texture getTile() {
         return this.tile;
     }

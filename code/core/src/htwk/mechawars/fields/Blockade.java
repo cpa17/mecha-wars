@@ -8,9 +8,9 @@ import com.badlogic.gdx.graphics.Texture;
  */
 public class Blockade extends Field {
 
-    // Attribut was angibt um welche der beiden Blockaden es sich handelt und ob sie horizontal oder vertikal sind
-    // 1 = horizontale Blockade mit Ziffern 2 und 4, 2 = horizontale Blockade mit Ziffern 1, 3 und 5
-    // 3 = vertikale Blockade mit Ziffern 2 und 4, 4 = vertikale Blockade mit Ziffern 1, 3 und 5
+    // attribute which represents the type of the blockade
+    // 1 = horizontal with the numbers 2 and 4, 2 = horizontal with the numbers 1, 3 and 5
+    // 3 = vertical with the numbers 2 and 4, 4 = vertical with the numbers 1, 3 and 5
     private int type;
     private Texture tile;
 
@@ -20,7 +20,9 @@ public class Blockade extends Field {
     public Blockade(int xcoor, int ycoor, int type) {
         super(xcoor, ycoor);
         this.type = type;
-        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "blockade/" + "Blockade0" + String.valueOf(type) + ".png"));
+        this.tile =
+                new Texture(Gdx.files.internal("mapAssets/" 
+        + "blockade/" + "Blockade0" + String.valueOf(type) + ".png"));
     }
 
     @Override
@@ -37,11 +39,7 @@ public class Blockade extends Field {
     public int getType() {
         return this.type;
     }
-    
-    /**
-     * Take the Texture of the tile
-     * @return the tile
-     */
+
     public Texture getTile() {
         return this.tile;
     }

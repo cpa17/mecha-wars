@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.Texture;
  */
 public class RepairSite extends Field {
 
-    // Attribut was angibt um welche Art Reparaturfeld es sich handelt
-    // 1 = einfaches Reparaturfeld, 2 = doppeltes Reparaturfeld
+    // attribut which indicates the type 
+    // 1 = simple repairsite, 2 = double repairsite
     private int type;
     private Texture tile;
     
@@ -22,8 +22,7 @@ public class RepairSite extends Field {
         
         if (type == 1) {
             this.tile = new Texture("mapAssets/repairsite/RepairSite01.png");
-        }
-        else {
+        } else {
             this.tile = new Texture("mapAssets/repairsite/RepairSite02.png");
         }
     }
@@ -42,11 +41,7 @@ public class RepairSite extends Field {
     public int getType() {
         return this.type;
     }
-    
-    /**
-     * Take the Texture of the tile
-     * @return the tile
-     */
+
     public Texture getTile() {
         return this.tile;
     }

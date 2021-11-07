@@ -8,8 +8,9 @@ import com.badlogic.gdx.graphics.Texture;
  */
 public class ExpressConveyorBelt extends Field {
 
-    // Attribute die angeben aus welcher Richtung das Express-Förderband kommt und in welche Richtung es führt
-    // 1 = links, 2 = oben, 3 = rechts, 4 = unten, 5 = links und rechts, 6 = oben und unten
+    // attribute which represents the start and the end of an express conveyorbelt
+    // 1 = left, 2 = top, 3 = right, 4 = bottom, 5 = left and right, 6 = top and bottom,
+    // 7 = right and top, 8 = left and top, 9 = right and bottom, 0 = left and bottom
     private int start;
     private int end;
     private Texture tile;
@@ -21,7 +22,10 @@ public class ExpressConveyorBelt extends Field {
         super(xcoor, ycoor);
         this.start = start;
         this.end = end;
-        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "expressconveyorBelt/" + "ExpressConveyorBelt" + String.valueOf(start) + String.valueOf(end) + ".png"));
+        this.tile = 
+                new Texture(Gdx.files.internal("mapAssets/" + 
+        "expressconveyorBelt/" + "ExpressConveyorBelt" + 
+                        String.valueOf(start) + String.valueOf(end) + ".png"));
     }
 
     @Override
@@ -46,11 +50,7 @@ public class ExpressConveyorBelt extends Field {
     public int getEnd() {
         return this.end;
     }
-    
-    /**
-     * Take the Texture of the tile
-     * @return the tile
-     */
+
     public Texture getTile() {
         return this.tile;
     }
