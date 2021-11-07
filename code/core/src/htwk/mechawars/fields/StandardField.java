@@ -17,7 +17,8 @@ public class StandardField extends Field {
         super(xcoor, ycoor);
         this.tile = new Texture("mapAssets/StandardField.png"); // = new Texture(Gdx.files.internal("mapAssets/" + i + ".png"));
     }
-    
+
+    @Override
     public Texture getTile() {
         return this.tile;
     }

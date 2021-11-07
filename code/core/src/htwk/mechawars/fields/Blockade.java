@@ -55,7 +55,8 @@ public class Blockade extends Field {
     public int getType() {
         return this.type;
     }
-    
+
+    @Override
     public Texture getTile() {
         return this.tile;
     }

@@ -35,7 +35,8 @@ public class Checkpoint extends Field {
     public int getNumber() {
         return this.number;
     }
-    
+
+    @Override
     public Texture getTile() {
         return this.tile;
     }

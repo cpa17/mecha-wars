@@ -41,7 +41,8 @@ public class Gear extends Field {
     public int getDirection() {
         return this.direction;
     }
-    
+
+    @Override
     public Texture getTile() {
         return this.tile;
     }

@@ -48,7 +48,7 @@ public class GameScreen implements Screen {
     private Card[] deck;
 
     //zum Ausgeben der bisherigen, "normalen" Spielfelds map mit mapStd ersetzen
-    private Board board = new Board("map.txt");
+    private Board board = new Board("map2.txt");
     private Robot player = new Robot();
 
     private TextButton[] buttons = new TextButton[choosableCardCount];
@@ -76,7 +76,7 @@ public class GameScreen implements Screen {
         board.startRobot(5, 5, Dir.NORTH, player);
 
         //MW37
-        Board.showFieldMatrix(Board.createFieldMatrix(testboard));
+        //Board.showFieldMatrix(Board.createFieldMatrix(testboard));
     }
 
     /**

@@ -85,7 +85,8 @@ public class Laser extends Field {
     public int getType() {
         return this.type;
     }
-    
+
+    @Override
     public Texture getTile() {
         return this.tile;
     }

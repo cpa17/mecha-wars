@@ -55,7 +55,8 @@ public class BarrierCorner extends Field {
     public int getCorner() {
         return this.corner;
     }
-    
+
+    @Override
     public Texture getTile() {
         return this.tile;
     }

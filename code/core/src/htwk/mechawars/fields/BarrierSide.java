@@ -55,7 +55,8 @@ public class BarrierSide extends Field {
     public int getSide() {
         return this.side;
     }
-    
+
+    @Override
     public Texture getTile() {
         return this.tile;
     }

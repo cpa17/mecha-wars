@@ -1,5 +1,7 @@
 package htwk.mechawars.fields;
 
+import com.badlogic.gdx.graphics.Texture;
+
 /**
  * Class of a Field.
  */
@@ -7,6 +9,7 @@ public class Field {
 
     protected int xcoor;
     protected int ycoor;
+    protected Texture tile;
 
     /**
      * Constructor of a Field.
@@ -14,6 +17,7 @@ public class Field {
     public Field(int xcoor, int ycoor) {
         this.xcoor = xcoor;
         this.ycoor = ycoor;
+        this.tile = new Texture("mapAssets/StandardField.png");
     }
 
     public String showAttributes() {
@@ -36,8 +40,8 @@ public class Field {
     public int getYcoor() {
         return this.ycoor;
     }
-    
-    public void rotateImg() {
-        
+
+    public Texture getTile() {
+        return this.tile;
     }
 }

@@ -16,7 +16,8 @@ public class BlackHole extends Field {
         super(xcoor, ycoor);
         this.tile = new Texture("mapAssets/BlackHole.png");
     }
-    
+
+    @Override
     public Texture getTile() {
         return this.tile;
     }
