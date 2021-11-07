@@ -1,4 +1,5 @@
 package htwk.mechawars.board;
+
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.Type;
 
@@ -79,10 +80,10 @@ public class Board {
      */
     public Board(String mapString, boolean isTest) {
         ArrayList<ArrayList<Integer>> tempLayout = new ArrayList<>();
-           
+
         String[] linesArray = mapString.split("\\r?\\n");
         String currentLine;
-        
+
         Scanner scn = new Scanner(mapString);
         String s;
         while (scn.hasNext()) {
@@ -118,7 +119,7 @@ public class Board {
 
         int width = tempLayout.get(0).size();
         int height = tempLayout.size();
-        
+
         if (height > 12) {
             System.out.println("The map has too many rows, only 12 are allowed!");
             Gdx.app.exit();
@@ -196,7 +197,6 @@ public class Board {
                         }
                         matrix[robot.getYcoor()][robot.getXcoor()] = robot.getDir().getValue();
                     }
-
                 }, i);
                 i += 1;
             }
@@ -207,7 +207,7 @@ public class Board {
             this.matrix[robot.getYcoor()][robot.getXcoor()] = robot.getDir().getValue();
         }
     }
-    
+
     /**
      * Method that checks whether the robot receives 2 damage points.
      * @param robot the robot that should check
