@@ -242,9 +242,9 @@ public class GameScreen implements Screen {
 
         endGameButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                
+
                 Dialog dialogCloseOption = new Dialog("Beenden?", skin) {
-                    
+
                     @Override
                     protected void result(Object object) {
                         boolean exit = (Boolean) object;
@@ -256,9 +256,9 @@ public class GameScreen implements Screen {
                     }
 
                 }.show(stage);
-                
+
                 dialogCloseOption.setSize(250, 110);
-                
+
                 dialogCloseOption.button("Beenden", true);
                 dialogCloseOption.button("Abbruch", false);
                 dialogCloseOption.key(Input.Keys.ENTER, true);
@@ -688,12 +688,12 @@ public class GameScreen implements Screen {
                 int r = b - c; //the result of the board height minus the current height
 
                 switch (p) {
-                case(0):
-                    batch.draw(industrialTile, x, r);
-                break;
-                default:
-                    batch.draw(industrialTile, x, r);
-                    break;
+                    case(0):
+                        batch.draw(industrialTile, x, r);
+                        break;
+                    default:
+                        batch.draw(industrialTile, x, r);
+                        break;
                 }
 
                 x = x + (Gdx.graphics.getHeight() / board.matrix.length);

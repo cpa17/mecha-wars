@@ -35,11 +35,11 @@ public class MainMenu implements Screen {
         game = g;
         img = new Texture(Gdx.files.internal("background.png"));
         stage = new Stage();
-        
+
         Gdx.input.setInputProcessor(stage);
-        
+
         Skin skin = new Skin(Gdx.files.internal("skinMenu/star-soldier-ui.json"));
-        
+
         TextButton startGame = new TextButton("Spiel starten", skin);
         startGame.setPosition(440, 200);
         startGame.setSize(400, 100);
@@ -55,10 +55,10 @@ public class MainMenu implements Screen {
         endGame.setSize(400, 100);
         endGame.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                
+
                 Dialog dialogCloseOption = new Dialog("                 Beenden?", skin) {
                     // many spaces, because then its nearly in the centre
-                    
+
                     @Override
                     protected void result(Object object) {
                         boolean exit = (Boolean) object;
@@ -70,9 +70,9 @@ public class MainMenu implements Screen {
                     }
 
                 }.show(stage);
-                
+
                 dialogCloseOption.setSize(450, 110);
-                
+
                 dialogCloseOption.button("Beenden", true);
                 dialogCloseOption.button("Abbruch", false);
                 dialogCloseOption.key(Input.Keys.ENTER, true);
