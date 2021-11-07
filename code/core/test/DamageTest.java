@@ -2,7 +2,6 @@ import htwk.mechawars.board.Board;
 import htwk.mechawars.board.Dir;
 import htwk.mechawars.board.Robot;
 import htwk.mechawars.cards.Card;
-import htwk.mechawars.cards.CardFunctions;
 import htwk.mechawars.cards.Type;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,13 +22,6 @@ public class DamageTest {
     @Test
     public void damageTest() {
         
-        Card[] tempKarten = new Card[84];
-        tempKarten = CardFunctions.initDeck();
-        tempKarten = CardFunctions.shuffle(tempKarten);
-        for (int i = 0; i <= tempKarten.length; i += 1) {
-            karten.add(tempKarten[i]);
-        }
-
         assertEquals(0, robot.getDamagePoints());
         assertFalse(robot.getShutDown());
         assertEquals(3, robot.getLifePoints());
