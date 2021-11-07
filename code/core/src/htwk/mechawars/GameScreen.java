@@ -1,6 +1,7 @@
 package htwk.mechawars;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -59,7 +60,7 @@ public class GameScreen implements Screen {
      */
     public GameScreen() {
         industrialTile = new Texture("mapAssets/0.png");
-        
+
         robot = new Texture("robot.png");
 
         batch = new SpriteBatch();
@@ -241,7 +242,28 @@ public class GameScreen implements Screen {
 
         endGameButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.exit();
+                
+                Dialog dialogCloseOption = new Dialog("Beenden?", skin) {
+                    
+                    @Override
+                    protected void result(Object object) {
+                        boolean exit = (Boolean) object;
+                        if (exit) {
+                            Gdx.app.exit();
+                        } else {
+                            remove();
+                        }
+                    }
+
+                }.show(stage);
+                
+                dialogCloseOption.setHeight(400);
+                //dialog.setSize(300, 100);
+                
+                dialogCloseOption.button("Beenden", true).setSize(100, 50);
+                dialogCloseOption.button("Abbruch", false).setSize(100, 50);
+                dialogCloseOption.key(Input.Keys.ENTER, true);
+                dialogCloseOption.key(Input.Keys.ESCAPE, false);                
             }
         });
 
@@ -667,12 +689,12 @@ public class GameScreen implements Screen {
                 int r = b - c; //the result of the board height minus the current height
 
                 switch (p) {
-                    case(0):
-                        batch.draw(industrialTile, x, r);
-                        break;
-                    default:
-                        batch.draw(industrialTile, x, r);
-                        break;
+                case(0):
+                    batch.draw(industrialTile, x, r);
+                break;
+                default:
+                    batch.draw(industrialTile, x, r);
+                    break;
                 }
 
                 x = x + (Gdx.graphics.getHeight() / board.matrix.length);
