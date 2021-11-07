@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
  */
 
 public class BoardTest {
-    private Board board = new Board(4, 4);
+    private Board board = new Board(4, 4, true);
     private Board boardtxt = new Board();
 
     private Robot robot = new Robot();
@@ -25,11 +25,11 @@ public class BoardTest {
             {0, 0, 0, 0},
             {0, 0, 0, 0},
             {0, 0, 0, 0},
-            {0, 0, 0, 1}
+            {0, 0, 0, 0}
     };
 
     public int[][] midMatrix = {
-            {0, 0, 3, 0},
+            {0, 0, 0, 0},
             {0, 0, 0, 0},
             {0, 0, 0, 0},
             {0, 0, 0, 0}
@@ -39,7 +39,7 @@ public class BoardTest {
             {0, 0, 0, 0},
             {0, 0, 0, 0},
             {0, 0, 0, 0},
-            {0, 0, 0, 2}
+            {0, 0, 0, 0}
     };
 
     public String boardString = "0 0 0 0 \n0 0 0 0 \n0 0 0 0 \n0 0 0 0";
@@ -80,7 +80,7 @@ public class BoardTest {
     public void initBoard() {
         board.startRobot(3, 3, Dir.NORTH, robot);
 
-        boardtxt = Board.fromString(boardString);
+        boardtxt = new Board(boardString, true);
         boardtxt.startRobot(3, 3, Dir.NORTH, robottxt);
     }
 
