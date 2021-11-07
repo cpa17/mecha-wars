@@ -200,8 +200,7 @@ public class Board {
                 }, i);
                 i += 1;
             }
-        }
-        catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             robot.setXcoor(robot.getStartX());
             robot.setYcoor(robot.getStartY());
             this.matrix[robot.getYcoor()][robot.getXcoor()] = robot.getDir().getValue();
