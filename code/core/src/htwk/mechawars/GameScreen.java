@@ -257,11 +257,10 @@ public class GameScreen implements Screen {
 
                 }.show(stage);
                 
-                dialogCloseOption.setHeight(400);
-                //dialog.setSize(300, 100);
+                dialogCloseOption.setSize(250, 110);
                 
-                dialogCloseOption.button("Beenden", true).setSize(100, 50);
-                dialogCloseOption.button("Abbruch", false).setSize(100, 50);
+                dialogCloseOption.button("Beenden", true);
+                dialogCloseOption.button("Abbruch", false);
                 dialogCloseOption.key(Input.Keys.ENTER, true);
                 dialogCloseOption.key(Input.Keys.ESCAPE, false);                
             }
