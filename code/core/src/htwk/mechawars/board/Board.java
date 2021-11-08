@@ -136,7 +136,7 @@ public class Board {
             System.out.println("The map has too many rows, only 12 are allowed!");
             Gdx.app.exit();
         }
-
+        
         Board wrappedBoard = new Board(width, height, isTest);
 
         for (int y = 0; y < height; y++) {
