@@ -108,7 +108,7 @@ public class Board {
             } catch (NumberFormatException z) {
                 System.out.println("The map obtains elements which are not integer!");
                 Gdx.app.exit();
-                System.exit(-1);
+                //System.exit(-1);
             }
         }
 
@@ -137,7 +137,7 @@ public class Board {
         if (height > 12) {
             System.out.println("The map has too many rows, only 12 are allowed!");
             Gdx.app.exit();
-            System.exit(-1);
+            //System.exit(-1);
         }
 
         Board wrappedBoard = new Board(width, height, isTest);
@@ -148,7 +148,9 @@ public class Board {
             }
         }
         this.matrix = wrappedBoard.matrix;
-        this.fieldmatrix = Board.createFieldMatrix(this.matrix);
+        if (!isTest) {
+            this.fieldmatrix = Board.createFieldMatrix(this.matrix);
+        }
     }
 
     /**
