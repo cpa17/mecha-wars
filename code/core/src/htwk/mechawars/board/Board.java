@@ -139,7 +139,7 @@ public class Board {
             Gdx.app.exit();
             System.exit(-1);
         }
-
+        
         Board wrappedBoard = new Board(width, height, isTest);
 
         for (int y = 0; y < height; y++) {

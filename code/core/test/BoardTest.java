@@ -84,7 +84,6 @@ public class BoardTest {
     @BeforeEach
     public void initBoard() {
         board.startRobot(3, 3, Dir.NORTH, robot);
-
         boardtxt = new Board(boardString, true);
         boardtxt.startRobot(3, 3, Dir.NORTH, robottxt);
     }
