@@ -17,7 +17,35 @@ public class Checkpoint extends Field {
     public Checkpoint(int xcoor, int ycoor, int number) {
         super(xcoor, ycoor);
         this.number = number;
-        this.tile = new Texture("mapAssets/Checkpoint.png");
+        
+        switch (this.number) {
+            case 1 :    this.tile = new Texture("mapAssets/checkpoints/Check1.png");
+                        break;
+        
+            case 2 :    this.tile = new Texture("mapAssets/checkpoints/Check2.png");
+                        break;
+        
+            case 3 :    this.tile = new Texture("mapAssets/checkpoints/Check3.png");
+                        break;
+        
+            case 4 :    this.tile = new Texture("mapAssets/checkpoints/Check4.png");
+                        break;
+                        
+            case 5 :    this.tile = new Texture("mapAssets/checkpoints/Check5.png");
+                        break;
+                        
+            case 6 :    this.tile = new Texture("mapAssets/checkpoints/Check6.png");
+                        break;
+                        
+            case 7 :    this.tile = new Texture("mapAssets/checkpoints/Check7.png");
+                        break;
+                        
+            case 8 :    this.tile = new Texture("mapAssets/checkpoints/Check8.png");
+                        break;
+                        
+            default:    this.tile = new Texture("mapAssets/Checkpoint.png");
+                        break;
+        }
     }
 
     @Override

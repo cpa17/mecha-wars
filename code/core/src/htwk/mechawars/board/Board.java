@@ -248,7 +248,7 @@ public class Board {
                     // Checkpoint
                     case 104:
                         int numberC = matrix[i][j] % 10;
-                        allowed = new int[]{0, 1, 2, 3, 4, 5};
+                        allowed = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8};
                         if (Arrays.stream(allowed).anyMatch(x -> x == numberC)) {
                             fieldmatrix[i][j] = new Checkpoint(j, i, numberC);
                         } else {

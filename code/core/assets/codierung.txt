@@ -23,6 +23,9 @@ Checkpoint		    ohne Nummer				                10400
 			        Nummer 3				                10403
 			        Nummer 4				                10404
 			        Nummer 5				                10405
+			        Nummer 6				                10406
+			        Nummer 7				                10407
+			        Nummer 8				                10408
 
 ConveyorBelt		von oben nach links			            10521
 			        von rechts nach links			        10531

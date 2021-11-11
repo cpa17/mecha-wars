@@ -27,12 +27,16 @@ import htwk.mechawars.board.Dir;
 import htwk.mechawars.board.Robot;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.CardFunctions;
+import htwk.mechawars.fields.Checkpoint;
+import htwk.mechawars.fields.Field;
+import htwk.mechawars.fields.RepairSite;
 
 /**
  * Class that presents the surface of the game screen.
  */
 public class GameScreen implements Screen {
-
+    
+    private Field robotPosition;
     private Texture industrialTile;
     private Texture robot;
     private Stage stage;
@@ -622,6 +626,11 @@ public class GameScreen implements Screen {
         //player.drawParameters(batch);
         sprite.draw(batch);
         batch.end();
+        robotPosition = board.fieldmatrix[player.getXcoor()][player.getYcoor()];
+        if (robotPosition instanceof RepairSite || robotPosition instanceof Checkpoint) {
+            player.setbackupCopyX(player.getXcoor());
+            player.setbackupCopyY(player.getYcoor());
+        } 
         stage.act();
         stage.draw();
     }
@@ -646,38 +655,6 @@ public class GameScreen implements Screen {
         } else if (player.getDir() == Dir.WEST) {
             sprite.setPosition(tileSize * x, tileSize * y);
             sprite.setRotation(90);
-        }
-    }
-
-    /**
-     * Function that draws the playing field.
-     */
-    public void drawPlayingField() {
-        int x = 0;
-
-        for (int i = 0; i < board.matrix.length; i++) {
-            for (int j = 0; j < board.matrix[i].length; j++) {
-
-                int p = board.matrix[i][j];
-
-                int t = Gdx.graphics.getHeight() / board.matrix.length; //height of one tile
-                int b = Gdx.graphics.getHeight(); //height of the entire board
-                int c = (i + 1) * t; //the current height in the loop
-                int r = b - c; //the result of the board height minus the current height
-
-                switch (p) {
-                    case(0):
-                        batch.draw(industrialTile, x, r);
-                        break;
-                    default:
-                        batch.draw(industrialTile, x, r);
-                        break;
-                }
-
-                x = x + (Gdx.graphics.getHeight() / board.matrix.length);
-            }
-
-            x = 0;
         }
     }
 
