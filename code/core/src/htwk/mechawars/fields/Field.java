@@ -20,7 +20,7 @@ public class Field {
         this.tile = new Texture("mapAssets/StandardField.png");
     }
 
-    public String showAttributes() {
+    public String toString() {
         String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor;
         return attributes;
     }

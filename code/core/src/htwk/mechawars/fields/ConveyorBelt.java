@@ -28,7 +28,7 @@ public class ConveyorBelt extends Field {
     }
 
     @Override
-    public String showAttributes() {
+    public String toString() {
         String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor
                 + ", start: " + this.start + ", end: " + this.end;
         return attributes;

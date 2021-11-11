@@ -357,7 +357,7 @@ public class Board {
      * @param fieldmatrix A matrix with field objects
      * @return fieldstring A String with the class and the attribute values for each field object
      */
-    public static String showFieldMatrix(Field[][] fieldmatrix) {
+    public String toString(Field[][] fieldmatrix) {
         String fieldstring = "";
         for (int i = 0; i < fieldmatrix.length; i++) {
             for (int j = 0; j < fieldmatrix[i].length; j++) {

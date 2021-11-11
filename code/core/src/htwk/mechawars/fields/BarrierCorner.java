@@ -26,7 +26,7 @@ public class BarrierCorner extends Field {
     }
 
     @Override
-    public String showAttributes() {
+    public String toString() {
         String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor
                 + ", corner: " + this.corner;
         return attributes;
