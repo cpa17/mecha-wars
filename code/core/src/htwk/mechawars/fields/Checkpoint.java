@@ -42,9 +42,6 @@ public class Checkpoint extends Field {
                         
             case 8 :    this.tile = new Texture("mapAssets/checkpoints/Check8.png");
                         break;
-                        
-            default:    this.tile = new Texture("mapAssets/Checkpoint.png");
-                        break;
         }
     }
 
