@@ -48,7 +48,6 @@ public class GameScreen implements Screen {
 
     private Card[] deck;
 
-    //zum Ausgeben der bisherigen, "normalen" Spielfelds map mit mapStd ersetzen
     private Board board = new Board("map.txt");
     private Robot player = new Robot();
 
@@ -58,7 +57,7 @@ public class GameScreen implements Screen {
      * Constructor of class GameScreen.
      */
     public GameScreen() {
-        industrialTile = new Texture("mapAssets/0.png");
+        industrialTile = new Texture("mapAssets/StandardField.png");
         
         robot = new Texture("robot.png");
 
