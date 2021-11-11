@@ -362,7 +362,7 @@ public class Board {
         for (int i = 0; i < fieldmatrix.length; i++) {
             for (int j = 0; j < fieldmatrix[i].length; j++) {
                 fieldstring = fieldstring + "(" + fieldmatrix[i][j].getClass() + ", "
-                        + fieldmatrix[i][j].showAttributes() + ") ";
+                        + fieldmatrix[i][j].toString() + ") ";
             }
             fieldstring = fieldstring + "\n";
         }
