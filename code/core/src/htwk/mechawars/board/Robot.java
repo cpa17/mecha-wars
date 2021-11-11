@@ -294,8 +294,9 @@ public class Robot {
             backupDraw = false;
             batch.draw(new Texture(Gdx.files.internal("robot.png")), backupCopyX, backupCopyY);
         }
-        batch.draw(life, 0, 0, 200, 200);
-        batch.draw(damage, 400, 0, 200, 200);
-        batch.draw(shutDown, 600, 0, 200, 200);
+        batch.draw(hud, 755, 0);
+        batch.draw(life, 765, 5);
+        batch.draw(damage, 840, 5);
+        batch.draw(shutDown, 915, 5);
     }
 }

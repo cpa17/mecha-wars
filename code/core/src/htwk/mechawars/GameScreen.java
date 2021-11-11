@@ -623,7 +623,7 @@ public class GameScreen implements Screen {
         batch.begin();
         Board.toAsset(batch, board);
         drawRobot();
-        //player.drawParameters(batch);
+        player.drawParameters(batch);
         sprite.draw(batch);
         batch.end();
         robotPosition = board.fieldmatrix[player.getXcoor()][player.getYcoor()];
