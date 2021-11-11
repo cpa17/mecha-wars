@@ -288,7 +288,6 @@ public class Robot {
         updateLife();
         updateDamage();
         updateShutDown();
-        batch.draw(hud, 740, 15);
         updateShutDown();
         if (backupDraw) {
             backupDraw = false;
