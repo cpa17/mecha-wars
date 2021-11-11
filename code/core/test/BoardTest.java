@@ -22,27 +22,32 @@ public class BoardTest {
     private Robot robottxt = new Robot();
 
     public int[][] startMatrix = {
-            {0, 0, 0, 0},
-            {0, 0, 0, 0},
-            {0, 0, 0, 0},
-            {0, 0, 0, 0}
+            {11000, 11000, 11000, 11000},
+            {11000, 11000, 11000, 11000},
+            {11000, 11000, 11000, 11000},
+            {11000, 11000, 11000, 11000}
     };
 
     public int[][] midMatrix = {
-            {0, 0, 0, 0},
-            {0, 0, 0, 0},
-            {0, 0, 0, 0},
-            {0, 0, 0, 0}
+            {11000, 11000, 11000, 11000},
+            {11000, 11000, 11000, 11000},
+            {11000, 11000, 11000, 11000},
+            {11000, 11000, 11000, 11000}
     };
 
     public int[][] endMatrix = {
-            {0, 0, 0, 0},
-            {0, 0, 0, 0},
-            {0, 0, 0, 0},
-            {0, 0, 0, 0}
+            {11000, 11000, 11000, 11000},
+            {11000, 11000, 11000, 11000},
+            {11000, 11000, 11000, 11000},
+            {11000, 11000, 11000, 11000}
     };
-
-    public String boardString = "0 0 0 0 \n0 0 0 0 \n0 0 0 0 \n0 0 0 0";
+    
+    String dummyVar = "";   
+    public String boardString = dummyVar + 
+            "11000 11000 11000 11000 \n" + 
+            "11000 11000 11000 11000 \n" +
+            "11000 11000 11000 11000 \n" +
+            "11000 11000 11000 11000";
 
     @Test
     public void boardTest() {
@@ -79,7 +84,6 @@ public class BoardTest {
     @BeforeEach
     public void initBoard() {
         board.startRobot(3, 3, Dir.NORTH, robot);
-
         boardtxt = new Board(boardString, true);
         boardtxt.startRobot(3, 3, Dir.NORTH, robottxt);
     }
