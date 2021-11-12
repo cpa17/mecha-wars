@@ -175,41 +175,70 @@ public class Board {
     }
 
     /**
-     * Method that moves the robot in the matrix.
+     * wrapper-function for the tests
+     * 
      * @param phase List of cards
      * @param robot the robot that should move
      */
     public void move(LinkedList<Card> phase, Robot robot) {
+        move(phase, robot, false);
+    }
+    
+    /**
+     * Method that moves the robot in the matrix.
+     * 
+     * @param phase List of cards
+     * @param robot the robot that should move
+     */
+    public void move(LinkedList<Card> phase, Robot robot, boolean booleanForTests) {
 
         checkDoubleDamage(robot);
 
         checkShutDown(robot);
 
-        // delay in seconds, increments for each phase in the linked list for another second
-        int i = 0;
-        for (Card card : phase) {
-            Timer.schedule(new Task() {
-
-                @Override
-                public void run() {
-                    if (card.getCardAttributeType() == Type.mov) {
-                        robot.moveInDirection(card.getCardAttributeMovCount());
-                    } else {
-                        robot.turn(card.getCardAttributeMovCount());
-                    }
-                    if (robot.getXcoor() >= matrix[1].length || robot.getYcoor() >= matrix.length
-                            || robot.getXcoor() < 0 || robot.getYcoor() < 0) {
-                        robot.setXcoor(robot.getStartX());
-                        robot.setYcoor(robot.getStartY());
-                        return;
-                    }
+        if(booleanForTests) {
+            for (Card card : phase) {
+                if (card.getCardAttributeType() == Type.mov) {
+                    robot.moveInDirection(card.getCardAttributeMovCount());
+                } else {
+                    robot.turn(card.getCardAttributeMovCount());
                 }
-            }, i);
-            i += 1;
+                if (robot.getXcoor() >= matrix[1].length || robot.getYcoor() >= matrix.length
+                        || robot.getXcoor() < 0 || robot.getYcoor() < 0) {
+                    robot.setXcoor(robot.getStartX());
+                    robot.setYcoor(robot.getStartY());
+                    return;
+                }
+            }
         }
-        
+        else {
+
+            // delay in seconds, increments for each phase in the linked list for another second
+            int i = 0;
+            for (Card card : phase) {
+                Timer.schedule(new Task() {
+
+                    @Override
+                    public void run() {
+                        if (card.getCardAttributeType() == Type.mov) {
+                            robot.moveInDirection(card.getCardAttributeMovCount());
+                        } else {
+                            robot.turn(card.getCardAttributeMovCount());
+                        }
+                        if (robot.getXcoor() >= matrix[1].length || robot.getYcoor() >= matrix.length
+                                || robot.getXcoor() < 0 || robot.getYcoor() < 0) {
+                            robot.setXcoor(robot.getStartX());
+                            robot.setYcoor(robot.getStartY());
+                            return;
+                        }
+                    }
+                }, i);
+                i += 1;
+            }
+        }
+
         robot.setShutDown(robot.getNextRound());
-        
+
     }
 
     /**

@@ -61,15 +61,15 @@ public class BoardTest {
         phase2.add(new Card(Type.mov, (byte) 2, 0));
 
         assertArrayEquals(startMatrix, board.matrix);
-        board.move(phase1, robot);
+        board.move(phase1, robot, true);
         assertArrayEquals(midMatrix, board.matrix);
-        board.move(phase2, robot);
+        board.move(phase2, robot, true);
         assertArrayEquals(endMatrix, board.matrix);
 
         assertArrayEquals(startMatrix, boardtxt.matrix);
-        boardtxt.move(phase1, robottxt);
+        boardtxt.move(phase1, robottxt, true);
         assertArrayEquals(midMatrix, boardtxt.matrix);
-        boardtxt.move(phase2, robottxt);
+        boardtxt.move(phase2, robottxt, true);
         assertArrayEquals(endMatrix, boardtxt.matrix);
     }
 
