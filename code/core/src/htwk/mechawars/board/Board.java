@@ -175,7 +175,7 @@ public class Board {
     }
 
     /**
-     * wrapper-function for the tests
+     * This is a wrapper-function for the tests.
      * 
      * @param phase List of cards
      * @param robot the robot that should move
@@ -196,7 +196,7 @@ public class Board {
 
         checkShutDown(robot);
 
-        if(booleanForTests) {
+        if (booleanForTests) {
             for (Card card : phase) {
                 if (card.getCardAttributeType() == Type.mov) {
                     robot.moveInDirection(card.getCardAttributeMovCount());
@@ -210,8 +210,7 @@ public class Board {
                     return;
                 }
             }
-        }
-        else {
+        } else {
 
             // delay in seconds, increments for each phase in the linked list for another second
             int i = 0;
@@ -225,8 +224,10 @@ public class Board {
                         } else {
                             robot.turn(card.getCardAttributeMovCount());
                         }
-                        if (robot.getXcoor() >= matrix[1].length || robot.getYcoor() >= matrix.length
-                                || robot.getXcoor() < 0 || robot.getYcoor() < 0) {
+                        if (robot.getXcoor() >= matrix[1].length ||
+                                robot.getYcoor() >= matrix.length || 
+                                robot.getXcoor() < 0 || 
+                                robot.getYcoor() < 0) {
                             robot.setXcoor(robot.getStartX());
                             robot.setYcoor(robot.getStartY());
                             return;
