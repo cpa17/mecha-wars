@@ -1,5 +1,7 @@
 package htwk.mechawars;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -27,9 +29,7 @@ import htwk.mechawars.board.Dir;
 import htwk.mechawars.board.Robot;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.CardFunctions;
-import htwk.mechawars.fields.Checkpoint;
 import htwk.mechawars.fields.Field;
-import htwk.mechawars.fields.RepairSite;
 
 /**
  * Class that presents the surface of the game screen.
@@ -50,7 +50,7 @@ public class GameScreen implements Screen {
     private int damagePoints = 0;
     private int choosableCardCount = 9;
 
-    private Card[] deck;
+    private ArrayList<Card> deck;
 
     private Board board = new Board("map.txt");
     private Robot player = new Robot();
@@ -97,14 +97,14 @@ public class GameScreen implements Screen {
         final ScrollPane scrollPanel = new ScrollPane(table, skin);
 
         // Array of Cards created
-        deck = CardFunctions.initDeck();
+        deck = CardFunctions.initDeck(deck);
         // shuffle Deck
         deck = CardFunctions.shuffle(deck);
 
         if (!player.getShutDown()) {
             for (int cardPrintCounter = 0; cardPrintCounter < choosableCardCount;
                     cardPrintCounter += 1) {
-                Card currentCard = deck[cardPrintCounter];
+                Card currentCard = deck.get(cardPrintCounter);
                 buttons[cardPrintCounter] = new TextButton(currentCard.getCardAttributePriority()
                         + " - " + currentCard, skin);
                 table.row();
@@ -169,8 +169,8 @@ public class GameScreen implements Screen {
     private void buttonsClean() {
         for (int i = 0; i < choosableCardCount; i += 1) {
             buttons[i].setColor(Color.LIGHT_GRAY);
-            buttons[i].setText(deck[i].getCardAttributePriority() + " - "
-                    + deck[i]);
+            buttons[i].setText(deck.get(i).getCardAttributePriority() + " - "
+                    + deck.get(i));
         }
     }
 
