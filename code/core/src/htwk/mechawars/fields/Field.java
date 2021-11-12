@@ -2,6 +2,8 @@ package htwk.mechawars.fields;
 
 import com.badlogic.gdx.graphics.Texture;
 
+import htwk.mechawars.board.Robot;
+
 /**
  * Class of a Field.
  */
@@ -43,5 +45,9 @@ public class Field {
 
     public Texture getTile() {
         return this.tile;
+    }
+    
+    public Robot action (Robot robot) {
+        return robot; 
     }
 }

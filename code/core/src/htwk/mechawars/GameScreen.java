@@ -627,10 +627,7 @@ public class GameScreen implements Screen {
         sprite.draw(batch);
         batch.end();
         robotPosition = board.fieldmatrix[player.getXcoor()][player.getYcoor()];
-        if (robotPosition instanceof RepairSite || robotPosition instanceof Checkpoint) {
-            player.setbackupCopyX(player.getXcoor());
-            player.setbackupCopyY(player.getYcoor());
-        } 
+        robotPosition.action(player);
         stage.act();
         stage.draw();
     }
