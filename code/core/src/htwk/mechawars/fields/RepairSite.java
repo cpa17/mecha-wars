@@ -2,6 +2,8 @@ package htwk.mechawars.fields;
 
 import com.badlogic.gdx.graphics.Texture;
 
+import htwk.mechawars.board.Robot;
+
 /**
  * Class of a Repair Site.
  */
@@ -44,5 +46,12 @@ public class RepairSite extends Field {
 
     public Texture getTile() {
         return this.tile;
+    }
+    
+    @Override
+    public Robot action(Robot robot) {
+        robot.setbackupCopyX(robot.getXcoor());
+        robot.setbackupCopyY(robot.getYcoor());
+        return robot;       
     }
 }
