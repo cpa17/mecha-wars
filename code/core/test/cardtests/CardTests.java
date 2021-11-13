@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import htwk.mechawars.cards.Card;
-import htwk.mechawars.cards.CardFunctions;
+import htwk.mechawars.cards.Deck;
 
 /**
  * Testclass.
@@ -16,13 +16,15 @@ import htwk.mechawars.cards.CardFunctions;
 public class CardTests {
     
     private ArrayList<Card> testCards = new ArrayList<Card>();
+    
+    private Deck instanceOfDeck = new Deck();
 
     /**
      * Tests if the movCount is only -1, 1, 2 or 3 .
      */
     @Test
     public void testMovCount() {
-        ArrayList<Card> testCardsMovCount = CardFunctions.initDeck(testCards);
+        ArrayList<Card> testCardsMovCount = instanceOfDeck.initDeck(testCards);
         
         for (int i = 0; i < 84; i += 1) {
             int x = testCardsMovCount.get(i).getCardAttributeMovCount();
@@ -35,7 +37,7 @@ public class CardTests {
      */
     @Test
     public void testName() {
-        testCards = CardFunctions.initDeck(testCards);
+        testCards = instanceOfDeck.initDeck(testCards);
 
         for (int i = 0; i < 84; i += 1) {
             assertTrue(testCards.get(i).toString() == "1 Vor"
@@ -54,11 +56,11 @@ public class CardTests {
      */
     @Test
     public void testCardShuffle() {
-        ArrayList<Card> testCardsUnshuffled = CardFunctions.initDeck(testCards);
+        ArrayList<Card> testCardsUnshuffled = instanceOfDeck.initDeck(testCards);
         ArrayList<Card> testCardsShuffled;
         boolean isEqual = true;
 
-        testCardsShuffled = CardFunctions.shuffle(testCardsUnshuffled);
+        testCardsShuffled = instanceOfDeck.shuffle(testCardsUnshuffled);
 
         for (int i = 0; i < 84; i += 1) {
             if (testCardsUnshuffled.get(i)
@@ -74,7 +76,7 @@ public class CardTests {
      */
     @Test
     public void testCardCount() {
-        testCards = CardFunctions.initDeck(testCards);
+        testCards = instanceOfDeck.initDeck(testCards);
         int counter = 0;
 
         for (int i = 0; i < 84; i += 1) {
@@ -91,7 +93,7 @@ public class CardTests {
      */
     @Test
     public void testPriority() {
-        testCards = CardFunctions.initDeck(testCards);
+        testCards = instanceOfDeck.initDeck(testCards);
         boolean prio0 = false;
         boolean prio1 = false;
         boolean prio2 = false;
