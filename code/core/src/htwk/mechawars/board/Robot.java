@@ -298,4 +298,11 @@ public class Robot {
         batch.draw(damage, 840, 5);
         batch.draw(shutDown, 915, 5);
     }
+    
+    /**
+     * Function to repair the Robot (only 1 Point).
+     */
+    public void onRepairField() {
+        damagePoints -= 1;
+    }
 }
