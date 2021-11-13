@@ -15,17 +15,17 @@ import htwk.mechawars.cards.CardFunctions;
  */
 public class CardTests {
     
-    private ArrayList<Card> testCards;
+    private ArrayList<Card> testCards = new ArrayList<Card>();
 
     /**
      * Tests if the movCount is only -1, 1, 2 or 3 .
      */
     @Test
     public void testMovCount() {
-        testCards = CardFunctions.initDeck(testCards);
+        ArrayList<Card> testCardsMovCount = CardFunctions.initDeck(testCards);
         
         for (int i = 0; i < 84; i += 1) {
-            int x = testCards.get(i).getCardAttributeMovCount();
+            int x = testCardsMovCount.get(i).getCardAttributeMovCount();
             assertTrue(-1 == x || 1 == x || 2 == x || 3 == x);
         }
     }
@@ -96,11 +96,6 @@ public class CardTests {
         boolean prio1 = false;
         boolean prio2 = false;
         boolean prio3 = false;
-
-        //for (int x = 0; x < 84; x += 1) {
-        //    System.out.println( testCards[x].toString() + "  "
-        //          + testCards[x].getCardAttributePriority());
-        //} -> Manuel Test of Priority
 
         for (int i = 0; i < 84; i += 1) {
             System.out.println("e" + i);

@@ -50,7 +50,7 @@ public class GameScreen implements Screen {
     private int damagePoints = 0;
     private int choosableCardCount = 9;
 
-    private ArrayList<Card> deck;
+    private ArrayList<Card> deck = new ArrayList<Card>();
 
     private Board board = new Board("map.txt");
     private Robot player = new Robot();
