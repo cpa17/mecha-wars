@@ -28,7 +28,7 @@ import htwk.mechawars.board.Board;
 import htwk.mechawars.board.Dir;
 import htwk.mechawars.board.Robot;
 import htwk.mechawars.cards.Card;
-import htwk.mechawars.cards.CardFunctions;
+import htwk.mechawars.cards.Deck;
 import htwk.mechawars.fields.Field;
 
 /**
@@ -51,6 +51,8 @@ public class GameScreen implements Screen {
     private int choosableCardCount = 9;
 
     private ArrayList<Card> deck = new ArrayList<Card>();
+    
+    public Deck instanceOfDeck = new Deck();
 
     private Board board = new Board("map.txt");
     private Robot player = new Robot();
@@ -97,9 +99,9 @@ public class GameScreen implements Screen {
         final ScrollPane scrollPanel = new ScrollPane(table, skin);
 
         // Array of Cards created
-        deck = CardFunctions.initDeck(deck);
+        deck = instanceOfDeck.initDeck(deck);
         // shuffle Deck
-        deck = CardFunctions.shuffle(deck);
+        deck = instanceOfDeck.shuffle(deck);
 
         if (!player.getShutDown()) {
             for (int cardPrintCounter = 0; cardPrintCounter < choosableCardCount;
