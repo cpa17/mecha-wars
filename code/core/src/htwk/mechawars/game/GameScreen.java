@@ -1,4 +1,4 @@
-package htwk.mechawars;
+package htwk.mechawars.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -22,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import htwk.mechawars.ZugInitialisierung;
 import htwk.mechawars.board.Board;
 import htwk.mechawars.board.Dir;
 import htwk.mechawars.board.Robot;
@@ -192,29 +193,15 @@ public class GameScreen implements Screen {
         addScrollPanelToStage(skin);
     }
 
-    /**
-     * Function that adds the buttons to the Stage.
-     *
-     * @param skin Object of class Skin which was initialized in the constructor.
-     */
-    public void addButtonsToStage(Skin skin) {
-
+    public Button startButton () {
         Button startExecutionButton = new TextButton("Ausfuehrung starten", skin);
-        Button endGameButton = new TextButton("Spiel beenden", skin);
-
         startExecutionButton.setSize(160, 43);
-        endGameButton.setSize(160, 43);
 
         int startExecutionButtonX = Gdx.graphics.getHeight()
                 + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
         int startExecutionButtonY = Gdx.graphics.getHeight() - 100;
-        int endGameButtonX = Gdx.graphics.getHeight()
-                + (((Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) * 2) / 3) - 64;
-        int endGameButtonY = Gdx.graphics.getHeight() - 100;
 
         startExecutionButton.setPosition(startExecutionButtonX, startExecutionButtonY);
-        endGameButton.setPosition(endGameButtonX, endGameButtonY);
-
 
         startExecutionButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
@@ -242,14 +229,29 @@ public class GameScreen implements Screen {
             }
         });
 
-        endGameButton.addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.exit();
-            }
-        });
+        return startExecutionButton;
+    }
 
-        stage.addActor(startExecutionButton);
-        stage.addActor(endGameButton);
+    public Button endButton() {
+        Button endGameButton = new TextButton("Spiel beenden", skin);
+
+        endGameButton.setSize(160, 43);
+
+        int endGameButtonX = Gdx.graphics.getHeight()
+                + (((Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) * 2) / 3) - 64;
+        int endGameButtonY = Gdx.graphics.getHeight() - 100;
+
+        endGameButton.setPosition(endGameButtonX, endGameButtonY);
+        return endGameButton;
+    }
+    /**
+     * Function that adds the buttons to the Stage.
+     *
+     * @param skin Object of class Skin which was initialized in the constructor.
+     */
+    public void addButtonsToStage(Skin skin) {
+        stage.addActor(startButton());
+        stage.addActor(endButton());
 
         // add Button to remove cardOrder
         Button removeCardOrder = new TextButton("Loesche\nKartenreihenfolge", skin);
