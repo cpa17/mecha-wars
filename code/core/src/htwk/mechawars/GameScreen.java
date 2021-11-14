@@ -65,7 +65,7 @@ public class GameScreen implements Screen {
     	industrialTile = new Texture("industrialTile.png");
     	
     	try {
-    	configs = ConfigReader.readConfigs();
+    	configs = ConfigReader.getConfigs();
     	}
     	catch(Exception e)
     	{}
@@ -128,7 +128,7 @@ public class GameScreen implements Screen {
 	private void startRobots(Robot[] players) {
 		for(int i = 0; i<players.length; i++)
 		{
-			board.startRobot(i, i, Dir.NORTH, players[i]);
+			board.startRobot(ConfigReader.getPlayerpoints()[i].x, ConfigReader.getPlayerpoints()[i].y, Dir.NORTH, players[i]);
 		}
 		
 	}

@@ -42,6 +42,7 @@ public class DesktopLauncher implements Runnable {
      * @throws IOException 
      */
     public static void main(String[] args) throws IOException {
+    	ConfigReader.readConfigs();
         if (restartJvm()) {
             return;
         }

@@ -1,0 +1,10 @@
+Startupconfig.txt is used to determine the gamemode (multi- and singleplayer) number of players and the behavior of the AI-Players
+
+determine the gamemode:
+'gameMode: [singleplayer|mutliplayer]'
+
+determine number of players:
+'playerNumber: [2...8]'
+
+determine behavior and startPosition of AI-Players on the Board
+'playerConfig: [index of Player - x-coordinate - y-coordinate - behavior(1 for Random generated Cards, 2 for no Cards)]

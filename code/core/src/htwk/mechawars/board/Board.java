@@ -1,5 +1,6 @@
 package htwk.mechawars.board;
 
+import htwk.mechawars.ConfigReader;
 import htwk.mechawars.cards.AICardGeneration;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.Type;
@@ -193,14 +194,15 @@ public class Board {
 	public void move(LinkedList<Card> phase, Robot[] players) {
 
 		for(int i = 0; i < players.length; i++) {
-			if(i > 0)
+			
+			if(i > 0 && ConfigReader.getAImodes()[i])
 			{
 				phase = AICardGeneration.generateRandomAICards(i);
 			}
         checkDoubleDamage(players[i]);
 
         checkShutDown(players[i]);
-        
+        if(ConfigReader.getAImodes()[i] || i == 0){
         try {
             for (Card card : phase) {
 
@@ -217,7 +219,8 @@ public class Board {
         	players[i].setXcoor(players[i].getStartX());
         	players[i].setYcoor(players[i].getStartY());
             this.matrix[players[i].getYcoor()][players[i].getXcoor()] = players[i].getDir().getValue();
-        }
+        	}
+		}
         
 		} 
 	}

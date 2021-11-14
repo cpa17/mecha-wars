@@ -1,5 +1,6 @@
 package htwk.mechawars;
 
+import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -10,8 +11,21 @@ public class ConfigReader {
 	private static int gameModeconfig = 0;
 	private static int aiMode = 0;
 	private static int playerNumber = 1;
+	private static boolean[] AImodes= {false,false,false,false,false,false,false,false};
+	private static int[] configs = {gameModeconfig,aiMode,playerNumber};
+	private static Point[] Playerpoints = {
+			new Point (1,1),
+			new Point (2,2),
+			new Point (3,3),
+			new Point (4,4),
+			new Point (5,5),
+			new Point (6,6),
+			new Point (7,7),
+			new Point (8,8)
+	};
+	
 
-	public static int[] readConfigs() throws IOException {
+	public static void readConfigs() throws IOException {
 		System.out.println("sheesh");
 	BufferedReader br = new BufferedReader(new FileReader("..//configs//Startupconfig.txt"));
 	try {
@@ -26,7 +40,7 @@ public class ConfigReader {
 	} finally {
 	    br.close();
 	}
-	return new int[] {gameModeconfig ,aiMode ,playerNumber};
+
 }
 
 	private static void readConfig(String line) {
@@ -35,42 +49,85 @@ public class ConfigReader {
 		{
 			if(line.contains("singleplayer"))
 			{
-				gameModeconfig = 0;
+				configs[0] = 0;
 			}
 			else if(line.contains("multiplayer"))
 			{
-				gameModeconfig = 1;
+				configs[0] = 1;
 			}
 			else 
 			{
-				gameModeconfig = 0;
+				configs[0] = 0;
 			}
 		}
 		
-		else if(line.contains("AImode"))
+		if(line.contains("AImode"))
 		{
 			if(line.contains("idle"))
 			{
-				aiMode = 0;
+				configs[1] = 0;
 			}
 			else if(line.contains("active"))
 			{
-				aiMode = 1;
+				configs[1] = 1;
 			}
 			else 
 			{
-				aiMode = 0;
+				configs[1] = 0;
 			}
 		}
 		
-		else if(line.contains("playerNumber"))
+		if(line.contains("playerNumber"))
 		{
-			playerNumber = Integer.parseInt(line.replaceAll("\\D+",""));
+			configs[2] = Integer.parseInt(line.replaceAll("\\D+",""));
 		}
 		
+		if(line.contains("playerNumber"))
+		{
+			configs[2] = Integer.parseInt(line.replaceAll("\\D+",""));
+		}
+		
+		if(line.contains("playerposition"))
+		{
+			
+			String[] s = line.split("-");
+				
+				line = line.replaceAll("\\p{P}","");
+				line = line.replaceAll("[a-z]","");
+
+
+		
+			for(int i = 0 ; i < s.length; i++)
+			{
+				s[i] = s[i].replaceAll("\\p{P}","");
+				s[i] = s[i].replaceAll("[a-z]","");
+				s[i] = s[i].replaceAll(" ","");
+				System.out.println(s[i]);	
+			}
+			Playerpoints[Integer.parseInt(s[0])] = new Point(Integer.parseInt(s[1]),Integer.parseInt(s[2]));
+			boolean AI = false;
+			if(Integer.parseInt(s[3])==1)
+					{
+				AI = true;
+					}
+			AImodes[Integer.parseInt(s[0])] = AI;
+			
+		}
 		
 	}
 	
+	public static boolean[] getAImodes() {
+		return AImodes;
+	}
+
+	public static Point[] getPlayerpoints() {
+		return Playerpoints;
+	}
+
+	public static void setPlayerpoints(Point[] playerpoints) {
+		Playerpoints = playerpoints;
+	}
+
 	public int getGameModeconfig() {
 		return gameModeconfig;
 	}
@@ -93,6 +150,11 @@ public class ConfigReader {
 
 	public void setPlayerNumber(int playerNumber) {
 		this.playerNumber = playerNumber;
+	}
+
+	public static int[] getConfigs() {
+		// TODO Auto-generated method stub
+		return configs;
 	}
 
 	}
