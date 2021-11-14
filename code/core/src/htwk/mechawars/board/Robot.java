@@ -2,6 +2,7 @@ package htwk.mechawars.board;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
@@ -297,5 +298,28 @@ public class Robot {
         batch.draw(life, 765, 5);
         batch.draw(damage, 840, 5);
         batch.draw(shutDown, 915, 5);
+    }
+
+    /**
+     * Function that draws the robot on the playing field.
+     */
+    public static void drawRobot(Robot player, Sprite sprite, Board board) {
+        int tileSize = (Gdx.graphics.getHeight() / board.matrix.length);
+        int x = player.getXcoor();
+        int y = Math.abs(player.getYcoor() - (board.matrix.length - 1));
+
+        if (player.getDir() == Dir.NORTH) {
+            sprite.setPosition(tileSize * x, tileSize * y);
+            sprite.setRotation(0);
+        } else if (player.getDir() == Dir.EAST) {
+            sprite.setPosition(tileSize * x, tileSize * y);
+            sprite.setRotation(270);
+        } else if (player.getDir() == Dir.SOUTH) {
+            sprite.setPosition(tileSize * x, tileSize * y);
+            sprite.setRotation(180);
+        } else if (player.getDir() == Dir.WEST) {
+            sprite.setPosition(tileSize * x, tileSize * y);
+            sprite.setRotation(90);
+        }
     }
 }

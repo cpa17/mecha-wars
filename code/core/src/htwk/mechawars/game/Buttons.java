@@ -11,7 +11,7 @@ import htwk.mechawars.board.Robot;
 
 public class Buttons extends GameScreen {
 
-    public static Button startButton(Skin skin, Robot player) {
+    protected static Button startButton(Skin skin, Robot player) {
         Button startExecutionButton = new TextButton("Ausfuehrung starten", skin);
         startExecutionButton.setSize(160, 43);
 
@@ -25,15 +25,15 @@ public class Buttons extends GameScreen {
             public void clicked(InputEvent event, float x, float y) {
                 if (!player.getShutDown()) {
                     //If All Cards are chosen
-                    if (cardOrder[4 - damagePoints] != -1) {
+                    if (ScrollPanel.cardOrder[4 - ScrollPanel.damagePoints] != -1) {
                         deactivateButtons();
                         zugInitialisierung.initialisiereBewegung();
                         board.move(zugInitialisierung.getList(), player);
                         zugInitialisierung.resetList();
                         startExecutionButton.setColor(Color.LIGHT_GRAY);
-                        cardOrderClear();
+                        ScrollPanel.cardOrderClear();
                         activateButtons();
-                        updateButtons();
+                        updateButtons(skin);
                     } else {
                         startExecutionButton.setColor(Color.RED);
                     }
@@ -42,7 +42,7 @@ public class Buttons extends GameScreen {
                     board.move(zugInitialisierung.getList(), player);
                     zugInitialisierung.resetList();
                     startExecutionButton.setColor(Color.LIGHT_GRAY);
-                    updateButtons();
+                    updateButtons(skin);
                 }
             }
         });
@@ -50,7 +50,7 @@ public class Buttons extends GameScreen {
         return startExecutionButton;
     }
 
-    public static Button endButton(Skin skin) {
+    protected static Button endButton(Skin skin) {
         Button endGameButton = new TextButton("Spiel beenden", skin);
 
         endGameButton.setSize(160, 43);
@@ -70,7 +70,7 @@ public class Buttons extends GameScreen {
         return endGameButton;
     }
 
-    public static Button removeButton(Skin skin) {
+    protected static Button removeButton(Skin skin) {
         Button removeCardOrder = new TextButton("Loesche\nKartenreihenfolge", skin);
 
         removeCardOrder.setSize(128, 43);
@@ -82,7 +82,7 @@ public class Buttons extends GameScreen {
 
         removeCardOrder.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                cardOrderClear();
+                ScrollPanel.cardOrderClear();
                 zugInitialisierung.resetList();
             }
 
@@ -91,19 +91,19 @@ public class Buttons extends GameScreen {
         return removeCardOrder;
     }
 
-    private static void deactivateButtons() {
-        for (TextButton button : buttons) {
+    protected static void deactivateButtons() {
+        for (TextButton button : ScrollPanel.buttons) {
             button.setTouchable(Touchable.disabled);
         }
     }
 
-    private static void activateButtons() {
-        for (TextButton button : buttons) {
+    protected static void activateButtons() {
+        for (TextButton button : ScrollPanel.buttons) {
             button.setTouchable(Touchable.enabled);
         }
     }
 
-    public static Button infoButton(Skin skin) {
+    protected static Button infoButton(Skin skin) {
         // add Button for hint and infos
         Button buttonInfo = new TextButton("Infos", skin);
 
@@ -377,7 +377,7 @@ public class Buttons extends GameScreen {
         return buttonInfo;
     }
 
-    public static Button wakeUpButton(Skin skin, Robot player) {
+    protected static Button wakeUpButton(Skin skin, Robot player) {
         Button wakeUpButton = new TextButton("WakeUp", skin);
 
         wakeUpButton.setSize(160, 43);
@@ -405,7 +405,7 @@ public class Buttons extends GameScreen {
         return wakeUpButton;
     }
 
-    public static Button shutDownButton(Skin skin, Robot player) {
+    protected static Button shutDownButton(Skin skin, Robot player) {
         Button shutDownButton = new TextButton("ShutDown", skin);
 
         shutDownButton.setSize(160, 43);
@@ -431,5 +431,11 @@ public class Buttons extends GameScreen {
         });
 
         return shutDownButton;
+    }
+
+    private static void updateButtons(Skin skin) {
+        stage.clear();
+        addButtonsToStage(skin);
+        addScrollPanelToStage(skin);
     }
 }
