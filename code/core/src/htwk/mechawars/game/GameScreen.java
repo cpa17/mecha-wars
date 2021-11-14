@@ -25,13 +25,13 @@ public class GameScreen implements Screen {
     private Field robotPosition;
     private Texture industrialTile;
     private Texture robot;
-    protected static Stage stage;
+    static Stage stage = new Stage();
     private SpriteBatch batch;
     private Sprite sprite;
-    protected static ZugInitialisierung zugInitialisierung = new ZugInitialisierung();
+    protected static final ZugInitialisierung zugInitialisierung = new ZugInitialisierung();
     private static Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
-    protected static Board board = new Board("map.txt");
+    protected static final Board board = new Board("map.txt");
     private static Robot player = new Robot();
 
     /**
@@ -45,7 +45,6 @@ public class GameScreen implements Screen {
         batch = new SpriteBatch();
         sprite = new Sprite(robot);
 
-        stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
         addButtonsToStage(skin);

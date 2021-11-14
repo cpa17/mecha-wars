@@ -12,11 +12,11 @@ import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.CardFunctions;
 
 public class ScrollPanel extends GameScreen{
-    protected static int[] cardOrder = { -1, -1, -1, -1, -1};
+    static final int[] cardOrder = { -1, -1, -1, -1, -1};
     private static int pressCounter = 0;
-    protected static int damagePoints = 0;
+    protected static final int damagePoints = 0;
     private static int choosableCardCount = 9;
-    protected static TextButton[] buttons = new TextButton[choosableCardCount];
+    static final TextButton[] buttons = new TextButton[choosableCardCount];
     private static Card[] deck;
 
     public static ScrollPane scrollPanel(Skin skin, Robot player) {
