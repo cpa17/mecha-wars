@@ -238,26 +238,56 @@ public class Robot {
         this.xcoor = xcoor;
     }
 
+    /**
+     * Setter-Function to set the startposition (x-coordinate) of the robot.
+     * 
+     * @param xcoor -> Integer of the x-coordinate
+     */
     public void setStartX(int startX) {
         this.startX = startX;
     }
-
+    
+    /**
+     * Setter-Function to set the startposition (y-coordinate) of the robot.
+     * 
+     * @param xcoor -> Integer of the y-coordinate
+     */
     public void setStartY(int startY) {
         this.startY = startY;
     }
 
+    /**
+     * Setter-Function to set ??? .
+     * 
+     * @param lastRound -> ?
+     */
     public void setLastRound(boolean lastRound) {
         this.lastRound = lastRound;
     }
 
+    /**
+     * Setter-Function to set ??? .
+     * 
+     * @param nextRound -> ?
+     */
     public void setNextRound(boolean nextRound) {
         this.nextRound = nextRound;
     }
 
+    /**
+     * Setter-Function for the x-coordinate of the BackupCopy from the robot.
+     * 
+     * @param xcoor -> Integer of the x-coordinate
+     */
     public void setbackupCopyX(int position) {
         backupCopyX = position;
     }
 
+    /**
+     * Setter-Function for the y-coordinate of the BackupCopy from the robot.
+     * 
+     * @param xcoor -> Integer of the y-coordinate
+     */
     public void setbackupCopyY(int position) {
         backupCopyY = position;
     }
