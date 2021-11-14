@@ -82,21 +82,40 @@ public class Robot {
         return this;
     }
 
+    // Getters. ------------------------------------------------------------------------------
+
     /**
-     * Getters.
+     * Getter-Function to get the current amount of damagePoints.
+     * 
+     * @return the current damagePoints as an Integer (int)
      */
     public int getDamagePoints() {
         return damagePoints;
     }
 
+    /**
+     * Getter-Function to get the current amount of lifePoints.
+     * 
+     * @return the current lifePoints as an Integer (int)
+     */
     public int getLifePoints() {
         return lifePoints;
     }
 
+    /**
+     * Getter-Function to get the current status of the robot.
+     * 
+     * @return the status of the robot (active/shutdown or not)
+     */
     public boolean getShutDown() {
         return shutDownMark;
     }
-
+    
+    /**
+     * Getter-Function to get the current direction of the robot.
+     * 
+     * @return the direction of the robot (as an Enum Dir)
+     */
     public Dir getDir() {
         return dir;
     }
