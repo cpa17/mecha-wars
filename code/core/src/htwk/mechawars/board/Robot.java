@@ -137,21 +137,40 @@ public class Robot {
         return backupCopyY;
     }
 
+    // Setters. ------------------------------------------------------------------------------
+
     /**
-     * Setters.
+     * Setter-Function for the direction of the robot.
+     * 
+     * @param dir -> direction of the robot
      */
     public void setDir(Dir dir) {
         this.dir = dir;
     }
 
+    /**
+     * Setter-Function for the active-status of the robot.
+     * 
+     * @param on -> boolean that encodes the (active-)status
+     */
     public void setShutDown(boolean on) {
         shutDownMark = on;
     }
 
+    /**
+     * Setter-Function for the y-coordinate of the robot.
+     * 
+     * @param ycoor -> Integer of the y-coordinate
+     */
     public void setYcoor(int ycoor) {
         this.ycoor = ycoor;
     }
 
+    /**
+     * Setter-Function for the x-coordinate of the robot.
+     * 
+     * @param xcoor -> Integer of the x-coordinate
+     */
     public void setXcoor(int xcoor) {
         this.xcoor = xcoor;
     }
@@ -180,23 +199,42 @@ public class Robot {
         backupCopyY = position;
     }
 
+    /**
+     * Setter-Function from the status of the robot (destroyed or not destroyed). 
+     * 
+     * @param destroyed -> boolean that encoded the status
+     */
     public void setDestroyed(boolean destroyed) {
         this.destroyed = destroyed;
     }
 
-
+    /**
+     * Increase the damagePoints of a robot by 1.
+     */
     public void damageUp() {
         damagePoints += 1;
     }
     
+    /**
+     * Reset damagePoints (to 0).
+     */
     public void damageReset() {
         damagePoints = 0;
     }
 
+    /**
+     * Decrease lifePoints by 1.
+     */
     public void lifeDown() {
         lifePoints -= 1;
     }
 
+    /**
+     * Function to repair the Robot (only 1 Point).
+     */
+    public void onRepairField() {
+        damagePoints -= 1;
+    }
 
     /**
      * Updates the life texture depening on the current lifePoints of the robot.
@@ -299,10 +337,4 @@ public class Robot {
         batch.draw(shutDown, 915, 5);
     }
     
-    /**
-     * Function to repair the Robot (only 1 Point).
-     */
-    public void onRepairField() {
-        damagePoints -= 1;
-    }
 }
