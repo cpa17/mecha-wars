@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 /**
  * Class that presents the robot and the player.
  */
-
 public class Robot {
     private Dir dir;
     private int xcoor;
@@ -120,38 +119,83 @@ public class Robot {
         return dir;
     }
 
+    /**
+     * Getter-Function to get the current y-coordinate of the robot.
+     * 
+     * @return the y-coordinate as an int
+     */
     public int getYcoor() {
         return ycoor;
     }
 
+    /**
+     * Getter-Function to get the current x-coordinate of the robot.
+     * 
+     * @return the x-coordinate as an int
+     */
     public int getXcoor() {
         return xcoor;
     }
 
+    /**
+     * Getter-Function to get the startposition (x-coordinate) of the robot.
+     * 
+     * @return the x-coordinate of the startposition as an int
+     */
     public int getStartX() {
         return startX;
     }
 
+    /**
+     * Getter-Function to get the startposition (y-coordinate) of the robot.
+     * 
+     * @return the y-coordinate of the startposition as an int
+     */
     public int getStartY() {
         return startY;
     }
 
+    /**
+     * Getter-Function to get ... .
+     * 
+     * @return the ?
+     */
     public boolean getLastRound() {
         return lastRound;
     }
 
+    /**
+     * Getter-Function to get ... .
+     * 
+     * @return the ?
+     */
     public boolean getNextRound() {
         return nextRound;
     }
 
+    /**
+     * Getter-Function to get the status of destruction of the robot (true or not).
+     * 
+     * @return the status of the robot (destroyed or not) as a boolean
+     */
     public boolean getDestroyed() {
         return destroyed;
     }
 
+    /**
+     * Getter-Function to get the x-coordinate of BackupCopy from the robot.
+     * 
+     * @return the x-coordinate of the BackupCopy (int)
+     */
     public int getbackupCopyX() {
         return backupCopyX;
     }
-
+    
+    /**
+     * Getter-Function to get the y-coordinate of BackupCopy from the robot.
+     * 
+     * @return the y-coordinate of the BackupCopy (int)
+     */
     public int getbackupCopyY() {
         return backupCopyY;
     }
