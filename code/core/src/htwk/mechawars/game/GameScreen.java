@@ -54,8 +54,7 @@ public class GameScreen implements Screen {
 
     /**
      * Function that adds the scroll panel to the Stage.
-     *
-     * @param skin Object of class Skin which was initialized in the constructor.
+     * @param skin Object of class Skin.
      */
     public static void addScrollPanelToStage(Skin skin) {
         int containerBoundsX = (Gdx.graphics.getWidth()
@@ -73,8 +72,7 @@ public class GameScreen implements Screen {
 
     /**
      * Function that adds the buttons to the Stage.
-     *
-     * @param skin Object of class Skin which was initialized in the constructor.
+     * @param skin Object of class Skin.
      */
     public static void addButtonsToStage(Skin skin) {
         stage.addActor(Buttons.startButton(skin, player));

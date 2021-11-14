@@ -4,13 +4,29 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import htwk.mechawars.board.Robot;
 
+/**
+ * Class that creates the ScrollPanel for the GameScreen.
+ */
 public class Buttons extends GameScreen {
 
+    /**
+     * Creates the startButton.
+     * @param player Object of class Robot.
+     * @param skin Object of class Skin.
+     * @return startButton.
+     */
     protected static Button startButton(Skin skin, Robot player) {
         Button startExecutionButton = new TextButton("Ausfuehrung starten", skin);
         startExecutionButton.setSize(160, 43);
@@ -50,6 +66,11 @@ public class Buttons extends GameScreen {
         return startExecutionButton;
     }
 
+    /**
+     * Creates the endButton.
+     * @param skin Object of class Skin.
+     * @return endButton.
+     */
     protected static Button endButton(Skin skin) {
         Button endGameButton = new TextButton("Spiel beenden", skin);
 
@@ -70,6 +91,11 @@ public class Buttons extends GameScreen {
         return endGameButton;
     }
 
+    /**
+     * Creates the removeButton.
+     * @param skin Object of class Skin.
+     * @return removwButton.
+     */
     protected static Button removeButton(Skin skin) {
         Button removeCardOrder = new TextButton("Loesche\nKartenreihenfolge", skin);
 
@@ -91,18 +117,29 @@ public class Buttons extends GameScreen {
         return removeCardOrder;
     }
 
+    /**
+     * Deactivate the buttons.
+     */
     protected static void deactivateButtons() {
         for (TextButton button : ScrollPanel.buttons) {
             button.setTouchable(Touchable.disabled);
         }
     }
 
+    /**
+     * Activate the buttons.
+     */
     protected static void activateButtons() {
         for (TextButton button : ScrollPanel.buttons) {
             button.setTouchable(Touchable.enabled);
         }
     }
 
+    /**
+     * Creates the infoButton.
+     * @param skin Object of class Skin.
+     * @return infoButton.
+     */
     protected static Button infoButton(Skin skin) {
         // add Button for hint and infos
         Button buttonInfo = new TextButton("Infos", skin);
@@ -377,6 +414,12 @@ public class Buttons extends GameScreen {
         return buttonInfo;
     }
 
+    /**
+     * Creates the wakeUpButton.
+     * @param player Object of class Robot.
+     * @param skin Object of class Skin.
+     * @return wakeUpButton.
+     */
     protected static Button wakeUpButton(Skin skin, Robot player) {
         Button wakeUpButton = new TextButton("WakeUp", skin);
 
@@ -405,6 +448,12 @@ public class Buttons extends GameScreen {
         return wakeUpButton;
     }
 
+    /**
+     * Creates the shutDownButton.
+     * @param player Object of class Robot.
+     * @param skin Object of class Skin.
+     * @return shutDownButton.
+     */
     protected static Button shutDownButton(Skin skin, Robot player) {
         Button shutDownButton = new TextButton("ShutDown", skin);
 
@@ -433,6 +482,10 @@ public class Buttons extends GameScreen {
         return shutDownButton;
     }
 
+    /**
+     * Update the Buttons and scroll panel.
+     * @param skin Object of class Skin.
+     */
     private static void updateButtons(Skin skin) {
         stage.clear();
         addButtonsToStage(skin);

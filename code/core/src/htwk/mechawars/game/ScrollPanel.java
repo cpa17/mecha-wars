@@ -11,7 +11,10 @@ import htwk.mechawars.board.Robot;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.CardFunctions;
 
-public class ScrollPanel extends GameScreen{
+/**
+ * Class that creates the ScrollPanel for the GameScreen.
+ */
+public class ScrollPanel extends GameScreen {
     static final int[] cardOrder = { -1, -1, -1, -1, -1};
     private static int pressCounter = 0;
     protected static final int damagePoints = 0;
@@ -19,6 +22,12 @@ public class ScrollPanel extends GameScreen{
     static final TextButton[] buttons = new TextButton[choosableCardCount];
     private static Card[] deck;
 
+    /**
+     * Constructor of class ScrollPanel.
+     * @param player Object of class Robot.
+     * @param skin Object of class Skin.
+     * @return scrollPanel.
+     */
     public static ScrollPane scrollPanel(Skin skin, Robot player) {
         Table table = new Table();
         final ScrollPane scrollPanel = new ScrollPane(table, skin);
@@ -30,7 +39,7 @@ public class ScrollPanel extends GameScreen{
 
         if (!player.getShutDown()) {
             for (int cardPrintCounter = 0; cardPrintCounter < choosableCardCount;
-                 cardPrintCounter += 1) {
+                    cardPrintCounter += 1) {
                 Card currentCard = deck[cardPrintCounter];
                 buttons[cardPrintCounter] = new TextButton(currentCard.getCardAttributePriority()
                         + " - " + currentCard, skin);
