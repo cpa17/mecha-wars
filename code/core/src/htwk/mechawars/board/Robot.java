@@ -241,7 +241,7 @@ public class Robot {
     /**
      * Setter-Function to set the startposition (x-coordinate) of the robot.
      * 
-     * @param xcoor -> Integer of the x-coordinate
+     * @param startX -> Integer of the x-coordinate
      */
     public void setStartX(int startX) {
         this.startX = startX;
@@ -250,7 +250,7 @@ public class Robot {
     /**
      * Setter-Function to set the startposition (y-coordinate) of the robot.
      * 
-     * @param xcoor -> Integer of the y-coordinate
+     * @param startY -> Integer of the y-coordinate
      */
     public void setStartY(int startY) {
         this.startY = startY;
@@ -277,7 +277,7 @@ public class Robot {
     /**
      * Setter-Function for the x-coordinate of the BackupCopy from the robot.
      * 
-     * @param xcoor -> Integer of the x-coordinate
+     * @param position -> Integer of the x-coordinate
      */
     public void setbackupCopyX(int position) {
         backupCopyX = position;
@@ -286,7 +286,7 @@ public class Robot {
     /**
      * Setter-Function for the y-coordinate of the BackupCopy from the robot.
      * 
-     * @param xcoor -> Integer of the y-coordinate
+     * @param position -> Integer of the y-coordinate
      */
     public void setbackupCopyY(int position) {
         backupCopyY = position;
