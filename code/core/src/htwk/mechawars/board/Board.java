@@ -377,10 +377,6 @@ public class Board {
      */
     public void move(LinkedList<Card> phase, Robot robot) {
 
-        checkDoubleDamage(robot);
-
-        checkShutDown(robot);
-
         for (Card card : phase) {
             if (card.getCardAttributeType() == Type.mov) {
                 robot.moveInDirection(card.getCardAttributeMovCount());
@@ -395,7 +391,10 @@ public class Board {
             }
         }
 
+        robot.setLastRound(robot.getShutDown());
         robot.setShutDown(robot.getNextRound());
+        checkDoubleDamage(robot);
+        checkShutDown(robot);
     }
 
     /**
@@ -426,7 +425,6 @@ public class Board {
 
         if (robot.getShutDown()) {
             robot.damageReset();
-            robot.setLastRound(true);
         }
     }
 
