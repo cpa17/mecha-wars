@@ -31,8 +31,6 @@ public class Deck {
      * # 18 Mov1, TurnR, TurnL
      * # 12 Mov2
      * # 6  Mov3, MovB, TurnU   . Also their priority this function will give them.
-     *
-     * @return The initial cardDeck
      */
     public void initDeck() {
 
