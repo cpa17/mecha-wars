@@ -8,8 +8,21 @@ import java.util.Collections;
  */
 public class Deck {
     
+    ArrayList<Card> deck = new ArrayList<>();
+    
+    /**
+     * Constructor of a complete Deck.
+     */
     public Deck() {
-        
+        initDeck(deck);
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public ArrayList<Card> getDeck() {
+        return deck;
     }
 
     /**
