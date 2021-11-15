@@ -1,7 +1,5 @@
 package htwk.mechawars;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -49,10 +47,8 @@ public class GameScreen implements Screen {
     private int pressCounter = 0;
     private int damagePoints = 0;
     private int choosableCardCount = 9;
-
-    private ArrayList<Card> deck = new ArrayList<Card>();
     
-    public Deck instanceOfDeck = new Deck();
+    public Deck cardDeck = new Deck();
 
     private Board board = new Board("map.txt");
     private Robot player = new Robot();
@@ -98,15 +94,13 @@ public class GameScreen implements Screen {
 
         final ScrollPane scrollPanel = new ScrollPane(table, skin);
 
-        // Array of Cards created
-        deck = instanceOfDeck.initDeck(deck);
         // shuffle Deck
-        deck = instanceOfDeck.shuffle(deck);
+        cardDeck.shuffle(cardDeck.getDeck());
 
         if (!player.getShutDown()) {
             for (int cardPrintCounter = 0; cardPrintCounter < choosableCardCount;
                     cardPrintCounter += 1) {
-                Card currentCard = deck.get(cardPrintCounter);
+                Card currentCard = cardDeck.getDeck().get(cardPrintCounter);
                 buttons[cardPrintCounter] = new TextButton(currentCard.getCardAttributePriority()
                         + " - " + currentCard, skin);
                 table.row();
@@ -171,8 +165,8 @@ public class GameScreen implements Screen {
     private void buttonsClean() {
         for (int i = 0; i < choosableCardCount; i += 1) {
             buttons[i].setColor(Color.LIGHT_GRAY);
-            buttons[i].setText(deck.get(i).getCardAttributePriority() + " - "
-                    + deck.get(i));
+            buttons[i].setText(cardDeck.getDeck().get(i).getCardAttributePriority() + " - "
+                    + cardDeck.getDeck().get(i));
         }
     }
 
