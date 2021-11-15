@@ -394,8 +394,27 @@ public class Board {
                 return;
             }
         }
+        
+        // When on repairField, decrease damagePoints
+        if (checkPosition(robot) instanceof RepairSite) {
+            //einfaches reparieren
+            robot.onRepairField();
+            System.out.println("Repariere...");
+        }
 
         robot.setShutDown(robot.getNextRound());
+    }
+    
+    /**
+     * Check the position where the robot stands.
+     * 
+     * @return the art of the Field as a String
+     */
+    private Field checkPosition(Robot robot) {
+        
+        Field art = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+        
+        return art;       
     }
 
     /**
