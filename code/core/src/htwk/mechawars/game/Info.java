@@ -2,12 +2,24 @@ package htwk.mechawars.game;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 
+/**
+ * Class that presents the surface of the info screen.
+ */
 public class Info extends Buttons {
 
+    /**
+     * ClickListener for the infoButton.
+     * @param skin Object of class Skin.
+     */
     protected static ClickListener infoListener(Skin skin) {
         return new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
