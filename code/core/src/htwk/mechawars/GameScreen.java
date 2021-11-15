@@ -95,7 +95,7 @@ public class GameScreen implements Screen {
         final ScrollPane scrollPanel = new ScrollPane(table, skin);
 
         // shuffle Deck
-        cardDeck.shuffle(cardDeck.getDeck());
+        cardDeck.shuffle();
 
         if (!player.getShutDown()) {
             for (int cardPrintCounter = 0; cardPrintCounter < choosableCardCount;
