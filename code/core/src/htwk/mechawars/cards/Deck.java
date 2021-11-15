@@ -18,8 +18,9 @@ public class Deck {
     }
 
     /**
+     * Getter-Function for the ArrayList<Card> deck.
      * 
-     * @return
+     * @return the hole deck (which is an ArrayList of Cards) 
      */
     public ArrayList<Card> getDeck() {
         return deck;
