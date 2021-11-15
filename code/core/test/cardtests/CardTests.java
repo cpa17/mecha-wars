@@ -3,31 +3,24 @@ package cardtests;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.ArrayList;
-
 import org.junit.jupiter.api.Test;
 
-import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.Deck;
 
 /**
  * Testclass.
  */
 public class CardTests {
-    
-    private ArrayList<Card> testCards = new ArrayList<Card>();
-    
-    private Deck instanceOfDeck = new Deck();
 
     /**
      * Tests if the movCount is only -1, 1, 2 or 3 .
      */
     @Test
     public void testMovCount() {
-        ArrayList<Card> testCardsMovCount = instanceOfDeck.initDeck(testCards);
+        Deck testDeckMovCount = new Deck();
         
         for (int i = 0; i < 84; i += 1) {
-            int x = testCardsMovCount.get(i).getCardAttributeMovCount();
+            int x = testDeckMovCount.getDeck().get(i).getCardAttributeMovCount();
             assertTrue(-1 == x || 1 == x || 2 == x || 3 == x);
         }
     }
@@ -37,16 +30,16 @@ public class CardTests {
      */
     @Test
     public void testName() {
-        testCards = instanceOfDeck.initDeck(testCards);
+        Deck testDeckNames = new Deck();
 
         for (int i = 0; i < 84; i += 1) {
-            assertTrue(testCards.get(i).toString() == "1 Vor"
-                    || testCards.get(i).toString() == "2 Vor"
-                    || testCards.get(i).toString() == "3 Vor"
-                    || testCards.get(i).toString() == "Rueckwaerts"
-                    || testCards.get(i).toString() == "Rechtsdrehung"
-                    || testCards.get(i).toString() == "Kehrtwendung"
-                    || testCards.get(i).toString() == "Linksdrehung");
+            assertTrue(testDeckNames.getDeck().get(i).toString() == "1 Vor"
+                    || testDeckNames.getDeck().get(i).toString() == "2 Vor"
+                    || testDeckNames.getDeck().get(i).toString() == "3 Vor"
+                    || testDeckNames.getDeck().get(i).toString() == "Rueckwaerts"
+                    || testDeckNames.getDeck().get(i).toString() == "Rechtsdrehung"
+                    || testDeckNames.getDeck().get(i).toString() == "Kehrtwendung"
+                    || testDeckNames.getDeck().get(i).toString() == "Linksdrehung");
         }
     }
 
@@ -56,15 +49,15 @@ public class CardTests {
      */
     @Test
     public void testCardShuffle() {
-        ArrayList<Card> testCardsUnshuffled = instanceOfDeck.initDeck(testCards);
-        ArrayList<Card> testCardsShuffled;
+        Deck testDeckShuffled = new Deck();
+        testDeckShuffled.shuffle();
+        Deck testDeckUnshuffled = new Deck();
+        
         boolean isEqual = true;
 
-        testCardsShuffled = instanceOfDeck.shuffle(testCardsUnshuffled);
-
         for (int i = 0; i < 84; i += 1) {
-            if (testCardsUnshuffled.get(i)
-                    != testCardsShuffled.get(i)) {
+            if (testDeckUnshuffled.getDeck().get(i)
+                    != testDeckShuffled.getDeck().get(i)) {
                 isEqual = false;
             }
         }
@@ -76,11 +69,12 @@ public class CardTests {
      */
     @Test
     public void testCardCount() {
-        testCards = instanceOfDeck.initDeck(testCards);
+        Deck testDeckCardCount = new Deck();
         int counter = 0;
 
         for (int i = 0; i < 84; i += 1) {
-            if (testCards.get(i).getCardAttributeType().toString() == "Linksdrehung") {
+            if (testDeckCardCount.getDeck().get(i).getCardAttributeType().toString() 
+                    == "Linksdrehung") {
                 counter += 1;
             }
         }
@@ -93,7 +87,7 @@ public class CardTests {
      */
     @Test
     public void testPriority() {
-        testCards = instanceOfDeck.initDeck(testCards);
+        Deck testDeck = new Deck();
         boolean prio0 = false;
         boolean prio1 = false;
         boolean prio2 = false;
@@ -101,27 +95,27 @@ public class CardTests {
 
         for (int i = 0; i < 84; i += 1) {
             System.out.println("e" + i);
-            if (testCards.get(i).toString() == "Kehrtwendung") {
+            if (testDeck.getDeck().get(i).toString() == "Kehrtwendung") {
                 System.out.println("1 ja");
-                if (testCards.get(i).getCardAttributePriority() == 70) {
+                if (testDeck.getDeck().get(i).getCardAttributePriority() == 70) {
                     prio0 = true;
                     System.out.println("2 Ja");
                 }
             }
-            if (testCards.get(i).getCardAttributePriority() == 410) {
+            if (testDeck.getDeck().get(i).getCardAttributePriority() == 410) {
                 System.out.println("Hallo Prio");
-                if (testCards.get(i).toString() == "Linksdrehung") {
+                if (testDeck.getDeck().get(i).toString() == "Linksdrehung") {
                     prio1 = true;
                     System.out.println("1");
                 }
             }
-            if (testCards.get(i).getCardAttributePriority() == 510
-                    && testCards.get(i).toString() == "1 Vor") {
+            if (testDeck.getDeck().get(i).getCardAttributePriority() == 510
+                    && testDeck.getDeck().get(i).toString() == "1 Vor") {
                 prio2 = true;
                 System.out.println("2");
             }
-            if (testCards.get(i).getCardAttributePriority() == 80
-                    && testCards.get(i).toString() == "Rechtsdrehung") {
+            if (testDeck.getDeck().get(i).getCardAttributePriority() == 80
+                    && testDeck.getDeck().get(i).toString() == "Rechtsdrehung") {
                 prio3 = true;
                 System.out.println("3");
             }
