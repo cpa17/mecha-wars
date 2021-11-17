@@ -231,7 +231,7 @@ public class Buttons extends GameScreen {
      * @param skin Object of class Skin.
      */
     private static void updateButtons(Skin skin) {
-        stage.clear();
+        getStage().clear();
         addButtonsToStage(skin);
         addScrollPanelToStage(skin);
     }
