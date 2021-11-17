@@ -28,7 +28,7 @@ public class GameScreen implements Screen {
     private Field robotPosition;
     private Texture industrialTile;
     private Texture robot;
-    static Stage stage;
+    public static Stage stage;
     private SpriteBatch batch;
     private Sprite sprite;
     protected static final ZugInitialisierung zugInitialisierung = new ZugInitialisierung();
