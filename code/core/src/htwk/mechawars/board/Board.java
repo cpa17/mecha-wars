@@ -33,37 +33,6 @@ public class Board {
     public Field[][] fieldmatrix;
 
     /**
-     * Method that constructs the game board as a field matrix with Standard Fields.
-     *
-     * @param width width of the game board
-     * @param height height of the game board
-     */
-    public Board(int width, int height) {
-        Board wrappedBoard = new Board(width, height, false);
-        this.fieldmatrix = wrappedBoard.fieldmatrix;
-    }
-
-    /**
-     * Method that constructs the game board, but can skip creating the field matrix with
-     * Standard Fields.
-     *
-     * @param width width of the game board
-     * @param height height of the game board
-     * @param isTest allows to skip creating the fieldmatrix
-     */
-    public Board(int width, int height, boolean isTest) {
-        int[][] matrix = new int[height][width];
-        
-        for (int[] ints : matrix) {
-            Arrays.fill(ints, 11000);
-        }
-
-        if (!isTest) {
-            this.fieldmatrix = new Board(matrix).fieldmatrix;
-        }
-    }
-
-    /**
      * Method that reads the game plan as a int matrix from a file and constructs the game board
      * as a field matrix.
      *
@@ -129,6 +98,7 @@ public class Board {
         }
 
         int[][] matrix = new int[height][width];
+
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 matrix[y][x] = tempLayout.get(y).get(x);
@@ -136,7 +106,7 @@ public class Board {
         }
 
         if (!isTest) {
-            this.fieldmatrix = new Board(matrix).fieldmatrix;
+            intToFieldMatrix(matrix);
         }
     }
 
@@ -145,7 +115,7 @@ public class Board {
      *
      * @param matrix A int matrix
      */
-    public Board(int[][] matrix) {
+    private void intToFieldMatrix(int[][] matrix) {
         this.fieldmatrix = new Field[matrix.length][matrix[0].length];
         int[] allowed;
         for (int i = 0; i < matrix.length; i++) {

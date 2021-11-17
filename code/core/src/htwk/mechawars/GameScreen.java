@@ -52,7 +52,7 @@ public class GameScreen implements Screen {
 
     private Card[] deck;
 
-    private Board board = new Board("map.txt");
+    private Board board = new Board("testmap.txt");
     private Robot player = new Robot();
 
     private TextButton[] buttons = new TextButton[choosableCardCount];
