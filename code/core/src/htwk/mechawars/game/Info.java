@@ -1,5 +1,6 @@
 package htwk.mechawars.game;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -15,6 +16,11 @@ import com.badlogic.gdx.utils.Align;
  * Class that presents the surface of the info screen.
  */
 public class Info extends Buttons {
+
+    public Info(Game g) {
+        super(g);
+        // TODO Auto-generated constructor stub
+    }
 
     /**
      * ClickListener for the infoButton.

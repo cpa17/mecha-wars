@@ -278,7 +278,7 @@ public class Robot {
      * Updates the shutDown texture depending on the amout of players.
      */
     private void createHud() {
-        hud = new Texture(Gdx.files.internal("parameters/hudrr.png"));
+        hud = new Texture(Gdx.files.internal("parameters/hud.png"));
     }
 
     /**
@@ -294,10 +294,10 @@ public class Robot {
             backupDraw = false;
             batch.draw(new Texture(Gdx.files.internal("robot.png")), backupCopyX, backupCopyY);
         }
-        batch.draw(hud, 755, 0);
-        batch.draw(life, 765, 5);
-        batch.draw(damage, 840, 5);
-        batch.draw(shutDown, 915, 5);
+        batch.draw(hud, 754, 15);
+        batch.draw(life, 763, 23);
+        batch.draw(damage, 838, 23);
+        batch.draw(shutDown, 914, 23);
     }
 
     /**

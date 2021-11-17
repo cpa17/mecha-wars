@@ -47,7 +47,7 @@ public class Field {
         return this.tile;
     }
     
-    public Robot action(Robot robot) {
+    public Robot action(Robot robot, Texture texture) {
         return robot; 
     }
 }
