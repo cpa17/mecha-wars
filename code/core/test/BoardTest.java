@@ -15,11 +15,9 @@ import org.junit.jupiter.api.Test;
  */
 
 public class BoardTest {
-    private Board board = new Board(4, 4, true);
-    private Board boardtxt = new Board(createBoardString(), true);
+    private Board board = new Board(createBoardString(), true);
 
     private Robot robot = new Robot();
-    private Robot robottxt = new Robot();
 
     public int[][] startMatrix = {
             {11000, 11000, 11000, 11000},
@@ -63,12 +61,6 @@ public class BoardTest {
         assertArrayEquals(midMatrix, board.matrix);
         board.move(phase2, robot);
         assertArrayEquals(endMatrix, board.matrix);
-
-        assertArrayEquals(startMatrix, boardtxt.matrix);
-        boardtxt.move(phase1, robottxt);
-        assertArrayEquals(midMatrix, boardtxt.matrix);
-        boardtxt.move(phase2, robottxt);
-        assertArrayEquals(endMatrix, boardtxt.matrix);
     }
 
     /**
@@ -77,11 +69,10 @@ public class BoardTest {
     @BeforeEach
     public void initBoard() {
         board.startRobot(3, 3, Dir.NORTH, robot);
-        boardtxt.startRobot(3, 3, Dir.NORTH, robottxt);
     }
 
     /**
-     * Method that generates a String for the board constructor that expects a String.
+     * Method that generates a String for the board constructor.
      */
     private String createBoardString() {
         String dummyVar = "";
