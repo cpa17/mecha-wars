@@ -30,45 +30,42 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * Class that presents the game board.
  */
 public class Board {
-    public int[][] matrix;
     public Field[][] fieldmatrix;
 
     /**
-     * Method that constructs the game board as a int matrix and a field matrix with
-     * Standard Fields.
+     * Method that constructs the game board as a field matrix with Standard Fields.
      *
      * @param width width of the game board
      * @param height height of the game board
      */
     public Board(int width, int height) {
         Board wrappedBoard = new Board(width, height, false);
-        this.matrix = wrappedBoard.matrix;
         this.fieldmatrix = wrappedBoard.fieldmatrix;
     }
 
     /**
-     * Method that constructs the game board as a int matrix with Standard Fields, but can skip
-     * creating the field matrix.
+     * Method that constructs the game board, but can skip creating the field matrix with
+     * Standard Fields.
      *
      * @param width width of the game board
      * @param height height of the game board
      * @param isTest allows to skip creating the fieldmatrix
      */
     public Board(int width, int height, boolean isTest) {
-        this.matrix = new int[height][width];
+        int[][] matrix = new int[height][width];
         
         for (int[] ints : matrix) {
             Arrays.fill(ints, 11000);
         }
 
         if (!isTest) {
-            this.fieldmatrix = new Board(this.matrix).fieldmatrix;
+            this.fieldmatrix = new Board(matrix).fieldmatrix;
         }
     }
 
     /**
      * Method that reads the game plan as a int matrix from a file and constructs the game board
-     * as a int matrix and a field matrix.
+     * as a field matrix.
      *
      * @param fileName Path to a file containing a map
      */
@@ -77,13 +74,12 @@ public class Board {
         String mapString = file.readString();
 
         Board wrappedBoard = new Board(mapString, false);
-        this.matrix = wrappedBoard.matrix;
-        this.fieldmatrix = new Board(this.matrix).fieldmatrix;
+        this.fieldmatrix = wrappedBoard.fieldmatrix;
     }
 
     /**
-     * Method that reads the game plan as a int matrix from a file and constructs the game board,
-     * but can skip creating the field matrix.
+     * Method that reads the game plan as a int matrix from a file and constructs the game board
+     * as a field matrix, but can skip creating the field matrix.
      *
      * @param mapString String containing a map
      * @param isTest allows to skip creating the assets
@@ -131,18 +127,16 @@ public class Board {
             System.out.println("The map has too many rows, only 12 are allowed!");
             Gdx.app.exit();
         }
-        
-        Board wrappedBoard = new Board(width, height, isTest);
 
+        int[][] matrix = new int[height][width];
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                wrappedBoard.matrix[y][x] = tempLayout.get(y).get(x);
+                matrix[y][x] = tempLayout.get(y).get(x);
             }
         }
 
-        this.matrix = wrappedBoard.matrix;
         if (!isTest) {
-            this.fieldmatrix = new Board(this.matrix).fieldmatrix;
+            this.fieldmatrix = new Board(matrix).fieldmatrix;
         }
     }
 
@@ -381,7 +375,7 @@ public class Board {
             } else {
                 robot.turn(card.getCardAttributeMovCount());
             }
-            if (robot.getXcoor() >= matrix[1].length || robot.getYcoor() >= matrix.length
+            if (robot.getXcoor() >= fieldmatrix[1].length || robot.getYcoor() >= fieldmatrix.length
                     || robot.getXcoor() < 0 || robot.getYcoor() < 0) {
                 robot.setXcoor(robot.getStartX());
                 robot.setYcoor(robot.getStartY());

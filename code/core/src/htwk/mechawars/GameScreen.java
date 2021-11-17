@@ -636,9 +636,9 @@ public class GameScreen implements Screen {
      * Function that draws the robot on the playing field.
      */
     public void drawRobot() {
-        int tileSize = (Gdx.graphics.getHeight() / board.matrix.length);
+        int tileSize = (Gdx.graphics.getHeight() / board.fieldmatrix.length);
         int x = player.getXcoor();
-        int y = Math.abs(player.getYcoor() - (board.matrix.length - 1));
+        int y = Math.abs(player.getYcoor() - (board.fieldmatrix.length - 1));
 
         if (player.getDir() == Dir.NORTH) {
             sprite.setPosition(tileSize * x, tileSize * y);
