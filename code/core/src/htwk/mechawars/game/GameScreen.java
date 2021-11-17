@@ -1,5 +1,6 @@
 package htwk.mechawars.game;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import htwk.mechawars.VictoryScreen;
 import htwk.mechawars.ZugInitialisierung;
 import htwk.mechawars.board.Board;
 import htwk.mechawars.board.Dir;
@@ -21,11 +23,12 @@ import htwk.mechawars.fields.Field;
  * Class that presents the surface of the game screen.
  */
 public class GameScreen implements Screen {
-    
+    private Game game;
+    private static boolean winCondition = false;
     private Field robotPosition;
     private Texture industrialTile;
     private Texture robot;
-    static Stage stage = new Stage();
+    static Stage stage;
     private SpriteBatch batch;
     private Sprite sprite;
     protected static final ZugInitialisierung zugInitialisierung = new ZugInitialisierung();
@@ -37,11 +40,15 @@ public class GameScreen implements Screen {
     /**
      * Constructor of class GameScreen.
      */
-    public GameScreen() {
+    public GameScreen(Game g) {
+        game = g;
+        
+        stage = new Stage();
+        
         industrialTile = new Texture("mapAssets/StandardField.png");
         
         robot = new Texture("robot.png");
-
+        
         batch = new SpriteBatch();
         sprite = new Sprite(robot);
 
@@ -106,7 +113,16 @@ public class GameScreen implements Screen {
         stage.addActor(Buttons.wakeUpButton(skin, player));
 
     }
-
+    
+    public static void setWinCondition() {
+        winCondition = true;
+    }
+    
+    public void changeScreen() {
+        game.setScreen(new VictoryScreen(game));
+        stage.dispose();
+    }
+    
     @Override
     public void show() {
 
@@ -122,7 +138,10 @@ public class GameScreen implements Screen {
         sprite.draw(batch);
         batch.end();
         robotPosition = board.fieldmatrix[player.getXcoor()][player.getYcoor()];
-        robotPosition.action(player);
+        robotPosition.action(player, robotPosition.getTile());
+        if (winCondition) {
+            changeScreen();
+        }
         stage.act();
         stage.draw();
     }

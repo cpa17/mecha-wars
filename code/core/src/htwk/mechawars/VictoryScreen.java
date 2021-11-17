@@ -11,104 +11,90 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import htwk.mechawars.game.GameScreen;
+import com.badlogic.gdx.utils.ScreenUtils;
 
 /**
- * Class that presents the surface of the MainMenu screen.
+ * Class that presents the victory screen of the game.
  */
-public class MainMenu implements Screen {
+public class VictoryScreen implements Screen {
+    
     private Game game;
     private Stage stage;
-    private SpriteBatch batch; 
-    private Texture img; 
-
+    private SpriteBatch batch;
+    private Texture endscreen;
+    
     /**
-     * Constructor of class MainMenue.
-     * @param g Object of class Game
+     * Constructor of class VictoryScreen.
      */
-    public MainMenu(Game g) {
+    public VictoryScreen(Game g) {
         game = g;
-        img = new Texture(Gdx.files.internal("background.png"));
+        
         stage = new Stage();
+        
+        endscreen = new Texture(Gdx.files.internal("endscreen.png"));
         
         Gdx.input.setInputProcessor(stage);
         
         Skin skin = new Skin(Gdx.files.internal("skinMenu/star-soldier-ui.json"));
         
-        TextButton startGame = new TextButton("Spiel starten", skin);
-        startGame.setPosition(440, 200);
-        startGame.setSize(400, 100);
-        startGame.addListener(new ClickListener() {
+        TextButton backToStart = new TextButton("Zum Hauptmenu", skin);
+        backToStart.setPosition(440, 430);
+        backToStart.setSize(400, 100);
+        backToStart.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent e, float x, float y, int point, int button) {
-                changeScreen();
+                toMainMenu();
             }
         });
-
-        TextButton endGame = new TextButton("Spiel beenden", skin);
-        endGame.setPosition(440, 100);
-        endGame.setSize(400, 100);
-        endGame.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button) {
-                Gdx.app.exit();
-            }
-        });
-
-        //add the buttons
-        stage.addActor(startGame);
-        stage.addActor(endGame);
+        
+        stage.addActor(backToStart);
     }
-
-    /**
-     * changeScreen function to switch to GameScreen.
-     */
-    public void changeScreen() {
-        game.setScreen(new GameScreen(game));
+    
+    public void toMainMenu() {
+        game.setScreen(new MainMenu(game));
         stage.dispose();
     }
-
+    
     @Override
     public void show() {
-
+      
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 0);
+        ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch = (SpriteBatch) stage.getBatch(); 
         batch.begin();
-        batch.draw(img, 0, 0, 1280, 720);
+        batch.draw(endscreen, 0, 0, 1280, 720);
         batch.end();
-
         stage.act(delta);
         stage.draw();
     }
 
     @Override
     public void resize(int width, int height) {
-
+        
     }
 
     @Override
     public void pause() {
-
+        
     }
 
     @Override
     public void resume() {
-
+        
     }
 
     @Override
     public void hide() {
-
+        
     }
 
     @Override
     public void dispose() {
-
+        
     }
 }

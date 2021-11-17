@@ -49,7 +49,7 @@ public class RepairSite extends Field {
     }
     
     @Override
-    public Robot action(Robot robot) {
+    public Robot action(Robot robot, Texture texture) {
         robot.setbackupCopyX(robot.getXcoor());
         robot.setbackupCopyY(robot.getYcoor());
         return robot;       

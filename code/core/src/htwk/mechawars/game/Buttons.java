@@ -1,5 +1,6 @@
 package htwk.mechawars.game;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -14,6 +15,11 @@ import htwk.mechawars.board.Robot;
  * Class that creates the ScrollPanel for the GameScreen.
  */
 public class Buttons extends GameScreen {
+
+    public Buttons(Game g) {
+        super(g);
+        // TODO Auto-generated constructor stub
+    }
 
     /**
      * Creates the startButton.
@@ -165,7 +171,7 @@ public class Buttons extends GameScreen {
 
         int wakeUpButtonX = Gdx.graphics.getHeight()
                 + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
-        int wakeUpButtonY = Gdx.graphics.getHeight() - 600;
+        int wakeUpButtonY = Gdx.graphics.getHeight() - 500;
 
         wakeUpButton.setPosition(wakeUpButtonX, wakeUpButtonY);
 

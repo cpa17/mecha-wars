@@ -1,5 +1,6 @@
 package htwk.mechawars.game;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -15,6 +16,10 @@ import htwk.mechawars.cards.CardFunctions;
  * Class that creates the ScrollPanel for the GameScreen.
  */
 public class ScrollPanel extends GameScreen {
+    public ScrollPanel(Game g) {
+        super(g);
+    }
+
     static final int[] cardOrder = { -1, -1, -1, -1, -1};
     private static int pressCounter = 0;
     protected static final int damagePoints = 0;
