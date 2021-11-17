@@ -34,39 +34,6 @@ public class Board {
     public Field[][] fieldmatrix;
 
     /**
-     * Method that constructs the game board as a int matrix and a field matrix with
-     * Standard Fields.
-     *
-     * @param width width of the game board
-     * @param height height of the game board
-     */
-    public Board(int width, int height) {
-        Board wrappedBoard = new Board(width, height, false);
-        this.matrix = wrappedBoard.matrix;
-        this.fieldmatrix = wrappedBoard.fieldmatrix;
-    }
-
-    /**
-     * Method that constructs the game board as a int matrix with Standard Fields, but can skip
-     * creating the field matrix.
-     *
-     * @param width width of the game board
-     * @param height height of the game board
-     * @param isTest allows to skip creating the fieldmatrix
-     */
-    public Board(int width, int height, boolean isTest) {
-        this.matrix = new int[height][width];
-        
-        for (int[] ints : matrix) {
-            Arrays.fill(ints, 11000);
-        }
-
-        if (!isTest) {
-            intToFieldMatrix(this.matrix);
-        }
-    }
-
-    /**
      * Method that reads the game plan as a int matrix from a file and constructs the game board
      * as a int matrix and a field matrix.
      *
