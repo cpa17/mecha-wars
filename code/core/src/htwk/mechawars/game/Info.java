@@ -281,7 +281,7 @@ public class Info extends Buttons {
                         System.out.println(object);
                     }
 
-                }.show(stage); //.setHeight(600);
+                }.show(getStage()); //.setHeight(600);
             }
         };
     }

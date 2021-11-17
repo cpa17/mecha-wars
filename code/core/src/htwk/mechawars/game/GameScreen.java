@@ -28,7 +28,7 @@ public class GameScreen implements Screen {
     private Field robotPosition;
     private Texture industrialTile;
     private Texture robot;
-    public static Stage stage;
+    private static Stage stage;
     private SpriteBatch batch;
     private Sprite sprite;
     protected static final ZugInitialisierung zugInitialisierung = new ZugInitialisierung();
@@ -43,7 +43,7 @@ public class GameScreen implements Screen {
     public GameScreen(Game g) {
         game = g;
         
-        stage = new Stage();
+        setStage(new Stage());
         
         industrialTile = new Texture("mapAssets/StandardField.png");
         
@@ -52,7 +52,7 @@ public class GameScreen implements Screen {
         batch = new SpriteBatch();
         sprite = new Sprite(robot);
 
-        Gdx.input.setInputProcessor(stage);
+        Gdx.input.setInputProcessor(getStage());
 
         addButtonsToStage(skin);
         addScrollPanelToStage(skin);
@@ -71,7 +71,7 @@ public class GameScreen implements Screen {
         int containerHeight = 600;
 
         Table container = new Table();
-        stage.addActor(container);
+        getStage().addActor(container);
         container.setBounds(containerBoundsX, containerBoundsY, containerWidth, containerHeight);
 
         container.add(ScrollPanel.scrollPanel(skin, player)).grow();
@@ -82,10 +82,10 @@ public class GameScreen implements Screen {
      * @param skin Object of class Skin.
      */
     public static void addButtonsToStage(Skin skin) {
-        stage.addActor(Buttons.startButton(skin, player));
-        stage.addActor(Buttons.endButton(skin));
+        getStage().addActor(Buttons.startButton(skin, player));
+        getStage().addActor(Buttons.endButton(skin));
 
-        stage.addActor(Buttons.removeButton(skin));
+        getStage().addActor(Buttons.removeButton(skin));
 
         if (player.getShutDown()) {
             Buttons.removeButton(skin).setTouchable(Touchable.disabled);
@@ -95,7 +95,7 @@ public class GameScreen implements Screen {
             Buttons.removeButton(skin).setDisabled(false);
         }
 
-        stage.addActor(Buttons.infoButton(skin));
+        getStage().addActor(Buttons.infoButton(skin));
 
         if (player.getShutDown()) {
             Buttons.shutDownButton(skin, player).setTouchable(Touchable.disabled);
@@ -109,8 +109,8 @@ public class GameScreen implements Screen {
             Buttons.wakeUpButton(skin, player).setDisabled(true);
         }
 
-        stage.addActor(Buttons.shutDownButton(skin, player));
-        stage.addActor(Buttons.wakeUpButton(skin, player));
+        getStage().addActor(Buttons.shutDownButton(skin, player));
+        getStage().addActor(Buttons.wakeUpButton(skin, player));
 
     }
     
@@ -120,7 +120,7 @@ public class GameScreen implements Screen {
     
     public void changeScreen() {
         game.setScreen(new VictoryScreen(game));
-        stage.dispose();
+        getStage().dispose();
     }
     
     @Override
@@ -142,8 +142,8 @@ public class GameScreen implements Screen {
         if (winCondition) {
             changeScreen();
         }
-        stage.act();
-        stage.draw();
+        getStage().act();
+        getStage().draw();
     }
 
     @Override
@@ -170,6 +170,14 @@ public class GameScreen implements Screen {
     @Override
     public void hide() {
 
+    }
+
+    public static Stage getStage() {
+        return stage;
+    }
+
+    public static void setStage(Stage stage) {
+        GameScreen.stage = stage;
     }
 
 }
