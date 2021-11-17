@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DamageTest {
     private Robot robot = new Robot();
-    private Board board = new Board(2, 2, true);
+    private Board board = new Board(createBoardString(), true);
     private LinkedList<Card> karten = new LinkedList<>();
 
     @Test
@@ -161,5 +161,16 @@ public class DamageTest {
         robot.setYcoor(0);
         robot.setShutDown(false);
         karten.add(new Card(Type.turn, (byte) 1, 0));
+    }
+
+    /**
+     * Method that generates a String for the board constructor.
+     */
+    private String createBoardString() {
+        String dummyVar = "";
+        String boardString = dummyVar +
+                "11000 11000 \n" +
+                "11000 11000";
+        return boardString;
     }
 }
