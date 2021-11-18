@@ -25,9 +25,8 @@ public class Checkpoint extends Field {
 
     @Override
     public String toString() {
-        String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor
+        return "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor
                 + ", number: " + this.number;
-        return attributes;
     }
 
     /**
@@ -91,7 +90,7 @@ public class Checkpoint extends Field {
     public void checkPointChoice(Robot robot) {
         if (robot.getCheckPointNumber() == this.number) {
             if (this.number == 8) {
-                GameScreen.setWinCondition();
+                GameScreen.setWinCondition(true);
             }
             robot.incCheckPointNumber();
         }

@@ -112,8 +112,8 @@ public class GameScreen implements Screen {
 
     }
     
-    public static void setWinCondition() {
-        winCondition = true;
+    public static void setWinCondition(boolean win) {
+        winCondition = win;
     }
     
     public void changeScreen() {
@@ -137,7 +137,7 @@ public class GameScreen implements Screen {
         batch.end();       
         if (winCondition) {
             changeScreen();
-            winCondition = false;
+            GameScreen.setWinCondition(false);
         }
         getStage().act();
         getStage().draw();
