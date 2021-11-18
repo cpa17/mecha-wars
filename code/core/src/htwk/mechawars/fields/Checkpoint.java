@@ -98,6 +98,8 @@ public class Checkpoint extends Field {
             if (number == 8) {
                 GameScreen.setWinCondition();
             }
+            System.out.println(checkPointNumberInt);
+            System.out.println(number);
             number++;
         }
     }
