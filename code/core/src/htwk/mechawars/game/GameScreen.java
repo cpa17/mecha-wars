@@ -35,7 +35,7 @@ public class GameScreen implements Screen {
     protected static final ZugInitialisierung zugInitialisierung = new ZugInitialisierung();
     private static Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
-    protected static final Board board = new Board("map.txt");
+    protected static final Board board = new Board("testmap.txt");
     private static Robot player = new Robot();
 
     /**
@@ -142,7 +142,7 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
         batch.begin();
         Board.toAsset(batch, board);
-        Robot.drawRobot(player, sprite, board);
+        player.drawRobot(sprite, board);
         player.drawParameters(batch);
         sprite.draw(batch);
         batch.end();
