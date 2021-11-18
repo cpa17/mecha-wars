@@ -78,10 +78,10 @@ public class Checkpoint extends Field {
     }
     
     @Override
-    public Robot action(Robot robot, Texture texture) {
+    public Robot action(Robot robot) {
         robot.setbackupCopyX(robot.getXcoor());
-        robot.setbackupCopyY(robot.getYcoor());
-        String t = texture.toString();
+        robot.setbackupCopyY(robot.getYcoor());        
+        String t = robot.getTexture().toString();
         String checkPointNumber = t.substring(t.lastIndexOf("Check") + 5, t.lastIndexOf("."));
         int checkPointNumberInt = Integer.parseInt(checkPointNumber);
         checkPointChoice(checkPointNumberInt);
