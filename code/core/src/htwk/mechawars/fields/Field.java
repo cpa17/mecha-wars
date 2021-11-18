@@ -20,6 +20,14 @@ public class Field {
         this.xcoor = xcoor;
         this.ycoor = ycoor;
         this.tile = new Texture("mapAssets/StandardField.png");
+     }
+
+    public Field(int xcoor, int ycoor, boolean isTest) {
+        this.xcoor = xcoor;
+        this.ycoor = ycoor;
+        if (!isTest) {
+            this.tile = new Texture("mapAssets/StandardField.png");
+        }
     }
 
     public String toString() {

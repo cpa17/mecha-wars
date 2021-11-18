@@ -17,6 +17,13 @@ public class StandardField extends Field {
         this.tile = new Texture("mapAssets/StandardField.png");
     }
 
+    public StandardField(int xcoor, int ycoor, boolean isTest) {
+        super(xcoor, ycoor);
+        if (!isTest) {
+            this.tile = new Texture("mapAssets/StandardField.png");
+        }
+    }
+
     public Texture getTile() {
         return this.tile;
     }

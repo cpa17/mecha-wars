@@ -51,7 +51,7 @@ public class Board {
      * as a field matrix, but can skip creating the field matrix.
      *
      * @param mapString String containing a map
-     * @param isTest allows to skip creating the assets
+     * @param isTest indicates that this is a test
      */
     public Board(String mapString, boolean isTest) {
         ArrayList<ArrayList<Integer>> tempLayout = new ArrayList<>();
@@ -105,9 +105,11 @@ public class Board {
             }
         }
 
-        if (!isTest) {
-            intToFieldMatrix(matrix);
-        }
+        intToFieldMatrix(matrix, isTest);
+    }
+
+    private void intToFieldMatrix(int[][] matrix) {
+        intToFieldMatrix(matrix, false);
     }
 
     /**
@@ -115,7 +117,7 @@ public class Board {
      *
      * @param matrix A int matrix
      */
-    private void intToFieldMatrix(int[][] matrix) {
+    private void intToFieldMatrix(int[][] matrix, boolean isTest) {
         this.fieldmatrix = new Field[matrix.length][matrix[0].length];
         int[] allowed;
         for (int i = 0; i < matrix.length; i++) {
@@ -247,7 +249,7 @@ public class Board {
 
                     // StandardField
                     case 110:
-                        this.fieldmatrix[i][j] = new StandardField(j, i);
+                        this.fieldmatrix[i][j] = new StandardField(j, i, isTest);
                         break;
 
                     // StartField
@@ -382,5 +384,4 @@ public class Board {
             robot.damageReset();
         }
     }
-
 }

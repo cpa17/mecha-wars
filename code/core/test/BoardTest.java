@@ -16,29 +16,11 @@ import org.junit.jupiter.api.Test;
 
 public class BoardTest {
     private Board board = new Board(createBoardString(), true);
+    private Board startBoard = new Board(createStartString(), true);
+    private Board midBoard = new Board(createMidString(), true);
+    private Board endBoard = new Board(createEndString(), true);
 
     private Robot robot = new Robot();
-
-    public int[][] startMatrix = {
-            {11000, 11000, 11000, 11000},
-            {11000, 11000, 11000, 11000},
-            {11000, 11000, 11000, 11000},
-            {11000, 11000, 11000, 11000}
-    };
-
-    public int[][] midMatrix = {
-            {11000, 11000, 11000, 11000},
-            {11000, 11000, 11000, 11000},
-            {11000, 11000, 11000, 11000},
-            {11000, 11000, 11000, 11000}
-    };
-
-    public int[][] endMatrix = {
-            {11000, 11000, 11000, 11000},
-            {11000, 11000, 11000, 11000},
-            {11000, 11000, 11000, 11000},
-            {11000, 11000, 11000, 11000}
-    };
 
     @Test
     public void boardTest() {
@@ -56,11 +38,11 @@ public class BoardTest {
         phase2.add(new Card(Type.turn, (byte) 1, 0));
         phase2.add(new Card(Type.mov, (byte) 2, 0));
 
-        assertArrayEquals(startMatrix, board.matrix);
+        assertArrayEquals(startBoard.fieldmatrix, board.fieldmatrix);
         board.move(phase1, robot);
-        assertArrayEquals(midMatrix, board.matrix);
+        assertArrayEquals(midBoard.fieldmatrix, board.fieldmatrix);
         board.move(phase2, robot);
-        assertArrayEquals(endMatrix, board.matrix);
+        assertArrayEquals(endBoard.fieldmatrix, board.fieldmatrix);
     }
 
     /**
@@ -82,5 +64,35 @@ public class BoardTest {
                 "11000 11000 11000 11000 \n" +
                 "11000 11000 11000 11000";
         return boardString;
+    }
+
+    private String createStartString() {
+        String dummyVar = "";
+        String startString = dummyVar +
+                "11000 11000 11000 11000 \n" +
+                "11000 11000 11000 11000 \n" +
+                "11000 11000 11000 11000 \n" +
+                "11000 11000 11000 11000";
+        return startString;
+    }
+
+    private String createMidString() {
+        String dummyVar = "";
+        String midString = dummyVar +
+                "11000 11000 11000 11000 \n" +
+                "11000 11000 11000 11000 \n" +
+                "11000 11000 11000 11000 \n" +
+                "11000 11000 11000 11000";
+        return midString;
+    }
+
+    private String createEndString() {
+        String dummyVar = "";
+        String endString = dummyVar +
+                "11000 11000 11000 11000 \n" +
+                "11000 11000 11000 11000 \n" +
+                "11000 11000 11000 11000 \n" +
+                "11000 11000 11000 11000";
+        return endString;
     }
 }
