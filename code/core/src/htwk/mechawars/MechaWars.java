@@ -1,6 +1,7 @@
 package htwk.mechawars;
 
 import com.badlogic.gdx.Game;
+import htwk.mechawars.game.GameScreen;
 
 /**
  * Main game class.
