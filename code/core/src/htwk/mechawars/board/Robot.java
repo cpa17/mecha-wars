@@ -19,6 +19,7 @@ public class Robot {
     private int damagePoints;
     private int backupCopyX;
     private int backupCopyY;
+    private int checkPointNumber = 1;
     private boolean shutDownMark;
     private boolean backupDraw;
     private boolean lastRound;
@@ -138,9 +139,14 @@ public class Robot {
         return backupCopyY;
     }
     
+    public int getCheckPointNumber() {
+        return checkPointNumber;
+    }
+    
     /**
      * Setters.
      */
+    
     public void setDir(Dir dir) {
         this.dir = dir;
     }
@@ -196,7 +202,10 @@ public class Robot {
     public void lifeDown() {
         lifePoints -= 1;
     }
-
+    
+    public void incCheckPointNumber() {
+        checkPointNumber++;
+    }
 
     /**
      * Updates the life texture depening on the current lifePoints of the robot.

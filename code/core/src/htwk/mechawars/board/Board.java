@@ -356,7 +356,6 @@ public class Board {
                 return;
             }
         }
-
         checkShutDown(robot);
         robot.setLastRound(robot.getShutDown());
         robot.setShutDown(robot.getNextRound());
