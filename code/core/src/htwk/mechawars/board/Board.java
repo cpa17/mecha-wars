@@ -24,6 +24,7 @@ import java.util.Scanner;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 /**
@@ -180,6 +181,19 @@ public class Board {
      * @param robot robot to which this applies
      */
     public void startRobot(int x, int y, Dir dir, Robot robot) {
+        int min = 1;
+        int max = 8;
+        int randomNumber =  ThreadLocalRandom.current().nextInt(min, max) + min;
+        
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (matrix[i][j] == (11100 + randomNumber)) {
+                    x = j;
+                    y = i;
+                }
+            }
+        }
+        
         robot.setXcoor(x);
         robot.setStartX(x);
         robot.setYcoor(y);

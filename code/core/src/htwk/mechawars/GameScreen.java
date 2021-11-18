@@ -73,7 +73,7 @@ public class GameScreen implements Screen {
 
         addButtonsToStage(skin);
         addScrollPanelToStage(skin);
-        board.startRobot(5, 5, Dir.NORTH, player);
+        board.startRobot(1, 1, Dir.NORTH, player);
     }
 
     /**
