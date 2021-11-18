@@ -27,7 +27,6 @@ public class GameScreen implements Screen {
     private static boolean winCondition = false;
     private Texture industrialTile;
     private Texture robot;
-    private Field robotPosition;
     private static Stage stage;
     private SpriteBatch batch;
     private Sprite sprite;
@@ -136,11 +135,7 @@ public class GameScreen implements Screen {
         player.drawRobot(sprite, board);
         player.drawParameters(batch);
         sprite.draw(batch);
-        batch.end();
-        
-        robotPosition = board.fieldmatrix[player.getXcoor()][player.getYcoor()];
-        robotPosition.action(player);
-        
+        batch.end();       
         if (winCondition) {
             changeScreen();
         }
