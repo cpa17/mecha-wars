@@ -344,6 +344,16 @@ public class Board {
      * @param robot the robot that should move
      */
     public void move(LinkedList<Card> phase, Robot robot) {
+        move(phase, robot, false);
+    }
+
+    /**
+     * Method that moves the robot in the matrix.
+     *
+     * @param phase List of cards
+     * @param robot the robot that should move
+     */
+    public void move(LinkedList<Card> phase, Robot robot, boolean isTest) {
         for (Card card : phase) {
             if (card.getCardAttributeType() == Type.mov) {
                 robot.moveInDirection(card.getCardAttributeMovCount());
@@ -357,9 +367,11 @@ public class Board {
                 return;
             }
         }
-        
-        robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-        robotPosition.action(robot);
+
+        if (!isTest) {
+            robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+            robotPosition.action(robot);
+        }
         
         checkShutDown(robot);
         robot.setLastRound(robot.getShutDown());
