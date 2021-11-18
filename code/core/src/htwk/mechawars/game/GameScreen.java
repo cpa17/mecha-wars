@@ -17,7 +17,6 @@ import htwk.mechawars.ZugInitialisierung;
 import htwk.mechawars.board.Board;
 import htwk.mechawars.board.Dir;
 import htwk.mechawars.board.Robot;
-import htwk.mechawars.fields.Field;
 
 /**
  * Class that presents the surface of the game screen.
@@ -138,6 +137,7 @@ public class GameScreen implements Screen {
         batch.end();       
         if (winCondition) {
             changeScreen();
+            winCondition = false;
         }
         getStage().act();
         getStage().draw();

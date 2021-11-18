@@ -89,6 +89,8 @@ public class Checkpoint extends Field {
      */
     
     public void checkPointChoice(Robot robot) {
+        System.out.println(number);
+        System.out.println(robot.getCheckPointNumber());
         if (robot.getCheckPointNumber() == this.number) {
             if (this.number == 8) {
                 GameScreen.setWinCondition();
