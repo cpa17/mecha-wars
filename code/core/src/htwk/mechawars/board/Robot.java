@@ -303,21 +303,21 @@ public class Robot {
     /**
      * Function that draws the robot on the playing field.
      */
-    public static void drawRobot(Robot player, Sprite sprite, Board board) {
+    public void drawRobot(Sprite sprite, Board board) {
         int tileSize = (Gdx.graphics.getHeight() / board.matrix.length);
-        int x = player.getXcoor();
-        int y = Math.abs(player.getYcoor() - (board.matrix.length - 1));
+        int x = xcoor;
+        int y = Math.abs(ycoor - (board.matrix.length - 1));
 
-        if (player.getDir() == Dir.NORTH) {
+        if (dir == Dir.NORTH) {
             sprite.setPosition(tileSize * x, tileSize * y);
             sprite.setRotation(0);
-        } else if (player.getDir() == Dir.EAST) {
+        } else if (dir == Dir.EAST) {
             sprite.setPosition(tileSize * x, tileSize * y);
             sprite.setRotation(270);
-        } else if (player.getDir() == Dir.SOUTH) {
+        } else if (dir == Dir.SOUTH) {
             sprite.setPosition(tileSize * x, tileSize * y);
             sprite.setRotation(180);
-        } else if (player.getDir() == Dir.WEST) {
+        } else if (dir == Dir.WEST) {
             sprite.setPosition(tileSize * x, tileSize * y);
             sprite.setRotation(90);
         }
