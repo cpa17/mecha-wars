@@ -44,7 +44,6 @@ public class Checkpoint extends Field {
     
     /**
      * changeScreen function to switch to GameScreen.
-     * @param number - number of the current Checkpoint
      */
     
     public void setCheckpoint() {
@@ -87,7 +86,6 @@ public class Checkpoint extends Field {
     
     /**
      * function to check if the order in which the Checkpoints are reached is right.
-     * @param checkPointNumberInt - number of the Checkpoint Texture
      */
     
     public void checkPointChoice() {
