@@ -185,11 +185,16 @@ public class Board {
         int max = 8;
         int randomNumber =  ThreadLocalRandom.current().nextInt(min, max) + min;
         
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                if (matrix[i][j] == (11100 + randomNumber)) {
+        for (int i = 0; i < fieldmatrix.length; i++) {
+            for (int j = 0; j < fieldmatrix[i].length; j++) {
+                /* if (matrix[i][j] == (11100 + randomNumber)) {
                     x = j;
                     y = i;
+                } */
+                
+                if (fieldmatrix[i][j] instanceof StartField) {
+                    x = fieldmatrix[i][j].getYcoor();
+                    y = fieldmatrix[i][j].getXcoor();
                 }
             }
         }
