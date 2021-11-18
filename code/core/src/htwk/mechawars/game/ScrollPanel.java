@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import htwk.mechawars.board.Robot;
 import htwk.mechawars.cards.Card;
-import htwk.mechawars.cards.CardFunctions;
+import htwk.mechawars.cards.Deck;
 
 /**
  * Class that creates the ScrollPanel for the GameScreen.
@@ -25,7 +25,7 @@ public class ScrollPanel extends GameScreen {
     protected static final int damagePoints = 0;
     private static int choosableCardCount = 9;
     static final TextButton[] buttons = new TextButton[choosableCardCount];
-    private static Card[] deck;
+    private static Deck deck = new Deck();
 
     /**
      * Constructor of class ScrollPanel.
@@ -37,15 +37,13 @@ public class ScrollPanel extends GameScreen {
         Table table = new Table();
         final ScrollPane scrollPanel = new ScrollPane(table, skin);
 
-        // Array of Cards created
-        deck = CardFunctions.initDeck();
         // shuffle Deck
-        deck = CardFunctions.shuffle(deck);
+        deck.shuffle();
 
         if (!player.getShutDown()) {
             for (int cardPrintCounter = 0; cardPrintCounter < choosableCardCount;
                     cardPrintCounter += 1) {
-                Card currentCard = deck[cardPrintCounter];
+                Card currentCard = deck.getDeck().get(cardPrintCounter);
                 buttons[cardPrintCounter] = new TextButton(currentCard.getCardAttributePriority()
                         + " - " + currentCard, skin);
                 table.row();
@@ -109,8 +107,8 @@ public class ScrollPanel extends GameScreen {
     private static void buttonsClean() {
         for (int i = 0; i < choosableCardCount; i += 1) {
             buttons[i].setColor(Color.LIGHT_GRAY);
-            buttons[i].setText(deck[i].getCardAttributePriority() + " - "
-                    + deck[i]);
+            buttons[i].setText(deck.getDeck().get(i).getCardAttributePriority() 
+                    + " - " + deck.getDeck().get(i));
         }
     }
 
