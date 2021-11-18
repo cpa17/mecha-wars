@@ -80,7 +80,7 @@ public class Checkpoint extends Field {
     public Robot action(Robot robot) {
         robot.setbackupCopyX(robot.getXcoor());
         robot.setbackupCopyY(robot.getYcoor());              
-        checkPointChoice();
+        checkCheckPoint();
         return robot;       
     }
     
@@ -88,7 +88,7 @@ public class Checkpoint extends Field {
      * function to check if the order in which the Checkpoints are reached is right.
      */
     
-    public void checkPointChoice() {
+    public void checkCheckPoint() {
         if (GameScreen.getCheckPointNumber() == this.number) {
             if (this.number == 8) {
                 GameScreen.setWinCondition();
