@@ -20,6 +20,7 @@ public class Checkpoint extends Field {
     public Checkpoint(int xcoor, int ycoor, int number) {
         super(xcoor, ycoor);
         this.number = number;
+        System.out.println(number);
         setCheckpoint();
     }
 
@@ -79,8 +80,8 @@ public class Checkpoint extends Field {
     @Override
     public Robot action(Robot robot) {
         robot.setbackupCopyX(robot.getXcoor());
-        robot.setbackupCopyY(robot.getYcoor());              
-        checkCheckPoint();
+        robot.setbackupCopyY(robot.getYcoor());         
+        checkPointChoice();
         return robot;       
     }
     
@@ -88,13 +89,13 @@ public class Checkpoint extends Field {
      * function to check if the order in which the Checkpoints are reached is right.
      */
     
-    public void checkCheckPoint() {
-        if (GameScreen.getCheckPointNumber() == this.number) {
-            if (this.number == 8) {
+    public void checkPointChoice() {
+        if (GameScreen.getCheckPointNumber() == getNumber()) {
+            if (getNumber() == 8) {
                 GameScreen.setWinCondition();
             }
             System.out.println(GameScreen.getCheckPointNumber());
-            System.out.println(this.number);
+            System.out.println(getNumber());
             GameScreen.incCheckPointNumber();
         }
     }

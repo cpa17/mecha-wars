@@ -28,7 +28,6 @@ public class Robot {
     private Texture damage;
     private Texture shutDown;
     private Texture hud;
-    private Texture texture;
 
     /**
      * Constructor of the robot class.
@@ -139,10 +138,6 @@ public class Robot {
         return backupCopyY;
     }
     
-    public Texture getTexture() {
-        return texture;
-    }
-
     /**
      * Setters.
      */
@@ -188,10 +183,6 @@ public class Robot {
 
     public void setDestroyed(boolean destroyed) {
         this.destroyed = destroyed;
-    }
-    
-    public void setTexture(Texture texture) {
-        this.texture = texture;
     }
 
     public void damageUp() {
