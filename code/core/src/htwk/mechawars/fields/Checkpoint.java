@@ -20,7 +20,6 @@ public class Checkpoint extends Field {
     public Checkpoint(int xcoor, int ycoor, int number) {
         super(xcoor, ycoor);
         this.number = number;
-        System.out.println(number);
         setCheckpoint();
     }
 
@@ -94,8 +93,6 @@ public class Checkpoint extends Field {
             if (this.number == 8) {
                 GameScreen.setWinCondition();
             }
-            System.out.println(robot.getCheckPointNumber());
-            System.out.println(this.number);
             robot.incCheckPointNumber();
         }
     }

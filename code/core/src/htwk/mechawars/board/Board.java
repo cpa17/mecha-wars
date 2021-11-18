@@ -23,6 +23,7 @@ import java.util.Scanner;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
@@ -32,6 +33,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Board {
     public int[][] matrix;
     public Field[][] fieldmatrix;
+    private Field robotPosition;
 
     /**
      * Method that reads the game plan as a int matrix from a file and constructs the game board
@@ -356,6 +358,10 @@ public class Board {
                 return;
             }
         }
+        
+        robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+        robotPosition.action(robot);
+        
         checkShutDown(robot);
         robot.setLastRound(robot.getShutDown());
         robot.setShutDown(robot.getNextRound());
