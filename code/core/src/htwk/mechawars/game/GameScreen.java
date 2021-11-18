@@ -25,17 +25,16 @@ import htwk.mechawars.fields.Field;
 public class GameScreen implements Screen {
     private Game game;
     private static boolean winCondition = false;
-    private static int checkPointNumber = 1;
-    private Field robotPosition;
     private Texture industrialTile;
     private Texture robot;
+    private Field robotPosition;
     private static Stage stage;
     private SpriteBatch batch;
     private Sprite sprite;
     protected static final ZugInitialisierung zugInitialisierung = new ZugInitialisierung();
     private static Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
-    protected static final Board board = new Board("testmap.txt");
+    protected static final Board board = new Board("map.txt");
     private static Robot player = new Robot();
 
     /**
@@ -115,14 +114,6 @@ public class GameScreen implements Screen {
 
     }
     
-    public static int getCheckPointNumber() {
-        return checkPointNumber;
-    }
-    
-    public static void incCheckPointNumber() {
-        checkPointNumber++;
-    }
-    
     public static void setWinCondition() {
         winCondition = true;
     }
@@ -146,9 +137,10 @@ public class GameScreen implements Screen {
         player.drawParameters(batch);
         sprite.draw(batch);
         batch.end();
+        
         robotPosition = board.fieldmatrix[player.getXcoor()][player.getYcoor()];
-        //System.out.println(robotPosition.getTile().toString());
         robotPosition.action(player);
+        
         if (winCondition) {
             changeScreen();
         }
