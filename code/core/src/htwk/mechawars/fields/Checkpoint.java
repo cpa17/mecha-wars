@@ -89,12 +89,12 @@ public class Checkpoint extends Field {
      */
     
     public void checkPointChoice() {
-        if (GameScreen.getCheckPointNumber() == getNumber()) {
-            if (getNumber() == 8) {
+        if (GameScreen.getCheckPointNumber() == this.number) {
+            if (this.number == 8) {
                 GameScreen.setWinCondition();
             }
             System.out.println(GameScreen.getCheckPointNumber());
-            System.out.println(getNumber());
+            System.out.println(this.number);
             GameScreen.incCheckPointNumber();
         }
     }
