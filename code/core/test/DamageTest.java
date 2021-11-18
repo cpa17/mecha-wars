@@ -51,7 +51,7 @@ public class DamageTest {
         assertFalse(robot.getDestroyed());
         assertEquals(3, robot.getLifePoints());
 
-        board.move(karten, robot);
+        board.move(karten, robot, true);
         robot.setNextRound(false);
         /* Robot:
          *   DamagePoint: 0
@@ -66,7 +66,7 @@ public class DamageTest {
         assertFalse(robot.getDestroyed());
         assertEquals(3, robot.getLifePoints());
 
-        board.move(karten, robot);
+        board.move(karten, robot, true);
         /* Robot:
          *   DamagePoint: 2
          *   ShutDown: false
@@ -92,7 +92,7 @@ public class DamageTest {
          * */
 
         assertTrue(robot.getDestroyed());
-        board.move(karten, robot);
+        board.move(karten, robot, true);
         /* Robot:
          *   DamagePoint: 4
          *   ShutDown: false
@@ -120,7 +120,7 @@ public class DamageTest {
 
         assertTrue(robot.getDestroyed());
 
-        board.move(karten, robot);
+        board.move(karten, robot, true);
         /* Robot:
          *   DamagePoint: 4
          *   ShutDown: true
@@ -135,7 +135,7 @@ public class DamageTest {
         assertFalse(robot.getDestroyed());
         assertEquals(3, robot.getLifePoints());
 
-        board.move(karten, robot);
+        board.move(karten, robot, true);
         /* Robot:
          *   DamagePoint: 0
          *   ShutDown: true
@@ -167,10 +167,7 @@ public class DamageTest {
      * Method that generates a String for the board constructor.
      */
     private String createBoardString() {
-        String dummyVar = "";
-        String boardString = dummyVar +
-                "11000 11000 \n" +
-                "11000 11000";
-        return boardString;
+        return "11000 11000 \n" +
+               "11000 11000";
     }
 }

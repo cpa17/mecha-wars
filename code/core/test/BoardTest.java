@@ -57,9 +57,9 @@ public class BoardTest {
         phase2.add(new Card(Type.mov, (byte) 2, 0));
 
         assertArrayEquals(startMatrix, board.matrix);
-        board.move(phase1, robot);
+        board.move(phase1, robot, true);
         assertArrayEquals(midMatrix, board.matrix);
-        board.move(phase2, robot);
+        board.move(phase2, robot, true);
         assertArrayEquals(endMatrix, board.matrix);
     }
 
@@ -75,12 +75,9 @@ public class BoardTest {
      * Method that generates a String for the board constructor.
      */
     private String createBoardString() {
-        String dummyVar = "";
-        String boardString = dummyVar +
-                "11000 11000 11000 11000 \n" +
+        return  "11000 11000 11000 11000 \n" +
                 "11000 11000 11000 11000 \n" +
                 "11000 11000 11000 11000 \n" +
                 "11000 11000 11000 11000";
-        return boardString;
     }
 }

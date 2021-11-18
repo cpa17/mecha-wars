@@ -1,5 +1,6 @@
 package htwk.mechawars.game;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
@@ -11,41 +12,45 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import htwk.mechawars.VictoryScreen;
 import htwk.mechawars.ZugInitialisierung;
 import htwk.mechawars.board.Board;
 import htwk.mechawars.board.Dir;
 import htwk.mechawars.board.Robot;
-import htwk.mechawars.fields.Field;
 
 /**
  * Class that presents the surface of the game screen.
  */
 public class GameScreen implements Screen {
-    
-    private Field robotPosition;
+    private Game game;
+    private static boolean winCondition = false;
     private Texture industrialTile;
     private Texture robot;
-    static Stage stage = new Stage();
+    private static Stage stage;
     private SpriteBatch batch;
     private Sprite sprite;
     protected static final ZugInitialisierung zugInitialisierung = new ZugInitialisierung();
     private static Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
-    protected static final Board board = new Board("testmap.txt");
+    protected static final Board board = new Board("map.txt");
     private static Robot player = new Robot();
 
     /**
      * Constructor of class GameScreen.
      */
-    public GameScreen() {
+    public GameScreen(Game g) {
+        game = g;
+        
+        setStage(new Stage());
+        
         industrialTile = new Texture("mapAssets/StandardField.png");
         
         robot = new Texture("robot.png");
-
+        
         batch = new SpriteBatch();
         sprite = new Sprite(robot);
 
-        Gdx.input.setInputProcessor(stage);
+        Gdx.input.setInputProcessor(getStage());
 
         addButtonsToStage(skin);
         addScrollPanelToStage(skin);
@@ -64,7 +69,7 @@ public class GameScreen implements Screen {
         int containerHeight = 600;
 
         Table container = new Table();
-        stage.addActor(container);
+        getStage().addActor(container);
         container.setBounds(containerBoundsX, containerBoundsY, containerWidth, containerHeight);
 
         container.add(ScrollPanel.scrollPanel(skin, player)).grow();
@@ -75,10 +80,10 @@ public class GameScreen implements Screen {
      * @param skin Object of class Skin.
      */
     public static void addButtonsToStage(Skin skin) {
-        stage.addActor(Buttons.startButton(skin, player));
-        stage.addActor(Buttons.endButton(skin));
+        getStage().addActor(Buttons.startButton(skin, player));
+        getStage().addActor(Buttons.endButton(skin));
 
-        stage.addActor(Buttons.removeButton(skin));
+        getStage().addActor(Buttons.removeButton(skin));
 
         if (player.getShutDown()) {
             Buttons.removeButton(skin).setTouchable(Touchable.disabled);
@@ -88,7 +93,7 @@ public class GameScreen implements Screen {
             Buttons.removeButton(skin).setDisabled(false);
         }
 
-        stage.addActor(Buttons.infoButton(skin));
+        getStage().addActor(Buttons.infoButton(skin));
 
         if (player.getShutDown()) {
             Buttons.shutDownButton(skin, player).setTouchable(Touchable.disabled);
@@ -102,11 +107,20 @@ public class GameScreen implements Screen {
             Buttons.wakeUpButton(skin, player).setDisabled(true);
         }
 
-        stage.addActor(Buttons.shutDownButton(skin, player));
-        stage.addActor(Buttons.wakeUpButton(skin, player));
+        getStage().addActor(Buttons.shutDownButton(skin, player));
+        getStage().addActor(Buttons.wakeUpButton(skin, player));
 
     }
-
+    
+    public static void setWinCondition(boolean win) {
+        winCondition = win;
+    }
+    
+    public void changeScreen() {
+        game.setScreen(new VictoryScreen(game));
+        getStage().dispose();
+    }
+    
     @Override
     public void show() {
 
@@ -120,11 +134,13 @@ public class GameScreen implements Screen {
         player.drawRobot(sprite, board);
         player.drawParameters(batch);
         sprite.draw(batch);
-        batch.end();
-        robotPosition = board.fieldmatrix[player.getXcoor()][player.getYcoor()];
-        robotPosition.action(player);
-        stage.act();
-        stage.draw();
+        batch.end();       
+        if (winCondition) {
+            changeScreen();
+            GameScreen.setWinCondition(false);
+        }
+        getStage().act();
+        getStage().draw();
     }
 
     @Override
@@ -151,6 +167,14 @@ public class GameScreen implements Screen {
     @Override
     public void hide() {
 
+    }
+
+    public static Stage getStage() {
+        return stage;
+    }
+
+    public static void setStage(Stage stage) {
+        GameScreen.stage = stage;
     }
 
 }
