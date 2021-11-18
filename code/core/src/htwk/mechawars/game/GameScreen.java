@@ -138,7 +138,8 @@ public class GameScreen implements Screen {
         sprite.draw(batch);
         batch.end();
         robotPosition = board.fieldmatrix[player.getXcoor()][player.getYcoor()];
-        robotPosition.action(player, robotPosition.getTile());
+        player.setTexture(robotPosition.getTile());
+        robotPosition.action(player);
         if (winCondition) {
             changeScreen();
         }
