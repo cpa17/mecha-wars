@@ -20,7 +20,7 @@ public class Checkpoint extends Field {
     public Checkpoint(int xcoor, int ycoor, int number) {
         super(xcoor, ycoor);
         this.number = number;
-        setCheckpoint(number);
+        setCheckpoint();
     }
 
     @Override
@@ -47,8 +47,8 @@ public class Checkpoint extends Field {
      * @param number - number of the current Checkpoint
      */
     
-    public void setCheckpoint(int number) {
-        switch (number) {
+    public void setCheckpoint() {
+        switch (this.number) {
             case 1 :    this.tile = new Texture("mapAssets/checkpoints/Check1.png");
                         break;
     
@@ -80,11 +80,8 @@ public class Checkpoint extends Field {
     @Override
     public Robot action(Robot robot) {
         robot.setbackupCopyX(robot.getXcoor());
-        robot.setbackupCopyY(robot.getYcoor());        
-        String t = robot.getTexture().toString();
-        String checkPointNumber = t.substring(t.lastIndexOf("Check") + 5, t.lastIndexOf("."));
-        int checkPointNumberInt = Integer.parseInt(checkPointNumber);
-        checkPointChoice(checkPointNumberInt);
+        robot.setbackupCopyY(robot.getYcoor());              
+        checkPointChoice();
         return robot;       
     }
     
@@ -93,14 +90,14 @@ public class Checkpoint extends Field {
      * @param checkPointNumberInt - number of the Checkpoint Texture
      */
     
-    public void checkPointChoice(int checkPointNumberInt) {
-        if (checkPointNumberInt == number) {
-            if (number == 8) {
+    public void checkPointChoice() {
+        if (GameScreen.getCheckPointNumber() == getNumber()) {
+            if (getNumber() == 8) {
                 GameScreen.setWinCondition();
             }
-            System.out.println(checkPointNumberInt);
-            System.out.println(number);
-            number++;
+            System.out.println(GameScreen.getCheckPointNumber());
+            System.out.println(getNumber());
+            GameScreen.incCheckPointNumber();
         }
     }
 }

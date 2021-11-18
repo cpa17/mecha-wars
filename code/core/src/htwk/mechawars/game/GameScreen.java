@@ -25,6 +25,7 @@ import htwk.mechawars.fields.Field;
 public class GameScreen implements Screen {
     private Game game;
     private static boolean winCondition = false;
+    private static int checkPointNumber = 1;
     private Field robotPosition;
     private Texture industrialTile;
     private Texture robot;
@@ -112,6 +113,14 @@ public class GameScreen implements Screen {
         getStage().addActor(Buttons.shutDownButton(skin, player));
         getStage().addActor(Buttons.wakeUpButton(skin, player));
 
+    }
+    
+    public static int getCheckPointNumber() {
+        return checkPointNumber;
+    }
+    
+    public static void incCheckPointNumber() {
+        checkPointNumber++;
     }
     
     public static void setWinCondition() {
