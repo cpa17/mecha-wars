@@ -48,6 +48,10 @@ public class Field {
     }
     
     public Robot action(Robot robot) {
+        
+        // On the field -> Repair
+        robot.onRepairField();
+        
         return robot; 
     }
 }
