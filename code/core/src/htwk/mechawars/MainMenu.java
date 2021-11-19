@@ -14,6 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+import htwk.mechawars.game.GameScreen;
+
 /**
  * Class that presents the surface of the MainMenu screen.
  */
@@ -85,7 +87,7 @@ public class MainMenu implements Screen {
      * changeScreen function to switch to GameScreen.
      */
     public void changeScreen() {
-        game.setScreen(new GameScreen());
+        game.setScreen(new GameScreen(game));
         stage.dispose();
     }
 

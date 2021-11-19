@@ -15,34 +15,30 @@ import org.junit.jupiter.api.Test;
  */
 
 public class BoardTest {
-    private Board board = new Board(4, 4, true);
-    private Board boardtxt = new Board();
+    private Board board = new Board(createBoardString(), true);
 
     private Robot robot = new Robot();
-    private Robot robottxt = new Robot();
 
     public int[][] startMatrix = {
-            {0, 0, 0, 0},
-            {0, 0, 0, 0},
-            {0, 0, 0, 0},
-            {0, 0, 0, 0}
+            {11000, 11000, 11000, 11000},
+            {11000, 11000, 11000, 11000},
+            {11000, 11000, 11000, 11000},
+            {11000, 11000, 11000, 11000}
     };
 
     public int[][] midMatrix = {
-            {0, 0, 0, 0},
-            {0, 0, 0, 0},
-            {0, 0, 0, 0},
-            {0, 0, 0, 0}
+            {11000, 11000, 11000, 11000},
+            {11000, 11000, 11000, 11000},
+            {11000, 11000, 11000, 11000},
+            {11000, 11000, 11000, 11000}
     };
 
     public int[][] endMatrix = {
-            {0, 0, 0, 0},
-            {0, 0, 0, 0},
-            {0, 0, 0, 0},
-            {0, 0, 0, 0}
+            {11000, 11000, 11000, 11000},
+            {11000, 11000, 11000, 11000},
+            {11000, 11000, 11000, 11000},
+            {11000, 11000, 11000, 11000}
     };
-
-    public String boardString = "0 0 0 0 \n0 0 0 0 \n0 0 0 0 \n0 0 0 0";
 
     @Test
     public void boardTest() {
@@ -61,27 +57,27 @@ public class BoardTest {
         phase2.add(new Card(Type.mov, (byte) 2, 0));
 
         assertArrayEquals(startMatrix, board.matrix);
-        board.move(phase1, robot);
+        board.move(phase1, robot, true);
         assertArrayEquals(midMatrix, board.matrix);
-        board.move(phase2, robot);
+        board.move(phase2, robot, true);
         assertArrayEquals(endMatrix, board.matrix);
-
-        assertArrayEquals(startMatrix, boardtxt.matrix);
-        boardtxt.move(phase1, robottxt);
-        assertArrayEquals(midMatrix, boardtxt.matrix);
-        boardtxt.move(phase2, robottxt);
-        assertArrayEquals(endMatrix, boardtxt.matrix);
     }
 
     /**
-     * Methode that generates the board and places the robot.
+     * Method that generates the board and places the robot.
      */
     @BeforeEach
     public void initBoard() {
         board.startRobot(3, 3, Dir.NORTH, robot);
-
-        boardtxt = new Board(boardString, true);
-        boardtxt.startRobot(3, 3, Dir.NORTH, robottxt);
     }
 
+    /**
+     * Method that generates a String for the board constructor.
+     */
+    private String createBoardString() {
+        return  "11000 11000 11000 11000 \n" +
+                "11000 11000 11000 11000 \n" +
+                "11000 11000 11000 11000 \n" +
+                "11000 11000 11000 11000";
+    }
 }
