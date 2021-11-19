@@ -2,15 +2,18 @@ package htwk.mechawars;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+
 import htwk.mechawars.game.GameScreen;
 
 /**
@@ -30,11 +33,11 @@ public class MainMenu implements Screen {
         game = g;
         img = new Texture(Gdx.files.internal("background.png"));
         stage = new Stage();
-        
+
         Gdx.input.setInputProcessor(stage);
-        
+
         Skin skin = new Skin(Gdx.files.internal("skinMenu/star-soldier-ui.json"));
-        
+
         TextButton startGame = new TextButton("Spiel starten", skin);
         startGame.setPosition(440, 200);
         startGame.setSize(400, 100);
@@ -49,9 +52,29 @@ public class MainMenu implements Screen {
         endGame.setPosition(440, 100);
         endGame.setSize(400, 100);
         endGame.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button) {
-                Gdx.app.exit();
+            public void clicked(InputEvent event, float x, float y) {
+
+                Dialog dialogCloseOption = new Dialog("                 Beenden?", skin) {
+                    // many spaces, because then its nearly in the centre
+
+                    @Override
+                    protected void result(Object object) {
+                        boolean exit = (Boolean) object;
+                        if (exit) {
+                            Gdx.app.exit();
+                        } else {
+                            remove();
+                        }
+                    }
+
+                }.show(stage);
+
+                dialogCloseOption.setSize(450, 110);
+
+                dialogCloseOption.button("Beenden", true);
+                dialogCloseOption.button("Abbruch", false);
+                dialogCloseOption.key(Input.Keys.ENTER, true);
+                dialogCloseOption.key(Input.Keys.ESCAPE, false);                
             }
         });
 

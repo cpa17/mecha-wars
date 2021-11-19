@@ -2,10 +2,12 @@ package htwk.mechawars.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -84,7 +86,28 @@ public class Buttons extends GameScreen {
 
         endGameButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.exit();
+
+                Dialog dialogCloseOption = new Dialog("                 Beenden?", skin) {
+                    // many spaces, because then its nearly in the centre
+
+                    @Override
+                    protected void result(Object object) {
+                        boolean exit = (Boolean) object;
+                        if (exit) {
+                            Gdx.app.exit();
+                        } else {
+                            remove();
+                        }
+                    }
+
+                }.show(stage);
+
+                dialogCloseOption.setSize(450, 110);
+
+                dialogCloseOption.button("Beenden", true);
+                dialogCloseOption.button("Abbruch", false);
+                dialogCloseOption.key(Input.Keys.ENTER, true);
+                dialogCloseOption.key(Input.Keys.ESCAPE, false);                
             }
         });
 
