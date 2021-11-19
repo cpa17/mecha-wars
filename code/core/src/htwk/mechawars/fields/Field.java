@@ -55,7 +55,7 @@ public class Field {
     /**
      * On the Field, a robot action can be done.
      * 
-     * @param robot
+     * @param robot -> give the function the robot, that have an action.
      * @return the instance robot
      */
     public Robot action(Robot robot) {        
