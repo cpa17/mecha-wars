@@ -31,7 +31,7 @@ public class GameScreen implements Screen {
     protected static final ZugInitialisierung zugInitialisierung = new ZugInitialisierung();
     private static Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
-    protected static final Board board = new Board("testmap.txt");
+    protected static final Board board = new Board("map.txt");
     private static Robot player = new Robot();
 
     /**
@@ -49,7 +49,7 @@ public class GameScreen implements Screen {
 
         addButtonsToStage(skin);
         addScrollPanelToStage(skin);
-        board.startRobot(5, 5, Dir.NORTH, player);
+        board.startRobot(5, 5, Dir.NORTH, player, false);
     }
 
     /**
