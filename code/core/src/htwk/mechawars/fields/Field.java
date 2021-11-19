@@ -43,15 +43,22 @@ public class Field {
         return this.ycoor;
     }
 
+    /**
+     * Dummy.
+     * 
+     * @return .
+     */
     public Texture getTile() {
         return this.tile;
     }
     
-    public Robot action(Robot robot) {
-        
-        // On the field -> Repair
-        robot.onRepairField();
-        
+    /**
+     * On the Field, a robot action can be done.
+     * 
+     * @param robot
+     * @return the instance robot
+     */
+    public Robot action(Robot robot) {        
         return robot; 
     }
 }
