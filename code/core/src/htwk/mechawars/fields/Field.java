@@ -58,4 +58,17 @@ public class Field {
     public Robot action(Robot robot) {
         return robot; 
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+
+        StandardField other = (StandardField) obj;
+        if (xcoor != other.xcoor) return false;
+        if (ycoor != other.ycoor) return false;
+
+        return true;
+    }
 }

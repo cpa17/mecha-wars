@@ -24,6 +24,16 @@ public class BarrierSide extends Field {
         "barrierside/" + "BarrierSide" + String.valueOf(side) + ".png"));
     }
 
+    public BarrierSide(int xcoor, int ycoor, int side, boolean isTest) {
+        super(xcoor, ycoor, isTest);
+        this.side = side;
+        if (!isTest) {
+            this.tile =
+                    new Texture(Gdx.files.internal("mapAssets/" +
+                            "barrierside/" + "BarrierSide" + String.valueOf(side) + ".png"));
+        }
+    }
+
     @Override
     public String toString() {
         String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor
@@ -41,5 +51,19 @@ public class BarrierSide extends Field {
 
     public Texture getTile() {
         return this.tile;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+
+        BarrierSide other = (BarrierSide) obj;
+        if (xcoor != other.xcoor) return false;
+        if (ycoor != other.ycoor) return false;
+        if (side != other.side) return false;
+
+        return true;
     }
 }

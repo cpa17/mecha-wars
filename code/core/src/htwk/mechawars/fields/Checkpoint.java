@@ -49,6 +49,50 @@ public class Checkpoint extends Field {
         }
     }
 
+    public Checkpoint(int xcoor, int ycoor, int number, boolean isTest) {
+        super(xcoor, ycoor, isTest);
+        this.number = number;
+
+        if (!isTest) {
+            switch (this.number) {
+                case 1:
+                    this.tile = new Texture("mapAssets/checkpoints/Check1.png");
+                    break;
+
+                case 2:
+                    this.tile = new Texture("mapAssets/checkpoints/Check2.png");
+                    break;
+
+                case 3:
+                    this.tile = new Texture("mapAssets/checkpoints/Check3.png");
+                    break;
+
+                case 4:
+                    this.tile = new Texture("mapAssets/checkpoints/Check4.png");
+                    break;
+
+                case 5:
+                    this.tile = new Texture("mapAssets/checkpoints/Check5.png");
+                    break;
+
+                case 6:
+                    this.tile = new Texture("mapAssets/checkpoints/Check6.png");
+                    break;
+
+                case 7:
+                    this.tile = new Texture("mapAssets/checkpoints/Check7.png");
+                    break;
+
+                case 8:
+                    this.tile = new Texture("mapAssets/checkpoints/Check8.png");
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
+
     @Override
     public String toString() {
         String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor
@@ -73,5 +117,19 @@ public class Checkpoint extends Field {
         robot.setbackupCopyX(robot.getXcoor());
         robot.setbackupCopyY(robot.getYcoor());
         return robot;       
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+
+        Checkpoint other = (Checkpoint) obj;
+        if (xcoor != other.xcoor) return false;
+        if (ycoor != other.ycoor) return false;
+        if (number != other.number) return false;
+
+        return true;
     }
 }

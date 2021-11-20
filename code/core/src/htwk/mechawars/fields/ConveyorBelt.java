@@ -22,9 +22,18 @@ public class ConveyorBelt extends Field {
         super(xcoor, ycoor);
         this.start = start;
         this.end = end;
-        this.tile = 
-                new Texture(Gdx.files.internal("mapAssets/" + 
+        this.tile = new Texture(Gdx.files.internal("mapAssets/" +
         "conveyorBelt/" + "ConveyorBelt" + String.valueOf(start) + String.valueOf(end) + ".png"));
+    }
+
+    public ConveyorBelt(int xcoor, int ycoor, int start, int end, boolean isTest) {
+        super(xcoor, ycoor, isTest);
+        this.start = start;
+        this.end = end;
+        if (!isTest) {
+            this.tile = new Texture(Gdx.files.internal("mapAssets/" +
+                            "conveyorBelt/" + "ConveyorBelt" + String.valueOf(start) + String.valueOf(end) + ".png"));
+        }
     }
 
     @Override
@@ -52,5 +61,20 @@ public class ConveyorBelt extends Field {
 
     public Texture getTile() {
         return this.tile;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+
+        ConveyorBelt other = (ConveyorBelt) obj;
+        if (xcoor != other.xcoor) return false;
+        if (ycoor != other.ycoor) return false;
+        if (start != other.start) return false;
+        if (end != other.end) return false;
+
+        return true;
     }
 }

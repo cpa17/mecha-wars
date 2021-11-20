@@ -29,6 +29,18 @@ public class RepairSite extends Field {
         }
     }
 
+    public RepairSite(int xcoor, int ycoor, int type, boolean isTest) {
+        super(xcoor, ycoor, isTest);
+        this.type = type;
+        if (!isTest) {
+            if (type == 1) {
+                this.tile = new Texture("mapAssets/repairsite/RepairSite01.png");
+            } else {
+                this.tile = new Texture("mapAssets/repairsite/RepairSite02.png");
+            }
+        }
+    }
+
     @Override
     public String toString() {
         String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor
@@ -53,5 +65,19 @@ public class RepairSite extends Field {
         robot.setbackupCopyX(robot.getXcoor());
         robot.setbackupCopyY(robot.getYcoor());
         return robot;       
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+
+        RepairSite other = (RepairSite) obj;
+        if (xcoor != other.xcoor) return false;
+        if (ycoor != other.ycoor) return false;
+        if (type != other.type) return false;
+
+        return true;
     }
 }

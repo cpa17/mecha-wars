@@ -24,6 +24,15 @@ public class StartField extends Field {
         "startfield/" + "StartField0" + String.valueOf(number) + ".png"));
     }
 
+    public StartField(int xcoor, int ycoor, int number, boolean isTest) {
+        super(xcoor, ycoor, isTest);
+        this.number = number;
+        if (!isTest) {
+            this.tile = new Texture(Gdx.files.internal("mapAssets/" +
+                    "startfield/" + "StartField0" + String.valueOf(number) + ".png"));
+        }
+    }
+
     @Override
     public String toString() {
         String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor
@@ -41,5 +50,19 @@ public class StartField extends Field {
 
     public Texture getTile() {
         return this.tile;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+
+        StartField other = (StartField) obj;
+        if (xcoor != other.xcoor) return false;
+        if (ycoor != other.ycoor) return false;
+        if (number != other.number) return false;
+
+        return true;
     }
 }

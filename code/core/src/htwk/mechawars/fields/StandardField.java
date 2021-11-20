@@ -18,7 +18,7 @@ public class StandardField extends Field {
     }
 
     public StandardField(int xcoor, int ycoor, boolean isTest) {
-        super(xcoor, ycoor);
+        super(xcoor, ycoor, isTest);
         if (!isTest) {
             this.tile = new Texture("mapAssets/StandardField.png");
         }
@@ -26,5 +26,18 @@ public class StandardField extends Field {
 
     public Texture getTile() {
         return this.tile;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+
+        StandardField other = (StandardField) obj;
+        if (xcoor != other.xcoor) return false;
+        if (ycoor != other.ycoor) return false;
+
+        return true;
     }
 }

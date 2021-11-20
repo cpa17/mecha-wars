@@ -28,6 +28,18 @@ public class ExpressConveyorBelt extends Field {
                         String.valueOf(start) + String.valueOf(end) + ".png"));
     }
 
+    public ExpressConveyorBelt(int xcoor, int ycoor, int start, int end, boolean isTest) {
+        super(xcoor, ycoor, isTest);
+        this.start = start;
+        this.end = end;
+        if (!isTest) {
+            this.tile =
+                    new Texture(Gdx.files.internal("mapAssets/" +
+                            "expressconveyorBelt/" + "ExpressConveyorBelt" +
+                            String.valueOf(start) + String.valueOf(end) + ".png"));
+        }
+    }
+
     @Override
     public String toString() {
         String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor
@@ -53,5 +65,20 @@ public class ExpressConveyorBelt extends Field {
 
     public Texture getTile() {
         return this.tile;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+
+        ExpressConveyorBelt other = (ExpressConveyorBelt) obj;
+        if (xcoor != other.xcoor) return false;
+        if (ycoor != other.ycoor) return false;
+        if (start != other.start) return false;
+        if (end != other.end) return false;
+
+        return true;
     }
 }
