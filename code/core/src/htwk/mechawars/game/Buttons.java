@@ -1,10 +1,13 @@
 package htwk.mechawars.game;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -14,6 +17,11 @@ import htwk.mechawars.board.Robot;
  * Class that creates the ScrollPanel for the GameScreen.
  */
 public class Buttons extends GameScreen {
+
+    public Buttons(Game g) {
+        super(g);
+        // TODO Auto-generated constructor stub
+    }
 
     /**
      * Creates the startButton.
@@ -78,7 +86,28 @@ public class Buttons extends GameScreen {
 
         endGameButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.exit();
+
+                Dialog dialogCloseOption = new Dialog("                 Beenden?", skin) {
+                    // many spaces, because then its nearly in the centre
+
+                    @Override
+                    protected void result(Object object) {
+                        boolean exit = (Boolean) object;
+                        if (exit) {
+                            Gdx.app.exit();
+                        } else {
+                            remove();
+                        }
+                    }
+
+                }.show(stage);
+
+                dialogCloseOption.setSize(450, 110);
+
+                dialogCloseOption.button("Beenden", true);
+                dialogCloseOption.button("Abbruch", false);
+                dialogCloseOption.key(Input.Keys.ENTER, true);
+                dialogCloseOption.key(Input.Keys.ESCAPE, false);                
             }
         });
 
@@ -165,7 +194,7 @@ public class Buttons extends GameScreen {
 
         int wakeUpButtonX = Gdx.graphics.getHeight()
                 + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
-        int wakeUpButtonY = Gdx.graphics.getHeight() - 600;
+        int wakeUpButtonY = Gdx.graphics.getHeight() - 500;
 
         wakeUpButton.setPosition(wakeUpButtonX, wakeUpButtonY);
 
@@ -225,7 +254,7 @@ public class Buttons extends GameScreen {
      * @param skin Object of class Skin.
      */
     private static void updateButtons(Skin skin) {
-        stage.clear();
+        getStage().clear();
         addButtonsToStage(skin);
         addScrollPanelToStage(skin);
     }

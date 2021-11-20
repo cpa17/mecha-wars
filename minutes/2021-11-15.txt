@@ -1,0 +1,23 @@
+# 15.11.2021 - 17:00 - Daily
+
+Entschuldigt: / 
+Anwesend: Alle
+Fehlend: /
+Protokollführung: Mark Fiedler
+
+## Runde
+- Marc: beide Tickets fertig, eins schon gemergt
+- Tim: MW32 erstellt, Funktionen erstellt, unkommentierte Funktionen auskommentiert, Card-Klasse umgeschrieben 
+- Pascal: MW56, Gamescreen-Klasse aufgeräumt, jetzt CLI mit Karte einfügen
+- Konstantin: Tickets laufen gut, kleines Problem mit Shutdown & Schaden, Tests umgeschrieben
+- Mark: MW23 in Bearbeitung, bisher keine Probleme aufgetreten
+- Antonia: Refactoring der Board-Klasse hat gut funktioniert, jetzt ersetzung der int-Matrix komplett durch Feld-Matrix
+- Bernhard: weiterhin mit der MW49 beschäftigt, sich mit dem Font auseinandergesetzt
+
+## Allgemein
+Termin für Review nicht verschobe, bedeutet:
+- verkürzter Sprint
+- Freitag (19.11) Review und Retro
+- Montag (22.11) Sprint-Planning
+- nächster Sprint auch verkürzt, danach wieder normal
+
