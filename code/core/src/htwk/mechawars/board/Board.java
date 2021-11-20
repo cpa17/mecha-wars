@@ -137,7 +137,8 @@ public class Board {
                         // Test that the read-out attribute value is in the set
                         // of allowed attribute values
                         if (Arrays.stream(allowed).anyMatch(x -> x == corner)) {
-                            this.fieldmatrix[col][cell] = new BarrierCorner(cell, col, corner, isTest);
+                            this.fieldmatrix[col][cell] = new BarrierCorner(cell, col, corner,
+                                    isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
@@ -178,7 +179,8 @@ public class Board {
                         int numberC = matrix[col][cell] % 10;
                         allowed = new int[]{1, 2, 3, 4, 5, 6, 7, 8};
                         if (Arrays.stream(allowed).anyMatch(x -> x == numberC)) {
-                            this.fieldmatrix[col][cell] = new Checkpoint(cell, col, numberC, isTest);
+                            this.fieldmatrix[col][cell] = new Checkpoint(cell, col, numberC,
+                                    isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
