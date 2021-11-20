@@ -44,10 +44,6 @@ public class BarrierSide extends Field {
         return attributes;
     }
 
-    /**
-     * Take the Side where the Barrier is.
-     * @return the Side
-     */
     public int getSide() {
         return this.side;
     }

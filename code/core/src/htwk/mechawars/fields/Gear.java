@@ -49,10 +49,6 @@ public class Gear extends Field {
         return attributes;
     }
 
-    /**
-     * Take the Direction of the rotation of the Gear.
-     * @return the Direction
-     */
     public int getDirection() {
         return this.direction;
     }

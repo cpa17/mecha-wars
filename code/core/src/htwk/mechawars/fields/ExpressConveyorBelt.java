@@ -49,18 +49,10 @@ public class ExpressConveyorBelt extends Field {
         return attributes;
     }
 
-    /**
-     * Take from where the Express Conveyor Belt come from.
-     * @return the Start
-     */
     public int getStart() {
         return this.start;
     }
 
-    /**
-     * Take where the Express Conveyor Belt goes.
-     * @return the End
-     */
     public int getEnd() {
         return this.end;
     }

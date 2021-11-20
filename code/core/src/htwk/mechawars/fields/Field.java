@@ -40,18 +40,10 @@ public class Field {
         return attributes;
     }
 
-    /**
-     * Take the x coordinate.
-     * @return xcoor The x coordinate
-     */
     public int getXcoor() {
         return this.xcoor;
     }
 
-    /**
-     * Take the y coordinate.
-     * @return ycoor The y coordinate
-     */
     public int getYcoor() {
         return this.ycoor;
     }

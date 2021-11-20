@@ -48,18 +48,10 @@ public class ConveyorBelt extends Field {
         return attributes;
     }
 
-    /**
-     * Take from where the Conveyor Belt come from.
-     * @return the Start
-     */
     public int getStart() {
         return this.start;
     }
 
-    /**
-     * Take where the Conveyor Belt goes.
-     * @return the End
-     */
     public int getEnd() {
         return this.end;
     }

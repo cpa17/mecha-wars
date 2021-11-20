@@ -8,8 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
  */
 public class StartField extends Field {
 
-    // Attribut was angibt welche Nummer das Startfeld hat
-    // 1 = Startfeld Nr. 1, 2 = Startfeld Nr.2, ...
+    // attribute which indicates the number of a certain start field
     private int number;
     private Texture tile;
 
@@ -44,10 +43,6 @@ public class StartField extends Field {
         return attributes;
     }
 
-    /**
-     * Take the Number of the Start Field.
-     * @return the Number
-     */
     public int getNumber() {
         return this.number;
     }

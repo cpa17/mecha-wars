@@ -46,10 +46,6 @@ public class Laser extends Field {
         return attributes;
     }
 
-    /**
-     * Take what Type of laser piece it is.
-     * @return the Type
-     */
     public int getType() {
         return this.type;
     }

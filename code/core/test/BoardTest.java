@@ -38,33 +38,11 @@ public class BoardTest {
         phase2.add(new Card(Type.turn, (byte) 1, 0));
         phase2.add(new Card(Type.mov, (byte) 2, 0));
 
-        assertEquals(startBoard.fieldmatrix.length, board.fieldmatrix.length);
-        assertEquals(startBoard.fieldmatrix[1].length, board.fieldmatrix[1].length);
-        for (int i = 0; i < startBoard.fieldmatrix.length; i++) {
-            for (int j = 0; j < startBoard.fieldmatrix[i].length; j++) {
-                assertEquals(startBoard.fieldmatrix[i][j], board.fieldmatrix[i][j]);
-            }
-        }
-
+        assertBoardEquals(board, startBoard);
         board.move(phase1, robot);
-
-        assertEquals(midBoard.fieldmatrix.length, board.fieldmatrix.length);
-        assertEquals(midBoard.fieldmatrix[1].length, board.fieldmatrix[1].length);
-        for (int i = 0; i < midBoard.fieldmatrix.length; i++) {
-            for (int j = 0; j < midBoard.fieldmatrix[i].length; j++) {
-                assertEquals(midBoard.fieldmatrix[i][j], board.fieldmatrix[i][j]);
-            }
-        }
-
+        assertBoardEquals(board, midBoard);
         board.move(phase2, robot);
-
-        assertEquals(endBoard.fieldmatrix.length, board.fieldmatrix.length);
-        assertEquals(endBoard.fieldmatrix[1].length, board.fieldmatrix[1].length);
-        for (int i = 0; i < endBoard.fieldmatrix.length; i++) {
-            for (int j = 0; j < endBoard.fieldmatrix[i].length; j++) {
-                assertEquals(endBoard.fieldmatrix[i][j], board.fieldmatrix[i][j]);
-            }
-        }
+        assertBoardEquals(board, endBoard);
     }
 
     /**
@@ -116,5 +94,15 @@ public class BoardTest {
                 "10701 10800 10901 11101 \n" +
                 "11000 11000 11000 11000";
         return endString;
+    }
+
+    private void assertBoardEquals(Board current, Board expected) {
+        assertEquals(expected.fieldmatrix.length, current.fieldmatrix.length);
+        assertEquals(expected.fieldmatrix[1].length, current.fieldmatrix[1].length);
+        for (int i = 0; i < expected.fieldmatrix.length; i++) {
+            for (int j = 0; j < expected.fieldmatrix[i].length; j++) {
+                assertEquals(expected.fieldmatrix[i][j], current.fieldmatrix[i][j]);
+            }
+        }
     }
 }

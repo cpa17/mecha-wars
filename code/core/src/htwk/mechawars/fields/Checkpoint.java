@@ -43,10 +43,6 @@ public class Checkpoint extends Field {
                 + ", number: " + this.number;
     }
 
-    /**
-     * Take the Number of the Checkpoint.
-     * @return the Number
-     */
     public int getNumber() {
         return this.number;
     }

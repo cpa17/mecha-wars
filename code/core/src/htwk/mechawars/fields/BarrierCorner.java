@@ -44,10 +44,6 @@ public class BarrierCorner extends Field {
         return attributes;
     }
 
-    /**
-     * Takes the Corner where the Barrier is.
-     * @return the Corner
-     */
     public int getCorner() {
         return this.corner;
     }

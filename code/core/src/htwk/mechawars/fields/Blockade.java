@@ -45,10 +45,6 @@ public class Blockade extends Field {
         return attributes;
     }
 
-    /**
-     * Take the Type of the Blockade.
-     * @return the Type
-     */
     public int getType() {
         return this.type;
     }

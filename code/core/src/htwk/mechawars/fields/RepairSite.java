@@ -53,10 +53,6 @@ public class RepairSite extends Field {
         return attributes;
     }
 
-    /**
-     * Take the Type of the Repair Site, either simple or double.
-     * @return the Type
-     */
     public int getType() {
         return this.type;
     }
