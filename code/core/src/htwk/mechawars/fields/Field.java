@@ -20,8 +20,13 @@ public class Field {
         this.xcoor = xcoor;
         this.ycoor = ycoor;
         this.tile = new Texture("mapAssets/StandardField.png");
-     }
+    }
 
+    /**
+     * Constructor of a Field which can skip creating the assets.
+     *
+     * @param isTest indicates that this is a test
+     */
     public Field(int xcoor, int ycoor, boolean isTest) {
         this.xcoor = xcoor;
         this.ycoor = ycoor;
@@ -61,14 +66,26 @@ public class Field {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
 
         StandardField other = (StandardField) obj;
-        if (xcoor != other.xcoor) return false;
-        if (ycoor != other.ycoor) return false;
+        if (xcoor != other.xcoor) {
+            return false;
+        }
+        if (ycoor != other.ycoor) {
+            return false;
+        }
 
         return true;
+    }
+
+    public int hashCode() {
+        assert false : "hashCode not designed";
+        return 42;
     }
 }

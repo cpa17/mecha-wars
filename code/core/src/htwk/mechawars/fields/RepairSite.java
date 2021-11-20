@@ -29,6 +29,11 @@ public class RepairSite extends Field {
         }
     }
 
+    /**
+     * Constructor of a Repair Site which can skip creating the assets.
+     *
+     * @param isTest indicates that this is a test
+     */
     public RepairSite(int xcoor, int ycoor, int type, boolean isTest) {
         super(xcoor, ycoor, isTest);
         this.type = type;
@@ -69,15 +74,29 @@ public class RepairSite extends Field {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
 
         RepairSite other = (RepairSite) obj;
-        if (xcoor != other.xcoor) return false;
-        if (ycoor != other.ycoor) return false;
-        if (type != other.type) return false;
+        if (xcoor != other.xcoor) {
+            return false;
+        }
+        if (ycoor != other.ycoor) {
+            return false;
+        }
+        if (type != other.type) {
+            return false;
+        }
 
         return true;
+    }
+
+    public int hashCode() {
+        assert false : "hashCode not designed";
+        return 42;
     }
 }

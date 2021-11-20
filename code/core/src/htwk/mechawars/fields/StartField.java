@@ -19,17 +19,21 @@ public class StartField extends Field {
     public StartField(int xcoor, int ycoor, int number) {
         super(xcoor, ycoor);
         this.number = number; 
-        this.tile = 
-                new Texture(Gdx.files.internal("mapAssets/" + 
-        "startfield/" + "StartField0" + String.valueOf(number) + ".png"));
+        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "startfield/"
+                + "StartField0" + String.valueOf(number) + ".png"));
     }
 
+    /**
+     * Constructor of a Start Field which can skip creating the assets.
+     *
+     * @param isTest indicates that this is a test
+     */
     public StartField(int xcoor, int ycoor, int number, boolean isTest) {
         super(xcoor, ycoor, isTest);
         this.number = number;
         if (!isTest) {
-            this.tile = new Texture(Gdx.files.internal("mapAssets/" +
-                    "startfield/" + "StartField0" + String.valueOf(number) + ".png"));
+            this.tile = new Texture(Gdx.files.internal("mapAssets/" + "startfield/"
+                    + "StartField0" + String.valueOf(number) + ".png"));
         }
     }
 
@@ -54,15 +58,29 @@ public class StartField extends Field {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
 
         StartField other = (StartField) obj;
-        if (xcoor != other.xcoor) return false;
-        if (ycoor != other.ycoor) return false;
-        if (number != other.number) return false;
+        if (xcoor != other.xcoor) {
+            return false;
+        }
+        if (ycoor != other.ycoor) {
+            return false;
+        }
+        if (number != other.number) {
+            return false;
+        }
 
         return true;
+    }
+
+    public int hashCode() {
+        assert false : "hashCode not designed";
+        return 42;
     }
 }

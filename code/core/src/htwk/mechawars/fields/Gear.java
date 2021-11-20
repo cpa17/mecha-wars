@@ -24,11 +24,16 @@ public class Gear extends Field {
         }
     }
 
+    /**
+     * Constructor of a Gear which can skip creating the assets.
+     *
+     * @param isTest indicates that this is a test
+     */
     public Gear(int xcoor, int ycoor, int direction, boolean isTest) {
         super(xcoor, ycoor, isTest);
         this.direction = direction;
 
-        if(!isTest) {
+        if (!isTest) {
             if (direction == 1) {
                 this.tile = new Texture("mapAssets/gear/Gear01.png");
             } else {
@@ -58,15 +63,29 @@ public class Gear extends Field {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
 
         Gear other = (Gear) obj;
-        if (xcoor != other.xcoor) return false;
-        if (ycoor != other.ycoor) return false;
-        if (direction != other.direction) return false;
+        if (xcoor != other.xcoor) {
+            return false;
+        }
+        if (ycoor != other.ycoor) {
+            return false;
+        }
+        if (direction != other.direction) {
+            return false;
+        }
 
         return true;
+    }
+
+    public int hashCode() {
+        assert false : "hashCode not designed";
+        return 42;
     }
 }

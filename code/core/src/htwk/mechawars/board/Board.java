@@ -108,10 +108,6 @@ public class Board {
         intToFieldMatrix(matrix, isTest);
     }
 
-    private void intToFieldMatrix(int[][] matrix) {
-        intToFieldMatrix(matrix, false);
-    }
-
     /**
      * Method that creates a field matrix from a int matrix.
      *
@@ -204,7 +200,8 @@ public class Board {
                         allowed = new int[]{21, 31, 41, 61, 71, 91, 2, 12, 32, 42, 52, 92,
                                 3, 13, 23, 43, 63, 83, 14, 24, 34, 54, 74, 84};
                         if (Arrays.stream(allowed).anyMatch(x -> x == (10 * startEc) + endEc)) {
-                            this.fieldmatrix[i][j] = new ExpressConveyorBelt(j, i, startEc, endEc, isTest);
+                            this.fieldmatrix[i][j]
+                                    = new ExpressConveyorBelt(j, i, startEc, endEc, isTest);
                         } else {
                             System.out.println("Codierung " + matrix[i][j]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");

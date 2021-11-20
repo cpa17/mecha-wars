@@ -19,18 +19,21 @@ public class BarrierSide extends Field {
     public BarrierSide(int xcoor, int ycoor, int side) {
         super(xcoor, ycoor);
         this.side = side;
-        this.tile = 
-                new Texture(Gdx.files.internal("mapAssets/" + 
-        "barrierside/" + "BarrierSide" + String.valueOf(side) + ".png"));
+        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "barrierside/"
+                + "BarrierSide" + String.valueOf(side) + ".png"));
     }
 
+    /**
+     * Constructor of a Side Barrier which can skip creating the assets.
+     *
+     * @param isTest indicates that this is a test
+     */
     public BarrierSide(int xcoor, int ycoor, int side, boolean isTest) {
         super(xcoor, ycoor, isTest);
         this.side = side;
         if (!isTest) {
-            this.tile =
-                    new Texture(Gdx.files.internal("mapAssets/" +
-                            "barrierside/" + "BarrierSide" + String.valueOf(side) + ".png"));
+            this.tile = new Texture(Gdx.files.internal("mapAssets/" + "barrierside/"
+                    + "BarrierSide" + String.valueOf(side) + ".png"));
         }
     }
 
@@ -55,15 +58,29 @@ public class BarrierSide extends Field {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
 
         BarrierSide other = (BarrierSide) obj;
-        if (xcoor != other.xcoor) return false;
-        if (ycoor != other.ycoor) return false;
-        if (side != other.side) return false;
+        if (xcoor != other.xcoor) {
+            return false;
+        }
+        if (ycoor != other.ycoor) {
+            return false;
+        }
+        if (side != other.side) {
+            return false;
+        }
 
         return true;
+    }
+
+    public int hashCode() {
+        assert false : "hashCode not designed";
+        return 42;
     }
 }

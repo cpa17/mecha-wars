@@ -17,6 +17,11 @@ public class BlackHole extends Field {
         this.tile = new Texture("mapAssets/BlackHole.png");
     }
 
+    /**
+     * Constructor of a Black Hole which can skip creating the assets.
+     *
+     * @param isTest indicates that this is a test
+     */
     public BlackHole(int xcoor, int ycoor, boolean isTest) {
         super(xcoor, ycoor, isTest);
         if (!isTest) {
@@ -30,14 +35,26 @@ public class BlackHole extends Field {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
 
         BlackHole other = (BlackHole) obj;
-        if (xcoor != other.xcoor) return false;
-        if (ycoor != other.ycoor) return false;
+        if (xcoor != other.xcoor) {
+            return false;
+        }
+        if (ycoor != other.ycoor) {
+            return false;
+        }
 
         return true;
+    }
+
+    public int hashCode() {
+        assert false : "hashCode not designed";
+        return 42;
     }
 }

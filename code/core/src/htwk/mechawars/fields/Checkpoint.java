@@ -23,32 +23,37 @@ public class Checkpoint extends Field {
         switch (this.number) {
             case 1 :    this.tile = new Texture("mapAssets/checkpoints/Check1.png");
                         break;
-        
+
             case 2 :    this.tile = new Texture("mapAssets/checkpoints/Check2.png");
                         break;
-        
+
             case 3 :    this.tile = new Texture("mapAssets/checkpoints/Check3.png");
                         break;
-        
+
             case 4 :    this.tile = new Texture("mapAssets/checkpoints/Check4.png");
                         break;
-                        
+
             case 5 :    this.tile = new Texture("mapAssets/checkpoints/Check5.png");
                         break;
-                        
+
             case 6 :    this.tile = new Texture("mapAssets/checkpoints/Check6.png");
                         break;
-                        
+
             case 7 :    this.tile = new Texture("mapAssets/checkpoints/Check7.png");
                         break;
-                        
+
             case 8 :    this.tile = new Texture("mapAssets/checkpoints/Check8.png");
                         break;
-                        
+
             default:    break;
         }
     }
 
+    /**
+     * Constructor of a Checkpoint which can skip creating the assets.
+     *
+     * @param isTest indicates that this is a test
+     */
     public Checkpoint(int xcoor, int ycoor, int number, boolean isTest) {
         super(xcoor, ycoor, isTest);
         this.number = number;
@@ -121,15 +126,29 @@ public class Checkpoint extends Field {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
 
         Checkpoint other = (Checkpoint) obj;
-        if (xcoor != other.xcoor) return false;
-        if (ycoor != other.ycoor) return false;
-        if (number != other.number) return false;
+        if (xcoor != other.xcoor) {
+            return false;
+        }
+        if (ycoor != other.ycoor) {
+            return false;
+        }
+        if (number != other.number) {
+            return false;
+        }
 
         return true;
+    }
+
+    public int hashCode() {
+        assert false : "hashCode not designed";
+        return 42;
     }
 }

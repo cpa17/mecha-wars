@@ -21,16 +21,21 @@ public class Laser extends Field {
     public Laser(int xcoor, int ycoor, int type) {
         super(xcoor, ycoor);
         this.type = type;
-        this.tile = new Texture(Gdx.files.internal("mapAssets/" +
-                        "laser/" + "Laser0" + String.valueOf(type) + ".png"));
+        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "laser/"
+                + "Laser0" + String.valueOf(type) + ".png"));
     }
 
+    /**
+     * Constructor of a Laser which can skip creating the assets.
+     *
+     * @param isTest indicates that this is a test
+     */
     public Laser(int xcoor, int ycoor, int type, boolean isTest) {
         super(xcoor, ycoor, isTest);
         this.type = type;
         if (!isTest) {
-            this.tile = new Texture(Gdx.files.internal("mapAssets/" +
-                    "laser/" + "Laser0" + String.valueOf(type) + ".png"));
+            this.tile = new Texture(Gdx.files.internal("mapAssets/" + "laser/"
+                    + "Laser0" + String.valueOf(type) + ".png"));
         }
     }
 
@@ -55,15 +60,29 @@ public class Laser extends Field {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
 
         Laser other = (Laser) obj;
-        if (xcoor != other.xcoor) return false;
-        if (ycoor != other.ycoor) return false;
-        if (type != other.type) return false;
+        if (xcoor != other.xcoor) {
+            return false;
+        }
+        if (ycoor != other.ycoor) {
+            return false;
+        }
+        if (type != other.type) {
+            return false;
+        }
 
         return true;
+    }
+
+    public int hashCode() {
+        assert false : "hashCode not designed";
+        return 42;
     }
 }
