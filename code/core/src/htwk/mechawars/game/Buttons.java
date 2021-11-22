@@ -13,15 +13,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import htwk.mechawars.board.Robot;
 
+import static htwk.mechawars.game.GameScreen.*;
+
 /**
  * Class that creates the ScrollPanel for the GameScreen.
  */
-public class Buttons extends GameScreen {
-
-    public Buttons(Game g) {
-        super(g);
-        // TODO Auto-generated constructor stub
-    }
+public class Buttons {
 
     /**
      * Creates the startButton.

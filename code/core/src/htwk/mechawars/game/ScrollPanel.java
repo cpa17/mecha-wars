@@ -12,13 +12,12 @@ import htwk.mechawars.board.Robot;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.Deck;
 
+import static htwk.mechawars.game.GameScreen.zugInitialisierung;
+
 /**
  * Class that creates the ScrollPanel for the GameScreen.
  */
-public class ScrollPanel extends GameScreen {
-    public ScrollPanel(Game g) {
-        super(g);
-    }
+public class ScrollPanel {
 
     static final int[] cardOrder = { -1, -1, -1, -1, -1};
     private static int pressCounter = 0;
