@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.Align;
 /**
  * Class that presents the surface of the info screen.
  */
+
 public class Info extends Buttons {
 
     public Info(Game g) {

@@ -68,7 +68,7 @@ public class BoardTest {
      */
     @BeforeEach
     public void initBoard() {
-        board.startRobot(3, 3, Dir.NORTH, robot);
+        board.startRobot(3, 3, Dir.NORTH, robot, true);
     }
 
     /**
