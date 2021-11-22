@@ -1,7 +1,7 @@
 package htwk.mechawars.board;
 
 import htwk.mechawars.ConfigReader;
-import htwk.mechawars.cards.AICardGeneration;
+import htwk.mechawars.cards.AiCardGeneration;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.Type;
 
@@ -158,7 +158,6 @@ public class Board {
         robot.setStartY(y);
         robot.setDir(dir);
         this.matrix[y][x] = robot.getDir().getValue();
-        System.out.println(robot.getYcoor()+"   "+robot.getXcoor());
     }
 
     /**
@@ -192,39 +191,44 @@ public class Board {
         }
     }
     
-	public void move(LinkedList<Card> phase, Robot[] players) {
+    /**
+     * Method that moves the robot in the matrix.
+     * @param phase List of cards
+     * @param players the robots that should be moved
+     */
+    public void move(LinkedList<Card> phase, Robot[] players) {
 
-		for(int i = 0; i < players.length; i++) {
-			
-			if(i > 0 && ConfigReader.getAImodes()[i])
-			{
-				phase = AICardGeneration.generateRandomAICards(i);
-			}
-        checkDoubleDamage(players[i]);
-
-        checkShutDown(players[i]);
-        if(ConfigReader.getAImodes()[i] || i == 0){
-        try {
-            for (Card card : phase) {
-
-                if (card.getCardAttributeType() == Type.mov) {
-                    this.matrix[players[i].getYcoor()][players[i].getXcoor()] = 0;
-                    players[i].moveInDirection(card.getCardAttributeMovCount());
-                } else {
-                	players[i].turn(card.getCardAttributeMovCount());
-                }
-                this.matrix[players[i].getYcoor()][players[i].getXcoor()] = players[i].getDir().getValue();
-
+        for (int i = 0; i < players.length; i++) {
+            if (i > 0 && ConfigReader.getAimodes()[i]) {
+                phase = AiCardGeneration.generateRandomAiCards(i);
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
-        	players[i].setXcoor(players[i].getStartX());
-        	players[i].setYcoor(players[i].getStartY());
-            this.matrix[players[i].getYcoor()][players[i].getXcoor()] = players[i].getDir().getValue();
-        	}
-		}
+            checkDoubleDamage(players[i]);
+            
+            checkShutDown(players[i]);
+            if (ConfigReader.getAimodes()[i] || i == 0) {
+                try {
+                    for (Card card : phase) {
+
+                        if (card.getCardAttributeType() == Type.mov) {
+                            this.matrix[players[i].getYcoor()][players[i].getXcoor()] = 0;
+                            players[i].moveInDirection(card.getCardAttributeMovCount());
+                        } else {
+                            players[i].turn(card.getCardAttributeMovCount());
+                        }
+                        this.matrix[players[i].getYcoor()][players[i].getXcoor()]
+                                = players[i].getDir().getValue();
+
+                    }
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    players[i].setXcoor(players[i].getStartX());
+                    players[i].setYcoor(players[i].getStartY());
+                    this.matrix[players[i].getYcoor()][players[i].getXcoor()] 
+                            = players[i].getDir().getValue();
+                }
+            }
         
-		} 
-	}
+        } 
+    }
     /**
      * Method that checks whether the robot receives 2 damage points.
      * @param robot the robot that should check

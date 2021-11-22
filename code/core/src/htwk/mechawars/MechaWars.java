@@ -18,7 +18,7 @@ public class MechaWars extends Game {
 
 
 
-	public static void setSkip(boolean skip) {
+    public static void setSkip(boolean skip) {
         isSkip = skip;
     }
 
@@ -27,16 +27,12 @@ public class MechaWars extends Game {
      */
     @Override
     public void create() {
-    	
+       
         if (isSkip == true) {
             this.setScreen(new GameScreen());
         } else {
-            try {
-				this.setScreen(new MainMenu(this));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+            this.setScreen(new MainMenu(this));
+
         }
     }
 

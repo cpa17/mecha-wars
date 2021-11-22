@@ -36,17 +36,14 @@ import htwk.mechawars.cards.CardFunctions;
 public class GameScreen implements Screen {
 
     private Texture industrialTile;
-    private Texture robot;
-    private Texture[] robotTextures;
+
     private Stage stage;
 
     private SpriteBatch batch;
-    private Sprite sprite;
     private Sprite[] robotSprites;
     private ZugInitialisierung zugInitialisierung = new ZugInitialisierung();
     
 
-    private int[] configs;
     private int playerNumber = ConfigReader.getPlayerNumber();
 
     private int[] cardOrder = { -1, -1, -1, -1, -1};
@@ -65,62 +62,54 @@ public class GameScreen implements Screen {
      * Constructor of class GameScreen.
      */
     public GameScreen() {
-    	industrialTile = new Texture("industrialTile.png");
-    	
-    	try {
-			ConfigReader.readConfigs();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        industrialTile = new Texture("industrialTile.png");
+        
+        try {
+            ConfigReader.readConfigs();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
-    		System.out.println("playernumber:  "+playerNumber);
-
-    		players = createRobots(playerNumber);
-
-            //robotTextures = createTextures(configs[2]);
-    		batch = new SpriteBatch();
-            robotSprites = createSprites(playerNumber);
-            stage = new Stage();
-            Gdx.input.setInputProcessor(stage);
-            Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-            addButtonsToStage(skin);
-            addScrollPanelToStage(skin);
-            startRobots(players);
-            board.startRobot(5, 5, Dir.NORTH, player);
-    	
-
+        System.out.println("playernumber:  " + playerNumber);
+        players = createRobots(playerNumber);
+        batch = new SpriteBatch();
+        robotSprites = createSprites(playerNumber);
+        stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
+        Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+        addButtonsToStage(skin);
+        addScrollPanelToStage(skin);
+        startRobots(players);
+        board.startRobot(5, 5, Dir.NORTH, player);
     }
 
     private Robot[] createRobots(int numberRobots) {
-    	Robot[] robots = new Robot[numberRobots];
-    	for(int i = 0; i < robots.length; i++)
-    	{
-    		robots[i] = new Robot();
-    	}
-    	return robots;
-	}
+        Robot[] robots = new Robot[numberRobots];
+        for (int i = 0; i < robots.length; i++) {
+            robots[i] = new Robot();
+        }
+        return robots;
+    }
     
     private Sprite[] createSprites(int numberRobots) {
-    	Sprite[] sprites = new Sprite[numberRobots];
-    	for(int i = 0; i < sprites.length; i++)
-    	{
-    		sprites[i] = new Sprite(new Texture("..//assets//robotskins//robot"+(i+1)+".png"));
-    		
-    		
-    		}
-    	return sprites;
-    	}
-    	
-	private void startRobots(Robot[] players) {
-		for(int i = 0; i<players.length; i++)
-		{
-			board.startRobot(ConfigReader.getPlayerpoints()[i].x, ConfigReader.getPlayerpoints()[i].y, Dir.NORTH, players[i]);
-		}
-		
-	}
+        Sprite[] sprites = new Sprite[numberRobots];
+        for (int i = 0; i < sprites.length; i++) {
+            sprites[i] = new Sprite(new Texture("..//assets//robotskins//robot" + (i + 1) 
+                    + ".png"));
+        }
+        return sprites;
+    }
+    
+    private void startRobots(Robot[] players) {
+        for (int i = 0; i < players.length; i++) {
+            board.startRobot(ConfigReader.getPlayerStartingPositions()[i].x, 
+                    ConfigReader.getPlayerStartingPositions()[i].y, Dir.NORTH, players[i]);
+        }
+        
+    }
 
-	/**
+    /**
      * Function that adds the scroll panel to the Stage.
      *
      * @param skin Object of class Skin which was initialized in the constructor.
@@ -584,10 +573,8 @@ public class GameScreen implements Screen {
         batch.begin();
         drawPlayingField();
         drawRobot();
-        //player.drawParameters(batch);
-        for(Sprite sprite : robotSprites)
-        {
-        sprite.draw(batch);
+        for (Sprite sprite : robotSprites) {
+            sprite.draw(batch);
         }
         batch.end();
         stage.act();
@@ -599,28 +586,22 @@ public class GameScreen implements Screen {
      */
     public void drawRobot() {
         int tileSize = (Gdx.graphics.getHeight() / board.matrix.length);
-
-        	for(int i = 0; i  < players.length;i++)
-        	{
-        		{
-        	        int x = players[i].getXcoor();
-        	        int y = Math.abs(players[i].getYcoor() - (board.matrix.length - 1));
-
-        	        if (players[i].getDir() == Dir.NORTH) {
-        	            robotSprites[i].setPosition(tileSize * x, tileSize * y);
-        	            robotSprites[i].setRotation(0);
-        	        } else if (players[i].getDir() == Dir.EAST) {
-        	        	robotSprites[i].setPosition(tileSize * x, tileSize * y);
-        	        	robotSprites[i].setRotation(270);
-        	        } else if (players[i].getDir() == Dir.SOUTH) {
-        	        	robotSprites[i].setPosition(tileSize * x, tileSize * y);
-        	        	robotSprites[i].setRotation(180);
-        	        } else if (players[i].getDir() == Dir.WEST) {
-        	        	robotSprites[i].setPosition(tileSize * x, tileSize * y);
-        	        	robotSprites[i].setRotation(90);
-        	        }
-        	        }
-        	
+        for (int i = 0; i < players.length; i++) {
+            int x = players[i].getXcoor();
+            int y = Math.abs(players[i].getYcoor() - (board.matrix.length - 1));
+            if (players[i].getDir() == Dir.NORTH) {
+                robotSprites[i].setPosition(tileSize * x, tileSize * y);
+                robotSprites[i].setRotation(0);
+            } else if (players[i].getDir() == Dir.EAST) {
+                robotSprites[i].setPosition(tileSize * x, tileSize * y);
+                robotSprites[i].setRotation(270);
+            } else if (players[i].getDir() == Dir.SOUTH) {
+                robotSprites[i].setPosition(tileSize * x, tileSize * y);
+                robotSprites[i].setRotation(180);
+            } else if (players[i].getDir() == Dir.WEST) {
+                robotSprites[i].setPosition(tileSize * x, tileSize * y);
+                robotSprites[i].setRotation(90);
+            } 
         }
     }
 
@@ -674,7 +655,9 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         industrialTile.dispose();
-        robot.dispose();
+        for (Sprite sprite : robotSprites) {
+            sprite.getTexture().dispose();
+        }
     }
 
     @Override

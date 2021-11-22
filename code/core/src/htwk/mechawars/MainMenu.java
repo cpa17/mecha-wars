@@ -28,11 +28,9 @@ public class MainMenu implements Screen {
     /**
      * Constructor of class MainMenue.
      * @param g Object of class Game
-     * @throws IOException 
      */
-    public MainMenu(Game g) throws IOException {
+    public MainMenu(Game g) {
 
-    	
         game = g;
         img = new Texture(Gdx.files.internal("background.png"));
 
