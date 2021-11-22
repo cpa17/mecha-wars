@@ -39,10 +39,8 @@ public class DesktopLauncher implements Runnable {
 
     /**
      * Main class, for the new CommandLine.
-     * @throws IOException 
      */
-    public static void main(String[] args) throws IOException {
-    	ConfigReader.readConfigs();
+    public static void main(String[] args) {
         if (restartJvm()) {
             return;
         }
