@@ -32,12 +32,10 @@ public class ConfigReader {
      */
     public static void readConfigs() throws IOException {
         FileHandle file = Gdx.files.internal("..//configs//Startupconfig.txt");
-        String line = file.readString();
-        
-        while (!line.contains("~")) {
-            //readConfig(line);
-            System.out.println(line);
-            line = file.readString();
+        String fileString = file.readString();
+        String[] lines = fileString.split("\\r?\\n");
+        for (String line : lines) {
+            readConfig(line);
         }
     }
     
@@ -58,8 +56,7 @@ public class ConfigReader {
             for (int i = 0; i < s.length; i++) {
                 s[i] = s[i].replaceAll("\\p{P}", "");
                 s[i] = s[i].replaceAll("[a-z]", "");
-                s[i] = s[i].replaceAll(" ", "");
-                System.out.println(s[i]);    
+                s[i] = s[i].replaceAll(" ", "");  
             }
             playerStartingPositions[Integer.parseInt(s[0])] =
                     new Point(Integer.parseInt(s[1]), Integer.parseInt(s[2]));

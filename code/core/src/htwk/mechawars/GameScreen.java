@@ -42,9 +42,6 @@ public class GameScreen implements Screen {
     private SpriteBatch batch;
     private Sprite[] robotSprites;
     private ZugInitialisierung zugInitialisierung = new ZugInitialisierung();
-    
-
-    private int playerNumber = ConfigReader.getPlayerNumber();
 
     private int[] cardOrder = { -1, -1, -1, -1, -1};
     private int pressCounter = 0;
@@ -71,10 +68,10 @@ public class GameScreen implements Screen {
             e.printStackTrace();
         }
 
-        System.out.println("playernumber:  " + playerNumber);
-        players = createRobots(playerNumber);
+        System.out.println("playernumber:  " + ConfigReader.getPlayerNumber());
+        players = createRobots(ConfigReader.getPlayerNumber());
         batch = new SpriteBatch();
-        robotSprites = createSprites(playerNumber);
+        robotSprites = createSprites(ConfigReader.getPlayerNumber());
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
         Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
