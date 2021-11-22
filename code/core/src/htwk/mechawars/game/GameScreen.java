@@ -55,7 +55,7 @@ public class GameScreen implements Screen {
 
         addButtonsToStage(skin);
         addScrollPanelToStage(skin);
-        board.startRobot(5, 5, Dir.NORTH, player);
+        board.startRobot(5, 5, Dir.NORTH, player, false);
     }
 
     private static void initBoard(String fileName) {
