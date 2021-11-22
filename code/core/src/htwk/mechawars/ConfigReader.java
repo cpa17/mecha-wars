@@ -6,6 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+
 /**
  * Class that reads the config File and saves the configurations in fields.
  * 
@@ -28,18 +31,14 @@ public class ConfigReader {
      * Function that reads the Game Configurations from Startupconfig.txt.
      */
     public static void readConfigs() throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader("..//configs//Startupconfig.txt"));
-        try {
-            String line = br.readLine();
-            while (line != null) {
-                readConfig(line);
-                line = br.readLine();
-            }
-
-        } finally {
-            br.close();
+        FileHandle file = Gdx.files.internal("..//configs//Startupconfig.txt");
+        String line = file.readString();
+        
+        while (!line.contains("~")) {
+            //readConfig(line);
+            System.out.println(line);
+            line = file.readString();
         }
-
     }
     
     /**
