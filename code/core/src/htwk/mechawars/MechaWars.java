@@ -22,6 +22,7 @@ public class MechaWars extends Game {
     public static void setMap(String fileName) {
         map = fileName;
     }
+
     public static String getMap() {
         return map;
     }

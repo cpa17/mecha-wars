@@ -17,7 +17,7 @@ import static htwk.mechawars.game.GameScreen.getStage;
 /**
  * Class that presents the surface of the info screen.
  */
-public class Info{
+public class Info {
     /**
      * ClickListener for the infoButton.
      * @param skin Object of class Skin.
