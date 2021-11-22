@@ -23,7 +23,7 @@ public class MechaWars extends Game {
     @Override
     public void create() {
         if (isSkip == true) {
-            this.setScreen(new GameScreen());
+            this.setScreen(new GameScreen(this));
         } else {
             this.setScreen(new MainMenu(this));
         }
@@ -36,6 +36,6 @@ public class MechaWars extends Game {
 
     @Override
     public void dispose() {
-
+        
     }
 }

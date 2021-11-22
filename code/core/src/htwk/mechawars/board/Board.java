@@ -24,8 +24,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 
 /**
  * Class that presents the game board.
@@ -33,6 +33,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Board {
     public int[][] matrix;
     public Field[][] fieldmatrix;
+    private Field robotPosition;
 
     /**
      * Method that reads the game plan as a int matrix from a file and constructs the game board
@@ -360,6 +361,16 @@ public class Board {
      * @param robot the robot that should move
      */
     public void move(LinkedList<Card> phase, Robot robot) {
+        move(phase, robot, false);
+    }
+
+    /**
+     * Method that moves the robot in the matrix.
+     *
+     * @param phase List of cards
+     * @param robot the robot that should move
+     */
+    public void move(LinkedList<Card> phase, Robot robot, boolean isTest) {
         for (Card card : phase) {
             if (card.getCardAttributeType() == Type.mov) {
                 robot.moveInDirection(card.getCardAttributeMovCount());
@@ -374,6 +385,11 @@ public class Board {
             }
         }
 
+        if (!isTest) {
+            robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+            robotPosition.action(robot);
+        }
+        
         checkShutDown(robot);
         robot.setLastRound(robot.getShutDown());
         robot.setShutDown(robot.getNextRound());

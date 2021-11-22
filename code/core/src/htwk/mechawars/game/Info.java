@@ -1,5 +1,6 @@
 package htwk.mechawars.game;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -16,6 +17,11 @@ import com.badlogic.gdx.utils.Align;
  */
 
 public class Info extends Buttons {
+
+    public Info(Game g) {
+        super(g);
+        // TODO Auto-generated constructor stub
+    }
 
     /**
      * ClickListener for the infoButton.
@@ -276,7 +282,7 @@ public class Info extends Buttons {
                         System.out.println(object);
                     }
 
-                }.show(stage); //.setHeight(600);
+                }.show(getStage()); //.setHeight(600);
             }
         };
     }
