@@ -191,6 +191,7 @@ public class Board {
             this.matrix[robot.getYcoor()][robot.getXcoor()] = robot.getDir().getValue();
         }
     }
+    
 	public void move(LinkedList<Card> phase, Robot[] players) {
 
 		for(int i = 0; i < players.length; i++) {

@@ -12,7 +12,6 @@ public class ConfigReader {
 	private static int aiMode = 0;
 	private static int playerNumber = 1;
 	private static boolean[] AImodes= {false,false,false,false,false,false,false,false};
-	private static int[] configs = {gameModeconfig,aiMode,playerNumber};
 	private static Point[] Playerpoints = {
 			new Point (1,1),
 			new Point (2,2),
@@ -26,7 +25,6 @@ public class ConfigReader {
 	
 
 	public static void readConfigs() throws IOException {
-		System.out.println("sheesh");
 	BufferedReader br = new BufferedReader(new FileReader("..//configs//Startupconfig.txt"));
 	try {
 	    StringBuilder sb = new StringBuilder();
@@ -45,47 +43,13 @@ public class ConfigReader {
 
 	private static void readConfig(String line) {
 		// TODO Auto-generated method stub
-		if(line.contains("gameMode"))
-		{
-			if(line.contains("singleplayer"))
-			{
-				configs[0] = 0;
-			}
-			else if(line.contains("multiplayer"))
-			{
-				configs[0] = 1;
-			}
-			else 
-			{
-				configs[0] = 0;
-			}
-		}
-		
-		if(line.contains("AImode"))
-		{
-			if(line.contains("idle"))
-			{
-				configs[1] = 0;
-			}
-			else if(line.contains("active"))
-			{
-				configs[1] = 1;
-			}
-			else 
-			{
-				configs[1] = 0;
-			}
-		}
+
 		
 		if(line.contains("playerNumber"))
 		{
-			configs[2] = Integer.parseInt(line.replaceAll("\\D+",""));
+			playerNumber = Integer.parseInt(line.replaceAll("\\D+",""));
 		}
-		
-		if(line.contains("playerNumber"))
-		{
-			configs[2] = Integer.parseInt(line.replaceAll("\\D+",""));
-		}
+
 		
 		if(line.contains("playerposition"))
 		{
@@ -144,7 +108,7 @@ public class ConfigReader {
 		this.aiMode = aiMode;
 	}
 
-	public int getPlayerNumber() {
+	public static int getPlayerNumber() {
 		return playerNumber;
 	}
 
@@ -152,9 +116,5 @@ public class ConfigReader {
 		this.playerNumber = playerNumber;
 	}
 
-	public static int[] getConfigs() {
-		// TODO Auto-generated method stub
-		return configs;
-	}
 
 	}

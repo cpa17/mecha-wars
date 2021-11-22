@@ -1,5 +1,7 @@
 package htwk.mechawars;
 
+import java.io.IOException;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -45,6 +47,7 @@ public class GameScreen implements Screen {
     
 
     private int[] configs;
+    private int playerNumber = ConfigReader.getPlayerNumber();
 
     private int[] cardOrder = { -1, -1, -1, -1, -1};
     private int pressCounter = 0;
@@ -65,20 +68,19 @@ public class GameScreen implements Screen {
     	industrialTile = new Texture("industrialTile.png");
     	
     	try {
-    	configs = ConfigReader.getConfigs();
-    	}
-    	catch(Exception e)
-    	{}
-    	
-    	
-    	
-    	if(configs[0]==1)
-    	{
-    		players = createRobots(configs[2]);
+			ConfigReader.readConfigs();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+    		System.out.println("playernumber:  "+playerNumber);
+
+    		players = createRobots(playerNumber);
 
             //robotTextures = createTextures(configs[2]);
     		batch = new SpriteBatch();
-            robotSprites = createSprites(configs[2]);
+            robotSprites = createSprites(playerNumber);
             stage = new Stage();
             Gdx.input.setInputProcessor(stage);
             Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
@@ -86,23 +88,8 @@ public class GameScreen implements Screen {
             addScrollPanelToStage(skin);
             startRobots(players);
             board.startRobot(5, 5, Dir.NORTH, player);
-    	}
     	
-    	else {
 
-        robot = new Texture("robot.png");
-
-        batch = new SpriteBatch();
-        sprite = new Sprite(robot);
-
-        stage = new Stage();
-        Gdx.input.setInputProcessor(stage);
-
-        Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-        addButtonsToStage(skin);
-        addScrollPanelToStage(skin);
-        board.startRobot(5, 5, Dir.NORTH, player);
-    	}
     }
 
     private Robot[] createRobots(int numberRobots) {
@@ -271,11 +258,9 @@ public class GameScreen implements Screen {
                 if (cardOrder[4 - damagePoints] != -1) {
                     deactivateButtons();
                     zugInitialisierung.initialisiereBewegung();
-                    if(configs[0] == 1)
-                    {
+
                     board.move(zugInitialisierung.getList(), players);
-                    }
-                    else{board.move(zugInitialisierung.getList(), player);}
+
                     zugInitialisierung.resetList();
                     startExecutionButton.setColor(Color.LIGHT_GRAY);
                     cardOrderClear();
@@ -597,19 +582,12 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
         batch.begin();
-
         drawPlayingField();
         drawRobot();
         //player.drawParameters(batch);
-        if(configs[0] == 1)
-        {
         for(Sprite sprite : robotSprites)
         {
         sprite.draw(batch);
-        }
-        }
-        else {
-        	sprite.draw(batch);
         }
         batch.end();
         stage.act();
@@ -621,26 +599,7 @@ public class GameScreen implements Screen {
      */
     public void drawRobot() {
         int tileSize = (Gdx.graphics.getHeight() / board.matrix.length);
-        if(configs[0]==0)
-        {
-        int x = player.getXcoor();
-        int y = Math.abs(player.getYcoor() - (board.matrix.length - 1));
 
-        if (player.getDir() == Dir.NORTH) {
-            sprite.setPosition(tileSize * x, tileSize * y);
-            sprite.setRotation(0);
-        } else if (player.getDir() == Dir.EAST) {
-            sprite.setPosition(tileSize * x, tileSize * y);
-            sprite.setRotation(270);
-        } else if (player.getDir() == Dir.SOUTH) {
-            sprite.setPosition(tileSize * x, tileSize * y);
-            sprite.setRotation(180);
-        } else if (player.getDir() == Dir.WEST) {
-            sprite.setPosition(tileSize * x, tileSize * y);
-            sprite.setRotation(90);
-        }
-        }
-        else {
         	for(int i = 0; i  < players.length;i++)
         	{
         		{
@@ -661,7 +620,7 @@ public class GameScreen implements Screen {
         	        	robotSprites[i].setRotation(90);
         	        }
         	        }
-        	}
+        	
         }
     }
 
