@@ -15,7 +15,6 @@ import htwk.mechawars.MechaWars;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
-import picocli.CommandLine.Parameters;
 
 /**
  * Class containing the runner for the desktop frontend.
