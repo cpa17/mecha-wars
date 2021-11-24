@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -328,7 +329,23 @@ public class Board {
      * @param dir direction of the robot
      * @param robot robot to which this applies
      */
-    public void startRobot(int x, int y, Dir dir, Robot robot) {
+    public void startRobot(int x, int y, Dir dir, Robot robot, boolean isTest) {
+        int min = 1;
+        int max = 8;
+        int randomNumber =  ThreadLocalRandom.current().nextInt(min, max) + min;
+        
+        if (!isTest) {
+            for (int i = 0; i < fieldmatrix.length; i++) {
+                for (int j = 0; j < fieldmatrix[i].length; j++) {
+                    if (fieldmatrix[i][j] instanceof StartField && 
+                            ((StartField) fieldmatrix[i][j]).getNumber() == randomNumber) {
+                        x = fieldmatrix[i][j].getYcoor();
+                        y = fieldmatrix[i][j].getXcoor();    
+                    }
+                }
+            }
+        }
+        
         robot.setXcoor(x);
         robot.setStartX(x);
         robot.setYcoor(y);
