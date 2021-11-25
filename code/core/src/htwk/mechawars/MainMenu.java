@@ -87,7 +87,7 @@ public class MainMenu implements Screen {
      * changeScreen function to switch to GameScreen.
      */
     public void changeScreen() {
-        game.setScreen(new GameScreen(game));
+        game.setScreen(new GameScreen(game, MechaWars.getMap()));
         stage.dispose();
     }
 
