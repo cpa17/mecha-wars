@@ -32,13 +32,12 @@ import com.badlogic.gdx.utils.Timer.Task;
  * Class that presents the game board.
  */
 public class Board {
-    public int[][] matrix;
     public Field[][] fieldmatrix;
     private Field robotPosition;
 
     /**
      * Method that reads the game plan as a int matrix from a file and constructs the game board
-     * as a int matrix and a field matrix.
+     * as a field matrix.
      *
      * @param fileName Path to a file containing a map
      */
@@ -47,16 +46,15 @@ public class Board {
         String mapString = file.readString();
 
         Board wrappedBoard = new Board(mapString, false);
-        this.matrix = wrappedBoard.matrix;
-        intToFieldMatrix(this.matrix);
+        this.fieldmatrix = wrappedBoard.fieldmatrix;
     }
 
     /**
-     * Method that reads the game plan as a int matrix from a file and constructs the game board,
-     * but can skip creating the field matrix.
+     * Method that reads the game plan as a int matrix from a file and constructs the game board
+     * as a field matrix, but can skip creating the field matrix.
      *
      * @param mapString String containing a map
-     * @param isTest allows to skip creating the assets
+     * @param isTest indicates that this is a test
      */
     public Board(String mapString, boolean isTest) {
         ArrayList<ArrayList<Integer>> tempLayout = new ArrayList<>();
@@ -117,10 +115,7 @@ public class Board {
             }
         }
 
-        this.matrix = matrix;
-        if (!isTest) {
-            intToFieldMatrix(this.matrix);
-        }
+        intToFieldMatrix(matrix, isTest);
     }
 
     /**
@@ -128,7 +123,7 @@ public class Board {
      *
      * @param matrix A int matrix
      */
-    private void intToFieldMatrix(int[][] matrix) {
+    private void intToFieldMatrix(int[][] matrix, boolean isTest) {
         this.fieldmatrix = new Field[matrix.length][matrix[0].length];
         int[] allowed;
         for (int col = 0; col < matrix.length; col++) {
@@ -144,7 +139,8 @@ public class Board {
                         // Test that the read-out attribute value is in the set
                         // of allowed attribute values
                         if (Arrays.stream(allowed).anyMatch(x -> x == corner)) {
-                            this.fieldmatrix[col][cell] = new BarrierCorner(cell, col, corner);
+                            this.fieldmatrix[col][cell] = new BarrierCorner(cell, col, corner,
+                                    isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
@@ -156,7 +152,7 @@ public class Board {
                         int side = matrix[col][cell] % 10;
                         allowed = new int[]{1, 2, 3, 4};
                         if (Arrays.stream(allowed).anyMatch(x -> x == side)) {
-                            this.fieldmatrix[col][cell] = new BarrierSide(cell, col, side);
+                            this.fieldmatrix[col][cell] = new BarrierSide(cell, col, side, isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
@@ -165,7 +161,7 @@ public class Board {
 
                     // BlackHole
                     case 102:
-                        fieldmatrix[col][cell] = new BlackHole(cell, col);
+                        fieldmatrix[col][cell] = new BlackHole(cell, col, isTest);
                         break;
 
                     // Blockade
@@ -173,7 +169,7 @@ public class Board {
                         int typeB = matrix[col][cell] % 10;
                         allowed = new int[]{1, 2, 3, 4};
                         if (Arrays.stream(allowed).anyMatch(x -> x == typeB)) {
-                            this.fieldmatrix[col][cell] = new Blockade(cell, col, typeB);
+                            this.fieldmatrix[col][cell] = new Blockade(cell, col, typeB, isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
@@ -185,7 +181,8 @@ public class Board {
                         int numberC = matrix[col][cell] % 10;
                         allowed = new int[]{1, 2, 3, 4, 5, 6, 7, 8};
                         if (Arrays.stream(allowed).anyMatch(x -> x == numberC)) {
-                            this.fieldmatrix[col][cell] = new Checkpoint(cell, col, numberC);
+                            this.fieldmatrix[col][cell] = new Checkpoint(cell, col, numberC,
+                                    isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
@@ -201,7 +198,8 @@ public class Board {
                         allowed = new int[]{21, 31, 41, 61, 71, 91, 2, 12, 32, 42, 52, 92,
                                 3, 13, 23, 43, 63, 83, 14, 24, 34, 54, 74, 84};
                         if (Arrays.stream(allowed).anyMatch(x -> x == (10 * startC) + endC)) {
-                            this.fieldmatrix[col][cell] = new ConveyorBelt(cell, col, startC, endC);
+                            this.fieldmatrix[col][cell] = new ConveyorBelt(cell, col, startC,
+                                    endC, isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
@@ -216,7 +214,7 @@ public class Board {
                                 3, 13, 23, 43, 63, 83, 14, 24, 34, 54, 74, 84};
                         if (Arrays.stream(allowed).anyMatch(x -> x == (10 * startEc) + endEc)) {
                             this.fieldmatrix[col][cell] = new ExpressConveyorBelt(cell, col,
-                                    startEc, endEc);
+                                    startEc, endEc, isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
@@ -228,7 +226,7 @@ public class Board {
                         int direction = matrix[col][cell] % 10;
                         allowed = new int[]{1, 2};
                         if (Arrays.stream(allowed).anyMatch(x -> x == direction)) {
-                            this.fieldmatrix[col][cell] = new Gear(cell, col, direction);
+                            this.fieldmatrix[col][cell] = new Gear(cell, col, direction, isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
@@ -240,7 +238,7 @@ public class Board {
                         int typeL = matrix[col][cell] % 10;
                         allowed = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
                         if (Arrays.stream(allowed).anyMatch(x -> x == typeL)) {
-                            this.fieldmatrix[col][cell] = new Laser(cell, col, typeL);
+                            this.fieldmatrix[col][cell] = new Laser(cell, col, typeL, isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
@@ -252,7 +250,7 @@ public class Board {
                         int typeR = matrix[col][cell] % 10;
                         allowed = new int[]{1, 2};
                         if (Arrays.stream(allowed).anyMatch(x -> x == typeR)) {
-                            this.fieldmatrix[col][cell] = new RepairSite(cell, col, typeR);
+                            this.fieldmatrix[col][cell] = new RepairSite(cell, col, typeR, isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
@@ -261,7 +259,7 @@ public class Board {
 
                     // StandardField
                     case 110:
-                        this.fieldmatrix[col][cell] = new StandardField(cell, col);
+                        this.fieldmatrix[col][cell] = new StandardField(cell, col, isTest);
                         break;
 
                     // StartField
@@ -269,7 +267,8 @@ public class Board {
                         int numberS = matrix[col][cell] % 10;
                         allowed = new int[]{1, 2, 3, 4, 5, 6, 7, 8};
                         if (Arrays.stream(allowed).anyMatch(x -> x == numberS)) {
-                            this.fieldmatrix[col][cell] = new StartField(cell, col, numberS);
+                            this.fieldmatrix[col][cell] = new StartField(cell, col, numberS,
+                                    isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
@@ -354,35 +353,34 @@ public class Board {
         robot.setStartY(y);
         robot.setDir(dir);
     }
-    
+
     /**
      * This is a wrapper-function for the tests.
-     * 
+     *
      * @param phase List of cards
      * @param robot the robot that should move
      */
     public void move(LinkedList<Card> phase, Robot robot) {
         move(phase, robot, false);
     }
-    
+
     /**
      * Method that moves the robot in the matrix.
-     * 
+     *
      * @param phase List of cards
      * @param robot the robot that should move
      */
-    public void move(LinkedList<Card> phase, Robot robot, boolean booleanForTests) {
-
+    public void move(LinkedList<Card> phase, Robot robot, boolean isTest) {
         checkShutDown(robot);
-
-        if (booleanForTests) {
+        if (isTest) {
             for (Card card : phase) {
                 if (card.getCardAttributeType() == Type.mov) {
                     robot.moveInDirection(card.getCardAttributeMovCount());
                 } else {
                     robot.turn(card.getCardAttributeMovCount());
                 }
-                if (robot.getXcoor() >= matrix[1].length || robot.getYcoor() >= matrix.length
+                if (robot.getXcoor() >= fieldmatrix[1].length
+                        || robot.getYcoor() >= fieldmatrix.length
                         || robot.getXcoor() < 0 || robot.getYcoor() < 0) {
                     robot.setXcoor(robot.getStartX());
                     robot.setYcoor(robot.getStartY());
@@ -403,9 +401,9 @@ public class Board {
                         } else {
                             robot.turn(card.getCardAttributeMovCount());
                         }
-                        if (robot.getXcoor() >= matrix[1].length ||
-                                robot.getYcoor() >= matrix.length || 
-                                robot.getXcoor() < 0 || 
+                        if (robot.getXcoor() >= fieldmatrix[1].length ||
+                                robot.getYcoor() >= fieldmatrix.length ||
+                                robot.getXcoor() < 0 ||
                                 robot.getYcoor() < 0) {
                             robot.setXcoor(robot.getStartX());
                             robot.setYcoor(robot.getStartY());
@@ -417,7 +415,7 @@ public class Board {
             }
         }
 
-        if (!booleanForTests) {
+        if (!isTest) {
             robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
             robotPosition.action(robot);
         }
@@ -457,6 +455,5 @@ public class Board {
             robot.damageReset();
         }
     }
-
 }
 

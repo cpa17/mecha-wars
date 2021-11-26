@@ -17,7 +17,46 @@ public class StandardField extends Field {
         this.tile = new Texture("mapAssets/StandardField.png");
     }
 
+    /**
+     * Constructor of a Standard Field which can skip creating the assets.
+     *
+     * @param isTest indicates that this is a test
+     */
+    public StandardField(int xcoor, int ycoor, boolean isTest) {
+        super(xcoor, ycoor, isTest);
+        if (!isTest) {
+            this.tile = new Texture("mapAssets/StandardField.png");
+        }
+    }
+
     public Texture getTile() {
         return this.tile;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+
+        StandardField other = (StandardField) obj;
+        if (xcoor != other.xcoor) {
+            return false;
+        }
+        if (ycoor != other.ycoor) {
+            return false;
+        }
+
+        return true;
+    }
+
+    // Function that overwrites the hash code but has no further meaning or functionality
+    // It only has to exist for the pipeline to work with the overridden equals function
+    public int hashCode() {
+        assert false : "hashCode not designed";
+        return 42;
     }
 }

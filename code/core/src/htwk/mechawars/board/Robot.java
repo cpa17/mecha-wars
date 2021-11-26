@@ -312,9 +312,9 @@ public class Robot {
      * Function that draws the robot on the playing field.
      */
     public void drawRobot(Sprite sprite, Board board) {
-        int tileSize = (Gdx.graphics.getHeight() / board.matrix.length);
+        int tileSize = (Gdx.graphics.getHeight() / board.fieldmatrix.length);
         int x = xcoor;
-        int y = Math.abs(ycoor - (board.matrix.length - 1));
+        int y = Math.abs(ycoor - (board.fieldmatrix.length - 1));
 
         if (dir == Dir.NORTH) {
             sprite.setPosition(tileSize * x, tileSize * y);

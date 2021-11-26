@@ -20,9 +20,22 @@ public class Blockade extends Field {
     public Blockade(int xcoor, int ycoor, int type) {
         super(xcoor, ycoor);
         this.type = type;
-        this.tile =
-                new Texture(Gdx.files.internal("mapAssets/" 
-        + "blockade/" + "Blockade0" + String.valueOf(type) + ".png"));
+        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "blockade/"
+                + "Blockade0" + String.valueOf(type) + ".png"));
+    }
+
+    /**
+     * Constructor of a Blockade which can skip creating the assets.
+     *
+     * @param isTest indicates that this is a test
+     */
+    public Blockade(int xcoor, int ycoor, int type, boolean isTest) {
+        super(xcoor, ycoor, isTest);
+        this.type = type;
+        if (!isTest) {
+            this.tile = new Texture(Gdx.files.internal("mapAssets/" + "blockade/"
+                    + "Blockade0" + String.valueOf(type) + ".png"));
+        }
     }
 
     @Override
@@ -32,15 +45,41 @@ public class Blockade extends Field {
         return attributes;
     }
 
-    /**
-     * Take the Type of the Blockade.
-     * @return the Type
-     */
     public int getType() {
         return this.type;
     }
 
     public Texture getTile() {
         return this.tile;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Blockade other = (Blockade) obj;
+        if (xcoor != other.xcoor) {
+            return false;
+        }
+        if (ycoor != other.ycoor) {
+            return false;
+        }
+        if (type != other.type) {
+            return false;
+        }
+
+        return true;
+    }
+
+    // Function that overwrites the hash code but has no further meaning or functionality
+    // It only has to exist for the pipeline to work with the overridden equals function
+    public int hashCode() {
+        assert false : "hashCode not designed";
+        return 42;
     }
 }

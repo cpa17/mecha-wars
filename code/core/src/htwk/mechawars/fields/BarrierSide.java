@@ -19,9 +19,22 @@ public class BarrierSide extends Field {
     public BarrierSide(int xcoor, int ycoor, int side) {
         super(xcoor, ycoor);
         this.side = side;
-        this.tile = 
-                new Texture(Gdx.files.internal("mapAssets/" + 
-        "barrierside/" + "BarrierSide" + String.valueOf(side) + ".png"));
+        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "barrierside/"
+                + "BarrierSide" + String.valueOf(side) + ".png"));
+    }
+
+    /**
+     * Constructor of a Side Barrier which can skip creating the assets.
+     *
+     * @param isTest indicates that this is a test
+     */
+    public BarrierSide(int xcoor, int ycoor, int side, boolean isTest) {
+        super(xcoor, ycoor, isTest);
+        this.side = side;
+        if (!isTest) {
+            this.tile = new Texture(Gdx.files.internal("mapAssets/" + "barrierside/"
+                    + "BarrierSide" + String.valueOf(side) + ".png"));
+        }
     }
 
     @Override
@@ -31,15 +44,41 @@ public class BarrierSide extends Field {
         return attributes;
     }
 
-    /**
-     * Take the Side where the Barrier is.
-     * @return the Side
-     */
     public int getSide() {
         return this.side;
     }
 
     public Texture getTile() {
         return this.tile;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+
+        BarrierSide other = (BarrierSide) obj;
+        if (xcoor != other.xcoor) {
+            return false;
+        }
+        if (ycoor != other.ycoor) {
+            return false;
+        }
+        if (side != other.side) {
+            return false;
+        }
+
+        return true;
+    }
+
+    // Function that overwrites the hash code but has no further meaning or functionality
+    // It only has to exist for the pipeline to work with the overridden equals function
+    public int hashCode() {
+        assert false : "hashCode not designed";
+        return 42;
     }
 }
