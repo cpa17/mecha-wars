@@ -419,7 +419,7 @@ public class Robot {
      * Updates the shutDown texture depending on the amout of players.
      */
     private void createHud() {
-        hud = new Texture(Gdx.files.internal("parameters/hudrr.png"));
+        hud = new Texture(Gdx.files.internal("parameters/hud.png"));
     }
 
     /**
