@@ -2,11 +2,25 @@ package htwk.mechawars.board;
 
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.Type;
+import htwk.mechawars.fields.BarrierCorner;
+import htwk.mechawars.fields.BarrierSide;
+import htwk.mechawars.fields.BlackHole;
+import htwk.mechawars.fields.Blockade;
+import htwk.mechawars.fields.Checkpoint;
+import htwk.mechawars.fields.ConveyorBelt;
+import htwk.mechawars.fields.ExpressConveyorBelt;
+import htwk.mechawars.fields.Field;
+import htwk.mechawars.fields.Gear;
+import htwk.mechawars.fields.Laser;
+import htwk.mechawars.fields.RepairSite;
+import htwk.mechawars.fields.StandardField;
+import htwk.mechawars.fields.StartField;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -20,46 +34,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 public class Board {
     public int[][] matrix;
-    private Texture[] fieldAssets = new Texture[36];
+    public Field[][] fieldmatrix;
+    private Field robotPosition;
 
     /**
-     * Method that constructs the game board as a matrix.
-     * @param width width of the game board
-     * @param height height of the game board
-     */
-    public Board(int width, int height) {
-        Board wrappedBoard = new Board(width, height, false);
-        this.matrix = wrappedBoard.matrix;
-        this.fieldAssets = wrappedBoard.fieldAssets;
-    }
-
-    /**
-     * Method that constructs the game board as a matrix, but can skip creating the assets.
-     * @param width width of the game board
-     * @param height height of the game board
-     * @param isTest allows to skip creating the assets
-     */
-    public Board(int width, int height, boolean isTest) {
-        this.matrix = new int[height][width];
-        if (!isTest) {
-            for (int i = 0; i < fieldAssets.length; i++) {
-                fieldAssets[i] = new Texture(Gdx.files.internal("mapAssets/" + i + ".png"));
-            }
-        }
-        for (int[] ints : matrix) {
-            Arrays.fill(ints, 0);
-        }
-    }
-
-    /**
-     * Method that constructs a game board with a null matrix.
-     */
-    public Board() {
-        this.matrix = new int[0][0];
-    }
-
-    /**
-     * Method that reads the game plan as a matrix from a file.
+     * Method that reads the game plan as a int matrix from a file and constructs the game board
+     * as a int matrix and a field matrix.
+     *
      * @param fileName Path to a file containing a map
      */
     public Board(String fileName) {
@@ -68,12 +49,12 @@ public class Board {
 
         Board wrappedBoard = new Board(mapString, false);
         this.matrix = wrappedBoard.matrix;
-        this.fieldAssets = wrappedBoard.fieldAssets;
+        intToFieldMatrix(this.matrix);
     }
 
     /**
-     * Method that reads the game plan as a matrix from a file, but can skip the creating the
-     * assets.
+     * Method that reads the game plan as a int matrix from a file and constructs the game board,
+     * but can skip creating the field matrix.
      *
      * @param mapString String containing a map
      * @param isTest allows to skip creating the assets
@@ -93,7 +74,6 @@ public class Board {
             } catch (NumberFormatException z) {
                 System.out.println("The map obtains elements which are not integer!");
                 Gdx.app.exit();
-                //System.exit(-1);
             }
         }
 
@@ -105,7 +85,6 @@ public class Board {
                 if (values.length > 12) {
                     System.out.println("The map has too many columns, only 12 are allowed!");
                     Gdx.app.exit();
-                    //System.exit(-1);
                 }
 
                 if (!string.isEmpty()) {
@@ -117,25 +96,43 @@ public class Board {
         }
         scn.close();
 
+        System.out.println(tempLayout);
+
         int width = tempLayout.get(0).size();
         int height = tempLayout.size();
 
         if (height > 12) {
             System.out.println("The map has too many rows, only 12 are allowed!");
             Gdx.app.exit();
-            //System.exit(-1);
         }
 
         Board wrappedBoard = new Board(width, height, isTest);
 
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                wrappedBoard.matrix[y][x] = tempLayout.get(y).get(x);
+                    default:
+                        System.out.println("Codierung " + matrix[col][cell]
+                                + " beschreibt kein gueltige Feldklasse");
+                        break;
+                }
             }
         }
+    }
 
-        this.matrix = wrappedBoard.matrix;
-        this.fieldAssets = wrappedBoard.fieldAssets;
+    /**
+     * Method that create a String from a field matrix that contains for each object the class
+     * and the attribute values.
+     *
+     * @return A String with the class and the attribute values for each field object
+     */
+    public String toString() {
+        String fieldstring = "";
+        for (Field[] fields : fieldmatrix) {
+            for (Field field : fields) {
+                fieldstring = fieldstring + "(" + field.getClass() + ", "
+                        + field + ") ";
+            }
+            fieldstring = fieldstring + "\n";
+        }
+        return fieldstring;
     }
 
     /**
@@ -145,28 +142,44 @@ public class Board {
      * @param board Board whose matrix is to be converted into a string
      */
     public static void toAsset(SpriteBatch batch, Board board) {
-        int x = 0;
-        for (int i = 0; i < board.matrix.length; i++) {
-            for (int j = 0; j < board.matrix[i].length; j++) {
-                int t = Gdx.graphics.getHeight() / board.matrix.length; //height of one tile
+        for (int row = 0; row < board.fieldmatrix.length; row++) {
+            int x = 0;
+            for (int cell = 0; cell < board.fieldmatrix[row].length; cell++) {
+                int t = Gdx.graphics.getHeight() / board.fieldmatrix.length; //height of one tile
                 int b = Gdx.graphics.getHeight(); //height of the entire board
-                int c = (i + 1) * t; //the current height in the loop
+                int c = (row + 1) * t; //the current height in the loop
                 int r = b - c; //the result of the board height minus the current height
-                batch.draw(board.fieldAssets[board.matrix[i][j]], x, r);
-                x = x + (Gdx.graphics.getHeight() / board.matrix.length);
+                batch.draw(board.fieldmatrix[cell][row].getTile(), x, r);
+                x = x + (Gdx.graphics.getHeight() / board.fieldmatrix.length);
             }
-            x = 0;
         }
     }
 
     /**
      * Method that places a robot in the matrix --> starting position.
+     *
      * @param x x-coordinate of the robot
      * @param y y-coordinate of the robot
      * @param dir direction of the robot
      * @param robot robot to which this applies
      */
-    public void startRobot(int x, int y, Dir dir, Robot robot) {
+    public void startRobot(int x, int y, Dir dir, Robot robot, boolean isTest) {
+        int min = 1;
+        int max = 8;
+        int randomNumber =  ThreadLocalRandom.current().nextInt(min, max) + min;
+        
+        if (!isTest) {
+            for (int i = 0; i < fieldmatrix.length; i++) {
+                for (int j = 0; j < fieldmatrix[i].length; j++) {
+                    if (fieldmatrix[i][j] instanceof StartField && 
+                            ((StartField) fieldmatrix[i][j]).getNumber() == randomNumber) {
+                        x = fieldmatrix[i][j].getYcoor();
+                        y = fieldmatrix[i][j].getXcoor();    
+                    }
+                }
+            }
+        }
+        
         robot.setXcoor(x);
         robot.setStartX(x);
         robot.setYcoor(y);
@@ -191,8 +204,6 @@ public class Board {
      * @param robot the robot that should move
      */
     public void move(LinkedList<Card> phase, Robot robot, boolean booleanForTests) {
-
-        checkDoubleDamage(robot);
 
         checkShutDown(robot);
 
@@ -238,12 +249,21 @@ public class Board {
             }
         }
 
+        if (!isTest) {
+            robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+            robotPosition.action(robot);
+        }
+        
+        checkShutDown(robot);
+        robot.setLastRound(robot.getShutDown());
         robot.setShutDown(robot.getNextRound());
 
+        checkDoubleDamage(robot);
     }
 
     /**
      * Method that checks whether the robot receives 2 damage points.
+     *
      * @param robot the robot that should check
      */
     private void checkDoubleDamage(Robot robot) {
@@ -254,24 +274,20 @@ public class Board {
 
             if (robot.getDestroyed()) {
                 robot.setDestroyed(false);
-            } else {
-                robot.setLastRound(false);
+                checkShutDown(robot);
             }
         }
     }
 
     /**
      * Method that checks whether the robot is in shutdown mode.
+     *
      * @param robot the robot that should check
      */
-
     private void checkShutDown(Robot robot) {
-
-        if (robot.getShutDown()) {
+        if (robot.getNextRound() || robot.getShutDown()) {
             robot.damageReset();
-            robot.setLastRound(true);
         }
     }
-
 
 }
