@@ -16,12 +16,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DamageTest {
     private Robot robot = new Robot();
-    private Board board = new Board(2, 2, true);
+    private Board board = new Board(createBoardString(), true);
     private LinkedList<Card> karten = new LinkedList<>();
 
     @Test
     public void damageTest() {
-
+        /* Robot:
+        *   DamagePoint: 0
+        *   ShutDown: false
+        *   NextRound: false
+        *   LastRound: false
+        *   Life: 3
+        * */
+        
         assertEquals(0, robot.getDamagePoints());
         assertFalse(robot.getShutDown());
         assertEquals(3, robot.getLifePoints());
@@ -30,20 +37,43 @@ public class DamageTest {
         robot.damageUp();
         robot.damageUp();
         robot.setShutDown(true);
+        robot.setNextRound(true);
+        /* Robot:
+         *   DamagePoint: 3
+         *   ShutDown: true
+         *   NextRound: true
+         *   LastRound: false
+         *   Life: 3
+         * */
 
         assertEquals(3, robot.getDamagePoints());
         assertTrue(robot.getShutDown());
         assertFalse(robot.getDestroyed());
         assertEquals(3, robot.getLifePoints());
 
-        board.move(karten, robot);
+        board.move(karten, robot, true);
+        robot.setNextRound(false);
+        /* Robot:
+         *   DamagePoint: 0
+         *   ShutDown: true
+         *   NextRound: false
+         *   LastRound: true
+         *   Life: 3
+         * */
 
         assertEquals(0, robot.getDamagePoints());
-        assertFalse(robot.getShutDown());
+        assertTrue(robot.getShutDown());
         assertFalse(robot.getDestroyed());
         assertEquals(3, robot.getLifePoints());
 
-        board.move(karten, robot);
+        board.move(karten, robot, true);
+        /* Robot:
+         *   DamagePoint: 2
+         *   ShutDown: false
+         *   NextRound: false
+         *   LastRound: true
+         *   Life: 3
+         * */
 
         assertEquals(2, robot.getDamagePoints());
         assertFalse(robot.getShutDown());
@@ -52,8 +82,25 @@ public class DamageTest {
 
 
         robot.setDestroyed(true);
+        /* Robot:
+         *   DamagePoint: 2
+         *   ShutDown: false
+         *   NextRound: false
+         *   LastRound: false
+         *   destroyed: true
+         *   Life: 3
+         * */
+
         assertTrue(robot.getDestroyed());
-        board.move(karten, robot);
+        board.move(karten, robot, true);
+        /* Robot:
+         *   DamagePoint: 4
+         *   ShutDown: false
+         *   NextRound: false
+         *   LastRound: false
+         *   destroyed: false
+         *   Life: 3
+         * */
 
         assertEquals(4, robot.getDamagePoints());
         assertFalse(robot.getShutDown());
@@ -62,15 +109,41 @@ public class DamageTest {
 
         robot.setNextRound(true);
         robot.setDestroyed(true);
-        assertTrue(robot.getDestroyed());
-        board.move(karten, robot);
+        /* Robot:
+         *   DamagePoint: 4
+         *   ShutDown: false
+         *   NextRound: true
+         *   LastRound: false
+         *   destroyed: true
+         *   Life: 3
+         * */
 
-        assertEquals(6, robot.getDamagePoints());
+        assertTrue(robot.getDestroyed());
+
+        board.move(karten, robot, true);
+        /* Robot:
+         *   DamagePoint: 4
+         *   ShutDown: true
+         *   NextRound: true
+         *   LastRound: false
+         *   destroyed: false
+         *   Life: 3
+         * */
+
+        assertEquals(0, robot.getDamagePoints());
         assertTrue(robot.getShutDown());
         assertFalse(robot.getDestroyed());
         assertEquals(3, robot.getLifePoints());
 
-        board.move(karten, robot);
+        board.move(karten, robot, true);
+        /* Robot:
+         *   DamagePoint: 0
+         *   ShutDown: true
+         *   NextRound: true
+         *   LastRound: true
+         *   destroyed: false
+         *   Life: 3
+         * */
 
         assertEquals(0, robot.getDamagePoints());
         assertTrue(robot.getShutDown());
@@ -88,5 +161,13 @@ public class DamageTest {
         robot.setYcoor(0);
         robot.setShutDown(false);
         karten.add(new Card(Type.turn, (byte) 1, 0));
+    }
+
+    /**
+     * Method that generates a String for the board constructor.
+     */
+    private String createBoardString() {
+        return "11000 11000 \n" +
+               "11000 11000";
     }
 }

@@ -2,6 +2,7 @@ package htwk.mechawars.board;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
@@ -17,6 +18,7 @@ public class Robot {
     private int damagePoints;
     private int backupCopyX;
     private int backupCopyY;
+    private int checkPointNumber = 1;
     private boolean shutDownMark;
     private boolean backupDraw;
     private boolean lastRound;
@@ -85,7 +87,7 @@ public class Robot {
 
     /**
      * Getter-Function to get the current amount of damagePoints.
-     * 
+     *
      * @return the current damagePoints as an Integer (int)
      */
     public int getDamagePoints() {
@@ -94,7 +96,7 @@ public class Robot {
 
     /**
      * Getter-Function to get the current amount of lifePoints.
-     * 
+     *
      * @return the current lifePoints as an Integer (int)
      */
     public int getLifePoints() {
@@ -103,16 +105,16 @@ public class Robot {
 
     /**
      * Getter-Function to get the current status of the robot.
-     * 
+     *
      * @return the status of the robot (active/shutdown or not)
      */
     public boolean getShutDown() {
         return shutDownMark;
     }
-    
+
     /**
      * Getter-Function to get the current direction of the robot.
-     * 
+     *
      * @return the direction of the robot (as an Enum Dir)
      */
     public Dir getDir() {
@@ -121,7 +123,7 @@ public class Robot {
 
     /**
      * Getter-Function to get the current y-coordinate of the robot.
-     * 
+     *
      * @return the y-coordinate as an int
      */
     public int getYcoor() {
@@ -130,7 +132,7 @@ public class Robot {
 
     /**
      * Getter-Function to get the current x-coordinate of the robot.
-     * 
+     *
      * @return the x-coordinate as an int
      */
     public int getXcoor() {
@@ -139,7 +141,7 @@ public class Robot {
 
     /**
      * Getter-Function to get the startposition (x-coordinate) of the robot.
-     * 
+     *
      * @return the x-coordinate of the startposition as an int
      */
     public int getStartX() {
@@ -148,7 +150,7 @@ public class Robot {
 
     /**
      * Getter-Function to get the startposition (y-coordinate) of the robot.
-     * 
+     *
      * @return the y-coordinate of the startposition as an int
      */
     public int getStartY() {
@@ -157,7 +159,7 @@ public class Robot {
 
     /**
      * Getter-Function to get ... .
-     * 
+     *
      * @return the ?
      */
     public boolean getLastRound() {
@@ -166,7 +168,7 @@ public class Robot {
 
     /**
      * Getter-Function to get ... .
-     * 
+     *
      * @return the ?
      */
     public boolean getNextRound() {
@@ -175,7 +177,7 @@ public class Robot {
 
     /**
      * Getter-Function to get the status of destruction of the robot (true or not).
-     * 
+     *
      * @return the status of the robot (destroyed or not) as a boolean
      */
     public boolean getDestroyed() {
@@ -184,36 +186,42 @@ public class Robot {
 
     /**
      * Getter-Function to get the x-coordinate of BackupCopy from the robot.
-     * 
+     *
      * @return the x-coordinate of the BackupCopy (int)
      */
     public int getbackupCopyX() {
         return backupCopyX;
     }
-    
+
     /**
      * Getter-Function to get the y-coordinate of BackupCopy from the robot.
-     * 
+     *
      * @return the y-coordinate of the BackupCopy (int)
      */
     public int getbackupCopyY() {
         return backupCopyY;
     }
 
+    public int getCheckPointNumber() {
+        return checkPointNumber;
+    }
+
+
     // Setters. ------------------------------------------------------------------------------
 
     /**
      * Setter-Function for the direction of the robot.
-     * 
+     *
      * @param dir -> direction of the robot
      */
+
     public void setDir(Dir dir) {
         this.dir = dir;
     }
 
     /**
      * Setter-Function for the active-status of the robot.
-     * 
+     *
      * @param on -> boolean that encodes the (active-)status
      */
     public void setShutDown(boolean on) {
@@ -222,7 +230,7 @@ public class Robot {
 
     /**
      * Setter-Function for the y-coordinate of the robot.
-     * 
+     *
      * @param ycoor -> Integer of the y-coordinate
      */
     public void setYcoor(int ycoor) {
@@ -231,7 +239,7 @@ public class Robot {
 
     /**
      * Setter-Function for the x-coordinate of the robot.
-     * 
+     *
      * @param xcoor -> Integer of the x-coordinate
      */
     public void setXcoor(int xcoor) {
@@ -240,16 +248,16 @@ public class Robot {
 
     /**
      * Setter-Function to set the startposition (x-coordinate) of the robot.
-     * 
+     *
      * @param startX -> Integer of the x-coordinate
      */
     public void setStartX(int startX) {
         this.startX = startX;
     }
-    
+
     /**
      * Setter-Function to set the startposition (y-coordinate) of the robot.
-     * 
+     *
      * @param startY -> Integer of the y-coordinate
      */
     public void setStartY(int startY) {
@@ -258,7 +266,7 @@ public class Robot {
 
     /**
      * Setter-Function to set ??? .
-     * 
+     *
      * @param lastRound -> ?
      */
     public void setLastRound(boolean lastRound) {
@@ -267,7 +275,7 @@ public class Robot {
 
     /**
      * Setter-Function to set ??? .
-     * 
+     *
      * @param nextRound -> ?
      */
     public void setNextRound(boolean nextRound) {
@@ -276,7 +284,7 @@ public class Robot {
 
     /**
      * Setter-Function for the x-coordinate of the BackupCopy from the robot.
-     * 
+     *
      * @param position -> Integer of the x-coordinate
      */
     public void setbackupCopyX(int position) {
@@ -285,7 +293,7 @@ public class Robot {
 
     /**
      * Setter-Function for the y-coordinate of the BackupCopy from the robot.
-     * 
+     *
      * @param position -> Integer of the y-coordinate
      */
     public void setbackupCopyY(int position) {
@@ -293,8 +301,8 @@ public class Robot {
     }
 
     /**
-     * Setter-Function from the status of the robot (destroyed or not destroyed). 
-     * 
+     * Setter-Function from the status of the robot (destroyed or not destroyed).
+     *
      * @param destroyed -> boolean that encoded the status
      */
     public void setDestroyed(boolean destroyed) {
@@ -320,6 +328,10 @@ public class Robot {
      */
     public void lifeDown() {
         lifePoints -= 1;
+    }
+
+    public void incCheckPointNumber() {
+        checkPointNumber++;
     }
 
     /**
@@ -408,7 +420,7 @@ public class Robot {
      * Updates the shutDown texture depending on the amout of players.
      */
     private void createHud() {
-        hud = new Texture(Gdx.files.internal("parameters/hudrr.png"));
+        hud = new Texture(Gdx.files.internal("parameters/hud.png"));
     }
 
     /**
@@ -424,10 +436,33 @@ public class Robot {
             backupDraw = false;
             batch.draw(new Texture(Gdx.files.internal("robot.png")), backupCopyX, backupCopyY);
         }
-        batch.draw(hud, 755, 0);
-        batch.draw(life, 765, 5);
-        batch.draw(damage, 840, 5);
-        batch.draw(shutDown, 915, 5);
+        batch.draw(hud, 754, 15);
+        batch.draw(life, 763, 23);
+        batch.draw(damage, 838, 23);
+        batch.draw(shutDown, 914, 23);
     }
-    
+
+    /**
+     * Function that draws the robot on the playing field.
+     */
+    public void drawRobot(Sprite sprite, Board board) {
+        int tileSize = (Gdx.graphics.getHeight() / board.fieldmatrix.length);
+        int x = xcoor;
+        int y = Math.abs(ycoor - (board.fieldmatrix.length - 1));
+
+        if (dir == Dir.NORTH) {
+            sprite.setPosition(tileSize * x, tileSize * y);
+            sprite.setRotation(0);
+        } else if (dir == Dir.EAST) {
+            sprite.setPosition(tileSize * x, tileSize * y);
+            sprite.setRotation(270);
+        } else if (dir == Dir.SOUTH) {
+            sprite.setPosition(tileSize * x, tileSize * y);
+            sprite.setRotation(180);
+        } else if (dir == Dir.WEST) {
+            sprite.setPosition(tileSize * x, tileSize * y);
+            sprite.setRotation(90);
+        }
+    }
+
 }

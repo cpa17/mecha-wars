@@ -5,8 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import htwk.mechawars.cards.Card;
-import htwk.mechawars.cards.CardFunctions;
+import htwk.mechawars.cards.Deck;
 
 /**
  * Testclass.
@@ -18,10 +17,10 @@ public class CardTests {
      */
     @Test
     public void testMovCount() {
-        Card[] testCards = CardFunctions.initDeck();
-
+        Deck testDeckMovCount = new Deck();
+        
         for (int i = 0; i < 84; i += 1) {
-            int x = testCards[i].getCardAttributeMovCount();
+            int x = testDeckMovCount.getDeck().get(i).getCardAttributeMovCount();
             assertTrue(-1 == x || 1 == x || 2 == x || 3 == x);
         }
     }
@@ -31,16 +30,16 @@ public class CardTests {
      */
     @Test
     public void testName() {
-        Card[] testCards = CardFunctions.initDeck();
+        Deck testDeckNames = new Deck();
 
         for (int i = 0; i < 84; i += 1) {
-            assertTrue(testCards[i].toString() == "1 Vor"
-                    || testCards[i].toString() == "2 Vor"
-                    || testCards[i].toString() == "3 Vor"
-                    || testCards[i].toString() == "Rueckwaerts"
-                    || testCards[i].toString() == "Rechtsdrehung"
-                    || testCards[i].toString() == "Kehrtwendung"
-                    || testCards[i].toString() == "Linksdrehung");
+            assertTrue(testDeckNames.getDeck().get(i).toString() == "1 Vor"
+                    || testDeckNames.getDeck().get(i).toString() == "2 Vor"
+                    || testDeckNames.getDeck().get(i).toString() == "3 Vor"
+                    || testDeckNames.getDeck().get(i).toString() == "Rueckwaerts"
+                    || testDeckNames.getDeck().get(i).toString() == "Rechtsdrehung"
+                    || testDeckNames.getDeck().get(i).toString() == "Kehrtwendung"
+                    || testDeckNames.getDeck().get(i).toString() == "Linksdrehung");
         }
     }
 
@@ -50,15 +49,15 @@ public class CardTests {
      */
     @Test
     public void testCardShuffle() {
-        Card[] testCardsUnshuffled = CardFunctions.initDeck();
-        Card[] testCardsShuffled;
+        Deck testDeckShuffled = new Deck();
+        testDeckShuffled.shuffle();
+        Deck testDeckUnshuffled = new Deck();
+        
         boolean isEqual = true;
 
-        testCardsShuffled = CardFunctions.shuffle(testCardsUnshuffled);
-
         for (int i = 0; i < 84; i += 1) {
-            if (testCardsUnshuffled[i]
-                    != testCardsShuffled[i]) {
+            if (testDeckUnshuffled.getDeck().get(i)
+                    != testDeckShuffled.getDeck().get(i)) {
                 isEqual = false;
             }
         }
@@ -70,11 +69,12 @@ public class CardTests {
      */
     @Test
     public void testCardCount() {
-        Card[] testCards = CardFunctions.initDeck();
+        Deck testDeckCardCount = new Deck();
         int counter = 0;
 
         for (int i = 0; i < 84; i += 1) {
-            if (testCards[i].getCardAttributeType().toString() == "Linksdrehung") {
+            if (testDeckCardCount.getDeck().get(i).getCardAttributeType().toString() 
+                    == "Linksdrehung") {
                 counter += 1;
             }
         }
@@ -87,40 +87,35 @@ public class CardTests {
      */
     @Test
     public void testPriority() {
-        Card[] testCards = CardFunctions.initDeck();
+        Deck testDeck = new Deck();
         boolean prio0 = false;
         boolean prio1 = false;
         boolean prio2 = false;
         boolean prio3 = false;
 
-        //for (int x = 0; x < 84; x += 1) {
-        //    System.out.println( testCards[x].toString() + "  "
-        //          + testCards[x].getCardAttributePriority());
-        //} -> Manuel Test of Priority
-
         for (int i = 0; i < 84; i += 1) {
             System.out.println("e" + i);
-            if (testCards[i].toString() == "Kehrtwendung") {
+            if (testDeck.getDeck().get(i).toString() == "Kehrtwendung") {
                 System.out.println("1 ja");
-                if (testCards[i].getCardAttributePriority() == 70) {
+                if (testDeck.getDeck().get(i).getCardAttributePriority() == 70) {
                     prio0 = true;
                     System.out.println("2 Ja");
                 }
             }
-            if (testCards[i].getCardAttributePriority() == 410) {
+            if (testDeck.getDeck().get(i).getCardAttributePriority() == 410) {
                 System.out.println("Hallo Prio");
-                if (testCards[i].toString() == "Linksdrehung") {
+                if (testDeck.getDeck().get(i).toString() == "Linksdrehung") {
                     prio1 = true;
                     System.out.println("1");
                 }
             }
-            if (testCards[i].getCardAttributePriority() == 510
-                    && testCards[i].toString() == "1 Vor") {
+            if (testDeck.getDeck().get(i).getCardAttributePriority() == 510
+                    && testDeck.getDeck().get(i).toString() == "1 Vor") {
                 prio2 = true;
                 System.out.println("2");
             }
-            if (testCards[i].getCardAttributePriority() == 80
-                    && testCards[i].toString() == "Rechtsdrehung") {
+            if (testDeck.getDeck().get(i).getCardAttributePriority() == 80
+                    && testDeck.getDeck().get(i).toString() == "Rechtsdrehung") {
                 prio3 = true;
                 System.out.println("3");
             }
