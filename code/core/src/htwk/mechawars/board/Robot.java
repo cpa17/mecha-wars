@@ -206,7 +206,6 @@ public class Robot {
         return checkPointNumber;
     }
 
-
     // Setters. ------------------------------------------------------------------------------
 
     /**
@@ -420,7 +419,7 @@ public class Robot {
      * Updates the shutDown texture depending on the amout of players.
      */
     private void createHud() {
-        hud = new Texture(Gdx.files.internal("parameters/hud.png"));
+        hud = new Texture(Gdx.files.internal("parameters/hudrr.png"));
     }
 
     /**
