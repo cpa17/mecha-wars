@@ -67,8 +67,7 @@ public class RepairSite extends Field {
     }
     
     @Override
-    public Robot turnAction(Robot robot) {
-        
+    public Robot turnAction(Robot robot) {       
         // On the field -> Repair
         robot.onRepairField();
         
@@ -79,7 +78,6 @@ public class RepairSite extends Field {
     
     @Override
     public Robot cardAction(Robot robot) {
-
         return robot;       
     }
     

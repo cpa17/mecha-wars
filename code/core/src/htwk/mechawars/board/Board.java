@@ -387,7 +387,7 @@ public class Board {
                     return;
                 }
                 robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-                robotPosition.cardAction(robot);
+                //robotPosition.cardAction(robot);
             }
         } else {
 
