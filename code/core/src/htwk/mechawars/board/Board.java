@@ -379,7 +379,8 @@ public class Board {
                 } else {
                     robot.turn(card.getCardAttributeMovCount());
                 }
-                if (robot.getXcoor() >= fieldmatrix[1].length || robot.getYcoor() >= fieldmatrix.length
+                if (robot.getXcoor() >= fieldmatrix[1].length
+                        || robot.getYcoor() >= fieldmatrix.length
                         || robot.getXcoor() < 0 || robot.getYcoor() < 0) {
                     robot.setXcoor(robot.getStartX());
                     robot.setYcoor(robot.getStartY());
