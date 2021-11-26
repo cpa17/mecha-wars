@@ -91,6 +91,8 @@ public class RepairSite extends Field {
         return true;
     }
 
+    // Function that overwrites the hash code but has no further meaning or functionality
+    // It only has to exist for the pipeline to work with the overridden equals function
     public int hashCode() {
         assert false : "hashCode not designed";
         return 42;
