@@ -1,6 +1,5 @@
 package htwk.mechawars.game;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
@@ -13,15 +12,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import htwk.mechawars.board.Robot;
 
+import static htwk.mechawars.game.GameScreen.board;
+import static htwk.mechawars.game.GameScreen.zugInitialisierung;
+import static htwk.mechawars.game.GameScreen.stage;
+import static htwk.mechawars.game.GameScreen.addButtonsToStage;
+import static htwk.mechawars.game.GameScreen.getStage;
+import static htwk.mechawars.game.GameScreen.addScrollPanelToStage;
+
 /**
  * Class that creates the ScrollPanel for the GameScreen.
  */
-public class Buttons extends GameScreen {
-
-    public Buttons(Game g) {
-        super(g);
-        // TODO Auto-generated constructor stub
-    }
+public class Buttons {
 
     /**
      * Creates the startButton.

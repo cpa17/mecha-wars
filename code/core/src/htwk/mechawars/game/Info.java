@@ -12,17 +12,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 
+import static htwk.mechawars.game.GameScreen.getStage;
+
 /**
  * Class that presents the surface of the info screen.
  */
-
-public class Info extends Buttons {
-
-    public Info(Game g) {
-        super(g);
-        // TODO Auto-generated constructor stub
-    }
-
+public class Info {
     /**
      * ClickListener for the infoButton.
      * @param skin Object of class Skin.

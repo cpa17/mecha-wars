@@ -11,10 +11,20 @@ public class MechaWars extends Game {
     /**
      * Method & Attribute for skipping the MainMenu when executing the Program.
      */
-    private static boolean isSkip = false; 
+    private static boolean isSkip = false;
 
     public static void setSkip(boolean skip) {
         isSkip = skip;
+    }
+
+    private static String map;
+
+    public static void setMap(String fileName) {
+        map = fileName;
+    }
+
+    public static String getMap() {
+        return map;
     }
 
     /**
@@ -22,8 +32,8 @@ public class MechaWars extends Game {
      */
     @Override
     public void create() {
-        if (isSkip == true) {
-            this.setScreen(new GameScreen(this));
+        if (isSkip) {
+            this.setScreen(new GameScreen(this, map));
         } else {
             this.setScreen(new MainMenu(this));
         }
