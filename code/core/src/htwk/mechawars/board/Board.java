@@ -334,19 +334,19 @@ public class Board {
         int min = 1;
         int max = 8;
         int randomNumber =  ThreadLocalRandom.current().nextInt(min, max) + min;
-        
+
         if (!isTest) {
             for (int i = 0; i < fieldmatrix.length; i++) {
                 for (int j = 0; j < fieldmatrix[i].length; j++) {
-                    if (fieldmatrix[i][j] instanceof StartField && 
+                    if (fieldmatrix[i][j] instanceof StartField &&
                             ((StartField) fieldmatrix[i][j]).getNumber() == randomNumber) {
                         x = fieldmatrix[i][j].getYcoor();
-                        y = fieldmatrix[i][j].getXcoor();    
+                        y = fieldmatrix[i][j].getXcoor();
                     }
                 }
             }
         }
-        
+
         robot.setXcoor(x);
         robot.setStartX(x);
         robot.setYcoor(y);
@@ -419,7 +419,7 @@ public class Board {
             robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
             robotPosition.action(robot);
         }
-        
+
         checkShutDown(robot);
         robot.setLastRound(robot.getShutDown());
         robot.setShutDown(robot.getNextRound());

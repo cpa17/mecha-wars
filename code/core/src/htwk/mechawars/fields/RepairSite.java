@@ -57,12 +57,21 @@ public class RepairSite extends Field {
         return this.type;
     }
 
+    /**
+     * Return the hole Tile.
+     * 
+     * @return a Texture.
+     */
     public Texture getTile() {
         return this.tile;
     }
     
     @Override
     public Robot action(Robot robot) {
+        
+        // On the field -> Repair
+        robot.onRepairField();
+        
         robot.setbackupCopyX(robot.getXcoor());
         robot.setbackupCopyY(robot.getYcoor());
         return robot;       

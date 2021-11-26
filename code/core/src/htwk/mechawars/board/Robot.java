@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 /**
  * Class that presents the robot and the player.
  */
-
 public class Robot {
     private Dir dir;
     private int xcoor;
@@ -84,127 +83,261 @@ public class Robot {
         return this;
     }
 
+    // Getters. ------------------------------------------------------------------------------
+
     /**
-     * Getters.
+     * Getter-Function to get the current amount of damagePoints.
+     *
+     * @return the current damagePoints as an Integer (int)
      */
     public int getDamagePoints() {
         return damagePoints;
     }
 
+    /**
+     * Getter-Function to get the current amount of lifePoints.
+     *
+     * @return the current lifePoints as an Integer (int)
+     */
     public int getLifePoints() {
         return lifePoints;
     }
 
+    /**
+     * Getter-Function to get the current status of the robot.
+     *
+     * @return the status of the robot (active/shutdown or not)
+     */
     public boolean getShutDown() {
         return shutDownMark;
     }
 
+    /**
+     * Getter-Function to get the current direction of the robot.
+     *
+     * @return the direction of the robot (as an Enum Dir)
+     */
     public Dir getDir() {
         return dir;
     }
 
+    /**
+     * Getter-Function to get the current y-coordinate of the robot.
+     *
+     * @return the y-coordinate as an int
+     */
     public int getYcoor() {
         return ycoor;
     }
 
+    /**
+     * Getter-Function to get the current x-coordinate of the robot.
+     *
+     * @return the x-coordinate as an int
+     */
     public int getXcoor() {
         return xcoor;
     }
 
+    /**
+     * Getter-Function to get the startposition (x-coordinate) of the robot.
+     *
+     * @return the x-coordinate of the startposition as an int
+     */
     public int getStartX() {
         return startX;
     }
 
+    /**
+     * Getter-Function to get the startposition (y-coordinate) of the robot.
+     *
+     * @return the y-coordinate of the startposition as an int
+     */
     public int getStartY() {
         return startY;
     }
 
+    /**
+     * Getter-Function to get ... .
+     *
+     * @return the ?
+     */
     public boolean getLastRound() {
         return lastRound;
     }
 
+    /**
+     * Getter-Function to get ... .
+     *
+     * @return the ?
+     */
     public boolean getNextRound() {
         return nextRound;
     }
 
+    /**
+     * Getter-Function to get the status of destruction of the robot (true or not).
+     *
+     * @return the status of the robot (destroyed or not) as a boolean
+     */
     public boolean getDestroyed() {
         return destroyed;
     }
 
+    /**
+     * Getter-Function to get the x-coordinate of BackupCopy from the robot.
+     *
+     * @return the x-coordinate of the BackupCopy (int)
+     */
     public int getbackupCopyX() {
         return backupCopyX;
     }
 
+    /**
+     * Getter-Function to get the y-coordinate of BackupCopy from the robot.
+     *
+     * @return the y-coordinate of the BackupCopy (int)
+     */
     public int getbackupCopyY() {
         return backupCopyY;
     }
-    
+
     public int getCheckPointNumber() {
         return checkPointNumber;
     }
-    
+
+    // Setters. ------------------------------------------------------------------------------
+
     /**
-     * Setters.
+     * Setter-Function for the direction of the robot.
+     *
+     * @param dir -> direction of the robot
      */
-    
+
     public void setDir(Dir dir) {
         this.dir = dir;
     }
 
+    /**
+     * Setter-Function for the active-status of the robot.
+     *
+     * @param on -> boolean that encodes the (active-)status
+     */
     public void setShutDown(boolean on) {
         shutDownMark = on;
     }
 
+    /**
+     * Setter-Function for the y-coordinate of the robot.
+     *
+     * @param ycoor -> Integer of the y-coordinate
+     */
     public void setYcoor(int ycoor) {
         this.ycoor = ycoor;
     }
 
+    /**
+     * Setter-Function for the x-coordinate of the robot.
+     *
+     * @param xcoor -> Integer of the x-coordinate
+     */
     public void setXcoor(int xcoor) {
         this.xcoor = xcoor;
     }
 
+    /**
+     * Setter-Function to set the startposition (x-coordinate) of the robot.
+     *
+     * @param startX -> Integer of the x-coordinate
+     */
     public void setStartX(int startX) {
         this.startX = startX;
     }
 
+    /**
+     * Setter-Function to set the startposition (y-coordinate) of the robot.
+     *
+     * @param startY -> Integer of the y-coordinate
+     */
     public void setStartY(int startY) {
         this.startY = startY;
     }
 
+    /**
+     * Setter-Function to set ??? .
+     *
+     * @param lastRound -> ?
+     */
     public void setLastRound(boolean lastRound) {
         this.lastRound = lastRound;
     }
 
+    /**
+     * Setter-Function to set ??? .
+     *
+     * @param nextRound -> ?
+     */
     public void setNextRound(boolean nextRound) {
         this.nextRound = nextRound;
     }
 
+    /**
+     * Setter-Function for the x-coordinate of the BackupCopy from the robot.
+     *
+     * @param position -> Integer of the x-coordinate
+     */
     public void setbackupCopyX(int position) {
         backupCopyX = position;
     }
 
+    /**
+     * Setter-Function for the y-coordinate of the BackupCopy from the robot.
+     *
+     * @param position -> Integer of the y-coordinate
+     */
     public void setbackupCopyY(int position) {
         backupCopyY = position;
     }
 
+    /**
+     * Setter-Function from the status of the robot (destroyed or not destroyed).
+     *
+     * @param destroyed -> boolean that encoded the status
+     */
     public void setDestroyed(boolean destroyed) {
         this.destroyed = destroyed;
     }
 
+    /**
+     * Increase the damagePoints of a robot by 1.
+     */
     public void damageUp() {
         damagePoints += 1;
     }
     
+    /**
+     * Reset damagePoints (to 0).
+     */
     public void damageReset() {
         damagePoints = 0;
     }
 
+    /**
+     * Decrease lifePoints by 1.
+     */
     public void lifeDown() {
         lifePoints -= 1;
     }
-    
+
     public void incCheckPointNumber() {
         checkPointNumber++;
+    }
+
+    /**
+     * Function to repair the Robot (only 1 Point).
+     */
+    public void onRepairField() {
+        damagePoints -= 1;
     }
 
     /**
@@ -286,7 +419,7 @@ public class Robot {
      * Updates the shutDown texture depending on the amout of players.
      */
     private void createHud() {
-        hud = new Texture(Gdx.files.internal("parameters/hud.png"));
+        hud = new Texture(Gdx.files.internal("parameters/hudrr.png"));
     }
 
     /**
@@ -330,4 +463,5 @@ public class Robot {
             sprite.setRotation(90);
         }
     }
+
 }
