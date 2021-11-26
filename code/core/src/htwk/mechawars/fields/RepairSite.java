@@ -67,7 +67,7 @@ public class RepairSite extends Field {
     }
     
     @Override
-    public Robot action(Robot robot) {
+    public Robot turnAction(Robot robot) {
         
         // On the field -> Repair
         robot.onRepairField();
@@ -76,6 +76,13 @@ public class RepairSite extends Field {
         robot.setbackupCopyY(robot.getYcoor());
         return robot;       
     }
+    
+    @Override
+    public Robot cardAction(Robot robot) {
+
+        return robot;       
+    }
+    
 
     @Override
     public boolean equals(Object obj) {

@@ -58,14 +58,25 @@ public class Field {
     }
     
     /**
-     * On the Field, a robot action can be done.
+     * On the Field, a turn action can be done.
      * 
      * @param robot -> give the function the robot, that have an action.
      * @return the instance robot
      */
-    public Robot action(Robot robot) {        
+    public Robot turnAction(Robot robot) {        
         return robot; 
     }
+    
+    /**
+     * On the Field, a card action can be done.
+     * 
+     * @param robot -> give the function the robot, that have an action.
+     * @return the instance robot
+     */
+    public Robot cardAction(Robot robot) {        
+        return robot; 
+    }
+    
 
     @Override
     public boolean equals(Object obj) {

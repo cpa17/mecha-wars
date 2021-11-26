@@ -3,6 +3,8 @@ package htwk.mechawars.fields;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
+import htwk.mechawars.board.Robot;
+
 /**
  * Class of a Side Barrier.
  */
@@ -52,6 +54,18 @@ public class BarrierSide extends Field {
         return this.tile;
     }
 
+    @Override
+    public Robot turnAction(Robot robot) {
+
+        return robot;       
+    }
+    
+    @Override
+    public Robot cardAction(Robot robot) {
+
+        return robot;       
+    }
+    
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {

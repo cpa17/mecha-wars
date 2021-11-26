@@ -3,6 +3,8 @@ package htwk.mechawars.fields;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
+import htwk.mechawars.board.Robot;
+
 /**
  * Class of a Blockade.
  */
@@ -36,8 +38,8 @@ public class Blockade extends Field {
             this.tile = new Texture(Gdx.files.internal("mapAssets/" + "blockade/"
                     + "Blockade0" + String.valueOf(type) + ".png"));
         }
-    }
-
+    }  
+    
     @Override
     public String toString() {
         String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor
@@ -53,6 +55,18 @@ public class Blockade extends Field {
         return this.tile;
     }
 
+    @Override
+    public Robot turnAction(Robot robot) {
+
+        return robot;       
+    }
+    
+    @Override
+    public Robot cardAction(Robot robot) {
+
+        return robot;       
+    }
+    
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
