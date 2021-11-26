@@ -2,6 +2,7 @@ package htwk.mechawars.board;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
@@ -17,6 +18,7 @@ public class Robot {
     private int damagePoints;
     private int backupCopyX;
     private int backupCopyY;
+    private int checkPointNumber = 1;
     private boolean shutDownMark;
     private boolean backupDraw;
     private boolean lastRound;
@@ -199,7 +201,11 @@ public class Robot {
     public int getbackupCopyY() {
         return backupCopyY;
     }
-
+    
+    public int getCheckPointNumber() {
+        return checkPointNumber;
+    }
+    
     // Setters. ------------------------------------------------------------------------------
 
     /**
@@ -321,6 +327,10 @@ public class Robot {
     public void lifeDown() {
         lifePoints -= 1;
     }
+    
+    public void incCheckPointNumber() {
+        checkPointNumber++;
+    }
 
     /**
      * Function to repair the Robot (only 1 Point).
@@ -328,7 +338,7 @@ public class Robot {
     public void onRepairField() {
         damagePoints -= 1;
     }
-
+    
     /**
      * Updates the life texture depening on the current lifePoints of the robot.
      */
@@ -424,10 +434,32 @@ public class Robot {
             backupDraw = false;
             batch.draw(new Texture(Gdx.files.internal("robot.png")), backupCopyX, backupCopyY);
         }
-        batch.draw(hud, 755, 0);
-        batch.draw(life, 765, 5);
-        batch.draw(damage, 840, 5);
-        batch.draw(shutDown, 915, 5);
+        batch.draw(hud, 754, 15);
+        batch.draw(life, 763, 23);
+        batch.draw(damage, 838, 23);
+        batch.draw(shutDown, 914, 23);
     }
-    
+
+    /**
+     * Function that draws the robot on the playing field.
+     */
+    public void drawRobot(Sprite sprite, Board board) {
+        int tileSize = (Gdx.graphics.getHeight() / board.matrix.length);
+        int x = xcoor;
+        int y = Math.abs(ycoor - (board.matrix.length - 1));
+
+        if (dir == Dir.NORTH) {
+            sprite.setPosition(tileSize * x, tileSize * y);
+            sprite.setRotation(0);
+        } else if (dir == Dir.EAST) {
+            sprite.setPosition(tileSize * x, tileSize * y);
+            sprite.setRotation(270);
+        } else if (dir == Dir.SOUTH) {
+            sprite.setPosition(tileSize * x, tileSize * y);
+            sprite.setRotation(180);
+        } else if (dir == Dir.WEST) {
+            sprite.setPosition(tileSize * x, tileSize * y);
+            sprite.setRotation(90);
+        }
+    }
 }

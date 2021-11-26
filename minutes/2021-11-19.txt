@@ -1,0 +1,78 @@
+19.11.2021 - 14:00 - Review + Retrospektive 4. Sprint "Robo Rally"
+
+teilweise anwesend: Marc
+Anwesend: Alle anderen
+Protokollführung: Antonia Swiridoff
+
+
+## Organisatorisches
+
+  - Sprint-Planning am Montag den 22.11. um 15 Uhr
+    -> leider war es nicht möglich einen Termin zu finden an dem alle können (also fehlt jetzt Antonia)
+    -> es wird aber vermutlich sowieso wenig zu Schätzen geben, da durch den verkürzten Sprint viele 
+       Tickets in den nächsten rutschen, die schon geschätzt sind
+  - Kick-Off Meeting schon am Mittwoch den 24.11. 11:30
+  - morgen, Samstag den 20.11.
+    -> Treffen in der Bar "Peter K" (Teambuilding und so)
+    -> recht spontan da Montag die Bars vermutlich wieder schließen
+
+
+## Tickets
+
+ gemergtet
+  - MW-53: Umwandulng der CardFunctions-Klasse in eine Deck-Klasse
+  - MW-20: Als Spieler möchte ich eine Anzeige für verschiedene Parameter sehen können
+  - MW-56: Aufteilung der GameScreen-Klasse in mehrere Module
+  - MW-62: Refactor der Board-Klasse
+  - MW-58: Als Spieler möchte ich, dass mein Roboter Flaggen erreichen kann
+
+ fertig aber nicht gemergt
+  - MW-52: Übersetzung der Klasse "Ausfuehrungslogik" zu "Zuginitialisierung"
+  - MW-17: Als Spieler will ich sehen können, wie mein Roboter die geplanten Schritte abarbeitet
+  - MW-40: Abfrage beim Schließen des Programms
+  - MW-23: Als Spieler möchte ich zum Spielbeginn zufällig auf einer der definierten Startpositionen stehen
+  - MW-49: Als Entwickler möchte ich mehrere Spieler-Instanzen, um Interaktionen zu testen
+  - MW-32: Als Spieler möchte ich einen Schadenspunkt verlieren, wenn ich nach allen Zügen auf einem Reparaturfeld stehe
+
+ nicht fertig
+  - MW-60: Als Spieler möchte ich, das Register blockiert werden, wenn ich zuviel Schaden erhalten habe
+  - MW-61: Vollständiges Ersetzen der int-Matrix aus der Boardklasse durch die neue fieldmatrix
+    -> heute oder morgen fertig
+  - MW-19: Als Entwickler möchte ich das Spiel direkt mit einer Karte starten können
+    -> noch einen halbe Sprint
+  - MW-63: Implementation der Spielfelder
+    -> noch nicht begonnen
+
+
+## Retrospektive
+
+ Glad
+  - dass alle Meetings online sind ist zeitlich vorteilhaft
+  - schnelle Problemlösung
+  - Tickets relativ bis sehr klar abgegrenzt
+  - Tickets waren teilweise einfacher als erwartet
+  - Code in deutlich besserem Zustand als vor dem Sprint, weil wir viel überarbeitet und verbessert haben
+  - Spiel ist nach diesem Sprint spielbar
+  - Begeisterung über Tills Problemlösungsfähigkeiten
+
+ Sad
+  - zu viele Tage zwischen Planning und Kick-Off (anonym gepostet, fand wenig Zustimmung)
+  - wir waren immer noch nicht zusammen irgendwo ein Bier trinken
+  - leider sehr kurzer Sprint
+  - langfristiges anpassen der SPrints an die feststehenden Termine in Präsenz
+ 
+ Mad
+  - GameScreen wurde aufgeteilt nachdem manche schon an ihrem Branch gearbeitet hatten
+  - verkürzter Sprint
+  - Meeting verschlafen
+  - Terminstress mit Herrn Höppner
+  - Terminfindung
+  
+
+
+
+
+
+
+ 
+
