@@ -24,8 +24,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 
 /**
  * Class that presents the game board.
@@ -353,39 +354,70 @@ public class Board {
         robot.setStartY(y);
         robot.setDir(dir);
     }
-
+    
     /**
-     * Method that moves the robot in the matrix.
-     *
+     * This is a wrapper-function for the tests.
+     * 
      * @param phase List of cards
      * @param robot the robot that should move
      */
     public void move(LinkedList<Card> phase, Robot robot) {
         move(phase, robot, false);
     }
-
+    
     /**
      * Method that moves the robot in the matrix.
-     *
+     * 
      * @param phase List of cards
      * @param robot the robot that should move
      */
-    public void move(LinkedList<Card> phase, Robot robot, boolean isTest) {
-        for (Card card : phase) {
-            if (card.getCardAttributeType() == Type.mov) {
-                robot.moveInDirection(card.getCardAttributeMovCount());
-            } else {
-                robot.turn(card.getCardAttributeMovCount());
+    public void move(LinkedList<Card> phase, Robot robot, boolean booleanForTests) {
+
+        checkShutDown(robot);
+
+        if (booleanForTests) {
+            for (Card card : phase) {
+                if (card.getCardAttributeType() == Type.mov) {
+                    robot.moveInDirection(card.getCardAttributeMovCount());
+                } else {
+                    robot.turn(card.getCardAttributeMovCount());
+                }
+                if (robot.getXcoor() >= matrix[1].length || robot.getYcoor() >= matrix.length
+                        || robot.getXcoor() < 0 || robot.getYcoor() < 0) {
+                    robot.setXcoor(robot.getStartX());
+                    robot.setYcoor(robot.getStartY());
+                    return;
+                }
             }
-            if (robot.getXcoor() >= matrix[1].length || robot.getYcoor() >= matrix.length
-                    || robot.getXcoor() < 0 || robot.getYcoor() < 0) {
-                robot.setXcoor(robot.getStartX());
-                robot.setYcoor(robot.getStartY());
-                return;
+        } else {
+
+            // delay in seconds, increments for each phase in the linked list for another second
+            int i = 0;
+            for (Card card : phase) {
+                Timer.schedule(new Task() {
+
+                    @Override
+                    public void run() {
+                        if (card.getCardAttributeType() == Type.mov) {
+                            robot.moveInDirection(card.getCardAttributeMovCount());
+                        } else {
+                            robot.turn(card.getCardAttributeMovCount());
+                        }
+                        if (robot.getXcoor() >= matrix[1].length ||
+                                robot.getYcoor() >= matrix.length || 
+                                robot.getXcoor() < 0 || 
+                                robot.getYcoor() < 0) {
+                            robot.setXcoor(robot.getStartX());
+                            robot.setYcoor(robot.getStartY());
+                            return;
+                        }
+                    }
+                }, i);
+                i += 1;
             }
         }
 
-        if (!isTest) {
+        if (!booleanForTests) {
             robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
             robotPosition.action(robot);
         }
@@ -393,6 +425,7 @@ public class Board {
         checkShutDown(robot);
         robot.setLastRound(robot.getShutDown());
         robot.setShutDown(robot.getNextRound());
+
         checkDoubleDamage(robot);
     }
 
@@ -426,3 +459,4 @@ public class Board {
     }
 
 }
+
