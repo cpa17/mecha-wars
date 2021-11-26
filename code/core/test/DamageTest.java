@@ -28,7 +28,7 @@ public class DamageTest {
         *   LastRound: false
         *   Life: 3
         * */
-
+        
         assertEquals(0, robot.getDamagePoints());
         assertFalse(robot.getShutDown());
         assertEquals(3, robot.getLifePoints());
