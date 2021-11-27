@@ -3,6 +3,8 @@ package htwk.mechawars.fields;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
+import htwk.mechawars.board.Robot;
+
 /**
  * Class of a Corner Barrier.
  */
@@ -36,7 +38,7 @@ public class BarrierCorner extends Field {
                     + "BarrierCorner0" + String.valueOf(corner) + ".png"));
         }
     }
-
+    
     @Override
     public String toString() {
         String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor
@@ -53,6 +55,16 @@ public class BarrierCorner extends Field {
         return this.tile;
     }
 
+    @Override
+    public Robot turnAction(Robot robot) {
+        return robot;       
+    }
+    
+    @Override
+    public Robot cardAction(Robot robot) {
+        return robot;       
+    }
+    
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {

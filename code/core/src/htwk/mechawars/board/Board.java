@@ -386,6 +386,8 @@ public class Board {
                     robot.setYcoor(robot.getStartY());
                     return;
                 }
+                robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+                //robotPosition.cardAction(robot);
             }
         } else {
 
@@ -417,7 +419,7 @@ public class Board {
 
         if (!isTest) {
             robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-            robotPosition.action(robot);
+            robotPosition.turnAction(robot);
         }
 
         checkShutDown(robot);
