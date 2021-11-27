@@ -425,6 +425,8 @@ public class Board {
         robot.setShutDown(robot.getNextRound());
 
         checkDoubleDamage(robot);
+
+        checkLaser(robot);
     }
 
     /**
@@ -454,6 +456,24 @@ public class Board {
         if (robot.getNextRound() || robot.getShutDown()) {
             robot.damageReset();
         }
+    }
+
+    /**
+     * Method that checks whether the robot is being shot at by a laser.
+     *
+     * @param robot
+     */
+    private void checkLaser(Robot robot) {
+
+        int x = robot.getXcoor();
+        int y = robot.getYcoor();
+
+        if (fieldmatrix[x][y] instanceof Laser) {
+            robot.damageUp();
+        }
+
+        System.out.println("x = " + x + ", y = " + y);
+        System.out.println(fieldmatrix[x][y].getClass());
     }
 }
 
