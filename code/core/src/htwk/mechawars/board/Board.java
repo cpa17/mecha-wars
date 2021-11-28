@@ -420,13 +420,15 @@ public class Board {
             robotPosition.action(robot);
         }
 
+        //checkLaser(robot);
+
         checkShutDown(robot);
         robot.setLastRound(robot.getShutDown());
         robot.setShutDown(robot.getNextRound());
 
         checkDoubleDamage(robot);
 
-        checkLaser(robot);
+        System.out.println("x = " + robot.getXcoor() + ", y = " + robot.getYcoor());
     }
 
     /**
@@ -463,17 +465,17 @@ public class Board {
      *
      * @param robot
      */
-    private void checkLaser(Robot robot) {
+    public void checkLaser(Robot robot) {
 
         int x = robot.getXcoor();
         int y = robot.getYcoor();
 
-        if (fieldmatrix[x][y] instanceof Laser) {
+        if (this.fieldmatrix[x][y] instanceof Laser) {
             robot.damageUp();
         }
 
         System.out.println("x = " + x + ", y = " + y);
-        System.out.println(fieldmatrix[x][y].getClass());
+        System.out.println(this.fieldmatrix[x][y].getClass());
     }
 }
 
