@@ -417,16 +417,23 @@ public class Board {
             }
         }
 
-        if (!isTest) {
-            robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-            robotPosition.turnAction(robot);
-        }
+        // Delay of 5 seconds for the code to run so that the robot has reached his final position
+        Timer.schedule(new Task() {
 
-        checkShutDown(robot);
-        robot.setLastRound(robot.getShutDown());
-        robot.setShutDown(robot.getNextRound());
+            @Override
+            public void run() {
+                if (!isTest) {
+                    robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+                    robotPosition.turnAction(robot);
+                }
 
-        checkDoubleDamage(robot);
+                checkShutDown(robot);
+                robot.setLastRound(robot.getShutDown());
+                robot.setShutDown(robot.getNextRound());
+
+                checkDoubleDamage(robot);
+            }
+        }, 5);
     }
 
     /**
