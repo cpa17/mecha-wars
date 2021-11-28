@@ -1,5 +1,5 @@
 playerNumber: 4
-playerposition: 0-2-3-0
-playerposition: 1-5-6-1
-playerposition: 2-6-5-1
-playerposition: 3-7-7-0
+playerposition: 0-0-0-1
+playerposition: 1-1-1-1
+playerposition: 2-2-2-1
+playerposition: 3-3-3-1

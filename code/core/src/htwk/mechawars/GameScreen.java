@@ -1,7 +1,5 @@
 package htwk.mechawars;
 
-import java.io.IOException;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -11,24 +9,17 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
-
 import htwk.mechawars.board.Board;
 import htwk.mechawars.board.Dir;
 import htwk.mechawars.board.Robot;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.CardFunctions;
+
+import java.io.IOException;
 
 /**
  * Class that presents the surface of the game screen.
@@ -60,7 +51,7 @@ public class GameScreen implements Screen {
      */
     public GameScreen() {
         industrialTile = new Texture("industrialTile.png");
-        
+        ConfigReader.setPlayerNumber(MechaWars.getPlayerNumber());
         try {
             ConfigReader.readConfigs();
         } catch (IOException e) {
@@ -68,7 +59,7 @@ public class GameScreen implements Screen {
             e.printStackTrace();
         }
 
-        System.out.println("playernumber:  " + ConfigReader.getPlayerNumber());
+        System.out.println("playernumber: " + ConfigReader.getPlayerNumber());
         players = createRobots(ConfigReader.getPlayerNumber());
         batch = new SpriteBatch();
         robotSprites = createSprites(ConfigReader.getPlayerNumber());
@@ -78,7 +69,6 @@ public class GameScreen implements Screen {
         addButtonsToStage(skin);
         addScrollPanelToStage(skin);
         startRobots(players);
-        board.startRobot(5, 5, Dir.NORTH, player);
     }
 
     private Robot[] createRobots(int numberRobots) {

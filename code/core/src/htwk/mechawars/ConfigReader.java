@@ -1,13 +1,10 @@
 package htwk.mechawars;
 
-import java.awt.Point;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+
+import java.awt.Point;
+import java.io.IOException;
 
 /**
  * Class that reads the config File and saves the configurations in fields.
@@ -98,6 +95,18 @@ public class ConfigReader {
     public static int getPlayerNumber() {
         int playerNumberCopy = playerNumber;
         return playerNumberCopy;
+    }
+
+    public static void setPlayerNumber(int playerNumber) {
+        String player = String.valueOf(playerNumber);
+
+        FileHandle file = Gdx.files.local("..//configs//Startupconfig.txt");
+        file.writeString("playerNumber: "+player, false);
+
+        for(int current = 0; current<playerNumber; current++){
+            file.writeString("\nplayerposition: "+current+"-"+current+"-"+current+"-"+"1", true);
+        }
+
     }
 
 }

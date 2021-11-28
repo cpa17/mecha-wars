@@ -1,7 +1,5 @@
 package htwk.mechawars;
 
-import java.io.IOException;
-
 import com.badlogic.gdx.Game;
 
 /**
@@ -14,12 +12,21 @@ public class MechaWars extends Game {
      * Method & Attribute for skipping the MainMenu when executing the Program.
      */
     private static boolean isSkip = false; 
-    
+
+    private static int playerNumber;
 
 
 
     public static void setSkip(boolean skip) {
         isSkip = skip;
+    }
+
+    public static void setPlayerNumber(int playerNr) {
+        playerNumber = playerNr;
+    }
+
+    public static int getPlayerNumber() {
+        return playerNumber;
     }
 
     /**

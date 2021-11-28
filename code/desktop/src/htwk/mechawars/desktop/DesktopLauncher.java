@@ -1,21 +1,19 @@
 package htwk.mechawars.desktop;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.management.ManagementFactory;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-
-import htwk.mechawars.ConfigReader;
 import htwk.mechawars.MechaWars;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.lang.management.ManagementFactory;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Class containing the runner for the desktop frontend.
@@ -35,13 +33,15 @@ public class DesktopLauncher implements Runnable {
     @Option(names = { "-s", "--skip" },
             description = "Starts the Game, without showing the MainMenu at first.")
     boolean skip;
-    
+
+    @Option(names = { "-p", "--player" }, description = "Number of Players")
+    int playerNumber = 4;
 
     /**
      * Main class, for the new CommandLine.
      */
     public static void main(String[] args) {
-        if (restartJvm()) {
+        if (restartJvm(args)) {
             return;
         }
         System.exit(new CommandLine(new DesktopLauncher()).execute(args));
@@ -54,6 +54,7 @@ public class DesktopLauncher implements Runnable {
     @Override
     public void run() {
         MechaWars.setSkip(skip);
+        MechaWars.setPlayerNumber(playerNumber);
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
         config.setWindowedMode(1280, 720);
         new Lwjgl3Application(new MechaWars(), config);
@@ -62,7 +63,7 @@ public class DesktopLauncher implements Runnable {
     /**
      * Method, for fixing bug with macOS.
      */
-    public static boolean restartJvm() {
+    public static boolean restartJvm(String[] args) {
 
         String osName = System.getProperty("os.name");
 
@@ -97,6 +98,7 @@ public class DesktopLauncher implements Runnable {
         jvmArgs.add("-cp");
         jvmArgs.add(classpath);
         jvmArgs.add(mainClass);
+        Collections.addAll(jvmArgs, args);
 
         // if you don't need console output, just enable these two lines
         // and delete bits after it. This JVM will then terminate.
