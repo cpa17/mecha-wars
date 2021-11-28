@@ -1,0 +1,23 @@
+Protokoll vom 08.11.2021 - Planning Meeting
+
+Anwesenheit - alle außer Till
+
+bis Weihnachten 2 Sprints
+- Ziel : klassischer Spielmodus spielbar -> Kernfunktionalität vorhanden
+
+in Weihnachtsszeit - 1-2 Plannings
+
+nächstes Semester extras - KI, Map-
+Editor,...
+
+*********************************************
+
+Ziele nächster Sprint:
+
+Code-Maintenance:
+Refacoring, bessere Datenstrukturen, zusammenführen von Klassen
+
+Implementation des Zyklus:
+Spiel kann gewonnen werden(Flaggen-Mechanik)
+
+Besprechung der einzelnen neuen Tickets - Aufwandsschätzung

@@ -1,293 +1,29 @@
-package htwk.mechawars;
+package htwk.mechawars.game;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.ScreenUtils;
-import htwk.mechawars.board.Board;
-import htwk.mechawars.board.Dir;
-import htwk.mechawars.board.Robot;
-import htwk.mechawars.cards.Card;
-import htwk.mechawars.cards.CardFunctions;
 
-import java.io.IOException;
+import static htwk.mechawars.game.GameScreen.getStage;
 
 /**
- * Class that presents the surface of the game screen.
+ * Class that presents the surface of the info screen.
  */
-public class GameScreen implements Screen {
-
-    private Texture industrialTile;
-
-    private Stage stage;
-
-    private SpriteBatch batch;
-    private Sprite[] robotSprites;
-    private ZugInitialisierung zugInitialisierung = new ZugInitialisierung();
-
-    private int[] cardOrder = { -1, -1, -1, -1, -1};
-    private int pressCounter = 0;
-    private int damagePoints = 0;
-    private int choosableCardCount = 9;
-    private Card[] deck;
-
-    private Board board = Board.fromFile("map.txt");
-    private Robot player = new Robot();
-    private Robot[] players;
-
-    private TextButton[] buttons = new TextButton[choosableCardCount];
-
+public class Info {
     /**
-     * Constructor of class GameScreen.
+     * ClickListener for the infoButton.
+     * @param skin Object of class Skin.
      */
-    public GameScreen() {
-        industrialTile = new Texture("industrialTile.png");
-        ConfigReader.setPlayerNumber(MechaWars.getPlayerNumber());
-        try {
-            ConfigReader.readConfigs();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        System.out.println("playernumber: " + ConfigReader.getPlayerNumber());
-        players = createRobots(ConfigReader.getPlayerNumber());
-        batch = new SpriteBatch();
-        robotSprites = createSprites(ConfigReader.getPlayerNumber());
-        stage = new Stage();
-        Gdx.input.setInputProcessor(stage);
-        Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-        addButtonsToStage(skin);
-        addScrollPanelToStage(skin);
-        startRobots(players);
-    }
-
-    private Robot[] createRobots(int numberRobots) {
-        Robot[] robots = new Robot[numberRobots];
-        for (int i = 0; i < robots.length; i++) {
-            robots[i] = new Robot();
-        }
-        return robots;
-    }
-    
-    private Sprite[] createSprites(int numberRobots) {
-        Sprite[] sprites = new Sprite[numberRobots];
-        for (int i = 0; i < sprites.length; i++) {
-            sprites[i] = new Sprite(new Texture("..//assets//robotskins//robot" + (i + 1) 
-                    + ".png"));
-        }
-        return sprites;
-    }
-    
-    private void startRobots(Robot[] players) {
-        for (int i = 0; i < players.length; i++) {
-            board.startRobot(ConfigReader.getPlayerStartingPositions()[i].x, 
-                    ConfigReader.getPlayerStartingPositions()[i].y, Dir.NORTH, players[i]);
-        }
-        
-    }
-
-    /**
-     * Function that adds the scroll panel to the Stage.
-     *
-     * @param skin Object of class Skin which was initialized in the constructor.
-     */
-    public void addScrollPanelToStage(Skin skin) {
-        int containerBoundsX = (Gdx.graphics.getWidth()
-                - ((Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 2)) + 10;
-        int containerBoundsY = 10;
-        int containerWidth = ((Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 2) - 20;
-        int containerHeight = 600;
-
-        Table container = new Table();
-        stage.addActor(container);
-        container.setBounds(containerBoundsX, containerBoundsY, containerWidth, containerHeight);
-
-        Table table = new Table();
-
-        final ScrollPane scrollPanel = new ScrollPane(table, skin);
-
-        // Array of Cards created
-        deck = CardFunctions.initDeck();
-        // shuffle Deck
-        deck = CardFunctions.shuffle(deck);
-
-        for (int cardPrintCounter = 0; cardPrintCounter < choosableCardCount;
-                cardPrintCounter += 1) {
-            Card currentCard = deck[cardPrintCounter];
-            buttons[cardPrintCounter] = new TextButton(currentCard.getCardAttributePriority()
-                    + " - " + currentCard, skin);
-            table.row();
-            table.add(buttons[cardPrintCounter]);
-            int buttonNumber = (cardPrintCounter + 1);
-
-            // Button-ClickListener
-            buttons[cardPrintCounter].addListener(new ClickListener() {
-                public void clicked(InputEvent event, float x, float y) {
-                    if (buttonClickOrder(buttonNumber)) {
-                        zugInitialisierung.addCard(currentCard);
-                    }
-                }
-            });
-        }
-
-        container.add(scrollPanel).grow();
-    }
-
-    /**
-     * If there were less than 5 valid button clicks: paints button green and adds
-     *  " | Nr: " with the corresponding Number of at what time it was clicked.
-     * @param buttonNumber -> ID-number of clicked button
-     */
-    private boolean buttonClickOrder(int buttonNumber) {
-        if (pressCounter < 5 - damagePoints) {
-            // write the number of the button in cardOrder at pressCounter
-            for (int i = (pressCounter - 1); i >= 0; i -= 1) {
-                if (cardOrder[i] == buttonNumber) {
-                    return false;
-                }
-            }
-
-            cardOrder[pressCounter] = buttonNumber;
-            pressCounter += 1;
-            
-            buttons[buttonNumber - 1].setColor(Color.GREEN);
-            buttons[buttonNumber - 1].setText(buttons[buttonNumber - 1].getText()
-                    + " | Nr: " + (pressCounter));
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Initialize cardOrder[] to non reachable values.
-     */
-    private void cardOrderClear() {
-        cardOrder[0] = -1;
-        cardOrder[1] = -1;
-        cardOrder[2] = -1;
-        cardOrder[3] = -1;
-        cardOrder[4] = -1;
-        buttonsClean();
-        pressCounter = 0;
-    }
-
-    /**
-     *  Renames every button to " - " and sets the button color to light grey.
-     */
-    private void buttonsClean() {
-        for (int i = 0; i < choosableCardCount; i += 1) {
-            buttons[i].setColor(Color.LIGHT_GRAY);
-            buttons[i].setText(deck[i].getCardAttributePriority() + " - "
-                    + deck[i]);
-        }
-    }
-
-    private void deactivateButtons() {
-        for (TextButton button : buttons) {
-            button.setTouchable(Touchable.disabled);
-        }
-    }
-
-    private void activateButtons() {
-        for (TextButton button : buttons) {
-            button.setTouchable(Touchable.enabled);
-        }
-    }
-
-    /**
-     * Function that adds the buttons to the Stage.
-     *
-     * @param skin Object of class Skin which was initialized in the constructor.
-     */
-    public void addButtonsToStage(Skin skin) {
-
-        Button startExecutionButton = new TextButton("Ausfuehrung starten", skin);
-        Button endGameButton = new TextButton("Spiel beenden", skin);
-
-        startExecutionButton.setSize(160, 43);
-        endGameButton.setSize(160, 43);
-
-        int startExecutionButtonX = Gdx.graphics.getHeight()
-                + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
-        int startExecutionButtonY = Gdx.graphics.getHeight() - 100;
-        int endGameButtonX = Gdx.graphics.getHeight()
-                + (((Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) * 2) / 3) - 64;
-        int endGameButtonY = Gdx.graphics.getHeight() - 100;
-
-        startExecutionButton.setPosition(startExecutionButtonX, startExecutionButtonY);
-        endGameButton.setPosition(endGameButtonX, endGameButtonY);
-
-
-        startExecutionButton.addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y) {
-                //If All Cards are chosen
-                if (cardOrder[4 - damagePoints] != -1) {
-                    deactivateButtons();
-                    zugInitialisierung.initialisiereBewegung();
-
-                    board.move(zugInitialisierung.getList(), players);
-
-                    zugInitialisierung.resetList();
-                    startExecutionButton.setColor(Color.LIGHT_GRAY);
-                    cardOrderClear();
-                    activateButtons();
-                } else {
-                    startExecutionButton.setColor(Color.RED);
-                }
-            }
-        });
-
-        endGameButton.addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.exit();
-            }
-        });
-
-        stage.addActor(startExecutionButton);
-        stage.addActor(endGameButton);
-
-        // add Button to remove cardOrder
-        Button removeCardOrder = new TextButton("Loesche\nKartenreihenfolge", skin);
-
-        removeCardOrder.setSize(128, 43);
-        int removeCardOrderX = Gdx.graphics.getHeight()
-                + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
-        int removeCardOrderY = Gdx.graphics.getHeight() - 200;
-
-        removeCardOrder.setPosition(removeCardOrderX, removeCardOrderY);
-
-        removeCardOrder.addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y) {
-                cardOrderClear();
-                zugInitialisierung.resetList();
-            }
-        });
-
-        stage.addActor(removeCardOrder);
-
-        // add Button for hint and infos
-        Button buttonInfo = new TextButton("Infos", skin);
-
-        int a = 60;     // width
-        int b = 40;     // height
-
-        buttonInfo.setSize(a, b);
-        int buttonInfoX = Gdx.graphics.getWidth() - (a + 10);
-        int buttonInfoY = Gdx.graphics.getHeight() - (b + 10);
-
-        buttonInfo.setPosition(buttonInfoX, buttonInfoY);
-
-        buttonInfo.addListener(new ClickListener() {
+    protected static ClickListener infoListener(Skin skin) {
+        return new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 new Dialog("Infos und Hinweise", skin) {
                     // best constructor for Dialog in LibGDX
@@ -507,7 +243,7 @@ public class GameScreen implements Screen {
                         table.row();
                         table.add(rotatingDoubleMergingConveyorTile).align(Align.right);
                         table.add(rotatingDoubleMergingConveyorTileText).width(650)
-                        .height(twoLine);
+                                .height(twoLine);
                         table.row();
                         table.add(pusherTile).align(Align.right);
                         table.add(pusherTileText).width(650).height(fourLine);
@@ -541,115 +277,8 @@ public class GameScreen implements Screen {
                         System.out.println(object);
                     }
 
-                }.show(stage); //.setHeight(600);
+                }.show(getStage()); //.setHeight(600);
             }
-        });
-
-        stage.addActor(buttonInfo);
+        };
     }
-
-
-    @Override
-    public void show() {
-
-    }
-
-    @Override
-    public void render(float delta) {
-        ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
-        batch.begin();
-        drawPlayingField();
-        drawRobot();
-        for (Sprite sprite : robotSprites) {
-            sprite.draw(batch);
-        }
-        batch.end();
-        stage.act();
-        stage.draw();
-    }
-
-    /**
-     * Function that draws the robot on the playing field.
-     */
-    public void drawRobot() {
-        int tileSize = (Gdx.graphics.getHeight() / board.matrix.length);
-        for (int i = 0; i < players.length; i++) {
-            int x = players[i].getXcoor();
-            int y = Math.abs(players[i].getYcoor() - (board.matrix.length - 1));
-            if (players[i].getDir() == Dir.NORTH) {
-                robotSprites[i].setPosition(tileSize * x, tileSize * y);
-                robotSprites[i].setRotation(0);
-            } else if (players[i].getDir() == Dir.EAST) {
-                robotSprites[i].setPosition(tileSize * x, tileSize * y);
-                robotSprites[i].setRotation(270);
-            } else if (players[i].getDir() == Dir.SOUTH) {
-                robotSprites[i].setPosition(tileSize * x, tileSize * y);
-                robotSprites[i].setRotation(180);
-            } else if (players[i].getDir() == Dir.WEST) {
-                robotSprites[i].setPosition(tileSize * x, tileSize * y);
-                robotSprites[i].setRotation(90);
-            } 
-        }
-    }
-
-    /**
-     * Function that draws the playing field.
-     */
-    public void drawPlayingField() {
-        int x = 0;
-
-        for (int i = 0; i < board.matrix.length; i++) {
-            for (int j = 0; j < board.matrix[i].length; j++) {
-
-                int p = board.matrix[i][j];
-
-                int t = Gdx.graphics.getHeight() / board.matrix.length; //height of one tile
-                int b = Gdx.graphics.getHeight(); //height of the entire board
-                int c = (i + 1) * t; //the current height in the loop
-                int r = b - c; //the result of the board height minus the current height
-
-                switch (p) {
-                    case(0):
-                        batch.draw(industrialTile, x, r);
-                        break;
-                    default:
-                        batch.draw(industrialTile, x, r);
-                        break;
-                }
-
-                x = x + (Gdx.graphics.getHeight() / board.matrix.length);
-            }
-
-            x = 0;
-        }
-    }
-
-    @Override
-    public void resize(int width, int height) {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void dispose() {
-        industrialTile.dispose();
-        for (Sprite sprite : robotSprites) {
-            sprite.getTexture().dispose();
-        }
-    }
-
-    @Override
-    public void hide() {
-
-    }
-
 }

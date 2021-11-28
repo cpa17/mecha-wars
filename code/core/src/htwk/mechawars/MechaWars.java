@@ -7,15 +7,12 @@ import com.badlogic.gdx.Game;
  */
 public class MechaWars extends Game {
 
-
     /**
      * Method & Attribute for skipping the MainMenu when executing the Program.
      */
     private static boolean isSkip = false; 
 
     private static int playerNumber;
-
-
 
     public static void setSkip(boolean skip) {
         isSkip = skip;
@@ -29,17 +26,25 @@ public class MechaWars extends Game {
         return playerNumber;
     }
 
+    private static String map;
+
+    public static void setMap(String fileName) {
+        map = fileName;
+    }
+
+    public static String getMap() {
+        return map;
+    }
+
     /**
      * Method to start either from the main menu or the game screen.
      */
     @Override
     public void create() {
-       
-        if (isSkip == true) {
-            this.setScreen(new GameScreen());
+        if (isSkip) {
+            this.setScreen(new GameScreen(this, map));
         } else {
             this.setScreen(new MainMenu(this));
-
         }
     }
 
