@@ -11,12 +11,15 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.ScreenUtils;
-
+import htwk.mechawars.ConfigReader;
+import htwk.mechawars.MechaWars;
 import htwk.mechawars.VictoryScreen;
 import htwk.mechawars.ZugInitialisierung;
 import htwk.mechawars.board.Board;
 import htwk.mechawars.board.Dir;
 import htwk.mechawars.board.Robot;
+
+import java.io.IOException;
 
 /**
  * Class that presents the surface of the game screen.
@@ -24,38 +27,74 @@ import htwk.mechawars.board.Robot;
 public class GameScreen implements Screen {
     private Game game;
     private static boolean winCondition = false;
+
     private Texture industrialTile;
-    private Texture robot;
+
     static Stage stage;
+
     private SpriteBatch batch;
-    private Sprite sprite;
-    protected static final ZugInitialisierung zugInitialisierung = new ZugInitialisierung();
+    private Sprite[] robotSprites;
+    protected static ZugInitialisierung zugInitialisierung = new ZugInitialisierung();
+
     private static Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
     static Board board;
-    private static Robot player = new Robot();
+    static Robot[] players;
 
     /**
      * Constructor of class GameScreen.
      */
     public GameScreen(Game g, String fileName) {
         game = g;
+
         initBoard(fileName);
-        
+
         setStage(new Stage());
-        
+
         industrialTile = new Texture("mapAssets/StandardField.png");
-        
-        robot = new Texture("robot.png");
-        
+
+        ConfigReader.setPlayerNumber(MechaWars.getPlayerNumber());
+        try {
+            ConfigReader.readConfigs();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        System.out.println("playernumber:  " + ConfigReader.getPlayerNumber());
+        players = createRobots(ConfigReader.getPlayerNumber());
         batch = new SpriteBatch();
-        sprite = new Sprite(robot);
-
-        Gdx.input.setInputProcessor(getStage());
-
+        robotSprites = createSprites(ConfigReader.getPlayerNumber());
+        stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
         addButtonsToStage(skin);
         addScrollPanelToStage(skin);
-        board.startRobot(5, 5, Dir.NORTH, player, false);
+        startRobots(players);
+    }
+
+    private Robot[] createRobots(int numberRobots) {
+        Robot[] robots = new Robot[numberRobots];
+        for (int i = 0; i < robots.length; i++) {
+            robots[i] = new Robot();
+        }
+        return robots;
+    }
+
+    private Sprite[] createSprites(int numberRobots) {
+        Sprite[] sprites = new Sprite[numberRobots];
+        for (int i = 0; i < sprites.length; i++) {
+            sprites[i] = new Sprite(new Texture("..//assets//robotskins//robot" + (i + 1)
+                    + ".png"));
+        }
+        return sprites;
+    }
+
+    private void startRobots(Robot[] players) {
+        for (int i = 0; i < players.length; i++) {
+            board.startRobot(ConfigReader.getPlayerStartingPositions()[i].x,
+                    ConfigReader.getPlayerStartingPositions()[i].y, Dir.NORTH, players[i], false);
+        }
+
     }
 
     private static void initBoard(String fileName) {
@@ -77,7 +116,7 @@ public class GameScreen implements Screen {
         getStage().addActor(container);
         container.setBounds(containerBoundsX, containerBoundsY, containerWidth, containerHeight);
 
-        container.add(ScrollPanel.scrollPanel(skin, player)).grow();
+        container.add(ScrollPanel.scrollPanel(skin, players[0])).grow();
     }
 
     /**
@@ -85,12 +124,12 @@ public class GameScreen implements Screen {
      * @param skin Object of class Skin.
      */
     public static void addButtonsToStage(Skin skin) {
-        getStage().addActor(Buttons.startButton(skin, player));
+        getStage().addActor(Buttons.startButton(skin, players[0]));
         getStage().addActor(Buttons.endButton(skin));
 
         getStage().addActor(Buttons.removeButton(skin));
 
-        if (player.getShutDown()) {
+        if (players[0].getShutDown()) {
             Buttons.removeButton(skin).setTouchable(Touchable.disabled);
             Buttons.removeButton(skin).setDisabled(true);
         } else {
@@ -100,20 +139,20 @@ public class GameScreen implements Screen {
 
         getStage().addActor(Buttons.infoButton(skin));
 
-        if (player.getShutDown()) {
-            Buttons.shutDownButton(skin, player).setTouchable(Touchable.disabled);
-            Buttons.wakeUpButton(skin, player).setTouchable(Touchable.enabled);
-            Buttons.shutDownButton(skin, player).setDisabled(true);
-            Buttons.wakeUpButton(skin, player).setDisabled(false);
+        if (players[0].getShutDown()) {
+            Buttons.shutDownButton(skin, players[0]).setTouchable(Touchable.disabled);
+            Buttons.wakeUpButton(skin, players[0]).setTouchable(Touchable.enabled);
+            Buttons.shutDownButton(skin, players[0]).setDisabled(true);
+            Buttons.wakeUpButton(skin, players[0]).setDisabled(false);
         } else {
-            Buttons.shutDownButton(skin, player).setTouchable(Touchable.enabled);
-            Buttons.wakeUpButton(skin, player).setTouchable(Touchable.disabled);
-            Buttons.shutDownButton(skin, player).setDisabled(false);
-            Buttons.wakeUpButton(skin, player).setDisabled(true);
+            Buttons.shutDownButton(skin, players[0]).setTouchable(Touchable.enabled);
+            Buttons.wakeUpButton(skin, players[0]).setTouchable(Touchable.disabled);
+            Buttons.shutDownButton(skin, players[0]).setDisabled(false);
+            Buttons.wakeUpButton(skin, players[0]).setDisabled(true);
         }
 
-        getStage().addActor(Buttons.shutDownButton(skin, player));
-        getStage().addActor(Buttons.wakeUpButton(skin, player));
+        getStage().addActor(Buttons.shutDownButton(skin, players[0]));
+        getStage().addActor(Buttons.wakeUpButton(skin, players[0]));
 
     }
     
@@ -136,9 +175,15 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
         batch.begin();
         Board.toAsset(batch, board);
-        player.drawRobot(sprite, board);
-        player.drawParameters(batch);
-        sprite.draw(batch);
+        players[0].drawParameters(batch);
+
+        for(int i = 0; i < MechaWars.getPlayerNumber(); i++) {
+            players[i].drawRobot(robotSprites[i], board);
+        }
+
+        for (Sprite sprite : robotSprites) {
+            sprite.draw(batch);
+        }
         batch.end();       
         if (winCondition) {
             changeScreen();
@@ -166,7 +211,9 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         industrialTile.dispose();
-        robot.dispose();
+        for (Sprite sprite : robotSprites) {
+            sprite.getTexture().dispose();
+        }
     }
 
     @Override

@@ -12,12 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import htwk.mechawars.board.Robot;
 
-import static htwk.mechawars.game.GameScreen.board;
-import static htwk.mechawars.game.GameScreen.zugInitialisierung;
-import static htwk.mechawars.game.GameScreen.stage;
-import static htwk.mechawars.game.GameScreen.addButtonsToStage;
-import static htwk.mechawars.game.GameScreen.getStage;
-import static htwk.mechawars.game.GameScreen.addScrollPanelToStage;
+import static htwk.mechawars.game.GameScreen.*;
 
 /**
  * Class that creates the ScrollPanel for the GameScreen.
@@ -47,7 +42,7 @@ public class Buttons {
                     if (ScrollPanel.cardOrder[4 - ScrollPanel.damagePoints] != -1) {
                         deactivateButtons();
                         zugInitialisierung.initialisiereBewegung();
-                        board.move(zugInitialisierung.getList(), player);
+                        board.move(zugInitialisierung.getList(), GameScreen.players);
                         zugInitialisierung.resetList();
                         startExecutionButton.setColor(Color.LIGHT_GRAY);
                         ScrollPanel.cardOrderClear();
@@ -58,7 +53,7 @@ public class Buttons {
                     }
                 } else {
                     zugInitialisierung.initialisiereBewegung();
-                    board.move(zugInitialisierung.getList(), player);
+                    board.move(zugInitialisierung.getList(), players);
                     zugInitialisierung.resetList();
                     startExecutionButton.setColor(Color.LIGHT_GRAY);
                     updateButtons(skin);
