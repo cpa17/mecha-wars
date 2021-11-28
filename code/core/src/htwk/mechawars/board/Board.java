@@ -418,22 +418,37 @@ public class Board {
         }
 
         // Delay of 5 seconds for the code to run so that the robot has reached his final position
-        Timer.schedule(new Task() {
+        if (!isTest) {
+            Timer.schedule(new Task() {
 
-            @Override
-            public void run() {
-                if (!isTest) {
-                    robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-                    robotPosition.turnAction(robot);
+                @Override
+                public void run() {
+                    if (!isTest) {
+                        robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+                        robotPosition.turnAction(robot);
+                    }
+
+                    checkShutDown(robot);
+                    robot.setLastRound(robot.getShutDown());
+                    robot.setShutDown(robot.getNextRound());
+
+                    checkDoubleDamage(robot);
                 }
+            }, 5);
+        } else {
 
-                checkShutDown(robot);
-                robot.setLastRound(robot.getShutDown());
-                robot.setShutDown(robot.getNextRound());
-
-                checkDoubleDamage(robot);
+            // No delay if this is a test
+            if (isTest) {
+                robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+                robotPosition.turnAction(robot);
             }
-        }, 5);
+
+            checkShutDown(robot);
+            robot.setLastRound(robot.getShutDown());
+            robot.setShutDown(robot.getNextRound());
+
+            checkDoubleDamage(robot);
+        }
     }
 
     /**
