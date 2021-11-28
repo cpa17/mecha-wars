@@ -420,7 +420,8 @@ public class Board {
             robotPosition.action(robot);
         }
 
-        //checkLaser(robot);
+        //MW57
+        checkLaser(robot);
 
         checkShutDown(robot);
         robot.setLastRound(robot.getShutDown());
@@ -428,6 +429,7 @@ public class Board {
 
         checkDoubleDamage(robot);
 
+        //MW57
         System.out.println("x = " + robot.getXcoor() + ", y = " + robot.getYcoor());
     }
 
@@ -474,8 +476,8 @@ public class Board {
             robot.damageUp();
         }
 
-        System.out.println("x = " + x + ", y = " + y);
-        System.out.println(this.fieldmatrix[x][y].getClass());
+        //System.out.println("x = " + x + ", y = " + y);
+        //System.out.println(this.fieldmatrix[x][y].getClass());
     }
 }
 
