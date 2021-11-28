@@ -21,6 +21,20 @@ public class ButtonfunctionsFieldEditor {
     public ButtonfunctionsFieldEditor() {
 
     }
+    
+    /**
+     * Only for the warnings.
+     * 
+     * @param t -> say if the functions will be called.
+     */
+    public ButtonfunctionsFieldEditor(boolean t) {
+        if (t) {
+            importField();
+            exportField();
+            resetField();
+            oneStapBack();
+        }
+    }
 
     private void importField() {
         
@@ -116,7 +130,19 @@ public class ButtonfunctionsFieldEditor {
         
     }
 
+    /**
+     * Reset the hole(/y) Field. That means, everyfield is a "standard-Field" and at the center
+     * is the startposition of the robot. 
+     */
     private void resetField() {
+        
+        for (int index = 0; index < 53; index += 1) {
+            actuallField.set(index, 11000);
+        }
+        actuallField.set(53, 10401);
+        for (int index = 54; index < 144; index += 1) {
+            actuallField.set(index, 11000);
+        }
 
     }
 
