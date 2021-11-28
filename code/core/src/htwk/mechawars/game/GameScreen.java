@@ -30,11 +30,11 @@ public class GameScreen implements Screen {
 
     private Texture industrialTile;
 
-    static Stage stage;
+    static Stage stage = new Stage();
 
     private SpriteBatch batch;
     private Sprite[] robotSprites;
-    protected static ZugInitialisierung zugInitialisierung = new ZugInitialisierung();
+    protected static final ZugInitialisierung zugInitialisierung = new ZugInitialisierung();
 
     private static Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
@@ -62,10 +62,9 @@ public class GameScreen implements Screen {
         }
 
         System.out.println("playernumber:  " + ConfigReader.getPlayerNumber());
-        players = createRobots(ConfigReader.getPlayerNumber());
+        setPlayers(createRobots(ConfigReader.getPlayerNumber()));
         batch = new SpriteBatch();
         robotSprites = createSprites(ConfigReader.getPlayerNumber());
-        stage = new Stage();
         Gdx.input.setInputProcessor(stage);
         addButtonsToStage(skin);
         addScrollPanelToStage(skin);
@@ -95,6 +94,10 @@ public class GameScreen implements Screen {
                     ConfigReader.getPlayerStartingPositions()[i].y, Dir.NORTH, players[i], false);
         }
 
+    }
+
+    private void setPlayers(Robot[] robots) {
+        players = robots;
     }
 
     private static void initBoard(String fileName) {
