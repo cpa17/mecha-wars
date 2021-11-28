@@ -177,7 +177,7 @@ public class GameScreen implements Screen {
         Board.toAsset(batch, board);
         players[0].drawParameters(batch);
 
-        for(int i = 0; i < MechaWars.getPlayerNumber(); i++) {
+        for (int i = 0; i < MechaWars.getPlayerNumber(); i++) {
             players[i].drawRobot(robotSprites[i], board);
         }
 

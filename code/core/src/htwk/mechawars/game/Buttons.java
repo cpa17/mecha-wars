@@ -12,7 +12,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import htwk.mechawars.board.Robot;
 
-import static htwk.mechawars.game.GameScreen.*;
+import static htwk.mechawars.game.GameScreen.board;
+import static htwk.mechawars.game.GameScreen.zugInitialisierung;
+import static htwk.mechawars.game.GameScreen.stage;
+import static htwk.mechawars.game.GameScreen.addButtonsToStage;
+import static htwk.mechawars.game.GameScreen.getStage;
+import static htwk.mechawars.game.GameScreen.addScrollPanelToStage;
+import static htwk.mechawars.game.GameScreen.players;
 
 /**
  * Class that creates the ScrollPanel for the GameScreen.

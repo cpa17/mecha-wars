@@ -9,7 +9,19 @@ import htwk.mechawars.ConfigReader;
 import htwk.mechawars.cards.AiCardGeneration;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.Type;
-import htwk.mechawars.fields.*;
+import htwk.mechawars.fields.Field;
+import htwk.mechawars.fields.BarrierCorner;
+import htwk.mechawars.fields.BarrierSide;
+import htwk.mechawars.fields.BlackHole;
+import htwk.mechawars.fields.Blockade;
+import htwk.mechawars.fields.Checkpoint;
+import htwk.mechawars.fields.ConveyorBelt;
+import htwk.mechawars.fields.ExpressConveyorBelt;
+import htwk.mechawars.fields.Gear;
+import htwk.mechawars.fields.Laser;
+import htwk.mechawars.fields.RepairSite;
+import htwk.mechawars.fields.StandardField;
+import htwk.mechawars.fields.StartField;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -354,6 +366,18 @@ public class Board {
     }
 
     /**
+     * For the tests.
+     *
+     * @param phase List of cards
+     * @param robot the robot that should move
+     */
+    public void move(LinkedList<Card> phase, Robot robot) {
+        Robot[] players = new Robot[1];
+        players[0] = robot;
+        move(phase, players, true);
+    }
+
+    /**
      * Method that moves the robot in the matrix.
      *
      * @param phase List of cards
@@ -381,29 +405,32 @@ public class Board {
                             players[i].setYcoor(players[i].getStartY());
                             return;
                         }
-                        robotPosition = this.fieldmatrix[players[i].getXcoor()][players[i].getYcoor()];
+                        robotPosition =
+                                this.fieldmatrix[players[i].getXcoor()][players[i].getYcoor()];
                     }
                 }
             } else {
                 if (ConfigReader.getAimodes()[i] || i == 0) {
-                    // delay in seconds, increments for each phase in the linked list for another second
+                    /*delay in seconds,
+                    increments for each phase in the linked list for another second*/
                     int j = 0;
                     for (Card card : phase) {
-                        int I = i;
+                        int newI = i;
                         Timer.schedule(new Task() {
 
                             @Override
                             public void run() {
                                 if (card.getCardAttributeType() == Type.mov) {
-                                    players[I].moveInDirection(card.getCardAttributeMovCount());
+                                    players[newI].moveInDirection(card.getCardAttributeMovCount());
                                 } else {
-                                    players[I].turn(card.getCardAttributeMovCount());
+                                    players[newI].turn(card.getCardAttributeMovCount());
                                 }
-                                if (players[I].getXcoor() >= fieldmatrix[1].length
-                                        || players[I].getYcoor() >= fieldmatrix.length
-                                        || players[I].getXcoor() < 0 || players[I].getYcoor() < 0) {
-                                    players[I].setXcoor(players[I].getStartX());
-                                    players[I].setYcoor(players[I].getStartY());
+                                if (players[newI].getXcoor() >= fieldmatrix[1].length
+                                        || players[newI].getYcoor() >= fieldmatrix.length
+                                        || players[newI].getXcoor() < 0
+                                        || players[newI].getYcoor() < 0) {
+                                    players[newI].setXcoor(players[newI].getStartX());
+                                    players[newI].setYcoor(players[newI].getStartY());
                                     return;
                                 }
                             }
@@ -413,23 +440,25 @@ public class Board {
                 }
             }
 
-            // Delay of 5 seconds for the code to run so that the robot has reached his final position
+            /* Delay of 5 seconds for the code to run so
+            that the robot has reached his final position*/
             if (!isTest) {
-                int I2 = i;
+                int newI2 = i;
                 Timer.schedule(new Task() {
 
                     @Override
                     public void run() {
                         if (!isTest) {
-                            robotPosition = fieldmatrix[players[I2].getXcoor()][players[I2].getYcoor()];
-                            robotPosition.turnAction(players[I2]);
+                            robotPosition = fieldmatrix[players[newI2].getXcoor()]
+                                    [players[newI2].getYcoor()];
+                            robotPosition.turnAction(players[newI2]);
                         }
 
-                        checkShutDown(players[I2]);
-                        players[I2].setLastRound(players[I2].getShutDown());
-                        players[I2].setShutDown(players[I2].getNextRound());
+                        checkShutDown(players[newI2]);
+                        players[newI2].setLastRound(players[newI2].getShutDown());
+                        players[newI2].setShutDown(players[newI2].getNextRound());
 
-                        checkDoubleDamage(players[I2]);
+                        checkDoubleDamage(players[newI2]);
                     }
                 }, 5);
             } else {

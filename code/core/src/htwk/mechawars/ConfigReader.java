@@ -97,14 +97,19 @@ public class ConfigReader {
         return playerNumberCopy;
     }
 
+    /**
+     * Function that setup the Startupconfig.
+     * @param playerNumber the number of players.
+     */
     public static void setPlayerNumber(int playerNumber) {
         String player = String.valueOf(playerNumber);
 
         FileHandle file = Gdx.files.local("..//configs//Startupconfig.txt");
-        file.writeString("playerNumber: "+player, false);
+        file.writeString("playerNumber: " + player, false);
 
-        for(int current = 0; current<playerNumber; current++){
-            file.writeString("\nplayerposition: "+current+"-"+3+"-"+(3+current)+"-"+"1", true);
+        for (int current = 0; current < playerNumber; current++) {
+            file.writeString("\nplayerposition: "
+                    + current + "-" + 3 + "-" + (3 + current) + "-" + "1", true);
         }
 
     }
