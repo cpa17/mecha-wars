@@ -104,7 +104,7 @@ public class ConfigReader {
         file.writeString("playerNumber: "+player, false);
 
         for(int current = 0; current<playerNumber; current++){
-            file.writeString("\nplayerposition: "+current+"-"+current+"-"+current+"-"+"1", true);
+            file.writeString("\nplayerposition: "+current+"-"+3+"-"+(3+current)+"-"+"1", true);
         }
 
     }
