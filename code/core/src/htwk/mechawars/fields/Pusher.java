@@ -3,12 +3,13 @@ package htwk.mechawars.fields;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
+import htwk.mechawars.board.Dir;
 import htwk.mechawars.board.Robot;
 
 /**
  * Class of a Blockade.
  */
-public class Blockade extends Field {
+public class Pusher extends Field {
 
     // attribute which represents the type of the blockade
     // 1 = horizontal with the numbers 2 and 4, 2 = horizontal with the numbers 1, 3 and 5
@@ -19,11 +20,11 @@ public class Blockade extends Field {
     /**
      * Constructor of a Blockade.
      */
-    public Blockade(int xcoor, int ycoor, int type) {
+    public Pusher(int xcoor, int ycoor, int type) {
         super(xcoor, ycoor);
         this.type = type;
-        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "blockade/"
-                + "Blockade0" + String.valueOf(type) + ".png"));
+        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "pusher/"
+                + "Pusher0" + String.valueOf(type) + ".png"));
     }
 
     /**
@@ -31,7 +32,7 @@ public class Blockade extends Field {
      *
      * @param isTest indicates that this is a test
      */
-    public Blockade(int xcoor, int ycoor, int type, boolean isTest) {
+    public Pusher(int xcoor, int ycoor, int type, boolean isTest) {
         super(xcoor, ycoor, isTest);
         this.type = type;
         if (!isTest) {
@@ -57,6 +58,14 @@ public class Blockade extends Field {
 
     @Override
     public Robot turnAction(Robot robot) {
+        if (type == 1) {
+            robot.moveInDirection((byte) -1);
+        } else if (type == 3) {
+            while (robot.getDir() != Dir.EAST) {
+                robot.turn((byte) 3); 
+            }
+            robot.moveInDirection((byte) 1);
+        }
         return robot;       
     }
     
@@ -74,7 +83,7 @@ public class Blockade extends Field {
             return false;
         }
 
-        Blockade other = (Blockade) obj;
+        Pusher other = (Pusher) obj;
         if (xcoor != other.xcoor) {
             return false;
         }

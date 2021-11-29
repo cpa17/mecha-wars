@@ -5,6 +5,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import htwk.mechawars.fields.BarrierCorner;
+import htwk.mechawars.fields.BarrierSide;
+import htwk.mechawars.fields.Field;
+
 /**
  * Class that presents the robot and the player.
  */
@@ -18,7 +22,8 @@ public class Robot {
     private int damagePoints;
     private int backupCopyX;
     private int backupCopyY;
-    private int checkPointNumber = 1;
+    private int checkPointNumber;
+    private boolean locked;
     private boolean shutDownMark;
     private boolean backupDraw;
     private boolean lastRound;
@@ -28,6 +33,8 @@ public class Robot {
     private Texture damage;
     private Texture shutDown;
     private Texture hud;
+    private Field field;
+    private int lastMove;
 
     /**
      * Constructor of the robot class.
@@ -41,14 +48,29 @@ public class Robot {
         lastRound = false;
         nextRound = false;
         destroyed = false;
+        field = null;
+        locked = false;
+        checkPointNumber = 1;
+        lastMove = 0;
     }
-
+        
+    public void checkBarrierSide(Robot robot) {
+        BarrierSide bS = (BarrierSide) this.field;
+        bS.barrierCheck(robot);
+    }
+    
+    public void checkBarrierCorner(Robot robot) {
+        //BarrierCorner bC = (BarrierCorner) this.field;
+        //bC.barrierCheck(robot);
+    }
+    
     /**
      * Method that lets the robot run forward.
      * @param mov byte of move
      * @return new position
      */
     public Robot moveInDirection(byte mov) {
+        setLastMove(mov);
         switch (getDir()) {
             case NORTH:
                 setYcoor(getYcoor() - mov);
@@ -205,9 +227,25 @@ public class Robot {
     public int getCheckPointNumber() {
         return checkPointNumber;
     }
+    
+    public Field getLastField() {
+        return field;
+    }
+    
+    public boolean getLocked() {
+        return locked;
+    }
+    
+    public int getLastMove() {
+        return lastMove;
+    }
 
     // Setters. ------------------------------------------------------------------------------
-
+    
+    public void setLastMove(int move) {
+        lastMove = move;
+    }
+    
     /**
      * Setter-Function for the direction of the robot.
      *
@@ -307,12 +345,28 @@ public class Robot {
     public void setDestroyed(boolean destroyed) {
         this.destroyed = destroyed;
     }
-
+    
+    public void setLastField(Field field) {
+        this.field = field;
+    }
+    
+    public void setLocked(boolean lock) {
+        locked = lock;
+    }
+    
     /**
      * Increase the damagePoints of a robot by 1.
      */
     public void damageUp() {
         damagePoints += 1;
+    }
+    
+    public void damageDown() {
+        damagePoints -= 1;
+    }
+    
+    public void blackHole() {
+        damagePoints = 10;
     }
     
     /**
