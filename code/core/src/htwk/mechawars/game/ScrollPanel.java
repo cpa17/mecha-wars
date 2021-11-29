@@ -58,7 +58,7 @@ public class ScrollPanel {
             for (; cardPrintCounter < ( choosableCardCount - player.getDamagePoints() ); 
                     cardPrintCounter += 1) {
                 Card currentCard = deck.getDeck().get(cardPrintCounter);
-                if(cardPrintCounter < 5) {
+                if (cardPrintCounter < 5) {
                     lockedList.set(cardPrintCounter, currentCard);
                 }
                 buttons[cardPrintCounter] = new TextButton(currentCard.getCardAttributePriority()
