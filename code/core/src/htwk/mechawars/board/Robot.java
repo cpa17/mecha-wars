@@ -5,8 +5,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import htwk.mechawars.fields.BarrierCorner;
-import htwk.mechawars.fields.BarrierSide;
 import htwk.mechawars.fields.Field;
 
 /**
