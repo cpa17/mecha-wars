@@ -65,8 +65,8 @@ public class ConveyorBelt extends Field {
     
     @Override
     public Robot turnAction(Robot robot) {
-        if (robot.getLastField() instanceof ConveyorBelt || 
-                robot.getLastField() instanceof ExpressConveyorBelt) {
+        if (robot.getField() instanceof ConveyorBelt || 
+                robot.getField() instanceof ExpressConveyorBelt) {
             switch (this.end) {
                 case 1 :    
                     while (robot.getDir() != Dir.WEST) {

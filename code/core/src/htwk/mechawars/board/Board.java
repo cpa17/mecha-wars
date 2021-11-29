@@ -375,17 +375,7 @@ public class Board {
         if (isTest) {
             for (Card card : phase) {
                 if (card.getCardAttributeType() == Type.mov) {
-                    if (!(robot.getLocked())) {
-                        robot.moveInDirection(card.getCardAttributeMovCount());
-                        robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-                        robot.setLastField(robotPosition); 
-                        if (robot.getLastField() instanceof BarrierCorner) {
-                            robot.checkBarrierCorner(robot);
-                        }
-                        if (robot.getLastField() instanceof BarrierSide) {
-                            robot.checkBarrierSide(robot);
-                        }
-                    }
+                    robot.moveInDirection(card.getCardAttributeMovCount());
                 } else {
                     robot.turn(card.getCardAttributeMovCount());
                 }
@@ -396,11 +386,11 @@ public class Board {
                     robot.setYcoor(robot.getStartY());
                     return;
                 }
-                robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-                robotPosition.cardAction(robot);
+                //robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+                //robotPosition.cardAction(robot);
             }
         } else {
-            
+
             // delay in seconds, increments for each phase in the linked list for another second
             int i = 0;
             for (Card card : phase) {
@@ -409,17 +399,7 @@ public class Board {
                     @Override
                     public void run() {
                         if (card.getCardAttributeType() == Type.mov) {
-                            if (!(robot.getLocked())) {
-                                robot.moveInDirection(card.getCardAttributeMovCount());
-                                robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-                                robot.setLastField(robotPosition); 
-                                if (robot.getLastField() instanceof BarrierCorner) {
-                                    robot.checkBarrierCorner(robot);
-                                }
-                                if (robot.getLastField() instanceof BarrierSide) {
-                                    robot.checkBarrierSide(robot);
-                                }
-                            }
+                            robot.moveInDirection(card.getCardAttributeMovCount());
                         } else {
                             robot.turn(card.getCardAttributeMovCount());
                         }
@@ -431,8 +411,8 @@ public class Board {
                             robot.setYcoor(robot.getStartY());
                             return;
                         }
-                        robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-                        robotPosition.cardAction(robot);
+                        //robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+                        //robotPosition.cardAction(robot);
                     }
                 }, i);
                 i += 1;
@@ -447,7 +427,6 @@ public class Board {
                 public void run() {
                     if (!isTest) {
                         robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-                        robot.setLastField(robotPosition);
                         robotPosition.turnAction(robot);
                     }
 

@@ -54,23 +54,13 @@ public class Robot {
         lastMove = 0;
     }
         
-    public void checkBarrierSide(Robot robot) {
-        BarrierSide bS = (BarrierSide) getLastField();
-        bS.barrierCheck(robot);
-    }
-    
-    public void checkBarrierCorner(Robot robot) {
-        //BarrierCorner bC = (BarrierCorner) this.field;
-        //bC.barrierCheck(robot);
-    }
-    
     /**
      * Method that lets the robot run forward.
      * @param mov byte of move
      * @return new position
      */
     public Robot moveInDirection(byte mov) {
-        setLastMove(mov);
+        setLastMove(mov); //brauch man bestimmt später nochmal
         switch (getDir()) {
             case NORTH:
                 setYcoor(getYcoor() - mov);
@@ -228,7 +218,7 @@ public class Robot {
         return checkPointNumber;
     }
     
-    public Field getLastField() {
+    public Field getField() {
         return field;
     }
     
@@ -346,7 +336,7 @@ public class Robot {
         this.destroyed = destroyed;
     }
     
-    public void setLastField(Field field) {
+    public void setField(Field field) {
         this.field = field;
     }
     

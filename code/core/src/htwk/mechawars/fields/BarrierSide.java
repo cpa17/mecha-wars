@@ -3,7 +3,6 @@ package htwk.mechawars.fields;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
-import htwk.mechawars.board.Dir;
 import htwk.mechawars.board.Robot;
 
 /**
@@ -54,104 +53,15 @@ public class BarrierSide extends Field {
     public Texture getTile() {
         return this.tile;
     }
-    
-    /**
-     * Checks if the Roboter is trying to move over the barrier from the outside.
-     * @param robot - the robot that moved
-     * @param card - 
-     */
-    public void barrierCheck(Robot robot) {
-        switch (this.side) {
-            case 1 :    
-                if (robot.getDir() == Dir.EAST || 
-                        (robot.getDir() == Dir.WEST && robot.getLastMove() == -1)) {     
-                    resetMove(robot.getLastMove(), robot);
-                    System.out.println("drin");
-                }
-                break;
-                    
-            case 2 :    
-                if (robot.getDir() == Dir.SOUTH || 
-                        (robot.getDir() == Dir.NORTH && robot.getLastMove() == -1)) {
-                    resetMove(robot.getLastMove(), robot);
-                }
-                break;
-                    
-            case 3 :    
-                if (robot.getDir() == Dir.WEST || 
-                        (robot.getDir() == Dir.EAST && robot.getLastMove() == -1)) { 
-                    resetMove(robot.getLastMove(), robot);
-                }
-                break;
-            
-            case 4 :    
-                if (robot.getDir() == Dir.NORTH || 
-                        (robot.getDir() == Dir.SOUTH && robot.getLastMove() == -1)) {
-                    resetMove(robot.getLastMove(), robot);
-                }
-                break;
-                    
-            default:    break;
-        }
-    }
-    
-    public void resetMove(int lastMove, Robot robot) {
-        switch (lastMove) {
-            case -1 :
-                robot.moveInDirection((byte) 1);
-                break;
-            case 1 :
-                robot.moveInDirection((byte) -1);
-                break;
-            case 2 :
-                robot.moveInDirection((byte) -1);
-                robot.moveInDirection((byte) -1);
-                break;
-            case 3 :
-                robot.moveInDirection((byte) -1);
-                robot.moveInDirection((byte) -1);
-                robot.moveInDirection((byte) -1);
-                break;
-        }
-    }
-    
+
     @Override
     public Robot turnAction(Robot robot) {
-        return robot;        
+        return robot;      
     }
     
     @Override
     public Robot cardAction(Robot robot) {
-        robot.setLocked(false);
-        switch (this.side) {
-            case 1 :    
-                //next move muss noch rein
-                if (robot.getDir() == Dir.NORTH || robot.getDir() == Dir.WEST) {
-                    robot.setLocked(true);
-                }
-                break;
-                    
-            case 2 :    
-                if (robot.getDir() == Dir.NORTH || robot.getDir() == Dir.EAST) {
-                    robot.setLocked(true);
-                }
-                break;
-                    
-            case 3 :    
-                if (robot.getDir() == Dir.SOUTH || robot.getDir() == Dir.EAST) {
-                    robot.setLocked(true);
-                }
-                break;
-            
-            case 4 :    
-                if (robot.getDir() == Dir.SOUTH || robot.getDir() == Dir.WEST) {
-                    robot.setLocked(true);
-                }
-                break;
-                    
-            default:    break;
-        }
-        return robot;        
+        return robot;   
     }
     
     @Override
