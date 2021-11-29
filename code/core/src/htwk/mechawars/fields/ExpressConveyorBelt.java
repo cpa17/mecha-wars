@@ -102,7 +102,6 @@ public class ExpressConveyorBelt extends Field {
     
     @Override
     public Robot cardAction(Robot robot) {
-
         return robot;       
     }
     

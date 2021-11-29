@@ -21,18 +21,16 @@ public class Robot {
     private int backupCopyX;
     private int backupCopyY;
     private int checkPointNumber;
-    private boolean locked;
     private boolean shutDownMark;
     private boolean backupDraw;
     private boolean lastRound;
     private boolean nextRound;
     private boolean destroyed;
+    private Field field;
     private Texture life;
     private Texture damage;
     private Texture shutDown;
     private Texture hud;
-    private Field field;
-    private int lastMove;
 
     /**
      * Constructor of the robot class.
@@ -46,10 +44,8 @@ public class Robot {
         lastRound = false;
         nextRound = false;
         destroyed = false;
-        field = null;
-        locked = false;
         checkPointNumber = 1;
-        lastMove = 0;
+        field = null;
     }
         
     /**
@@ -58,7 +54,6 @@ public class Robot {
      * @return new position
      */
     public Robot moveInDirection(byte mov) {
-        setLastMove(mov); //brauch man bestimmt später nochmal
         switch (getDir()) {
             case NORTH:
                 setYcoor(getYcoor() - mov);
@@ -219,20 +214,8 @@ public class Robot {
     public Field getField() {
         return field;
     }
-    
-    public boolean getLocked() {
-        return locked;
-    }
-    
-    public int getLastMove() {
-        return lastMove;
-    }
 
     // Setters. ------------------------------------------------------------------------------
-    
-    public void setLastMove(int move) {
-        lastMove = move;
-    }
     
     /**
      * Setter-Function for the direction of the robot.
@@ -336,10 +319,6 @@ public class Robot {
     
     public void setField(Field field) {
         this.field = field;
-    }
-    
-    public void setLocked(boolean lock) {
-        locked = lock;
     }
     
     /**
