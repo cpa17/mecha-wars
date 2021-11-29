@@ -55,8 +55,8 @@ public class Robot {
     }
         
     public void checkBarrierSide(Robot robot) {
-        BarrierSide bS = (BarrierSide) getLastField();
-        bS.barrierCheck(robot);
+        BarrierSide barrierSide = (BarrierSide) getLastField();
+        barrierSide.barrierCheck(robot);
     }
     
     public void checkBarrierCorner(Robot robot) {

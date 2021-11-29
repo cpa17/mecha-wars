@@ -57,8 +57,7 @@ public class BarrierSide extends Field {
     
     /**
      * Checks if the Roboter is trying to move over the barrier from the outside.
-     * @param robot - the robot that moved
-     * @param card - 
+     * @param robot -> the robot that moved
      */
     public void barrierCheck(Robot robot) {
         switch (this.side) {
@@ -95,6 +94,9 @@ public class BarrierSide extends Field {
         }
     }
     
+    /*
+     * Discard the move of the robot.
+     */
     public void resetMove(int lastMove, Robot robot) {
         switch (lastMove) {
             case -1 :
@@ -111,6 +113,8 @@ public class BarrierSide extends Field {
                 robot.moveInDirection((byte) -1);
                 robot.moveInDirection((byte) -1);
                 robot.moveInDirection((byte) -1);
+                break;
+            default :
                 break;
         }
     }
