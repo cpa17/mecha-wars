@@ -94,8 +94,11 @@ public class BarrierSide extends Field {
         }
     }
     
-    /*
-     * Discard the move of the robot.
+    /**
+     * Discard the robots move.
+     * 
+     * @param lastMove -> say, which amount of for/backwards the robot moves.
+     * @param robot -> which robots moves.
      */
     public void resetMove(int lastMove, Robot robot) {
         switch (lastMove) {
