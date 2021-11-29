@@ -479,5 +479,54 @@ public class Board {
         //System.out.println("x = " + x + ", y = " + y);
         //System.out.println(this.fieldmatrix[x][y].getClass());
     }
+    
+    public void robotLaser(Robot robot) {
+        
+        int x = robot.getXcoor();
+        int y = robot.getYcoor();
+        Dir z = robot.getDir();
+        
+        switch (robot.getDir()) {
+        case NORTH:
+            for(int i = robot.getYcoor(); i < 12; i++) {
+                /*
+                if(this.fieldmatrix[x][i] instanceof Robot) {
+                    
+                }
+                */
+            }
+        case SOUTH:
+            for(int i = robot.getXcoor(); i < 12; i++) {
+                
+            }
+        case EAST:
+            for(int i = robot.getXcoor(); i < 12; i++) {
+                
+            }
+        case WEST:
+            for(int i = robot.getXcoor(); i < 12; i++) {
+                
+            }
+        }
+        
+        /*
+        switch (robot.getDir()) {
+        case NORTH:
+            setYcoor(getYcoor() - mov);
+            return this;
+        case SOUTH:
+            setYcoor(getYcoor() + mov);
+            return this;
+        case EAST:
+            setXcoor(getXcoor() + mov);
+            return this;
+        case WEST:
+            setXcoor(getXcoor() - mov);
+            return this;
+        default:
+            return this;
+    }
+    */
+    }
 }
 
