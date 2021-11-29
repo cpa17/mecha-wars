@@ -26,7 +26,7 @@ public class Buttons {
 
     /**
      * Creates the startButton.
-     * @param player Object of class Robot.
+     * @param players Array of all the Players.
      * @param skin Object of class Skin.
      * @return startButton.
      */

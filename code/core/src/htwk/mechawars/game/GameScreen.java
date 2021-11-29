@@ -85,8 +85,7 @@ public class GameScreen implements Screen {
     
     private void startRobots(Robot[] players) {
         for (int i = 0; i < players.length; i++) {
-            System.out.println(ConfigReader.getPlayerStartingPositions()[i].x+"   "+ 
-                    ConfigReader.getPlayerStartingPositions()[i].y);
+
             board.startRobot(ConfigReader.getPlayerStartingPositions()[i].x, 
                     ConfigReader.getPlayerStartingPositions()[i].y, Dir.NORTH, players[i], false);
         }
