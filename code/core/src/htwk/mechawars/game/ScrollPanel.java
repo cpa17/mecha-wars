@@ -55,7 +55,7 @@ public class ScrollPanel {
 
         if (!player.getShutDown() || !player.getDestroyed()) {
                   
-            for (; cardPrintCounter < ( choosableCardCount - player.getDamagePoints() ); 
+            for (; cardPrintCounter < (choosableCardCount - player.getDamagePoints()); 
                     cardPrintCounter += 1) {
                 Card currentCard = deck.getDeck().get(cardPrintCounter);
                 if (cardPrintCounter < 5) {
@@ -81,7 +81,8 @@ public class ScrollPanel {
                 for (int lockedPrintCounter = 4; lockedPrintCounter < player.getDamagePoints();
                         lockedPrintCounter += 1) {
                     Card currentCard = lockedList.get(8 - lockedPrintCounter);
-                    buttons[cardPrintCounter] = new TextButton(currentCard.getCardAttributePriority()
+                    buttons[cardPrintCounter] = 
+                            new TextButton(currentCard.getCardAttributePriority()
                             + " - " + currentCard + " | Nr: " + cardNumber, skin);
                     buttons[cardPrintCounter].setColor(Color.RED);
                     zugInitialisierung.addCard(currentCard);
@@ -128,38 +129,38 @@ public class ScrollPanel {
      */
     protected static void cardOrderClear(Robot player) {
         switch (player.getDamagePoints()) {
-        case 5:     cardOrder[0] = -1;
-                    cardOrder[1] = -1;
-                    cardOrder[2] = -1;
-                    cardOrder[3] = -1;
-                    break;
-                    
-        case 6:     cardOrder[0] = -1;
-                    cardOrder[1] = -1;
-                    cardOrder[2] = -1;
-                    break;
-                    
-        case 7:     cardOrder[0] = -1;
-                    cardOrder[1] = -1;
-                    break;
-                    
-        case 8:     cardOrder[0] = -1;
-                    break;
-                    
-        case 9:     break;
-        
-        case 10:    break;
-        
-        default:    cardOrder[0] = -1;
-                    cardOrder[1] = -1;
-                    cardOrder[2] = -1;
-                    cardOrder[3] = -1;
-                    cardOrder[4] = -1;
-                    break; 
-                    
-    }
-    buttonsClean();
-    pressCounter = 0;
+            case 5:     cardOrder[0] = -1;
+                        cardOrder[1] = -1;
+                        cardOrder[2] = -1;
+                        cardOrder[3] = -1;
+                        break;
+                        
+            case 6:     cardOrder[0] = -1;
+                        cardOrder[1] = -1;
+                        cardOrder[2] = -1;
+                        break;
+                        
+            case 7:     cardOrder[0] = -1;
+                        cardOrder[1] = -1;
+                        break;
+                        
+            case 8:     cardOrder[0] = -1;
+                        break;
+                        
+            case 9:     break;
+            
+            case 10:    break;
+            
+            default:    cardOrder[0] = -1;
+                        cardOrder[1] = -1;
+                        cardOrder[2] = -1;
+                        cardOrder[3] = -1;
+                        cardOrder[4] = -1;
+                        break; 
+                        
+        }
+        buttonsClean();
+        pressCounter = 0;
     }
 
     /**

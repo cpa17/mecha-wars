@@ -161,7 +161,7 @@ public class Buttons {
      */
     protected static void deactivateButtons() {
         for (TextButton button : ScrollPanel.buttons) {
-//            button.setTouchable(Touchable.disabled);
+            // button.setTouchable(Touchable.disabled);
         }
     }
 
