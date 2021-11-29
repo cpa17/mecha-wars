@@ -30,7 +30,6 @@ public class GameScreen implements Screen {
     static Stage stage;
     private SpriteBatch batch;
     private Sprite[] robotSprites;
-    private static Robot[] players;
     protected static final ZugInitialisierung zugInitialisierung = new ZugInitialisierung();
     private static Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
     
@@ -42,6 +41,8 @@ public class GameScreen implements Screen {
      * Constructor of class GameScreen.
      */
     public GameScreen(Game g, String fileName) {
+        
+        
         game = g;
         initBoard(fileName);
         
@@ -51,7 +52,8 @@ public class GameScreen implements Screen {
         
         robot = new Texture("robot.png");
         
-        players = createRobots(ConfigReader.getPlayerNumber());
+                
+
         
         batch = new SpriteBatch();
         robotSprites = createSprites(ConfigReader.getPlayerNumber());
@@ -60,16 +62,11 @@ public class GameScreen implements Screen {
 
         addButtonsToStage(skin);
         addScrollPanelToStage(skin);
-        startRobots(players);
+        startRobots(Robot.getPlayers());
     }
+   
+
     
-    private Robot[] createRobots(int numberRobots) {
-        Robot[] robots = new Robot[numberRobots];
-        for (int i = 0; i < robots.length; i++) {
-            robots[i] = new Robot();
-        }
-        return robots;
-    }
     private static void initBoard(String fileName) {
         board = new Board(fileName);
     }
@@ -115,7 +112,7 @@ public class GameScreen implements Screen {
      * @param skin Object of class Skin.
      */
     public static void addButtonsToStage(Skin skin) {
-        getStage().addActor(Buttons.startButton(skin, players));
+        getStage().addActor(Buttons.startButton(skin, Robot.getPlayers()));
         getStage().addActor(Buttons.endButton(skin));
 
         getStage().addActor(Buttons.removeButton(skin));
@@ -166,9 +163,9 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
         batch.begin();
         Board.toAsset(batch, board);
-        for (int i = 0; i < players.length; i++) {
-            players[i].drawRobot(robotSprites[i], board);
-            players[i].drawParameters(batch);
+        for (int i = 0; i < Robot.getPlayers().length; i++) {
+            Robot.getPlayers()[i].drawRobot(robotSprites[i], board);
+            Robot.getPlayers()[i].drawParameters(batch);
             robotSprites[i].draw(batch);
         }
         batch.end();       

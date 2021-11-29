@@ -377,6 +377,7 @@ public class Board {
                 phase = AiCardGeneration.generateRandomAiCards(i);
                 move(phase, players[i]);
             }
+            Robot.setPlayers(players);
             
         }
     }

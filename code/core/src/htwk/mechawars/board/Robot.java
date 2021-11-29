@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import htwk.mechawars.ConfigReader;
+
 /**
  * Class that presents the robot and the player.
  */
@@ -28,6 +30,7 @@ public class Robot {
     private Texture damage;
     private Texture shutDown;
     private Texture hud;
+    private static Robot[] players = createRobots(ConfigReader.getPlayerNumber());
 
     /**
      * Constructor of the robot class.
@@ -461,6 +464,34 @@ public class Robot {
             sprite.setPosition(tileSize * x, tileSize * y);
             sprite.setRotation(90);
         }
+    }
+    
+    /**
+     * Function that creates a given number of robots.
+     * @param numberRobots number of robots
+     * @return Array of robots
+     */
+    public static Robot[] createRobots(int numberRobots) {
+        Robot[] robots = new Robot[numberRobots];
+        for (int i = 0; i < robots.length; i++) {
+            robots[i] = new Robot();
+        }
+        return robots;
+    }
+
+    public static Robot[] getPlayers() {
+        Robot[] playersCopy = players;
+        return playersCopy;
+    }
+
+    /** Setter for players.
+     * @param players2 setter for players
+     */
+    public static void setPlayers(Robot[] players2) {
+        for (int i = 0; i < players.length; i++) {
+            players[i] = players2[i]; 
+        }
+        
     }
 
 }
