@@ -58,7 +58,6 @@ public class Laser extends Field {
     
     @Override
     public Robot turnAction(Robot robot) {
-        //anderes Ticket
         return robot;       
     }
     
