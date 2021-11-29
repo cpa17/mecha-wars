@@ -58,7 +58,7 @@ public class BarrierSide extends Field {
     /**
      * Checks if the Roboter is trying to move over the barrier from the outside.
      * @param robot - the robot that moved
-     * @param card - i dont have a clue
+     * @param card - 
      */
     public void barrierCheck(Robot robot) {
         switch (this.side) {
@@ -122,8 +122,10 @@ public class BarrierSide extends Field {
     
     @Override
     public Robot cardAction(Robot robot) {
+        robot.setLocked(false);
         switch (this.side) {
             case 1 :    
+                //next move muss noch rein
                 if (robot.getDir() == Dir.NORTH || robot.getDir() == Dir.WEST) {
                     robot.setLocked(true);
                 }

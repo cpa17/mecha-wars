@@ -400,7 +400,7 @@ public class Board {
                 robotPosition.cardAction(robot);
             }
         } else {
-
+            
             // delay in seconds, increments for each phase in the linked list for another second
             int i = 0;
             for (Card card : phase) {
