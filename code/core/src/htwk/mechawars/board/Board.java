@@ -386,6 +386,8 @@ public class Board {
                     robot.setYcoor(robot.getStartY());
                     return;
                 }
+                robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+                //robotPosition.cardAction(robot);
             }
         } else {
 
@@ -415,22 +417,46 @@ public class Board {
             }
         }
 
+        // Delay of 5 seconds for the code to run so that the robot has reached his final position
         if (!isTest) {
-            robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-            robotPosition.action(robot);
+            Timer.schedule(new Task() {
+
+                @Override
+                public void run() {
+                    if (!isTest) {
+                        robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+                        robotPosition.turnAction(robot);
+                    }
+                    
+                    checkLaser(robot);
+                    checkShutDown(robot);
+                    robot.setLastRound(robot.getShutDown());
+                    robot.setShutDown(robot.getNextRound());
+
+                    checkDoubleDamage(robot);
+                    
+                  //MW57
+                    System.out.println("x = " + robot.getXcoor() + ", y = " + robot.getYcoor());
+                }
+            }, 5);
+        } else {
+
+            // No delay if this is a test
+            if (isTest) {
+                robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+                robotPosition.turnAction(robot);
+            }
+            
+            checkLaser(robot);
+            checkShutDown(robot);
+            robot.setLastRound(robot.getShutDown());
+            robot.setShutDown(robot.getNextRound());
+
+            checkDoubleDamage(robot);
+            
+          //MW57
+            System.out.println("x = " + robot.getXcoor() + ", y = " + robot.getYcoor());
         }
-
-        //MW57
-        checkLaser(robot);
-
-        checkShutDown(robot);
-        robot.setLastRound(robot.getShutDown());
-        robot.setShutDown(robot.getNextRound());
-
-        checkDoubleDamage(robot);
-
-        //MW57
-        System.out.println("x = " + robot.getXcoor() + ", y = " + robot.getYcoor());
     }
 
     /**

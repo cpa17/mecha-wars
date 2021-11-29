@@ -1,0 +1,28 @@
+26.11.2021 - 17:15 - Daily - 5. Sprint "Robo Rally"
+
+Entschuldigt: Bernhard, Konstantin, Marc
+Anwesend: Alle anderen
+Protokollführung: Antonia Swiridoff
+
+
+## Runde
+
+- Tim: Tickets laufen gut, aktuellen Stand von MW-42 über Stream gezeigt 
+- Pascal: MW-19 erledigt und gemerged, als nächstes MW-64
+- Mark: MW-57 eingelesen, Frage zur Funktionalität des Roboter-Lasers konnten beantwortet werden
+- Antonia: MW-61 beendet, mit MW-57 noch nicht bekonnen wegen Zeitmangel
+
+
+## Allgemein
+
+- Review und Retro am Freitag den 4.12. 
+  -> vermutlich nicht in Präsenz, noch wurde aber nichts bekannt gegeben
+  
+
+
+
+
+
+
+ 
+

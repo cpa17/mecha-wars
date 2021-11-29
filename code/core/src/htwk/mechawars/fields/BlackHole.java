@@ -2,6 +2,8 @@ package htwk.mechawars.fields;
 
 import com.badlogic.gdx.graphics.Texture;
 
+import htwk.mechawars.board.Robot;
+
 /**
  * Class of a Black Hole.
  */
@@ -32,7 +34,17 @@ public class BlackHole extends Field {
     public Texture getTile() {
         return this.tile;
     }
-
+    
+    @Override
+    public Robot turnAction(Robot robot) {
+        return robot;       
+    }
+    
+    @Override
+    public Robot cardAction(Robot robot) {
+        return robot;       
+    }
+    
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
