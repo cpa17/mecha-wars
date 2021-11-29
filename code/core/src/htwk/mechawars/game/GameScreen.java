@@ -31,6 +31,7 @@ public class GameScreen implements Screen {
     private Sprite sprite;
     protected static final ZugInitialisierung zugInitialisierung = new ZugInitialisierung();
     private static Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+    
 
     static Board board;
     private static Robot player = new Robot();
