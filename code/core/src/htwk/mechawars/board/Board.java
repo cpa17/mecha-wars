@@ -1,5 +1,7 @@
 package htwk.mechawars.board;
 
+import htwk.mechawars.ConfigReader;
+import htwk.mechawars.cards.AiCardGeneration;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.Type;
 import htwk.mechawars.fields.BarrierCorner;
@@ -362,6 +364,16 @@ public class Board {
      */
     public void move(LinkedList<Card> phase, Robot robot) {
         move(phase, robot, false);
+    }
+    
+    public void move(LinkedList<Card> phase, Robot[] players) {
+
+        for (int i = 0; i < players.length; i++) {
+            if (i > 0 && ConfigReader.getAimodes()[i]) {
+                phase = AiCardGeneration.generateRandomAiCards(i);
+            }
+            move(phase, players[i]);
+        }
     }
 
     /**

@@ -30,7 +30,7 @@ public class Buttons {
      * @param skin Object of class Skin.
      * @return startButton.
      */
-    protected static Button startButton(Skin skin, Robot player) {
+    protected static Button startButton(Skin skin, Robot[] players) {
         Button startExecutionButton = new TextButton("Ausfuehrung starten", skin);
         startExecutionButton.setSize(160, 43);
 
@@ -42,12 +42,12 @@ public class Buttons {
 
         startExecutionButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                if (!player.getShutDown()) {
+                if (!players[0].getShutDown()) {
                     //If All Cards are chosen
                     if (ScrollPanel.cardOrder[4 - ScrollPanel.damagePoints] != -1) {
                         deactivateButtons();
                         zugInitialisierung.initialisiereBewegung();
-                        board.move(zugInitialisierung.getList(), player);
+                        board.move(zugInitialisierung.getList(), players);
                         zugInitialisierung.resetList();
                         startExecutionButton.setColor(Color.LIGHT_GRAY);
                         ScrollPanel.cardOrderClear();
@@ -58,7 +58,7 @@ public class Buttons {
                     }
                 } else {
                     zugInitialisierung.initialisiereBewegung();
-                    board.move(zugInitialisierung.getList(), player);
+                    board.move(zugInitialisierung.getList(), players);
                     zugInitialisierung.resetList();
                     startExecutionButton.setColor(Color.LIGHT_GRAY);
                     updateButtons(skin);

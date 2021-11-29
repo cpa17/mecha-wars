@@ -448,7 +448,6 @@ public class Robot {
         int tileSize = (Gdx.graphics.getHeight() / board.fieldmatrix.length);
         int x = xcoor;
         int y = Math.abs(ycoor - (board.fieldmatrix.length - 1));
-
         if (dir == Dir.NORTH) {
             sprite.setPosition(tileSize * x, tileSize * y);
             sprite.setRotation(0);
