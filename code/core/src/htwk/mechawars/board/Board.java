@@ -1,7 +1,15 @@
 package htwk.mechawars.board;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
+import htwk.mechawars.ConfigReader;
+import htwk.mechawars.cards.AiCardGeneration;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.Type;
+import htwk.mechawars.fields.Field;
 import htwk.mechawars.fields.BarrierCorner;
 import htwk.mechawars.fields.BarrierSide;
 import htwk.mechawars.fields.BlackHole;
@@ -9,7 +17,6 @@ import htwk.mechawars.fields.Blockade;
 import htwk.mechawars.fields.Checkpoint;
 import htwk.mechawars.fields.ConveyorBelt;
 import htwk.mechawars.fields.ExpressConveyorBelt;
-import htwk.mechawars.fields.Field;
 import htwk.mechawars.fields.Gear;
 import htwk.mechawars.fields.Laser;
 import htwk.mechawars.fields.RepairSite;
@@ -21,12 +28,6 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.Timer;
-import com.badlogic.gdx.utils.Timer.Task;
 
 /**
  * Class that presents the game board.
@@ -358,104 +359,127 @@ public class Board {
      * This is a wrapper-function for the tests.
      *
      * @param phase List of cards
+     * @param players the robot that should move
+     */
+    public void move(LinkedList<Card> phase, Robot[] players) {
+        move(phase, players, false);
+    }
+
+    /**
+     * For the tests.
+     *
+     * @param phase List of cards
      * @param robot the robot that should move
      */
     public void move(LinkedList<Card> phase, Robot robot) {
-        move(phase, robot, false);
+        Robot[] players = new Robot[1];
+        players[0] = robot;
+        move(phase, players, true);
     }
 
     /**
      * Method that moves the robot in the matrix.
      *
      * @param phase List of cards
-     * @param robot the robot that should move
+     * @param players the robot that should move
      */
-    public void move(LinkedList<Card> phase, Robot robot, boolean isTest) {
-        checkShutDown(robot);
-        if (isTest) {
-            for (Card card : phase) {
-                if (card.getCardAttributeType() == Type.mov) {
-                    robot.moveInDirection(card.getCardAttributeMovCount());
-                } else {
-                    robot.turn(card.getCardAttributeMovCount());
-                }
-                if (robot.getXcoor() >= fieldmatrix[1].length
-                        || robot.getYcoor() >= fieldmatrix.length
-                        || robot.getXcoor() < 0 || robot.getYcoor() < 0) {
-                    robot.setXcoor(robot.getStartX());
-                    robot.setYcoor(robot.getStartY());
-                    return;
-                }
-                robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-                //robotPosition.cardAction(robot);
+    public void move(LinkedList<Card> phase, Robot[] players, boolean isTest) {
+        for (int i = 0; i < players.length; i++) {
+            if (i > 0 && ConfigReader.getAimodes()[i]) {
+                phase = AiCardGeneration.generateRandomAiCards(i);
             }
-        } else {
 
-            // delay in seconds, increments for each phase in the linked list for another second
-            int i = 0;
-            for (Card card : phase) {
+            if (isTest) {
+                if (ConfigReader.getAimodes()[i] || i == 0) {
+                    for (Card card : phase) {
+
+                        if (card.getCardAttributeType() == Type.mov) {
+                            players[i].moveInDirection(card.getCardAttributeMovCount());
+                        } else {
+                            players[i].turn(card.getCardAttributeMovCount());
+                        }
+                        if (players[i].getXcoor() >= fieldmatrix[1].length
+                                || players[i].getYcoor() >= fieldmatrix.length
+                                || players[i].getXcoor() < 0 || players[i].getYcoor() < 0) {
+                            players[i].setXcoor(players[i].getStartX());
+                            players[i].setYcoor(players[i].getStartY());
+                            return;
+                        }
+                        robotPosition =
+                                this.fieldmatrix[players[i].getXcoor()][players[i].getYcoor()];
+                    }
+                }
+            } else {
+                if (ConfigReader.getAimodes()[i] || i == 0) {
+                    /*delay in seconds,
+                    increments for each phase in the linked list for another second*/
+                    int j = 0;
+                    for (Card card : phase) {
+                        int newI = i;
+                        Timer.schedule(new Task() {
+
+                            @Override
+                            public void run() {
+                                if (card.getCardAttributeType() == Type.mov) {
+                                    players[newI].moveInDirection(card.getCardAttributeMovCount());
+                                } else {
+                                    players[newI].turn(card.getCardAttributeMovCount());
+                                }
+                                if (players[newI].getXcoor() >= fieldmatrix[1].length
+                                        || players[newI].getYcoor() >= fieldmatrix.length
+                                        || players[newI].getXcoor() < 0
+                                        || players[newI].getYcoor() < 0) {
+                                    players[newI].setXcoor(players[newI].getStartX());
+                                    players[newI].setYcoor(players[newI].getStartY());
+                                    return;
+                                }
+                            }
+                        }, j);
+                        j += 1;
+                    }
+                }
+            }
+
+            /* Delay of 5 seconds for the code to run so
+            that the robot has reached his final position*/
+            if (!isTest) {
+                int newI2 = i;
                 Timer.schedule(new Task() {
 
                     @Override
                     public void run() {
-                        if (card.getCardAttributeType() == Type.mov) {
-                            robot.moveInDirection(card.getCardAttributeMovCount());
-                        } else {
-                            robot.turn(card.getCardAttributeMovCount());
+                        if (!isTest) {
+                            robotPosition = fieldmatrix[players[newI2].getXcoor()]
+                                    [players[newI2].getYcoor()];
+                            robotPosition.turnAction(players[newI2]);
                         }
-                        if (robot.getXcoor() >= fieldmatrix[1].length ||
-                                robot.getYcoor() >= fieldmatrix.length ||
-                                robot.getXcoor() < 0 ||
-                                robot.getYcoor() < 0) {
-                            robot.setXcoor(robot.getStartX());
-                            robot.setYcoor(robot.getStartY());
-                            return;
-                        }
+            
+            checkLaser(players[newI2]);
+                        checkShutDown(players[newI2]);
+                        players[newI2].setLastRound(players[newI2].getShutDown());
+                        players[newI2].setShutDown(players[newI2].getNextRound());
+
+                        checkDoubleDamage(players[newI2]);
                     }
-                }, i);
-                i += 1;
-            }
-        }
+                }, 5);
+            } else {
 
-        // Delay of 5 seconds for the code to run so that the robot has reached his final position
-        if (!isTest) {
-            Timer.schedule(new Task() {
-
-                @Override
-                public void run() {
-                    if (!isTest) {
-                        robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-                        robotPosition.turnAction(robot);
-                    }
-                    
-                    checkLaser(robot);
-                    checkShutDown(robot);
-                    robot.setLastRound(robot.getShutDown());
-                    robot.setShutDown(robot.getNextRound());
-
-                    checkDoubleDamage(robot);
-                    
-                  //MW57
-                    System.out.println("x = " + robot.getXcoor() + ", y = " + robot.getYcoor());
+                // No delay if this is a test
+                if (isTest) {
+                    robotPosition = fieldmatrix[players[i].getXcoor()][players[i].getYcoor()];
+                    robotPosition.turnAction(players[i]);
                 }
-            }, 5);
-        } else {
 
-            // No delay if this is a test
-            if (isTest) {
-                robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-                robotPosition.turnAction(robot);
+        checkLaser(players[i]);
+                checkShutDown(players[i]);
+                players[i].setLastRound(players[i].getShutDown());
+                players[i].setShutDown(players[i].getNextRound());
+
+                checkDoubleDamage(players[i]);
+
+        //MW57
+                System.out.println("x = " + players[i].getXcoor() + ", y = " + players[i].getYcoor());
             }
-            
-            checkLaser(robot);
-            checkShutDown(robot);
-            robot.setLastRound(robot.getShutDown());
-            robot.setShutDown(robot.getNextRound());
-
-            checkDoubleDamage(robot);
-            
-          //MW57
-            System.out.println("x = " + robot.getXcoor() + ", y = " + robot.getYcoor());
         }
     }
 

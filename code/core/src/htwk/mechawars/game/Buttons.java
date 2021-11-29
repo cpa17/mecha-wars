@@ -18,6 +18,7 @@ import static htwk.mechawars.game.GameScreen.stage;
 import static htwk.mechawars.game.GameScreen.addButtonsToStage;
 import static htwk.mechawars.game.GameScreen.getStage;
 import static htwk.mechawars.game.GameScreen.addScrollPanelToStage;
+import static htwk.mechawars.game.GameScreen.players;
 
 /**
  * Class that creates the ScrollPanel for the GameScreen.
@@ -47,7 +48,7 @@ public class Buttons {
                     if (ScrollPanel.cardOrder[4 - ScrollPanel.damagePoints] != -1) {
                         deactivateButtons();
                         zugInitialisierung.initialisiereBewegung();
-                        board.move(zugInitialisierung.getList(), player);
+                        board.move(zugInitialisierung.getList(), GameScreen.players);
                         zugInitialisierung.resetList();
                         startExecutionButton.setColor(Color.LIGHT_GRAY);
                         ScrollPanel.cardOrderClear();
@@ -58,7 +59,7 @@ public class Buttons {
                     }
                 } else {
                     zugInitialisierung.initialisiereBewegung();
-                    board.move(zugInitialisierung.getList(), player);
+                    board.move(zugInitialisierung.getList(), players);
                     zugInitialisierung.resetList();
                     startExecutionButton.setColor(Color.LIGHT_GRAY);
                     updateButtons(skin);

@@ -11,10 +11,20 @@ public class MechaWars extends Game {
     /**
      * Method & Attribute for skipping the MainMenu when executing the Program.
      */
-    private static boolean isSkip = false;
+    private static boolean isSkip = false; 
+
+    private static int playerNumber;
 
     public static void setSkip(boolean skip) {
         isSkip = skip;
+    }
+
+    public static void setPlayerNumber(int playerNr) {
+        playerNumber = playerNr;
+    }
+
+    public static int getPlayerNumber() {
+        return playerNumber;
     }
 
     private static String map;
@@ -46,6 +56,6 @@ public class MechaWars extends Game {
 
     @Override
     public void dispose() {
-        
+
     }
 }
