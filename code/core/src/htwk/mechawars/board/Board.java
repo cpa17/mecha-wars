@@ -378,7 +378,7 @@ public class Board {
                     if (!(robot.getLocked())) {
                         robot.moveInDirection(card.getCardAttributeMovCount());
                         robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-                        robot.setLastField(robotPosition); //feld setzen
+                        robot.setLastField(robotPosition); 
                         if (robot.getLastField() instanceof BarrierCorner) {
                             robot.checkBarrierCorner(robot);
                         }
@@ -409,7 +409,17 @@ public class Board {
                     @Override
                     public void run() {
                         if (card.getCardAttributeType() == Type.mov) {
-                            robot.moveInDirection(card.getCardAttributeMovCount());
+                            if (!(robot.getLocked())) {
+                                robot.moveInDirection(card.getCardAttributeMovCount());
+                                robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+                                robot.setLastField(robotPosition); 
+                                if (robot.getLastField() instanceof BarrierCorner) {
+                                    robot.checkBarrierCorner(robot);
+                                }
+                                if (robot.getLastField() instanceof BarrierSide) {
+                                    robot.checkBarrierSide(robot);
+                                }
+                            }
                         } else {
                             robot.turn(card.getCardAttributeMovCount());
                         }
@@ -421,6 +431,8 @@ public class Board {
                             robot.setYcoor(robot.getStartY());
                             return;
                         }
+                        robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+                        robotPosition.cardAction(robot);
                     }
                 }, i);
                 i += 1;

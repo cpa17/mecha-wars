@@ -66,6 +66,7 @@ public class BarrierSide extends Field {
                 if (robot.getDir() == Dir.EAST || 
                         (robot.getDir() == Dir.WEST && robot.getLastMove() == -1)) {     
                     resetMove(robot.getLastMove(), robot);
+                    System.out.println("drin");
                 }
                 break;
                     
@@ -98,15 +99,19 @@ public class BarrierSide extends Field {
         switch (lastMove) {
             case -1 :
                 robot.moveInDirection((byte) 1);
+                break;
             case 1 :
                 robot.moveInDirection((byte) -1);
+                break;
             case 2 :
                 robot.moveInDirection((byte) -1);
                 robot.moveInDirection((byte) -1);
+                break;
             case 3 :
                 robot.moveInDirection((byte) -1);
                 robot.moveInDirection((byte) -1);
                 robot.moveInDirection((byte) -1);
+                break;
         }
     }
     
