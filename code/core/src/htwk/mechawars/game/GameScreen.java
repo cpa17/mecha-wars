@@ -88,14 +88,14 @@ public class GameScreen implements Screen {
         getStage().addActor(Buttons.startButton(skin, player));
         getStage().addActor(Buttons.endButton(skin));
 
-        getStage().addActor(Buttons.removeButton(skin));
+        getStage().addActor(Buttons.removeButton(skin, player));
 
         if (player.getShutDown()) {
-            Buttons.removeButton(skin).setTouchable(Touchable.disabled);
-            Buttons.removeButton(skin).setDisabled(true);
+            Buttons.removeButton(skin, player).setTouchable(Touchable.disabled);
+            Buttons.removeButton(skin, player).setDisabled(true);
         } else {
-            Buttons.removeButton(skin).setTouchable(Touchable.enabled);
-            Buttons.removeButton(skin).setDisabled(false);
+            Buttons.removeButton(skin, player).setTouchable(Touchable.enabled);
+            Buttons.removeButton(skin, player).setDisabled(false);
         }
 
         getStage().addActor(Buttons.infoButton(skin));

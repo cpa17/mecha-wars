@@ -43,19 +43,35 @@ public class Buttons {
         startExecutionButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 if (!player.getShutDown()) {
-                    //If All Cards are chosen
-                    if (ScrollPanel.cardOrder[4 - ScrollPanel.damagePoints] != -1) {
-                        deactivateButtons();
-                        zugInitialisierung.initialisiereBewegung();
-                        board.move(zugInitialisierung.getList(), player);
-                        zugInitialisierung.resetList();
-                        startExecutionButton.setColor(Color.LIGHT_GRAY);
-                        ScrollPanel.cardOrderClear();
-                        activateButtons();
-                        updateButtons(skin);
-                    } else {
-                        startExecutionButton.setColor(Color.RED);
-                    }
+                    int lastCheck = 4;
+                        switch (player.getDamagePoints()) {
+                        case 5:     lastCheck = 3;
+                                    break;
+                        case 6:     lastCheck = 2;
+                                    break;
+                        case 7:     lastCheck = 1;
+                                    break;
+                        case 8:     lastCheck = 0;
+                                    break;
+                        default:    lastCheck = 4;
+                                    break;
+                        }
+                        
+                        //If All Cards are chosen
+                        if (ScrollPanel.cardOrder[lastCheck] != -1) {
+                            deactivateButtons();
+                            zugInitialisierung.initialisiereBewegung();
+                            board.move(zugInitialisierung.getList(), player);
+                            player.damageUp();      //////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                            zugInitialisierung.resetList();
+                            startExecutionButton.setColor(Color.LIGHT_GRAY);
+                            ScrollPanel.cardOrderClear(player);
+                            activateButtons();
+                            updateButtons(skin);
+                        } else {
+                            startExecutionButton.setColor(Color.RED);
+                        } 
+                        
                 } else {
                     zugInitialisierung.initialisiereBewegung();
                     board.move(zugInitialisierung.getList(), player);
@@ -120,7 +136,7 @@ public class Buttons {
      * @param skin Object of class Skin.
      * @return removeButton.
      */
-    protected static Button removeButton(Skin skin) {
+    protected static Button removeButton(Skin skin, Robot player) {
         Button removeCardOrder = new TextButton("Loesche\nKartenreihenfolge", skin);
 
         removeCardOrder.setSize(128, 43);
@@ -132,7 +148,7 @@ public class Buttons {
 
         removeCardOrder.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                ScrollPanel.cardOrderClear();
+                ScrollPanel.cardOrderClear(player);
                 zugInitialisierung.resetList();
             }
 
@@ -146,7 +162,7 @@ public class Buttons {
      */
     protected static void deactivateButtons() {
         for (TextButton button : ScrollPanel.buttons) {
-            button.setTouchable(Touchable.disabled);
+//            button.setTouchable(Touchable.disabled);
         }
     }
 
