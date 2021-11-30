@@ -52,7 +52,7 @@ public class ScrollPanel {
                 buttons[cardPrintCounter].addListener(new ClickListener() {
                     public void clicked(InputEvent event, float x, float y) {
                         if (buttonClickOrder(buttonNumber)) {
-                            Buttons.addCard(currentCard);
+                            player.addCard(currentCard);
                         }
                     }
                 });

@@ -28,7 +28,6 @@ public class GameScreen implements Screen {
     private Texture robot;
     static Stage stage;
     private SpriteBatch batch;
-    private Sprite sprite;
     private Sprite[] robotSprites;
     private static Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
     
