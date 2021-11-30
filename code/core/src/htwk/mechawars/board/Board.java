@@ -454,7 +454,7 @@ public class Board {
                             robotPosition.turnAction(players[newI2]);
                         }
             
-            checkLaser(players[newI2]);
+                        checkLaser(players[newI2]);
                         checkShutDown(players[newI2]);
                         players[newI2].setLastRound(players[newI2].getShutDown());
                         players[newI2].setShutDown(players[newI2].getNextRound());
@@ -469,18 +469,23 @@ public class Board {
                     robotPosition = fieldmatrix[players[i].getXcoor()][players[i].getYcoor()];
                     robotPosition.turnAction(players[i]);
                 }
-
-        checkLaser(players[i]);
+                
+                //MW57
+                checkLaser(players[i]);               
+                //checkRobotLaser(players);
+                
                 checkShutDown(players[i]);
                 players[i].setLastRound(players[i].getShutDown());
                 players[i].setShutDown(players[i].getNextRound());
 
                 checkDoubleDamage(players[i]);
 
-        //MW57
+                //MW57
                 System.out.println("x = " + players[i].getXcoor() + ", y = " + players[i].getYcoor());
             }
         }
+        
+        checkRobotLaser(players);
     }
 
     /**
@@ -530,34 +535,72 @@ public class Board {
         //System.out.println(this.fieldmatrix[x][y].getClass());
     }
     
-    public void robotLaser(Robot robot) {
+    //MW57
+    public void checkRobotLaser(Robot[] players) {
         
-        int x = robot.getXcoor();
-        int y = robot.getYcoor();
-        Dir z = robot.getDir();
-        
-        switch (robot.getDir()) {
-        case NORTH:
-            for(int i = robot.getYcoor(); i < 12; i++) {
-                /*
-                if(this.fieldmatrix[x][i] instanceof Robot) {
-                    
+        for (int i = 0; i < players.length; i++) {
+            
+            int x = players[i].getXcoor();
+            int y = players[i].getYcoor();
+            
+            switch (players[i].getDir()) {
+            case NORTH:
+                for (int i2 = (y-1); i2 >= 0; i2--) {
+                    for (int i3 = 0; i3 < players.length; i3++) {
+                        
+                        int x2 = players[i3].getXcoor();
+                        int y2 = players[i3].getYcoor();
+                        
+                        if (x2 == x && y2 == i2) {
+                            players[i3].damageUp();
+                        }   
+                    }
                 }
-                */
-            }
-        case SOUTH:
-            for(int i = robot.getXcoor(); i < 12; i++) {
                 
-            }
-        case EAST:
-            for(int i = robot.getXcoor(); i < 12; i++) {
                 
-            }
-        case WEST:
-            for(int i = robot.getXcoor(); i < 12; i++) {
+            case SOUTH:
+                for (int i2 = (y+1); i2 <= 11; i2++) {
+                    for (int i3 = 0; i3 < players.length; i3++) {
+                        
+                        int x2 = players[i3].getXcoor();
+                        int y2 = players[i3].getYcoor();
+                        
+                        if (x2 == x && y2 == i2) {
+                            players[i3].damageUp();
+                        }   
+                    }
+                }
                 
-            }
+                
+            case EAST:
+                for (int i2 = (x+1); i2 <= 11; i2++) {
+                    for (int i3 = 0; i3 < players.length; i3++) {
+                        
+                        int x2 = players[i3].getXcoor();
+                        int y2 = players[i3].getYcoor();
+                        
+                        if (x2 == i2 && y2 == y) {
+                            players[i3].damageUp();
+                        }   
+                    }
+                }
+                
+                
+            case WEST:
+                for (int i2 = (x-1); i2 >= 0; i2--) {
+                    for (int i3 = 0; i3 < players.length; i3++) {
+                        
+                        int x2 = players[i3].getXcoor();
+                        int y2 = players[i3].getYcoor();
+                        
+                        if (x2 == i2 && y2 == y) {
+                            players[i3].damageUp();
+                        }   
+                    }
+                }    
+            }       
         }
+           
         
         /*
         switch (robot.getDir()) {
