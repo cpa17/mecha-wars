@@ -328,12 +328,8 @@ public class Robot {
         damagePoints += 1;
     }
     
-    public void damageDown() {
-        damagePoints -= 1;
-    }
-    
-    public void blackHole() {
-        damagePoints = 10;
+    public void setDamage(int damage) {
+        damagePoints += damage;
     }
     
     /**
