@@ -1,5 +1,7 @@
 package htwk.mechawars;
 
+import java.io.IOException;
+
 import com.badlogic.gdx.Game;
 import htwk.mechawars.game.GameScreen;
 
@@ -32,6 +34,12 @@ public class MechaWars extends Game {
      */
     @Override
     public void create() {
+        try {
+            ConfigReader.readConfigs();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         if (isSkip) {
             this.setScreen(new GameScreen(this, map));
         } else {

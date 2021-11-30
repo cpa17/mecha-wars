@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import htwk.mechawars.ConfigReader;
 import htwk.mechawars.VictoryScreen;
 import htwk.mechawars.ZugInitialisierung;
 import htwk.mechawars.board.Board;
@@ -28,9 +29,10 @@ public class GameScreen implements Screen {
     private Texture robot;
     static Stage stage;
     private SpriteBatch batch;
-    private Sprite sprite;
+    private Sprite[] robotSprites;
     protected static final ZugInitialisierung zugInitialisierung = new ZugInitialisierung();
     private static Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+    
 
     static Board board;
     private static Robot player = new Robot();
@@ -39,6 +41,8 @@ public class GameScreen implements Screen {
      * Constructor of class GameScreen.
      */
     public GameScreen(Game g, String fileName) {
+        
+        
         game = g;
         initBoard(fileName);
         
@@ -48,18 +52,41 @@ public class GameScreen implements Screen {
         
         robot = new Texture("robot.png");
         
+                
+
+        
         batch = new SpriteBatch();
-        sprite = new Sprite(robot);
+        robotSprites = createSprites(ConfigReader.getPlayerNumber());
 
         Gdx.input.setInputProcessor(getStage());
 
         addButtonsToStage(skin);
         addScrollPanelToStage(skin);
-        board.startRobot(5, 5, Dir.NORTH, player, false);
+        startRobots(Robot.getPlayers());
     }
+   
 
+    
     private static void initBoard(String fileName) {
         board = new Board(fileName);
+    }
+    
+    private Sprite[] createSprites(int numberRobots) {
+        Sprite[] sprites = new Sprite[numberRobots];
+        for (int i = 0; i < sprites.length; i++) {
+            sprites[i] = new Sprite(new Texture("..//assets//robotskins//robot" + (i + 1) 
+                    + ".png"));
+        }
+        return sprites;
+    }
+    
+    private void startRobots(Robot[] players) {
+        for (int i = 0; i < players.length; i++) {
+
+            board.startRobot(ConfigReader.getPlayerStartingPositions()[i].x, 
+                    ConfigReader.getPlayerStartingPositions()[i].y, Dir.NORTH, players[i], false);
+        }
+        
     }
 
     /**
@@ -85,7 +112,7 @@ public class GameScreen implements Screen {
      * @param skin Object of class Skin.
      */
     public static void addButtonsToStage(Skin skin) {
-        getStage().addActor(Buttons.startButton(skin, player));
+        getStage().addActor(Buttons.startButton(skin, Robot.getPlayers()));
         getStage().addActor(Buttons.endButton(skin));
 
         getStage().addActor(Buttons.removeButton(skin));
@@ -136,9 +163,11 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
         batch.begin();
         Board.toAsset(batch, board);
-        player.drawRobot(sprite, board);
-        player.drawParameters(batch);
-        sprite.draw(batch);
+        for (int i = 0; i < Robot.getPlayers().length; i++) {
+            Robot.getPlayers()[i].drawRobot(robotSprites[i], board);
+            Robot.getPlayers()[i].drawParameters(batch);
+            robotSprites[i].draw(batch);
+        }
         batch.end();       
         if (winCondition) {
             changeScreen();
