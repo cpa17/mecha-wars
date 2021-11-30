@@ -13,16 +13,20 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import htwk.mechawars.board.Robot;
 
 import static htwk.mechawars.game.GameScreen.board;
-import static htwk.mechawars.game.GameScreen.zugInitialisierung;
 import static htwk.mechawars.game.GameScreen.stage;
+
+import java.util.LinkedList;
+
 import static htwk.mechawars.game.GameScreen.addButtonsToStage;
 import static htwk.mechawars.game.GameScreen.getStage;
 import static htwk.mechawars.game.GameScreen.addScrollPanelToStage;
+import htwk.mechawars.cards.Card;
 
 /**
  * Class that creates the ScrollPanel for the GameScreen.
  */
 public class Buttons {
+
 
     /**
      * Creates the startButton.
@@ -33,22 +37,18 @@ public class Buttons {
     protected static Button startButton(Skin skin, Robot[] players) {
         Button startExecutionButton = new TextButton("Ausfuehrung starten", skin);
         startExecutionButton.setSize(160, 43);
-
         int startExecutionButtonX = Gdx.graphics.getHeight()
                 + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
         int startExecutionButtonY = Gdx.graphics.getHeight() - 100;
-
         startExecutionButton.setPosition(startExecutionButtonX, startExecutionButtonY);
-
         startExecutionButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 if (!players[0].getShutDown()) {
                     //If All Cards are chosen
                     if (ScrollPanel.cardOrder[4 - ScrollPanel.damagePoints] != -1) {
                         deactivateButtons();
-                        zugInitialisierung.initialisiereBewegung();
-                        board.move(zugInitialisierung.getList(), players);
-                        zugInitialisierung.resetList();
+                        board.move(players);
+                        players[0].resetList();
                         startExecutionButton.setColor(Color.LIGHT_GRAY);
                         ScrollPanel.cardOrderClear();
                         activateButtons();
@@ -57,13 +57,14 @@ public class Buttons {
                         startExecutionButton.setColor(Color.RED);
                     }
                 } else {
-                    zugInitialisierung.initialisiereBewegung();
-                    board.move(zugInitialisierung.getList(), players);
-                    zugInitialisierung.resetList();
+                    board.move(players);
+                    players[0].resetList();
                     startExecutionButton.setColor(Color.LIGHT_GRAY);
                     updateButtons(skin);
                 }
             }
+
+
         });
 
         return startExecutionButton;
@@ -133,7 +134,7 @@ public class Buttons {
         removeCardOrder.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 ScrollPanel.cardOrderClear();
-                zugInitialisierung.resetList();
+                Robot.getPlayers()[0].resetList();
             }
 
         });
@@ -259,4 +260,9 @@ public class Buttons {
         addButtonsToStage(skin);
         addScrollPanelToStage(skin);
     }
+    
+
+    
+
+    
 }
