@@ -514,6 +514,7 @@ public class Robot {
         }
         
     }
+    
     public LinkedList<Card> getSelectedCards() {
         return selectedCards;
     }
