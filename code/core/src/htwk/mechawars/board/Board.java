@@ -371,6 +371,7 @@ public class Board {
      */
     public void move(Robot[] players) {
         LinkedList<Card> phase;
+        System.out.println("liste  "+players[0].getSelectedCards());
         move(players[0].getSelectedCards(), players[0]);
         for (int i = 1; i < players.length; i++) {
             if (i > 0 && ConfigReader.getAimodes()[i]) {
