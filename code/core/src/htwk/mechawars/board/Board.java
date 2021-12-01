@@ -540,7 +540,7 @@ public class Board {
     /**
      * Method that checks if a robot got hit by a Laser of another robot.
      *
-     * @param robot
+     * @param players
      */
     public void checkRobotLaser(Robot[] players) {
         
@@ -548,24 +548,31 @@ public class Board {
             
             int x = players[i].getXcoor();
             int y = players[i].getYcoor();
+            
+            //the variable z, checks if a player or a wall already have been hit
             int z = 0;
             
+            //switch for the direction the player is facing
             switch (players[i].getDir()) {
             case NORTH:
+                //for-loop which checks every field from the tile the robot is standing on
+                //in his direction, until the end of the board is reached
+                //i2 is at first one tile ahead of the robot in the direction he is facing
                 for (int i2 = (y-1); i2 >= 0; i2--) {
                     
+                    //if a robot has been hit, the loop has too break, happens when z = 1
                     if (z == 1) {
                         break;
                     }
                     
-                    /*
-                     * for walls
+                    //if a Barrier is in the way, the loop immediately breaks
                     if (this.fieldmatrix[x][i2] instanceof BarrierCorner 
                             || this.fieldmatrix[x][i2] instanceof BarrierSide ) {
-                        z++;
+                        break;
                     }
-                    */
                     
+                    //checks if one of the players is on the current field [x][i2], if yes
+                    //he gets damage and z becomes 1, so the loop breaks
                     for (int i3 = 0; i3 < players.length; i3++) {
                         
                         int x2 = players[i3].getXcoor();
