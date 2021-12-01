@@ -25,9 +25,11 @@ public class ButtonfunctionsFieldEditor {
     private ArrayList<Integer> actuallField = new ArrayList<>();
     
     private Stage stage;
+    private Skin skin;
 
-    public ButtonfunctionsFieldEditor(Stage stage) {
+    public ButtonfunctionsFieldEditor(Stage stage, Skin skin) {
         this.stage = stage;
+        this.skin = skin;
     }
     
     /**
@@ -62,7 +64,6 @@ public class ButtonfunctionsFieldEditor {
         // Control, if the field is not to large (because of manual manipulation e.g.)
         if (actuallField.size() != 144) {
             // ErrorDialog
-            Skin skin = new Skin(Gdx.files.internal("skinMenu/star-soldier-ui.json"));
             Dialog dialogCloseOption = new Dialog("Error beim Laden! Bitte Datei ueberpruefen.",
                     skin) {
                 @Override
