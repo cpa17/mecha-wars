@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import htwk.mechawars.ConfigReader;
+import htwk.mechawars.MechaWars;
 import htwk.mechawars.VictoryScreen;
 import htwk.mechawars.board.Board;
 import htwk.mechawars.board.Dir;
@@ -30,7 +31,7 @@ public class GameScreen implements Screen {
     private SpriteBatch batch;
     private Sprite[] robotSprites;
     private static Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-    
+
 
     static Board board;
     private static Robot player = new Robot();
@@ -39,8 +40,7 @@ public class GameScreen implements Screen {
      * Constructor of class GameScreen.
      */
     public GameScreen(Game g, String fileName) {
-        
-        
+
         game = g;
         initBoard(fileName);
         
@@ -49,10 +49,7 @@ public class GameScreen implements Screen {
         industrialTile = new Texture("mapAssets/StandardField.png");
         
         robot = new Texture("robot.png");
-        
-                
 
-        
         batch = new SpriteBatch();
         robotSprites = createSprites(ConfigReader.getPlayerNumber());
 
