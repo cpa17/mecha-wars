@@ -14,12 +14,20 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+
 public class ButtonfunctionsFieldEditor {
 
     private ArrayList<Integer> actuallField = new ArrayList<>();
+    
+    private Stage stage;
 
-    public ButtonfunctionsFieldEditor() {
-
+    public ButtonfunctionsFieldEditor(Stage stage) {
+        this.stage = stage;
     }
     
     /**
@@ -49,6 +57,30 @@ public class ButtonfunctionsFieldEditor {
         int chooseroption = chooser.showOpenDialog(null);
         if (chooseroption == JFileChooser.APPROVE_OPTION) {
             openFile(chooser.getSelectedFile());
+        }
+        
+        // Control, if the field is not to large (because of manual manipulation e.g.)
+        if (actuallField.size() != 144) {
+            // ErrorDialog
+            Skin skin = new Skin(Gdx.files.internal("skinMenu/star-soldier-ui.json"));
+            Dialog dialogCloseOption = new Dialog("Error beim Laden! Bitte Datei ueberpruefen.",
+                    skin) {
+                @Override
+                protected void result(Object object) {
+                    remove();
+                }
+            }.show(stage);
+
+            dialogCloseOption.setSize(450, 110);
+
+            dialogCloseOption.button("Verstanden.", true);
+            dialogCloseOption.key(Input.Keys.ENTER, true);   
+            
+            // clean ArrayList
+            actuallField.clear();
+            for (int index = 0; index < 144; index += 1) {
+                actuallField.add(11000);
+            }
         }
         
     }
