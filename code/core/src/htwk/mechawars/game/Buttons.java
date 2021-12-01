@@ -62,7 +62,6 @@ public class Buttons {
                             deactivateButtons();
                             zugInitialisierung.initialisiereBewegung();
                             board.move(zugInitialisierung.getList(), player);
-                            player.damageUp();
                             zugInitialisierung.resetList();
                             startExecutionButton.setColor(Color.LIGHT_GRAY);
                             ScrollPanel.cardOrderClear(player);
