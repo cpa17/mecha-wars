@@ -1,5 +1,7 @@
 package htwk.mechawars.board;
 
+import java.util.LinkedList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -7,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import htwk.mechawars.ConfigReader;
 import htwk.mechawars.fields.Field;
+import htwk.mechawars.cards.Card;
 
 /**
  * Class that presents the robot and the player.
@@ -33,7 +36,8 @@ public class Robot {
     private Texture shutDown;
     private Texture hud;
     private static Robot[] players = createRobots(ConfigReader.getPlayerNumber());
-
+    private LinkedList<Card> selectedCards = new LinkedList<Card>();
+    
     /**
      * Constructor of the robot class.
      */
@@ -510,4 +514,16 @@ public class Robot {
         }
         
     }
+    public LinkedList<Card> getSelectedCards() {
+        return selectedCards;
+    }
+    
+    public void resetList() {
+        selectedCards = new LinkedList<Card>();       
+    }
+    
+    public void addCard(Card card) {
+        this.getSelectedCards().add(card);
+    }
+
 }

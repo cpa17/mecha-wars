@@ -11,7 +11,6 @@ import htwk.mechawars.board.Robot;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.Deck;
 
-import static htwk.mechawars.game.GameScreen.zugInitialisierung;
 
 /**
  * Class that creates the ScrollPanel for the GameScreen.
@@ -52,7 +51,7 @@ public class ScrollPanel {
                 buttons[cardPrintCounter].addListener(new ClickListener() {
                     public void clicked(InputEvent event, float x, float y) {
                         if (buttonClickOrder(buttonNumber)) {
-                            zugInitialisierung.addCard(currentCard);
+                            player.addCard(currentCard);
                         }
                     }
                 });

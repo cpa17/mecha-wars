@@ -14,7 +14,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 import htwk.mechawars.ConfigReader;
 import htwk.mechawars.VictoryScreen;
-import htwk.mechawars.ZugInitialisierung;
 import htwk.mechawars.board.Board;
 import htwk.mechawars.board.Dir;
 import htwk.mechawars.board.Robot;
@@ -30,7 +29,6 @@ public class GameScreen implements Screen {
     static Stage stage;
     private SpriteBatch batch;
     private Sprite[] robotSprites;
-    protected static final ZugInitialisierung zugInitialisierung = new ZugInitialisierung();
     private static Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
     
 

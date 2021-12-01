@@ -367,11 +367,11 @@ public class Board {
     }
     
     /**Function that initialises Movement for the Robots.
-     * @param phase player chosen cards for this turn
      * @param players array of all players
      */
-    public void move(LinkedList<Card> phase, Robot[] players) {
-        move(phase, players[0]);
+    public void move(Robot[] players) {
+        LinkedList<Card> phase;
+        move(players[0].getSelectedCards(), players[0]);
         for (int i = 1; i < players.length; i++) {
             if (i > 0 && ConfigReader.getAimodes()[i]) {
                 phase = AiCardGeneration.generateRandomAiCards(i);
