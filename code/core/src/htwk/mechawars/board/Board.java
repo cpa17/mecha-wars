@@ -553,26 +553,39 @@ public class Board {
             switch (players[i].getDir()) {
             case NORTH:
                 for (int i2 = (y-1); i2 >= 0; i2--) {
+                    
+                    if (z == 1) {
+                        break;
+                    }
+                    
+                    /*
+                     * for walls
+                    if (this.fieldmatrix[x][i2] instanceof BarrierCorner 
+                            || this.fieldmatrix[x][i2] instanceof BarrierSide ) {
+                        z++;
+                    }
+                    */
+                    
                     for (int i3 = 0; i3 < players.length; i3++) {
                         
                         int x2 = players[i3].getXcoor();
                         int y2 = players[i3].getYcoor();
                         
                         if (x2 == x && y2 == i2) {
-                            players[i3].damageUp(); //geht für alle durch brauch nen break
+                            players[i3].damageUp(); 
                             z++;
                         }   
                     }
-                    
-                    if (z == 1) {
-                        break;
-                    }
-                    
                 }
                 
                 
             case SOUTH:
                 for (int i2 = (y+1); i2 <= 11; i2++) {
+                    
+                    if (z == 1) {
+                        break;
+                    }
+                    
                     for (int i3 = 0; i3 < players.length; i3++) {
                         
                         int x2 = players[i3].getXcoor();
@@ -582,17 +595,17 @@ public class Board {
                             players[i3].damageUp();
                             z++;
                         }   
-                    }
-                    
-                    if (z == 1) {
-                        break;
-                    }
-                    
+                    } 
                 }
                 
                 
             case EAST:
                 for (int i2 = (x+1); i2 <= 11; i2++) {
+                    
+                    if (z == 1) {
+                        break;
+                    }
+                    
                     for (int i3 = 0; i3 < players.length; i3++) {
                         
                         int x2 = players[i3].getXcoor();
@@ -603,16 +616,16 @@ public class Board {
                             z++;
                         }   
                     }
-                    
-                    if (z == 1) {
-                        break;
-                    }
-                    
                 }
                 
                 
             case WEST:
                 for (int i2 = (x-1); i2 >= 0; i2--) {
+                    
+                    if (z == 1) {
+                        break;
+                    }
+                    
                     for (int i3 = 0; i3 < players.length; i3++) {
                         
                         int x2 = players[i3].getXcoor();
@@ -622,12 +635,7 @@ public class Board {
                             players[i3].damageUp();
                             z++;
                         }   
-                    }
-                    
-                    if (z == 1) {
-                        break;
-                    }
-                    
+                    }                    
                 }    
             }       
         }
