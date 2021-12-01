@@ -454,7 +454,7 @@ public class Board {
                             robotPosition.turnAction(players[newI2]);
                         }
             
-                        checkLaser(players[newI2]);
+                        checkBoardLaser(players[newI2]);
                         checkShutDown(players[newI2]);
                         players[newI2].setLastRound(players[newI2].getShutDown());
                         players[newI2].setShutDown(players[newI2].getNextRound());
@@ -471,7 +471,7 @@ public class Board {
                 }
                 
                 //MW57
-                checkLaser(players[i]);               
+                checkBoardLaser(players[i]);               
                 //checkRobotLaser(players);
                 
                 checkShutDown(players[i]);
@@ -516,13 +516,14 @@ public class Board {
             robot.damageReset();
         }
     }
-
+    
+    //MW57
     /**
      * Method that checks whether the robot is being shot at by a laser.
      *
      * @param robot
      */
-    public void checkLaser(Robot robot) {
+    public void checkBoardLaser(Robot robot) {
 
         int x = robot.getXcoor();
         int y = robot.getYcoor();
@@ -536,12 +537,18 @@ public class Board {
     }
     
     //MW57
+    /**
+     * Method that checks if a robot got hit by a Laser of another robot.
+     *
+     * @param robot
+     */
     public void checkRobotLaser(Robot[] players) {
         
         for (int i = 0; i < players.length; i++) {
             
             int x = players[i].getXcoor();
             int y = players[i].getYcoor();
+            int z = 0;
             
             switch (players[i].getDir()) {
             case NORTH:
@@ -552,9 +559,15 @@ public class Board {
                         int y2 = players[i3].getYcoor();
                         
                         if (x2 == x && y2 == i2) {
-                            players[i3].damageUp();
+                            players[i3].damageUp(); //geht für alle durch brauch nen break
+                            z++;
                         }   
                     }
+                    
+                    if (z == 1) {
+                        break;
+                    }
+                    
                 }
                 
                 
@@ -567,8 +580,14 @@ public class Board {
                         
                         if (x2 == x && y2 == i2) {
                             players[i3].damageUp();
+                            z++;
                         }   
                     }
+                    
+                    if (z == 1) {
+                        break;
+                    }
+                    
                 }
                 
                 
@@ -581,8 +600,14 @@ public class Board {
                         
                         if (x2 == i2 && y2 == y) {
                             players[i3].damageUp();
+                            z++;
                         }   
                     }
+                    
+                    if (z == 1) {
+                        break;
+                    }
+                    
                 }
                 
                 
@@ -595,8 +620,14 @@ public class Board {
                         
                         if (x2 == i2 && y2 == y) {
                             players[i3].damageUp();
+                            z++;
                         }   
                     }
+                    
+                    if (z == 1) {
+                        break;
+                    }
+                    
                 }    
             }       
         }
