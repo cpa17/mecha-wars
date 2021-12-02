@@ -8,8 +8,10 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import htwk.mechawars.ConfigReader;
@@ -30,17 +32,18 @@ public class GameScreen implements Screen {
     private SpriteBatch batch;
     private Sprite[] robotSprites;
     private static Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-    
+
+    static Button removeCardOrder = new TextButton("Loesche\nKartenreihenfolge", skin);
+    static Button startExecutionButton = new TextButton("Ausfuehrung starten", skin);
+    static Button wakeUpButton = new TextButton("WakeUp", skin);
+    static Button shutDownButton = new TextButton("ShutDown", skin);
 
     static Board board;
-    private static Robot player = new Robot();
 
     /**
      * Constructor of class GameScreen.
      */
     public GameScreen(Game g, String fileName) {
-        
-        
         game = g;
         initBoard(fileName);
         
@@ -49,10 +52,7 @@ public class GameScreen implements Screen {
         industrialTile = new Texture("mapAssets/StandardField.png");
         
         robot = new Texture("robot.png");
-        
-                
 
-        
         batch = new SpriteBatch();
         robotSprites = createSprites(ConfigReader.getPlayerNumber());
 
@@ -102,7 +102,7 @@ public class GameScreen implements Screen {
         getStage().addActor(container);
         container.setBounds(containerBoundsX, containerBoundsY, containerWidth, containerHeight);
 
-        container.add(ScrollPanel.scrollPanel(skin, player)).grow();
+        container.add(ScrollPanel.scrollPanel(skin, Robot.getPlayers()[0])).grow();
     }
 
     /**
@@ -110,35 +110,35 @@ public class GameScreen implements Screen {
      * @param skin Object of class Skin.
      */
     public static void addButtonsToStage(Skin skin) {
-        getStage().addActor(Buttons.startButton(skin, Robot.getPlayers()));
+        getStage().addActor(Buttons.startButton(Robot.getPlayers(), startExecutionButton));
         getStage().addActor(Buttons.endButton(skin));
 
-        getStage().addActor(Buttons.removeButton(skin));
+        getStage().addActor(Buttons.removeButton(removeCardOrder));
 
-        if (player.getShutDown()) {
-            Buttons.removeButton(skin).setTouchable(Touchable.disabled);
-            Buttons.removeButton(skin).setDisabled(true);
+        if (Robot.getPlayers()[0].getShutDown()) {
+            removeCardOrder.setTouchable(Touchable.disabled);
+            removeCardOrder.setDisabled(true);
         } else {
-            Buttons.removeButton(skin).setTouchable(Touchable.enabled);
-            Buttons.removeButton(skin).setDisabled(false);
+            removeCardOrder.setTouchable(Touchable.enabled);
+            removeCardOrder.setDisabled(false);
         }
 
         getStage().addActor(Buttons.infoButton(skin));
 
-        if (player.getShutDown()) {
-            Buttons.shutDownButton(skin, player).setTouchable(Touchable.disabled);
-            Buttons.wakeUpButton(skin, player).setTouchable(Touchable.enabled);
-            Buttons.shutDownButton(skin, player).setDisabled(true);
-            Buttons.wakeUpButton(skin, player).setDisabled(false);
+        if (Robot.getPlayers()[0].getShutDown()) {
+            shutDownButton.setTouchable(Touchable.disabled);
+            wakeUpButton.setTouchable(Touchable.enabled);
+            shutDownButton.setDisabled(true);
+            wakeUpButton.setDisabled(false);
         } else {
-            Buttons.shutDownButton(skin, player).setTouchable(Touchable.enabled);
-            Buttons.wakeUpButton(skin, player).setTouchable(Touchable.disabled);
-            Buttons.shutDownButton(skin, player).setDisabled(false);
-            Buttons.wakeUpButton(skin, player).setDisabled(true);
+            shutDownButton.setTouchable(Touchable.enabled);
+            wakeUpButton.setTouchable(Touchable.disabled);
+            shutDownButton.setDisabled(false);
+            wakeUpButton.setDisabled(true);
         }
 
-        getStage().addActor(Buttons.shutDownButton(skin, player));
-        getStage().addActor(Buttons.wakeUpButton(skin, player));
+        getStage().addActor(Buttons.shutDownButton(Robot.getPlayers()[0], shutDownButton));
+        getStage().addActor(Buttons.wakeUpButton(Robot.getPlayers()[0], wakeUpButton));
 
     }
     
