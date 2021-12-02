@@ -646,26 +646,6 @@ public class Board {
                 }    
             }       
         }
-           
-        
-        /*
-        switch (robot.getDir()) {
-        case NORTH:
-            setYcoor(getYcoor() - mov);
-            return this;
-        case SOUTH:
-            setYcoor(getYcoor() + mov);
-            return this;
-        case EAST:
-            setXcoor(getXcoor() + mov);
-            return this;
-        case WEST:
-            setXcoor(getXcoor() - mov);
-            return this;
-        default:
-            return this;
-    }
-    */
     }
 }
 
