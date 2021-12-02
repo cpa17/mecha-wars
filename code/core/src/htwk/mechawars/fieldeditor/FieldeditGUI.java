@@ -41,28 +41,9 @@ public class FieldeditGUI implements Screen{
         
         importButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-
-                //No dialog but file system instead!
-                Dialog dialogCloseOption = new Dialog("Import", skinFEdit) {
-
-                    @Override
-                    protected void result(Object object) {
-                        boolean yesNoOpt = (Boolean) object;
-                        if (yesNoOpt) {
-//                            importieren();
-                        } else {
-                        }
-                    }
-
-                }.show(stageFEdit);
-
-                dialogCloseOption.setSize(450, 110);
-                dialogCloseOption.button("Importieren", true);
-                dialogCloseOption.button("Zurueck", false);
-                //extra Keys?
-                dialogCloseOption.key(Input.Keys.ENTER, true);
-                dialogCloseOption.key(Input.Keys.ESCAPE, false);                
+                
             }
+//                            importieren(skinFEdit);
         });
         
         TextButton exportButton = new TextButton("Export", skinFEdit);
@@ -72,26 +53,8 @@ public class FieldeditGUI implements Screen{
         
         exportButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-
-                Dialog dialogCloseOption = new Dialog("Export als txt", skinFEdit) {
-
-                    @Override
-                    protected void result(Object object) {
-                        boolean yesNoOpt = (Boolean) object;
-                        if (yesNoOpt) {
-//                            exportieren();
-                        } else {
-                        }
-                    }
-
-                }.show(stageFEdit);
-
-                dialogCloseOption.setSize(450, 110);
-                dialogCloseOption.button("Exportieren", true);
-                dialogCloseOption.button("Zurueck", false);
-                //extra Keys?
-                dialogCloseOption.key(Input.Keys.ENTER, true);
-                dialogCloseOption.key(Input.Keys.ESCAPE, false);                
+                    
+//                            exportieren(skinFEdit);
             }
         });
         
