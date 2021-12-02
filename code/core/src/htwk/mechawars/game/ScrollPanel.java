@@ -23,7 +23,7 @@ public class ScrollPanel {
     protected static final int damagePoints = 0;
     private static int choosableCardCount = 9;
     static final TextButton[] buttons = new TextButton[choosableCardCount];
-    private static Deck deck = new Deck();
+    private static Deck deck = new Deck(0);
 
     /**
      * Constructor of class ScrollPanel.

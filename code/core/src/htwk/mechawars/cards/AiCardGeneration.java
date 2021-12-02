@@ -33,7 +33,7 @@ public class AiCardGeneration {
             int moveSetter = (int) Math.round(Math.random() * (4) - 0.5);
             byte attributemovCount = (byte) moveCounts[moveSetter];
             int cardAttributePriority = (int) Math.round(Math.random() * 3);
-            Card card = new Card(type, attributemovCount, cardAttributePriority);
+            Card card = new Card(type, attributemovCount, cardAttributePriority, playercount);
             cards.add(card);
             System.out.println(card.toString() + "    Card number" + 1);    
         }

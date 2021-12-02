@@ -7,6 +7,7 @@ public class Card {
 
     private Type cardAttributeType;
     private byte cardAttributeMovCount;
+    private int cardPlayerNumber;
     /*
      * amount of moves forward or amount of turns
      * -1:              backwards           -----
@@ -19,10 +20,11 @@ public class Card {
     /**
      * Constructor of a Card.
      */
-    public Card(Type cardAttributeType, byte cardAttributeMovCount, int cardAttributePriority) {
+    public Card(Type cardAttributeType, byte cardAttributeMovCount, int cardAttributePriority, int cardPlayerNumber) {
         this.cardAttributeType = cardAttributeType;
         this.cardAttributeMovCount = cardAttributeMovCount;
         this.cardAttributePriority = cardAttributePriority;
+        this.cardPlayerNumber = cardPlayerNumber;
     }
 
     // getter functions --------------------------------------------------------
