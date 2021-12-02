@@ -433,8 +433,23 @@ public class Board {
                 move2(players, isTest, i);
             }
         }
+
         //MW57
-        //checkRobotLaser(players);
+        if (!isTest) {
+            /* Delay of 5 seconds for the code to run so
+            that the robot has reached his final position */
+            Timer.schedule(new Task() {
+
+                @Override
+                public void run() {
+                    checkRobotLaser(players);
+                    checkBoardLaser(players);
+                }
+            }, 5);
+        } else {
+            checkRobotLaser(players);
+            checkBoardLaser(players);
+        }
     }
 
     /**
@@ -476,11 +491,6 @@ public class Board {
         players[i].setShutDown(players[i].getNextRound());
 
         checkDoubleDamage(players[i]);
-
-        //MW57
-        checkBoardLaser(players[i]);
-        //checkRobotLaser(players);
-        //System.out.println("x = " + players[i].getXcoor() + ", y = " + players[i].getYcoor());
     }
 
     /**
@@ -516,19 +526,121 @@ public class Board {
     /**
      * Method that checks whether the robot is being shot at by a laser.
      *
-     * @param robot
+     * @param players
      */
-    public void checkBoardLaser(Robot robot) {
+    public void checkBoardLaser(Robot[] players) {
+        Laser laser;
+        Laser currentLaser;
+        int flag;
+        int q;
+        for (int i = 0; i < this.fieldmatrix.length; i++) {
+            for (int j = 0; j < this.fieldmatrix[i].length; j++) {
+                if (this.fieldmatrix[i][j] instanceof Laser) {
+                    laser = (Laser) this.fieldmatrix[i][j];
+                    switch (laser.getType()) {
 
-        int x = robot.getXcoor();
-        int y = robot.getYcoor();
+                        // begin left
+                        case 0:
+                            currentLaser = laser;
+                            flag = 0;
+                            q = 1;
+                            while (flag == 0) {
+                                for (int s = 0; (s < players.length) && (flag == 0); s++) {
+                                    int x = players[s].getXcoor();
+                                    int y = players[s].getYcoor();
+                                    if ((y == currentLaser.getXcoor()) && (x == currentLaser.getYcoor())) {
+                                        players[s].damageUp();
+                                        flag = 1;
+                                    }
+                                }
+                                if (fieldmatrix[i+q][j] instanceof Laser) {
+                                    currentLaser = (Laser) fieldmatrix[i+q][j];
+                                    q = q + 1;
+                                }
+                                else {
+                                    flag = 1;
+                                }
+                            }
+                            break;
 
-        if (this.fieldmatrix[x][y] instanceof Laser) {
-            robot.damageUp();
+                        // begin top
+                        case 1:
+                            currentLaser = laser;
+                            flag = 0;
+                            q = 1;
+                            while (flag == 0) {
+                                for (int s = 0; (s < players.length) && (flag == 0); s++) {
+                                    int x = players[s].getXcoor();
+                                    int y = players[s].getYcoor();
+                                    if ((y == currentLaser.getXcoor()) && (x == currentLaser.getYcoor())) {
+                                        players[s].damageUp();
+                                        flag = 1;
+                                    }
+                                }
+                                if (fieldmatrix[i][j+q] instanceof Laser) {
+                                    currentLaser = (Laser) fieldmatrix[i][j+q];
+                                    q = q + 1;
+                                }
+                                else {
+                                    flag = 1;
+                                }
+                            }
+                            break;
+
+                        // begin right
+                        case 2:
+                            currentLaser = laser;
+                            flag = 0;
+                            q = 1;
+                            while (flag == 0) {
+                                for (int s = 0; (s < players.length) && (flag == 0); s++) {
+                                    int x = players[s].getXcoor();
+                                    int y = players[s].getYcoor();
+                                    if ((y == currentLaser.getXcoor()) && (x == currentLaser.getYcoor())) {
+                                        players[s].damageUp();
+                                        flag = 1;
+                                    }
+                                }
+                                if (fieldmatrix[i-q][j] instanceof Laser) {
+                                    currentLaser = (Laser) fieldmatrix[i-q][j];
+                                    q = q + 1;
+                                }
+                                else {
+                                    flag = 1;
+                                }
+                            }
+                            break;
+
+                        // begin bottom
+                        case 3:
+                            currentLaser = laser;
+                            flag = 0;
+                            q = 1;
+                            while (flag == 0) {
+                                for (int s = 0; (s < players.length) && (flag == 0); s++) {
+                                    int x = players[s].getXcoor();
+                                    int y = players[s].getYcoor();
+                                    if ((y == currentLaser.getXcoor()) && (x == currentLaser.getYcoor())) {
+                                        players[s].damageUp();
+                                        flag = 1;
+                                    }
+                                }
+                                if (fieldmatrix[i][j-q] instanceof Laser) {
+                                    currentLaser = (Laser) fieldmatrix[i][j-q];
+                                    q = q + 1;
+                                }
+                                else {
+                                    flag = 1;
+                                }
+                            }
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+            }
         }
-
-        //System.out.println("x = " + x + ", y = " + y);
-        //System.out.println(this.fieldmatrix[x][y].getClass());
     }
     
     //MW57
