@@ -295,8 +295,7 @@ public class Board {
         String fieldstring = "";
         for (Field[] fields : fieldmatrix) {
             for (Field field : fields) {
-                fieldstring = fieldstring + "(" + field.getClass() + ", "
-                        + field + ") ";
+                fieldstring = fieldstring + "(" + field.getClass() + ", " + field + ") ";
             }
             fieldstring = fieldstring + "\n";
         }
@@ -381,7 +380,8 @@ public class Board {
      * Method that moves the robot in the matrix.
      *
      * @param phase List of cards
-     * @param players the robot that should move
+     * @param players The robots that should move
+     * @param isTest indicates that this is a test
      */
     public void move(LinkedList<Card> phase, Robot[] players, boolean isTest) {
         for (int i = 0; i < players.length; i++) {
@@ -389,30 +389,10 @@ public class Board {
                 phase = AiCardGeneration.generateRandomAiCards(i);
             }
 
-            if (isTest) {
+            if (!isTest) {
                 if (ConfigReader.getAimodes()[i] || i == 0) {
-                    for (Card card : phase) {
-
-                        if (card.getCardAttributeType() == Type.mov) {
-                            players[i].moveInDirection(card.getCardAttributeMovCount());
-                        } else {
-                            players[i].turn(card.getCardAttributeMovCount());
-                        }
-                        if (players[i].getXcoor() >= fieldmatrix[1].length
-                                || players[i].getYcoor() >= fieldmatrix.length
-                                || players[i].getXcoor() < 0 || players[i].getYcoor() < 0) {
-                            players[i].setXcoor(players[i].getStartX());
-                            players[i].setYcoor(players[i].getStartY());
-                            return;
-                        }
-                        robotPosition =
-                                this.fieldmatrix[players[i].getXcoor()][players[i].getYcoor()];
-                    }
-                }
-            } else {
-                if (ConfigReader.getAimodes()[i] || i == 0) {
-                    /*delay in seconds,
-                    increments for each phase in the linked list for another second*/
+                    /* Delay in seconds,
+                    increments for each phase in the linked list for another second */
                     int j = 0;
                     for (Card card : phase) {
                         int newI = i;
@@ -420,72 +400,97 @@ public class Board {
 
                             @Override
                             public void run() {
-                                if (card.getCardAttributeType() == Type.mov) {
-                                    players[newI].moveInDirection(card.getCardAttributeMovCount());
-                                } else {
-                                    players[newI].turn(card.getCardAttributeMovCount());
-                                }
-                                if (players[newI].getXcoor() >= fieldmatrix[1].length
-                                        || players[newI].getYcoor() >= fieldmatrix.length
-                                        || players[newI].getXcoor() < 0
-                                        || players[newI].getYcoor() < 0) {
-                                    players[newI].setXcoor(players[newI].getStartX());
-                                    players[newI].setYcoor(players[newI].getStartY());
-                                    return;
-                                }
+                                move1(card, players, newI);
                             }
                         }, j);
                         j += 1;
                     }
                 }
+            } else {
+                if (ConfigReader.getAimodes()[i] || i == 0) {
+                    // No delay if this is a test
+                    for (Card card : phase) {
+                        move1(card, players, i);
+                        robotPosition =
+                                this.fieldmatrix[players[i].getXcoor()][players[i].getYcoor()];
+                    }
+                }
             }
 
-            /* Delay of 5 seconds for the code to run so
-            that the robot has reached his final position*/
             if (!isTest) {
                 int newI2 = i;
+                /* Delay of 5 seconds for the code to run so
+                that the robot has reached his final position */
                 Timer.schedule(new Task() {
 
                     @Override
                     public void run() {
-                        if (!isTest) {
-                            robotPosition = fieldmatrix[players[newI2].getXcoor()]
-                                    [players[newI2].getYcoor()];
-                            robotPosition.turnAction(players[newI2]);
-                        }
-            
-                        checkBoardLaser(players[newI2]);
-                        checkShutDown(players[newI2]);
-                        players[newI2].setLastRound(players[newI2].getShutDown());
-                        players[newI2].setShutDown(players[newI2].getNextRound());
-
-                        checkDoubleDamage(players[newI2]);
+                        move2(players, isTest, newI2);
                     }
                 }, 5);
             } else {
-
                 // No delay if this is a test
-                if (isTest) {
-                    robotPosition = fieldmatrix[players[i].getXcoor()][players[i].getYcoor()];
-                    robotPosition.turnAction(players[i]);
-                }
-                
-                //MW57
-                checkBoardLaser(players[i]);               
-                //checkRobotLaser(players);
-                
-                checkShutDown(players[i]);
-                players[i].setLastRound(players[i].getShutDown());
-                players[i].setShutDown(players[i].getNextRound());
-
-                checkDoubleDamage(players[i]);
-
-                //MW57
-                System.out.println("x = " + players[i].getXcoor() + ", y = " + players[i].getYcoor());
+                move2(players, isTest, i);
             }
         }
-        
-        checkRobotLaser(players);
+
+        //MW57
+        if (!isTest) {
+            /* Delay of 5 seconds for the code to run so
+            that the robot has reached his final position */
+            Timer.schedule(new Task() {
+
+                @Override
+                public void run() {
+                    checkRobotLaser(players);
+                    checkBoardLaser(players);
+                }
+            }, 5);
+        } else {
+            checkRobotLaser(players);
+            checkBoardLaser(players);
+        }
+    }
+
+    /**
+     * Outsourced code from the move function, that would otherwise be duplicated.
+     *
+     * @param card Current card
+     * @param players The robots that should move
+     */
+    public void move1(Card card, Robot[] players, int i) {
+        if (card.getCardAttributeType() == Type.mov) {
+            players[i].moveInDirection(card.getCardAttributeMovCount());
+        } else {
+            players[i].turn(card.getCardAttributeMovCount());
+        }
+        if (players[i].getXcoor() >= fieldmatrix[1].length
+                || players[i].getYcoor() >= fieldmatrix.length
+                || players[i].getXcoor() < 0
+                || players[i].getYcoor() < 0) {
+            players[i].setXcoor(players[i].getStartX());
+            players[i].setYcoor(players[i].getStartY());
+        }
+    }
+
+    /**
+     * Outsourced code from the move function, that would otherwise be duplicated.
+     *
+     * @param players The robots that should move
+     * @param isTest indicates that this is a test
+     */
+    public void move2(Robot[] players, boolean isTest, int i) {
+        if (!isTest) {
+            robotPosition = fieldmatrix[players[i].getXcoor()]
+                    [players[i].getYcoor()];
+            robotPosition.turnAction(players[i]);
+        }
+
+        checkShutDown(players[i]);
+        players[i].setLastRound(players[i].getShutDown());
+        players[i].setShutDown(players[i].getNextRound());
+
+        checkDoubleDamage(players[i]);
     }
 
     /**
@@ -516,24 +521,125 @@ public class Board {
             robot.damageReset();
         }
     }
-    
-    //MW57
+
     /**
      * Method that checks whether the robot is being shot at by a laser.
      *
-     * @param robot
+     * @param players A array of robots
      */
-    public void checkBoardLaser(Robot robot) {
+    public void checkBoardLaser(Robot[] players) {
+        Laser laser;
+        Laser currentLaser;
+        int flag;
+        int q;
+        for (int i = 0; i < this.fieldmatrix.length; i++) {
+            for (int j = 0; j < this.fieldmatrix[i].length; j++) {
+                if (this.fieldmatrix[i][j] instanceof Laser) {
+                    laser = (Laser) this.fieldmatrix[i][j];
+                    switch (laser.getType()) {
 
-        int x = robot.getXcoor();
-        int y = robot.getYcoor();
+                        // begin left
+                        case 0:
+                            currentLaser = laser;
+                            flag = 0;
+                            q = 1;
+                            while (flag == 0) {
+                                for (int s = 0; (s < players.length) && (flag == 0); s++) {
+                                    int x = players[s].getXcoor();
+                                    int y = players[s].getYcoor();
+                                    if ((y == currentLaser.getXcoor())
+                                            && (x == currentLaser.getYcoor())) {
+                                        players[s].damageUp();
+                                        flag = 1;
+                                    }
+                                }
+                                if (fieldmatrix[i + q][j] instanceof Laser) {
+                                    currentLaser = (Laser) fieldmatrix[i + q][j];
+                                    q = q + 1;
+                                } else {
+                                    flag = 1;
+                                }
+                            }
+                            break;
 
-        if (this.fieldmatrix[x][y] instanceof Laser) {
-            robot.damageUp();
+                        // begin top
+                        case 1:
+                            currentLaser = laser;
+                            flag = 0;
+                            q = 1;
+                            while (flag == 0) {
+                                for (int s = 0; (s < players.length) && (flag == 0); s++) {
+                                    int x = players[s].getXcoor();
+                                    int y = players[s].getYcoor();
+                                    if ((y == currentLaser.getXcoor())
+                                            && (x == currentLaser.getYcoor())) {
+                                        players[s].damageUp();
+                                        flag = 1;
+                                    }
+                                }
+                                if (fieldmatrix[i][j + q] instanceof Laser) {
+                                    currentLaser = (Laser) fieldmatrix[i][j + q];
+                                    q = q + 1;
+                                } else {
+                                    flag = 1;
+                                }
+                            }
+                            break;
+
+                        // begin right
+                        case 2:
+                            currentLaser = laser;
+                            flag = 0;
+                            q = 1;
+                            while (flag == 0) {
+                                for (int s = 0; (s < players.length) && (flag == 0); s++) {
+                                    int x = players[s].getXcoor();
+                                    int y = players[s].getYcoor();
+                                    if ((y == currentLaser.getXcoor())
+                                            && (x == currentLaser.getYcoor())) {
+                                        players[s].damageUp();
+                                        flag = 1;
+                                    }
+                                }
+                                if (fieldmatrix[i - q][j] instanceof Laser) {
+                                    currentLaser = (Laser) fieldmatrix[i - q][j];
+                                    q = q + 1;
+                                } else {
+                                    flag = 1;
+                                }
+                            }
+                            break;
+
+                        // begin bottom
+                        case 3:
+                            currentLaser = laser;
+                            flag = 0;
+                            q = 1;
+                            while (flag == 0) {
+                                for (int s = 0; (s < players.length) && (flag == 0); s++) {
+                                    int x = players[s].getXcoor();
+                                    int y = players[s].getYcoor();
+                                    if ((y == currentLaser.getXcoor())
+                                            && (x == currentLaser.getYcoor())) {
+                                        players[s].damageUp();
+                                        flag = 1;
+                                    }
+                                }
+                                if (fieldmatrix[i][j - q] instanceof Laser) {
+                                    currentLaser = (Laser) fieldmatrix[i][j - q];
+                                    q = q + 1;
+                                } else {
+                                    flag = 1;
+                                }
+                            }
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+            }
         }
-
-        //System.out.println("x = " + x + ", y = " + y);
-        //System.out.println(this.fieldmatrix[x][y].getClass());
     }
     
     //MW57
