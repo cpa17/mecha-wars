@@ -380,7 +380,8 @@ public class Board {
      * Method that moves the robot in the matrix.
      *
      * @param phase List of cards
-     * @param players the robot that should move
+     * @param players The robots that should move
+     * @param isTest indicates that this is a test
      */
     public void move(LinkedList<Card> phase, Robot[] players, boolean isTest) {
         for (int i = 0; i < players.length; i++) {
@@ -433,9 +434,15 @@ public class Board {
             }
         }
         //MW57
-        checkRobotLaser(players);
+        //checkRobotLaser(players);
     }
 
+    /**
+     * Outsourced code from the move function, that would otherwise be duplicated.
+     *
+     * @param card Current card
+     * @param players The robots that should move
+     */
     public void move1(Card card, Robot[] players, int i) {
         if (card.getCardAttributeType() == Type.mov) {
             players[i].moveInDirection(card.getCardAttributeMovCount());
@@ -451,6 +458,12 @@ public class Board {
         }
     }
 
+    /**
+     * Outsourced code from the move function, that would otherwise be duplicated.
+     *
+     * @param players The robots that should move
+     * @param isTest indicates that this is a test
+     */
     public void move2(Robot[] players, boolean isTest, int i) {
         if (!isTest) {
             robotPosition = fieldmatrix[players[i].getXcoor()]
