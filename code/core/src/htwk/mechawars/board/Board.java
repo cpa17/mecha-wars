@@ -642,11 +642,10 @@ public class Board {
         }
     }
     
-    //MW57
     /**
      * Method that checks if a robot got hit by a Laser of another robot.
      *
-     * @param players
+     * @param players an array of robots
      */
     public void checkRobotLaser(Robot[] players) {
         
@@ -658,98 +657,119 @@ public class Board {
             //the variable z, checks if a player or a wall already have been hit
             int z = 0;
             
-            //switch for the direction the player is facing
             switch (players[i].getDir()) {
-            case NORTH:
-                //for-loop which checks every field from the tile the robot is standing on
-                //in his direction, until the end of the board is reached
-                //i2 is at first one tile ahead of the robot in the direction he is facing
-                for (int i2 = (y-1); i2 >= 0; i2--) {
-                    
-                    //if a robot has been hit, the loop has too break, happens when z = 1
-                    if (z == 1) {
-                        break;
-                    }
-                    
-                    //if a Barrier is in the way, the loop immediately breaks
-                    if (this.fieldmatrix[x][i2] instanceof BarrierCorner 
-                            || this.fieldmatrix[x][i2] instanceof BarrierSide ) {
-                        break;
-                    }
-                    
-                    //checks if one of the players is on the current field [x][i2], if yes
-                    //he gets damage and z becomes 1, so the loop breaks
-                    for (int i3 = 0; i3 < players.length; i3++) {
+                case NORTH:
+    
+                    //i2 is the next tile the robot is facing
+                    for (int i2 = (y - 1); i2 >= 0; i2--) {
                         
-                        int x2 = players[i3].getXcoor();
-                        int y2 = players[i3].getYcoor();
+                        if (z == 1) {
+                            break;
+                        }
                         
-                        if (x2 == x && y2 == i2) {
-                            players[i3].damageUp(); 
-                            z++;
-                        }   
+                        if (this.fieldmatrix[x][i2] instanceof BarrierCorner 
+                                || this.fieldmatrix[x][i2] instanceof BarrierSide) {
+                            break;
+                        }
+                        
+                        /* checks if one of the players is on the current field [x][i2], if yes
+                        gets damage and z becomes 1, so the loop breaks */
+                        for (int i3 = 0; i3 < players.length; i3++) {
+                            
+                            int x2 = players[i3].getXcoor();
+                            int y2 = players[i3].getYcoor();
+                            
+                            if (x2 == x && y2 == i2) {
+                                players[i3].damageUp(); 
+                                z++;
+                            }   
+                        }
                     }
-                }
+                    break;
+                 
+                    
+                    
+                case SOUTH:
+                    for (int i2 = (y + 1); i2 <= 11; i2++) {
+                        
+                        if (z == 1) {
+                            break;
+                        }
+                        
+                        if (this.fieldmatrix[x][i2] instanceof BarrierCorner 
+                                || this.fieldmatrix[x][i2] instanceof BarrierSide) {
+                            break;
+                        }
+                        
+                        for (int i3 = 0; i3 < players.length; i3++) {
+                            
+                            int x2 = players[i3].getXcoor();
+                            int y2 = players[i3].getYcoor();
+                            
+                            if (x2 == x && y2 == i2) {
+                                players[i3].damageUp();
+                                z++;
+                            }   
+                        } 
+                    }
+                    break;
+                    
                 
-                
-            case SOUTH:
-                for (int i2 = (y+1); i2 <= 11; i2++) {
                     
-                    if (z == 1) {
-                        break;
+                case EAST:
+                    for (int i2 = (x + 1); i2 <= 11; i2++) {
+                        
+                        if (z == 1) {
+                            break;
+                        }
+                        
+                        if (this.fieldmatrix[x][i2] instanceof BarrierCorner 
+                                || this.fieldmatrix[x][i2] instanceof BarrierSide) {
+                            break;
+                        }
+                        
+                        for (int i3 = 0; i3 < players.length; i3++) {
+                            
+                            int x2 = players[i3].getXcoor();
+                            int y2 = players[i3].getYcoor();
+                            
+                            if (x2 == i2 && y2 == y) {
+                                players[i3].damageUp();
+                                z++;
+                            }   
+                        }
                     }
+                    break;
                     
-                    for (int i3 = 0; i3 < players.length; i3++) {
-                        
-                        int x2 = players[i3].getXcoor();
-                        int y2 = players[i3].getYcoor();
-                        
-                        if (x2 == x && y2 == i2) {
-                            players[i3].damageUp();
-                            z++;
-                        }   
-                    } 
-                }
                 
-                
-            case EAST:
-                for (int i2 = (x+1); i2 <= 11; i2++) {
                     
-                    if (z == 1) {
-                        break;
+                case WEST:
+                    for (int i2 = (x - 1); i2 >= 0; i2--) {
+                        
+                        if (z == 1) {
+                            break;
+                        }
+                        
+                        if (this.fieldmatrix[x][i2] instanceof BarrierCorner 
+                                || this.fieldmatrix[x][i2] instanceof BarrierSide) {
+                            break;
+                        }
+                        
+                        for (int i3 = 0; i3 < players.length; i3++) {
+                            
+                            int x2 = players[i3].getXcoor();
+                            int y2 = players[i3].getYcoor();
+                            
+                            if (x2 == i2 && y2 == y) {
+                                players[i3].damageUp();
+                                z++;
+                            }   
+                        }                    
                     }
+                    break;
                     
-                    for (int i3 = 0; i3 < players.length; i3++) {
-                        
-                        int x2 = players[i3].getXcoor();
-                        int y2 = players[i3].getYcoor();
-                        
-                        if (x2 == i2 && y2 == y) {
-                            players[i3].damageUp();
-                            z++;
-                        }   
-                    }
-                }
-                
-                
-            case WEST:
-                for (int i2 = (x-1); i2 >= 0; i2--) {
-                    
-                    if (z == 1) {
-                        break;
-                    }
-                    
-                    for (int i3 = 0; i3 < players.length; i3++) {
-                        
-                        int x2 = players[i3].getXcoor();
-                        int y2 = players[i3].getYcoor();
-                        
-                        if (x2 == i2 && y2 == y) {
-                            players[i3].damageUp();
-                            z++;
-                        }   
-                    }                    
-                }    
+                default:
+                    break;
             }       
         }
     }
