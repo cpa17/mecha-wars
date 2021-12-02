@@ -521,12 +521,11 @@ public class Board {
             robot.damageReset();
         }
     }
-    
-    //MW57
+
     /**
      * Method that checks whether the robot is being shot at by a laser.
      *
-     * @param players
+     * @param players A array of robots
      */
     public void checkBoardLaser(Robot[] players) {
         Laser laser;
@@ -548,16 +547,16 @@ public class Board {
                                 for (int s = 0; (s < players.length) && (flag == 0); s++) {
                                     int x = players[s].getXcoor();
                                     int y = players[s].getYcoor();
-                                    if ((y == currentLaser.getXcoor()) && (x == currentLaser.getYcoor())) {
+                                    if ((y == currentLaser.getXcoor())
+                                            && (x == currentLaser.getYcoor())) {
                                         players[s].damageUp();
                                         flag = 1;
                                     }
                                 }
-                                if (fieldmatrix[i+q][j] instanceof Laser) {
-                                    currentLaser = (Laser) fieldmatrix[i+q][j];
+                                if (fieldmatrix[i + q][j] instanceof Laser) {
+                                    currentLaser = (Laser) fieldmatrix[i + q][j];
                                     q = q + 1;
-                                }
-                                else {
+                                } else {
                                     flag = 1;
                                 }
                             }
@@ -572,16 +571,16 @@ public class Board {
                                 for (int s = 0; (s < players.length) && (flag == 0); s++) {
                                     int x = players[s].getXcoor();
                                     int y = players[s].getYcoor();
-                                    if ((y == currentLaser.getXcoor()) && (x == currentLaser.getYcoor())) {
+                                    if ((y == currentLaser.getXcoor())
+                                            && (x == currentLaser.getYcoor())) {
                                         players[s].damageUp();
                                         flag = 1;
                                     }
                                 }
-                                if (fieldmatrix[i][j+q] instanceof Laser) {
-                                    currentLaser = (Laser) fieldmatrix[i][j+q];
+                                if (fieldmatrix[i][j + q] instanceof Laser) {
+                                    currentLaser = (Laser) fieldmatrix[i][j + q];
                                     q = q + 1;
-                                }
-                                else {
+                                } else {
                                     flag = 1;
                                 }
                             }
@@ -596,16 +595,16 @@ public class Board {
                                 for (int s = 0; (s < players.length) && (flag == 0); s++) {
                                     int x = players[s].getXcoor();
                                     int y = players[s].getYcoor();
-                                    if ((y == currentLaser.getXcoor()) && (x == currentLaser.getYcoor())) {
+                                    if ((y == currentLaser.getXcoor())
+                                            && (x == currentLaser.getYcoor())) {
                                         players[s].damageUp();
                                         flag = 1;
                                     }
                                 }
-                                if (fieldmatrix[i-q][j] instanceof Laser) {
-                                    currentLaser = (Laser) fieldmatrix[i-q][j];
+                                if (fieldmatrix[i - q][j] instanceof Laser) {
+                                    currentLaser = (Laser) fieldmatrix[i - q][j];
                                     q = q + 1;
-                                }
-                                else {
+                                } else {
                                     flag = 1;
                                 }
                             }
@@ -620,16 +619,16 @@ public class Board {
                                 for (int s = 0; (s < players.length) && (flag == 0); s++) {
                                     int x = players[s].getXcoor();
                                     int y = players[s].getYcoor();
-                                    if ((y == currentLaser.getXcoor()) && (x == currentLaser.getYcoor())) {
+                                    if ((y == currentLaser.getXcoor())
+                                            && (x == currentLaser.getYcoor())) {
                                         players[s].damageUp();
                                         flag = 1;
                                     }
                                 }
-                                if (fieldmatrix[i][j-q] instanceof Laser) {
-                                    currentLaser = (Laser) fieldmatrix[i][j-q];
+                                if (fieldmatrix[i][j - q] instanceof Laser) {
+                                    currentLaser = (Laser) fieldmatrix[i][j - q];
                                     q = q + 1;
-                                }
-                                else {
+                                } else {
                                     flag = 1;
                                 }
                             }
