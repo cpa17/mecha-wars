@@ -382,6 +382,7 @@ public class Board {
                 }
             }
         }
+        allCards = Deck.transposeList(maxCardCount, allCards);
         move(allCards, players, maxCardCount, false);
     }
 
