@@ -19,6 +19,12 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
+/**
+ * ButtonFunctions for the FieldEditor.
+ * 
+ * @author -.-
+ *
+ */
 public class ButtonfunctionsFieldEditor {
 
     private ArrayList<Integer> actuallField = new ArrayList<>();
@@ -51,13 +57,13 @@ public class ButtonfunctionsFieldEditor {
     }
 
     /**
-     * 
+     * Function, that manage the import of a Map.
      */
     private void importField() {
         
         JFileChooser chooser = new JFileChooser();
 
-        chooser.setDialogTitle("Link-Liste öffnen");
+        chooser.setDialogTitle("Link-Liste oeffnen");
 
         // Startfolder
         File filepfadLinkListe = new File("code\\desktop\\bin\\main");
@@ -94,8 +100,9 @@ public class ButtonfunctionsFieldEditor {
     }
     
     /**
+     * Function, that manage the Inputstream of the choosen file.
      * 
-     * @param file
+     * @param file -> show, what file should be open.
      */
     private void openFile(File file) {
 
@@ -105,7 +112,7 @@ public class ButtonfunctionsFieldEditor {
         try {
             istream = new FileInputStream(file);
             Scanner reader = new Scanner(istream);
-            while(reader.hasNext()) {
+            while (reader.hasNext()) {
                 String[] arg = reader.nextLine().split(" ");
                 for (int i = 0; i < arg.length; i += 1) {
                     int abc = Integer.parseInt(arg[i]);
@@ -120,7 +127,7 @@ public class ButtonfunctionsFieldEditor {
     }
 
     /**
-     * 
+     * Manage the exportfunction, to save a field in a .txt file permanently.
      */
     private void exportField() {
         
@@ -144,9 +151,9 @@ public class ButtonfunctionsFieldEditor {
     }
     
     /**
+     * Function to save the actuall Field in the File, that the user wanted to use/or create.
      * 
-     * @param file
-     * @param liste
+     * @param file - show the file to save the field.
      */
     public boolean save(File file) {
         
