@@ -391,7 +391,7 @@ public class Board {
     public void move(LinkedList<Card> phase, Robot robot, boolean isTest) {
         checkShutDown(robot);
         robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-        robot.setField(robotPosition);
+        robot.setLastField(robotPosition);
         if (isTest) {
             for (Card card : phase) {
                 if (card.getCardAttributeType() == Type.mov) {

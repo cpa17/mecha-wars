@@ -217,7 +217,7 @@ public class Robot {
         return checkPointNumber;
     }
     
-    public Field getField() {
+    public Field getLastField() {
         return field;
     }
 
@@ -323,7 +323,7 @@ public class Robot {
         this.destroyed = destroyed;
     }
     
-    public void setField(Field field) {
+    public void setLastField(Field field) {
         this.field = field;
     }
     
