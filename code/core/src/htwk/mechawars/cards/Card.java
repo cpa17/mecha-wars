@@ -27,6 +27,17 @@ public class Card {
         this.cardAttributePriority = cardAttributePriority;
         this.cardPlayerNumber = cardPlayerNumber;
     }
+    
+    /**
+     * Constructor of a Card for testing.
+     */
+    public Card(Type cardAttributeType, byte cardAttributeMovCount,
+            int cardAttributePriority) {
+        this.cardAttributeType = cardAttributeType;
+        this.cardAttributeMovCount = cardAttributeMovCount;
+        this.cardAttributePriority = cardAttributePriority;
+        this.cardPlayerNumber = 0;
+    }
 
     // getter functions --------------------------------------------------------
 

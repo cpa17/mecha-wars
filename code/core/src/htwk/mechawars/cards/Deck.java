@@ -18,6 +18,13 @@ public class Deck {
     public Deck(int playerNumber) {
         initDeck(playerNumber);
     }
+    
+    /**
+     * Constructor of a complete Deck.
+     */
+    public Deck() {
+        initDeck(0);
+    }
 
     /**
      * Getter-Function for the ArrayList<\Card\> deck.
@@ -78,6 +85,7 @@ public class Deck {
             priority += 10;
         }
     }
+
 
     /**
      * Shuffles the cards, which were created before.

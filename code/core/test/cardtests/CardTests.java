@@ -30,7 +30,7 @@ public class CardTests {
      */
     @Test
     public void testName() {
-        Deck testDeckNames = new Deck();
+        Deck testDeckNames = new Deck(0);
 
         for (int i = 0; i < 84; i += 1) {
             assertTrue(testDeckNames.getDeck().get(i).toString() == "1 Vor"

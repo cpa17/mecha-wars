@@ -359,7 +359,7 @@ public class Board {
 
 
     public void move(LinkedList<Card> phase, Robot robot) {
-        //move(phase, robot, false);
+        move(phase, robot, false);
     }
     
     /**Function that initialises Movement for the Robots.
@@ -501,6 +501,94 @@ public class Board {
             }
         }
     }
+    
+    /**
+     * Method that moves the robot in the matrix.
+     *
+     * @param phase List of cards
+     * @param robot the robot that should move
+     */
+    public void move(LinkedList<Card> phase, Robot robot, boolean isTest) {
+        checkShutDown(robot);
+        if (isTest) {
+            for (Card card : phase) {
+                if (card.getCardAttributeType() == Type.mov) {
+                    robot.moveInDirection(card.getCardAttributeMovCount());
+                } else {
+                    robot.turn(card.getCardAttributeMovCount());
+                }
+                if (robot.getXcoor() >= fieldmatrix[1].length
+                        || robot.getYcoor() >= fieldmatrix.length
+                        || robot.getXcoor() < 0 || robot.getYcoor() < 0) {
+                    robot.setXcoor(robot.getStartX());
+                    robot.setYcoor(robot.getStartY());
+                    return;
+                }
+                robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+                //robotPosition.cardAction(robot);
+            }
+        } else {
+
+            // delay in seconds, increments for each phase in the linked list for another second
+            int i = 0;
+            for (Card card : phase) {
+                Timer.schedule(new Task() {
+
+                    @Override
+                    public void run() {
+                        if (card.getCardAttributeType() == Type.mov) {
+                            robot.moveInDirection(card.getCardAttributeMovCount());
+                        } else {
+                            robot.turn(card.getCardAttributeMovCount());
+                        }
+                        if (robot.getXcoor() >= fieldmatrix[1].length ||
+                                robot.getYcoor() >= fieldmatrix.length ||
+                                robot.getXcoor() < 0 ||
+                                robot.getYcoor() < 0) {
+                            robot.setXcoor(robot.getStartX());
+                            robot.setYcoor(robot.getStartY());
+                            return;
+                        }
+                    }
+                }, i);
+                i += 1;
+            }
+        }
+
+        // Delay of 5 seconds for the code to run so that the robot has reached his final position
+        if (!isTest) {
+            Timer.schedule(new Task() {
+
+                @Override
+                public void run() {
+                    if (!isTest) {
+                        robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+                        robotPosition.turnAction(robot);
+                    }
+
+                    checkShutDown(robot);
+                    robot.setLastRound(robot.getShutDown());
+                    robot.setShutDown(robot.getNextRound());
+
+                    checkDoubleDamage(robot);
+                }
+            }, 5);
+        } else {
+
+            // No delay if this is a test
+            if (isTest) {
+                robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+                robotPosition.turnAction(robot);
+            }
+
+            checkShutDown(robot);
+            robot.setLastRound(robot.getShutDown());
+            robot.setShutDown(robot.getNextRound());
+
+            checkDoubleDamage(robot);
+        }
+    }
+
 
     /**
      * Method that checks whether the robot receives 2 damage points.
