@@ -68,8 +68,7 @@ public class RepairSite extends Field {
     
     @Override
     public Robot turnAction(Robot robot) {       
-        // On the field -> Repair
-        robot.onRepairField();
+        robot.setDamage(-1);
         
         robot.setbackupCopyX(robot.getXcoor());
         robot.setbackupCopyY(robot.getYcoor());
