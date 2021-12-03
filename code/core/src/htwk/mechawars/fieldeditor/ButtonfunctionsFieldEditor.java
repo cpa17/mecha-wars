@@ -22,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 public class ButtonfunctionsFieldEditor {
 
     private ArrayList<Integer> actuallField = new ArrayList<>();
+    private FieldBackupForBackStep backup = new FieldBackupForBackStep();
     
     private Stage stage;
     private Skin skin;
@@ -42,9 +43,14 @@ public class ButtonfunctionsFieldEditor {
             exportField();
             resetField();
             oneStepBack();
+            oneStepDone();
+            oneStepForward();
         }
     }
 
+    /**
+     * 
+     */
     private void importField() {
         
         JFileChooser chooser = new JFileChooser();
@@ -111,16 +117,19 @@ public class ButtonfunctionsFieldEditor {
         }
     }
 
+    /**
+     * 
+     */
     private void exportField() {
         
-        JFrame Speicherfenster = new JFrame();           
+        JFrame saveDialog = new JFrame();           
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Datei speichern unter...");  
 
         File filepfadLinkListe = new File("code\\desktop\\bin\\main");
         fileChooser.setCurrentDirectory(filepfadLinkListe);
 
-        int userSelection = fileChooser.showSaveDialog(Speicherfenster);
+        int userSelection = fileChooser.showSaveDialog(saveDialog);
 
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File fileToSave = fileChooser.getSelectedFile();
@@ -178,8 +187,44 @@ public class ButtonfunctionsFieldEditor {
 
     }
 
+    /**
+     * Set the actuallField, which is draw continuously.
+     */
     private void oneStepBack() {
-
+        actuallField = backup.getBackup();
+    }
+    
+    /**
+     * Saves the actuall change in a hole new (backup)Field.
+     * 
+     * @return boolean, that show`s the victorious of the function.
+     */
+    private boolean oneStepDone() {
+        try {
+            backup.addBackup(actuallField);
+            return true;
+        }
+        catch(ArrayIndexOutOfBoundsException e) {
+            System.out.println("Error by saving the actuallField.");
+            return false;
+        }
+    }
+    
+    /**
+     * Gives the Field, that are forward of the actuall Step, when the user accidently make
+     * a Step-Back.
+     * 
+     * @return boolean, which show of a forward is available of not.
+     */
+    private boolean oneStepForward() {
+        if(backup.getForwardBackup() != null) {
+            actuallField = backup.getForwardBackup();
+            return true;
+        }
+        else {
+            System.out.println("No Step-Forward available!");
+            return false;
+        }
     }
 
     public ArrayList<Integer> getActuallField() {
