@@ -142,7 +142,7 @@ public class ButtonfunctionsFieldEditor {
 
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File fileToSave = fileChooser.getSelectedFile();
-            if(!fileToSave.getAbsolutePath().endsWith(".txt")) {
+            if (!fileToSave.getAbsolutePath().endsWith(".txt")) {
                 fileToSave = new File(fileToSave.getAbsoluteFile() + ".txt");
             }
             save(fileToSave);
@@ -162,7 +162,7 @@ public class ButtonfunctionsFieldEditor {
             ostream = new FileOutputStream(file);
             PrintWriter schreiber = new PrintWriter(ostream);
 
-            for (int index = 0; index<actuallField.size(); index += 1) {
+            for (int index = 0; index < actuallField.size(); index += 1) {
                 for (int row = 0; row < 12; row += 1) {
                     schreiber.print(actuallField.get(index) + " ");
                 }
@@ -173,7 +173,7 @@ public class ButtonfunctionsFieldEditor {
             
             return true;
         } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(null,"Fehler!");
+            JOptionPane.showMessageDialog(null, "Fehler!");
             e.printStackTrace();
             return false;
         }
@@ -212,8 +212,7 @@ public class ButtonfunctionsFieldEditor {
         try {
             backup.addBackup(actuallField);
             return true;
-        }
-        catch(ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Error by saving the actuallField.");
             return false;
         }
@@ -229,8 +228,7 @@ public class ButtonfunctionsFieldEditor {
         if(backup.getForwardBackup() != null) {
             actuallField = backup.getForwardBackup();
             return true;
-        }
-        else {
+        } else {
             System.out.println("No Step-Forward available!");
             return false;
         }
