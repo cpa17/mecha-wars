@@ -532,9 +532,12 @@ public class Board {
         Laser currentLaser;
         int flag;
         int q;
+
         for (int i = 0; i < this.fieldmatrix.length; i++) {
             for (int j = 0; j < this.fieldmatrix[i].length; j++) {
+
                 if (this.fieldmatrix[i][j] instanceof Laser) {
+
                     laser = (Laser) this.fieldmatrix[i][j];
                     switch (laser.getType()) {
 
@@ -543,7 +546,9 @@ public class Board {
                             currentLaser = laser;
                             flag = 0;
                             q = 1;
+
                             while (flag == 0) {
+
                                 for (int s = 0; (s < players.length) && (flag == 0); s++) {
                                     int x = players[s].getXcoor();
                                     int y = players[s].getYcoor();
@@ -553,6 +558,7 @@ public class Board {
                                         flag = 1;
                                     }
                                 }
+
                                 if (fieldmatrix[i + q][j] instanceof Laser) {
                                     currentLaser = (Laser) fieldmatrix[i + q][j];
                                     q = q + 1;
@@ -567,7 +573,9 @@ public class Board {
                             currentLaser = laser;
                             flag = 0;
                             q = 1;
+
                             while (flag == 0) {
+
                                 for (int s = 0; (s < players.length) && (flag == 0); s++) {
                                     int x = players[s].getXcoor();
                                     int y = players[s].getYcoor();
@@ -577,6 +585,7 @@ public class Board {
                                         flag = 1;
                                     }
                                 }
+
                                 if (fieldmatrix[i][j + q] instanceof Laser) {
                                     currentLaser = (Laser) fieldmatrix[i][j + q];
                                     q = q + 1;
@@ -591,7 +600,9 @@ public class Board {
                             currentLaser = laser;
                             flag = 0;
                             q = 1;
+
                             while (flag == 0) {
+
                                 for (int s = 0; (s < players.length) && (flag == 0); s++) {
                                     int x = players[s].getXcoor();
                                     int y = players[s].getYcoor();
@@ -601,6 +612,7 @@ public class Board {
                                         flag = 1;
                                     }
                                 }
+
                                 if (fieldmatrix[i - q][j] instanceof Laser) {
                                     currentLaser = (Laser) fieldmatrix[i - q][j];
                                     q = q + 1;
@@ -615,7 +627,9 @@ public class Board {
                             currentLaser = laser;
                             flag = 0;
                             q = 1;
+
                             while (flag == 0) {
+
                                 for (int s = 0; (s < players.length) && (flag == 0); s++) {
                                     int x = players[s].getXcoor();
                                     int y = players[s].getYcoor();
@@ -625,6 +639,7 @@ public class Board {
                                         flag = 1;
                                     }
                                 }
+
                                 if (fieldmatrix[i][j - q] instanceof Laser) {
                                     currentLaser = (Laser) fieldmatrix[i][j - q];
                                     q = q + 1;
@@ -690,7 +705,7 @@ public class Board {
                     
                     
                 case SOUTH:
-                    for (int i2 = (y + 1); i2 <= 11; i2++) {
+                    for (int i2 = (y + 1); i2 < this.fieldmatrix.length; i2++) {
                         
                         if (z == 1) {
                             break;
@@ -717,7 +732,7 @@ public class Board {
                 
                     
                 case EAST:
-                    for (int i2 = (x + 1); i2 <= 11; i2++) {
+                    for (int i2 = (x + 1); i2 < this.fieldmatrix[0].length; i2++) {
                         
                         if (z == 1) {
                             break;
