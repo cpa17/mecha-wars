@@ -31,7 +31,7 @@ public class ConfigReader {
      * Function that reads the Game Configurations from Startupconfig.txt.
      */
     public static void readConfigs() throws IOException {
-        FileHandle file = Gdx.files.internal("..//assets//configs//Startupconfig.txt");
+        FileHandle file = Gdx.files.internal("configs/Startupconfig.txt");
         String fileString = file.readString();
         String[] lines = fileString.split("\\r?\\n");
         for (String line : lines) {
@@ -107,7 +107,7 @@ public class ConfigReader {
     public static void writePlayerNumber(int playerNumber) {
         String player = String.valueOf(playerNumber);
 
-        FileHandle file = Gdx.files.local("..//assets//configs//Startupconfig.txt");
+        FileHandle file = Gdx.files.local("configs/Startupconfig.txt");
         file.writeString("playerNumber: " + player, false);
 
         for (int current = 0; current < playerNumber; current++) {
