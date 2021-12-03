@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import htwk.mechawars.ConfigReader;
+import htwk.mechawars.fields.Field;
 import htwk.mechawars.cards.Card;
 
 /**
@@ -23,12 +24,13 @@ public class Robot {
     private int damagePoints;
     private int backupCopyX;
     private int backupCopyY;
-    private int checkPointNumber = 1;
+    private int checkPointNumber;
     private boolean shutDownMark;
     private boolean backupDraw;
     private boolean lastRound;
     private boolean nextRound;
     private boolean destroyed;
+    private Field field;
     private Texture life;
     private Texture damage;
     private Texture shutDown;
@@ -48,8 +50,10 @@ public class Robot {
         lastRound = false;
         nextRound = false;
         destroyed = false;
+        checkPointNumber = 1;
+        field = null;
     }
-
+        
     /**
      * Method that lets the robot run forward.
      * @param mov byte of move
@@ -212,9 +216,13 @@ public class Robot {
     public int getCheckPointNumber() {
         return checkPointNumber;
     }
+    
+    public Field getLastField() {
+        return field;
+    }
 
     // Setters. ------------------------------------------------------------------------------
-
+    
     /**
      * Setter-Function for the direction of the robot.
      *
@@ -314,12 +322,20 @@ public class Robot {
     public void setDestroyed(boolean destroyed) {
         this.destroyed = destroyed;
     }
-
+    
+    public void setLastField(Field field) {
+        this.field = field;
+    }
+    
     /**
      * Increase the damagePoints of a robot by 1.
      */
     public void damageUp() {
         damagePoints += 1;
+    }
+    
+    public void setDamage(int damage) {
+        damagePoints += damage;
     }
     
     /**
@@ -455,6 +471,7 @@ public class Robot {
         int tileSize = (Gdx.graphics.getHeight() / board.fieldmatrix.length);
         int x = xcoor;
         int y = Math.abs(ycoor - (board.fieldmatrix.length - 1));
+
         if (dir == Dir.NORTH) {
             sprite.setPosition(tileSize * x, tileSize * y);
             sprite.setRotation(0);
@@ -497,7 +514,7 @@ public class Robot {
         }
         
     }
-
+    
     public LinkedList<Card> getSelectedCards() {
         return selectedCards;
     }

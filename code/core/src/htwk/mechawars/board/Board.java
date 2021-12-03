@@ -7,7 +7,7 @@ import htwk.mechawars.cards.Type;
 import htwk.mechawars.fields.BarrierCorner;
 import htwk.mechawars.fields.BarrierSide;
 import htwk.mechawars.fields.BlackHole;
-import htwk.mechawars.fields.Blockade;
+import htwk.mechawars.fields.Pusher;
 import htwk.mechawars.fields.Checkpoint;
 import htwk.mechawars.fields.ConveyorBelt;
 import htwk.mechawars.fields.ExpressConveyorBelt;
@@ -171,7 +171,7 @@ public class Board {
                         int typeB = matrix[col][cell] % 10;
                         allowed = new int[]{1, 2, 3, 4};
                         if (Arrays.stream(allowed).anyMatch(x -> x == typeB)) {
-                            this.fieldmatrix[col][cell] = new Blockade(cell, col, typeB, isTest);
+                            this.fieldmatrix[col][cell] = new Pusher(cell, col, typeB, isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
@@ -390,6 +390,8 @@ public class Board {
      */
     public void move(LinkedList<Card> phase, Robot robot, boolean isTest) {
         checkShutDown(robot);
+        robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+        robot.setLastField(robotPosition);
         if (isTest) {
             for (Card card : phase) {
                 if (card.getCardAttributeType() == Type.mov) {
@@ -404,7 +406,7 @@ public class Board {
                     robot.setYcoor(robot.getStartY());
                     return;
                 }
-                robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+                //robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
                 //robotPosition.cardAction(robot);
             }
         } else {
@@ -429,6 +431,8 @@ public class Board {
                             robot.setYcoor(robot.getStartY());
                             return;
                         }
+                        //robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+                        //robotPosition.cardAction(robot);
                     }
                 }, i);
                 i += 1;
