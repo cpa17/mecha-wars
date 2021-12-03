@@ -23,14 +23,13 @@ public class FieldBackupForBackStep {
     /**
      * Getter-Function for the last Backup, not the actuall.
      * 
-     * @return an ArrayList</Integer/> which includes the last field, before the last change.
+     * @return an ArrayList of Integer which includes the last field, before the last change.
      */
     public ArrayList<Integer> getBackup() {
         try {
             backupNumber -= 1;
             return backup.get(backupNumber + 1);
-        }
-        catch(ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("[INDEXOUTOFBOUNDSE] - Backup not loadable");
             return null;
         }
@@ -44,8 +43,7 @@ public class FieldBackupForBackStep {
     public void addBackup(ArrayList<Integer> backup) {
         if ( backupNumber <= backup.size() ) {
             this.backup.set(backupNumber, backup);
-        }
-        else {
+        } else {
             this.backup.add(backup);
         }
         backupNumber += 1;
@@ -54,14 +52,13 @@ public class FieldBackupForBackStep {
     /**
      * Function, that return a forward step, when someone is available.
      * 
-     * @return an ArrayList</Integer/> which includes the field after the change.
+     * @return an ArrayList of Integer which includes the field after the change.
      */
     public ArrayList<Integer> getForwardBackup() {
         try {
             backupNumber += 1;
             return backup.get(backupNumber);
-        }
-        catch(ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("[INDEXOUTOFBOUNDSE] - Backup not loadable");
             return null;
         }

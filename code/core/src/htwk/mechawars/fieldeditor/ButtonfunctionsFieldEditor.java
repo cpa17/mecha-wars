@@ -225,7 +225,7 @@ public class ButtonfunctionsFieldEditor {
      * @return boolean, which show of a forward is available of not.
      */
     private boolean oneStepForward() {
-        if(backup.getForwardBackup() != null) {
+        if (backup.getForwardBackup() != null) {
             actuallField = backup.getForwardBackup();
             return true;
         } else {
