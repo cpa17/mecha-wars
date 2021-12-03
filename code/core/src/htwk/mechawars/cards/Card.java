@@ -20,7 +20,8 @@ public class Card {
     /**
      * Constructor of a Card.
      */
-    public Card(Type cardAttributeType, byte cardAttributeMovCount, int cardAttributePriority, int cardPlayerNumber) {
+    public Card(Type cardAttributeType, byte cardAttributeMovCount,
+            int cardAttributePriority, int cardPlayerNumber) {
         this.cardAttributeType = cardAttributeType;
         this.cardAttributeMovCount = cardAttributeMovCount;
         this.cardAttributePriority = cardAttributePriority;
@@ -51,6 +52,10 @@ public class Card {
      */
     public int getCardAttributePriority() {
         return cardAttributePriority;
+    }
+
+    public int getCardPlayerNumber() {
+        return cardPlayerNumber;
     }
 
     /**
@@ -98,6 +103,8 @@ public class Card {
 
         return xyz;
     }
+    
+
 
 
 }

@@ -2,6 +2,8 @@ package htwk.mechawars.cards;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
 
 /**
  * Includes the functions, that are needed for working with an cardDeck.
@@ -85,4 +87,57 @@ public class Deck {
         Collections.shuffle(deck);
 
     }
+    
+    /** Function that sorts and outputs the input list by priority. 
+     * @param list list of cards
+     * @return the input list of cards, sorted by priority
+     */
+    public static LinkedList<Card> sortByPriority(LinkedList<Card> list) {
+        list.sort(new Comparator<Card>() {
+            @Override
+            public int compare(Card o1, Card o2) {          
+                return Integer.max(o1.getCardAttributePriority(), o2.getCardAttributePriority());
+            }
+
+        });    
+        return list;
+    }
+    
+    /**Function that turns a list of list of cards, each list representing
+     * the Cards each player chose, into a list of where each list
+     * represents one turn. 
+     * @param maxCardCount maximum Cards one player has, used to determine
+     *     the number of turns
+     * @param inputList list of list of Cards(players)
+     * @return List of List of Cards(turns)
+     */
+    public static LinkedList<LinkedList<Card>> transposeList(int maxCardCount,
+            LinkedList<LinkedList<Card>> inputList) {
+        
+        LinkedList<LinkedList<Card>> outputList = new LinkedList<LinkedList<Card>>();
+        for (int i = 0; i < maxCardCount; i++) {
+            outputList.add(new LinkedList<Card>());
+        }
+        
+        for (int i = 0; i < inputList.size(); i++) {
+            for (int j = 0; j < inputList.get(i).size(); j++) {
+                Card card = inputList.get(i).get(j);
+                System.out.println("cardowner:  " + card.getCardPlayerNumber());
+                outputList.get(j).add(card);
+            }
+        }
+        
+        for (int i = 0; i < outputList.size(); i++) {
+            outputList.set(i, sortByPriority(outputList.get(i))); 
+        }
+        System.out.println("outputListsize:  " + outputList.size());
+        return outputList;
+        
+        
+        
+        
+    }
+    
+    
+    
 }
