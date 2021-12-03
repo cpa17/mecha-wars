@@ -39,7 +39,6 @@ public class GameScreen implements Screen {
     static Button shutDownButton = new TextButton("ShutDown", skin);
 
     static Board board;
-    private static Robot player = new Robot();
 
     /**
      * Constructor of class GameScreen.
