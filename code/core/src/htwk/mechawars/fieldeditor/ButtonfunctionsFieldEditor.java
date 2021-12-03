@@ -37,7 +37,9 @@ public class ButtonfunctionsFieldEditor {
      * 
      * @param t -> say if the functions will be called.
      */
-    public ButtonfunctionsFieldEditor(boolean t) {
+    public ButtonfunctionsFieldEditor(Stage stage, Skin skin, boolean t) {
+        this.stage = stage;
+        this.skin = skin;
         if (t) {
             importField();
             exportField();
