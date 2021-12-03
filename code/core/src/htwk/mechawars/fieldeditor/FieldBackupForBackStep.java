@@ -41,7 +41,7 @@ public class FieldBackupForBackStep {
      * @param backup -> Include the Backup, that should be save.
      */
     public void addBackup(ArrayList<Integer> backup) {
-        if ( backupNumber <= backup.size() ) {
+        if (backupNumber <= backup.size()) {
             this.backup.set(backupNumber, backup);
         } else {
             this.backup.add(backup);
