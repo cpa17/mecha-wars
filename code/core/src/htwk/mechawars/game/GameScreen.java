@@ -72,8 +72,7 @@ public class GameScreen implements Screen {
     private Sprite[] createSprites(int numberRobots) {
         Sprite[] sprites = new Sprite[numberRobots];
         for (int i = 0; i < sprites.length; i++) {
-            sprites[i] = new Sprite(new Texture("..//assets//robotskins//robot" + (i + 1) 
-                    + ".png"));
+            sprites[i] = new Sprite(new Texture("robotskins/robot" + (i + 1) + ".png"));
         }
         return sprites;
     }

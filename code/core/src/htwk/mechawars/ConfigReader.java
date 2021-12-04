@@ -1,6 +1,9 @@
 package htwk.mechawars;
 
 import java.awt.Point;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 
 import com.badlogic.gdx.Gdx;
@@ -28,7 +31,7 @@ public class ConfigReader {
      * Function that reads the Game Configurations from Startupconfig.txt.
      */
     public static void readConfigs() throws IOException {
-        FileHandle file = Gdx.files.internal("assets\\configs\\Startupconfig.txt");
+        FileHandle file = Gdx.files.internal("configs/Startupconfig.txt");
         String fileString = file.readString();
         String[] lines = fileString.split("\\r?\\n");
         for (String line : lines) {
@@ -97,4 +100,20 @@ public class ConfigReader {
         return playerNumberCopy;
     }
 
+    /**
+     * Function that setup the Startupconfig.
+     * @param playerNumber the number of players.
+     */
+    public static void writePlayerNumber(int playerNumber) {
+        String player = String.valueOf(playerNumber);
+
+        FileHandle file = Gdx.files.local("configs/Startupconfig.txt");
+        file.writeString("playerNumber: " + player, false);
+
+        for (int current = 0; current < playerNumber; current++) {
+            file.writeString("\nplayerposition: "
+                    + current + "-" + 3 + "-" + (3 + current) + "-" + "1", true);
+        }
+
+    }
 }
