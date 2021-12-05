@@ -8,18 +8,17 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.ScreenUtils;
+
 import htwk.mechawars.ConfigReader;
-import htwk.mechawars.MechaWars;
 import htwk.mechawars.VictoryScreen;
-import htwk.mechawars.ZugInitialisierung;
 import htwk.mechawars.board.Board;
 import htwk.mechawars.board.Dir;
 import htwk.mechawars.board.Robot;
-
-import java.io.IOException;
 
 /**
  * Class that presents the surface of the game screen.
@@ -27,81 +26,64 @@ import java.io.IOException;
 public class GameScreen implements Screen {
     private Game game;
     private static boolean winCondition = false;
-
     private Texture industrialTile;
-
-    static Stage stage = new Stage();
-
+    private Texture robot;
+    static Stage stage;
     private SpriteBatch batch;
     private Sprite[] robotSprites;
-    protected static final ZugInitialisierung zugInitialisierung = new ZugInitialisierung();
-
     private static Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
+    static Button removeCardOrder = new TextButton("Loesche\nKartenreihenfolge", skin);
+    static Button startExecutionButton = new TextButton("Ausfuehrung starten", skin);
+    static Button wakeUpButton = new TextButton("WakeUp", skin);
+    static Button shutDownButton = new TextButton("ShutDown", skin);
+
     static Board board;
-    static Robot[] players;
 
     /**
      * Constructor of class GameScreen.
      */
     public GameScreen(Game g, String fileName) {
         game = g;
-
         initBoard(fileName);
-
+        
         setStage(new Stage());
-
+        
         industrialTile = new Texture("mapAssets/StandardField.png");
+        
+        robot = new Texture("robot.png");
 
-        ConfigReader.setPlayerNumber(MechaWars.getPlayerNumber());
-        try {
-            ConfigReader.readConfigs();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        System.out.println("playernumber:  " + ConfigReader.getPlayerNumber());
-        setPlayers(createRobots(ConfigReader.getPlayerNumber()));
         batch = new SpriteBatch();
         robotSprites = createSprites(ConfigReader.getPlayerNumber());
-        Gdx.input.setInputProcessor(stage);
+
+        Gdx.input.setInputProcessor(getStage());
+
         addButtonsToStage(skin);
         addScrollPanelToStage(skin);
-        startRobots(players);
+        startRobots(Robot.getPlayers());
     }
+   
 
-    private Robot[] createRobots(int numberRobots) {
-        Robot[] robots = new Robot[numberRobots];
-        for (int i = 0; i < robots.length; i++) {
-            robots[i] = new Robot();
-        }
-        return robots;
+    
+    private static void initBoard(String fileName) {
+        board = new Board(fileName);
     }
-
+    
     private Sprite[] createSprites(int numberRobots) {
         Sprite[] sprites = new Sprite[numberRobots];
         for (int i = 0; i < sprites.length; i++) {
-            sprites[i] = new Sprite(new Texture("robotskins//robot" + (i + 1)
-                    + ".png"));
+            sprites[i] = new Sprite(new Texture("robotskins/robot" + (i + 1) + ".png"));
         }
         return sprites;
     }
-
+    
     private void startRobots(Robot[] players) {
         for (int i = 0; i < players.length; i++) {
-            board.startRobot(ConfigReader.getPlayerStartingPositions()[i].x,
+
+            board.startRobot(ConfigReader.getPlayerStartingPositions()[i].x, 
                     ConfigReader.getPlayerStartingPositions()[i].y, Dir.NORTH, players[i], false);
         }
-
-    }
-
-    private void setPlayers(Robot[] robots) {
-        players = robots;
-    }
-
-    private static void initBoard(String fileName) {
-        board = new Board(fileName);
+        
     }
 
     /**
@@ -119,7 +101,7 @@ public class GameScreen implements Screen {
         getStage().addActor(container);
         container.setBounds(containerBoundsX, containerBoundsY, containerWidth, containerHeight);
 
-        container.add(ScrollPanel.scrollPanel(skin, players[0])).grow();
+        container.add(ScrollPanel.scrollPanel(skin, Robot.getPlayers()[0])).grow();
     }
 
     /**
@@ -127,35 +109,35 @@ public class GameScreen implements Screen {
      * @param skin Object of class Skin.
      */
     public static void addButtonsToStage(Skin skin) {
-        getStage().addActor(Buttons.startButton(skin, players[0]));
+        getStage().addActor(Buttons.startButton(Robot.getPlayers(), startExecutionButton));
         getStage().addActor(Buttons.endButton(skin));
 
-        getStage().addActor(Buttons.removeButton(skin));
+        getStage().addActor(Buttons.removeButton(removeCardOrder));
 
-        if (players[0].getShutDown()) {
-            Buttons.removeButton(skin).setTouchable(Touchable.disabled);
-            Buttons.removeButton(skin).setDisabled(true);
+        if (Robot.getPlayers()[0].getShutDown()) {
+            removeCardOrder.setTouchable(Touchable.disabled);
+            removeCardOrder.setDisabled(true);
         } else {
-            Buttons.removeButton(skin).setTouchable(Touchable.enabled);
-            Buttons.removeButton(skin).setDisabled(false);
+            removeCardOrder.setTouchable(Touchable.enabled);
+            removeCardOrder.setDisabled(false);
         }
 
         getStage().addActor(Buttons.infoButton(skin));
 
-        if (players[0].getShutDown()) {
-            Buttons.shutDownButton(skin, players[0]).setTouchable(Touchable.disabled);
-            Buttons.wakeUpButton(skin, players[0]).setTouchable(Touchable.enabled);
-            Buttons.shutDownButton(skin, players[0]).setDisabled(true);
-            Buttons.wakeUpButton(skin, players[0]).setDisabled(false);
+        if (Robot.getPlayers()[0].getShutDown()) {
+            shutDownButton.setTouchable(Touchable.disabled);
+            wakeUpButton.setTouchable(Touchable.enabled);
+            shutDownButton.setDisabled(true);
+            wakeUpButton.setDisabled(false);
         } else {
-            Buttons.shutDownButton(skin, players[0]).setTouchable(Touchable.enabled);
-            Buttons.wakeUpButton(skin, players[0]).setTouchable(Touchable.disabled);
-            Buttons.shutDownButton(skin, players[0]).setDisabled(false);
-            Buttons.wakeUpButton(skin, players[0]).setDisabled(true);
+            shutDownButton.setTouchable(Touchable.enabled);
+            wakeUpButton.setTouchable(Touchable.disabled);
+            shutDownButton.setDisabled(false);
+            wakeUpButton.setDisabled(true);
         }
 
-        getStage().addActor(Buttons.shutDownButton(skin, players[0]));
-        getStage().addActor(Buttons.wakeUpButton(skin, players[0]));
+        getStage().addActor(Buttons.shutDownButton(Robot.getPlayers()[0], shutDownButton));
+        getStage().addActor(Buttons.wakeUpButton(Robot.getPlayers()[0], wakeUpButton));
 
     }
     
@@ -178,14 +160,10 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
         batch.begin();
         Board.toAsset(batch, board);
-        players[0].drawParameters(batch);
-
-        for (int i = 0; i < MechaWars.getPlayerNumber(); i++) {
-            players[i].drawRobot(robotSprites[i], board);
-        }
-
-        for (Sprite sprite : robotSprites) {
-            sprite.draw(batch);
+        Robot.getPlayers()[0].drawParameters(batch);
+        for (int i = 0; i < Robot.getPlayers().length; i++) {
+            Robot.getPlayers()[i].drawRobot(robotSprites[i], board);
+            robotSprites[i].draw(batch);
         }
         batch.end();       
         if (winCondition) {
@@ -214,9 +192,7 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         industrialTile.dispose();
-        for (Sprite sprite : robotSprites) {
-            sprite.getTexture().dispose();
-        }
+        robot.dispose();
     }
 
     @Override

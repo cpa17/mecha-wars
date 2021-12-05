@@ -5,7 +5,7 @@ import htwk.mechawars.board.Board;
 import htwk.mechawars.fields.BarrierCorner;
 import htwk.mechawars.fields.BarrierSide;
 import htwk.mechawars.fields.BlackHole;
-import htwk.mechawars.fields.Blockade;
+import htwk.mechawars.fields.Pusher;
 import htwk.mechawars.fields.Checkpoint;
 import htwk.mechawars.fields.ConveyorBelt;
 import htwk.mechawars.fields.ExpressConveyorBelt;
@@ -71,11 +71,11 @@ public class BoardTest {
         fieldmatrix[6][0] = new BarrierSide(0, 6, 3, true);
         fieldmatrix[7][0] = new BarrierSide(0, 7, 4, true);
         fieldmatrix[8][0] = new BlackHole(0, 8, true);
-        fieldmatrix[9][0] = new Blockade(0, 9, 1, true);
+        fieldmatrix[9][0] = new Pusher(0, 9, 1, true);
 
-        fieldmatrix[0][1] = new Blockade(1, 0, 2, true);
-        fieldmatrix[1][1] = new Blockade(1, 1, 3, true);
-        fieldmatrix[2][1] = new Blockade(1, 2, 4, true);
+        fieldmatrix[0][1] = new Pusher(1, 0, 2, true);
+        fieldmatrix[1][1] = new Pusher(1, 1, 3, true);
+        fieldmatrix[2][1] = new Pusher(1, 2, 4, true);
         fieldmatrix[3][1] = new Checkpoint(1, 3, 1, true);
         fieldmatrix[4][1] = new Checkpoint(1, 4, 2, true);
         fieldmatrix[5][1] = new Checkpoint(1, 5, 3, true);

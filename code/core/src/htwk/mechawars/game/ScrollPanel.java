@@ -1,6 +1,5 @@
 package htwk.mechawars.game;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -12,7 +11,6 @@ import htwk.mechawars.board.Robot;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.Deck;
 
-import static htwk.mechawars.game.GameScreen.zugInitialisierung;
 
 /**
  * Class that creates the ScrollPanel for the GameScreen.
@@ -53,7 +51,7 @@ public class ScrollPanel {
                 buttons[cardPrintCounter].addListener(new ClickListener() {
                     public void clicked(InputEvent event, float x, float y) {
                         if (buttonClickOrder(buttonNumber)) {
-                            zugInitialisierung.addCard(currentCard);
+                            Robot.getPlayers()[0].addCard(currentCard);
                         }
                     }
                 });

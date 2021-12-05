@@ -1,5 +1,7 @@
 package htwk.mechawars;
 
+import java.io.IOException;
+
 import com.badlogic.gdx.Game;
 import htwk.mechawars.game.GameScreen;
 
@@ -11,7 +13,7 @@ public class MechaWars extends Game {
     /**
      * Method & Attribute for skipping the MainMenu when executing the Program.
      */
-    private static boolean isSkip = false; 
+    private static boolean isSkip = false;
 
     private static int playerNumber;
 
@@ -19,14 +21,10 @@ public class MechaWars extends Game {
         isSkip = skip;
     }
 
-    public static void setPlayerNumber(int playerNr) {
-        playerNumber = playerNr;
-    }
 
-    public static int getPlayerNumber() {
-        return playerNumber;
-    }
-
+    /**
+     * Method & Attribute for setup the Map when executing the Program.
+     */
     private static String map;
 
     public static void setMap(String fileName) {
@@ -38,10 +36,28 @@ public class MechaWars extends Game {
     }
 
     /**
+     * Method & Attribute for setup the number of players when executing the Program.
+     */
+    //private static int playerNumber;
+
+    public static void setPlayerNumber(int playerNr) {
+        playerNumber = playerNr;
+    }
+
+    /**
      * Method to start either from the main menu or the game screen.
      */
     @Override
     public void create() {
+        ConfigReader.writePlayerNumber(playerNumber);
+
+        try {
+            ConfigReader.readConfigs();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
         if (isSkip) {
             this.setScreen(new GameScreen(this, map));
         } else {

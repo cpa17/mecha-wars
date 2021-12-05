@@ -35,7 +35,7 @@ public class AiCardGeneration {
             int cardAttributePriority = (int) Math.round(Math.random() * 3);
             Card card = new Card(type, attributemovCount, cardAttributePriority);
             cards.add(card);
-            System.out.println(card.toString() + "    Card number " + (i + 1));
+            System.out.println(card.toString() + "    Card number" + 1);    
         }
         System.out.println("*************************************************************");
         return cards;

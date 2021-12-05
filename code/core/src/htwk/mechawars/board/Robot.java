@@ -1,9 +1,15 @@
 package htwk.mechawars.board;
 
+import java.util.LinkedList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+import htwk.mechawars.ConfigReader;
+import htwk.mechawars.fields.Field;
+import htwk.mechawars.cards.Card;
 
 /**
  * Class that presents the robot and the player.
@@ -18,17 +24,20 @@ public class Robot {
     private int damagePoints;
     private int backupCopyX;
     private int backupCopyY;
-    private int checkPointNumber = 1;
+    private int checkPointNumber;
     private boolean shutDownMark;
     private boolean backupDraw;
     private boolean lastRound;
     private boolean nextRound;
     private boolean destroyed;
+    private Field field;
     private Texture life;
     private Texture damage;
     private Texture shutDown;
     private Texture hud;
-
+    private static Robot[] players = createRobots(ConfigReader.getPlayerNumber());
+    private LinkedList<Card> selectedCards = new LinkedList<Card>();
+    
     /**
      * Constructor of the robot class.
      */
@@ -41,8 +50,10 @@ public class Robot {
         lastRound = false;
         nextRound = false;
         destroyed = false;
+        checkPointNumber = 1;
+        field = null;
     }
-
+        
     /**
      * Method that lets the robot run forward.
      * @param mov byte of move
@@ -205,9 +216,13 @@ public class Robot {
     public int getCheckPointNumber() {
         return checkPointNumber;
     }
+    
+    public Field getLastField() {
+        return field;
+    }
 
     // Setters. ------------------------------------------------------------------------------
-
+    
     /**
      * Setter-Function for the direction of the robot.
      *
@@ -307,12 +322,20 @@ public class Robot {
     public void setDestroyed(boolean destroyed) {
         this.destroyed = destroyed;
     }
-
+    
+    public void setLastField(Field field) {
+        this.field = field;
+    }
+    
     /**
      * Increase the damagePoints of a robot by 1.
      */
     public void damageUp() {
         damagePoints += 1;
+    }
+    
+    public void setDamage(int damage) {
+        damagePoints += damage;
     }
     
     /**
@@ -462,6 +485,46 @@ public class Robot {
             sprite.setPosition(tileSize * x, tileSize * y);
             sprite.setRotation(90);
         }
+    }
+    
+    /**
+     * Function that creates a given number of robots.
+     * @param numberRobots number of robots
+     * @return Array of robots
+     */
+    public static Robot[] createRobots(int numberRobots) {
+        Robot[] robots = new Robot[numberRobots];
+        for (int i = 0; i < robots.length; i++) {
+            robots[i] = new Robot();
+        }
+        return robots;
+    }
+
+    public static Robot[] getPlayers() {
+        Robot[] playersCopy = players;
+        return playersCopy;
+    }
+
+    /** Setter for players.
+     * @param players2 setter for players
+     */
+    public static void setPlayers(Robot[] players2) {
+        for (int i = 0; i < players.length; i++) {
+            players[i] = players2[i]; 
+        }
+        
+    }
+    
+    public LinkedList<Card> getSelectedCards() {
+        return selectedCards;
+    }
+    
+    public void resetList() {
+        selectedCards = new LinkedList<Card>();       
+    }
+    
+    public void addCard(Card card) {
+        this.getSelectedCards().add(card);
     }
 
 }
