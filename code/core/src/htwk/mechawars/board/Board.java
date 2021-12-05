@@ -141,7 +141,7 @@ public class Board {
                         // Test that the read-out attribute value is in the set
                         // of allowed attribute values
                         if (Arrays.stream(allowed).anyMatch(x -> x == corner)) {
-                            this.fieldmatrix[col][cell] = new BarrierCorner(cell, col, corner,
+                            this.fieldmatrix[col][cell] = new BarrierCorner(col, cell, corner,
                                     isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
@@ -154,7 +154,7 @@ public class Board {
                         int side = matrix[col][cell] % 10;
                         allowed = new int[]{1, 2, 3, 4};
                         if (Arrays.stream(allowed).anyMatch(x -> x == side)) {
-                            this.fieldmatrix[col][cell] = new BarrierSide(cell, col, side, isTest);
+                            this.fieldmatrix[col][cell] = new BarrierSide(col, cell, side, isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
@@ -163,7 +163,7 @@ public class Board {
 
                     // BlackHole
                     case 102:
-                        fieldmatrix[col][cell] = new BlackHole(cell, col, isTest);
+                        fieldmatrix[col][cell] = new BlackHole(col, cell, isTest);
                         break;
 
                     // Pusher
@@ -171,7 +171,7 @@ public class Board {
                         int typeB = matrix[col][cell] % 10;
                         allowed = new int[]{1, 2, 3, 4};
                         if (Arrays.stream(allowed).anyMatch(x -> x == typeB)) {
-                            this.fieldmatrix[col][cell] = new Pusher(cell, col, typeB, isTest);
+                            this.fieldmatrix[col][cell] = new Pusher(col, cell, typeB, isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
@@ -183,7 +183,7 @@ public class Board {
                         int numberC = matrix[col][cell] % 10;
                         allowed = new int[]{1, 2, 3, 4, 5, 6, 7, 8};
                         if (Arrays.stream(allowed).anyMatch(x -> x == numberC)) {
-                            this.fieldmatrix[col][cell] = new Checkpoint(cell, col, numberC,
+                            this.fieldmatrix[col][cell] = new Checkpoint(col, cell, numberC,
                                     isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
@@ -200,7 +200,7 @@ public class Board {
                         allowed = new int[]{21, 31, 41, 61, 71, 91, 2, 12, 32, 42, 52, 92,
                                 3, 13, 23, 43, 63, 83, 14, 24, 34, 54, 74, 84};
                         if (Arrays.stream(allowed).anyMatch(x -> x == (10 * startC) + endC)) {
-                            this.fieldmatrix[col][cell] = new ConveyorBelt(cell, col, startC,
+                            this.fieldmatrix[col][cell] = new ConveyorBelt(col, cell, startC,
                                     endC, isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
@@ -215,7 +215,7 @@ public class Board {
                         allowed = new int[]{21, 31, 41, 61, 71, 91, 2, 12, 32, 42, 52, 92,
                                 3, 13, 23, 43, 63, 83, 14, 24, 34, 54, 74, 84};
                         if (Arrays.stream(allowed).anyMatch(x -> x == (10 * startEc) + endEc)) {
-                            this.fieldmatrix[col][cell] = new ExpressConveyorBelt(cell, col,
+                            this.fieldmatrix[col][cell] = new ExpressConveyorBelt(col, cell,
                                     startEc, endEc, isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
@@ -228,7 +228,7 @@ public class Board {
                         int direction = matrix[col][cell] % 10;
                         allowed = new int[]{1, 2};
                         if (Arrays.stream(allowed).anyMatch(x -> x == direction)) {
-                            this.fieldmatrix[col][cell] = new Gear(cell, col, direction, isTest);
+                            this.fieldmatrix[col][cell] = new Gear(col, cell, direction, isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
@@ -240,7 +240,7 @@ public class Board {
                         int typeL = matrix[col][cell] % 10;
                         allowed = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
                         if (Arrays.stream(allowed).anyMatch(x -> x == typeL)) {
-                            this.fieldmatrix[col][cell] = new Laser(cell, col, typeL, isTest);
+                            this.fieldmatrix[col][cell] = new Laser(col, cell, typeL, isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
@@ -252,7 +252,7 @@ public class Board {
                         int typeR = matrix[col][cell] % 10;
                         allowed = new int[]{1, 2};
                         if (Arrays.stream(allowed).anyMatch(x -> x == typeR)) {
-                            this.fieldmatrix[col][cell] = new RepairSite(cell, col, typeR, isTest);
+                            this.fieldmatrix[col][cell] = new RepairSite(col, cell, typeR, isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
@@ -261,7 +261,7 @@ public class Board {
 
                     // StandardField
                     case 110:
-                        this.fieldmatrix[col][cell] = new StandardField(cell, col, isTest);
+                        this.fieldmatrix[col][cell] = new StandardField(col, cell, isTest);
                         break;
 
                     // StartField
@@ -269,7 +269,7 @@ public class Board {
                         int numberS = matrix[col][cell] % 10;
                         allowed = new int[]{1, 2, 3, 4, 5, 6, 7, 8};
                         if (Arrays.stream(allowed).anyMatch(x -> x == numberS)) {
-                            this.fieldmatrix[col][cell] = new StartField(cell, col, numberS,
+                            this.fieldmatrix[col][cell] = new StartField(col, cell, numberS,
                                     isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
@@ -342,8 +342,8 @@ public class Board {
                 for (int j = 0; j < fieldmatrix[i].length; j++) {
                     if (fieldmatrix[i][j] instanceof StartField &&
                             ((StartField) fieldmatrix[i][j]).getNumber() == randomNumber) {
-                        x = fieldmatrix[i][j].getYcoor();
-                        y = fieldmatrix[i][j].getXcoor();
+                        x = fieldmatrix[i][j].getXcoor();
+                        y = fieldmatrix[i][j].getYcoor();
                     }
                 }
             }
@@ -465,8 +465,8 @@ public class Board {
         } else {
             robot.turn(card.getCardAttributeMovCount());
         }
-        if (robot.getXcoor() >= fieldmatrix[1].length
-                || robot.getYcoor() >= fieldmatrix.length
+        if (robot.getXcoor() >= fieldmatrix.length
+                || robot.getYcoor() >= fieldmatrix[1].length
                 || robot.getXcoor() < 0 || robot.getYcoor() < 0) {
             robot.setXcoor(robot.getStartX());
             robot.setYcoor(robot.getStartY());
@@ -553,8 +553,8 @@ public class Board {
                                 for (int s = 0; (s < players.length) && (flag == 0); s++) {
                                     int x = players[s].getXcoor();
                                     int y = players[s].getYcoor();
-                                    if ((y == currentLaser.getXcoor())
-                                            && (x == currentLaser.getYcoor())) {
+                                    if ((x == currentLaser.getXcoor())
+                                            && (y == currentLaser.getYcoor())) {
                                         players[s].damageUp();
                                         flag = 1;
                                     }
@@ -580,8 +580,8 @@ public class Board {
                                 for (int s = 0; (s < players.length) && (flag == 0); s++) {
                                     int x = players[s].getXcoor();
                                     int y = players[s].getYcoor();
-                                    if ((y == currentLaser.getXcoor())
-                                            && (x == currentLaser.getYcoor())) {
+                                    if ((x == currentLaser.getXcoor())
+                                            && (y == currentLaser.getYcoor())) {
                                         players[s].damageUp();
                                         flag = 1;
                                     }
@@ -607,8 +607,8 @@ public class Board {
                                 for (int s = 0; (s < players.length) && (flag == 0); s++) {
                                     int x = players[s].getXcoor();
                                     int y = players[s].getYcoor();
-                                    if ((y == currentLaser.getXcoor())
-                                            && (x == currentLaser.getYcoor())) {
+                                    if ((x == currentLaser.getXcoor())
+                                            && (y == currentLaser.getYcoor())) {
                                         players[s].damageUp();
                                         flag = 1;
                                     }
@@ -634,8 +634,8 @@ public class Board {
                                 for (int s = 0; (s < players.length) && (flag == 0); s++) {
                                     int x = players[s].getXcoor();
                                     int y = players[s].getYcoor();
-                                    if ((y == currentLaser.getXcoor())
-                                            && (x == currentLaser.getYcoor())) {
+                                    if ((x == currentLaser.getXcoor())
+                                            && (y == currentLaser.getYcoor())) {
                                         players[s].damageUp();
                                         flag = 1;
                                     }
