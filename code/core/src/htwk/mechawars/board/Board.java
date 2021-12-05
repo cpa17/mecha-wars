@@ -166,7 +166,7 @@ public class Board {
                         fieldmatrix[col][cell] = new BlackHole(cell, col, isTest);
                         break;
 
-                    // Blockade
+                    // Pusher
                     case 103:
                         int typeB = matrix[col][cell] % 10;
                         allowed = new int[]{1, 2, 3, 4};
