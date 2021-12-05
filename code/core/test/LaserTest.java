@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Class that tests the Lasers.
  */
 public class LaserTest {
-    private Robot[] robotarray = new Robot[1];
+    private Robot[] robotarray = new Robot[2];
     private Board board = new Board(createBoardString(), true);
 
     /**
@@ -29,6 +29,7 @@ public class LaserTest {
         robotarray[0].resetList();
         robotarray[0].addCard(new Card(Type.mov, (byte) 3, 0));
 
+        // Robot moves in front of the laser 1
         board.move(robotarray, true);
 
         // Xcoor: 2, Ycoor: 0, Dir: NORTH, DamagePoints: 1
@@ -43,6 +44,7 @@ public class LaserTest {
         robotarray[0].addCard(new Card(Type.turn, (byte) 3, 0));
         robotarray[0].addCard(new Card(Type.mov, (byte) 2, 0));
 
+        // Robot moves in front of the laser 2
         board.move(robotarray, true);
 
         // Xcoor: 4, Ycoor: 2, Dir: EAST, DamagePoints: 2
@@ -56,6 +58,7 @@ public class LaserTest {
         robotarray[0].addCard(new Card(Type.mov, (byte) 2, 0));
         robotarray[0].addCard(new Card(Type.mov, (byte) 2, 0));
 
+        // Robot moves in front of the laser 3
         board.move(robotarray, true);
 
         // Xcoor: 0, Ycoor: 2, Dir: WEST, DamagePoints: 3
@@ -71,31 +74,33 @@ public class LaserTest {
         robotarray[0].addCard(new Card(Type.mov, (byte) 2, 0));
         robotarray[0].addCard(new Card(Type.mov, (byte) 2, 0));
 
+        // Robot moves in front of the laser 4 (which is blocked by the other robot)
         board.move(robotarray, true);
 
-        // Xcoor: 2, Ycoor: 6, Dir: SOUTH, DamagePoints: 4
+        // Xcoor: 2, Ycoor: 6, Dir: SOUTH, DamagePoints: 3 (because the other robot is in the way)
         assertEquals(2, robotarray[0].getXcoor());
         assertEquals(6, robotarray[0].getYcoor());
         assertEquals(Dir.SOUTH, robotarray[0].getDir());
-        assertEquals(4, robotarray[0].getDamagePoints());
+        assertEquals(3, robotarray[0].getDamagePoints());
 
         robotarray[0].resetList();
         robotarray[0].addCard(new Card(Type.turn, (byte) 2, 0));
         robotarray[0].addCard(new Card(Type.mov, (byte) 3, 0));
 
+        // Robot moves back to its starting position
         board.move(robotarray, true);
 
-        // Xcoor: 2, Ycoor: 3, Dir: NORTH, DamagePoints: 4
+        // Xcoor: 2, Ycoor: 3, Dir: NORTH, DamagePoints: 3
         assertEquals(2, robotarray[0].getXcoor());
         assertEquals(3, robotarray[0].getYcoor());
         assertEquals(Dir.NORTH, robotarray[0].getDir());
-        assertEquals(4, robotarray[0].getDamagePoints());
+        assertEquals(3, robotarray[0].getDamagePoints());
 
         robotarray[0].resetList();
     }
 
     /**
-     * Methode that initialized the robot.
+     * Methode that initialized the robots.
      */
     @BeforeEach
     public void initRobot() {
@@ -103,11 +108,20 @@ public class LaserTest {
         robotarray[0].setDir(Dir.NORTH);
         robotarray[0].setXcoor(2);
         robotarray[0].setYcoor(3);
-        robotarray[0].setShutDown(false);
+
+        // robot that only exists to block lasers 4
+        robotarray[1] = new Robot();
+        robotarray[1].setDir(Dir.NORTH);
+        robotarray[1].setXcoor(3);
+        robotarray[1].setYcoor(6);
     }
 
     /**
      * Method that generates a String for the board constructor.
+     * Laser 1 from Field(1,0) to Field(3,0)
+     * Laser 2 from Field(4,2) to Field(4,4)
+     * Laser 3 from Field(0,4) to Field(0,2)
+     * Laser 4 from Field(3,6) to Field(1,6)
      */
     private String createBoardString() {
         String dummyVar = "";
