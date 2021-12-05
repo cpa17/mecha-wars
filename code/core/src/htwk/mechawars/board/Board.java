@@ -397,7 +397,6 @@ public class Board {
 
                 @Override
                 public void run() {
-                    System.out.println("In run Funktion");
                     checkRobotLaser(players);
                     checkBoardLaser(players);
                 }
@@ -445,7 +444,6 @@ public class Board {
                 @Override
                 public void run() {
                     move2(robot, isTest);
-                    System.out.println("nach move2");
                 }
             }, 5);
         } else {
@@ -537,9 +535,7 @@ public class Board {
         int q;
 
         for (int i = 0; i < this.fieldmatrix.length; i++) {
-            System.out.println("In 1. Schleife zum " + i + ". Mal drin.");
             for (int j = 0; j < this.fieldmatrix[i].length; j++) {
-            //System.out.println("In 2. Schleife zum " + j + ". Mal drin.");
 
                 if (this.fieldmatrix[i][j] instanceof Laser) {
 
@@ -559,10 +555,7 @@ public class Board {
                                     int y = players[s].getYcoor();
                                     if ((y == currentLaser.getXcoor())
                                             && (x == currentLaser.getYcoor())) {
-                                        System.out.println("Case 0, i = " + i + ", j = " + j);
-                                        System.out.println(players[s].getDamagePoints());
                                         players[s].damageUp();
-                                        System.out.println(players[s].getDamagePoints());
                                         flag = 1;
                                     }
                                 }
@@ -589,7 +582,6 @@ public class Board {
                                     int y = players[s].getYcoor();
                                     if ((y == currentLaser.getXcoor())
                                             && (x == currentLaser.getYcoor())) {
-                                        System.out.println("Case 0, i = " + i + ", j = " + j);
                                         players[s].damageUp();
                                         flag = 1;
                                     }
@@ -617,7 +609,6 @@ public class Board {
                                     int y = players[s].getYcoor();
                                     if ((y == currentLaser.getXcoor())
                                             && (x == currentLaser.getYcoor())) {
-                                        System.out.println("Case 0, i = " + i + ", j = " + j);
                                         players[s].damageUp();
                                         flag = 1;
                                     }
@@ -645,7 +636,6 @@ public class Board {
                                     int y = players[s].getYcoor();
                                     if ((y == currentLaser.getXcoor())
                                             && (x == currentLaser.getYcoor())) {
-                                        System.out.println("Case 0, i = " + i + ", j = " + j);
                                         players[s].damageUp();
                                         flag = 1;
                                     }
