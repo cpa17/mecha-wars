@@ -680,11 +680,7 @@ public class Board {
                 case NORTH:
 
                     //i2 is the next tile the robot is facing
-                    for (int i2 = (y - 1); i2 >= 0; i2--) {
-
-                        if (z == 1) {
-                            break;
-                        }
+                    for (int i2 = (y - 1); i2 >= 0 && (z == 0); i2--) {
 
                         if (this.fieldmatrix[x][i2] instanceof BarrierSide) {
                             
@@ -733,11 +729,7 @@ public class Board {
 
 
                 case SOUTH:
-                    for (int i2 = (y + 1); i2 < this.fieldmatrix.length; i2++) {
-
-                        if (z == 1) {
-                            break;
-                        }
+                    for (int i2 = (y + 1); i2 < this.fieldmatrix.length && (z == 0); i2++) {
 
                         if (this.fieldmatrix[x][i2] instanceof BarrierSide) {
                             
@@ -784,11 +776,7 @@ public class Board {
 
 
                 case EAST:
-                    for (int i2 = (x + 1); i2 < this.fieldmatrix[0].length; i2++) {
-
-                        if (z == 1) {
-                            break;
-                        }
+                    for (int i2 = (x + 1); i2 < this.fieldmatrix[0].length && (z == 0); i2++) {
 
                         if (this.fieldmatrix[i2][y] instanceof BarrierSide) {
                             
@@ -834,11 +822,7 @@ public class Board {
 
 
                 case WEST:
-                    for (int i2 = (x - 1); i2 >= 0; i2--) {
-
-                        if (z == 1) {
-                            break;
-                        }
+                    for (int i2 = (x - 1); i2 >= 0 && (z == 0); i2--) {
 
                         if (this.fieldmatrix[i2][y] instanceof BarrierSide) {
                             
