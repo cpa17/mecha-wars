@@ -419,7 +419,7 @@ public class Board {
         robot.setLastField(robotPosition);
         if (isTest) {
             for (Card card : phase) {
-                move1(card, robot);
+                robotMovement(card, robot);
             }
         } else {
 
@@ -430,7 +430,7 @@ public class Board {
 
                     @Override
                     public void run() {
-                        move1(card, robot);
+                        robotMovement(card, robot);
                     }
                 }, i);
                 i += 1;
@@ -443,13 +443,13 @@ public class Board {
 
                 @Override
                 public void run() {
-                    move2(robot, isTest);
+                    state(robot, false);
                 }
             }, 5);
         } else {
 
             // No delay if this is a test
-            move2(robot, isTest);
+            state(robot, true);
         }
     }
 
@@ -459,7 +459,7 @@ public class Board {
      * @param card Current card
      * @param robot The robot that should move
      */
-    public void move1(Card card, Robot robot) {
+    public void robotMovement(Card card, Robot robot) {
         if (card.getCardAttributeType() == Type.mov) {
             robot.moveInDirection(card.getCardAttributeMovCount());
         } else {
@@ -481,7 +481,7 @@ public class Board {
      * @param robot The robot that should move
      * @param isTest indicates that this is a test
      */
-    public void move2(Robot robot, boolean isTest) {
+    public void state(Robot robot, boolean isTest) {
         if (!isTest) {
             robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
             robotPosition.turnAction(robot);
