@@ -15,7 +15,7 @@ public class LaserTest {
     private Board board = new Board(createBoardString(), true);
 
     /**
-     * Test for the Board Laser
+     * Test for the Board Laser.
      */
     @Test
     public void laserTest() {
