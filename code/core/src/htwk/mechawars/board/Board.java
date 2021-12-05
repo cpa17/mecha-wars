@@ -664,6 +664,9 @@ public class Board {
      * @param players an array of robots
      */
     public void checkRobotLaser(Robot[] players) {
+        
+        BarrierSide barrierside;
+        BarrierCorner barriercorner;
 
         for (int i = 0; i < players.length; i++) {
 
@@ -683,9 +686,33 @@ public class Board {
                             break;
                         }
 
-                        if (this.fieldmatrix[x][i2] instanceof BarrierCorner
-                                || this.fieldmatrix[x][i2] instanceof BarrierSide) {
-                            break;
+                        if (this.fieldmatrix[x][i2] instanceof BarrierSide) {
+                            
+                            barrierside = (BarrierSide) this.fieldmatrix[x][i2];
+                            
+                            if (barrierside.getSide() == 4) {
+                                break;
+                            }
+                            
+                            if (barrierside.getSide() == 2) {
+                                z++;
+                            }
+                        }   
+                        
+                        if (this.fieldmatrix[x][i2] instanceof BarrierCorner) {
+                            
+                            barriercorner = (BarrierCorner) this.fieldmatrix[x][i2];
+                            
+                            if (barriercorner.getCorner() == 3 ||
+                                    barriercorner.getCorner() == 4) {
+                                break;
+                            }
+                            
+                            if (barriercorner.getCorner() == 1 ||
+                                    barriercorner.getCorner() == 2) {
+                                z++;
+                            }
+                            
                         }
 
                         /* checks if one of the players is on the current field [x][i2], if yes
@@ -712,9 +739,33 @@ public class Board {
                             break;
                         }
 
-                        if (this.fieldmatrix[x][i2] instanceof BarrierCorner
-                                || this.fieldmatrix[x][i2] instanceof BarrierSide) {
-                            break;
+                        if (this.fieldmatrix[x][i2] instanceof BarrierSide) {
+                            
+                            barrierside = (BarrierSide) this.fieldmatrix[x][i2];
+                            
+                            if (barrierside.getSide() == 2) {
+                                break;
+                            }
+                            
+                            if (barrierside.getSide() == 4) {
+                                z++;
+                            }
+                        }   
+                        
+                        if (this.fieldmatrix[x][i2] instanceof BarrierCorner) {
+                            
+                            barriercorner = (BarrierCorner) this.fieldmatrix[x][i2];
+                            
+                            if (barriercorner.getCorner() == 1 ||
+                                    barriercorner.getCorner() == 2) {
+                                break;
+                            }
+                            
+                            if (barriercorner.getCorner() == 3 ||
+                                    barriercorner.getCorner() == 4) {
+                                z++;
+                            }
+                            
                         }
 
                         for (int i3 = 0; i3 < players.length; i3++) {
@@ -739,9 +790,32 @@ public class Board {
                             break;
                         }
 
-                        if (this.fieldmatrix[x][i2] instanceof BarrierCorner
-                                || this.fieldmatrix[x][i2] instanceof BarrierSide) {
-                            break;
+                        if (this.fieldmatrix[i2][y] instanceof BarrierSide) {
+                            
+                            barrierside = (BarrierSide) this.fieldmatrix[x][i2];
+                            
+                            if (barrierside.getSide() == 1) {
+                                break;
+                            }
+                            
+                            if (barrierside.getSide() == 3) {
+                                z++;
+                            }
+                        }   
+                        
+                        if (this.fieldmatrix[i2][y] instanceof BarrierCorner) {
+                            
+                            barriercorner = (BarrierCorner) this.fieldmatrix[x][i2];
+                            
+                            if (barriercorner.getCorner() == 1 ||
+                                    barriercorner.getCorner() == 4) {
+                                break;
+                            }
+                            
+                            if (barriercorner.getCorner() == 2 ||
+                                    barriercorner.getCorner() == 3) {
+                                z++;
+                            }  
                         }
 
                         for (int i3 = 0; i3 < players.length; i3++) {
@@ -766,9 +840,32 @@ public class Board {
                             break;
                         }
 
-                        if (this.fieldmatrix[x][i2] instanceof BarrierCorner
-                                || this.fieldmatrix[x][i2] instanceof BarrierSide) {
-                            break;
+                        if (this.fieldmatrix[i2][y] instanceof BarrierSide) {
+                            
+                            barrierside = (BarrierSide) this.fieldmatrix[x][i2];
+                            
+                            if (barrierside.getSide() == 3) {
+                                break;
+                            }
+                            
+                            if (barrierside.getSide() == 1) {
+                                z++;
+                            }
+                        }   
+                        
+                        if (this.fieldmatrix[i2][y] instanceof BarrierCorner) {
+                            
+                            barriercorner = (BarrierCorner) this.fieldmatrix[x][i2];
+                            
+                            if (barriercorner.getCorner() == 2 ||
+                                    barriercorner.getCorner() == 3) {
+                                break;
+                            }
+                            
+                            if (barriercorner.getCorner() == 1 ||
+                                    barriercorner.getCorner() == 4) {
+                                z++;
+                            }  
                         }
 
                         for (int i3 = 0; i3 < players.length; i3++) {
