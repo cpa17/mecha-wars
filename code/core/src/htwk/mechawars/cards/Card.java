@@ -1,5 +1,9 @@
 package htwk.mechawars.cards;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+
 /**
  * Class of a single Card.
  */
@@ -114,6 +118,22 @@ public class Card {
 
         return xyz;
     }
+    
+    /** Function that sorts and outputs the input list by priority. 
+     * @param list list of cards
+     * @return the input list of cards, sorted by priority
+     */
+    public static LinkedList<Card> sortByPriority(LinkedList<Card> list) {
+        Collections.sort(list, new Comparator<Card>() {
+            @Override
+            public int compare(Card o1, Card o2) {          
+                return Integer.max(o1.getCardAttributePriority(), o2.getCardAttributePriority());
+            }
+
+        });
+        return list;
+    }
+    
     
 
 

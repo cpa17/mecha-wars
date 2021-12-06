@@ -96,21 +96,6 @@ public class Deck {
 
     }
     
-    /** Function that sorts and outputs the input list by priority. 
-     * @param list list of cards
-     * @return the input list of cards, sorted by priority
-     */
-    public static LinkedList<Card> sortByPriority(LinkedList<Card> list) {
-        list.sort(new Comparator<Card>() {
-            @Override
-            public int compare(Card o1, Card o2) {          
-                return Integer.max(o1.getCardAttributePriority(), o2.getCardAttributePriority());
-            }
-
-        });    
-        return list;
-    }
-    
     /**Function that turns a list of list of cards, each list representing
      * the Cards each player chose, into a list of where each list
      * represents one turn. 
@@ -136,7 +121,7 @@ public class Deck {
         }
         
         for (int i = 0; i < outputList.size(); i++) {
-            outputList.set(i, sortByPriority(outputList.get(i))); 
+            outputList.set(i, Card.sortByPriority(outputList.get(i))); 
         }
         System.out.println("outputListsize:  " + outputList.size());
         return outputList;

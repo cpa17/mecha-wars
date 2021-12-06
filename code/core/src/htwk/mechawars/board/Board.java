@@ -366,15 +366,18 @@ public class Board {
      * @param players array of all players
      */
     public void move(Robot[] players) {
-        int maxCardCount = 0;
-        LinkedList<LinkedList<Card>> allCards = new LinkedList<LinkedList<Card>>();
+        int maxCardCount = 0; /* keeps track of the max number of cards any robot has
+                                -> determines the number of turns*/
+        LinkedList<LinkedList<Card>> allCards = new LinkedList<LinkedList<Card>>(); 
         for (int i = 0; i < ConfigReader.getPlayerNumber(); i++) {
             if (i == 0) {
-                allCards.add(players[0].getSelectedCards());
+                allCards.add(players[0].getSelectedCards()); /* List of Lists of cards,
+                                                            each List for one Players cards*/
                 maxCardCount = players[0].getSelectedCards().size();
             } else {
                 if (ConfigReader.getAimodes()[i]) {
-                    LinkedList<Card> generatedCards = AiCardGeneration.generateRandomAiCards(i);
+                    LinkedList<Card> generatedCards = AiCardGeneration.generateRandomAiCards(i); 
+                    // Random Cards generation for the AI-Players
                     allCards.add(generatedCards);
                     maxCardCount = Integer.max(generatedCards.size(), maxCardCount);
                 } else {
@@ -382,7 +385,9 @@ public class Board {
                 }
             }
         }
-        allCards = Deck.transposeList(maxCardCount, allCards);
+        allCards = Deck.transposeList(maxCardCount, allCards); /* turns a list of List of Cards
+                                                                    for each Player into a list 
+                                                               of lists of cards for each turn*/
         move(allCards, players, maxCardCount, false);
     }
 
@@ -485,7 +490,7 @@ public class Board {
                     
                         }
                     }
-            }, 5);
+            }, 25);
         } else {
             for (int playerIndex = 0; playerIndex < players.length; playerIndex++) {
                 // No delay if this is a test
