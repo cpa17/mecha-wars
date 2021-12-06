@@ -111,9 +111,8 @@ public class LaserTest {
 
         robotLaserBoard.checkRobotLaser(robotarray);
 
-        /** robot a: xcoor = 2, ycoor = 6, Dir = EAST, DamagePoints = 0
-         *  robot b: xcoor = 3, ycoor = 6, Dir = NORTH, DamagePoints = 1
-         */
+        // robot a: xcoor = 2, ycoor = 6, Dir = EAST, DamagePoints = 0
+        // robot b: xcoor = 3, ycoor = 6, Dir = NORTH, DamagePoints = 1
         assertEquals(0, robotarray[0].getDamagePoints());
         assertEquals(1, robotarray[1].getDamagePoints());
 
@@ -125,9 +124,8 @@ public class LaserTest {
 
         robotLaserBoard.checkRobotLaser(robotarray);
 
-        /** robot a: xcoor = 3, ycoor = 4, Dir = EAST, DamagePoints = 1
-         *  robot b: xcoor = 5, ycoor = 4, Dir = WEST, DamagePoints = 2
-         */
+        // robot a: xcoor = 3, ycoor = 4, Dir = EAST, DamagePoints = 1
+        // robot b: xcoor = 5, ycoor = 4, Dir = WEST, DamagePoints = 2
         assertEquals(1, robotarray[0].getDamagePoints());
         assertEquals(2, robotarray[1].getDamagePoints());
 
@@ -138,9 +136,8 @@ public class LaserTest {
 
         robotLaserBoard.checkRobotLaser(robotarray);
 
-        /** robot a: xcoor = 4, ycoor = 4, Dir = EAST, DamagePoints = 2
-         *  robot b: xcoor = 4, ycoor = 2, Dir = SOUTH, DamagePoints = 2
-         */
+        // robot a: xcoor = 4, ycoor = 4, Dir = EAST, DamagePoints = 2
+        // robot b: xcoor = 4, ycoor = 2, Dir = SOUTH, DamagePoints = 2
         assertEquals(2, robotarray[0].getDamagePoints());
         assertEquals(2, robotarray[1].getDamagePoints());
 
@@ -148,9 +145,8 @@ public class LaserTest {
 
         robotLaserBoard.checkRobotLaser(robotarray);
 
-        /** robot a: xcoor = 4, ycoor = 5, Dir = EAST, DamagePoints = 2
-         *  robot b: xcoor = 4, ycoor = 2, Dir = SOUTH, DamagePoints = 2
-         */
+        // robot a: xcoor = 4, ycoor = 5, Dir = EAST, DamagePoints = 2
+        // robot b: xcoor = 4, ycoor = 2, Dir = SOUTH, DamagePoints = 2
         assertEquals(2, robotarray[0].getDamagePoints());
         assertEquals(2, robotarray[1].getDamagePoints());
 
@@ -160,9 +156,8 @@ public class LaserTest {
 
         robotLaserBoard.checkRobotLaser(robotarray);
 
-        /** robot a: xcoor = 2, ycoor = 5, Dir = NORTH, DamagePoints = 2
-         *  robot b: xcoor = 2, ycoor = 2, Dir = SOUTH, DamagePoints = 2
-         */
+        // robot a: xcoor = 2, ycoor = 5, Dir = NORTH, DamagePoints = 2
+        // robot b: xcoor = 2, ycoor = 2, Dir = SOUTH, DamagePoints = 2
         assertEquals(2, robotarray[0].getDamagePoints());
         assertEquals(2, robotarray[1].getDamagePoints());
 
@@ -172,9 +167,8 @@ public class LaserTest {
 
         robotLaserBoard.checkRobotLaser(robotarray);
 
-        /** robot a: xcoor = 2, ycoor = 0, Dir = SOUTH, DamagePoints = 3
-         *  robot b: xcoor = 2, ycoor = 2, Dir = NORTH, DamagePoints = 3
-         */
+        // robot a: xcoor = 2, ycoor = 0, Dir = SOUTH, DamagePoints = 3
+        // robot b: xcoor = 2, ycoor = 2, Dir = NORTH, DamagePoints = 3
         assertEquals(3, robotarray[0].getDamagePoints());
         assertEquals(3, robotarray[1].getDamagePoints());
     }
