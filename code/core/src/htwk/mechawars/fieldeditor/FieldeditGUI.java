@@ -108,24 +108,24 @@ public class FieldeditGUI implements Screen{
         ImageButton barrierCornerButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "barriercorner/"
                         + "BarrierCorner0" + String.valueOf(corner) + ".png"))));
-//        barrierCornerButton.setSize(width, height);
+        barrierCornerButton.setSize(buttonWidth, buttonHeight);
 //        barrierCornerButton.setPosition(x, y);
-        barrierCornerButton.addListener(new ClickListener() {
-            public void enter() {
-                
-            }
-            public void exit() {
-                
-            }
-            public void clicked(InputEvent event, float x, float y) {
-//                drawOnField(x, y, corner);
-            }
-        });
+//        barrierCornerButton.addListener(new ClickListener() {
+//            public void enter() {
+//                
+//            }
+//            public void exit() {
+//                
+//            }
+//            public void clicked(InputEvent event, float x, float y) {
+////                drawOnField(x, y, corner);
+//            }
+//        });
         ImageButton barrierSideButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "barrierside/"
                         + "BarrierSide" + String.valueOf(side) + ".png"))));
-//      barrierSideButton.setSize(width, height);
-//      barrierSideButton.setPosition(x, y);
+        barrierSideButton.setSize(buttonWidth, buttonHeight);
+//        barrierSideButton.setPosition(x, y);
 //      barrierSideButton.addListener(new ClickListener() {
 //          public void enter() {
 //                
@@ -139,7 +139,7 @@ public class FieldeditGUI implements Screen{
 //      });
         ImageButton blackHoleButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/BlackHole.png"))));
-//      blackHoleButton.setSize(width, height);
+//      blackHoleButton.setSize(buttonWidth, buttonHeight);
 //      blackHoleButton.setPosition(x, y);
 //      blackHoleButton.addListener(new ClickListener() {
 //          public void enter() {
@@ -157,7 +157,7 @@ public class FieldeditGUI implements Screen{
 //        ImageButton blockadeButton = new ImageButton(new TextureRegionDrawable(
 //                new TextureRegion(new Texture("mapAssets/" + "blockade/"
 //                        + "Blockade0" + String.valueOf(type) + ".png"))));
-//      blockadeButton.setSize(width, height);
+//      blockadeButton.setSize(buttonWidth, buttonHeight);
 //      blockadeButton.setPosition(x, y);
 //      blockadeButton.addListener(new ClickListener() {
 //          public void enter() {
@@ -175,7 +175,7 @@ public class FieldeditGUI implements Screen{
         ImageButton checkpointButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/checkpoints/Check" 
                         + checkpointNumber + ".png"))));
-//      checkpointButton.setSize(width, height);
+//      checkpointButton.setSize(buttonWidth, buttonHeight);
 //      checkpointButton.setPosition(x, y);
 //      checkpointButton.addListener(new ClickListener() {
 //          public void enter() {
@@ -192,7 +192,7 @@ public class FieldeditGUI implements Screen{
                 new TextureRegion(new Texture("mapAssets/" + "conveyorBelt/"
                         + "ConveyorBelt" + String.valueOf(startConveyor) 
                         + String.valueOf(endConveyor) + ".png"))));
-//      conveyorBeltButton.setSize(width, height);
+//      conveyorBeltButton.setSize(buttonWidth, buttonHeight);
 //      conveyorBeltButton.setPosition(x, y);
 //      conveyorBeltButton.addListener(new ClickListener() {
 //          public void enter() {
@@ -209,7 +209,7 @@ public class FieldeditGUI implements Screen{
                 new TextureRegion(new Texture("mapAssets/" + "expressconveyorBelt/"
                         + "ExpressConveyorBelt" + String.valueOf(startExpressConveyor) 
                         + String.valueOf(endExpressConveyor) + ".png"))));
-//      expressConveyorBeltButton.setSize(width, height);
+//      expressConveyorBeltButton.setSize(buttonWidth, buttonHeight);
 //      expressConveyorBeltButton.setPosition(x, y);
 //      expressConveyorBeltButton.addListener(new ClickListener() {
 //          public void enter() {
@@ -224,7 +224,7 @@ public class FieldeditGUI implements Screen{
 //      });
         ImageButton fieldButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/StandardField.png"))));
-//      fieldButton.setSize(width, height);
+//      fieldButton.setSize(buttonWidth, buttonHeight);
 //      fieldButton.setPosition(x, y);
 //      fieldButton.addListener(new ClickListener() {
 //          public void enter() {
@@ -239,7 +239,7 @@ public class FieldeditGUI implements Screen{
 //      });
         ImageButton gearButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/gear/Gear0" + gearNumber + ".png"))));
-//      gearButton.setSize(width, height);
+//      gearButton.setSize(buttonWidth, buttonHeight);
 //      gearButton.setPosition(x, y);
 //      gearButton.addListener(new ClickListener() {
 //          public void enter() {
@@ -255,7 +255,7 @@ public class FieldeditGUI implements Screen{
         ImageButton laserButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "laser/"
                         + "Laser0" + String.valueOf(typeLaser) + ".png"))));
-//      laserButton.setSize(width, height);
+//      laserButton.setSize(buttonWidth, buttonHeight);
 //      laserButton.setPosition(x, y);
 //      laserButton.addListener(new ClickListener() {
 //          public void enter() {
@@ -271,7 +271,7 @@ public class FieldeditGUI implements Screen{
         ImageButton repairSiteButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/repairsite/RepairSite0" + repairNum
                         + ".png"))));
-//      repairSiteButton.setSize(width, height);
+//      repairSiteButton.setSize(buttonWidth, buttonHeight);
 //      repairSiteButton.setPosition(x, y);
 //      repairSiteButton.addListener(new ClickListener() {
 //          public void enter() {
@@ -286,7 +286,7 @@ public class FieldeditGUI implements Screen{
 //      });
         ImageButton standardFieldButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/StandardField.png"))));
-//      standardFieldButton.setSize(width, height);
+//      standardFieldButton.setSize(buttonWidth, buttonHeight);
 //      standardFieldButton.setPosition(x, y);
 //      standardFieldButton.addListener(new ClickListener() {
 //          public void enter() {
@@ -302,7 +302,7 @@ public class FieldeditGUI implements Screen{
         ImageButton startFieldButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "startfield/"
                         + "StartField0" + String.valueOf(startFieldNumber) + ".png"))));
-//      startFieldButton.setSize(width, height);
+//      startFieldButton.setSize(buttonWidth, buttonHeight);
 //      startFieldButton.setPosition(x, y);
 //      startFieldButton.addListener(new ClickListener() {
 //          public void enter() {
