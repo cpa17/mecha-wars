@@ -23,7 +23,7 @@ public class ScrollPanel {
     protected static final int damagePoints = 0;
     private static int choosableCardCount = 9;
     static final TextButton[] buttons = new TextButton[choosableCardCount];
-    private static Deck deck = new Deck(0);
+    private static Deck deck = new Deck();
 
     /**
      * Constructor of class ScrollPanel.
@@ -52,7 +52,7 @@ public class ScrollPanel {
                 buttons[cardPrintCounter].addListener(new ClickListener() {
                     public void clicked(InputEvent event, float x, float y) {
                         if (buttonClickOrder(buttonNumber)) {
-                            Robot.getPlayers()[0].addCard(currentCard);
+                            Robot.getPlayers()[0].addCard(currentCard, 0);
                         }
                     }
                 });

@@ -12,6 +12,11 @@ public class Card {
     private Type cardAttributeType;
     private byte cardAttributeMovCount;
     private int cardPlayerNumber;
+    
+    public void setCardPlayerNumber(int cardPlayerNumber) {
+        this.cardPlayerNumber = cardPlayerNumber;
+    }
+
     /*
      * amount of moves forward or amount of turns
      * -1:              backwards           -----

@@ -506,7 +506,8 @@ public class Robot {
         selectedCards = new LinkedList<Card>();       
     }
     
-    public void addCard(Card card) {
+    public void addCard(Card card, int playerNumber) {
+        card.setCardPlayerNumber(playerNumber);
         this.getSelectedCards().add(card);
     }
 

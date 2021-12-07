@@ -12,18 +12,13 @@ public class Deck {
     
     ArrayList<Card> deck = new ArrayList<>();
     
-    /**
-     * Constructor of a complete Deck.
-     */
-    public Deck(int playerNumber) {
-        initDeck(playerNumber);
-    }
+
     
     /**
      * Constructor of a complete Deck.
      */
     public Deck() {
-        initDeck(0);
+        initDeck();
     }
 
     /**
@@ -41,8 +36,9 @@ public class Deck {
      * # 12 Mov2
      * # 6  Mov3, MovB, TurnU   . Also their priority this function will give them.
      */
-    public void initDeck(int playerNumber) {
+    public void initDeck() {
 
+        int playerNumber = -1;
         deck.clear();   //clear Arraylist completely for initialization
 
         int priority = 10;
