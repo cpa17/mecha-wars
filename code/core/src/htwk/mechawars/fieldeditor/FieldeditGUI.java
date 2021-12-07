@@ -29,28 +29,29 @@ public class FieldeditGUI implements Screen{
     private Stage stageFiEdit;
     private Texture img;
     private SpriteBatch batchFiEdit;
-    private Board boardFiEdit;
+    private static Board boardFiEdit;
     private int buttonWidth = 400;
     private int buttonHeight = 100;
     private int buttonPosX = Gdx.graphics.getHeight()
             + (((Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) * 2) / 3) - 64;
     private int buttonPosY = Gdx.graphics.getHeight() - 100;
-    private int corner = 0; //corner of ImageButton
-    private int side = 0; //side of BarrierButton
-    private int type = 0; //type of BlockadeButton
-    private int checkpointNumber = 0; //number of CheckpointButton
-    private int startConveyor = 0; //start of ConveyorButton
-    private int endConveyor = 0; //end of ConveyorButton
-    private int startExpressConveyor = 0; //start of ExpressConveyorButton
-    private int endExpressConveyor = 0; //end of ExpressConveyorButton
-    private int gearNumber = 0; //number of GearButton
+    private int corner = 1; //corner of ImageButton
+    private int side = 1; //side of BarrierButton
+//    private int type = 0; //type of BlockadeButton
+    private int checkpointNumber = 1; //number of CheckpointButton
+    private int startConveyor = 4; //start of ConveyorButton
+    private int endConveyor = 2; //end of ConveyorButton
+    private int startExpressConveyor = 4; //start of ExpressConveyorButton
+    private int endExpressConveyor = 2; //end of ExpressConveyorButton
+    private int gearNumber = 1; //number of GearButton
     private int typeLaser = 0; //type of LaserButton
-    private int repairNum = 0; //number of RepairButton
-    private int startFieldNumber = 0; //number of StartFieldButton
+    private int repairNum = 2; //number of RepairButton
+    private int startFieldNumber = 1; //number of StartFieldButton
     private boolean backToMain = false;
     
-    public FieldeditGUI(String name) {
+    public FieldeditGUI(FieldEditor fieldEditor, String map) {
         
+        initBoardFiEdit(map);
         stageFiEdit = new Stage();
         
         img = new Texture(Gdx.files.internal("background.png"));
@@ -151,9 +152,11 @@ public class FieldeditGUI implements Screen{
 //              drawOnField(x, y);
 //          }
 //      });
-        ImageButton blockadeButton = new ImageButton(new TextureRegionDrawable(
-                new TextureRegion(new Texture("mapAssets/" + "blockade/"
-                        + "Blockade0" + String.valueOf(type) + ".png"))));
+        
+        
+//        ImageButton blockadeButton = new ImageButton(new TextureRegionDrawable(
+//                new TextureRegion(new Texture("mapAssets/" + "blockade/"
+//                        + "Blockade0" + String.valueOf(type) + ".png"))));
 //      blockadeButton.setSize(width, height);
 //      blockadeButton.setPosition(x, y);
 //      blockadeButton.addListener(new ClickListener() {
@@ -167,6 +170,8 @@ public class FieldeditGUI implements Screen{
 //              drawOnField(x, y, type);
 //          }
 //      });
+        
+        
         ImageButton checkpointButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/checkpoints/Check" 
                         + checkpointNumber + ".png"))));
@@ -233,7 +238,7 @@ public class FieldeditGUI implements Screen{
 //          }
 //      });
         ImageButton gearButton = new ImageButton(new TextureRegionDrawable(
-                new TextureRegion(new Texture("mapAssets/gear/Gear0 " + gearNumber + ".png"))));
+                new TextureRegion(new Texture("mapAssets/gear/Gear0" + gearNumber + ".png"))));
 //      gearButton.setSize(width, height);
 //      gearButton.setPosition(x, y);
 //      gearButton.addListener(new ClickListener() {
@@ -319,6 +324,10 @@ public class FieldeditGUI implements Screen{
     public void changeScreen() {
         gameFiEdit.setScreen(new MainMenu(gameFiEdit));
         stageFiEdit.dispose();
+    }
+    
+    private static void initBoardFiEdit(String fileName) {
+        boardFiEdit = new Board(fileName);
     }
 
     @Override
