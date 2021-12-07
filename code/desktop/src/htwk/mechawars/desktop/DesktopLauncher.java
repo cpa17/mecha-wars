@@ -132,6 +132,3 @@ public class DesktopLauncher implements Runnable {
         return true;
     }
 }
-
-
-

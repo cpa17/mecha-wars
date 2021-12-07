@@ -15,9 +15,12 @@ public class MechaWars extends Game {
      */
     private static boolean isSkip = false;
 
+    private static int playerNumber;
+
     public static void setSkip(boolean skip) {
         isSkip = skip;
     }
+
 
     /**
      * Method & Attribute for setup the Map when executing the Program.
@@ -35,7 +38,7 @@ public class MechaWars extends Game {
     /**
      * Method & Attribute for setup the number of players when executing the Program.
      */
-    private static int playerNumber;
+    //private static int playerNumber;
 
     public static void setPlayerNumber(int playerNr) {
         playerNumber = playerNr;
@@ -69,6 +72,6 @@ public class MechaWars extends Game {
 
     @Override
     public void dispose() {
-        
+
     }
 }

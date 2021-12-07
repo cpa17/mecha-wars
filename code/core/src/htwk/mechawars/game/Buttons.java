@@ -259,9 +259,4 @@ public class Buttons {
         addButtonsToStage(skin);
         addScrollPanelToStage(skin);
     }
-    
-
-    
-
-    
 }
