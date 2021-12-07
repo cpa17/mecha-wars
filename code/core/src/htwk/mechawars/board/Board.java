@@ -359,16 +359,6 @@ public class Board {
     /**
      * This is a wrapper-function for the tests.
      *
-     * @param phase List of cards
-     * @param robot the robot that should move
-     */
-    public void move(LinkedList<Card> phase, Robot robot) {
-        move(phase, robot, false);
-    }
-
-    /**
-     * This is a wrapper-function for the tests.
-     *
      * @param players array of all players
      */
     public void move(Robot[] players) {
@@ -382,11 +372,11 @@ public class Board {
      */
     public void move(Robot[] players, boolean isTest) {
         LinkedList<Card> phase;
-        move(players[0].getSelectedCards(), players[0], isTest);
+        moveSingleRobot(players[0].getSelectedCards(), players[0], isTest);
         for (int i = 1; i < players.length; i++) {
-            if (i > 0 && ConfigReader.getAimodes()[i]) {
+            if (ConfigReader.getAimodes()[i]) {
                 phase = AiCardGeneration.generateRandomAiCards(i);
-                move(phase, players[i], isTest);
+                moveSingleRobot(phase, players[i], isTest);
             }
             Robot.setPlayers(players);
         }
@@ -413,7 +403,7 @@ public class Board {
      * @param phase List of cards
      * @param robot the robot that should move
      */
-    public void move(LinkedList<Card> phase, Robot robot, boolean isTest) {
+    public void moveSingleRobot(LinkedList<Card> phase, Robot robot, boolean isTest) {
         checkShutDown(robot);
         robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
         robot.setLastField(robotPosition);
@@ -668,15 +658,15 @@ public class Board {
         BarrierSide barrierside;
         BarrierCorner barriercorner;
 
-        for (int i = 0; i < players.length; i++) {
+        for (Robot player : players) {
 
-            int x = players[i].getXcoor();
-            int y = players[i].getYcoor();
+            int x = player.getXcoor();
+            int y = player.getYcoor();
 
             //the variable z, checks if a player or a wall already have been hit
             int z = 0;
 
-            switch (players[i].getDir()) {
+            switch (player.getDir()) {
                 case NORTH:
 
                     if (this.fieldmatrix[x][y] instanceof BarrierSide) {
@@ -697,9 +687,9 @@ public class Board {
                     for (int i2 = (y - 1); i2 >= 0 && (z == 0); i2--) {
 
                         if (this.fieldmatrix[x][i2] instanceof BarrierSide) {
-                            
+
                             barrierside = (BarrierSide) this.fieldmatrix[x][i2];
-                            
+
                             if (barrierside.getSide() == 4) {
                                 break;
                             }
@@ -707,17 +697,17 @@ public class Board {
                             if (barrierside.getSide() == 2) {
                                 z++;
                             }
-                        }   
-                        
+                        }
+
                         if (this.fieldmatrix[x][i2] instanceof BarrierCorner) {
-                            
+
                             barriercorner = (BarrierCorner) this.fieldmatrix[x][i2];
-                            
+
                             if (barriercorner.getCorner() == 3 ||
                                     barriercorner.getCorner() == 4) {
                                 break;
                             }
-                            
+
                             if (barriercorner.getCorner() == 1 ||
                                     barriercorner.getCorner() == 2) {
                                 z++;
@@ -726,19 +716,18 @@ public class Board {
 
                         /* checks if one of the players is on the current field [x][i2], if yes
                         gets damage and z becomes 1, so the loop breaks */
-                        for (int i3 = 0; i3 < players.length; i3++) {
+                        for (Robot robot : players) {
 
-                            int x2 = players[i3].getXcoor();
-                            int y2 = players[i3].getYcoor();
+                            int x2 = robot.getXcoor();
+                            int y2 = robot.getYcoor();
 
                             if (x2 == x && y2 == i2) {
-                                players[i3].damageUp();
+                                robot.damageUp();
                                 z++;
                             }
                         }
                     }
                     break;
-
 
 
                 case SOUTH:
@@ -760,46 +749,45 @@ public class Board {
                     for (int i2 = (y + 1); i2 < this.fieldmatrix.length && (z == 0); i2++) {
 
                         if (this.fieldmatrix[x][i2] instanceof BarrierSide) {
-                            
+
                             barrierside = (BarrierSide) this.fieldmatrix[x][i2];
-                            
+
                             if (barrierside.getSide() == 2) {
                                 break;
                             }
-                            
+
                             if (barrierside.getSide() == 4) {
                                 z++;
                             }
-                        }   
-                        
+                        }
+
                         if (this.fieldmatrix[x][i2] instanceof BarrierCorner) {
-                            
+
                             barriercorner = (BarrierCorner) this.fieldmatrix[x][i2];
-                            
+
                             if (barriercorner.getCorner() == 1 ||
                                     barriercorner.getCorner() == 2) {
                                 break;
                             }
-                            
+
                             if (barriercorner.getCorner() == 3 ||
                                     barriercorner.getCorner() == 4) {
                                 z++;
                             }
                         }
 
-                        for (int i3 = 0; i3 < players.length; i3++) {
+                        for (Robot robot : players) {
 
-                            int x2 = players[i3].getXcoor();
-                            int y2 = players[i3].getYcoor();
+                            int x2 = robot.getXcoor();
+                            int y2 = robot.getYcoor();
 
                             if (x2 == x && y2 == i2) {
-                                players[i3].damageUp();
+                                robot.damageUp();
                                 z++;
                             }
                         }
                     }
                     break;
-
 
 
                 case EAST:
@@ -821,46 +809,45 @@ public class Board {
                     for (int i2 = (x + 1); i2 < this.fieldmatrix[0].length && (z == 0); i2++) {
 
                         if (this.fieldmatrix[i2][y] instanceof BarrierSide) {
-                            
+
                             barrierside = (BarrierSide) this.fieldmatrix[i2][y];
-                            
+
                             if (barrierside.getSide() == 1) {
                                 break;
                             }
-                            
+
                             if (barrierside.getSide() == 3) {
                                 z++;
                             }
-                        }   
-                        
+                        }
+
                         if (this.fieldmatrix[i2][y] instanceof BarrierCorner) {
-                            
+
                             barriercorner = (BarrierCorner) this.fieldmatrix[i2][y];
-                            
+
                             if (barriercorner.getCorner() == 1 ||
                                     barriercorner.getCorner() == 4) {
                                 break;
                             }
-                            
+
                             if (barriercorner.getCorner() == 2 ||
                                     barriercorner.getCorner() == 3) {
                                 z++;
-                            }  
+                            }
                         }
 
-                        for (int i3 = 0; i3 < players.length; i3++) {
+                        for (Robot robot : players) {
 
-                            int x2 = players[i3].getXcoor();
-                            int y2 = players[i3].getYcoor();
+                            int x2 = robot.getXcoor();
+                            int y2 = robot.getYcoor();
 
                             if (x2 == i2 && y2 == y) {
-                                players[i3].damageUp();
+                                robot.damageUp();
                                 z++;
                             }
                         }
                     }
                     break;
-
 
 
                 case WEST:
@@ -882,40 +869,40 @@ public class Board {
                     for (int i2 = (x - 1); i2 >= 0 && (z == 0); i2--) {
 
                         if (this.fieldmatrix[i2][y] instanceof BarrierSide) {
-                            
+
                             barrierside = (BarrierSide) this.fieldmatrix[i2][y];
-                            
+
                             if (barrierside.getSide() == 3) {
                                 break;
                             }
-                            
+
                             if (barrierside.getSide() == 1) {
                                 z++;
                             }
-                        }   
-                        
+                        }
+
                         if (this.fieldmatrix[i2][y] instanceof BarrierCorner) {
-                            
+
                             barriercorner = (BarrierCorner) this.fieldmatrix[i2][y];
-                            
+
                             if (barriercorner.getCorner() == 2 ||
                                     barriercorner.getCorner() == 3) {
                                 break;
                             }
-                            
+
                             if (barriercorner.getCorner() == 1 ||
                                     barriercorner.getCorner() == 4) {
                                 z++;
-                            }  
+                            }
                         }
 
-                        for (int i3 = 0; i3 < players.length; i3++) {
+                        for (Robot robot : players) {
 
-                            int x2 = players[i3].getXcoor();
-                            int y2 = players[i3].getYcoor();
+                            int x2 = robot.getXcoor();
+                            int y2 = robot.getYcoor();
 
                             if (x2 == i2 && y2 == y) {
-                                players[i3].damageUp();
+                                robot.damageUp();
                                 z++;
                             }
                         }
