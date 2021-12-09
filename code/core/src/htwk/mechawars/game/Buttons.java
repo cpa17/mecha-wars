@@ -1,5 +1,6 @@
 package htwk.mechawars.game;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
@@ -31,7 +32,7 @@ public class Buttons {
      * @param players Array of all the Players.
      * @return startButton.
      */
-    protected static Button startButton(Robot[] players, Button startExecutionButton) {
+    protected static Button startButton(Robot[] players, Button startExecutionButton, Skin skin) {
         startExecutionButton.setSize(160, 43);
         int startExecutionButtonX = Gdx.graphics.getHeight()
                 + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
@@ -51,16 +52,27 @@ public class Buttons {
                                 startExecutionButton.setColor(Color.LIGHT_GRAY);
                                 ScrollPanel.cardOrderClear();
                                 activateButtons();
+                                setButtons(players);
+                                ScrollPanel.clearScrollPanel(skin, players);
                             }
                         }, 5);
                     } else {
                         startExecutionButton.setColor(Color.RED);
                     }
                 } else {
-                    System.out.println(players[0].getShutDown());
+                    deactivateButtons();
                     board.move(players);
-                    players[0].resetList();
-                    startExecutionButton.setColor(Color.LIGHT_GRAY);
+                    Timer.schedule(new Timer.Task() {
+                        @Override
+                        public void run() {
+                            players[0].resetList();
+                            startExecutionButton.setColor(Color.LIGHT_GRAY);
+                            ScrollPanel.cardOrderClear();
+                            activateButtons();
+                            setButtons(players);
+                            ScrollPanel.clearScrollPanel(skin, players);
+                        }
+                    }, 5);
                 }
             }
 
@@ -163,6 +175,8 @@ public class Buttons {
         GameScreen.startExecutionButton.setTouchable(Touchable.enabled);
         GameScreen.wakeUpButton.setTouchable(Touchable.enabled);
         GameScreen.shutDownButton.setTouchable(Touchable.enabled);
+        GameScreen.wakeUpButton.setColor(Color.LIGHT_GRAY);
+        GameScreen.shutDownButton.setColor(Color.LIGHT_GRAY);
     }
 
     /**
@@ -251,12 +265,24 @@ public class Buttons {
     }
 
     /**
-     * Update the Buttons and scroll panel.
-     * @param skin Object of class Skin.
+     * Buttons on Stage
+     * @param players Array of Robots.
      */
-    private static void updateButtons(Skin skin) {
-        getStage().clear();
-        addButtonsToStage(skin);
-        addScrollPanelToStage(skin);
+    static void setButtons(Robot[] players) {
+        if (players[0].getShutDown()) {
+            GameScreen.removeCardOrder.setTouchable(Touchable.disabled);
+            GameScreen.removeCardOrder.setDisabled(true);
+            GameScreen.shutDownButton.setTouchable(Touchable.disabled);
+            GameScreen.wakeUpButton.setTouchable(Touchable.enabled);
+            GameScreen.shutDownButton.setDisabled(true);
+            GameScreen.wakeUpButton.setDisabled(false);
+        } else {
+            GameScreen.removeCardOrder.setTouchable(Touchable.enabled);
+            GameScreen.removeCardOrder.setDisabled(false);
+            GameScreen.shutDownButton.setTouchable(Touchable.enabled);
+            GameScreen.wakeUpButton.setTouchable(Touchable.disabled);
+            GameScreen.shutDownButton.setDisabled(false);
+            GameScreen.wakeUpButton.setDisabled(true);
+        }
     }
 }
