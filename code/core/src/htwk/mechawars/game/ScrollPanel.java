@@ -36,7 +36,7 @@ public class ScrollPanel {
         deck.shuffle();
 
         for (int cardPrintCounter = 0; cardPrintCounter < choosableCardCount;
-             cardPrintCounter += 1) {
+                cardPrintCounter += 1) {
             Card currentCard = deck.getDeck().get(cardPrintCounter);
             buttons[cardPrintCounter] = new TextButton(currentCard.getCardAttributePriority()
                     + " - " + currentCard, skin);
@@ -44,7 +44,7 @@ public class ScrollPanel {
             table.add(buttons[cardPrintCounter]);
             int buttonNumber = (cardPrintCounter + 1);
 
-                // Button-ClickListener
+            // Button-ClickListener
             buttons[cardPrintCounter].addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
                     if (buttonClickOrder(buttonNumber)) {

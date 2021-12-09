@@ -265,7 +265,7 @@ public class Buttons {
     }
 
     /**
-     * Buttons on Stage
+     * Buttons on Stage.
      * @param players Array of Robots.
      */
     static void setButtons(Robot[] players) {
