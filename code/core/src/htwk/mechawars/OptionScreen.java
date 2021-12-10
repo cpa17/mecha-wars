@@ -93,8 +93,8 @@ public class OptionScreen implements Screen {
                 
                 try {
                     ConfigReader.readConfigs();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
+                } catch (IOException c) {
+                    c.printStackTrace();
                 }
                 
                 if (!chooseMap.getText().contains(".txt")) {
