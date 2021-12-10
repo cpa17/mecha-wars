@@ -3,7 +3,6 @@ package htwk.mechawars;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -23,6 +21,9 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 import htwk.mechawars.game.GameScreen;
 
+/**
+ * Class that presents the surface of the OptionScreen screen.
+ */
 public class OptionScreen implements Screen {
     private Game game;
     private Stage stage;
@@ -55,7 +56,7 @@ public class OptionScreen implements Screen {
         trainMode.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                
+              //TODO change to Train Mode
             }
         });
         
@@ -70,8 +71,9 @@ public class OptionScreen implements Screen {
         enemyChooser.addListener(new ChangeListener() {
             public void changed (ChangeEvent event, Actor actor) {
                 enemyCounter.setY(enemyChooser.getValue() - 1);
-                enemyCounter.setText((int) enemyChooser.getValue());
+                enemyCounter.setText( (int) enemyChooser.getValue());
                 enemyCounter.setPosition(775, 180);
+                //TODO change the number of players
             }
         });
 

@@ -1,7 +1,5 @@
 package htwk.mechawars;
 
-import java.io.IOException;
-
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -15,8 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-
-import htwk.mechawars.game.GameScreen;
 
 /**
  * Class that presents the surface of the MainMenu screen.
