@@ -398,6 +398,7 @@ public class Board {
             checkRobotLaser(players);
             checkBoardLaser(players);
         }
+        checkDoubleDamage(players);
     }
 
     /**
@@ -407,7 +408,6 @@ public class Board {
      * @param robot the robot that should move
      */
     public void moveSingleRobot(LinkedList<Card> phase, Robot robot, boolean isTest) {
-        checkShutDown(robot);
         robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
         robot.setLastField(robotPosition);
         if (isTest) {
@@ -477,8 +477,6 @@ public class Board {
             robot.setXcoor(robot.getStartX());
             robot.setYcoor(robot.getStartY());
         }
-        //robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-        //robotPosition.cardAction(robot);
     }
 
     /**
@@ -487,40 +485,40 @@ public class Board {
      * @param robot The robot that should move
      */
     public void state(Robot robot) {
-
-        checkShutDown(robot);
         robot.setLastRound(robot.getShutDown());
         robot.setShutDown(robot.getNextRound());
-
-        checkDoubleDamage(robot);
     }
 
     /**
      * Method that checks whether the robot receives 2 damage points.
      *
-     * @param robot the robot that should check
+     * @param players the robot that should check
      */
-    private void checkDoubleDamage(Robot robot) {
-        if ((!robot.getShutDown() && robot.getLastRound()) || robot.getDestroyed()) {
+    private void checkDoubleDamage(Robot[] players) {
+        for (Robot player : players) {
+            if ((!player.getShutDown() && player.getLastRound()) || player.getDestroyed()) {
 
-            robot.damageUp();
-            robot.damageUp();
+                player.damageUp();
+                player.damageUp();
 
-            if (robot.getDestroyed()) {
-                robot.setDestroyed(false);
-                checkShutDown(robot);
+                if (player.getDestroyed()) {
+                    player.setDestroyed(false);
+                }
             }
         }
+        checkShutDown(players);
     }
 
     /**
      * Method that checks whether the robot is in shutdown mode.
      *
-     * @param robot the robot that should check
+     * @param players the robot that should check
      */
-    private void checkShutDown(Robot robot) {
-        if (robot.getNextRound() || robot.getShutDown()) {
-            robot.damageReset();
+    private void checkShutDown(Robot[] players) {
+        for (Robot player : players) {
+            if (player.getShutDown() || player.getNextRound()) {
+                player.damageReset();
+            }
         }
     }
 
