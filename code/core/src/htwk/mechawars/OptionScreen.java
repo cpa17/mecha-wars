@@ -36,7 +36,7 @@ public class OptionScreen implements Screen {
     private TextField chooseMap;
     private CheckBox trainMode;
     private Texture img;
-    private TextButton startGame;
+    private TextButton start;
     private Skin skin;
     
     /**
@@ -83,10 +83,10 @@ public class OptionScreen implements Screen {
         chooseMap.setPosition(20, 20);
         chooseMap.setSize(300, 50);    
         
-        startGame = new TextButton("Starten!", skin);
-        startGame.setPosition(440, 310);
-        startGame.setSize(400, 100);
-        startGame.addListener(new ClickListener() {
+        start = new TextButton("Starten", skin);
+        start.setPosition(440, 310);
+        start.setSize(400, 100);
+        start.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent e, float x, float y, int point, int button) {
                 ConfigReader.writePlayerNumber((int) enemyChooser.getValue()); 
@@ -112,7 +112,7 @@ public class OptionScreen implements Screen {
         stage.addActor(howManyEnemys);
         stage.addActor(enemyCounter);
         stage.addActor(chooseMap);
-        stage.addActor(startGame);
+        stage.addActor(start);
     }
     
     public void toGameScreen() {
