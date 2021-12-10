@@ -54,7 +54,7 @@ public class Buttons {
                                 setButtons(players);
                                 ScrollPanel.clearScrollPanel(skin, players);
                             }
-                        }, 5);
+                        }, 9);
                     } else {
                         startExecutionButton.setColor(Color.RED);
                     }

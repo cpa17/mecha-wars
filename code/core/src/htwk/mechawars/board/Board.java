@@ -383,20 +383,22 @@ public class Board {
         if (!isTest) {
             /* Delay of 5 seconds for the code to run so
             that the robot has reached his final position */
-            Timer.schedule(new Task() {
 
-                @Override
-                public void run() {
-                    checkRobotLaser(players);
-                    checkBoardLaser(players);
-                    checkDoubleDamage(players);
-                }
-            }, 5);
+            for (int i = 1; i <= 9; i = i + 2) {
+                Timer.schedule(new Task() {
+
+                    @Override
+                    public void run() {
+                        checkRobotLaser(players);
+                        checkBoardLaser(players);
+                    }
+                }, i);
+            }
         } else {
             checkRobotLaser(players);
             checkBoardLaser(players);
-            checkDoubleDamage(players);
         }
+        checkDoubleDamage(players);
     }
 
     /**
@@ -414,7 +416,7 @@ public class Board {
             }
         } else {
 
-            // delay in seconds, increments for each phase in the linked list for another second
+            // delay in seconds, increments for each phase in the linked list for two more second
             int i = 0;
             for (Card card : phase) {
                 Timer.schedule(new Task() {
@@ -424,23 +426,36 @@ public class Board {
                         robotMovement(card, robot);
                     }
                 }, i);
-                i += 1;
+                i += 2;
             }
         }
 
-        // Delay of 5 seconds for the code to run so that the robot has reached his final position
+        // Delay of 15 seconds for the state-function to run so that the robot has reached his
+        // final position
         if (!isTest) {
             Timer.schedule(new Task() {
 
                 @Override
                 public void run() {
-                    state(robot, false);
+                    state(robot);
                 }
-            }, 5);
+            }, 10);
+
+            // calls turnAction after each card
+            for (int i = 1; i <= 9; i = i + 2) {
+                Timer.schedule(new Task() {
+
+                    @Override
+                    public void run() {
+                        robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+                        robotPosition.turnAction(robot);
+                    }
+                }, i);
+            }
         } else {
 
             // No delay if this is a test
-            state(robot, true);
+            state(robot);
         }
     }
 
@@ -462,21 +477,14 @@ public class Board {
             robot.setXcoor(robot.getStartX());
             robot.setYcoor(robot.getStartY());
         }
-        //robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-        //robotPosition.cardAction(robot);
     }
 
     /**
      * Outsourced code from the move function, that would otherwise be duplicated.
      *
      * @param robot The robot that should move
-     * @param isTest indicates that this is a test
      */
-    public void state(Robot robot, boolean isTest) {
-        if (!isTest) {
-            robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-            robotPosition.turnAction(robot);
-        }
+    public void state(Robot robot) {
         robot.setLastRound(robot.getShutDown());
         robot.setShutDown(robot.getNextRound());
     }
