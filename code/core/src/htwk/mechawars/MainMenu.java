@@ -47,7 +47,7 @@ public class MainMenu implements Screen {
         startGame.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent e, float x, float y, int point, int button) {
-                changeScreen();
+                toOptionScreen();
             }
         });
 
@@ -89,8 +89,8 @@ public class MainMenu implements Screen {
     /**
      * changeScreen function to switch to GameScreen.
      */
-    public void changeScreen() {
-        game.setScreen(new GameScreen(game, MechaWars.getMap()));
+    public void toOptionScreen() {
+        game.setScreen(new OptionScreen(game));
         stage.dispose();
     }
 
