@@ -87,8 +87,8 @@ public class OptionScreen implements Screen {
         startGame.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent e, float x, float y, int point, int button) {
-                ConfigReader.writePlayerNumber((int) enemyChooser.getValue()); //hier stimmt noch was nich
-                if(!chooseMap.getText().contains(".txt")) {
+                ConfigReader.writePlayerNumber((int) enemyChooser.getValue()); 
+                if (!chooseMap.getText().contains(".txt")) {
                     chooseMap.setText(chooseMap.getText() + ".txt");
                 }
                 MechaWars.setMap(chooseMap.getText());
