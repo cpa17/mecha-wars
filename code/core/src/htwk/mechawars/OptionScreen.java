@@ -1,5 +1,7 @@
 package htwk.mechawars;
 
+import java.io.IOException;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -88,11 +90,19 @@ public class OptionScreen implements Screen {
             @Override
             public void touchUp(InputEvent e, float x, float y, int point, int button) {
                 ConfigReader.writePlayerNumber((int) enemyChooser.getValue()); 
+                
+                try {
+                    ConfigReader.readConfigs();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                
                 if (!chooseMap.getText().contains(".txt")) {
                     chooseMap.setText(chooseMap.getText() + ".txt");
                 }
+                
                 MechaWars.setMap(chooseMap.getText());
-                System.out.println(chooseMap.getText());
+                
                 toGameScreen();
             }
         });
