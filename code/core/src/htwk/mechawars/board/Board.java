@@ -383,14 +383,17 @@ public class Board {
         if (!isTest) {
             /* Delay of 5 seconds for the code to run so
             that the robot has reached his final position */
-            Timer.schedule(new Task() {
 
-                @Override
-                public void run() {
-                    checkRobotLaser(players);
-                    checkBoardLaser(players);
-                }
-            }, 5);
+            for (int i = 1; i <= 11; i = i + 2) {
+                Timer.schedule(new Task() {
+
+                    @Override
+                    public void run() {
+                        checkRobotLaser(players);
+                        checkBoardLaser(players);
+                    }
+                }, i);
+            }
         } else {
             checkRobotLaser(players);
             checkBoardLaser(players);
@@ -413,7 +416,7 @@ public class Board {
             }
         } else {
 
-            // delay in seconds, increments for each phase in the linked list for another second
+            // delay in seconds, increments for each phase in the linked list for two more second
             int i = 0;
             for (Card card : phase) {
                 Timer.schedule(new Task() {
@@ -423,11 +426,11 @@ public class Board {
                         robotMovement(card, robot);
                     }
                 }, i);
-                i += 1;
+                i += 2;
             }
         }
 
-        // Delay of 5 seconds for the code to run so that the robot has reached his final position
+        // Delay of 12 seconds for the code to run so that the robot has reached his final position
         if (!isTest) {
             Timer.schedule(new Task() {
 
@@ -435,7 +438,7 @@ public class Board {
                 public void run() {
                     state(robot, false);
                 }
-            }, 5);
+            }, 12);
         } else {
 
             // No delay if this is a test
