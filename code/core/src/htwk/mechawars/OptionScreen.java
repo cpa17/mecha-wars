@@ -56,7 +56,7 @@ public class OptionScreen implements Screen {
         trainMode.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-              //TODO change to Train Mode
+                //TODO change to Train Mode
             }
         });
         
@@ -73,13 +73,14 @@ public class OptionScreen implements Screen {
                 enemyCounter.setY(enemyChooser.getValue() - 1);
                 enemyCounter.setText((int) enemyChooser.getValue());
                 enemyCounter.setPosition(775, 180);
-                //TODO change the number of players
+                //TODO change the number of players in Startupconfig
             }
         });
 
         chooseMap = new TextField(" Bitte Map angeben!", skin);
         chooseMap.setPosition(10, 10);
         chooseMap.setSize(300, 50);
+        //TODO add Listener to choose the right map (needs maps to be tested)
         
         startGame = new TextButton("Starten!", skin);
         startGame.setPosition(440, 310);
