@@ -69,9 +69,9 @@ public class OptionScreen implements Screen {
         enemyChooser.setPosition(470, 200);
         enemyChooser.setSize(340, 50);
         enemyChooser.addListener(new ChangeListener() {
-            public void changed (ChangeEvent event, Actor actor) {
+            public void changed(ChangeEvent event, Actor actor) {
                 enemyCounter.setY(enemyChooser.getValue() - 1);
-                enemyCounter.setText( (int) enemyChooser.getValue());
+                enemyCounter.setText((int) enemyChooser.getValue());
                 enemyCounter.setPosition(775, 180);
                 //TODO change the number of players
             }
@@ -82,7 +82,7 @@ public class OptionScreen implements Screen {
         chooseMap.setSize(300, 50);
         
         startGame = new TextButton("Starten!", skin);
-        startGame.setPosition(440, 400);
+        startGame.setPosition(440, 310);
         startGame.setSize(400, 100);
         startGame.addListener(new ClickListener() {
             @Override
