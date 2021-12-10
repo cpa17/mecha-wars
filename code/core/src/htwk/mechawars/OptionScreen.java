@@ -28,7 +28,7 @@ public class OptionScreen implements Screen {
     private Game game;
     private Stage stage;
     private SpriteBatch batch;
-    private Label howManyEnemy;
+    private Label howManyEnemys;
     private Label enemyCounter;
     private Slider enemyChooser;
     private TextField chooseMap;
@@ -60,8 +60,8 @@ public class OptionScreen implements Screen {
             }
         });
         
-        howManyEnemy = new Label("Anzahl der Gegner:", skin);
-        howManyEnemy.setPosition(485, 180);
+        howManyEnemys = new Label("Anzahl der Gegner:", skin);
+        howManyEnemys.setPosition(485, 180);
         
         enemyCounter = new Label(" ", skin);
         
@@ -94,7 +94,7 @@ public class OptionScreen implements Screen {
         
         stage.addActor(trainMode);
         stage.addActor(enemyChooser);
-        stage.addActor(howManyEnemy);
+        stage.addActor(howManyEnemys);
         stage.addActor(enemyCounter);
         stage.addActor(chooseMap);
         stage.addActor(startGame);
