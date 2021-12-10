@@ -61,6 +61,11 @@ public class Gear extends Field {
 
     @Override
     public Robot turnAction(Robot robot) {
+        if (this.direction == 1) {
+            robot.turn((byte) 1);
+        } else {
+            robot.turn((byte) 3);
+        }
         return robot;       
     }
     
