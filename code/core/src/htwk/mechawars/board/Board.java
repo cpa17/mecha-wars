@@ -384,7 +384,7 @@ public class Board {
             /* Delay of 5 seconds for the code to run so
             that the robot has reached his final position */
 
-            for (int i = 1; i <= 11; i = i + 2) {
+            for (int i = 2; i <= 14; i = i + 3) {
                 Timer.schedule(new Task() {
 
                     @Override
@@ -426,23 +426,36 @@ public class Board {
                         robotMovement(card, robot);
                     }
                 }, i);
-                i += 2;
+                i += 3;
             }
         }
 
-        // Delay of 12 seconds for the code to run so that the robot has reached his final position
+        // Delay of 15 seconds for the state-function to run so that the robot has reached his
+        // final position
         if (!isTest) {
             Timer.schedule(new Task() {
 
                 @Override
                 public void run() {
-                    state(robot, false);
+                    state(robot);
                 }
-            }, 12);
+            }, 15);
+
+            // calls turnAction after each card
+            for (int i = 1; i <= 13; i = i + 3) {
+                Timer.schedule(new Task() {
+
+                    @Override
+                    public void run() {
+                        robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+                        robotPosition.turnAction(robot);
+                    }
+                }, i);
+            }
         } else {
 
             // No delay if this is a test
-            state(robot, true);
+            state(robot);
         }
     }
 
@@ -472,13 +485,8 @@ public class Board {
      * Outsourced code from the move function, that would otherwise be duplicated.
      *
      * @param robot The robot that should move
-     * @param isTest indicates that this is a test
      */
-    public void state(Robot robot, boolean isTest) {
-        if (!isTest) {
-            robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-            robotPosition.turnAction(robot);
-        }
+    public void state(Robot robot) {
 
         checkShutDown(robot);
         robot.setLastRound(robot.getShutDown());

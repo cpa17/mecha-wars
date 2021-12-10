@@ -52,7 +52,7 @@ public class Buttons {
                                 ScrollPanel.cardOrderClear();
                                 activateButtons();
                             }
-                        }, 12);
+                        }, 15);
                     } else {
                         startExecutionButton.setColor(Color.RED);
                     }
