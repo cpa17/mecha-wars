@@ -384,7 +384,7 @@ public class Board {
             /* Delay of 5 seconds for the code to run so
             that the robot has reached his final position */
 
-            for (int i = 2; i <= 14; i = i + 3) {
+            for (int i = 1; i <= 9; i = i + 2) {
                 Timer.schedule(new Task() {
 
                     @Override
@@ -426,7 +426,7 @@ public class Board {
                         robotMovement(card, robot);
                     }
                 }, i);
-                i += 3;
+                i += 2;
             }
         }
 
@@ -439,10 +439,10 @@ public class Board {
                 public void run() {
                     state(robot);
                 }
-            }, 15);
+            }, 10);
 
             // calls turnAction after each card
-            for (int i = 1; i <= 13; i = i + 3) {
+            for (int i = 1; i <= 9; i = i + 2) {
                 Timer.schedule(new Task() {
 
                     @Override
