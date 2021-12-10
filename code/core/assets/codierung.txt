@@ -12,7 +12,7 @@ BarrierSide		    links					                10101
 
 BlackHole		    -					                    10200
 
-Pusher	            horizontale mit Ziffern 2 und 4		    10301
+Blockade	        horizontale mit Ziffern 2 und 4		    10301
 			        horizontale mit Ziffern 1, 3 und 5	    10302
 			        vertikal mit Ziffern 2 und 4		    10303
 			        vertikal mit Ziffern 1, 3 und 5		    10304

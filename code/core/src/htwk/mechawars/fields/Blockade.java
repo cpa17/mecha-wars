@@ -3,41 +3,40 @@ package htwk.mechawars.fields;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
-import htwk.mechawars.board.Dir;
 import htwk.mechawars.board.Robot;
 
 /**
- * Class of a Pusher.
+ * Class of a Blockade.
  */
-public class Pusher extends Field {
+public class Blockade extends Field {
 
-    // attribute which represents the type of the pusher
+    // attribute which represents the type of the blockade
     // 1 = horizontal with the numbers 2 and 4, 2 = horizontal with the numbers 1, 3 and 5
     // 3 = vertical with the numbers 2 and 4, 4 = vertical with the numbers 1, 3 and 5
     private int type;
     private Texture tile;
 
     /**
-     * Constructor of a Pusher.
+     * Constructor of a Blockade.
      */
-    public Pusher(int xcoor, int ycoor, int type) {
+    public Blockade(int xcoor, int ycoor, int type) {
         super(xcoor, ycoor);
         this.type = type;
-        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "pusher/"
-                + "Pusher0" + String.valueOf(type) + ".png"));
+        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "blockade/"
+                + "Blockade0" + String.valueOf(type) + ".png"));
     }
 
     /**
-     * Constructor of a Pusher which can skip creating the assets.
+     * Constructor of a Blockade which can skip creating the assets.
      *
      * @param isTest indicates that this is a test
      */
-    public Pusher(int xcoor, int ycoor, int type, boolean isTest) {
+    public Blockade(int xcoor, int ycoor, int type, boolean isTest) {
         super(xcoor, ycoor, isTest);
         this.type = type;
         if (!isTest) {
-            this.tile = new Texture(Gdx.files.internal("mapAssets/" + "pusher/"
-                    + "Pusher0" + String.valueOf(type) + ".png"));
+            this.tile = new Texture(Gdx.files.internal("mapAssets/" + "blockade/"
+                    + "Blockade0" + String.valueOf(type) + ".png"));
         }
     }  
     
@@ -58,14 +57,6 @@ public class Pusher extends Field {
 
     @Override
     public Robot turnAction(Robot robot) {
-        if (type == 1) {
-            robot.moveInDirection((byte) -1);
-        } else if (type == 3) {
-            while (robot.getDir() != Dir.EAST) {
-                robot.turn((byte) 3); 
-            }
-            robot.moveInDirection((byte) 1);
-        }
         return robot;       
     }
     
@@ -83,7 +74,7 @@ public class Pusher extends Field {
             return false;
         }
 
-        Pusher other = (Pusher) obj;
+        Blockade other = (Blockade) obj;
         if (xcoor != other.xcoor) {
             return false;
         }

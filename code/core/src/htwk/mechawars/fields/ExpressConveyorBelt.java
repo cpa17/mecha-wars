@@ -3,7 +3,6 @@ package htwk.mechawars.fields;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
-import htwk.mechawars.board.Dir;
 import htwk.mechawars.board.Robot;
 
 /**
@@ -66,42 +65,13 @@ public class ExpressConveyorBelt extends Field {
     
     @Override
     public Robot turnAction(Robot robot) {
-        if (robot.getLastField() instanceof ConveyorBelt || 
-                robot.getLastField() instanceof ExpressConveyorBelt) {
-            switch (this.end) {
-                case 1 :    
-                    while (robot.getDir() != Dir.WEST) {
-                        robot.turn((byte) 3);
-                    }
-                    break;
-                
-                case 2 :
-                    while (robot.getDir() != Dir.NORTH) {
-                        robot.turn((byte) 3); 
-                    }
-                    break;
-                
-                case 3 :
-                    while (robot.getDir() != Dir.EAST) {
-                        robot.turn((byte) 3); 
-                    }
-                    break;
-                
-                case 4 :
-                    while (robot.getDir() != Dir.SOUTH) {
-                        robot.turn((byte) 3);
-                    }
-                    break;
-                
-                default : break;
-            }
-        }
-        robot.moveInDirection((byte) 1);
+
         return robot;       
     }
     
     @Override
     public Robot cardAction(Robot robot) {
+
         return robot;       
     }
     

@@ -37,7 +37,6 @@ public class BlackHole extends Field {
     
     @Override
     public Robot turnAction(Robot robot) {
-        robot.setDamage(10);
         return robot;       
     }
     

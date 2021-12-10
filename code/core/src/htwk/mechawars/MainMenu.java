@@ -1,7 +1,5 @@
 package htwk.mechawars;
 
-import java.io.IOException;
-
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -32,7 +30,6 @@ public class MainMenu implements Screen {
      * @param g Object of class Game
      */
     public MainMenu(Game g) {
-
         game = g;
         img = new Texture(Gdx.files.internal("background.png"));
         stage = new Stage();
