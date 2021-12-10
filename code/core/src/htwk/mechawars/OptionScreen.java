@@ -52,7 +52,7 @@ public class OptionScreen implements Screen {
         skin = new Skin(Gdx.files.internal("skinMenu/star-soldier-ui.json"));
         
         trainMode = new CheckBox("Trainingsmodus", skin);
-        trainMode.setPosition(1010, 680);
+        trainMode.setPosition(1015, 680);
         trainMode.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -78,7 +78,7 @@ public class OptionScreen implements Screen {
         });
 
         chooseMap = new TextField(" Bitte Map angeben!", skin);
-        chooseMap.setPosition(10, 10);
+        chooseMap.setPosition(20, 20);
         chooseMap.setSize(300, 50);
         //TODO add Listener to choose the right map (needs maps to be tested)
         
