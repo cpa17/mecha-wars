@@ -63,7 +63,8 @@ public class OptionScreen implements Screen {
         howManyEnemys = new Label("Anzahl der Gegner:", skin);
         howManyEnemys.setPosition(485, 180);
         
-        enemyCounter = new Label(" ", skin);
+        enemyCounter = new Label("1", skin);
+        enemyCounter.setPosition(775, 180);
         
         enemyChooser = new Slider(1, 7, 1, false, skin);
         enemyChooser.setPosition(470, 200);
@@ -73,14 +74,12 @@ public class OptionScreen implements Screen {
                 enemyCounter.setY(enemyChooser.getValue() - 1);
                 enemyCounter.setText((int) enemyChooser.getValue());
                 enemyCounter.setPosition(775, 180);
-                //TODO change the number of players in Startupconfig
             }
         });
 
         chooseMap = new TextField(" Bitte Map angeben!", skin);
         chooseMap.setPosition(20, 20);
-        chooseMap.setSize(300, 50);
-        //TODO add Listener to choose the right map (needs maps to be tested)
+        chooseMap.setSize(300, 50);    
         
         startGame = new TextButton("Starten!", skin);
         startGame.setPosition(440, 310);
@@ -88,6 +87,12 @@ public class OptionScreen implements Screen {
         startGame.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent e, float x, float y, int point, int button) {
+                ConfigReader.writePlayerNumber((int) enemyChooser.getValue()); //hier stimmt noch was nich
+                if(!chooseMap.getText().contains(".txt")) {
+                    chooseMap.setText(chooseMap.getText() + ".txt");
+                }
+                MechaWars.setMap(chooseMap.getText());
+                System.out.println(chooseMap.getText());
                 toGameScreen();
             }
         });
