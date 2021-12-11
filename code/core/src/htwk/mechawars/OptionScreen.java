@@ -112,36 +112,20 @@ public class OptionScreen implements Screen {
                 if (fileListRead(input)) {
                     if (!input.contains(".txt")) {
                         input = input + ".txt";
-                    }
-                    
+                    }               
                     MechaWars.setMap(input);
-
                     toGameScreen();
-                }
-                else {
-                    Dialog dialogCloseOption = new Dialog("Eingabe falsch... | Programm wird beendet", skin) {
-                        // many spaces, because then its nearly in the centre
-
+                } else {
+                    Dialog dialogCloseOption = new Dialog("\t Mapname falsch", skin) {
                         @Override
                         protected void result(Object object) {
-                            boolean choose = (Boolean) object;
-                            if (choose) {
-                                MechaWars.setMap("map.txt");
-                                toGameScreen();
-                            } else {
-                                // mache was anderes
-                                remove();
-                            }
+                            remove();
                         }
-
                     }.show(stage);
-
-                    dialogCloseOption.setSize(550, 110);
-
-                    dialogCloseOption.button("Standard-Map", true);
-                    dialogCloseOption.button("Neue Eingabe", false);
-                    dialogCloseOption.key(Input.Keys.ENTER, true);
-                    dialogCloseOption.key(Input.Keys.ESCAPE, false);                
+                    dialogCloseOption.setSize(400, 100);
+                    dialogCloseOption.setPosition(440, 310);
+                    dialogCloseOption.button("Neue Eingabe", null);   
+                    dialogCloseOption.key(Input.Keys.ENTER, null);
                 }
             }
         });
