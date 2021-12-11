@@ -57,7 +57,8 @@ public class Robot {
     }
 
     /**
-     * Method that lets the robot run forward.
+     * Method that makes the robot run forward by a field. Therefore the function don't checks
+     * whether walls are in the way, because a field never moves a robot towards a wall.
      * @param mov byte of move
      * @return new position
      */
@@ -81,17 +82,21 @@ public class Robot {
     }
 
     /**
-     * Method that lets the robot run forward.
+     * Method that makes the robot run forward by a card. Therefore
+     * the function checks whether walls are in the way.
+     * @param fieldmatrix of the board, on which the robot moves
      * @param mov byte of move
      * @return new position
      */
-    public Robot moveInDirection(Field[][] fieldmatrix, byte mov) {
+    public Robot moveInDirectionByCard(Field[][] fieldmatrix, byte mov) {
 
         Boolean flag = Boolean.FALSE;
         BarrierSide barrierSide;
         BarrierCorner barrierCorner;
         Dir moveDir;
 
+        // If the robot is walking backwards, the moving direction is the opposite direction
+        // of the robot
         if (mov == -1) {
             switch (getDir()) {
                 case NORTH:
@@ -119,6 +124,8 @@ public class Robot {
                 for (int i = 0; (i < mov) && (flag == Boolean.FALSE); i++) {
                     int x = getXcoor();
                     int y = getYcoor();
+                    // Checks whether a side or corner barrier on the field on which the robot is
+                    // currently standing, stops the current step
                     if ((y >= 0) && (y <= 11) && (x >= 0) && (x <= 11)) {
                         if (fieldmatrix[x][y] instanceof BarrierSide) {
                             barrierSide = (BarrierSide) fieldmatrix[x][y];
@@ -133,6 +140,8 @@ public class Robot {
                             }
                         }
                     }
+                    // Checks whether a side or corner barrier on the next field in the moving
+                    // direction, stops the current step
                     if ((y-1 >= 0) && (y-1 <= 11) && (x >= 0) && (x <= 11)) {
                         if (fieldmatrix[x][y - 1] instanceof BarrierSide) {
                             barrierSide = (BarrierSide) fieldmatrix[x][y - 1];
