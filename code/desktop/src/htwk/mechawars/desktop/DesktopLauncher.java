@@ -39,6 +39,9 @@ public class DesktopLauncher implements Runnable {
             description = "Choose a Gameboard (map.txt, map2.txt)")
     private String fileName = "map.txt";
 
+    @Option(names = { "-p", "--player" }, description = "Number of Players")
+    int player = 4;
+
     /**
      * Main class, for the new CommandLine.
      */
@@ -56,6 +59,7 @@ public class DesktopLauncher implements Runnable {
     public void run() {
         MechaWars.setSkip(skip);
         MechaWars.setMap(fileName);
+        MechaWars.setPlayerNumber(player);
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
         config.setWindowedMode(1280, 720);
         new Lwjgl3Application(new MechaWars(), config);
@@ -128,6 +132,3 @@ public class DesktopLauncher implements Runnable {
         return true;
     }
 }
-
-
-

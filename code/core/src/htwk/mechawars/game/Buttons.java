@@ -10,11 +10,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Timer;
 import htwk.mechawars.board.Robot;
 
 import static htwk.mechawars.game.GameScreen.board;
-import static htwk.mechawars.game.GameScreen.zugInitialisierung;
 import static htwk.mechawars.game.GameScreen.stage;
+
 import static htwk.mechawars.game.GameScreen.addButtonsToStage;
 import static htwk.mechawars.game.GameScreen.getStage;
 import static htwk.mechawars.game.GameScreen.addScrollPanelToStage;
@@ -24,46 +25,57 @@ import static htwk.mechawars.game.GameScreen.addScrollPanelToStage;
  */
 public class Buttons {
 
+
     /**
      * Creates the startButton.
-     * @param player Object of class Robot.
-     * @param skin Object of class Skin.
+     * @param players Array of all the Players.
      * @return startButton.
      */
-    protected static Button startButton(Skin skin, Robot player) {
-        Button startExecutionButton = new TextButton("Ausfuehrung starten", skin);
+    protected static Button startButton(Robot[] players, Button startExecutionButton, Skin skin) {
         startExecutionButton.setSize(160, 43);
-
         int startExecutionButtonX = Gdx.graphics.getHeight()
                 + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
         int startExecutionButtonY = Gdx.graphics.getHeight() - 100;
-
         startExecutionButton.setPosition(startExecutionButtonX, startExecutionButtonY);
-
         startExecutionButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                if (!player.getShutDown()) {
+                if (!players[0].getShutDown()) {
                     //If All Cards are chosen
                     if (ScrollPanel.cardOrder[4 - ScrollPanel.damagePoints] != -1) {
                         deactivateButtons();
-                        zugInitialisierung.initialisiereBewegung();
-                        board.move(zugInitialisierung.getList(), player);
-                        zugInitialisierung.resetList();
-                        startExecutionButton.setColor(Color.LIGHT_GRAY);
-                        ScrollPanel.cardOrderClear();
-                        activateButtons();
-                        updateButtons(skin);
+                        board.move(players);
+                        Timer.schedule(new Timer.Task() {
+                            @Override
+                            public void run() {
+                                players[0].resetList();
+                                startExecutionButton.setColor(Color.LIGHT_GRAY);
+                                ScrollPanel.cardOrderClear();
+                                activateButtons();
+                                setButtons(players);
+                                ScrollPanel.clearScrollPanel(skin, players);
+                            }
+                        }, 9);
                     } else {
                         startExecutionButton.setColor(Color.RED);
                     }
                 } else {
-                    zugInitialisierung.initialisiereBewegung();
-                    board.move(zugInitialisierung.getList(), player);
-                    zugInitialisierung.resetList();
-                    startExecutionButton.setColor(Color.LIGHT_GRAY);
-                    updateButtons(skin);
+                    deactivateButtons();
+                    board.move(players);
+                    Timer.schedule(new Timer.Task() {
+                        @Override
+                        public void run() {
+                            players[0].resetList();
+                            startExecutionButton.setColor(Color.LIGHT_GRAY);
+                            ScrollPanel.cardOrderClear();
+                            activateButtons();
+                            setButtons(players);
+                            ScrollPanel.clearScrollPanel(skin, players);
+                        }
+                    }, 5);
                 }
             }
+
+
         });
 
         return startExecutionButton;
@@ -117,13 +129,10 @@ public class Buttons {
 
     /**
      * Creates the removeButton.
-     * @param skin Object of class Skin.
      * @return removeButton.
      */
-    protected static Button removeButton(Skin skin) {
-        Button removeCardOrder = new TextButton("Loesche\nKartenreihenfolge", skin);
-
-        removeCardOrder.setSize(128, 43);
+    protected static Button removeButton(Button removeCardOrder) {
+        removeCardOrder.setSize(160, 43);
         int removeCardOrderX = Gdx.graphics.getHeight()
                 + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
         int removeCardOrderY = Gdx.graphics.getHeight() - 200;
@@ -133,7 +142,7 @@ public class Buttons {
         removeCardOrder.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 ScrollPanel.cardOrderClear();
-                zugInitialisierung.resetList();
+                Robot.getPlayers()[0].resetList();
             }
 
         });
@@ -148,6 +157,10 @@ public class Buttons {
         for (TextButton button : ScrollPanel.buttons) {
             button.setTouchable(Touchable.disabled);
         }
+        GameScreen.removeCardOrder.setTouchable(Touchable.disabled);
+        GameScreen.startExecutionButton.setTouchable(Touchable.disabled);
+        GameScreen.wakeUpButton.setTouchable(Touchable.disabled);
+        GameScreen.shutDownButton.setTouchable(Touchable.disabled);
     }
 
     /**
@@ -157,6 +170,12 @@ public class Buttons {
         for (TextButton button : ScrollPanel.buttons) {
             button.setTouchable(Touchable.enabled);
         }
+        GameScreen.removeCardOrder.setTouchable(Touchable.enabled);
+        GameScreen.startExecutionButton.setTouchable(Touchable.enabled);
+        GameScreen.wakeUpButton.setTouchable(Touchable.enabled);
+        GameScreen.shutDownButton.setTouchable(Touchable.enabled);
+        GameScreen.wakeUpButton.setColor(Color.LIGHT_GRAY);
+        GameScreen.shutDownButton.setColor(Color.LIGHT_GRAY);
     }
 
     /**
@@ -185,12 +204,9 @@ public class Buttons {
     /**
      * Creates the wakeUpButton.
      * @param player Object of class Robot.
-     * @param skin Object of class Skin.
      * @return wakeUpButton.
      */
-    protected static Button wakeUpButton(Skin skin, Robot player) {
-        Button wakeUpButton = new TextButton("WakeUp", skin);
-
+    protected static Button wakeUpButton(Robot player, Button wakeUpButton) {
         wakeUpButton.setSize(160, 43);
 
         int wakeUpButtonX = Gdx.graphics.getHeight()
@@ -219,12 +235,9 @@ public class Buttons {
     /**
      * Creates the shutDownButton.
      * @param player Object of class Robot.
-     * @param skin Object of class Skin.
      * @return shutDownButton.
      */
-    protected static Button shutDownButton(Skin skin, Robot player) {
-        Button shutDownButton = new TextButton("ShutDown", skin);
-
+    protected static Button shutDownButton(Robot player, Button shutDownButton) {
         shutDownButton.setSize(160, 43);
 
         int shutDownButtonX = Gdx.graphics.getHeight()
@@ -251,12 +264,24 @@ public class Buttons {
     }
 
     /**
-     * Update the Buttons and scroll panel.
-     * @param skin Object of class Skin.
+     * Buttons on Stage.
+     * @param players Array of Robots.
      */
-    private static void updateButtons(Skin skin) {
-        getStage().clear();
-        addButtonsToStage(skin);
-        addScrollPanelToStage(skin);
+    static void setButtons(Robot[] players) {
+        if (players[0].getShutDown()) {
+            GameScreen.removeCardOrder.setTouchable(Touchable.disabled);
+            GameScreen.removeCardOrder.setDisabled(true);
+            GameScreen.shutDownButton.setTouchable(Touchable.disabled);
+            GameScreen.wakeUpButton.setTouchable(Touchable.enabled);
+            GameScreen.shutDownButton.setDisabled(true);
+            GameScreen.wakeUpButton.setDisabled(false);
+        } else {
+            GameScreen.removeCardOrder.setTouchable(Touchable.enabled);
+            GameScreen.removeCardOrder.setDisabled(false);
+            GameScreen.shutDownButton.setTouchable(Touchable.enabled);
+            GameScreen.wakeUpButton.setTouchable(Touchable.disabled);
+            GameScreen.shutDownButton.setDisabled(false);
+            GameScreen.wakeUpButton.setDisabled(true);
+        }
     }
 }

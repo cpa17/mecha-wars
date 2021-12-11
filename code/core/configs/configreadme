@@ -1,0 +1,9 @@
+Startupconfig.txt is used to determine the  number of players and the behavior of the AI-Players
+
+
+
+determine number of players:
+'playerNumber: [1...8]'
+
+determine behavior and startPosition of AI-Players on the Board
+'playerConfig: [index of Player - x-coordinate - y-coordinate - behavior(1 for Random generated Cards, 0 for no Cards)]
