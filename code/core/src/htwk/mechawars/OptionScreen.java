@@ -200,13 +200,15 @@ public class OptionScreen implements Screen {
         if (!input.matches(regex + ".txt")) {
             input = input + ".txt";
         }
-
-        for (File file : folder.listFiles()) {
-            if (file.getName().matches(regex + ".txt")) {
-                filesInDirectory.add(file.getName());
+        
+        if (folder.listFiles() != null) {
+            for (File file : folder.listFiles()) {
+                if (file.getName().matches(regex + ".txt")) {
+                    filesInDirectory.add(file.getName());
+                }
             }
         }
-        
+         
         for (int i = 0; i < filesInDirectory.size(); i += 1) {
             if (filesInDirectory.get(i).equals(input)) {
                 return true;
