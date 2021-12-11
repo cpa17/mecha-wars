@@ -135,14 +135,15 @@ public class Robot {
                         }
                         if (fieldmatrix[x][y] instanceof BarrierCorner) {
                             barrierCorner = (BarrierCorner) fieldmatrix[x][y];
-                            if ((barrierCorner.getCorner() == 1) || (barrierCorner.getCorner() == 2)) {
+                            if ((barrierCorner.getCorner() == 1)
+                                    || (barrierCorner.getCorner() == 2)) {
                                 flag = Boolean.TRUE;
                             }
                         }
                     }
                     // Checks whether a side or corner barrier on the next field in the moving
                     // direction, stops the current step
-                    if ((y-1 >= 0) && (y-1 <= 11) && (x >= 0) && (x <= 11)) {
+                    if ((y - 1 >= 0) && (y - 1 <= 11) && (x >= 0) && (x <= 11)) {
                         if (fieldmatrix[x][y - 1] instanceof BarrierSide) {
                             barrierSide = (BarrierSide) fieldmatrix[x][y - 1];
                             if (barrierSide.getSide() == 4) {
@@ -151,7 +152,8 @@ public class Robot {
                         }
                         if (fieldmatrix[x][y - 1] instanceof BarrierCorner) {
                             barrierCorner = (BarrierCorner) fieldmatrix[x][y - 1];
-                            if ((barrierCorner.getCorner() == 3) || (barrierCorner.getCorner() == 4)) {
+                            if ((barrierCorner.getCorner() == 3)
+                                    || (barrierCorner.getCorner() == 4)) {
                                 flag = Boolean.TRUE;
                             }
                         }
@@ -175,26 +177,24 @@ public class Robot {
                         }
                         if (fieldmatrix[x][y] instanceof BarrierCorner) {
                             barrierCorner = (BarrierCorner) fieldmatrix[x][y];
-                            if ((barrierCorner.getCorner() == 3) || (barrierCorner.getCorner() == 4)) {
+                            if ((barrierCorner.getCorner() == 3)
+                                    || (barrierCorner.getCorner() == 4)) {
                                 flag = Boolean.TRUE;
                             }
                         }
                     }
-                    if ((y+1 >= 0) && (y+1 <= 11) && (x >= 0) && (x <= 11)) {
-                        if (y + 1 <= 11) {
-                            if (fieldmatrix[x][y + 1] instanceof BarrierSide) {
-                                barrierSide = (BarrierSide) fieldmatrix[x][y + 1];
-                                if (barrierSide.getSide() == 2) {
-                                    flag = Boolean.TRUE;
-                                }
+                    if ((y + 1 >= 0) && (y + 1 <= 11) && (x >= 0) && (x <= 11)) {
+                        if (fieldmatrix[x][y + 1] instanceof BarrierSide) {
+                            barrierSide = (BarrierSide) fieldmatrix[x][y + 1];
+                            if (barrierSide.getSide() == 2) {
+                                flag = Boolean.TRUE;
                             }
                         }
-                        if (y + 1 <= 11) {
-                            if (fieldmatrix[x][y + 1] instanceof BarrierCorner) {
-                                barrierCorner = (BarrierCorner) fieldmatrix[x][y + 1];
-                                if ((barrierCorner.getCorner() == 1) || (barrierCorner.getCorner() == 2)) {
-                                    flag = Boolean.TRUE;
-                                }
+                        if (fieldmatrix[x][y + 1] instanceof BarrierCorner) {
+                            barrierCorner = (BarrierCorner) fieldmatrix[x][y + 1];
+                            if ((barrierCorner.getCorner() == 1)
+                                    || (barrierCorner.getCorner() == 2)) {
+                                flag = Boolean.TRUE;
                             }
                         }
                     }
@@ -217,26 +217,24 @@ public class Robot {
                         }
                         if (fieldmatrix[x][y] instanceof BarrierCorner) {
                             barrierCorner = (BarrierCorner) fieldmatrix[x][y];
-                            if ((barrierCorner.getCorner() == 2) || (barrierCorner.getCorner() == 3)) {
+                            if ((barrierCorner.getCorner() == 2)
+                                    || (barrierCorner.getCorner() == 3)) {
                                 flag = Boolean.TRUE;
                             }
                         }
                     }
-                    if ((y >= 0) && (y <= 11) && (x+1 >= 0) && (x+1 <= 11)) {
-                        if (x + 1 <= 11) {
-                            if (fieldmatrix[x + 1][y] instanceof BarrierSide) {
-                                barrierSide = (BarrierSide) fieldmatrix[x + 1][y];
-                                if (barrierSide.getSide() == 1) {
-                                    flag = Boolean.TRUE;
-                                }
+                    if ((y >= 0) && (y <= 11) && (x + 1 >= 0) && (x + 1 <= 11)) {
+                        if (fieldmatrix[x + 1][y] instanceof BarrierSide) {
+                            barrierSide = (BarrierSide) fieldmatrix[x + 1][y];
+                            if (barrierSide.getSide() == 1) {
+                                flag = Boolean.TRUE;
                             }
                         }
-                        if (x + 1 <= 11) {
-                            if (fieldmatrix[x + 1][y] instanceof BarrierCorner) {
-                                barrierCorner = (BarrierCorner) fieldmatrix[x + 1][y];
-                                if ((barrierCorner.getCorner() == 1) || (barrierCorner.getCorner() == 4)) {
-                                    flag = Boolean.TRUE;
-                                }
+                        if (fieldmatrix[x + 1][y] instanceof BarrierCorner) {
+                            barrierCorner = (BarrierCorner) fieldmatrix[x + 1][y];
+                            if ((barrierCorner.getCorner() == 1)
+                                    || (barrierCorner.getCorner() == 4)) {
+                                flag = Boolean.TRUE;
                             }
                         }
                     }
@@ -259,26 +257,24 @@ public class Robot {
                         }
                         if (fieldmatrix[x][y] instanceof BarrierCorner) {
                             barrierCorner = (BarrierCorner) fieldmatrix[x][y];
-                            if ((barrierCorner.getCorner() == 1) || (barrierCorner.getCorner() == 4)) {
+                            if ((barrierCorner.getCorner() == 1)
+                                    || (barrierCorner.getCorner() == 4)) {
                                 flag = Boolean.TRUE;
                             }
                         }
                     }
-                    if ((y >= 0) && (y <= 11) && (x-1 >= 0) && (x-1 <= 11)) {
-                        if (x - 1 >= 0) {
-                            if (fieldmatrix[x - 1][y] instanceof BarrierSide) {
-                                barrierSide = (BarrierSide) fieldmatrix[x - 1][y];
-                                if (barrierSide.getSide() == 3) {
-                                    flag = Boolean.TRUE;
-                                }
+                    if ((y >= 0) && (y <= 11) && (x - 1 >= 0) && (x - 1 <= 11)) {
+                        if (fieldmatrix[x - 1][y] instanceof BarrierSide) {
+                            barrierSide = (BarrierSide) fieldmatrix[x - 1][y];
+                            if (barrierSide.getSide() == 3) {
+                                flag = Boolean.TRUE;
                             }
                         }
-                        if (x - 1 >= 0) {
-                            if (fieldmatrix[x - 1][y] instanceof BarrierCorner) {
-                                barrierCorner = (BarrierCorner) fieldmatrix[x - 1][y];
-                                if ((barrierCorner.getCorner() == 2) || (barrierCorner.getCorner() == 3)) {
-                                    flag = Boolean.TRUE;
-                                }
+                        if (fieldmatrix[x - 1][y] instanceof BarrierCorner) {
+                            barrierCorner = (BarrierCorner) fieldmatrix[x - 1][y];
+                            if ((barrierCorner.getCorner() == 2)
+                                    || (barrierCorner.getCorner() == 3)) {
+                                flag = Boolean.TRUE;
                             }
                         }
                     }
