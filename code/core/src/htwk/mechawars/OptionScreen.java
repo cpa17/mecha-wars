@@ -209,12 +209,12 @@ public class OptionScreen implements Screen {
         }
         
         //Ausgabe zur Kontrolle
-        for (int i = 0; i < filesInDirectory.size(); i += 1){
+        for (int i = 0; i < filesInDirectory.size(); i += 1) {
             System.out.println(filesInDirectory.get(i));
         }
         
         // vorhanden
-        for (int i = 0; i < filesInDirectory.size(); i += 1){
+        for (int i = 0; i < filesInDirectory.size(); i += 1) {
             if (filesInDirectory.get(i).equals(input)) {
                 return true;
             }
