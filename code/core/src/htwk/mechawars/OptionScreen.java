@@ -92,7 +92,7 @@ public class OptionScreen implements Screen {
         start.setSize(400, 100);
         start.addListener(new ClickListener() {
             @Override
-            public void touchUp(InputEvent e, float x, float y, int point, int button) {
+            public void clicked(InputEvent event, float x, float y) {
                 ConfigReader.writePlayerNumber((int) enemyChooser.getValue()); 
                 
                 try {
@@ -131,7 +131,6 @@ public class OptionScreen implements Screen {
                             } else {
                                 // mache was anderes
                                 remove();
-                                touchUp(e, x, y, point, button);
                             }
                         }
 
