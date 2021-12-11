@@ -1,9 +1,12 @@
 package htwk.mechawars;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -12,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
@@ -79,7 +83,7 @@ public class OptionScreen implements Screen {
             }
         });
 
-        chooseMap = new TextField(" Bitte Map angeben!", skin);
+        chooseMap = new TextField(" Bitte map angeben!", skin);
         chooseMap.setPosition(20, 20);
         chooseMap.setSize(300, 50);    
         
@@ -97,13 +101,46 @@ public class OptionScreen implements Screen {
                     c.printStackTrace();
                 }
                 
-                if (!chooseMap.getText().contains(".txt")) {
-                    chooseMap.setText(chooseMap.getText() + ".txt");
+                String input = chooseMap.getText();
+                
+                // delete all wrong spaces
+                if (input.matches(" " + "(.*)")) {
+                    System.out.println("1");
+                    input = input.replace(" ", "");
                 }
                 
-                MechaWars.setMap(chooseMap.getText());
-                
-                toGameScreen();
+                if (fileListRead(input)) {
+                    if (!input.contains(".txt")) {
+                        input = input + ".txt";
+                    }
+                    
+                    MechaWars.setMap(input);
+
+                    toGameScreen();
+                }
+                else {
+                    Dialog dialogCloseOption = new Dialog("Eingabe falsch... | Programm wird beendet", skin) {
+                        // many spaces, because then its nearly in the centre
+
+                        @Override
+                        protected void result(Object object) {
+                            boolean exit = (Boolean) object;
+                            if (exit) {
+                                Gdx.app.exit();
+                            } else {
+                                remove();
+                            }
+                        }
+
+                    }.show(stage);
+
+                    dialogCloseOption.setSize(450, 110);
+
+                    dialogCloseOption.button("Beenden", true);
+                    dialogCloseOption.button("Beenden", false);
+                    dialogCloseOption.key(Input.Keys.ENTER, true);
+                    dialogCloseOption.key(Input.Keys.ESCAPE, false);                
+                }
             }
         });
         
@@ -161,5 +198,42 @@ public class OptionScreen implements Screen {
     @Override
     public void dispose() {
         
+    }
+    
+    /**
+     * Function check, if the choosen file exist.
+     * 
+     * @param input -> string from the input (choosen file)
+     * @return true if the file exist
+     */
+    public boolean fileListRead(String input) {
+        
+        ArrayList<String> filesInDirectory = new ArrayList<String>();
+        String regex = "(.*)";        
+        File folder = new File("bin/main");
+        
+        if (!input.matches(regex + ".txt")) {
+            input = input + ".txt";
+        }
+
+        for (File file : folder.listFiles()) {
+            if (file.getName().matches(regex + ".txt")) {
+                filesInDirectory.add(file.getName());
+            }
+        }
+        
+        //Ausgabe zur Kontrolle
+        for (int i = 0; i < filesInDirectory.size(); i += 1){
+            System.out.println(filesInDirectory.get(i));
+        }
+        
+        // vorhanden
+        for (int i = 0; i < filesInDirectory.size(); i += 1){
+            if (filesInDirectory.get(i).equals(input)) {
+                return true;
+            }
+        }
+        
+        return false;
     }
 }
