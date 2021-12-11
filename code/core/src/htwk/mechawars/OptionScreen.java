@@ -124,20 +124,23 @@ public class OptionScreen implements Screen {
 
                         @Override
                         protected void result(Object object) {
-                            boolean exit = (Boolean) object;
-                            if (exit) {
-                                Gdx.app.exit();
+                            boolean choose = (Boolean) object;
+                            if (choose) {
+                                MechaWars.setMap("map.txt");
+                                toGameScreen();
                             } else {
+                                // mache was anderes
                                 remove();
+                                touchUp(e, x, y, point, button);
                             }
                         }
 
                     }.show(stage);
 
-                    dialogCloseOption.setSize(450, 110);
+                    dialogCloseOption.setSize(550, 110);
 
-                    dialogCloseOption.button("Beenden", true);
-                    dialogCloseOption.button("Beenden", false);
+                    dialogCloseOption.button("Standard-Map", true);
+                    dialogCloseOption.button("Neue Eingabe", false);
                     dialogCloseOption.key(Input.Keys.ENTER, true);
                     dialogCloseOption.key(Input.Keys.ESCAPE, false);                
                 }
