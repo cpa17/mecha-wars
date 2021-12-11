@@ -95,7 +95,7 @@ public class Robot {
         BarrierCorner barrierCorner;
         Dir moveDir;
 
-        // If the robot is walking backwards, the moving direction is the opposite direction
+        // If the robot is moving backwards, the moving direction is the opposite direction
         // of the robot
         if (mov == -1) {
             switch (getDir()) {
