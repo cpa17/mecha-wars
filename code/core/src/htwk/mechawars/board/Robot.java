@@ -57,7 +57,7 @@ public class Robot {
     }
 
     /**
-     * Method that makes the robot run forward by a field. Therefore the function don't checks
+     * Method that makes the robot move forward by a field. Therefore the function don't checks
      * whether walls are in the way, because a field never moves a robot towards a wall.
      * @param mov byte of move
      * @return new position
@@ -82,7 +82,7 @@ public class Robot {
     }
 
     /**
-     * Method that makes the robot run forward by a card. Therefore
+     * Method that makes the robot move forward by a card. Therefore
      * the function checks whether walls are in the way.
      * @param fieldmatrix of the board, on which the robot moves
      * @param mov byte of move
