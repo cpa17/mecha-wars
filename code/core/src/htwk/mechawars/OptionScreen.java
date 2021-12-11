@@ -207,8 +207,8 @@ public class OptionScreen implements Screen {
                     filesInDirectory.add(file.getName());
                 }
             }
-        } catch (NullPointerException c) {
-            c.printStackTrace();
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
         }
         
         for (int i = 0; i < filesInDirectory.size(); i += 1) {
