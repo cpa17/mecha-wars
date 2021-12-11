@@ -62,20 +62,20 @@ public class OptionScreen implements Screen {
             }
         });
         
-        howManyEnemys = new Label("Anzahl der Gegner:", skin);
-        howManyEnemys.setPosition(485, 180);
+        howManyEnemys = new Label("Anzahl der Spieler:", skin);
+        howManyEnemys.setPosition(480, 180);
         
         enemyCounter = new Label("1", skin);
-        enemyCounter.setPosition(775, 180);
+        enemyCounter.setPosition(780, 180);
         
-        enemyChooser = new Slider(1, 7, 1, false, skin);
+        enemyChooser = new Slider(1, 8, 1, false, skin);
         enemyChooser.setPosition(470, 200);
         enemyChooser.setSize(340, 50);
         enemyChooser.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
                 enemyCounter.setY(enemyChooser.getValue() - 1);
                 enemyCounter.setText((int) enemyChooser.getValue());
-                enemyCounter.setPosition(775, 180);
+                enemyCounter.setPosition(780, 180);
             }
         });
 
