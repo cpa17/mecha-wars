@@ -105,7 +105,6 @@ public class OptionScreen implements Screen {
                 
                 // delete all wrong spaces
                 if (input.matches(" " + "(.*)")) {
-                    System.out.println("1");
                     input = input.replace(" ", "");
                 }
                 
@@ -122,6 +121,7 @@ public class OptionScreen implements Screen {
                             remove();
                         }
                     }.show(stage);
+                    
                     dialogCloseOption.setSize(400, 100);
                     dialogCloseOption.setPosition(440, 310);
                     dialogCloseOption.button("Neue Eingabe", null);   
@@ -192,8 +192,7 @@ public class OptionScreen implements Screen {
      * @param input -> string from the input (choosen file)
      * @return true if the file exist
      */
-    public boolean fileListRead(String input) {
-        
+    public boolean fileListRead(String input) { 
         ArrayList<String> filesInDirectory = new ArrayList<String>();
         String regex = "(.*)";        
         File folder = new File("bin/main");
@@ -208,18 +207,11 @@ public class OptionScreen implements Screen {
             }
         }
         
-        //Ausgabe zur Kontrolle
-        for (int i = 0; i < filesInDirectory.size(); i += 1) {
-            System.out.println(filesInDirectory.get(i));
-        }
-        
-        // vorhanden
         for (int i = 0; i < filesInDirectory.size(); i += 1) {
             if (filesInDirectory.get(i).equals(input)) {
                 return true;
             }
-        }
-        
+        }   
         return false;
     }
 }
