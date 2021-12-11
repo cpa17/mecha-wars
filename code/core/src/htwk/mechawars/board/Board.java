@@ -467,7 +467,7 @@ public class Board {
      */
     public void robotMovement(Card card, Robot robot) {
         if (card.getCardAttributeType() == Type.mov) {
-            robot.moveInDirection(fieldmatrix, card.getCardAttributeMovCount());
+            robot.moveInDirectionByCard(fieldmatrix, card.getCardAttributeMovCount());
         } else {
             robot.turn(card.getCardAttributeMovCount());
         }
