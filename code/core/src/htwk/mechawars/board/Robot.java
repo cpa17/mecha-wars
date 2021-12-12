@@ -39,7 +39,7 @@ public class Robot {
     private Texture hud;
     private static Robot[] players = createRobots(ConfigReader.getPlayerNumber());
     private LinkedList<Card> selectedCards = new LinkedList<Card>();
-    
+
     /**
      * Constructor of the robot class.
      */
@@ -82,13 +82,26 @@ public class Robot {
     }
 
     /**
-     * Method that makes the robot move forward by a card. Therefore
-     * the function checks whether walls are in the way.
+     * Method that makes the robot move forward by a card. Therefore the function calls another
+     * function, which checks whether walls are in the way or whether the robot pushes another robot.
+     * The direction ist the direction of the robot.
      * @param fieldmatrix of the board, on which the robot moves
      * @param mov byte of move
+     */
+    public void moveInDirectionByCard(Field[][] fieldmatrix, byte mov) {
+        this.moveInDirection(fieldmatrix, (byte) mov, this.getDir());
+    }
+
+    /**
+     * Method that makes the robot move forward. Therefore the function checks whether walls are
+     * in the way or whether the robot pushes another robot.
+     * @param fieldmatrix of the board, on which the robot moves
+     * @param mov byte of move
+     * @param dir If the robot moves by a card, it is the direction of the robot.
+     *            If the robot is pushed by another robot, it is the direction of the other robot.
      * @return new position
      */
-    public Robot moveInDirectionByCard(Field[][] fieldmatrix, byte mov) {
+    public Robot moveInDirection(Field[][] fieldmatrix, byte mov, Dir dir) {
 
         Boolean flag = Boolean.FALSE;
         BarrierSide barrierSide;
@@ -98,7 +111,7 @@ public class Robot {
         // If the robot is moving backwards, the moving direction is the opposite direction
         // of the robot
         if (mov == -1) {
-            switch (getDir()) {
+            switch (dir) {
                 case NORTH:
                     moveDir = Dir.SOUTH;
                     break;
@@ -116,7 +129,7 @@ public class Robot {
             }
             mov = 1;
         } else {
-            moveDir = getDir();
+            moveDir = dir;
         }
 
         switch (moveDir) {
@@ -155,6 +168,20 @@ public class Robot {
                             if ((barrierCorner.getCorner() == 3)
                                     || (barrierCorner.getCorner() == 4)) {
                                 flag = Boolean.TRUE;
+                            }
+                        }
+                    }
+                    // Checks whether the robot is pushing another robot
+                    if ((y - 1 >= 0) && (y - 1 <= 11) && (x >= 0) && (x <= 11)) {
+                        for (int p = 0; p < players.length; p++) {
+                            int currX = players[p].getXcoor();
+                            int currY = players[p].getYcoor();
+                            if ((currX == x) && (currY == y - 1)) {
+                                players[p].moveInDirection(fieldmatrix, (byte) 1, moveDir);
+                                if ((players[p].getXcoor() == currX)
+                                        && (players[p].getYcoor() == currY)) {
+                                    flag = Boolean.TRUE;
+                                }
                             }
                         }
                     }
@@ -198,6 +225,20 @@ public class Robot {
                             }
                         }
                     }
+                    // Checks whether the robot is pushing another robot
+                    if ((y + 1 >= 0) && (y + 1 <= 11) && (x >= 0) && (x <= 11)) {
+                        for (int p = 0; p < players.length; p++) {
+                            int currX = players[p].getXcoor();
+                            int currY = players[p].getYcoor();
+                            if ((currX == x) && (currY == y + 1)) {
+                                players[p].moveInDirection(fieldmatrix, (byte) 1, moveDir);
+                                if ((players[p].getXcoor() == currX)
+                                        && (players[p].getYcoor() == currY)) {
+                                    flag = Boolean.TRUE;
+                                }
+                            }
+                        }
+                    }
                     if (flag == Boolean.FALSE) {
                         setYcoor(getYcoor() + 1);
                     }
@@ -238,6 +279,20 @@ public class Robot {
                             }
                         }
                     }
+                    // Checks whether the robot is pushing another robot
+                    if ((y >= 0) && (y <= 11) && (x + 1 >= 0) && (x + 1 <= 11)) {
+                        for (int p = 0; p < players.length; p++) {
+                            int currX = players[p].getXcoor();
+                            int currY = players[p].getYcoor();
+                            if ((currX == x + 1) && (currY == y)) {
+                                players[p].moveInDirection(fieldmatrix, (byte) 1, moveDir);
+                                if ((players[p].getXcoor() == currX)
+                                        && (players[p].getYcoor() == currY)) {
+                                    flag = Boolean.TRUE;
+                                }
+                            }
+                        }
+                    }
                     if (flag == Boolean.FALSE) {
                         setXcoor(getXcoor() + 1);
                     }
@@ -275,6 +330,20 @@ public class Robot {
                             if ((barrierCorner.getCorner() == 2)
                                     || (barrierCorner.getCorner() == 3)) {
                                 flag = Boolean.TRUE;
+                            }
+                        }
+                    }
+                    // Checks whether the robot is pushing another robot
+                    if ((y >= 0) && (y <= 11) && (x - 1 >= 0) && (x - 1 <= 11)) {
+                        for (int p = 0; p < players.length; p++) {
+                            int currX = players[p].getXcoor();
+                            int currY = players[p].getYcoor();
+                            if ((currX == x - 1) && (currY == y)) {
+                                players[p].moveInDirection(fieldmatrix, (byte) 1, moveDir);
+                                if ((players[p].getXcoor() == currX)
+                                        && (players[p].getYcoor() == currY)) {
+                                    flag = Boolean.TRUE;
+                                }
                             }
                         }
                     }
