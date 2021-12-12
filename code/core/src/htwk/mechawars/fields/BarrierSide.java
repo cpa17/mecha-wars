@@ -56,12 +56,12 @@ public class BarrierSide extends Field {
 
     @Override
     public Robot turnAction(Robot robot) {
-        return robot;       
+        return robot;      
     }
     
     @Override
     public Robot cardAction(Robot robot) {
-        return robot;       
+        return robot;   
     }
     
     @Override
