@@ -15,9 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 
 public class DamageTest {
-    private Robot robot = new Robot();
+    private Robot[] robot = Robot.createRobots(1);
     private Board board = new Board(createBoardString(), true);
-    private LinkedList<Card> karten = new LinkedList<>();
 
     @Test
     public void damageTest() {
@@ -29,15 +28,15 @@ public class DamageTest {
         *   Life: 3
         * */
         
-        assertEquals(0, robot.getDamagePoints());
-        assertFalse(robot.getShutDown());
-        assertEquals(3, robot.getLifePoints());
+        assertEquals(0, robot[0].getDamagePoints());
+        assertFalse(robot[0].getShutDown());
+        assertEquals(3, robot[0].getLifePoints());
 
-        robot.damageUp();
-        robot.damageUp();
-        robot.damageUp();
-        robot.setShutDown(true);
-        robot.setNextRound(true);
+        robot[0].damageUp();
+        robot[0].damageUp();
+        robot[0].damageUp();
+        robot[0].setShutDown(true);
+        robot[0].setNextRound(true);
         /* Robot:
          *   DamagePoint: 3
          *   ShutDown: true
@@ -46,13 +45,13 @@ public class DamageTest {
          *   Life: 3
          * */
 
-        assertEquals(3, robot.getDamagePoints());
-        assertTrue(robot.getShutDown());
-        assertFalse(robot.getDestroyed());
-        assertEquals(3, robot.getLifePoints());
+        assertEquals(3, robot[0].getDamagePoints());
+        assertTrue(robot[0].getShutDown());
+        assertFalse(robot[0].getDestroyed());
+        assertEquals(3, robot[0].getLifePoints());
 
-        board.move(karten, robot, true);
-        robot.setNextRound(false);
+        board.move(robot, true);
+        robot[0].setNextRound(false);
         /* Robot:
          *   DamagePoint: 0
          *   ShutDown: true
@@ -61,12 +60,12 @@ public class DamageTest {
          *   Life: 3
          * */
 
-        assertEquals(0, robot.getDamagePoints());
-        assertTrue(robot.getShutDown());
-        assertFalse(robot.getDestroyed());
-        assertEquals(3, robot.getLifePoints());
+        assertEquals(0, robot[0].getDamagePoints());
+        assertTrue(robot[0].getShutDown());
+        assertFalse(robot[0].getDestroyed());
+        assertEquals(3, robot[0].getLifePoints());
 
-        board.move(karten, robot, true);
+        board.move(robot, true);
         /* Robot:
          *   DamagePoint: 2
          *   ShutDown: false
@@ -75,13 +74,13 @@ public class DamageTest {
          *   Life: 3
          * */
 
-        assertEquals(2, robot.getDamagePoints());
-        assertFalse(robot.getShutDown());
-        assertFalse(robot.getDestroyed());
-        assertEquals(3, robot.getLifePoints());
+        assertEquals(2, robot[0].getDamagePoints());
+        assertFalse(robot[0].getShutDown());
+        assertFalse(robot[0].getDestroyed());
+        assertEquals(3, robot[0].getLifePoints());
 
 
-        robot.setDestroyed(true);
+        robot[0].setDestroyed(true);
         /* Robot:
          *   DamagePoint: 2
          *   ShutDown: false
@@ -91,8 +90,8 @@ public class DamageTest {
          *   Life: 3
          * */
 
-        assertTrue(robot.getDestroyed());
-        board.move(karten, robot, true);
+        assertTrue(robot[0].getDestroyed());
+        board.move(robot, true);
         /* Robot:
          *   DamagePoint: 4
          *   ShutDown: false
@@ -102,13 +101,13 @@ public class DamageTest {
          *   Life: 3
          * */
 
-        assertEquals(4, robot.getDamagePoints());
-        assertFalse(robot.getShutDown());
-        assertFalse(robot.getDestroyed());
-        assertEquals(3, robot.getLifePoints());
+        assertEquals(4, robot[0].getDamagePoints());
+        assertFalse(robot[0].getShutDown());
+        assertFalse(robot[0].getDestroyed());
+        assertEquals(3, robot[0].getLifePoints());
 
-        robot.setNextRound(true);
-        robot.setDestroyed(true);
+        robot[0].setNextRound(true);
+        robot[0].setDestroyed(true);
         /* Robot:
          *   DamagePoint: 4
          *   ShutDown: false
@@ -118,9 +117,9 @@ public class DamageTest {
          *   Life: 3
          * */
 
-        assertTrue(robot.getDestroyed());
+        assertTrue(robot[0].getDestroyed());
 
-        board.move(karten, robot, true);
+        board.move(robot, true);
         /* Robot:
          *   DamagePoint: 4
          *   ShutDown: true
@@ -130,12 +129,12 @@ public class DamageTest {
          *   Life: 3
          * */
 
-        assertEquals(0, robot.getDamagePoints());
-        assertTrue(robot.getShutDown());
-        assertFalse(robot.getDestroyed());
-        assertEquals(3, robot.getLifePoints());
+        assertEquals(0, robot[0].getDamagePoints());
+        assertTrue(robot[0].getShutDown());
+        assertFalse(robot[0].getDestroyed());
+        assertEquals(3, robot[0].getLifePoints());
 
-        board.move(karten, robot, true);
+        board.move(robot, true);
         /* Robot:
          *   DamagePoint: 0
          *   ShutDown: true
@@ -145,10 +144,10 @@ public class DamageTest {
          *   Life: 3
          * */
 
-        assertEquals(0, robot.getDamagePoints());
-        assertTrue(robot.getShutDown());
-        assertFalse(robot.getDestroyed());
-        assertEquals(3, robot.getLifePoints());
+        assertEquals(0, robot[0].getDamagePoints());
+        assertTrue(robot[0].getShutDown());
+        assertFalse(robot[0].getDestroyed());
+        assertEquals(3, robot[0].getLifePoints());
     }
 
     /**
@@ -156,11 +155,10 @@ public class DamageTest {
      */
     @BeforeEach
     public void initRobot() {
-        robot.setDir(Dir.NORTH);
-        robot.setXcoor(0);
-        robot.setYcoor(0);
-        robot.setShutDown(false);
-        karten.add(new Card(Type.turn, (byte) 1, 0));
+        robot[0].setDir(Dir.NORTH);
+        robot[0].setXcoor(0);
+        robot[0].setYcoor(0);
+        robot[0].setShutDown(false);
     }
 
     /**

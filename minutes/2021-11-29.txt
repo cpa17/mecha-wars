@@ -1,0 +1,20 @@
+Protokoll vom 29.11.2021
+
+Anwesenheit: 
+	- Pascal entschuldigt
+	- Bernhard nicht da
+
+Antonia & Mark: 
+	MW-70:  
+		- Laser feuern
+
+Konstantin: 
+	MW60:
+		- Merge auf dem Master Stand gebracht
+
+Marc & Tim: 
+	MW 63: 
+		- fertig, Spielfeld editor weitergemacht Handbuch weitergemacht
+
+Weiterer Punkt:
+	- Wände sind jetzt ein eigenes Ticket
