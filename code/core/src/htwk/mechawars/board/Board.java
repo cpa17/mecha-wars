@@ -381,9 +381,8 @@ public class Board {
             Robot.setPlayers(players);
         }
         if (!isTest) {
-            /* Delay of 5 seconds for the code to run so
-            that the robot has reached his final position */
 
+            // calls the laser-functions after each card
             for (int i = 1; i <= 9; i = i + 2) {
                 Timer.schedule(new Task() {
 
@@ -430,7 +429,7 @@ public class Board {
             }
         }
 
-        // Delay of 15 seconds for the state-function to run so that the robot has reached his
+        // Delay of 10 seconds for the state-function to run so that the robot has reached his
         // final position
         if (!isTest) {
             Timer.schedule(new Task() {
@@ -471,11 +470,13 @@ public class Board {
         } else {
             robot.turn(card.getCardAttributeMovCount());
         }
-        if (robot.getXcoor() >= fieldmatrix.length
-                || robot.getYcoor() >= fieldmatrix[1].length
-                || robot.getXcoor() < 0 || robot.getYcoor() < 0) {
-            robot.setXcoor(robot.getStartX());
-            robot.setYcoor(robot.getStartY());
+        for (Robot player : robot.getPlayers()) {
+            if (player.getXcoor() >= fieldmatrix.length
+                    || player.getYcoor() >= fieldmatrix[0].length
+                    || player.getXcoor() < 0 || player.getYcoor() < 0) {
+                player.setXcoor(robot.getStartX());
+                player.setYcoor(robot.getStartY());
+            }
         }
     }
 

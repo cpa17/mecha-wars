@@ -173,13 +173,12 @@ public class Robot {
                     }
                     // Checks whether the robot is pushing another robot
                     if ((y - 1 >= 0) && (y - 1 <= 11) && (x >= 0) && (x <= 11)) {
-                        for (int p = 0; p < players.length; p++) {
-                            int currX = players[p].getXcoor();
-                            int currY = players[p].getYcoor();
+                        for (Robot player : players) {
+                            int currX = player.getXcoor();
+                            int currY = player.getYcoor();
                             if ((currX == x) && (currY == y - 1)) {
-                                players[p].moveInDirection(fieldmatrix, (byte) 1, moveDir);
-                                if ((players[p].getXcoor() == currX)
-                                        && (players[p].getYcoor() == currY)) {
+                                player.moveInDirection(fieldmatrix, (byte) 1, moveDir);
+                                if ((player.getXcoor() == currX) && (player.getYcoor() == currY)) {
                                     flag = Boolean.TRUE;
                                 }
                             }
@@ -195,6 +194,8 @@ public class Robot {
                 for (int i = 0; (i < mov) && (flag == Boolean.FALSE); i++) {
                     int x = getXcoor();
                     int y = getYcoor();
+                    // Checks whether a side or corner barrier on the field on which the robot is
+                    // currently standing, stops the current step
                     if ((y >= 0) && (y <= 11) && (x >= 0) && (x <= 11)) {
                         if (fieldmatrix[x][y] instanceof BarrierSide) {
                             barrierSide = (BarrierSide) fieldmatrix[x][y];
@@ -210,6 +211,8 @@ public class Robot {
                             }
                         }
                     }
+                    // Checks whether a side or corner barrier on the next field in the moving
+                    // direction, stops the current step
                     if ((y + 1 >= 0) && (y + 1 <= 11) && (x >= 0) && (x <= 11)) {
                         if (fieldmatrix[x][y + 1] instanceof BarrierSide) {
                             barrierSide = (BarrierSide) fieldmatrix[x][y + 1];
@@ -227,13 +230,12 @@ public class Robot {
                     }
                     // Checks whether the robot is pushing another robot
                     if ((y + 1 >= 0) && (y + 1 <= 11) && (x >= 0) && (x <= 11)) {
-                        for (int p = 0; p < players.length; p++) {
-                            int currX = players[p].getXcoor();
-                            int currY = players[p].getYcoor();
+                        for (Robot player : players) {
+                            int currX = player.getXcoor();
+                            int currY = player.getYcoor();
                             if ((currX == x) && (currY == y + 1)) {
-                                players[p].moveInDirection(fieldmatrix, (byte) 1, moveDir);
-                                if ((players[p].getXcoor() == currX)
-                                        && (players[p].getYcoor() == currY)) {
+                                player.moveInDirection(fieldmatrix, (byte) 1, moveDir);
+                                if ((player.getXcoor() == currX) && (player.getYcoor() == currY)) {
                                     flag = Boolean.TRUE;
                                 }
                             }
@@ -249,6 +251,8 @@ public class Robot {
                 for (int i = 0; (i < mov) && (flag == Boolean.FALSE); i++) {
                     int x = getXcoor();
                     int y = getYcoor();
+                    // Checks whether a side or corner barrier on the field on which the robot is
+                    // currently standing, stops the current step
                     if ((y >= 0) && (y <= 11) && (x >= 0) && (x <= 11)) {
                         if (fieldmatrix[x][y] instanceof BarrierSide) {
                             barrierSide = (BarrierSide) fieldmatrix[x][y];
@@ -264,6 +268,8 @@ public class Robot {
                             }
                         }
                     }
+                    // Checks whether a side or corner barrier on the next field in the moving
+                    // direction, stops the current step
                     if ((y >= 0) && (y <= 11) && (x + 1 >= 0) && (x + 1 <= 11)) {
                         if (fieldmatrix[x + 1][y] instanceof BarrierSide) {
                             barrierSide = (BarrierSide) fieldmatrix[x + 1][y];
@@ -281,13 +287,12 @@ public class Robot {
                     }
                     // Checks whether the robot is pushing another robot
                     if ((y >= 0) && (y <= 11) && (x + 1 >= 0) && (x + 1 <= 11)) {
-                        for (int p = 0; p < players.length; p++) {
-                            int currX = players[p].getXcoor();
-                            int currY = players[p].getYcoor();
+                        for (Robot player : players) {
+                            int currX = player.getXcoor();
+                            int currY = player.getYcoor();
                             if ((currX == x + 1) && (currY == y)) {
-                                players[p].moveInDirection(fieldmatrix, (byte) 1, moveDir);
-                                if ((players[p].getXcoor() == currX)
-                                        && (players[p].getYcoor() == currY)) {
+                                player.moveInDirection(fieldmatrix, (byte) 1, moveDir);
+                                if ((player.getXcoor() == currX) && (player.getYcoor() == currY)) {
                                     flag = Boolean.TRUE;
                                 }
                             }
@@ -303,6 +308,8 @@ public class Robot {
                 for (int i = 0; (i < mov) && (flag == Boolean.FALSE); i++) {
                     int x = getXcoor();
                     int y = getYcoor();
+                    // Checks whether a side or corner barrier on the field on which the robot is
+                    // currently standing, stops the current step
                     if ((y >= 0) && (y <= 11) && (x >= 0) && (x <= 11)) {
                         if (fieldmatrix[x][y] instanceof BarrierSide) {
                             barrierSide = (BarrierSide) fieldmatrix[x][y];
@@ -318,6 +325,8 @@ public class Robot {
                             }
                         }
                     }
+                    // Checks whether a side or corner barrier on the next field in the moving
+                    // direction, stops the current step
                     if ((y >= 0) && (y <= 11) && (x - 1 >= 0) && (x - 1 <= 11)) {
                         if (fieldmatrix[x - 1][y] instanceof BarrierSide) {
                             barrierSide = (BarrierSide) fieldmatrix[x - 1][y];
@@ -335,13 +344,12 @@ public class Robot {
                     }
                     // Checks whether the robot is pushing another robot
                     if ((y >= 0) && (y <= 11) && (x - 1 >= 0) && (x - 1 <= 11)) {
-                        for (int p = 0; p < players.length; p++) {
-                            int currX = players[p].getXcoor();
-                            int currY = players[p].getYcoor();
+                        for (Robot player : players) {
+                            int currX = player.getXcoor();
+                            int currY = player.getYcoor();
                             if ((currX == x - 1) && (currY == y)) {
-                                players[p].moveInDirection(fieldmatrix, (byte) 1, moveDir);
-                                if ((players[p].getXcoor() == currX)
-                                        && (players[p].getYcoor() == currY)) {
+                                player.moveInDirection(fieldmatrix, (byte) 1, moveDir);
+                                if ((player.getXcoor() == currX) && (player.getYcoor() == currY)) {
                                     flag = Boolean.TRUE;
                                 }
                             }
