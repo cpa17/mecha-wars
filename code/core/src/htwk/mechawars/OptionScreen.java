@@ -84,7 +84,7 @@ public class OptionScreen implements Screen {
         });
 
         chooseMap = new TextField(" Bitte map angeben!", skin);
-        chooseMap.setPosition(20, 20);
+        chooseMap.setPosition(50, 20);
         chooseMap.setSize(300, 50);    
         
         start = new TextButton("Starten", skin);
@@ -93,39 +93,37 @@ public class OptionScreen implements Screen {
         start.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                ConfigReader.writePlayerNumber((int) enemyChooser.getValue()); 
-                
-                try {
-                    ConfigReader.readConfigs();
-                } catch (IOException c) {
-                    c.printStackTrace();
-                }
-                
+                loadConfig();
                 String input = chooseMap.getText();
+                if (!input.matches(" Bitte map angeben!")) {
                 
-                // delete all wrong spaces
-                if (input.matches(" " + "(.*)")) {
-                    input = input.replace(" ", "");
-                }
-                
-                if (fileListRead(input)) {
-                    if (!input.contains(".txt")) {
-                        input = input + ".txt";
-                    }               
-                    MechaWars.setMap(input);
-                    toGameScreen();
-                } else {
-                    Dialog dialogCloseOption = new Dialog("\t Mapname falsch", skin) {
-                        @Override
-                        protected void result(Object object) {
-                            remove();
-                        }
-                    }.show(stage);
+                    // delete all wrong spaces
+                    if (input.matches(" " + "(.*)")) {
+                        input = input.replace(" ", "");
+                    }
                     
-                    dialogCloseOption.setSize(400, 100);
-                    dialogCloseOption.setPosition(440, 310);
-                    dialogCloseOption.button("Neue Eingabe", null);   
-                    dialogCloseOption.key(Input.Keys.ENTER, null);
+                    if (fileListRead(input)) {
+                        if (!input.contains(".txt")) {
+                            input = input + ".txt";
+                        }               
+                        MechaWars.setMap(input);
+                        toGameScreen();
+                    } else {
+                        Dialog dialogCloseOption = new Dialog("\t Mapname falsch", skin) {
+                            @Override
+                            protected void result(Object object) {
+                                remove();
+                            }
+                        }.show(stage);
+                        
+                        dialogCloseOption.setSize(400, 100);
+                        dialogCloseOption.setPosition(440, 310);
+                        dialogCloseOption.button("Neue Eingabe", null);   
+                        dialogCloseOption.key(Input.Keys.ENTER, null);
+                    }
+                } else {
+                    MechaWars.setMap("map.txt");
+                    toGameScreen(); 
                 }
             }
         });
@@ -141,6 +139,16 @@ public class OptionScreen implements Screen {
     public void toGameScreen() {
         game.setScreen(new GameScreen(game, MechaWars.getMap()));
         stage.dispose();
+    }
+    
+    public void loadConfig() {
+        ConfigReader.writePlayerNumber((int) enemyChooser.getValue()); 
+        
+        try {
+            ConfigReader.readConfigs();
+        } catch (IOException c) {
+            c.printStackTrace();
+        }
     }
     
     @Override
