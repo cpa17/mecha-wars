@@ -42,6 +42,7 @@ public class OptionScreen implements Screen {
     private Texture img;
     private TextButton start;
     private Skin skin;
+    private String chooseMapText;
     
     /**
      * Constructor of class VictoryScreen.
@@ -82,9 +83,11 @@ public class OptionScreen implements Screen {
                 enemyCounter.setPosition(780, 180);
             }
         });
-
-        chooseMap = new TextField(" Bitte map angeben!", skin);
-        chooseMap.setPosition(50, 20);
+        
+        chooseMapText = " Bitte map angeben!";
+        
+        chooseMap = new TextField(chooseMapText, skin);
+        chooseMap.setPosition(20, 20);
         chooseMap.setSize(300, 50);    
         
         start = new TextButton("Starten", skin);
@@ -95,7 +98,7 @@ public class OptionScreen implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 loadConfig();
                 String input = chooseMap.getText();
-                if (!input.matches(" Bitte map angeben!")) {
+                if (!input.matches(chooseMapText)) {
                 
                     // delete all wrong spaces
                     if (input.matches(" " + "(.*)")) {
