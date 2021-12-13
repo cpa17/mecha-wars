@@ -84,7 +84,7 @@ public class OptionScreen implements Screen {
             }
         });
         
-        chooseMapText = " Bitte map angeben!";
+        chooseMapText = " Bitte Map angeben!";
         
         chooseMap = new TextField(chooseMapText, skin);
         chooseMap.setPosition(20, 20);
