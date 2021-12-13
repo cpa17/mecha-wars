@@ -127,8 +127,8 @@ public class OptionScreen implements Screen {
                     }
                 } else if (!input.matches(chooseMapText) && mapNotFound) {                  
                     dataPath = input;
-                    mapNotFound = false;
-                    
+                    mapNotFound = false; 
+                    start.setText("Starten");
                 } else {                  
                     MechaWars.setMap("map.txt");
                     toGameScreen(); 
@@ -215,7 +215,7 @@ public class OptionScreen implements Screen {
         ArrayList<String> filesInDirectory = new ArrayList<String>();
         String regex = "(.*)";        
         File folder = new File(dataPath);
-        System.out.println("hierauch");
+
         if (!input.matches(regex + ".txt")) {
             input = input + ".txt";
         }
@@ -227,13 +227,14 @@ public class OptionScreen implements Screen {
                 }
             }
         } catch (NullPointerException npe) {
-            Dialog dialogCloseOption = new Dialog("Keine Maps vorhanden", skin) {
+            Dialog dialogCloseOption = new Dialog("\t    Keine Maps da", skin) {
                 @Override   
                 protected void result(Object object) {
                     remove();
                 }
             }.show(stage);
             
+            start.setText("Neuen Pfad nehmen");
             dialogCloseOption.setSize(400, 100);
             dialogCloseOption.setPosition(440, 310);
             dialogCloseOption.button("Neuen Pfad angeben", null);   
