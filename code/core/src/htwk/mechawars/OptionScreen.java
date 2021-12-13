@@ -43,6 +43,8 @@ public class OptionScreen implements Screen {
     private TextButton start;
     private Skin skin;
     private String chooseMapText;
+    private boolean mapNotFound;
+    private String dataPath = "/core/assets";
     
     /**
      * Constructor of class VictoryScreen.
@@ -97,21 +99,20 @@ public class OptionScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 loadConfig();
+
                 String input = chooseMap.getText().toLowerCase();
-                if (!input.matches(chooseMapText)) {
                 
-                    // delete all wrong spaces
-                    if (input.matches(" " + "(.*)")) {
-                        input = input.replace(" ", "");
-                    }
-                    
+                if (!input.matches(chooseMapText) && mapNotFound == false) {                       
                     if (fileListRead(input)) {
                         if (!input.contains(".txt")) {
                             input = input + ".txt";
-                        }               
+                        } 
+                        
                         MechaWars.setMap(input);
+                        
                         toGameScreen();
-                    } else {
+                        
+                    } else {                     
                         Dialog dialogCloseOption = new Dialog("\t Mapname falsch", skin) {
                             @Override
                             protected void result(Object object) {
@@ -124,7 +125,11 @@ public class OptionScreen implements Screen {
                         dialogCloseOption.button("Neue Eingabe", null);   
                         dialogCloseOption.key(Input.Keys.ENTER, null);
                     }
-                } else {
+                } else if (!input.matches(chooseMapText) && mapNotFound) {                  
+                    dataPath = input;
+                    mapNotFound = false;
+                    
+                } else {                  
                     MechaWars.setMap("map.txt");
                     toGameScreen(); 
                 }
@@ -209,8 +214,8 @@ public class OptionScreen implements Screen {
     public boolean fileListRead(String input) { 
         ArrayList<String> filesInDirectory = new ArrayList<String>();
         String regex = "(.*)";        
-        File folder = new File("../core/assets");
-        
+        File folder = new File(dataPath);
+        System.out.println("hierauch");
         if (!input.matches(regex + ".txt")) {
             input = input + ".txt";
         }
@@ -222,7 +227,18 @@ public class OptionScreen implements Screen {
                 }
             }
         } catch (NullPointerException npe) {
-            npe.printStackTrace();
+            Dialog dialogCloseOption = new Dialog("Keine Maps vorhanden", skin) {
+                @Override   
+                protected void result(Object object) {
+                    remove();
+                }
+            }.show(stage);
+            
+            dialogCloseOption.setSize(400, 100);
+            dialogCloseOption.setPosition(440, 310);
+            dialogCloseOption.button("Neuen Pfad angeben", null);   
+            dialogCloseOption.key(Input.Keys.ENTER, null);
+            mapNotFound = true;
         }
         
         for (int i = 0; i < filesInDirectory.size(); i += 1) {
