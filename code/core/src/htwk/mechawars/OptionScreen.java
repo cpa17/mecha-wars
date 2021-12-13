@@ -97,7 +97,7 @@ public class OptionScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 loadConfig();
-                String input = chooseMap.getText();
+                String input = chooseMap.getText().toLowerCase();
                 if (!input.matches(chooseMapText)) {
                 
                     // delete all wrong spaces
@@ -209,7 +209,7 @@ public class OptionScreen implements Screen {
     public boolean fileListRead(String input) { 
         ArrayList<String> filesInDirectory = new ArrayList<String>();
         String regex = "(.*)";        
-        File folder = new File("bin/main");
+        File folder = new File("../core/assets");
         
         if (!input.matches(regex + ".txt")) {
             input = input + ".txt";
