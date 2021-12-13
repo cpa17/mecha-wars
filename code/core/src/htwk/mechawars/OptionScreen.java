@@ -44,7 +44,7 @@ public class OptionScreen implements Screen {
     private Skin skin;
     private String chooseMapText;
     private boolean mapNotFound;
-    private String dataPath = "/core/assets";
+    private String dataPath = "../core/assets";
     
     /**
      * Constructor of class VictoryScreen.
