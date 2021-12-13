@@ -96,7 +96,7 @@ public class ExpressConveyorBelt extends Field {
                 default : break;
             }
         }
-        robot.moveInDirection((byte) 1);
+        robot.moveInDirectionByField((byte) 1);
         return robot;       
     }
     
