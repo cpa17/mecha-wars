@@ -141,6 +141,9 @@ public class OptionScreen implements Screen {
         stage.dispose();
     }
     
+    /**
+     * Function to load the right number of Players.
+     */
     public void loadConfig() {
         ConfigReader.writePlayerNumber((int) enemyChooser.getValue()); 
         
