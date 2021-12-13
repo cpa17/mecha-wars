@@ -10,6 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Timer;
+
 import htwk.mechawars.board.Robot;
 
 import static htwk.mechawars.game.GameScreen.board;
@@ -46,24 +48,27 @@ public class Buttons {
                 if (!players[0].getShutDown()) {
                     //If All Cards are chosen
                     if (ScrollPanel.cardOrder[4 - ScrollPanel.damagePoints] != -1) {
-                        System.out.println("click!");
                         deactivateButtons();
                         startExecutionButton.setTouchable(Touchable.disabled);
                         board.move(players);
-                        players[0].resetList();
-                        startExecutionButton.setColor(Color.LIGHT_GRAY);
-                        ScrollPanel.cardOrderClear();
-                        activateButtons();
-                        updateButtons(skin);
+                        Timer.schedule(new Timer.Task() {
+                            @Override
+                            public void run() {
+                                players[0].resetList();
+                                startExecutionButton.setColor(Color.LIGHT_GRAY);
+                                ScrollPanel.cardOrderClear();
+                                activateButtons();
+                                startExecutionButton.setTouchable(Touchable.enabled);
+                            }
+                        }, 25);
                     } else {
                         startExecutionButton.setColor(Color.RED);
                     }
                 } else {
-                    startExecutionButton.setTouchable(Touchable.disabled);
+                    System.out.println(players[0].getShutDown());
                     board.move(players);
                     players[0].resetList();
                     startExecutionButton.setColor(Color.LIGHT_GRAY);
-                    updateButtons(skin);
                 }
             }
 
