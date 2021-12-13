@@ -46,7 +46,9 @@ public class Buttons {
                 if (!players[0].getShutDown()) {
                     //If All Cards are chosen
                     if (ScrollPanel.cardOrder[4 - ScrollPanel.damagePoints] != -1) {
+                        System.out.println("click!");
                         deactivateButtons();
+                        startExecutionButton.setTouchable(Touchable.disabled);
                         board.move(players);
                         players[0].resetList();
                         startExecutionButton.setColor(Color.LIGHT_GRAY);
@@ -57,6 +59,7 @@ public class Buttons {
                         startExecutionButton.setColor(Color.RED);
                     }
                 } else {
+                    startExecutionButton.setTouchable(Touchable.disabled);
                     board.move(players);
                     players[0].resetList();
                     startExecutionButton.setColor(Color.LIGHT_GRAY);

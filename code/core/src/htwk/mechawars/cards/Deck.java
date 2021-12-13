@@ -111,7 +111,6 @@ public class Deck {
         for (int i = 0; i < inputList.size(); i++) {
             for (int j = 0; j < inputList.get(i).size(); j++) {
                 Card card = inputList.get(i).get(j);
-                System.out.println("cardowner:  " + card.getCardPlayerNumber());
                 outputList.get(j).add(card);
             }
         }
@@ -119,7 +118,6 @@ public class Deck {
         for (int i = 0; i < outputList.size(); i++) {
             outputList.set(i, Card.sortByPriority(outputList.get(i))); 
         }
-        System.out.println("outputListsize:  " + outputList.size());
         return outputList;
         
         
