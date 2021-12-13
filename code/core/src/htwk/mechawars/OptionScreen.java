@@ -43,7 +43,7 @@ public class OptionScreen implements Screen {
     private TextButton start;
     private Skin skin;
     private String chooseMapText;
-    private String dataPath = "/core/assets";
+    private String dataPath = "../core/assets";
     private boolean mapNotFound;
     
     /**
