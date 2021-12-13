@@ -43,7 +43,7 @@ public class OptionScreen implements Screen {
     private TextButton start;
     private Skin skin;
     private String chooseMapText;
-    private String dataPath = "../core/assets";
+    private String mapPath = "../core/assets";
     private boolean mapNotFound;
     
     /**
@@ -126,7 +126,7 @@ public class OptionScreen implements Screen {
                         dialogCloseOption.key(Input.Keys.ENTER, null);
                     }
                 } else if (!input.matches(chooseMapText) && mapNotFound) {
-                    dataPath = input;
+                    mapPath = input;
                     mapNotFound = false; 
                     start.setText("Starten");
                 } else {                  
@@ -214,7 +214,7 @@ public class OptionScreen implements Screen {
     public boolean fileListRead(String input) { 
         ArrayList<String> filesInDirectory = new ArrayList<String>();
         String regex = "(.*)";        
-        File folder = new File(dataPath);
+        File folder = new File(mapPath);
 
         if (!input.matches(regex + ".txt")) {
             input = input + ".txt";
@@ -233,12 +233,16 @@ public class OptionScreen implements Screen {
                     remove();
                 }
             }.show(stage);
+            
             dialogCloseOption.setSize(400, 100);
             dialogCloseOption.setPosition(440, 310);
             dialogCloseOption.button("Neuen Pfad angeben", null);   
             dialogCloseOption.key(Input.Keys.ENTER, null);
+            
             start.setText("Neuen Pfad nehmen");
+            
             chooseMap.setText("Bitte Pfad angeben");
+            
             mapNotFound = true;
         }
         
