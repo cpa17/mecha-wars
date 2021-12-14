@@ -124,6 +124,7 @@ public class Board {
      * Method that creates a field matrix from a int matrix.
      *
      * @param matrix A int matrix
+     * @param isTest indicates that this is a test
      */
     private void intToFieldMatrix(int[][] matrix, boolean isTest) {
         this.fieldmatrix = new Field[matrix.length][matrix[0].length];
@@ -331,6 +332,7 @@ public class Board {
      * @param y y-coordinate of the robot
      * @param dir direction of the robot
      * @param robot robot to which this applies
+     * @param isTest indicates that this is a test
      */
     public void startRobot(int x, int y, Dir dir, Robot robot, boolean isTest) {
         int min = 1;
@@ -369,14 +371,15 @@ public class Board {
      * Function that initialises Movement for the Robots.
      *
      * @param players array of all players
+     * @param isTest indicates that this is a test
      */
     public void move(Robot[] players, boolean isTest) {
         LinkedList<Card> phase;
-        moveSingleRobot(players[0].getSelectedCards(), players[0], isTest);
+        moveSingleRobot(players[0].getSelectedCards(), players[0], players, isTest);
         for (int i = 1; i < players.length; i++) {
             if (ConfigReader.getAimodes()[i]) {
                 phase = AiCardGeneration.generateRandomAiCards(i);
-                moveSingleRobot(phase, players[i], isTest);
+                moveSingleRobot(phase, players[i],  players, isTest);
             }
             Robot.setPlayers(players);
         }
@@ -405,13 +408,16 @@ public class Board {
      *
      * @param phase List of cards
      * @param robot the robot that should move
+     * @param players array of all players
+     * @param isTest indicates that this is a test
      */
-    public void moveSingleRobot(LinkedList<Card> phase, Robot robot, boolean isTest) {
+    public void moveSingleRobot(LinkedList<Card> phase,
+                                Robot robot, Robot[] players, boolean isTest) {
         robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
         robot.setLastField(robotPosition);
         if (isTest) {
             for (Card card : phase) {
-                robotMovement(card, robot);
+                robotMovement(card, robot, players);
             }
         } else {
 
@@ -422,7 +428,7 @@ public class Board {
 
                     @Override
                     public void run() {
-                        robotMovement(card, robot);
+                        robotMovement(card, robot, players);
                     }
                 }, i);
                 i += 2;
@@ -463,10 +469,11 @@ public class Board {
      *
      * @param card Current card
      * @param robot The robot that should move
+     * @param players array of all players
      */
-    public void robotMovement(Card card, Robot robot) {
+    public void robotMovement(Card card, Robot robot, Robot[] players) {
         if (card.getCardAttributeType() == Type.mov) {
-            robot.moveInDirectionByCard(fieldmatrix, card.getCardAttributeMovCount());
+            robot.moveInDirectionByCard(fieldmatrix, card.getCardAttributeMovCount(), players);
         } else {
             robot.turn(card.getCardAttributeMovCount());
         }
@@ -493,7 +500,7 @@ public class Board {
     /**
      * Method that checks whether the robot receives 2 damage points.
      *
-     * @param players the robot that should check
+     * @param players array of all players
      */
     private void checkDoubleDamage(Robot[] players) {
         for (Robot player : players) {
@@ -513,7 +520,7 @@ public class Board {
     /**
      * Method that checks whether the robot is in shutdown mode.
      *
-     * @param players the robot that should check
+     * @param players array of all players
      */
     private void checkShutDown(Robot[] players) {
         for (Robot player : players) {
@@ -526,7 +533,7 @@ public class Board {
     /**
      * Method that checks whether the robot is being shot at by a laser.
      *
-     * @param players A array of robots
+     * @param players array of all players
      */
     public void checkBoardLaser(Robot[] players) {
         Laser laser;
@@ -661,7 +668,7 @@ public class Board {
     /**
      * Method that checks if a robot got hit by a Laser of another robot.
      *
-     * @param players an array of robots
+     * @param players array of all players
      */
     public void checkRobotLaser(Robot[] players) {
         

@@ -87,9 +87,10 @@ public class Robot {
      * The direction ist the direction of the robot.
      * @param fieldmatrix of the board, on which the robot moves
      * @param mov byte of move
+     * @param players array of all players
      */
-    public void moveInDirectionByCard(Field[][] fieldmatrix, byte mov) {
-        this.moveInDirection(fieldmatrix, (byte) mov, this.getDir());
+    public void moveInDirectionByCard(Field[][] fieldmatrix, byte mov, Robot[] players) {
+        this.moveInDirection(fieldmatrix, (byte) mov, this.getDir(), players);
     }
 
     /**
@@ -99,11 +100,12 @@ public class Robot {
      * @param mov byte of move
      * @param dir If the robot moves by a card, it is the direction of the robot.
      *            If the robot is pushed by another robot, it is the direction of the other robot.
+     * @param players array of all players
      * @return new position
      */
-    public Robot moveInDirection(Field[][] fieldmatrix, byte mov, Dir dir) {
+    public Robot moveInDirection(Field[][] fieldmatrix, byte mov, Dir dir, Robot[] players) {
 
-        Boolean flag = Boolean.FALSE;
+        boolean flag = false;
         BarrierSide barrierSide;
         BarrierCorner barrierCorner;
         Dir moveDir;
@@ -134,7 +136,7 @@ public class Robot {
 
         switch (moveDir) {
             case NORTH:
-                for (int i = 0; (i < mov) && (flag == Boolean.FALSE); i++) {
+                for (int i = 0; (i < mov) && (!false); i++) {
                     int x = getXcoor();
                     int y = getYcoor();
                     // Checks whether a side or corner barrier on the field on which the robot is
@@ -143,14 +145,14 @@ public class Robot {
                         if (fieldmatrix[x][y] instanceof BarrierSide) {
                             barrierSide = (BarrierSide) fieldmatrix[x][y];
                             if (barrierSide.getSide() == 2) {
-                                flag = Boolean.TRUE;
+                                flag = true;
                             }
                         }
                         if (fieldmatrix[x][y] instanceof BarrierCorner) {
                             barrierCorner = (BarrierCorner) fieldmatrix[x][y];
                             if ((barrierCorner.getCorner() == 1)
                                     || (barrierCorner.getCorner() == 2)) {
-                                flag = Boolean.TRUE;
+                                flag = true;
                             }
                         }
                     }
@@ -160,14 +162,14 @@ public class Robot {
                         if (fieldmatrix[x][y - 1] instanceof BarrierSide) {
                             barrierSide = (BarrierSide) fieldmatrix[x][y - 1];
                             if (barrierSide.getSide() == 4) {
-                                flag = Boolean.TRUE;
+                                flag = true;
                             }
                         }
                         if (fieldmatrix[x][y - 1] instanceof BarrierCorner) {
                             barrierCorner = (BarrierCorner) fieldmatrix[x][y - 1];
                             if ((barrierCorner.getCorner() == 3)
                                     || (barrierCorner.getCorner() == 4)) {
-                                flag = Boolean.TRUE;
+                                flag = true;
                             }
                         }
                     }
@@ -177,21 +179,21 @@ public class Robot {
                             int currX = player.getXcoor();
                             int currY = player.getYcoor();
                             if ((currX == x) && (currY == y - 1)) {
-                                player.moveInDirection(fieldmatrix, (byte) 1, moveDir);
+                                player.moveInDirection(fieldmatrix, (byte) 1, moveDir, players);
                                 if ((player.getXcoor() == currX) && (player.getYcoor() == currY)) {
-                                    flag = Boolean.TRUE;
+                                    flag = true;
                                 }
                             }
                         }
                     }
-                    if (flag == Boolean.FALSE) {
+                    if (!flag) {
                         setYcoor(getYcoor() - 1);
                     }
                 }
                 return this;
 
             case SOUTH:
-                for (int i = 0; (i < mov) && (flag == Boolean.FALSE); i++) {
+                for (int i = 0; (i < mov) && (!flag); i++) {
                     int x = getXcoor();
                     int y = getYcoor();
                     // Checks whether a side or corner barrier on the field on which the robot is
@@ -200,14 +202,14 @@ public class Robot {
                         if (fieldmatrix[x][y] instanceof BarrierSide) {
                             barrierSide = (BarrierSide) fieldmatrix[x][y];
                             if (barrierSide.getSide() == 4) {
-                                flag = Boolean.TRUE;
+                                flag = true;
                             }
                         }
                         if (fieldmatrix[x][y] instanceof BarrierCorner) {
                             barrierCorner = (BarrierCorner) fieldmatrix[x][y];
                             if ((barrierCorner.getCorner() == 3)
                                     || (barrierCorner.getCorner() == 4)) {
-                                flag = Boolean.TRUE;
+                                flag = true;
                             }
                         }
                     }
@@ -217,14 +219,14 @@ public class Robot {
                         if (fieldmatrix[x][y + 1] instanceof BarrierSide) {
                             barrierSide = (BarrierSide) fieldmatrix[x][y + 1];
                             if (barrierSide.getSide() == 2) {
-                                flag = Boolean.TRUE;
+                                flag = true;
                             }
                         }
                         if (fieldmatrix[x][y + 1] instanceof BarrierCorner) {
                             barrierCorner = (BarrierCorner) fieldmatrix[x][y + 1];
                             if ((barrierCorner.getCorner() == 1)
                                     || (barrierCorner.getCorner() == 2)) {
-                                flag = Boolean.TRUE;
+                                flag = true;
                             }
                         }
                     }
@@ -234,21 +236,21 @@ public class Robot {
                             int currX = player.getXcoor();
                             int currY = player.getYcoor();
                             if ((currX == x) && (currY == y + 1)) {
-                                player.moveInDirection(fieldmatrix, (byte) 1, moveDir);
+                                player.moveInDirection(fieldmatrix, (byte) 1, moveDir, players);
                                 if ((player.getXcoor() == currX) && (player.getYcoor() == currY)) {
-                                    flag = Boolean.TRUE;
+                                    flag = true;
                                 }
                             }
                         }
                     }
-                    if (flag == Boolean.FALSE) {
+                    if (!flag) {
                         setYcoor(getYcoor() + 1);
                     }
                 }
                 return this;
 
             case EAST:
-                for (int i = 0; (i < mov) && (flag == Boolean.FALSE); i++) {
+                for (int i = 0; (i < mov) && (!flag); i++) {
                     int x = getXcoor();
                     int y = getYcoor();
                     // Checks whether a side or corner barrier on the field on which the robot is
@@ -257,14 +259,14 @@ public class Robot {
                         if (fieldmatrix[x][y] instanceof BarrierSide) {
                             barrierSide = (BarrierSide) fieldmatrix[x][y];
                             if (barrierSide.getSide() == 3) {
-                                flag = Boolean.TRUE;
+                                flag = true;
                             }
                         }
                         if (fieldmatrix[x][y] instanceof BarrierCorner) {
                             barrierCorner = (BarrierCorner) fieldmatrix[x][y];
                             if ((barrierCorner.getCorner() == 2)
                                     || (barrierCorner.getCorner() == 3)) {
-                                flag = Boolean.TRUE;
+                                flag = true;
                             }
                         }
                     }
@@ -274,14 +276,14 @@ public class Robot {
                         if (fieldmatrix[x + 1][y] instanceof BarrierSide) {
                             barrierSide = (BarrierSide) fieldmatrix[x + 1][y];
                             if (barrierSide.getSide() == 1) {
-                                flag = Boolean.TRUE;
+                                flag = true;
                             }
                         }
                         if (fieldmatrix[x + 1][y] instanceof BarrierCorner) {
                             barrierCorner = (BarrierCorner) fieldmatrix[x + 1][y];
                             if ((barrierCorner.getCorner() == 1)
                                     || (barrierCorner.getCorner() == 4)) {
-                                flag = Boolean.TRUE;
+                                flag = true;
                             }
                         }
                     }
@@ -291,21 +293,21 @@ public class Robot {
                             int currX = player.getXcoor();
                             int currY = player.getYcoor();
                             if ((currX == x + 1) && (currY == y)) {
-                                player.moveInDirection(fieldmatrix, (byte) 1, moveDir);
+                                player.moveInDirection(fieldmatrix, (byte) 1, moveDir, players);
                                 if ((player.getXcoor() == currX) && (player.getYcoor() == currY)) {
-                                    flag = Boolean.TRUE;
+                                    flag = true;
                                 }
                             }
                         }
                     }
-                    if (flag == Boolean.FALSE) {
+                    if (!flag) {
                         setXcoor(getXcoor() + 1);
                     }
                 }
                 return this;
 
             case WEST:
-                for (int i = 0; (i < mov) && (flag == Boolean.FALSE); i++) {
+                for (int i = 0; (i < mov) && (!flag); i++) {
                     int x = getXcoor();
                     int y = getYcoor();
                     // Checks whether a side or corner barrier on the field on which the robot is
@@ -314,14 +316,14 @@ public class Robot {
                         if (fieldmatrix[x][y] instanceof BarrierSide) {
                             barrierSide = (BarrierSide) fieldmatrix[x][y];
                             if (barrierSide.getSide() == 1) {
-                                flag = Boolean.TRUE;
+                                flag = true;
                             }
                         }
                         if (fieldmatrix[x][y] instanceof BarrierCorner) {
                             barrierCorner = (BarrierCorner) fieldmatrix[x][y];
                             if ((barrierCorner.getCorner() == 1)
                                     || (barrierCorner.getCorner() == 4)) {
-                                flag = Boolean.TRUE;
+                                flag = true;
                             }
                         }
                     }
@@ -331,14 +333,14 @@ public class Robot {
                         if (fieldmatrix[x - 1][y] instanceof BarrierSide) {
                             barrierSide = (BarrierSide) fieldmatrix[x - 1][y];
                             if (barrierSide.getSide() == 3) {
-                                flag = Boolean.TRUE;
+                                flag = true;
                             }
                         }
                         if (fieldmatrix[x - 1][y] instanceof BarrierCorner) {
                             barrierCorner = (BarrierCorner) fieldmatrix[x - 1][y];
                             if ((barrierCorner.getCorner() == 2)
                                     || (barrierCorner.getCorner() == 3)) {
-                                flag = Boolean.TRUE;
+                                flag = true;
                             }
                         }
                     }
@@ -348,14 +350,14 @@ public class Robot {
                             int currX = player.getXcoor();
                             int currY = player.getYcoor();
                             if ((currX == x - 1) && (currY == y)) {
-                                player.moveInDirection(fieldmatrix, (byte) 1, moveDir);
+                                player.moveInDirection(fieldmatrix, (byte) 1, moveDir, players);
                                 if ((player.getXcoor() == currX) && (player.getYcoor() == currY)) {
-                                    flag = Boolean.TRUE;
+                                    flag = true;
                                 }
                             }
                         }
                     }
-                    if (flag == Boolean.FALSE) {
+                    if (!flag) {
                         setXcoor(getXcoor() - 1);
                     }
                 }
