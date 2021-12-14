@@ -28,7 +28,6 @@ public class MainMenu implements Screen {
      * @param g Object of class Game
      */
     public MainMenu(Game g) {
-
         game = g;
         img = new Texture(Gdx.files.internal("background.png"));
         stage = new Stage();
@@ -52,10 +51,7 @@ public class MainMenu implements Screen {
         endGame.setSize(400, 100);
         endGame.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-
-                Dialog dialogCloseOption = new Dialog("                 Beenden?", skin) {
-                    // many spaces, because then its nearly in the centre
-
+                Dialog dialogCloseOption = new Dialog("\t\t  Beenden?", skin) {
                     @Override
                     protected void result(Object object) {
                         boolean exit = (Boolean) object;
@@ -67,7 +63,7 @@ public class MainMenu implements Screen {
                     }
 
                 }.show(stage);
-
+                dialogCloseOption.setPosition(410, 326);
                 dialogCloseOption.setSize(450, 110);
 
                 dialogCloseOption.button("Beenden", true);
