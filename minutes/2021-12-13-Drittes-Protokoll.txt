@@ -1,0 +1,14 @@
+Protokoll: 13.12.2021
+
+geführt von: Tim Kretzschmar
+
+Entschuldigt: Till
+Anwesend: Alle
+
+Daily-Treffen
+
+	- Mitteilung, wie Noten vergeben werden. Schwerpunkte, Kommentierung etc.
+	Besprechung:
+		- jeder was er gemacht hat
+		- Probleme mit YouTrack besprochen -> Lösung VPN oder X2Go nutzen (Mail von Prof. Weicker besprochen in dem Zusammenhang)
+	- Map besprochen, Klärung wegen Startfelder -> 12x12 zu 16x12 für Docking-Bay
