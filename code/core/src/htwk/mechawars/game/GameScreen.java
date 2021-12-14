@@ -7,9 +7,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import htwk.mechawars.ConfigReader;
@@ -29,18 +30,19 @@ public class GameScreen implements Screen {
     static Stage stage;
     private SpriteBatch batch;
     private Sprite[] robotSprites;
-    private static Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-    
+    static Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+
+    static Button removeCardOrder = new TextButton("Loesche\nKartenreihenfolge", skin);
+    static Button startExecutionButton = new TextButton("Ausfuehrung starten", skin);
+    static Button wakeUpButton = new TextButton("WakeUp", skin);
+    static Button shutDownButton = new TextButton("ShutDown", skin);
 
     static Board board;
-    private static Robot player = new Robot();
 
     /**
      * Constructor of class GameScreen.
      */
     public GameScreen(Game g, String fileName) {
-        
-        
         game = g;
         initBoard(fileName);
         
@@ -49,16 +51,14 @@ public class GameScreen implements Screen {
         industrialTile = new Texture("mapAssets/StandardField.png");
         
         robot = new Texture("robot.png");
-        
-                
 
-        
         batch = new SpriteBatch();
         robotSprites = createSprites(ConfigReader.getPlayerNumber());
 
         Gdx.input.setInputProcessor(getStage());
 
         addButtonsToStage(skin);
+        Buttons.setButtons(Robot.getPlayers());
         addScrollPanelToStage(skin);
         startRobots(Robot.getPlayers());
     }
@@ -72,8 +72,7 @@ public class GameScreen implements Screen {
     private Sprite[] createSprites(int numberRobots) {
         Sprite[] sprites = new Sprite[numberRobots];
         for (int i = 0; i < sprites.length; i++) {
-            sprites[i] = new Sprite(new Texture("..//assets//robotskins//robot" + (i + 1) 
-                    + ".png"));
+            sprites[i] = new Sprite(new Texture("robotskins/robot" + (i + 1) + ".png"));
         }
         return sprites;
     }
@@ -102,7 +101,7 @@ public class GameScreen implements Screen {
         getStage().addActor(container);
         container.setBounds(containerBoundsX, containerBoundsY, containerWidth, containerHeight);
 
-        container.add(ScrollPanel.scrollPanel(skin, player)).grow();
+        container.add(ScrollPanel.scrollPanel(skin)).grow();
     }
 
     /**
@@ -110,35 +109,15 @@ public class GameScreen implements Screen {
      * @param skin Object of class Skin.
      */
     public static void addButtonsToStage(Skin skin) {
-        getStage().addActor(Buttons.startButton(skin, Robot.getPlayers()));
+        getStage().addActor(Buttons.startButton(Robot.getPlayers(), startExecutionButton, skin));
         getStage().addActor(Buttons.endButton(skin));
 
-        getStage().addActor(Buttons.removeButton(skin));
-
-        if (player.getShutDown()) {
-            Buttons.removeButton(skin).setTouchable(Touchable.disabled);
-            Buttons.removeButton(skin).setDisabled(true);
-        } else {
-            Buttons.removeButton(skin).setTouchable(Touchable.enabled);
-            Buttons.removeButton(skin).setDisabled(false);
-        }
+        getStage().addActor(Buttons.removeButton(removeCardOrder));
 
         getStage().addActor(Buttons.infoButton(skin));
 
-        if (player.getShutDown()) {
-            Buttons.shutDownButton(skin, player).setTouchable(Touchable.disabled);
-            Buttons.wakeUpButton(skin, player).setTouchable(Touchable.enabled);
-            Buttons.shutDownButton(skin, player).setDisabled(true);
-            Buttons.wakeUpButton(skin, player).setDisabled(false);
-        } else {
-            Buttons.shutDownButton(skin, player).setTouchable(Touchable.enabled);
-            Buttons.wakeUpButton(skin, player).setTouchable(Touchable.disabled);
-            Buttons.shutDownButton(skin, player).setDisabled(false);
-            Buttons.wakeUpButton(skin, player).setDisabled(true);
-        }
-
-        getStage().addActor(Buttons.shutDownButton(skin, player));
-        getStage().addActor(Buttons.wakeUpButton(skin, player));
+        getStage().addActor(Buttons.shutDownButton(Robot.getPlayers()[0], shutDownButton));
+        getStage().addActor(Buttons.wakeUpButton(Robot.getPlayers()[0], wakeUpButton));
 
     }
     
@@ -161,9 +140,9 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
         batch.begin();
         Board.toAsset(batch, board);
+        Robot.getPlayers()[0].drawParameters(batch);
         for (int i = 0; i < Robot.getPlayers().length; i++) {
             Robot.getPlayers()[i].drawRobot(robotSprites[i], board);
-            Robot.getPlayers()[i].drawParameters(batch);
             robotSprites[i].draw(batch);
         }
         batch.end();       

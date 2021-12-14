@@ -1,6 +1,5 @@
 package htwk.mechawars.game;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -24,30 +23,26 @@ public class ScrollPanel {
     private static int choosableCardCount = 9;
     static final TextButton[] buttons = new TextButton[choosableCardCount];
     private static Deck deck = new Deck();
+    private static Table table = new Table();
+    private static final ScrollPane scrollPanel = new ScrollPane(table, GameScreen.skin);
 
     /**
      * Constructor of class ScrollPanel.
-     * @param player Object of class Robot.
      * @param skin Object of class Skin.
      * @return scrollPanel.
      */
-    public static ScrollPane scrollPanel(Skin skin, Robot player) {
-        Table table = new Table();
-        final ScrollPane scrollPanel = new ScrollPane(table, skin);
-
+    public static ScrollPane scrollPanel(Skin skin) {
         // shuffle Deck
         deck.shuffle();
 
-        if (!player.getShutDown()) {
-            for (int cardPrintCounter = 0; cardPrintCounter < choosableCardCount;
-                    cardPrintCounter += 1) {
-                Card currentCard = deck.getDeck().get(cardPrintCounter);
-                buttons[cardPrintCounter] = new TextButton(currentCard.getCardAttributePriority()
-                        + " - " + currentCard, skin);
-                table.row();
-                table.add(buttons[cardPrintCounter]);
-                int buttonNumber = (cardPrintCounter + 1);
-
+        for (int cardPrintCounter = 0; cardPrintCounter < choosableCardCount;
+                cardPrintCounter += 1) {
+            Card currentCard = deck.getDeck().get(cardPrintCounter);
+            buttons[cardPrintCounter] = new TextButton(currentCard.getCardAttributePriority()
+                    + " - " + currentCard, skin);
+            table.row();
+            table.add(buttons[cardPrintCounter]);
+            int buttonNumber = (cardPrintCounter + 1);
                 // Button-ClickListener
                 buttons[cardPrintCounter].addListener(new ClickListener() {
                     public void clicked(InputEvent event, float x, float y) {
@@ -55,8 +50,7 @@ public class ScrollPanel {
                             Robot.getPlayers()[0].addCard(currentCard, 0);
                         }
                     }
-                });
-            }
+        });
         }
         return scrollPanel;
     }
@@ -107,6 +101,13 @@ public class ScrollPanel {
             buttons[i].setColor(Color.LIGHT_GRAY);
             buttons[i].setText(deck.getDeck().get(i).getCardAttributePriority() 
                     + " - " + deck.getDeck().get(i));
+        }
+    }
+
+    static void clearScrollPanel(Skin skin, Robot[] players) {
+        table.clear();
+        if (!players[0].getShutDown()) {
+            scrollPanel(skin);
         }
     }
 
