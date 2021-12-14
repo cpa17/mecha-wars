@@ -145,6 +145,8 @@ public class ButtonfunctionsFieldEditor {
             if (!fileToSave.getAbsolutePath().endsWith(".txt")) {
                 fileToSave = new File(fileToSave.getAbsoluteFile() + ".txt");
             }
+            // make every String in Lower-Case, so there are no misstakes, when open it in the Game
+            fileToSave.getName().toLowerCase();
             save(fileToSave);
         }
 
