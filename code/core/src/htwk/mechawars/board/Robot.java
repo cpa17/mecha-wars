@@ -127,7 +127,7 @@ public class Robot {
                     moveDir = Dir.EAST;
                     break;
                 default:
-                    moveDir = getDir();
+                    moveDir = dir;
             }
             mov = 1;
         } else {
@@ -203,6 +203,7 @@ public class Robot {
                             barrierSide = (BarrierSide) fieldmatrix[x][y];
                             if (barrierSide.getSide() == 4) {
                                 flag = true;
+
                             }
                         }
                         if (fieldmatrix[x][y] instanceof BarrierCorner) {
