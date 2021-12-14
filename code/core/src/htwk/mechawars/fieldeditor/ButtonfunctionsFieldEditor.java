@@ -14,12 +14,28 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+
+/**
+ * ButtonFunctions for the FieldEditor.
+ * 
+ * @author -.-
+ *
+ */
 public class ButtonfunctionsFieldEditor {
 
     private ArrayList<Integer> actuallField = new ArrayList<>();
+    private FieldBackupForBackStep backup = new FieldBackupForBackStep();
+    
+    private Stage stage;
+    private Skin skin;
 
-    public ButtonfunctionsFieldEditor() {
-
+    public ButtonfunctionsFieldEditor(Stage stage, Skin skin) {
+        this.stage = stage;
+        this.skin = skin;
     }
     
     /**
@@ -27,20 +43,27 @@ public class ButtonfunctionsFieldEditor {
      * 
      * @param t -> say if the functions will be called.
      */
-    public ButtonfunctionsFieldEditor(boolean t) {
+    public ButtonfunctionsFieldEditor(Stage stage, Skin skin, boolean t) {
+        this.stage = stage;
+        this.skin = skin;
         if (t) {
             importField();
             exportField();
             resetField();
-            oneStapBack();
+            oneStepBack();
+            oneStepDone();
+            oneStepForward();
         }
     }
 
+    /**
+     * Function, that manage the import of a Map.
+     */
     private void importField() {
         
         JFileChooser chooser = new JFileChooser();
 
-        chooser.setDialogTitle("Link-Liste öffnen");
+        chooser.setDialogTitle("Link-Liste oeffnen");
 
         // Startfolder
         File filepfadLinkListe = new File("code\\desktop\\bin\\main");
@@ -51,11 +74,35 @@ public class ButtonfunctionsFieldEditor {
             openFile(chooser.getSelectedFile());
         }
         
+        // Control, if the field is not to large (because of manual manipulation e.g.)
+        if (actuallField.size() != 144) {
+            // ErrorDialog
+            Dialog dialogCloseOption = new Dialog("Error beim Laden! Bitte Datei ueberpruefen.",
+                    skin) {
+                @Override
+                protected void result(Object object) {
+                    remove();
+                }
+            }.show(stage);
+
+            dialogCloseOption.setSize(450, 110);
+
+            dialogCloseOption.button("Verstanden.", true);
+            dialogCloseOption.key(Input.Keys.ENTER, true);   
+            
+            // clean ArrayList
+            actuallField.clear();
+            for (int index = 0; index < 144; index += 1) {
+                actuallField.add(11000);
+            }
+        }
+        
     }
     
     /**
+     * Function, that manage the Inputstream of the choosen file.
      * 
-     * @param file
+     * @param file -> show, what file should be open.
      */
     private void openFile(File file) {
 
@@ -65,7 +112,7 @@ public class ButtonfunctionsFieldEditor {
         try {
             istream = new FileInputStream(file);
             Scanner reader = new Scanner(istream);
-            while(reader.hasNext()) {
+            while (reader.hasNext()) {
                 String[] arg = reader.nextLine().split(" ");
                 for (int i = 0; i < arg.length; i += 1) {
                     int abc = Integer.parseInt(arg[i]);
@@ -79,20 +126,23 @@ public class ButtonfunctionsFieldEditor {
         }
     }
 
+    /**
+     * Manage the exportfunction, to save a field in a .txt file permanently.
+     */
     private void exportField() {
         
-        JFrame Speicherfenster = new JFrame();           
+        JFrame saveDialog = new JFrame();           
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Datei speichern unter...");  
 
         File filepfadLinkListe = new File("code\\desktop\\bin\\main");
         fileChooser.setCurrentDirectory(filepfadLinkListe);
 
-        int userSelection = fileChooser.showSaveDialog(Speicherfenster);
+        int userSelection = fileChooser.showSaveDialog(saveDialog);
 
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File fileToSave = fileChooser.getSelectedFile();
-            if(!fileToSave.getAbsolutePath().endsWith(".txt")) {
+            if (!fileToSave.getAbsolutePath().endsWith(".txt")) {
                 fileToSave = new File(fileToSave.getAbsoluteFile() + ".txt");
             }
             save(fileToSave);
@@ -101,9 +151,9 @@ public class ButtonfunctionsFieldEditor {
     }
     
     /**
+     * Function to save the actuall Field in the File, that the user wanted to use/or create.
      * 
-     * @param file
-     * @param liste
+     * @param file - show the file to save the field.
      */
     public boolean save(File file) {
         
@@ -112,7 +162,7 @@ public class ButtonfunctionsFieldEditor {
             ostream = new FileOutputStream(file);
             PrintWriter schreiber = new PrintWriter(ostream);
 
-            for (int index = 0; index<actuallField.size(); index += 1) {
+            for (int index = 0; index < actuallField.size(); index += 1) {
                 for (int row = 0; row < 12; row += 1) {
                     schreiber.print(actuallField.get(index) + " ");
                 }
@@ -123,7 +173,7 @@ public class ButtonfunctionsFieldEditor {
             
             return true;
         } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(null,"Fehler!");
+            JOptionPane.showMessageDialog(null, "Fehler!");
             e.printStackTrace();
             return false;
         }
@@ -146,8 +196,42 @@ public class ButtonfunctionsFieldEditor {
 
     }
 
-    private void oneStapBack() {
-
+    /**
+     * Set the actuallField, which is draw continuously.
+     */
+    private void oneStepBack() {
+        actuallField = backup.getBackup();
+    }
+    
+    /**
+     * Saves the actuall change in a hole new (backup)Field.
+     * 
+     * @return boolean, that show`s the victorious of the function.
+     */
+    private boolean oneStepDone() {
+        try {
+            backup.addBackup(actuallField);
+            return true;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Error by saving the actuallField.");
+            return false;
+        }
+    }
+    
+    /**
+     * Gives the Field, that are forward of the actuall Step, when the user accidently make
+     * a Step-Back.
+     * 
+     * @return boolean, which show of a forward is available of not.
+     */
+    private boolean oneStepForward() {
+        if (backup.getForwardBackup() != null) {
+            actuallField = backup.getForwardBackup();
+            return true;
+        } else {
+            System.out.println("No Step-Forward available!");
+            return false;
+        }
     }
 
     public ArrayList<Integer> getActuallField() {
