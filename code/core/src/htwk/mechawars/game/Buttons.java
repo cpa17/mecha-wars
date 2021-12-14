@@ -84,13 +84,14 @@ public class Buttons {
                                     ScrollPanel.clearScrollPanel(skin, players);
                                 }
                             }, 5);
-                        };
+                        }
+                ;
 
                     } 
                 }); 
      
-                return startExecutionButton;
-            }
+        return startExecutionButton;
+    }
 
 
 

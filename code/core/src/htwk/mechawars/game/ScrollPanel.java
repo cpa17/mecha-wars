@@ -43,14 +43,14 @@ public class ScrollPanel {
             table.row();
             table.add(buttons[cardPrintCounter]);
             int buttonNumber = (cardPrintCounter + 1);
-                // Button-ClickListener
-                buttons[cardPrintCounter].addListener(new ClickListener() {
+            // Button-ClickListener
+            buttons[cardPrintCounter].addListener(new ClickListener() {
                     public void clicked(InputEvent event, float x, float y) {
                         if (buttonClickOrder(buttonNumber)) {
                             Robot.getPlayers()[0].addCard(currentCard, 0);
                         }
                     }
-        });
+            });
         }
         return scrollPanel;
     }

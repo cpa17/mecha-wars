@@ -28,7 +28,7 @@ public class LaserTest {
         assertEquals(0, robotarray[0].getDamagePoints());
 
         robotarray[0].resetList();
-        robotarray[0].addCard(new Card(Type.mov, (byte) 3, 0),0);
+        robotarray[0].addCard(new Card(Type.mov, (byte) 3, 0), 0);
 
         // Robot moves in front of the laser 1
         boardLaserBoard.move(robotarray, true);
@@ -40,10 +40,10 @@ public class LaserTest {
         assertEquals(1, robotarray[0].getDamagePoints());
 
         robotarray[0].resetList();
-        robotarray[0].addCard(new Card(Type.turn, (byte) 2, 0),0);
-        robotarray[0].addCard(new Card(Type.mov, (byte) 2, 0),0);
-        robotarray[0].addCard(new Card(Type.turn, (byte) 3, 0),0);
-        robotarray[0].addCard(new Card(Type.mov, (byte) 2, 0),0);
+        robotarray[0].addCard(new Card(Type.turn, (byte) 2, 0), 0);
+        robotarray[0].addCard(new Card(Type.mov, (byte) 2, 0), 0);
+        robotarray[0].addCard(new Card(Type.turn, (byte) 3, 0), 0);
+        robotarray[0].addCard(new Card(Type.mov, (byte) 2, 0), 0);
 
         // Robot moves in front of the laser 2
         boardLaserBoard.move(robotarray, true);
@@ -55,9 +55,9 @@ public class LaserTest {
         assertEquals(2, robotarray[0].getDamagePoints());
 
         robotarray[0].resetList();
-        robotarray[0].addCard(new Card(Type.turn, (byte) 2, 0),0);
-        robotarray[0].addCard(new Card(Type.mov, (byte) 2, 0),0);
-        robotarray[0].addCard(new Card(Type.mov, (byte) 2, 0),0);
+        robotarray[0].addCard(new Card(Type.turn, (byte) 2, 0), 0);
+        robotarray[0].addCard(new Card(Type.mov, (byte) 2, 0), 0);
+        robotarray[0].addCard(new Card(Type.mov, (byte) 2, 0), 0);
 
         // Robot moves in front of the laser 3
         boardLaserBoard.move(robotarray, true);
@@ -69,11 +69,11 @@ public class LaserTest {
         assertEquals(3, robotarray[0].getDamagePoints());
 
         robotarray[0].resetList();
-        robotarray[0].addCard(new Card(Type.turn, (byte) 2, 0),0);
-        robotarray[0].addCard(new Card(Type.mov, (byte) 2, 0),0);
-        robotarray[0].addCard(new Card(Type.turn, (byte) 1, 0),0);
-        robotarray[0].addCard(new Card(Type.mov, (byte) 2, 0),0);
-        robotarray[0].addCard(new Card(Type.mov, (byte) 2, 0),0);
+        robotarray[0].addCard(new Card(Type.turn, (byte) 2, 0), 0);
+        robotarray[0].addCard(new Card(Type.mov, (byte) 2, 0), 0);
+        robotarray[0].addCard(new Card(Type.turn, (byte) 1, 0), 0);
+        robotarray[0].addCard(new Card(Type.mov, (byte) 2, 0), 0);
+        robotarray[0].addCard(new Card(Type.mov, (byte) 2, 0), 0);
 
         // Robot moves in front of the laser 4 (which is blocked by the other robot)
         boardLaserBoard.move(robotarray, true);
@@ -85,8 +85,8 @@ public class LaserTest {
         assertEquals(3, robotarray[0].getDamagePoints());
 
         robotarray[0].resetList();
-        robotarray[0].addCard(new Card(Type.turn, (byte) 2, 0),0);
-        robotarray[0].addCard(new Card(Type.mov, (byte) 3, 0),0);
+        robotarray[0].addCard(new Card(Type.turn, (byte) 2, 0), 0);
+        robotarray[0].addCard(new Card(Type.mov, (byte) 3, 0), 0);
 
         // Robot moves back to its starting position
         boardLaserBoard.move(robotarray, true);
