@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import htwk.mechawars.ConfigReader;
+import htwk.mechawars.fields.BarrierCorner;
+import htwk.mechawars.fields.BarrierSide;
 import htwk.mechawars.fields.Field;
 import htwk.mechawars.cards.Card;
 
@@ -53,13 +55,14 @@ public class Robot {
         checkPointNumber = 1;
         field = null;
     }
-        
+
     /**
-     * Method that lets the robot run forward.
+     * Method that makes the robot move forward by a field. Therefore the function don't checks
+     * whether walls are in the way, because a field never moves a robot towards a wall.
      * @param mov byte of move
      * @return new position
      */
-    public Robot moveInDirection(byte mov) {
+    public Robot moveInDirectionByField(byte mov) {
         switch (getDir()) {
             case NORTH:
                 setYcoor(getYcoor() - mov);
@@ -73,6 +76,214 @@ public class Robot {
             case WEST:
                 setXcoor(getXcoor() - mov);
                 return this;
+            default:
+                return this;
+        }
+    }
+
+    /**
+     * Method that makes the robot move forward by a card. Therefore
+     * the function checks whether walls are in the way.
+     * @param fieldmatrix of the board, on which the robot moves
+     * @param mov byte of move
+     * @return new position
+     */
+    public Robot moveInDirectionByCard(Field[][] fieldmatrix, byte mov) {
+
+        Boolean flag = Boolean.FALSE;
+        BarrierSide barrierSide;
+        BarrierCorner barrierCorner;
+        Dir moveDir;
+
+        // If the robot is moving backwards, the moving direction is the opposite direction
+        // of the robot
+        if (mov == -1) {
+            switch (getDir()) {
+                case NORTH:
+                    moveDir = Dir.SOUTH;
+                    break;
+                case SOUTH:
+                    moveDir = Dir.NORTH;
+                    break;
+                case EAST:
+                    moveDir = Dir.WEST;
+                    break;
+                case WEST:
+                    moveDir = Dir.EAST;
+                    break;
+                default:
+                    moveDir = getDir();
+            }
+            mov = 1;
+        } else {
+            moveDir = getDir();
+        }
+
+        switch (moveDir) {
+            case NORTH:
+                for (int i = 0; (i < mov) && (flag == Boolean.FALSE); i++) {
+                    int x = getXcoor();
+                    int y = getYcoor();
+                    // Checks whether a side or corner barrier on the field on which the robot is
+                    // currently standing, stops the current step
+                    if ((y >= 0) && (y <= 11) && (x >= 0) && (x <= 11)) {
+                        if (fieldmatrix[x][y] instanceof BarrierSide) {
+                            barrierSide = (BarrierSide) fieldmatrix[x][y];
+                            if (barrierSide.getSide() == 2) {
+                                flag = Boolean.TRUE;
+                            }
+                        }
+                        if (fieldmatrix[x][y] instanceof BarrierCorner) {
+                            barrierCorner = (BarrierCorner) fieldmatrix[x][y];
+                            if ((barrierCorner.getCorner() == 1)
+                                    || (barrierCorner.getCorner() == 2)) {
+                                flag = Boolean.TRUE;
+                            }
+                        }
+                    }
+                    // Checks whether a side or corner barrier on the next field in the moving
+                    // direction, stops the current step
+                    if ((y - 1 >= 0) && (y - 1 <= 11) && (x >= 0) && (x <= 11)) {
+                        if (fieldmatrix[x][y - 1] instanceof BarrierSide) {
+                            barrierSide = (BarrierSide) fieldmatrix[x][y - 1];
+                            if (barrierSide.getSide() == 4) {
+                                flag = Boolean.TRUE;
+                            }
+                        }
+                        if (fieldmatrix[x][y - 1] instanceof BarrierCorner) {
+                            barrierCorner = (BarrierCorner) fieldmatrix[x][y - 1];
+                            if ((barrierCorner.getCorner() == 3)
+                                    || (barrierCorner.getCorner() == 4)) {
+                                flag = Boolean.TRUE;
+                            }
+                        }
+                    }
+                    if (flag == Boolean.FALSE) {
+                        setYcoor(getYcoor() - 1);
+                    }
+                }
+                return this;
+
+            case SOUTH:
+                for (int i = 0; (i < mov) && (flag == Boolean.FALSE); i++) {
+                    int x = getXcoor();
+                    int y = getYcoor();
+                    if ((y >= 0) && (y <= 11) && (x >= 0) && (x <= 11)) {
+                        if (fieldmatrix[x][y] instanceof BarrierSide) {
+                            barrierSide = (BarrierSide) fieldmatrix[x][y];
+                            if (barrierSide.getSide() == 4) {
+                                flag = Boolean.TRUE;
+                            }
+                        }
+                        if (fieldmatrix[x][y] instanceof BarrierCorner) {
+                            barrierCorner = (BarrierCorner) fieldmatrix[x][y];
+                            if ((barrierCorner.getCorner() == 3)
+                                    || (barrierCorner.getCorner() == 4)) {
+                                flag = Boolean.TRUE;
+                            }
+                        }
+                    }
+                    if ((y + 1 >= 0) && (y + 1 <= 11) && (x >= 0) && (x <= 11)) {
+                        if (fieldmatrix[x][y + 1] instanceof BarrierSide) {
+                            barrierSide = (BarrierSide) fieldmatrix[x][y + 1];
+                            if (barrierSide.getSide() == 2) {
+                                flag = Boolean.TRUE;
+                            }
+                        }
+                        if (fieldmatrix[x][y + 1] instanceof BarrierCorner) {
+                            barrierCorner = (BarrierCorner) fieldmatrix[x][y + 1];
+                            if ((barrierCorner.getCorner() == 1)
+                                    || (barrierCorner.getCorner() == 2)) {
+                                flag = Boolean.TRUE;
+                            }
+                        }
+                    }
+                    if (flag == Boolean.FALSE) {
+                        setYcoor(getYcoor() + 1);
+                    }
+                }
+                return this;
+
+            case EAST:
+                for (int i = 0; (i < mov) && (flag == Boolean.FALSE); i++) {
+                    int x = getXcoor();
+                    int y = getYcoor();
+                    if ((y >= 0) && (y <= 11) && (x >= 0) && (x <= 11)) {
+                        if (fieldmatrix[x][y] instanceof BarrierSide) {
+                            barrierSide = (BarrierSide) fieldmatrix[x][y];
+                            if (barrierSide.getSide() == 3) {
+                                flag = Boolean.TRUE;
+                            }
+                        }
+                        if (fieldmatrix[x][y] instanceof BarrierCorner) {
+                            barrierCorner = (BarrierCorner) fieldmatrix[x][y];
+                            if ((barrierCorner.getCorner() == 2)
+                                    || (barrierCorner.getCorner() == 3)) {
+                                flag = Boolean.TRUE;
+                            }
+                        }
+                    }
+                    if ((y >= 0) && (y <= 11) && (x + 1 >= 0) && (x + 1 <= 11)) {
+                        if (fieldmatrix[x + 1][y] instanceof BarrierSide) {
+                            barrierSide = (BarrierSide) fieldmatrix[x + 1][y];
+                            if (barrierSide.getSide() == 1) {
+                                flag = Boolean.TRUE;
+                            }
+                        }
+                        if (fieldmatrix[x + 1][y] instanceof BarrierCorner) {
+                            barrierCorner = (BarrierCorner) fieldmatrix[x + 1][y];
+                            if ((barrierCorner.getCorner() == 1)
+                                    || (barrierCorner.getCorner() == 4)) {
+                                flag = Boolean.TRUE;
+                            }
+                        }
+                    }
+                    if (flag == Boolean.FALSE) {
+                        setXcoor(getXcoor() + 1);
+                    }
+                }
+                return this;
+
+            case WEST:
+                for (int i = 0; (i < mov) && (flag == Boolean.FALSE); i++) {
+                    int x = getXcoor();
+                    int y = getYcoor();
+                    if ((y >= 0) && (y <= 11) && (x >= 0) && (x <= 11)) {
+                        if (fieldmatrix[x][y] instanceof BarrierSide) {
+                            barrierSide = (BarrierSide) fieldmatrix[x][y];
+                            if (barrierSide.getSide() == 1) {
+                                flag = Boolean.TRUE;
+                            }
+                        }
+                        if (fieldmatrix[x][y] instanceof BarrierCorner) {
+                            barrierCorner = (BarrierCorner) fieldmatrix[x][y];
+                            if ((barrierCorner.getCorner() == 1)
+                                    || (barrierCorner.getCorner() == 4)) {
+                                flag = Boolean.TRUE;
+                            }
+                        }
+                    }
+                    if ((y >= 0) && (y <= 11) && (x - 1 >= 0) && (x - 1 <= 11)) {
+                        if (fieldmatrix[x - 1][y] instanceof BarrierSide) {
+                            barrierSide = (BarrierSide) fieldmatrix[x - 1][y];
+                            if (barrierSide.getSide() == 3) {
+                                flag = Boolean.TRUE;
+                            }
+                        }
+                        if (fieldmatrix[x - 1][y] instanceof BarrierCorner) {
+                            barrierCorner = (BarrierCorner) fieldmatrix[x - 1][y];
+                            if ((barrierCorner.getCorner() == 2)
+                                    || (barrierCorner.getCorner() == 3)) {
+                                flag = Boolean.TRUE;
+                            }
+                        }
+                    }
+                    if (flag == Boolean.FALSE) {
+                        setXcoor(getXcoor() - 1);
+                    }
+                }
+                return this;
+
             default:
                 return this;
         }
