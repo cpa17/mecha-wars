@@ -63,6 +63,7 @@ public class MainMenu implements Screen {
                     }
 
                 }.show(stage);
+                
                 dialogCloseOption.setPosition(410, 326);
                 dialogCloseOption.setSize(450, 110);
 
