@@ -14,9 +14,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import htwk.mechawars.MainMenu;
@@ -30,11 +32,15 @@ public class FieldeditGUI implements Screen{
     private Texture img;
     private SpriteBatch batchFiEdit;
     private static Board boardFiEdit;
-    private int buttonWidth = 400;
-    private int buttonHeight = 100;
-    private int buttonPosX = Gdx.graphics.getHeight()
-            + (((Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) * 2) / 3) - 64;
-    private int buttonPosY = Gdx.graphics.getHeight() - 100;
+    private int buttonWidth = 220;
+    private int buttonHeight = 75;
+    private int funcButtonPosX = Gdx.graphics.getHeight()
+            + (((Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) * 2) / 3) - 264;
+    private int funcButtonPosY = Gdx.graphics.getHeight() - 70;
+    private int picButtonSize = 80;
+    private int picButtonPosX = Gdx.graphics.getHeight()
+            + (((Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) * 2) / 3) - 194;;
+    private int picButtonPosY = Gdx.graphics.getHeight() - 200;
     private int corner = 1; //corner of ImageButton
     private int side = 1; //side of BarrierButton
 //    private int type = 0; //type of BlockadeButton
@@ -60,7 +66,7 @@ public class FieldeditGUI implements Screen{
         
         TextButton importButton = new TextButton("Import", skinFiEdit);
         
-        importButton.setPosition(buttonPosX, buttonPosY);
+        importButton.setPosition(funcButtonPosX, funcButtonPosY);
         importButton.setSize(buttonWidth, buttonHeight);
         importButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
@@ -71,7 +77,7 @@ public class FieldeditGUI implements Screen{
         
         TextButton exportButton = new TextButton("Export", skinFiEdit);
         
-        exportButton.setPosition(buttonPosX, buttonPosY + 100);
+        exportButton.setPosition(funcButtonPosX, funcButtonPosY - 42);
         exportButton.setSize(buttonWidth, buttonHeight);
         exportButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
@@ -82,7 +88,7 @@ public class FieldeditGUI implements Screen{
         
         TextButton backButton = new TextButton("Zurueck", skinFiEdit);
         
-        backButton.setPosition(buttonPosX, buttonPosY + 200);
+        backButton.setPosition(funcButtonPosX + 180 , funcButtonPosY);
         backButton.setSize(buttonWidth, buttonHeight);
         backButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
@@ -94,7 +100,7 @@ public class FieldeditGUI implements Screen{
         
         TextButton clearButton = new TextButton("Loeschen", skinFiEdit);
         
-        clearButton.setPosition(buttonPosX, buttonPosY + 200);
+        clearButton.setPosition(funcButtonPosX + 180, funcButtonPosY - 42);
         clearButton.setSize(buttonWidth, buttonHeight);
         clearButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
@@ -108,8 +114,8 @@ public class FieldeditGUI implements Screen{
         ImageButton barrierCornerButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "barriercorner/"
                         + "BarrierCorner0" + String.valueOf(corner) + ".png"))));
-        barrierCornerButton.setSize(buttonWidth, buttonHeight);
-//        barrierCornerButton.setPosition(x, y);
+        barrierCornerButton.setSize(picButtonSize, picButtonSize);
+        barrierCornerButton.setPosition(picButtonPosX, picButtonPosY);
 //        barrierCornerButton.addListener(new ClickListener() {
 //            public void enter() {
 //                
@@ -124,8 +130,8 @@ public class FieldeditGUI implements Screen{
         ImageButton barrierSideButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "barrierside/"
                         + "BarrierSide" + String.valueOf(side) + ".png"))));
-        barrierSideButton.setSize(buttonWidth, buttonHeight);
-//        barrierSideButton.setPosition(x, y);
+        barrierSideButton.setSize(picButtonSize, picButtonSize);
+        barrierSideButton.setPosition(picButtonPosX + 90, picButtonPosY);
 //      barrierSideButton.addListener(new ClickListener() {
 //          public void enter() {
 //                
@@ -139,8 +145,8 @@ public class FieldeditGUI implements Screen{
 //      });
         ImageButton blackHoleButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/BlackHole.png"))));
-//      blackHoleButton.setSize(buttonWidth, buttonHeight);
-//      blackHoleButton.setPosition(x, y);
+        blackHoleButton.setSize(picButtonSize, picButtonSize);
+        blackHoleButton.setPosition(picButtonPosX + 180, picButtonPosY);
 //      blackHoleButton.addListener(new ClickListener() {
 //          public void enter() {
 //      
@@ -175,8 +181,8 @@ public class FieldeditGUI implements Screen{
         ImageButton checkpointButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/checkpoints/Check" 
                         + checkpointNumber + ".png"))));
-//      checkpointButton.setSize(buttonWidth, buttonHeight);
-//      checkpointButton.setPosition(x, y);
+        checkpointButton.setSize(picButtonSize, picButtonSize);
+        checkpointButton.setPosition(picButtonPosX, picButtonPosY - 90);
 //      checkpointButton.addListener(new ClickListener() {
 //          public void enter() {
 //
@@ -192,8 +198,8 @@ public class FieldeditGUI implements Screen{
                 new TextureRegion(new Texture("mapAssets/" + "conveyorBelt/"
                         + "ConveyorBelt" + String.valueOf(startConveyor) 
                         + String.valueOf(endConveyor) + ".png"))));
-//      conveyorBeltButton.setSize(buttonWidth, buttonHeight);
-//      conveyorBeltButton.setPosition(x, y);
+        conveyorBeltButton.setSize(picButtonSize, picButtonSize);
+        conveyorBeltButton.setPosition(picButtonPosX + 90, picButtonPosY - 90);
 //      conveyorBeltButton.addListener(new ClickListener() {
 //          public void enter() {
 //
@@ -209,8 +215,8 @@ public class FieldeditGUI implements Screen{
                 new TextureRegion(new Texture("mapAssets/" + "expressconveyorBelt/"
                         + "ExpressConveyorBelt" + String.valueOf(startExpressConveyor) 
                         + String.valueOf(endExpressConveyor) + ".png"))));
-//      expressConveyorBeltButton.setSize(buttonWidth, buttonHeight);
-//      expressConveyorBeltButton.setPosition(x, y);
+        expressConveyorBeltButton.setSize(picButtonSize, picButtonSize);
+        expressConveyorBeltButton.setPosition(picButtonPosX + 180, picButtonPosY - 90);
 //      expressConveyorBeltButton.addListener(new ClickListener() {
 //          public void enter() {
 //
@@ -224,8 +230,8 @@ public class FieldeditGUI implements Screen{
 //      });
         ImageButton fieldButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/StandardField.png"))));
-//      fieldButton.setSize(buttonWidth, buttonHeight);
-//      fieldButton.setPosition(x, y);
+        fieldButton.setSize(picButtonSize, picButtonSize);
+        fieldButton.setPosition(picButtonPosX, picButtonPosY - 180);
 //      fieldButton.addListener(new ClickListener() {
 //          public void enter() {
 //
@@ -239,8 +245,8 @@ public class FieldeditGUI implements Screen{
 //      });
         ImageButton gearButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/gear/Gear0" + gearNumber + ".png"))));
-//      gearButton.setSize(buttonWidth, buttonHeight);
-//      gearButton.setPosition(x, y);
+        gearButton.setSize(picButtonSize, picButtonSize);
+        gearButton.setPosition(picButtonPosX + 90, picButtonPosY - 180);
 //      gearButton.addListener(new ClickListener() {
 //          public void enter() {
 //
@@ -255,8 +261,8 @@ public class FieldeditGUI implements Screen{
         ImageButton laserButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "laser/"
                         + "Laser0" + String.valueOf(typeLaser) + ".png"))));
-//      laserButton.setSize(buttonWidth, buttonHeight);
-//      laserButton.setPosition(x, y);
+        laserButton.setSize(picButtonSize, picButtonSize);
+        laserButton.setPosition(picButtonPosX + 180, picButtonPosY - 180);
 //      laserButton.addListener(new ClickListener() {
 //          public void enter() {
 //
@@ -271,8 +277,8 @@ public class FieldeditGUI implements Screen{
         ImageButton repairSiteButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/repairsite/RepairSite0" + repairNum
                         + ".png"))));
-//      repairSiteButton.setSize(buttonWidth, buttonHeight);
-//      repairSiteButton.setPosition(x, y);
+        repairSiteButton.setSize(picButtonSize, picButtonSize);
+        repairSiteButton.setPosition(picButtonPosX, picButtonPosY - 270);
 //      repairSiteButton.addListener(new ClickListener() {
 //          public void enter() {
 //
@@ -286,8 +292,8 @@ public class FieldeditGUI implements Screen{
 //      });
         ImageButton standardFieldButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/StandardField.png"))));
-//      standardFieldButton.setSize(buttonWidth, buttonHeight);
-//      standardFieldButton.setPosition(x, y);
+        standardFieldButton.setSize(picButtonSize, picButtonSize);
+        standardFieldButton.setPosition(picButtonPosX + 90, picButtonPosY - 270);
 //      standardFieldButton.addListener(new ClickListener() {
 //          public void enter() {
 //
@@ -302,8 +308,8 @@ public class FieldeditGUI implements Screen{
         ImageButton startFieldButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "startfield/"
                         + "StartField0" + String.valueOf(startFieldNumber) + ".png"))));
-//      startFieldButton.setSize(buttonWidth, buttonHeight);
-//      startFieldButton.setPosition(x, y);
+        startFieldButton.setSize(picButtonSize, picButtonSize);
+        startFieldButton.setPosition(picButtonPosX + 180, picButtonPosY - 270);
 //      startFieldButton.addListener(new ClickListener() {
 //          public void enter() {
 //
@@ -315,6 +321,29 @@ public class FieldeditGUI implements Screen{
 //              drawOnField(x, y, startFieldNumber);
 //          }
 //      });
+        
+        TextField textFieldInfo = new TextField(":)", skinFiEdit);
+        textFieldInfo.setAlignment(Align.center);
+        textFieldInfo.setSize(buttonWidth + 100, buttonHeight);
+        textFieldInfo.setPosition(funcButtonPosX + 40, funcButtonPosY - 520);
+
+        stageFiEdit.addActor(importButton);
+        stageFiEdit.addActor(exportButton);
+        stageFiEdit.addActor(backButton);
+        stageFiEdit.addActor(clearButton);
+        stageFiEdit.addActor(barrierCornerButton);
+        stageFiEdit.addActor(barrierSideButton);
+        stageFiEdit.addActor(blackHoleButton);
+        stageFiEdit.addActor(checkpointButton);
+        stageFiEdit.addActor(conveyorBeltButton);
+        stageFiEdit.addActor(expressConveyorBeltButton);
+        stageFiEdit.addActor(fieldButton);
+        stageFiEdit.addActor(gearButton);
+        stageFiEdit.addActor(laserButton);
+        stageFiEdit.addActor(repairSiteButton);
+        stageFiEdit.addActor(standardFieldButton);
+        stageFiEdit.addActor(startFieldButton);
+        stageFiEdit.addActor(textFieldInfo);
         
     }
     
