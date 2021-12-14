@@ -83,8 +83,8 @@ public class Robot {
 
     /**
      * Method that makes the robot move forward by a card. Therefore the function calls another
-     * function, which checks whether walls are in the way or whether the robot pushes another robot.
-     * The direction ist the direction of the robot.
+     * function, which checks whether walls are in the way or whether the robot pushes another
+     * robot. The direction ist the direction of the robot.
      * @param fieldmatrix of the board, on which the robot moves
      * @param mov byte of move
      * @param players array of all players
