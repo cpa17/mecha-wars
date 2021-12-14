@@ -103,7 +103,8 @@ public class OptionScreen implements Screen {
 
                 String input = chooseMap.getText().toLowerCase();
                 
-                if (!(chooseMap.getText().matches(" Bitte Map angeben")) && !mapNotFound) {                       
+                if (!(chooseMap.getText().matches(" Bitte Map angeben")) 
+                        && !mapNotFound) {                       
                     if (fileListRead(input)) {
                         if (!input.contains(".txt")) {
                             input = input + ".txt";
