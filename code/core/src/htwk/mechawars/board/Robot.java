@@ -136,12 +136,13 @@ public class Robot {
 
         switch (moveDir) {
             case NORTH:
-                for (int i = 0; (i < mov) && (!false); i++) {
+                for (int i = 0; (i < mov) && (!flag); i++) {
                     int x = getXcoor();
                     int y = getYcoor();
                     // Checks whether a side or corner barrier on the field on which the robot is
                     // currently standing, stops the current step
-                    if ((y >= 0) && (y <= 11) && (x >= 0) && (x <= 11)) {
+                    if ((y >= 0) && (y < fieldmatrix[0].length)
+                            && (x >= 0) && (x < fieldmatrix.length)) {
                         if (fieldmatrix[x][y] instanceof BarrierSide) {
                             barrierSide = (BarrierSide) fieldmatrix[x][y];
                             if (barrierSide.getSide() == 2) {
@@ -158,7 +159,8 @@ public class Robot {
                     }
                     // Checks whether a side or corner barrier on the next field in the moving
                     // direction, stops the current step
-                    if ((y - 1 >= 0) && (y - 1 <= 11) && (x >= 0) && (x <= 11)) {
+                    if ((y - 1 >= 0) && (y - 1 < fieldmatrix[0].length)
+                            && (x >= 0) && (x < fieldmatrix.length)) {
                         if (fieldmatrix[x][y - 1] instanceof BarrierSide) {
                             barrierSide = (BarrierSide) fieldmatrix[x][y - 1];
                             if (barrierSide.getSide() == 4) {
@@ -174,7 +176,8 @@ public class Robot {
                         }
                     }
                     // Checks whether the robot is pushing another robot
-                    if ((y - 1 >= 0) && (y - 1 <= 11) && (x >= 0) && (x <= 11)) {
+                    if ((y - 1 >= 0) && (y - 1 < fieldmatrix[0].length)
+                            && (x >= 0) && (x < fieldmatrix.length)) {
                         for (Robot player : players) {
                             int currX = player.getXcoor();
                             int currY = player.getYcoor();
@@ -198,7 +201,8 @@ public class Robot {
                     int y = getYcoor();
                     // Checks whether a side or corner barrier on the field on which the robot is
                     // currently standing, stops the current step
-                    if ((y >= 0) && (y <= 11) && (x >= 0) && (x <= 11)) {
+                    if ((y >= 0) && (y < fieldmatrix[0].length)
+                            && (x >= 0) && (x < fieldmatrix.length)) {
                         if (fieldmatrix[x][y] instanceof BarrierSide) {
                             barrierSide = (BarrierSide) fieldmatrix[x][y];
                             if (barrierSide.getSide() == 4) {
@@ -216,7 +220,8 @@ public class Robot {
                     }
                     // Checks whether a side or corner barrier on the next field in the moving
                     // direction, stops the current step
-                    if ((y + 1 >= 0) && (y + 1 <= 11) && (x >= 0) && (x <= 11)) {
+                    if ((y + 1 >= 0) && (y + 1 < fieldmatrix[0].length)
+                            && (x >= 0) && (x < fieldmatrix.length)) {
                         if (fieldmatrix[x][y + 1] instanceof BarrierSide) {
                             barrierSide = (BarrierSide) fieldmatrix[x][y + 1];
                             if (barrierSide.getSide() == 2) {
@@ -232,7 +237,8 @@ public class Robot {
                         }
                     }
                     // Checks whether the robot is pushing another robot
-                    if ((y + 1 >= 0) && (y + 1 <= 11) && (x >= 0) && (x <= 11)) {
+                    if ((y + 1 >= 0) && (y + 1 < fieldmatrix[0].length)
+                            && (x >= 0) && (x < fieldmatrix.length)) {
                         for (Robot player : players) {
                             int currX = player.getXcoor();
                             int currY = player.getYcoor();
@@ -256,7 +262,8 @@ public class Robot {
                     int y = getYcoor();
                     // Checks whether a side or corner barrier on the field on which the robot is
                     // currently standing, stops the current step
-                    if ((y >= 0) && (y <= 11) && (x >= 0) && (x <= 11)) {
+                    if ((y >= 0) && (y < fieldmatrix[0].length)
+                            && (x >= 0) && (x < fieldmatrix.length)) {
                         if (fieldmatrix[x][y] instanceof BarrierSide) {
                             barrierSide = (BarrierSide) fieldmatrix[x][y];
                             if (barrierSide.getSide() == 3) {
@@ -273,7 +280,8 @@ public class Robot {
                     }
                     // Checks whether a side or corner barrier on the next field in the moving
                     // direction, stops the current step
-                    if ((y >= 0) && (y <= 11) && (x + 1 >= 0) && (x + 1 <= 11)) {
+                    if ((y >= 0) && (y < fieldmatrix[0].length)
+                            && (x + 1 >= 0) && (x + 1 < fieldmatrix.length)) {
                         if (fieldmatrix[x + 1][y] instanceof BarrierSide) {
                             barrierSide = (BarrierSide) fieldmatrix[x + 1][y];
                             if (barrierSide.getSide() == 1) {
@@ -289,7 +297,8 @@ public class Robot {
                         }
                     }
                     // Checks whether the robot is pushing another robot
-                    if ((y >= 0) && (y <= 11) && (x + 1 >= 0) && (x + 1 <= 11)) {
+                    if ((y >= 0) && (y < fieldmatrix[0].length)
+                            && (x + 1 >= 0) && (x + 1 < fieldmatrix.length)) {
                         for (Robot player : players) {
                             int currX = player.getXcoor();
                             int currY = player.getYcoor();
@@ -313,7 +322,8 @@ public class Robot {
                     int y = getYcoor();
                     // Checks whether a side or corner barrier on the field on which the robot is
                     // currently standing, stops the current step
-                    if ((y >= 0) && (y <= 11) && (x >= 0) && (x <= 11)) {
+                    if ((y >= 0) && (y < fieldmatrix[0].length)
+                            && (x >= 0) && (x < fieldmatrix.length)) {
                         if (fieldmatrix[x][y] instanceof BarrierSide) {
                             barrierSide = (BarrierSide) fieldmatrix[x][y];
                             if (barrierSide.getSide() == 1) {
@@ -330,7 +340,8 @@ public class Robot {
                     }
                     // Checks whether a side or corner barrier on the next field in the moving
                     // direction, stops the current step
-                    if ((y >= 0) && (y <= 11) && (x - 1 >= 0) && (x - 1 <= 11)) {
+                    if ((y >= 0) && (y < fieldmatrix[0].length)
+                            && (x - 1 >= 0) && (x - 1 < fieldmatrix.length)) {
                         if (fieldmatrix[x - 1][y] instanceof BarrierSide) {
                             barrierSide = (BarrierSide) fieldmatrix[x - 1][y];
                             if (barrierSide.getSide() == 3) {
@@ -346,7 +357,8 @@ public class Robot {
                         }
                     }
                     // Checks whether the robot is pushing another robot
-                    if ((y >= 0) && (y <= 11) && (x - 1 >= 0) && (x - 1 <= 11)) {
+                    if ((y >= 0) && (y < fieldmatrix[0].length)
+                            && (x - 1 >= 0) && (x - 1 < fieldmatrix.length)) {
                         for (Robot player : players) {
                             int currX = player.getXcoor();
                             int currY = player.getYcoor();

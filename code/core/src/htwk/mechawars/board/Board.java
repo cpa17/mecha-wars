@@ -477,12 +477,12 @@ public class Board {
         } else {
             robot.turn(card.getCardAttributeMovCount());
         }
-        for (Robot player : robot.getPlayers()) {
+        for (Robot player : players) {
             if (player.getXcoor() >= fieldmatrix.length
                     || player.getYcoor() >= fieldmatrix[0].length
                     || player.getXcoor() < 0 || player.getYcoor() < 0) {
-                player.setXcoor(robot.getStartX());
-                player.setYcoor(robot.getStartY());
+                player.setXcoor(player.getStartX());
+                player.setYcoor(player.getStartY());
             }
         }
     }
