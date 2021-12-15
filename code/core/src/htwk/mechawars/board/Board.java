@@ -81,8 +81,8 @@ public class Board {
             ArrayList<Integer> row = new ArrayList<>();
             String[] values = currentLine.trim().split(" ");
             for (String string : values) {
-                if (values.length > 12) {
-                    System.out.println("The map has too many columns, only 12 are allowed!");
+                if (values.length > 16) {
+                    System.out.println("The map has too many columns, only 16 are allowed!");
                     Gdx.app.exit();
                 }
                 if (!string.isEmpty()) {
@@ -99,22 +99,28 @@ public class Board {
         int width = tempLayout.get(0).size();
         int height = tempLayout.size();
         
-        if (height > 12) {
-            System.out.println("The map has too many rows, only 12 are allowed!");
+        if (height > 16) {
+            System.out.println("The map has too many rows, only 16 are allowed!");
             Gdx.app.exit();
         }
 
         int[][] matrix = new int[width][height];
 
+        System.out.println(width);
+        System.out.println(height);
+        System.out.println(matrix.length);
+        System.out.println(matrix[0].length);
+        System.out.println(Arrays.deepToString(matrix));
         /*
          * matrix should be [col][cell], while tempLayout is [row][cell].
          *                  [x]  [y]                         [y]  [x]
          * Therefore we need to switch them around.
          */
-        for (int col = 0; col < height; col++) {
-            for (int cell = 0; cell < width; cell++) {
+        for (int col = 0; col < width; col++) {
+            for (int cell = 0; cell < height; cell++) {
                 matrix[col][cell] = tempLayout.get(cell).get(col);
             }
+            System.out.println(Arrays.toString(matrix[col]));
         }
 
         intToFieldMatrix(matrix, isTest);
@@ -311,15 +317,15 @@ public class Board {
      * @param board Board whose matrix is to be converted into a string
      */
     public static void toAsset(SpriteBatch batch, Board board) {
-        for (int row = 0; row < board.fieldmatrix.length; row++) {
+        for (int row = 0; row < board.fieldmatrix[0].length; row++) {
             int x = 0;
-            for (int cell = 0; cell < board.fieldmatrix[row].length; cell++) {
-                int t = Gdx.graphics.getHeight() / board.fieldmatrix.length; //height of one tile
+            for (int cell = 0; cell < board.fieldmatrix.length; cell++) {
+                int t = Gdx.graphics.getHeight() / board.fieldmatrix[0].length; //height of one tile
                 int b = Gdx.graphics.getHeight(); //height of the entire board
                 int c = (row + 1) * t; //the current height in the loop
                 int r = b - c; //the result of the board height minus the current height
-                batch.draw(board.fieldmatrix[cell][row].getTile(), x, r);
-                x = x + (Gdx.graphics.getHeight() / board.fieldmatrix.length);
+                batch.draw(board.fieldmatrix[cell][row].getTile(), x, r, t, t);
+                x = x + (Gdx.graphics.getHeight() / board.fieldmatrix[0].length);
             }
         }
     }
@@ -448,6 +454,7 @@ public class Board {
                     @Override
                     public void run() {
                         robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+                        System.out.println(robotPosition);
                         robotPosition.turnAction(robot);
                     }
                 }, i);
@@ -815,7 +822,7 @@ public class Board {
                         }
                     }
 
-                    for (int i2 = (x + 1); i2 < this.fieldmatrix[0].length && (z == 0); i2++) {
+                    for (int i2 = (x + 1); i2 < this.fieldmatrix.length && (z == 0); i2++) {
 
                         if (this.fieldmatrix[i2][y] instanceof BarrierSide) {
 
