@@ -84,9 +84,11 @@ public class GameScreen implements Screen {
                     ConfigReader.getPlayerStartingPositions()[i].y, Dir.NORTH, players[i], false);
             
             if (i != 0) {
-            boolean check = false;
-            while (!check) {
-                for (int j = (i-1); j >= 0; j--) {
+                boolean check = false;
+                
+                while (!check) {
+                    
+                    for (int j = (i - 1); j >= 0; j--) {
                     
                         int x1 = players[i].getXcoor();
                         int x2 = players[j].getXcoor();
@@ -95,13 +97,12 @@ public class GameScreen implements Screen {
                         
                         if (x1 == x2 && y1 == y2) {
                             board.startRobot(ConfigReader.getPlayerStartingPositions()[i].x, 
-                                    ConfigReader.getPlayerStartingPositions()[i].y, Dir.NORTH, players[i], false);
+                                    ConfigReader.getPlayerStartingPositions()[i].y,
+                                    Dir.NORTH, players[i], false);
                             break;
-                        }
-                        else if (j == 0) {
+                        } else if (j == 0) {
                             check = true;
-                        }
-                        else {
+                        } else {
                             continue;
                         }
                     } 
