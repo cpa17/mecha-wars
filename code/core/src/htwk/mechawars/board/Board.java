@@ -18,10 +18,7 @@ import htwk.mechawars.fields.RepairSite;
 import htwk.mechawars.fields.StandardField;
 import htwk.mechawars.fields.StartField;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.badlogic.gdx.Gdx;
@@ -454,7 +451,6 @@ public class Board {
                     @Override
                     public void run() {
                         robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-                        System.out.println(robotPosition);
                         robotPosition.turnAction(robot);
                     }
                 }, i);
@@ -670,8 +666,8 @@ public class Board {
      * @param players an array of robots
      */
     public void checkRobotLaser(Robot[] players) {
-        
-        BarrierSide barrierside;
+        try {
+            BarrierSide barrierside;
         BarrierCorner barriercorner;
 
         for (Robot player : players) {
@@ -928,6 +924,9 @@ public class Board {
                 default:
                     break;
             }
+        }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Something went wrong.");
         }
     }
 }
