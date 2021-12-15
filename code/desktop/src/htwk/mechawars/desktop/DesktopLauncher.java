@@ -36,8 +36,8 @@ public class DesktopLauncher implements Runnable {
     boolean skip;
 
     @Option(names = { "-b", "--board" },
-            description = "Choose a Gameboard (ChopChopShopChallenge.txt, VaultAssault.txt)")
-    private String fileName = "VaultAssault.txt";
+            description = "Choose a Gameboard (ChopShopChallenge.txt, VaultAssault.txt)")
+    private String fileName = "ChopShopChallenge.txt";
 
     @Option(names = { "-p", "--player" }, description = "Number of Players")
     int player = 4;
