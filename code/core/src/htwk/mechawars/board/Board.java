@@ -666,8 +666,7 @@ public class Board {
      * @param players an array of robots
      */
     public void checkRobotLaser(Robot[] players) {
-        try {
-            BarrierSide barrierside;
+        BarrierSide barrierside;
         BarrierCorner barriercorner;
 
         for (Robot player : players) {
@@ -924,12 +923,6 @@ public class Board {
                 default:
                     break;
             }
-        }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Something went wrong.");
-            e.printStackTrace();
-        } catch (IndexOutOfBoundsException e) {
-            e.printStackTrace();
         }
     }
 }
