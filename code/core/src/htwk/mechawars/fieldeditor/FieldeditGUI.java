@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextTooltip;
+import com.badlogic.gdx.scenes.scene2d.ui.TooltipManager;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.FocusListener;
@@ -57,9 +58,12 @@ public class FieldeditGUI implements Screen{
     private int startFieldNumber = 1; //number of StartFieldButton
     private int pusherNumber = 1; //Number of Pusher
     private boolean backToMain = false;
+    private boolean mapChange = true;
+    private TooltipManager tTM = new TooltipManager() ;
     
     public FieldeditGUI(FieldEditor fieldEditor, String map) {
         
+        tTM.instant();
         initBoardFiEdit(map);
         stageFiEdit = new Stage();
         
@@ -126,9 +130,10 @@ public class FieldeditGUI implements Screen{
         barrierCornerButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
 //                drawOnField(x, y, corner);
+                rol(1, 4, corner);
             }
         });
-        barrierCornerButton.addListener(new TextTooltip("Barrier Corner", skinFiEdit));
+        barrierCornerButton.addListener(new TextTooltip("Barrier Corner", tTM, skinFiEdit));
         
         ImageButton barrierSideButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "barrierside/"
@@ -138,9 +143,10 @@ public class FieldeditGUI implements Screen{
         barrierSideButton.addListener(new ClickListener() {
           public void clicked(InputEvent event, float x, float y) {
 //              drawOnField(x, y, side);
+              rol(1, 4, side);
           }
         });
-        barrierSideButton.addListener(new TextTooltip("Barrier Side", skinFiEdit));
+        barrierSideButton.addListener(new TextTooltip("Barrier Side", tTM, skinFiEdit));
         
         ImageButton blackHoleButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/BlackHole.png"))));
@@ -151,7 +157,7 @@ public class FieldeditGUI implements Screen{
 //              drawOnField(x, y);
           }
         });
-        blackHoleButton.addListener(new TextTooltip("Black Hole", skinFiEdit));
+        blackHoleButton.addListener(new TextTooltip("Black Hole", tTM, skinFiEdit));
         
         ImageButton checkpointButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/checkpoints/Check" 
@@ -161,9 +167,10 @@ public class FieldeditGUI implements Screen{
         checkpointButton.addListener(new ClickListener() {
           public void clicked(InputEvent event, float x, float y) {
 //              drawOnField(x, y, checkpointNumber);
+              rol(1, 8, checkpointNumber);
           }
         });
-        checkpointButton.addListener(new TextTooltip("Checkpoint", skinFiEdit));
+        checkpointButton.addListener(new TextTooltip("Checkpoint", tTM, skinFiEdit));
         
         ImageButton conveyorBeltButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "conveyorBelt/"
@@ -174,9 +181,11 @@ public class FieldeditGUI implements Screen{
         conveyorBeltButton.addListener(new ClickListener() {
           public void clicked(InputEvent event, float x, float y) {
 //              drawOnField(x, y, endConveyor);
+              rol(0, 9, startConveyor);
+              rol(1, 4, endConveyor);
           }
         });
-        conveyorBeltButton.addListener(new TextTooltip("Conveyorbelt", skinFiEdit));
+        conveyorBeltButton.addListener(new TextTooltip("Conveyorbelt", tTM, skinFiEdit));
         
         ImageButton expressConveyorBeltButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "expressconveyorBelt/"
@@ -187,9 +196,12 @@ public class FieldeditGUI implements Screen{
         expressConveyorBeltButton.addListener(new ClickListener() {
           public void clicked(InputEvent event, float x, float y) {
 //              drawOnField(x, y, endExpressConveyor);
+              rol(0, 9, startExpressConveyor);
+              rol(1, 4, endExpressConveyor);
           }
         });
-        expressConveyorBeltButton.addListener(new TextTooltip("Express Conveyorbelt", skinFiEdit));
+        expressConveyorBeltButton.addListener(new TextTooltip("Express Conveyorbelt", 
+                tTM, skinFiEdit));
         
         ImageButton backupButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/Checkpoint.png"))));
@@ -200,7 +212,7 @@ public class FieldeditGUI implements Screen{
 //              drawOnField(x, y);
           }
         });
-        backupButton.addListener(new TextTooltip("Backup Checkpoint", skinFiEdit));
+        backupButton.addListener(new TextTooltip("Backup Checkpoint", tTM, skinFiEdit));
         
         ImageButton gearButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/gear/Gear0" + gearNumber + ".png"))));
@@ -211,7 +223,7 @@ public class FieldeditGUI implements Screen{
 //              drawOnField(x, y, gearNumber);
           }
         });
-        gearButton.addListener(new TextTooltip("Gear", skinFiEdit));
+        gearButton.addListener(new TextTooltip("Gear", tTM, skinFiEdit));
         
         ImageButton laserButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "laser/"
@@ -223,7 +235,7 @@ public class FieldeditGUI implements Screen{
 //              drawOnField(x, y, typeLaser);
           }
         });
-        laserButton.addListener(new TextTooltip("Laser", skinFiEdit));
+        laserButton.addListener(new TextTooltip("Laser", tTM, skinFiEdit));
         
         ImageButton repairSiteButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/repairsite/RepairSite0" + repairNum
@@ -235,7 +247,7 @@ public class FieldeditGUI implements Screen{
 //              drawOnField(x, y, repairNum);
           }
         });
-        repairSiteButton.addListener(new TextTooltip("Repair Site", skinFiEdit));
+        repairSiteButton.addListener(new TextTooltip("Repair Site", tTM, skinFiEdit));
         
         ImageButton standardFieldButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/StandardField.png"))));
@@ -246,7 +258,7 @@ public class FieldeditGUI implements Screen{
 //              drawOnField(x, y);
           }
         });
-        standardFieldButton.addListener(new TextTooltip("Standard Feld", skinFiEdit));
+        standardFieldButton.addListener(new TextTooltip("Standard Feld", tTM, skinFiEdit));
         
         ImageButton startFieldButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "startfield/"
@@ -258,7 +270,7 @@ public class FieldeditGUI implements Screen{
 //              drawOnField(x, y, startFieldNumber);
           }
         });
-        startFieldButton.addListener(new TextTooltip("Start Feld", skinFiEdit));
+        startFieldButton.addListener(new TextTooltip("Start Feld", tTM, skinFiEdit));
 
         ImageButton pusherButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "pusher/"
@@ -270,7 +282,7 @@ public class FieldeditGUI implements Screen{
 //              drawOnField(x, y, startFieldNumber);
           }
         });
-        pusherButton.addListener(new TextTooltip("Pusher", skinFiEdit));
+        pusherButton.addListener(new TextTooltip("Pusher", tTM, skinFiEdit));
         
         stageFiEdit.addActor(importButton);
         stageFiEdit.addActor(exportButton);
@@ -313,14 +325,17 @@ public class FieldeditGUI implements Screen{
 
     @Override
     public void render(float delta) {
-        
+
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+        
         batchFiEdit = (SpriteBatch) stageFiEdit.getBatch(); 
         batchFiEdit.begin();
         batchFiEdit.draw(img, 0, 0, 1280, 720);
-        Board.toAsset(batchFiEdit, boardFiEdit);
+        if(mapChange) {
+            Board.toAsset(batchFiEdit, boardFiEdit);
+            mapChange = false;
+        }
         batchFiEdit.end();
 
         stageFiEdit.act(delta);
@@ -359,5 +374,15 @@ public class FieldeditGUI implements Screen{
     public void dispose() {
         // TODO Auto-generated method stub
         
+    }
+    
+    private int rol(int min, int max, int var) {
+        if (var < max) {
+            var += 1;
+        } else {
+            var = min;
+        }
+        //zeichnen !!!!!!!!!
+        return var;
     }
 }
