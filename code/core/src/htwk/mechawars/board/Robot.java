@@ -689,7 +689,7 @@ public class Robot {
             sprite.setOriginCenter();
             sprite.setRotation(0);
         } else if (dir == Dir.EAST) {
-            sprite.setPosition(tileSize * x,tileSize * y);
+            sprite.setPosition(tileSize * x, tileSize * y);
             sprite.setSize(tileSize, tileSize);
             sprite.setOriginCenter();
             sprite.setRotation(270);
