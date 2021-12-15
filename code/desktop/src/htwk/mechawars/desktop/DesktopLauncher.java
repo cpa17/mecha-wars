@@ -37,7 +37,7 @@ public class DesktopLauncher implements Runnable {
 
     @Option(names = { "-b", "--board" },
             description = "Choose a Gameboard (ChopShopChallenge.txt, VaultAssault.txt)")
-    private String fileName = "ChopShopChallenge.txt";
+    private String fileName = "test.txt";
 
     @Option(names = { "-p", "--player" }, description = "Number of Players")
     int player = 4;
