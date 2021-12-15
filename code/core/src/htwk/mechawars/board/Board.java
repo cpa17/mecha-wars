@@ -927,6 +927,9 @@ public class Board {
         }
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Something went wrong.");
+            e.printStackTrace();
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
         }
     }
 }
