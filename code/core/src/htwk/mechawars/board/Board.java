@@ -454,6 +454,13 @@ public class Board {
                     public void run() {
                         robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
                         robotPosition.turnAction(robot);
+                        // checks whether the robot has been pushed off the board by the turnAction
+                        if (robot.getXcoor() >= fieldmatrix.length
+                                || robot.getYcoor() >= fieldmatrix[0].length
+                                || robot.getXcoor() < 0 || robot.getYcoor() < 0) {
+                            robot.setXcoor(robot.getbackupCopyX());
+                            robot.setYcoor(robot.getbackupCopyY());
+                        }
                     }
                 }, i);
             }

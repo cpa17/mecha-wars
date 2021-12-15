@@ -60,10 +60,11 @@ public class Robot {
      * Method that makes the robot move forward by a field. Therefore the function don't checks
      * whether walls are in the way, because a field never moves a robot towards a wall.
      * @param mov byte of move
+     * @param dir direction in which the field moves the robot
      * @return new position
      */
-    public Robot moveInDirectionByField(byte mov) {
-        switch (getDir()) {
+    public Robot moveInDirectionByField(byte mov, Dir dir) {
+        switch (dir) {
             case NORTH:
                 setYcoor(getYcoor() - mov);
                 return this;
@@ -570,6 +571,7 @@ public class Robot {
      */
     public void setStartX(int startX) {
         this.startX = startX;
+        this.backupCopyX = startX;
     }
 
     /**
@@ -579,6 +581,7 @@ public class Robot {
      */
     public void setStartY(int startY) {
         this.startY = startY;
+        this.backupCopyY = startY;
     }
 
     /**

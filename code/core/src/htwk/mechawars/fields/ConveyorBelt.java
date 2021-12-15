@@ -65,7 +65,31 @@ public class ConveyorBelt extends Field {
     
     @Override
     public Robot turnAction(Robot robot) {
-        if (robot.getLastField() instanceof ConveyorBelt || 
+
+        switch (this.end) {
+            case 1:
+                robot.moveInDirectionByField((byte) 1, Dir.WEST);
+                break;
+
+            case 2:
+                robot.moveInDirectionByField((byte) 1, Dir.NORTH);
+                break;
+
+            case 3:
+                robot.moveInDirectionByField((byte) 1, Dir.EAST);
+                break;
+
+            case 4:
+                robot.moveInDirectionByField((byte) 1, Dir.SOUTH);
+                break;
+
+            default:
+                break;
+        }
+
+
+
+        /*if (robot.getLastField() instanceof ConveyorBelt ||
                 robot.getLastField() instanceof ExpressConveyorBelt) {
             switch (this.end) {
                 case 1 :    
@@ -95,7 +119,7 @@ public class ConveyorBelt extends Field {
                 default : break;
             }
         }
-        robot.moveInDirectionByField((byte) 1);
+        robot.moveInDirectionByField((byte) 1);*/
         return robot;     
     }
     
