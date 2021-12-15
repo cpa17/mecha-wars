@@ -387,7 +387,6 @@ public class Board {
                         @Override
                     public void run() {
                                 robotMovement(card, players[card.getCardPlayerNumber()]);
-                                return;
                                 }
                         },
                             i);
@@ -402,11 +401,9 @@ public class Board {
                 @Override
                 public void run() {
                     for (int playerIndex = 0; playerIndex < players.length; playerIndex++) {
-                        if (!isTest) {
-                            robotPosition = fieldmatrix[players[playerIndex].getXcoor()]
-                                    [players[playerIndex].getYcoor()];
-                            robotPosition.turnAction(players[playerIndex]);
-                        }
+                        robotPosition = fieldmatrix[players[playerIndex].getXcoor()]
+                                [players[playerIndex].getYcoor()];
+                        robotPosition.turnAction(players[playerIndex]);
 
                         checkShutDown(players);
                         players[playerIndex].setLastRound(players[playerIndex].getShutDown());
@@ -418,12 +415,9 @@ public class Board {
             }, 25);
         } else {
             for (int playerIndex = 0; playerIndex < players.length; playerIndex++) {
-                // No delay if this is a test
-                if (isTest) {
-                    robotPosition = fieldmatrix[players[playerIndex].getXcoor()]
-                            [players[playerIndex].getYcoor()];
-                    robotPosition.turnAction(players[playerIndex]);
-                }
+                robotPosition = fieldmatrix[players[playerIndex].getXcoor()]
+                        [players[playerIndex].getYcoor()];
+                robotPosition.turnAction(players[playerIndex]);
 
                 checkShutDown(players);
                 players[playerIndex].setLastRound(players[playerIndex].getShutDown());
@@ -440,7 +434,7 @@ public class Board {
     public void move(Robot[] players, boolean isTest) {
         int maxCardCount = 0; /* keeps track of the max number of cards any robot has
                                 -> determines the number of turns*/
-        LinkedList<LinkedList<Card>> allCards = new LinkedList<LinkedList<Card>>(); 
+        LinkedList<LinkedList<Card>> allCards = new LinkedList<>();
         for (int i = 0; i < ConfigReader.getPlayerNumber(); i++) {
             if (i == 0) {
                 allCards.add(players[0].getSelectedCards()); /* List of Lists of cards,
@@ -453,14 +447,14 @@ public class Board {
                     allCards.add(generatedCards);
                     maxCardCount = Integer.max(generatedCards.size(), maxCardCount);
                 } else {
-                    allCards.add(new LinkedList<Card>());
+                    allCards.add(new LinkedList<>());
                 }
             }
         }
         allCards = Deck.transposeList(maxCardCount, allCards); /* turns a list of List of Cards
                                                                     for each Player into a list 
                                                                of lists of cards for each turn*/
-        move(allCards, players, maxCardCount, false);
+        move(allCards, players, maxCardCount, isTest);
     }
 
     
