@@ -1,0 +1,23 @@
+Protokoll: 15.12.2021
+
+Anwesend: Bernhard fehlte, der Rest war da
+
+Thema: Daily
+
+geführt von: Mark Fiedler, 19MIB-1
+
+## Stand der Tickets
+
+Antonia: fast fertig mit der Implementation des Schiebens der Roboter
+Mark: Programm getestet, MW88 fast fertig
+Konstantik: Field-Editor hat alle grafischen Elemente
+Pascal: Maps fertig gemacht
+Tim: sich mit Konstantin an der GUI gearbeitet
+Marc: Anpassung seines Tickets
+
+## Probleme
+
+- Youtrack noch down
+- Laser problematisch, Laser Umsetzung muss anders implemntiert werden
+- noch Renderprobleme im Editor, es flackert
+
