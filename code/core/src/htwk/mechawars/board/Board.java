@@ -357,87 +357,12 @@ public class Board {
         robot.setDir(dir);
     }
 
-    /**Function that moves all the Robots in one Turn.
-     * @param phase a list of lists of cards, each list of cards represents one turn
-     * @param players array of robots that will be moved
-     * @param maxCardCount the maximum amount of cards one player has -> amount of turns
-     * @param isTest if the method is called in a test context
-     */
-    public void move(LinkedList<LinkedList<Card>> phase, Robot[] players,
-            int maxCardCount, boolean isTest) {
-        
-        if (isTest) {
-            for (int turnIndex = 0; turnIndex < maxCardCount; turnIndex++) { 
-                for (int cardListIndex = 0; cardListIndex < phase.get(turnIndex).size();
-                        cardListIndex++) {
-                    Card card = phase.get(turnIndex).get(cardListIndex);
-                    robotMovement(card, players[card.getCardPlayerNumber()]);
-                }
-            }
-        } else {
-
-            // delay in seconds, increments for each phase in the linked list for another second
-            int i = 0;
-            for (int turnIndex = 0; turnIndex < maxCardCount; turnIndex++) {
-                for (int cardListIndex = 0; cardListIndex < phase.get(turnIndex).size(); 
-                            cardListIndex++) {
-                    Card card = phase.get(turnIndex).get(cardListIndex);
-                    checkShutDown(players);
-                    Timer.schedule(new Task() {
-                        @Override
-                    public void run() {
-                                robotMovement(card, players[card.getCardPlayerNumber()]);
-                                return;
-                                }
-                        },
-                            i);
-                    i += 1;
-                }
-            }
-        }
-        // Delay of 5 seconds for the code to run so that the robot has reached his final position
-        if (!isTest) {
-            Timer.schedule(new Task() {
-
-                @Override
-                public void run() {
-                    for (int playerIndex = 0; playerIndex < players.length; playerIndex++) {
-                        if (!isTest) {
-                            robotPosition = fieldmatrix[players[playerIndex].getXcoor()]
-                                    [players[playerIndex].getYcoor()];
-                            robotPosition.turnAction(players[playerIndex]);
-                        }
-
-                        checkShutDown(players);
-                        players[playerIndex].setLastRound(players[playerIndex].getShutDown());
-                        players[playerIndex].setShutDown(players[playerIndex].getNextRound());
-                        checkDoubleDamage(players);
-                    
-                        }
-                    }
-            }, 25);
-        } else {
-            for (int playerIndex = 0; playerIndex < players.length; playerIndex++) {
-                // No delay if this is a test
-                if (isTest) {
-                    robotPosition = fieldmatrix[players[playerIndex].getXcoor()]
-                            [players[playerIndex].getYcoor()];
-                    robotPosition.turnAction(players[playerIndex]);
-                }
-
-                checkShutDown(players);
-                players[playerIndex].setLastRound(players[playerIndex].getShutDown());
-                players[playerIndex].setShutDown(players[playerIndex].getNextRound());
-                checkDoubleDamage(players);
-            }
-        }
-    }
  
-    
     /**Function that initialises Movement for the Robots.
      * @param players array of all players
      */
     public void move(Robot[] players, boolean isTest) {
+
         int maxCardCount = 0; /* keeps track of the max number of cards any robot has
                                 -> determines the number of turns*/
         LinkedList<LinkedList<Card>> allCards = new LinkedList<LinkedList<Card>>(); 
@@ -457,10 +382,39 @@ public class Board {
                 }
             }
         }
-        allCards = Deck.transposeList(maxCardCount, allCards); /* turns a list of List of Cards
+        allCards = Deck.transposeList(maxCardCount, allCards);  /*turns a list of List of Cards
                                                                     for each Player into a list 
                                                                of lists of cards for each turn*/
-        move(allCards, players, maxCardCount, false);
+        for(int i = 0; i < allCards.size(); i++) {
+            moveSingleTurn(allCards.get(i), players, isTest);
+        }
+        Robot.setPlayers(players);
+        
+        if(players.length == 1 && isTest)
+        {
+            state(players[0]);
+        }
+    
+    if (!isTest) {
+        /* Delay of 5 seconds for the code to run so
+        that the robot has reached his final position */
+
+        for (int i = 1; i <= 9; i = i + 2) {
+            Timer.schedule(new Task() {
+
+                @Override
+                public void run() {
+                    checkRobotLaser(players);
+                    checkBoardLaser(players);
+                }
+            }, i);
+        }
+    } else {
+        checkRobotLaser(players);
+        checkBoardLaser(players);
+    }
+    checkDoubleDamage(players);
+
     }
 
     
@@ -492,12 +446,13 @@ public class Board {
      * @param robot the robot that should move
      */
 
-    public void moveSingleRobot(LinkedList<Card> phase, Robot robot, boolean isTest) {
-        robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-        robot.setLastField(robotPosition);
+    public void moveSingleTurn(LinkedList<Card> phase, Robot[] robots, boolean isTest) {
+        
         if (isTest) {
             for (Card card : phase) {
-                robotMovement(card, robot);
+                robotPosition = fieldmatrix[robots[card.getCardPlayerNumber()].getXcoor()][robots[card.getCardPlayerNumber()].getYcoor()];
+                robots[card.getCardPlayerNumber()].setLastField(robotPosition);
+                robotMovement(card, robots[card.getCardPlayerNumber()]);
             }
         } else {
             /* delay in seconds, increments for each 
@@ -507,7 +462,9 @@ public class Board {
                 Timer.schedule(new Task() {
                     @Override
                     public void run() {
-                        robotMovement(card, robot);
+                        robotPosition = fieldmatrix[robots[card.getCardPlayerNumber()].getXcoor()][robots[card.getCardPlayerNumber()].getYcoor()];
+                        robots[card.getCardPlayerNumber()].setLastField(robotPosition);
+                        robotMovement(card, robots[card.getCardPlayerNumber()]);
                     }
                 }, i);
                 i += 2;
@@ -520,7 +477,9 @@ public class Board {
             Timer.schedule(new Task() {
                 @Override
                 public void run() {
+                    for(Robot robot: robots) {
                     state(robot);
+                    }
                 }
             }, 10);
             // calls turnAction after each card
@@ -528,14 +487,18 @@ public class Board {
                 Timer.schedule(new Task() {
                     @Override
                     public void run() {
+                        for(Robot robot: robots) {
                         robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
                         robotPosition.turnAction(robot);
+                        }
                     }
                 }, i);
             }
         } else {
             // No delay if this is a test
-            state(robot);
+            for(Robot robot: robots) {
+                state(robot);
+                }
         }
     }
 
