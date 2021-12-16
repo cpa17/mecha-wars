@@ -27,7 +27,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
  */
 public class ButtonfunctionsFieldEditor {
 
-    private ArrayList<Integer> actuallField = new ArrayList<>();
+    private ArrayList<Integer> currentField = new ArrayList<>();
     private FieldBackupForBackStep backup = new FieldBackupForBackStep();
 
     private Stage stage;
@@ -75,7 +75,7 @@ public class ButtonfunctionsFieldEditor {
                 openFile(chooser.getSelectedFile());
 
                 // Control, if the field is not to large (because of manual manipulation e.g.)
-                if (actuallField.size() != 144) {
+                if (currentField.size() != 144) {
                     // ErrorDialog
                     Dialog dialogCloseOption = new Dialog("Error beim Laden!"
                             + "Bitte Datei ueberpruefen.",
@@ -92,15 +92,15 @@ public class ButtonfunctionsFieldEditor {
                     dialogCloseOption.key(Input.Keys.ENTER, true);   
 
                     // clean ArrayList
-                    actuallField.clear();
+                    currentField.clear();
                     for (int index = 0; index < 144; index += 1) {
-                        actuallField.add(11000);
+                        currentField.add(11000);
                     }
                 }
             } else {
-                actuallField.clear();
+                currentField.clear();
                 for (int index = 0; index < 144; index += 1) {
-                    actuallField.add(11000);
+                    currentField.add(11000);
                 }
             }
         }
@@ -113,7 +113,7 @@ public class ButtonfunctionsFieldEditor {
      */
     private void openFile(File file) {
 
-        actuallField.clear();
+        currentField.clear();
 
         InputStream istream;
         try {
@@ -123,7 +123,7 @@ public class ButtonfunctionsFieldEditor {
                 String[] arg = reader.nextLine().split(" ");
                 for (int i = 0; i < arg.length; i += 1) {
                     int abc = Integer.parseInt(arg[i]);
-                    actuallField.add(abc);               
+                    currentField.add(abc);               
                 }
             }
             reader.close();
@@ -160,7 +160,7 @@ public class ButtonfunctionsFieldEditor {
     }
 
     /**
-     * Function to save the actuall Field in the File, that the user wanted to use/or create.
+     * Function to save the current Field in the File, that the user wanted to use/or create.
      * 
      * @param file - show the file to save the field.
      */
@@ -171,9 +171,9 @@ public class ButtonfunctionsFieldEditor {
             ostream = new FileOutputStream(file);
             PrintWriter schreiber = new PrintWriter(ostream);
 
-            for (int index = 0; index < actuallField.size(); index += 1) {
+            for (int index = 0; index < currentField.size(); index += 1) {
                 for (int row = 0; row < 12; row += 1) {
-                    schreiber.print(actuallField.get(index) + " ");
+                    schreiber.print(currentField.get(index) + " ");
                 }
                 schreiber.println();
             }
@@ -196,11 +196,11 @@ public class ButtonfunctionsFieldEditor {
     public void resetField() {
 
         for (int index = 0; index < 53; index += 1) {
-            actuallField.set(index, 11000);
+            currentField.set(index, 11000);
         }
-        actuallField.set(53, 10401);
+        currentField.set(53, 10401);
         for (int index = 54; index < 144; index += 1) {
-            actuallField.set(index, 11000);
+            currentField.set(index, 11000);
         }
 
     }
@@ -209,17 +209,17 @@ public class ButtonfunctionsFieldEditor {
      * Set the actuallField, which is draw continuously.
      */
     public void oneStepBack() {
-        actuallField = backup.getBackup();
+        currentField = backup.getBackup();
     }
 
     /**
-     * Saves the actuall change in a hole new (backup)Field.
+     * Saves the current change in a hole new (backup)Field.
      * 
      * @return boolean, that show`s the victorious of the function.
      */
     public boolean oneStepDone() {
         try {
-            backup.addBackup(actuallField);
+            backup.addBackup(currentField);
             return true;
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Error by saving the actuallField.");
@@ -228,14 +228,14 @@ public class ButtonfunctionsFieldEditor {
     }
 
     /**
-     * Gives the Field, that are forward of the actuall Step, when the user accidently make
+     * Gives the Field, that are forward of the current Step, when the user accidently make
      * a Step-Back.
      * 
      * @return boolean, which show of a forward is available of not.
      */
     public boolean oneStepForward() {
         if (backup.getForwardBackup() != null) {
-            actuallField = backup.getForwardBackup();
+            currentField = backup.getForwardBackup();
             return true;
         } else {
             System.out.println("No Step-Forward available!");
@@ -259,11 +259,11 @@ public class ButtonfunctionsFieldEditor {
         return zw;
     }
 
-    public ArrayList<Integer> getActuallField() {
-        return actuallField;
+    public ArrayList<Integer> getCurrentField() {
+        return currentField;
     }
 
-    public void setActuallField(ArrayList<Integer> actuallField) {
-        this.actuallField = actuallField;
+    public void setCurrentField(ArrayList<Integer> currentField) {
+        this.currentField = currentField;
     }
 }
