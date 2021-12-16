@@ -266,4 +266,12 @@ public class ButtonfunctionsFieldEditor {
     public void setCurrentField(ArrayList<Integer> currentField) {
         this.currentField = currentField;
     }
+    
+    /**
+     * Gives the squere-route of the size of arrayList.
+     * @return the squere-route as an int
+     */
+    public int sqrtOfList() {      
+        return (int) Math.sqrt(currentField.size());
+    }
 }
