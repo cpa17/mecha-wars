@@ -2,7 +2,6 @@ package htwk.mechawars.fieldeditor;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,24 +9,19 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextTooltip;
 import com.badlogic.gdx.scenes.scene2d.ui.TooltipManager;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.FocusListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.ScreenUtils;
 
 import htwk.mechawars.MainMenu;
-import htwk.mechawars.MechaWars;
 import htwk.mechawars.board.Board;
-import htwk.mechawars.game.GameScreen;
 
 public class FieldeditGUI implements Screen{
     private Game gameFiEdit;
@@ -132,6 +126,11 @@ public class FieldeditGUI implements Screen{
         barrierCornerButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
 //                drawOnField(x, y, corner);
+                ImageButtonStyle style = new ImageButtonStyle();
+                style.up = new TextureRegionDrawable(
+                        new TextureRegion(new Texture("mapAssets/" + "barriercorner/"
+                                + "BarrierCorner0" + String.valueOf(corner) + ".png")));
+                barrierCornerButton.setStyle(style);
                 corner = ror(1, 4, corner);
             }
         });
