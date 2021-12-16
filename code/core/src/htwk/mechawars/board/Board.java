@@ -347,10 +347,6 @@ public class Board {
         
         int randomNumber =  ThreadLocalRandom.current().nextInt(min, max + 1);
         
-        while (randomNumber == 0) {
-            
-        }
-
         if (!isTest) {
             for (int i = 0; i < fieldmatrix.length; i++) {
                 for (int j = 0; j < fieldmatrix[i].length; j++) {
