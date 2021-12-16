@@ -19,6 +19,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
+import htwk.mechawars.fields.Field;
+
 /**
  * ButtonFunctions for the FieldEditor.
  * 
@@ -234,6 +236,22 @@ public class ButtonfunctionsFieldEditor {
             System.out.println("No Step-Forward available!");
             return false;
         }
+    }
+    
+    /**
+     * Create an int[][]-Array out of the given ArrayList.
+     * 
+     * @param list -> the src-data for the int-Array
+     * @return an int[][] with 12x12 
+     */
+    public int[][] listToIntArray(ArrayList<Integer> list){
+        int[][] zw = new int[12][12];
+        for (int index = 0; index < 12; index += 1) {
+            for (int i = 0; i < 12; i += 1) {
+                zw[index][i] = list.get(index + i);
+            }
+        }
+        return zw;
     }
 
     public ArrayList<Integer> getActuallField() {
