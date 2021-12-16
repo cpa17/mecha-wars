@@ -59,6 +59,7 @@ public class FieldeditGUI implements Screen{
             new ButtonfunctionsFieldEditor(stageFiEdit, skinFiEdit);
     private int mouseX = 0;
     private int mouseY = 0;
+    private int fieldNumber = 0;
     private int[][] fieldMatrixInt;
     
     public FieldeditGUI(FieldEditor fieldEditor, String map) {
@@ -303,7 +304,8 @@ public class FieldeditGUI implements Screen{
         standardFieldButton.setPosition(picButtonPosX + 90, picButtonPosY - 270);
         standardFieldButton.addListener(new ClickListener() {
           public void clicked(InputEvent event, float x, float y) {
-//              drawOnField(x, y);
+              buFiEdit.setCurrentField(fieldNumber, 10109);
+//              drawOnField(mouseX, mouseY);
           }
         });
         standardFieldButton.addListener(new TextTooltip("Standard Feld", tTM, skinFiEdit));
@@ -450,6 +452,12 @@ public class FieldeditGUI implements Screen{
         this.fieldMatrixInt = new int[buFiEdit.sqrtOfList()]
                 [buFiEdit.sqrtOfList()];
         fieldMatrixInt = buFiEdit.listToIntArray(buFiEdit.getCurrentField());
+        
+        for (int i = 0; i < fieldMatrixInt.length; i +=1 ) {
+            for (int j = 0; j < fieldMatrixInt.length; j += 1) {
+                boardFiEdit.intToFieldMatrix(fieldMatrixInt, false);
+            }
+        }        
         buFiEdit.oneStepDone();
     }
 }

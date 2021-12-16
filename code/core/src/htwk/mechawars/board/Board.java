@@ -125,7 +125,7 @@ public class Board {
      *
      * @param matrix A int matrix
      */
-    private void intToFieldMatrix(int[][] matrix, boolean isTest) {
+    public void intToFieldMatrix(int[][] matrix, boolean isTest) {
         this.fieldmatrix = new Field[matrix.length][matrix[0].length];
         int[] allowed;
         for (int col = 0; col < matrix.length; col++) {

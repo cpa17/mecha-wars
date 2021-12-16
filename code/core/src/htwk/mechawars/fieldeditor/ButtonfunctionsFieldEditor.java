@@ -263,8 +263,8 @@ public class ButtonfunctionsFieldEditor {
         return currentField;
     }
 
-    public void setCurrentField(ArrayList<Integer> currentField) {
-        this.currentField = currentField;
+    public void setCurrentField(int index, int type) {
+        currentField.set(index, type);
     }
 
     /**
