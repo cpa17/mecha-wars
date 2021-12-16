@@ -126,11 +126,11 @@ public class FieldeditGUI implements Screen{
         barrierCornerButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
 //                drawOnField(x, y, corner);
-                ImageButtonStyle style = new ImageButtonStyle();
-                style.up = new TextureRegionDrawable(
+                ImageButtonStyle styleFiEdit = new ImageButtonStyle();
+                styleFiEdit.up = new TextureRegionDrawable(
                         new TextureRegion(new Texture("mapAssets/" + "barriercorner/"
                                 + "BarrierCorner0" + String.valueOf(corner) + ".png")));
-                barrierCornerButton.setStyle(style);
+                barrierCornerButton.setStyle(styleFiEdit);
                 corner = ror(1, 4, corner);
             }
         });
