@@ -144,6 +144,11 @@ public class FieldeditGUI implements Screen{
         barrierSideButton.addListener(new ClickListener() {
           public void clicked(InputEvent event, float x, float y) {
 //              drawOnField(x, y, side);
+              ImageButtonStyle styleFiEdit = new ImageButtonStyle();
+              styleFiEdit.up = new TextureRegionDrawable(
+                      new TextureRegion(new Texture("mapAssets/" + "barrierside/"
+                              + "BarrierSide" + String.valueOf(side) + ".png")));
+              barrierSideButton.setStyle(styleFiEdit);
               side = ror(1, 4, side);
           }
         });
@@ -168,6 +173,11 @@ public class FieldeditGUI implements Screen{
         checkpointButton.addListener(new ClickListener() {
           public void clicked(InputEvent event, float x, float y) {
 //              drawOnField(x, y, checkpointNumber);
+              ImageButtonStyle styleFiEdit = new ImageButtonStyle();
+              styleFiEdit.up = new TextureRegionDrawable(
+                      new TextureRegion(new Texture("mapAssets/checkpoints/Check" 
+                              + checkpointNumber + ".png")));
+              checkpointButton.setStyle(styleFiEdit);
               checkpointNumber = ror(1, 8, checkpointNumber);
           }
         });
@@ -182,8 +192,18 @@ public class FieldeditGUI implements Screen{
         conveyorBeltButton.addListener(new ClickListener() {
           public void clicked(InputEvent event, float x, float y) {
 //              drawOnField(x, y, endConveyor);
+              ImageButtonStyle styleFiEdit = new ImageButtonStyle();
+              styleFiEdit.up = new TextureRegionDrawable(
+                      new TextureRegion(new Texture("mapAssets/" + "conveyorBelt/"
+                              + "ConveyorBelt" + String.valueOf(startConveyor) 
+                              + String.valueOf(endConveyor) + ".png")));
+              conveyorBeltButton.setStyle(styleFiEdit);
               startConveyor = ror(0, 9, startConveyor);
-              endConveyor = ror(1, 4, endConveyor);
+              if (!(((startConveyor == 5) && (endConveyor == 2)) ||
+                      (startConveyor == 6) && (endConveyor == 1) ||
+                      (startConveyor == 8) && (endConveyor == 4))) {
+                  endConveyor = ror(1, 4, endConveyor);
+              }
           }
         });
         conveyorBeltButton.addListener(new TextTooltip("Conveyorbelt", tTM, skinFiEdit));
@@ -197,8 +217,18 @@ public class FieldeditGUI implements Screen{
         expressConveyorBeltButton.addListener(new ClickListener() {
           public void clicked(InputEvent event, float x, float y) {
 //              drawOnField(x, y, endExpressConveyor);
+              ImageButtonStyle styleFiEdit = new ImageButtonStyle();
+              styleFiEdit.up = new TextureRegionDrawable(
+                      new TextureRegion(new Texture("mapAssets/" + "expressconveyorBelt/"
+                              + "ExpressConveyorBelt" + String.valueOf(startExpressConveyor) 
+                              + String.valueOf(endExpressConveyor) + ".png")));
+              expressConveyorBeltButton.setStyle(styleFiEdit);
               startExpressConveyor = ror(0, 9, startExpressConveyor);
-              endExpressConveyor = ror(1, 4, endExpressConveyor);
+              if (!(((startExpressConveyor == 5) && (endExpressConveyor == 2)) ||
+                      (startExpressConveyor == 6) && (endExpressConveyor == 1) ||
+                      (startExpressConveyor == 8) && (endExpressConveyor == 4))) {
+                  endExpressConveyor = ror(1, 4, endExpressConveyor);
+              }
           }
         });
         expressConveyorBeltButton.addListener(new TextTooltip("Express Conveyorbelt", 
@@ -221,8 +251,13 @@ public class FieldeditGUI implements Screen{
         gearButton.setPosition(picButtonPosX + 90, picButtonPosY - 180);
         gearButton.addListener(new ClickListener() {
           public void clicked(InputEvent event, float x, float y) {
-              gearNumber = ror(1, 2, gearNumber);
 //              drawOnField(x, y, gearNumber);
+              ImageButtonStyle styleFiEdit = new ImageButtonStyle();
+              styleFiEdit.up = new TextureRegionDrawable(
+                      new TextureRegion(new Texture("mapAssets/gear/Gear0" + gearNumber 
+                              + ".png")));
+              gearButton.setStyle(styleFiEdit);
+              gearNumber = ror(1, 2, gearNumber);
           }
         });
         gearButton.addListener(new TextTooltip("Gear", tTM, skinFiEdit));
@@ -234,8 +269,13 @@ public class FieldeditGUI implements Screen{
         laserButton.setPosition(picButtonPosX + 180, picButtonPosY - 180);
         laserButton.addListener(new ClickListener() {
           public void clicked(InputEvent event, float x, float y) {
-              typeLaserNum = ror(0, 9, typeLaserNum);
 //              drawOnField(x, y, typeLaser);
+              ImageButtonStyle styleFiEdit = new ImageButtonStyle();
+              styleFiEdit.up = new TextureRegionDrawable(
+                      new TextureRegion(new Texture("mapAssets/" + "laser/"
+                              + "Laser0" + String.valueOf(typeLaserNum) + ".png")));
+              laserButton.setStyle(styleFiEdit);
+              typeLaserNum = ror(0, 9, typeLaserNum);
           }
         });
         laserButton.addListener(new TextTooltip("Laser", tTM, skinFiEdit));
@@ -247,8 +287,13 @@ public class FieldeditGUI implements Screen{
         repairSiteButton.setPosition(picButtonPosX, picButtonPosY - 270);
         repairSiteButton.addListener(new ClickListener() {
           public void clicked(InputEvent event, float x, float y) {
-              repairNum = ror(1, 2, repairNum);
 //              drawOnField(x, y, repairNum);
+              ImageButtonStyle styleFiEdit = new ImageButtonStyle();
+              styleFiEdit.up = new TextureRegionDrawable(
+                      new TextureRegion(new Texture("mapAssets/repairsite/RepairSite0" 
+                              + repairNum + ".png")));
+              repairSiteButton.setStyle(styleFiEdit);
+              repairNum = ror(1, 2, repairNum);
           }
         });
         repairSiteButton.addListener(new TextTooltip("Repair Site", tTM, skinFiEdit));
@@ -271,8 +316,13 @@ public class FieldeditGUI implements Screen{
         startFieldButton.setPosition(picButtonPosX + 180, picButtonPosY - 270);
         startFieldButton.addListener(new ClickListener() {
           public void clicked(InputEvent event, float x, float y) {
-              startFieldNumber = ror(1, 8, startFieldNumber);
 //              drawOnField(x, y, startFieldNumber);
+              ImageButtonStyle styleFiEdit = new ImageButtonStyle();
+              styleFiEdit.up = new TextureRegionDrawable(
+                      new TextureRegion(new Texture("mapAssets/" + "startfield/"
+                              + "StartField0" + String.valueOf(startFieldNumber) + ".png")));
+              startFieldButton.setStyle(styleFiEdit);
+              startFieldNumber = ror(1, 8, startFieldNumber);
           }
         });
         startFieldButton.addListener(new TextTooltip("Start Feld", tTM, skinFiEdit));
@@ -282,10 +332,15 @@ public class FieldeditGUI implements Screen{
                         + "Pusher0" + String.valueOf(pusherNumber) + ".png"))));
         pusherButton.setSize(picButtonSize, picButtonSize);
         pusherButton.setPosition(picButtonPosX + 90, picButtonPosY - 360);
-        startFieldButton.addListener(new ClickListener() {
+        pusherButton.addListener(new ClickListener() {
           public void clicked(InputEvent event, float x, float y) {
+//              drawOnField(x, y, pusherNumber);
+              ImageButtonStyle styleFiEdit = new ImageButtonStyle();
+              styleFiEdit.up = new TextureRegionDrawable(
+                      new TextureRegion(new Texture("mapAssets/" + "pusher/"
+                              + "Pusher0" + String.valueOf(pusherNumber) + ".png")));
+              pusherButton.setStyle(styleFiEdit);
               pusherNumber = ror(1, 4, pusherNumber);
-//              drawOnField(x, y, startFieldNumber);
           }
         });
         pusherButton.addListener(new TextTooltip("Pusher", tTM, skinFiEdit));
