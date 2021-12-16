@@ -43,7 +43,7 @@ public class ButtonfunctionsFieldEditor {
     /**
      * Only for the warnings.
      * 
-     * @param t -> say if the functions will be called.
+     * @param t -> says if the functions will be called.
      */
     public ButtonfunctionsFieldEditor(Stage stage, Skin skin, boolean t) {
         this.stage = stage;
@@ -61,7 +61,7 @@ public class ButtonfunctionsFieldEditor {
     /**
      * Function, that manage the import of a Map.
      */
-    private void importField() {
+    public void importField() {
         
         JFileChooser chooser = new JFileChooser();
 
@@ -131,7 +131,7 @@ public class ButtonfunctionsFieldEditor {
     /**
      * Manage the exportfunction, to save a field in a .txt file permanently.
      */
-    private void exportField() {
+    public void exportField() {
         
         JFrame saveDialog = new JFrame();           
         JFileChooser fileChooser = new JFileChooser();
@@ -159,7 +159,7 @@ public class ButtonfunctionsFieldEditor {
      * 
      * @param file - show the file to save the field.
      */
-    public boolean save(File file) {
+    private boolean save(File file) {
         
         OutputStream ostream;
         try {
@@ -188,7 +188,7 @@ public class ButtonfunctionsFieldEditor {
      * Reset the hole(/y) Field. That means, everyfield is a "standard-Field" and at the center
      * is the startposition of the robot. 
      */
-    private void resetField() {
+    public void resetField() {
         
         for (int index = 0; index < 53; index += 1) {
             actuallField.set(index, 11000);
@@ -203,7 +203,7 @@ public class ButtonfunctionsFieldEditor {
     /**
      * Set the actuallField, which is draw continuously.
      */
-    private void oneStepBack() {
+    public void oneStepBack() {
         actuallField = backup.getBackup();
     }
     
@@ -212,7 +212,7 @@ public class ButtonfunctionsFieldEditor {
      * 
      * @return boolean, that show`s the victorious of the function.
      */
-    private boolean oneStepDone() {
+    public boolean oneStepDone() {
         try {
             backup.addBackup(actuallField);
             return true;
@@ -228,7 +228,7 @@ public class ButtonfunctionsFieldEditor {
      * 
      * @return boolean, which show of a forward is available of not.
      */
-    private boolean oneStepForward() {
+    public boolean oneStepForward() {
         if (backup.getForwardBackup() != null) {
             actuallField = backup.getForwardBackup();
             return true;

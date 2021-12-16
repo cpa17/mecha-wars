@@ -53,7 +53,10 @@ public class FieldeditGUI implements Screen{
     private int pusherNumber = 1; //Number of Pusher
     private boolean backToMain = false;
     private boolean mapChange = true;
-    private TooltipManager tTM = new TooltipManager() ;
+    private TooltipManager tTM = new TooltipManager();
+    protected Skin skinFiEdit = new Skin(Gdx.files.internal("skinMenu/star-soldier-ui.json"));
+    private ButtonfunctionsFieldEditor buFiEdit = 
+            new ButtonfunctionsFieldEditor(stageFiEdit, skinFiEdit);
     
     public FieldeditGUI(FieldEditor fieldEditor, String map) {
         
@@ -64,7 +67,6 @@ public class FieldeditGUI implements Screen{
         stageFiEdit = new Stage();
         
         img = new Texture(Gdx.files.internal("background.png"));
-        Skin skinFiEdit = new Skin(Gdx.files.internal("skinMenu/star-soldier-ui.json"));
         Gdx.input.setInputProcessor(stageFiEdit);
         
         TextButton importButton = new TextButton("Import", skinFiEdit);
@@ -73,9 +75,8 @@ public class FieldeditGUI implements Screen{
         importButton.setSize(buttonWidth, buttonHeight);
         importButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                
+                buFiEdit.importField();
             }
-//                            importieren(skinFEdit);
         });
         
         TextButton exportButton = new TextButton("Export", skinFiEdit);
