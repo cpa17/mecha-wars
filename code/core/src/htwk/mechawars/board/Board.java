@@ -385,35 +385,34 @@ public class Board {
         allCards = Deck.transposeList(maxCardCount, allCards);  /*turns a list of List of Cards
                                                                     for each Player into a list 
                                                                of lists of cards for each turn*/
-        for(int i = 0; i < allCards.size(); i++) {
+        for (int i = 0; i < allCards.size(); i++) {
             moveSingleTurn(allCards.get(i), players, isTest);
         }
         Robot.setPlayers(players);
         
-        if(players.length == 1 && isTest)
-        {
+        if (players.length == 1 && isTest) {
             state(players[0]);
         }
     
-    if (!isTest) {
-        /* Delay of 5 seconds for the code to run so
-        that the robot has reached his final position */
+        if (!isTest) {
+            /* Delay of 5 seconds for the code to run so
+            that the robot has reached his final position */
 
-        for (int i = 1; i <= 9; i = i + 2) {
-            Timer.schedule(new Task() {
+            for (int i = 1; i <= 9; i = i + 2) {
+                Timer.schedule(new Task() {
 
-                @Override
+                    @Override
                 public void run() {
-                    checkRobotLaser(players);
-                    checkBoardLaser(players);
-                }
-            }, i);
+                        checkRobotLaser(players);
+                        checkBoardLaser(players);
+                    }
+                }, i);
+            }
+        }   else {
+            checkRobotLaser(players);
+            checkBoardLaser(players);
         }
-    } else {
-        checkRobotLaser(players);
-        checkBoardLaser(players);
-    }
-    checkDoubleDamage(players);
+        checkDoubleDamage(players);
 
     }
 
@@ -443,14 +442,15 @@ public class Board {
      * Method that moves the robot in the matrix.
      *
      * @param phase List of cards
-     * @param robot the robot that should move
+     * @param robots the robots that should move
      */
 
     public void moveSingleTurn(LinkedList<Card> phase, Robot[] robots, boolean isTest) {
         
         if (isTest) {
             for (Card card : phase) {
-                robotPosition = fieldmatrix[robots[card.getCardPlayerNumber()].getXcoor()][robots[card.getCardPlayerNumber()].getYcoor()];
+                robotPosition = fieldmatrix[robots[card.getCardPlayerNumber()].getXcoor()]
+                        [robots[card.getCardPlayerNumber()].getYcoor()];
                 robots[card.getCardPlayerNumber()].setLastField(robotPosition);
                 robotMovement(card, robots[card.getCardPlayerNumber()]);
             }
@@ -462,7 +462,8 @@ public class Board {
                 Timer.schedule(new Task() {
                     @Override
                     public void run() {
-                        robotPosition = fieldmatrix[robots[card.getCardPlayerNumber()].getXcoor()][robots[card.getCardPlayerNumber()].getYcoor()];
+                        robotPosition = fieldmatrix[robots[card.getCardPlayerNumber()].getXcoor()]
+                                [robots[card.getCardPlayerNumber()].getYcoor()];
                         robots[card.getCardPlayerNumber()].setLastField(robotPosition);
                         robotMovement(card, robots[card.getCardPlayerNumber()]);
                     }
@@ -477,8 +478,8 @@ public class Board {
             Timer.schedule(new Task() {
                 @Override
                 public void run() {
-                    for(Robot robot: robots) {
-                    state(robot);
+                    for (Robot robot : robots) {
+                        state(robot);
                     }
                 }
             }, 10);
@@ -487,18 +488,18 @@ public class Board {
                 Timer.schedule(new Task() {
                     @Override
                     public void run() {
-                        for(Robot robot: robots) {
-                        robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-                        robotPosition.turnAction(robot);
+                        for (Robot robot : robots) {
+                            robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+                            robotPosition.turnAction(robot);
                         }
                     }
                 }, i);
             }
         } else {
             // No delay if this is a test
-            for(Robot robot: robots) {
+            for (Robot robot : robots) {
                 state(robot);
-                }
+            }
         }
     }
 

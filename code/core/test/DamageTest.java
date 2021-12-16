@@ -74,7 +74,7 @@ public class DamageTest {
          *   Life: 3
          * */
 
-//        assertEquals(2, robot[0].getDamagePoints());
+        assertEquals(2, robot[0].getDamagePoints());
         assertFalse(robot[0].getShutDown());
         assertFalse(robot[0].getDestroyed());
         assertEquals(3, robot[0].getLifePoints());
