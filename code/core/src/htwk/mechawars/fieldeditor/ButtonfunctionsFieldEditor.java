@@ -19,8 +19,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
-import htwk.mechawars.fields.Field;
-
 /**
  * ButtonFunctions for the FieldEditor.
  * 
@@ -31,7 +29,7 @@ public class ButtonfunctionsFieldEditor {
 
     private ArrayList<Integer> actuallField = new ArrayList<>();
     private FieldBackupForBackStep backup = new FieldBackupForBackStep();
-    
+
     private Stage stage;
     private Skin skin;
 
@@ -39,7 +37,7 @@ public class ButtonfunctionsFieldEditor {
         this.stage = stage;
         this.skin = skin;
     }
-    
+
     /**
      * Only for the warnings.
      * 
@@ -62,7 +60,7 @@ public class ButtonfunctionsFieldEditor {
      * Function, that manage the import of a Map.
      */
     public void importField() {
-        
+
         JFileChooser chooser = new JFileChooser();
 
         chooser.setDialogTitle("Map oeffnen");
@@ -73,34 +71,41 @@ public class ButtonfunctionsFieldEditor {
 
         int chooseroption = chooser.showOpenDialog(null);
         if (chooseroption == JFileChooser.APPROVE_OPTION) {
-            openFile(chooser.getSelectedFile());
-        }
-        
-        // Control, if the field is not to large (because of manual manipulation e.g.)
-        if (actuallField.size() != 144) {
-            // ErrorDialog
-            Dialog dialogCloseOption = new Dialog("Error beim Laden! Bitte Datei ueberpruefen.",
-                    skin) {
-                @Override
-                protected void result(Object object) {
-                    remove();
+            if (chooser.getSelectedFile().toString().matches("(.*)" + ".txt")) {
+                openFile(chooser.getSelectedFile());
+
+                // Control, if the field is not to large (because of manual manipulation e.g.)
+                if (actuallField.size() != 144) {
+                    // ErrorDialog
+                    Dialog dialogCloseOption = new Dialog("Error beim Laden!"
+                            + "Bitte Datei ueberpruefen.",
+                            skin) {
+                        @Override
+                        protected void result(Object object) {
+                            remove();
+                        }
+                    }.show(stage);
+
+                    dialogCloseOption.setSize(450, 110);
+
+                    dialogCloseOption.button("Verstanden.", true);
+                    dialogCloseOption.key(Input.Keys.ENTER, true);   
+
+                    // clean ArrayList
+                    actuallField.clear();
+                    for (int index = 0; index < 144; index += 1) {
+                        actuallField.add(11000);
+                    }
                 }
-            }.show(stage);
-
-            dialogCloseOption.setSize(450, 110);
-
-            dialogCloseOption.button("Verstanden.", true);
-            dialogCloseOption.key(Input.Keys.ENTER, true);   
-            
-            // clean ArrayList
-            actuallField.clear();
-            for (int index = 0; index < 144; index += 1) {
-                actuallField.add(11000);
+            } else {
+                actuallField.clear();
+                for (int index = 0; index < 144; index += 1) {
+                    actuallField.add(11000);
+                }
             }
         }
-        
     }
-    
+
     /**
      * Function, that manage the Inputstream of the choosen file.
      * 
@@ -132,7 +137,7 @@ public class ButtonfunctionsFieldEditor {
      * Manage the exportfunction, to save a field in a .txt file permanently.
      */
     public void exportField() {
-        
+
         JFrame saveDialog = new JFrame();           
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Datei speichern unter...");  
@@ -153,14 +158,14 @@ public class ButtonfunctionsFieldEditor {
         }
 
     }
-    
+
     /**
      * Function to save the actuall Field in the File, that the user wanted to use/or create.
      * 
      * @param file - show the file to save the field.
      */
     private boolean save(File file) {
-        
+
         OutputStream ostream;
         try {
             ostream = new FileOutputStream(file);
@@ -174,14 +179,14 @@ public class ButtonfunctionsFieldEditor {
             }
 
             schreiber.close();
-            
+
             return true;
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(null, "Fehler!");
             e.printStackTrace();
             return false;
         }
-        
+
     }
 
     /**
@@ -189,7 +194,7 @@ public class ButtonfunctionsFieldEditor {
      * is the startposition of the robot. 
      */
     public void resetField() {
-        
+
         for (int index = 0; index < 53; index += 1) {
             actuallField.set(index, 11000);
         }
@@ -206,7 +211,7 @@ public class ButtonfunctionsFieldEditor {
     public void oneStepBack() {
         actuallField = backup.getBackup();
     }
-    
+
     /**
      * Saves the actuall change in a hole new (backup)Field.
      * 
@@ -221,7 +226,7 @@ public class ButtonfunctionsFieldEditor {
             return false;
         }
     }
-    
+
     /**
      * Gives the Field, that are forward of the actuall Step, when the user accidently make
      * a Step-Back.
@@ -237,7 +242,7 @@ public class ButtonfunctionsFieldEditor {
             return false;
         }
     }
-    
+
     /**
      * Create an int[][]-Array out of the given ArrayList.
      * 
