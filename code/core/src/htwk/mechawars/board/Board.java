@@ -472,7 +472,7 @@ public class Board {
         }
 
         // Delay of 15 seconds for the state-function to run so that the robot has reached his
-        // final position
+        // final position.
         if (!isTest) {
             Timer.schedule(new Task() {
                 @Override
