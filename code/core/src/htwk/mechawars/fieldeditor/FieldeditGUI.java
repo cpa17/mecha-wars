@@ -85,8 +85,7 @@ public class FieldeditGUI implements Screen{
         exportButton.setSize(buttonWidth, buttonHeight);
         exportButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                    
-//                            exportieren(skinFEdit);
+                buFiEdit.exportField();
             }
         });
         
@@ -96,9 +95,7 @@ public class FieldeditGUI implements Screen{
         backButton.setSize(buttonWidth, buttonHeight);
         backButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-
-//                zurueck();
-                
+                buFiEdit.oneStepBack();
             }
         });
         
@@ -108,9 +105,7 @@ public class FieldeditGUI implements Screen{
         clearButton.setSize(buttonWidth, buttonHeight);
         clearButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-
-//                resetField();
-                
+                buFiEdit.resetField();
             }
         });
         

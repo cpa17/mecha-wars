@@ -65,7 +65,7 @@ public class ButtonfunctionsFieldEditor {
         
         JFileChooser chooser = new JFileChooser();
 
-        chooser.setDialogTitle("Link-Liste oeffnen");
+        chooser.setDialogTitle("Map oeffnen");
 
         // Startfolder
         File filepfadLinkListe = new File("code\\desktop\\bin\\main");
