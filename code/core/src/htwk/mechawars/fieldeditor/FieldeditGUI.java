@@ -393,10 +393,10 @@ public class FieldeditGUI implements Screen{
         batchFiEdit = (SpriteBatch) stageFiEdit.getBatch();
         batchFiEdit.begin();
         batchFiEdit.draw(img, 0, 0, 1280, 720);
-        if(mapChange) {
-            Board.toAsset(batchFiEdit, boardFiEdit);
-            mapChange = false;
-        }
+        Board.toAsset(batchFiEdit, boardFiEdit);
+//        if(mapChange) {
+//            mapChange = false;
+//        }
         batchFiEdit.end();
 
         stageFiEdit.act(delta);
