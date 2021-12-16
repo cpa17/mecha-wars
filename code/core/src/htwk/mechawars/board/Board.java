@@ -413,8 +413,6 @@ public class Board {
      */
     public void moveSingleRobot(LinkedList<Card> phase,
                                 Robot robot, Robot[] players, boolean isTest) {
-        robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-        robot.setLastField(robotPosition);
         if (isTest) {
             for (Card card : phase) {
                 robotMovement(card, robot, players);
@@ -492,6 +490,7 @@ public class Board {
                 player.setYcoor(player.getStartY());
             }
         }
+        robot.setLastMovementByConveyor(false);
     }
 
     /**
