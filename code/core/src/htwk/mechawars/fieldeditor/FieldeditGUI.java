@@ -57,6 +57,9 @@ public class FieldeditGUI implements Screen{
     protected Skin skinFiEdit = new Skin(Gdx.files.internal("skinMenu/star-soldier-ui.json"));
     private ButtonfunctionsFieldEditor buFiEdit = 
             new ButtonfunctionsFieldEditor(stageFiEdit, skinFiEdit);
+    private int mouseX = 0;
+    private int mouseY = 0;
+    private int[][] fieldMatrixInt;
     
     public FieldeditGUI(FieldEditor fieldEditor, String map) {
         
@@ -441,5 +444,11 @@ public class FieldeditGUI implements Screen{
         }
         //zeichnen !!!!!!!!!
         return var;
+    }
+    
+    private void drawOnField() {
+        this.fieldMatrixInt = new int[buFiEdit.getCurrentField().size()]
+                [buFiEdit.getCurrentField().size()];
+        buFiEdit.oneStepDone();
     }
 }
