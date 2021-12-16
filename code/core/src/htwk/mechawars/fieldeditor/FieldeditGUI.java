@@ -53,7 +53,7 @@ public class FieldeditGUI implements Screen{
     private int startExpressConveyor = 4; //start of ExpressConveyorButton
     private int endExpressConveyor = 2; //end of ExpressConveyorButton
     private int gearNumber = 1; //number of GearButton
-    private int typeLaser = 0; //type of LaserButton
+    private int typeLaserNum = 0; //number of type of LaserButton
     private int repairNum = 2; //number of RepairButton
     private int startFieldNumber = 1; //number of StartFieldButton
     private int pusherNumber = 1; //Number of Pusher
@@ -64,6 +64,8 @@ public class FieldeditGUI implements Screen{
     public FieldeditGUI(FieldEditor fieldEditor, String map) {
         
         tTM.instant();
+        tTM.animations = false;
+        tTM.initialTime = 0;
         initBoardFiEdit(map);
         stageFiEdit = new Stage();
         
@@ -130,7 +132,7 @@ public class FieldeditGUI implements Screen{
         barrierCornerButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
 //                drawOnField(x, y, corner);
-                rol(1, 4, corner);
+                corner = ror(1, 4, corner);
             }
         });
         barrierCornerButton.addListener(new TextTooltip("Barrier Corner", tTM, skinFiEdit));
@@ -143,7 +145,7 @@ public class FieldeditGUI implements Screen{
         barrierSideButton.addListener(new ClickListener() {
           public void clicked(InputEvent event, float x, float y) {
 //              drawOnField(x, y, side);
-              rol(1, 4, side);
+              side = ror(1, 4, side);
           }
         });
         barrierSideButton.addListener(new TextTooltip("Barrier Side", tTM, skinFiEdit));
@@ -167,7 +169,7 @@ public class FieldeditGUI implements Screen{
         checkpointButton.addListener(new ClickListener() {
           public void clicked(InputEvent event, float x, float y) {
 //              drawOnField(x, y, checkpointNumber);
-              rol(1, 8, checkpointNumber);
+              checkpointNumber = ror(1, 8, checkpointNumber);
           }
         });
         checkpointButton.addListener(new TextTooltip("Checkpoint", tTM, skinFiEdit));
@@ -181,8 +183,8 @@ public class FieldeditGUI implements Screen{
         conveyorBeltButton.addListener(new ClickListener() {
           public void clicked(InputEvent event, float x, float y) {
 //              drawOnField(x, y, endConveyor);
-              rol(0, 9, startConveyor);
-              rol(1, 4, endConveyor);
+              startConveyor = ror(0, 9, startConveyor);
+              endConveyor = ror(1, 4, endConveyor);
           }
         });
         conveyorBeltButton.addListener(new TextTooltip("Conveyorbelt", tTM, skinFiEdit));
@@ -196,8 +198,8 @@ public class FieldeditGUI implements Screen{
         expressConveyorBeltButton.addListener(new ClickListener() {
           public void clicked(InputEvent event, float x, float y) {
 //              drawOnField(x, y, endExpressConveyor);
-              rol(0, 9, startExpressConveyor);
-              rol(1, 4, endExpressConveyor);
+              startExpressConveyor = ror(0, 9, startExpressConveyor);
+              endExpressConveyor = ror(1, 4, endExpressConveyor);
           }
         });
         expressConveyorBeltButton.addListener(new TextTooltip("Express Conveyorbelt", 
@@ -220,6 +222,7 @@ public class FieldeditGUI implements Screen{
         gearButton.setPosition(picButtonPosX + 90, picButtonPosY - 180);
         gearButton.addListener(new ClickListener() {
           public void clicked(InputEvent event, float x, float y) {
+              gearNumber = ror(1, 2, gearNumber);
 //              drawOnField(x, y, gearNumber);
           }
         });
@@ -227,11 +230,12 @@ public class FieldeditGUI implements Screen{
         
         ImageButton laserButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "laser/"
-                        + "Laser0" + String.valueOf(typeLaser) + ".png"))));
+                        + "Laser0" + String.valueOf(typeLaserNum) + ".png"))));
         laserButton.setSize(picButtonSize, picButtonSize);
         laserButton.setPosition(picButtonPosX + 180, picButtonPosY - 180);
         laserButton.addListener(new ClickListener() {
           public void clicked(InputEvent event, float x, float y) {
+              typeLaserNum = ror(0, 9, typeLaserNum);
 //              drawOnField(x, y, typeLaser);
           }
         });
@@ -244,6 +248,7 @@ public class FieldeditGUI implements Screen{
         repairSiteButton.setPosition(picButtonPosX, picButtonPosY - 270);
         repairSiteButton.addListener(new ClickListener() {
           public void clicked(InputEvent event, float x, float y) {
+              repairNum = ror(1, 2, repairNum);
 //              drawOnField(x, y, repairNum);
           }
         });
@@ -267,6 +272,7 @@ public class FieldeditGUI implements Screen{
         startFieldButton.setPosition(picButtonPosX + 180, picButtonPosY - 270);
         startFieldButton.addListener(new ClickListener() {
           public void clicked(InputEvent event, float x, float y) {
+              startFieldNumber = ror(1, 8, startFieldNumber);
 //              drawOnField(x, y, startFieldNumber);
           }
         });
@@ -279,6 +285,7 @@ public class FieldeditGUI implements Screen{
         pusherButton.setPosition(picButtonPosX + 90, picButtonPosY - 360);
         startFieldButton.addListener(new ClickListener() {
           public void clicked(InputEvent event, float x, float y) {
+              pusherNumber = ror(1, 4, pusherNumber);
 //              drawOnField(x, y, startFieldNumber);
           }
         });
@@ -329,7 +336,7 @@ public class FieldeditGUI implements Screen{
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         
-        batchFiEdit = (SpriteBatch) stageFiEdit.getBatch(); 
+        batchFiEdit = (SpriteBatch) stageFiEdit.getBatch();
         batchFiEdit.begin();
         batchFiEdit.draw(img, 0, 0, 1280, 720);
         if(mapChange) {
@@ -376,7 +383,7 @@ public class FieldeditGUI implements Screen{
         
     }
     
-    private int rol(int min, int max, int var) {
+    private int ror(int min, int max, int var) {
         if (var < max) {
             var += 1;
         } else {
