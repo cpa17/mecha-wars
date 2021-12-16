@@ -447,8 +447,9 @@ public class FieldeditGUI implements Screen{
     }
     
     private void drawOnField() {
-        this.fieldMatrixInt = new int[buFiEdit.getCurrentField().size()]
-                [buFiEdit.getCurrentField().size()];
+        this.fieldMatrixInt = new int[buFiEdit.sqrtOfList()]
+                [buFiEdit.sqrtOfList()];
+        fieldMatrixInt = buFiEdit.listToIntArray(buFiEdit.getCurrentField());
         buFiEdit.oneStepDone();
     }
 }
