@@ -250,9 +250,9 @@ public class ButtonfunctionsFieldEditor {
      * @return an int[][] with 12x12 
      */
     public int[][] listToIntArray(ArrayList<Integer> list){
-        int[][] zw = new int[12][12];
-        for (int index = 0; index < 12; index += 1) {
-            for (int i = 0; i < 12; i += 1) {
+        int[][] zw = new int[sqrtOfList()][sqrtOfList()];
+        for (int index = 0; index < sqrtOfList(); index += 1) {
+            for (int i = 0; i < sqrtOfList(); i += 1) {
                 zw[index][i] = list.get(index + i);
             }
         }
