@@ -2,11 +2,15 @@ package htwk.mechawars.cards;
 
 import java.util.LinkedList;
 
+import htwk.mechawars.game.ScrollPanel;
+
 /**
  * Class that generaters random Cards for AI testing. 
  */
 public class AiCardGeneration {
+    private static Deck deck = ScrollPanel.getDeck();
     
+
     /**
      * Method that outputs randomly generated Cards for AI players.
      * @param playercount index of player that the Cards are generated for.
@@ -41,4 +45,23 @@ public class AiCardGeneration {
         return cards;
     }
 
+    public static LinkedList<Card> generateRandomAiCardsfromDeck(int playercount) {
+        LinkedList<Card> cards = new LinkedList<Card>();
+        System.out.println("");
+        System.out.println("Player: " + (playercount + 1));
+        System.out.println();
+        System.out.println("Cards:  ");
+        for (int i = 0; i < 5; i++) {
+            int x =  0 + (int)(Math.random() * deck.getDeck().size());
+            Card card = deck.getDeck().get(x);
+            card.setCardPlayerNumber(playercount);
+            cards.add(card);
+            deck.getDeck().remove(card);
+            System.out.println(card.toString() + "    Card number" + 1); 
+            }
+        System.out.println("*************************************************************");
+        return cards;
+        
+        
+    }
 }

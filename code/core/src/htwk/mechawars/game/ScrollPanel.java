@@ -23,6 +23,8 @@ public class ScrollPanel {
     private static int choosableCardCount = 9;
     static final TextButton[] buttons = new TextButton[choosableCardCount];
     private static Deck deck = new Deck();
+
+
     private static Table table = new Table();
     private static final ScrollPane scrollPanel = new ScrollPane(table, GameScreen.skin);
 
@@ -48,6 +50,7 @@ public class ScrollPanel {
                     public void clicked(InputEvent event, float x, float y) {
                         if (buttonClickOrder(buttonNumber)) {
                             Robot.getPlayers()[0].addCard(currentCard, 0);
+                            deck.getDeck().remove(currentCard);
                         }
                     }
             });
@@ -109,6 +112,14 @@ public class ScrollPanel {
         if (!players[0].getShutDown()) {
             scrollPanel(skin);
         }
+    }
+    
+    public static Deck getDeck() {
+        return deck;
+    }
+
+    public static void setDeck(Deck deck) {
+        ScrollPanel.deck = deck;
     }
 
 }

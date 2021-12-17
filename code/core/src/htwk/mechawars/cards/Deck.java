@@ -118,9 +118,15 @@ public class Deck {
         for (int i = 0; i < outputList.size(); i++) {
             outputList.set(i, Card.sortByPriority(outputList.get(i))); 
         }
+        for (int i = 0; i < outputList.size(); i++) {
+            for (Card card: outputList.get(i)) {
+//                System.out.println(card.getCardPlayerNumber()+"  nummer  "+card.toString()+ "prio:  "+card.getCardAttributePriority());    
+            }
+        }
+        
         return outputList;
         
-        
+       
         
         
     }

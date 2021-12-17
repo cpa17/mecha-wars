@@ -83,7 +83,7 @@ public class Buttons {
                                     setButtons(players);
                                     ScrollPanel.clearScrollPanel(skin, players);
                                 }
-                            }, 5);
+                            }, 15);
                         }
                 ;
 

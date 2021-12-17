@@ -129,13 +129,8 @@ public class Card {
      * @return the input list of cards, sorted by priority
      */
     public static LinkedList<Card> sortByPriority(LinkedList<Card> list) {
-        Collections.sort(list, new Comparator<Card>() {
-            @Override
-            public int compare(Card o1, Card o2) {          
-                return Integer.max(o1.getCardAttributePriority(), o2.getCardAttributePriority());
-            }
-
-        });
+        Collections.sort(list, Comparator.comparing(Card::getCardAttributePriority));
+        Collections.reverse(list);
         return list;
     }
     

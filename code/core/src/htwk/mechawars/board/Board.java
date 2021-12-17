@@ -373,7 +373,9 @@ public class Board {
                 maxCardCount = players[0].getSelectedCards().size();
             } else {
                 if (ConfigReader.getAimodes()[i]) {
-                    LinkedList<Card> generatedCards = AiCardGeneration.generateRandomAiCards(i); 
+
+                    LinkedList<Card> generatedCards = 
+                            AiCardGeneration.generateRandomAiCardsfromDeck(i);
                     // Random Cards generation for the AI-Players
                     allCards.add(generatedCards);
                     maxCardCount = Integer.max(generatedCards.size(), maxCardCount);
@@ -385,8 +387,23 @@ public class Board {
         allCards = Deck.transposeList(maxCardCount, allCards);  /*turns a list of List of Cards
                                                                     for each Player into a list 
                                                                of lists of cards for each turn*/
-        for (int i = 0; i < allCards.size(); i++) {
-            moveSingleTurn(allCards.get(i), players, isTest);
+        
+        final LinkedList<LinkedList<Card>> allCard = allCards;
+        if (!isTest) {
+            Timer.schedule(new Task() {
+                int j = 0;
+                @Override
+                public void run() {
+                    
+                    moveSingleTurn(allCard.get(j), players, isTest);
+                    j++;
+                }
+            }, 0, 4, allCards.size() - 1);
+            
+        } else {
+            for (int i = 0; i < allCards.size(); i++) {
+                moveSingleTurn(allCard.get(i), players, isTest);  
+            }
         }
         Robot.setPlayers(players);
         
@@ -462,12 +479,10 @@ public class Board {
                 Timer.schedule(new Task() {
                     @Override
                     public void run() {
-                        robotPosition = fieldmatrix[robots[card.getCardPlayerNumber()].getXcoor()]
-                                [robots[card.getCardPlayerNumber()].getYcoor()];
-                        robots[card.getCardPlayerNumber()].setLastField(robotPosition);
+//                        System.out.println(card.getCardPlayerNumber()+"  nummer  "+card.toString());
                         robotMovement(card, robots[card.getCardPlayerNumber()]);
                     }
-                }, i);
+                }, (float)i/2);
                 i += 2;
             }
         }
