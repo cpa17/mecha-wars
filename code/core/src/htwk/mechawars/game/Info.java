@@ -38,7 +38,7 @@ public class Info {
                         movOne.setColor(Color.CHARTREUSE);
                         Label movTwo = new Label("2 Vor  ", skin);
                         movTwo.setColor(Color.CHARTREUSE);
-                        Label movThree = new Label("3 Vor ", skin);
+                        Label movThree = new Label("3 Vor  ", skin);
                         movThree.setColor(Color.CHARTREUSE);
                         Label movBack = new Label("Rueckwaerts  ", skin);
                         movBack.setColor(Color.CHARTREUSE);
