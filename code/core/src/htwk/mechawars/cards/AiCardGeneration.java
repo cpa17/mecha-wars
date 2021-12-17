@@ -44,7 +44,12 @@ public class AiCardGeneration {
         System.out.println("*************************************************************");
         return cards;
     }
-
+    
+    /**
+     * Method that outputs randomly generated Cards for AI players.
+     * @param playercount index of player that the Cards are generated for.
+     * @return list of generated Cards. 
+     */
     public static LinkedList<Card> generateRandomAiCardsfromDeck(int playercount) {
         LinkedList<Card> cards = new LinkedList<Card>();
         System.out.println("");
@@ -52,13 +57,13 @@ public class AiCardGeneration {
         System.out.println();
         System.out.println("Cards:  ");
         for (int i = 0; i < 5; i++) {
-            int x =  0 + (int)(Math.random() * deck.getDeck().size());
+            int x =  0 + (int) (Math.random() * deck.getDeck().size());
             Card card = deck.getDeck().get(x);
             card.setCardPlayerNumber(playercount);
             cards.add(card);
             deck.getDeck().remove(card);
             System.out.println(card.toString() + "    Card number" + 1); 
-            }
+        }
         System.out.println("*************************************************************");
         return cards;
         

@@ -391,12 +391,12 @@ public class Board {
         final LinkedList<LinkedList<Card>> allCard = allCards;
         if (!isTest) {
             Timer.schedule(new Task() {
-                int j = 0;
+                int turnCounter = 0;
                 @Override
                 public void run() {
                     
-                    moveSingleTurn(allCard.get(j), players, isTest);
-                    j++;
+                    moveSingleTurn(allCard.get(turnCounter), players, isTest);
+                    turnCounter++;
                 }
             }, 0, 4, allCards.size() - 1);
             
@@ -479,10 +479,9 @@ public class Board {
                 Timer.schedule(new Task() {
                     @Override
                     public void run() {
-//                        System.out.println(card.getCardPlayerNumber()+"  nummer  "+card.toString());
                         robotMovement(card, robots[card.getCardPlayerNumber()]);
                     }
-                }, (float)i/2);
+                }, (float) i / 2);
                 i += 2;
             }
         }
