@@ -3,6 +3,7 @@ package htwk.mechawars.board;
 import htwk.mechawars.ConfigReader;
 import htwk.mechawars.cards.AiCardGeneration;
 import htwk.mechawars.cards.Card;
+import htwk.mechawars.cards.Deck;
 import htwk.mechawars.cards.Type;
 import htwk.mechawars.fields.BarrierCorner;
 import htwk.mechawars.fields.BarrierSide;
@@ -366,30 +367,60 @@ public class Board {
         robot.setDir(dir);
     }
 
-    /**
-     * This is a wrapper-function for the tests.
-     *
-     * @param players array of all players
-     */
-    public void move(Robot[] players) {
-        move(players, false);
-    }
-    
-    /**
-     * Function that initialises Movement for the Robots.
-     *
+ 
+    /**Function that initialises Movement for the Robots.
      * @param players array of all players
      */
     public void move(Robot[] players, boolean isTest) {
-        LinkedList<Card> phase;
-        moveSingleRobot(players[0].getSelectedCards(), players[0], isTest);
-        for (int i = 1; i < players.length; i++) {
-            if (ConfigReader.getAimodes()[i]) {
-                phase = AiCardGeneration.generateRandomAiCards(i);
-                moveSingleRobot(phase, players[i], isTest);
+
+        int maxCardCount = 0; /* keeps track of the max number of cards any robot has
+                                -> determines the number of turns*/
+        LinkedList<LinkedList<Card>> allCards = new LinkedList<LinkedList<Card>>(); 
+        for (int i = 0; i < ConfigReader.getPlayerNumber(); i++) {
+            if (i == 0) {
+                allCards.add(players[0].getSelectedCards()); /* List of Lists of cards,
+                                                            each List for one Players cards*/
+                maxCardCount = players[0].getSelectedCards().size();
+            } else {
+                if (ConfigReader.getAimodes()[i]) {
+
+                    LinkedList<Card> generatedCards = 
+                            AiCardGeneration.generateRandomAiCardsfromDeck(i);
+                    // Random Cards generation for the AI-Players
+                    allCards.add(generatedCards);
+                    maxCardCount = Integer.max(generatedCards.size(), maxCardCount);
+                } else {
+                    allCards.add(new LinkedList<Card>());
+                }
             }
-            Robot.setPlayers(players);
         }
+        allCards = Deck.transposeList(maxCardCount, allCards);  /*turns a list of List of Cards
+                                                                    for each Player into a list 
+                                                               of lists of cards for each turn*/
+        
+        final LinkedList<LinkedList<Card>> allCard = allCards;
+        if (!isTest) {
+            Timer.schedule(new Task() {
+                int turnCounter = 0;
+                @Override
+                public void run() {
+                    
+                    moveSingleTurn(allCard.get(turnCounter), players, isTest);
+                    turnCounter++;
+                }
+            }, 0, 4, allCards.size() - 1);
+            
+        } else {
+            for (int i = 0; i < allCards.size(); i++) {
+                moveSingleTurn(allCard.get(i), players, isTest);  
+            }
+        }
+        Robot.setPlayers(players);
+        
+        if (players.length == 1 && isTest) {
+            state(players[0]);
+        }
+    
         if (!isTest) {
             /* Delay of 5 seconds for the code to run so
             that the robot has reached his final position */
@@ -398,74 +429,101 @@ public class Board {
                 Timer.schedule(new Task() {
 
                     @Override
-                    public void run() {
+                public void run() {
                         checkRobotLaser(players);
                         checkBoardLaser(players);
                     }
                 }, i);
             }
-        } else {
+        }   else {
             checkRobotLaser(players);
             checkBoardLaser(players);
         }
         checkDoubleDamage(players);
+
     }
+
+    
+    /**
+     * Method that checks whether the robot receives 2 damage points.
+     *
+     * @param players the robot that should check
+     */
+    private void checkDoubleDamage(Robot[] players) {
+        for (Robot player : players) {
+            if ((!player.getShutDown() && player.getLastRound()) || player.getDestroyed()) {
+
+                player.damageUp();
+                player.damageUp();
+
+                if (player.getDestroyed()) {
+                    player.setDestroyed(false);
+                }
+            }
+        }
+        checkShutDown(players);
+    }
+
 
     /**
      * Method that moves the robot in the matrix.
      *
      * @param phase List of cards
-     * @param robot the robot that should move
+     * @param robots the robots that should move
      */
-    public void moveSingleRobot(LinkedList<Card> phase, Robot robot, boolean isTest) {
-        robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-        robot.setLastField(robotPosition);
+
+    public void moveSingleTurn(LinkedList<Card> phase, Robot[] robots, boolean isTest) {
+        
         if (isTest) {
             for (Card card : phase) {
-                robotMovement(card, robot);
+                robotPosition = fieldmatrix[robots[card.getCardPlayerNumber()].getXcoor()]
+                        [robots[card.getCardPlayerNumber()].getYcoor()];
+                robots[card.getCardPlayerNumber()].setLastField(robotPosition);
+                robotMovement(card, robots[card.getCardPlayerNumber()]);
             }
         } else {
-
-            // delay in seconds, increments for each phase in the linked list for two more second
+            /* delay in seconds, increments for each 
+            phase in the linked list for two more second*/
             int i = 0;
             for (Card card : phase) {
                 Timer.schedule(new Task() {
-
                     @Override
                     public void run() {
-                        robotMovement(card, robot);
+                        robotMovement(card, robots[card.getCardPlayerNumber()]);
                     }
-                }, i);
+                }, (float) i / 2);
                 i += 2;
             }
         }
 
         // Delay of 15 seconds for the state-function to run so that the robot has reached his
-        // final position
+        // final position.
         if (!isTest) {
             Timer.schedule(new Task() {
-
                 @Override
                 public void run() {
-                    state(robot);
+                    for (Robot robot : robots) {
+                        state(robot);
+                    }
                 }
             }, 10);
-
             // calls turnAction after each card
             for (int i = 1; i <= 9; i = i + 2) {
                 Timer.schedule(new Task() {
-
                     @Override
                     public void run() {
-                        robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-                        robotPosition.turnAction(robot);
+                        for (Robot robot : robots) {
+                            robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+                            robotPosition.turnAction(robot);
+                        }
                     }
                 }, i);
             }
         } else {
-
             // No delay if this is a test
-            state(robot);
+            for (Robot robot : robots) {
+                state(robot);
+            }
         }
     }
 
@@ -493,31 +551,12 @@ public class Board {
      * Outsourced code from the move function, that would otherwise be duplicated.
      *
      * @param robot The robot that should move
-     */
+      */
     public void state(Robot robot) {
         robot.setLastRound(robot.getShutDown());
         robot.setShutDown(robot.getNextRound());
     }
 
-    /**
-     * Method that checks whether the robot receives 2 damage points.
-     *
-     * @param players the robot that should check
-     */
-    private void checkDoubleDamage(Robot[] players) {
-        for (Robot player : players) {
-            if ((!player.getShutDown() && player.getLastRound()) || player.getDestroyed()) {
-
-                player.damageUp();
-                player.damageUp();
-
-                if (player.getDestroyed()) {
-                    player.setDestroyed(false);
-                }
-            }
-        }
-        checkShutDown(players);
-    }
 
     /**
      * Method that checks whether the robot is in shutdown mode.
@@ -604,7 +643,6 @@ public class Board {
                                 }
                             }
                             break;
-
                         // begin right
                         case 2:
                             currentLaser = laser;
@@ -617,7 +655,7 @@ public class Board {
                                     int x = players[s].getXcoor();
                                     int y = players[s].getYcoor();
                                     if ((x == currentLaser.getXcoor())
-                                            && (y == currentLaser.getYcoor())) {
+                                             && (y == currentLaser.getYcoor())) {
                                         players[s].damageUp();
                                         flag = 1;
                                     }
@@ -632,7 +670,7 @@ public class Board {
                             }
                             break;
 
-                        // begin bottom
+                            // begin bottom
                         case 3:
                             currentLaser = laser;
                             flag = 0;
@@ -658,7 +696,6 @@ public class Board {
                                 }
                             }
                             break;
-
                         default:
                             break;
                     }
@@ -673,6 +710,7 @@ public class Board {
      * @param players an array of robots
      */
     public void checkRobotLaser(Robot[] players) {
+        
         
         BarrierSide barrierside;
         BarrierCorner barriercorner;
@@ -931,6 +969,7 @@ public class Board {
                 default:
                     break;
             }
-        }
-    }
+        } 
+    } 
+
 }

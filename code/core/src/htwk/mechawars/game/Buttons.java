@@ -38,12 +38,14 @@ public class Buttons {
         int startExecutionButtonY = Gdx.graphics.getHeight() - 100;
         startExecutionButton.setPosition(startExecutionButtonX, startExecutionButtonY);
         startExecutionButton.addListener(new ClickListener() {
+            
             public void clicked(InputEvent event, float x, float y) {
                 if (!players[0].getShutDown()) {
                     //If All Cards are chosen
                     if (ScrollPanel.cardOrder[4 - ScrollPanel.damagePoints] != -1) {
                         deactivateButtons();
-                        board.move(players);
+                        startExecutionButton.setTouchable(Touchable.disabled);
+                        board.move(players, false);
                         Timer.schedule(new Timer.Task() {
                             @Override
                             public void run() {
@@ -51,35 +53,47 @@ public class Buttons {
                                 startExecutionButton.setColor(Color.LIGHT_GRAY);
                                 ScrollPanel.cardOrderClear();
                                 activateButtons();
+
+                                startExecutionButton.setTouchable(Touchable.enabled);
+                            }
+                        }, 25);
+
                                 setButtons(players);
                                 ScrollPanel.clearScrollPanel(skin, players);
+                            } else {
+                                startExecutionButton.setColor(Color.RED);
                             }
-                        }, 9);
-                    } else {
-                        startExecutionButton.setColor(Color.RED);
-                    }
-                } else {
-                    deactivateButtons();
-                    board.move(players);
-                    Timer.schedule(new Timer.Task() {
-                        @Override
-                        public void run() {
+                        } else {
+
+                            System.out.println(players[0].getShutDown());
+
+                            deactivateButtons();
+
+                            board.move(players, false);
+
                             players[0].resetList();
                             startExecutionButton.setColor(Color.LIGHT_GRAY);
-                            ScrollPanel.cardOrderClear();
-                            activateButtons();
-                            setButtons(players);
-                            ScrollPanel.clearScrollPanel(skin, players);
+                            Timer.schedule(new Timer.Task() {
+                                @Override
+                                public void run() {
+                                    players[0].resetList();
+                                    startExecutionButton.setColor(Color.LIGHT_GRAY);
+                                    ScrollPanel.cardOrderClear();
+                                    activateButtons();
+                                    setButtons(players);
+                                    ScrollPanel.clearScrollPanel(skin, players);
+                                }
+                            }, 15);
                         }
-                    }, 5);
-                }
-            }
+                ;
 
-
-        });
-
+                    } 
+                }); 
+     
         return startExecutionButton;
     }
+
+
 
     /**
      * Creates the endButton.
