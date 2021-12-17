@@ -3,6 +3,7 @@ package htwk.mechawars.board;
 import htwk.mechawars.ConfigReader;
 import htwk.mechawars.cards.AiCardGeneration;
 import htwk.mechawars.cards.Card;
+import htwk.mechawars.cards.Deck;
 import htwk.mechawars.cards.Type;
 import htwk.mechawars.fields.BarrierCorner;
 import htwk.mechawars.fields.BarrierSide;
@@ -552,12 +553,11 @@ public class Board {
      * Outsourced code from the move function, that would otherwise be duplicated.
      *
      * @param robot The robot that should move
-      */
+     */
     public void state(Robot robot) {
         robot.setLastRound(robot.getShutDown());
         robot.setShutDown(robot.getNextRound());
     }
-
 
     /**
      * Method that checks whether the robot is in shutdown mode.
@@ -657,7 +657,7 @@ public class Board {
                                     int x = players[s].getXcoor();
                                     int y = players[s].getYcoor();
                                     if ((x == currentLaser.getXcoor())
-                                             && (y == currentLaser.getYcoor())) {
+                                            && (y == currentLaser.getYcoor())) {
                                         players[s].damageUp();
                                         flag = 1;
                                     }
@@ -672,7 +672,7 @@ public class Board {
                             }
                             break;
 
-                            // begin bottom
+                        // begin bottom
                         case 3:
                             currentLaser = laser;
                             flag = 0;
@@ -698,6 +698,7 @@ public class Board {
                                 }
                             }
                             break;
+
                         default:
                             break;
                     }
@@ -712,7 +713,6 @@ public class Board {
      * @param players an array of robots
      */
     public void checkRobotLaser(Robot[] players) {
-
 
         BarrierSide barrierside;
         BarrierCorner barriercorner;
@@ -865,7 +865,7 @@ public class Board {
                         }
                     }
 
-                    for (int i2 = (x + 1); i2 < this.fieldmatrix.length && (z == 0); i2++) {
+                    for (int i2 = (x + 1); i2 < this.fieldmatrix[0].length && (z == 0); i2++) {
 
                         if (this.fieldmatrix[i2][y] instanceof BarrierSide) {
 
@@ -973,5 +973,4 @@ public class Board {
             }
         }
     }
-
 }
