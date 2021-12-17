@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 
 public class BarrierTest {
-    private Robot robot = new Robot();
+    private Robot[] robot = Robot.createRobots(1);
     private Board board = new Board(createBoardString(), true);
 
     @Test
@@ -20,314 +20,314 @@ public class BarrierTest {
         // Test for scenarios when the robot direction is NORTH
 
         // xcoor: 5, ycoor: 5, Dir: NORTH
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 2);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 2, robot);
         // xcoor: 5, ycoor: 4, Dir: NORTH
-        assertEquals(5, robot.getXcoor());
-        assertEquals(4, robot.getYcoor());
+        assertEquals(5, robot[0].getXcoor());
+        assertEquals(4, robot[0].getYcoor());
 
-        robot.setYcoor(2);
+        robot[0].setYcoor(2);
         // xcoor: 5, ycoor: 2, Dir: NORTH
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 2);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 2, robot);
         // xcoor: 5, ycoor: 0, Dir: NORTH
-        assertEquals(5, robot.getXcoor());
-        assertEquals(0, robot.getYcoor());
+        assertEquals(5, robot[0].getXcoor());
+        assertEquals(0, robot[0].getYcoor());
 
-        robot.setXcoor(3);
-        robot.setYcoor(5);
+        robot[0].setXcoor(3);
+        robot[0].setYcoor(5);
         // xcoor: 3, ycoor: 5, Dir: NORTH
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 1);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 1, robot);
         // xcoor: 3, ycoor: 5, Dir: NORTH
-        assertEquals(3, robot.getXcoor());
-        assertEquals(5, robot.getYcoor());
+        assertEquals(3, robot[0].getXcoor());
+        assertEquals(5, robot[0].getYcoor());
 
-        robot.setYcoor(4);
+        robot[0].setYcoor(4);
         // xcoor: 3, ycoor: 4, Dir: NORTH
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 3);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 3, robot);
         // xcoor: 3, ycoor: 2, Dir: NORTH
-        assertEquals(3, robot.getXcoor());
-        assertEquals(2, robot.getYcoor());
+        assertEquals(3, robot[0].getXcoor());
+        assertEquals(2, robot[0].getYcoor());
 
-        robot.setXcoor(1);
-        robot.setYcoor(6);
+        robot[0].setXcoor(1);
+        robot[0].setYcoor(6);
         // xcoor: 1, ycoor: 6, Dir: NORTH
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 1);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 1, robot);
         // xcoor: 1, ycoor: 6, Dir: NORTH
-        assertEquals(1, robot.getXcoor());
-        assertEquals(6, robot.getYcoor());
+        assertEquals(1, robot[0].getXcoor());
+        assertEquals(6, robot[0].getYcoor());
 
-        robot.setYcoor(5);
+        robot[0].setYcoor(5);
         // xcoor: 1, ycoor: 5, Dir: NORTH
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 3);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 3, robot);
         // xcoor: 1, ycoor: 3, Dir: NORTH
-        assertEquals(1, robot.getXcoor());
-        assertEquals(3, robot.getYcoor());
+        assertEquals(1, robot[0].getXcoor());
+        assertEquals(3, robot[0].getYcoor());
 
-        robot.setYcoor(2);
+        robot[0].setYcoor(2);
         // xcoor: 1, ycoor: 2, Dir: NORTH
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 2);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 2, robot);
         // xcoor: 1, ycoor: 1, Dir: NORTH
-        assertEquals(1, robot.getXcoor());
-        assertEquals(1, robot.getYcoor());
+        assertEquals(1, robot[0].getXcoor());
+        assertEquals(1, robot[0].getYcoor());
 
 
         // Test for scenarios when the robot direction is SOUTH
-        robot.setDir(Dir.SOUTH);
-        robot.setYcoor(0);
+        robot[0].setDir(Dir.SOUTH);
+        robot[0].setYcoor(0);
         // xcoor: 1, ycoor: 0, Dir: SOUTH
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 1);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 1, robot);
         // xcoor: 1, ycoor: 0, Dir: SOUTH
-        assertEquals(1, robot.getXcoor());
-        assertEquals(0, robot.getYcoor());
+        assertEquals(1, robot[0].getXcoor());
+        assertEquals(0, robot[0].getYcoor());
 
-        robot.setYcoor(3);
+        robot[0].setYcoor(3);
         // xcoor: 1, ycoor: 3, Dir: SOUTH
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 3);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 3, robot);
         // xcoor: 1, ycoor: 5, Dir: SOUTH
-        assertEquals(1, robot.getXcoor());
-        assertEquals(5, robot.getYcoor());
+        assertEquals(1, robot[0].getXcoor());
+        assertEquals(5, robot[0].getYcoor());
 
-        robot.setXcoor(3);
-        robot.setYcoor(0);
+        robot[0].setXcoor(3);
+        robot[0].setYcoor(0);
         // xcoor: 3, ycoor: 0, Dir: SOUTH
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 2);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 2, robot);
         // xcoor: 3, ycoor: 1, Dir: SOUTH
-        assertEquals(3, robot.getXcoor());
-        assertEquals(1, robot.getYcoor());
+        assertEquals(3, robot[0].getXcoor());
+        assertEquals(1, robot[0].getYcoor());
 
-        robot.setYcoor(2);
+        robot[0].setYcoor(2);
         // xcoor: 3, ycoor: 2, Dir: SOUTH
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 3);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 3, robot);
         // xcoor: 3, ycoor: 4, Dir: SOUTH
-        assertEquals(3, robot.getXcoor());
-        assertEquals(4, robot.getYcoor());
+        assertEquals(3, robot[0].getXcoor());
+        assertEquals(4, robot[0].getYcoor());
 
-        robot.setXcoor(5);
-        robot.setYcoor(0);
+        robot[0].setXcoor(5);
+        robot[0].setYcoor(0);
         // xcoor: 5, ycoor: 0, Dir: SOUTH
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 4);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 4, robot);
         // xcoor: 5, ycoor: 3, Dir: SOUTH
-        assertEquals(5, robot.getXcoor());
-        assertEquals(3, robot.getYcoor());
+        assertEquals(5, robot[0].getXcoor());
+        assertEquals(3, robot[0].getYcoor());
 
 
         // Test for scenarios when the robot direction is WEST
-        robot.setDir(Dir.WEST);
-        robot.setYcoor(5);
+        robot[0].setDir(Dir.WEST);
+        robot[0].setYcoor(5);
         // xcoor: 5, ycoor: 5, Dir: WEST
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 4);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 4, robot);
         // xcoor: 2, ycoor: 5, Dir: WEST
-        assertEquals(2, robot.getXcoor());
-        assertEquals(5, robot.getYcoor());
+        assertEquals(2, robot[0].getXcoor());
+        assertEquals(5, robot[0].getYcoor());
 
-        robot.setXcoor(6);
-        robot.setYcoor(3);
+        robot[0].setXcoor(6);
+        robot[0].setYcoor(3);
         // xcoor: 6, ycoor: 3, Dir: WEST
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 4);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 4, robot);
         // xcoor: 3, ycoor: 3, Dir: WEST
-        assertEquals(3, robot.getXcoor());
-        assertEquals(3, robot.getYcoor());
+        assertEquals(3, robot[0].getXcoor());
+        assertEquals(3, robot[0].getYcoor());
 
-        robot.setXcoor(2);
+        robot[0].setXcoor(2);
         // xcoor: 2, ycoor: 3, Dir: WEST
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 3);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 3, robot);
         // xcoor: 2, ycoor: 3, Dir: WEST
-        assertEquals(2, robot.getXcoor());
-        assertEquals(3, robot.getYcoor());
+        assertEquals(2, robot[0].getXcoor());
+        assertEquals(3, robot[0].getYcoor());
 
-        robot.setXcoor(6);
-        robot.setYcoor(1);
+        robot[0].setXcoor(6);
+        robot[0].setYcoor(1);
         // xcoor: 6, ycoor: 1, Dir: WEST
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 2);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 2, robot);
         // xcoor: 6, ycoor: 1, Dir: WEST
-        assertEquals(6, robot.getXcoor());
-        assertEquals(1, robot.getYcoor());
+        assertEquals(6, robot[0].getXcoor());
+        assertEquals(1, robot[0].getYcoor());
 
-        robot.setXcoor(5);
+        robot[0].setXcoor(5);
         // xcoor: 5, ycoor: 1, Dir: WEST
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 3);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 3, robot);
         // xcoor: 3, ycoor: 1, Dir: WEST
-        assertEquals(3, robot.getXcoor());
-        assertEquals(1, robot.getYcoor());
+        assertEquals(3, robot[0].getXcoor());
+        assertEquals(1, robot[0].getYcoor());
 
-        robot.setXcoor(2);
+        robot[0].setXcoor(2);
         // xcoor: 2, ycoor: 1, Dir: WEST
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 3);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 3, robot);
         // xcoor: 1, ycoor: 1, Dir: WEST
-        assertEquals(1, robot.getXcoor());
-        assertEquals(1, robot.getYcoor());
+        assertEquals(1, robot[0].getXcoor());
+        assertEquals(1, robot[0].getYcoor());
 
 
         // Test for scenarios when the robot direction is EAST
-        robot.setDir(Dir.EAST);
-        robot.setXcoor(0);
+        robot[0].setDir(Dir.EAST);
+        robot[0].setXcoor(0);
         // xcoor: 0, ycoor: 1, Dir: EAST
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 1);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 1, robot);
         // xcoor: 0, ycoor: 1, Dir: EAST
-        assertEquals(0, robot.getXcoor());
-        assertEquals(1, robot.getYcoor());
+        assertEquals(0, robot[0].getXcoor());
+        assertEquals(1, robot[0].getYcoor());
 
-        robot.setXcoor(1);
+        robot[0].setXcoor(1);
         // xcoor: 1, ycoor: 1, Dir: EAST
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 3);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 3, robot);
         // xcoor: 2, ycoor: 1, Dir: EAST
-        assertEquals(2, robot.getXcoor());
-        assertEquals(1, robot.getYcoor());
+        assertEquals(2, robot[0].getXcoor());
+        assertEquals(1, robot[0].getYcoor());
 
-        robot.setXcoor(3);
+        robot[0].setXcoor(3);
         // xcoor: 3, ycoor: 1, Dir: EAST
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 3);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 3, robot);
         // xcoor: 5, ycoor: 1, Dir: EAST
-        assertEquals(5, robot.getXcoor());
-        assertEquals(1, robot.getYcoor());
+        assertEquals(5, robot[0].getXcoor());
+        assertEquals(1, robot[0].getYcoor());
 
-        robot.setXcoor(0);
-        robot.setYcoor(3);
+        robot[0].setXcoor(0);
+        robot[0].setYcoor(3);
         // xcoor: 0, ycoor: 3, Dir: EAST
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 2);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 2, robot);
         // xcoor: 1, ycoor: 3, Dir: EAST
-        assertEquals(1, robot.getXcoor());
-        assertEquals(3, robot.getYcoor());
+        assertEquals(1, robot[0].getXcoor());
+        assertEquals(3, robot[0].getYcoor());
 
-        robot.setXcoor(2);
+        robot[0].setXcoor(2);
         // xcoor: 2, ycoor: 3, Dir: EAST
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 3);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 3, robot);
         // xcoor: 2, ycoor: 3, Dir: EAST
-        assertEquals(2, robot.getXcoor());
-        assertEquals(3, robot.getYcoor());
+        assertEquals(2, robot[0].getXcoor());
+        assertEquals(3, robot[0].getYcoor());
 
-        robot.setXcoor(3);
+        robot[0].setXcoor(3);
         // xcoor: 3, ycoor: 3, Dir: EAST
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 3);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 3, robot);
         // xcoor: 6, ycoor: 3, Dir: EAST
-        assertEquals(6, robot.getXcoor());
-        assertEquals(3, robot.getYcoor());
+        assertEquals(6, robot[0].getXcoor());
+        assertEquals(3, robot[0].getYcoor());
 
-        robot.setXcoor(0);
-        robot.setYcoor(5);
+        robot[0].setXcoor(0);
+        robot[0].setYcoor(5);
         // xcoor: 0, ycoor: 5, Dir: EAST
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 3);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 3, robot);
         // xcoor: 1, ycoor: 5, Dir: EAST
-        assertEquals(1, robot.getXcoor());
-        assertEquals(5, robot.getYcoor());
+        assertEquals(1, robot[0].getXcoor());
+        assertEquals(5, robot[0].getYcoor());
 
-        robot.setXcoor(2);
-        robot.setYcoor(5);
+        robot[0].setXcoor(2);
+        robot[0].setYcoor(5);
         // xcoor: 2, ycoor: 5, Dir: EAST
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 3);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 3, robot);
         // xcoor: 5, ycoor: 5, Dir: EAST
-        assertEquals(5, robot.getXcoor());
-        assertEquals(5, robot.getYcoor());
+        assertEquals(5, robot[0].getXcoor());
+        assertEquals(5, robot[0].getYcoor());
 
 
         // Test for scenarios in which the robot passes walls but should not be stopped
-        robot.setXcoor(0);
-        robot.setYcoor(4);
+        robot[0].setXcoor(0);
+        robot[0].setYcoor(4);
         // xcoor: 0, ycoor: 4, Dir: EAST
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 6);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 6, robot);
         // xcoor: 6, ycoor: 4, Dir: EAST
-        assertEquals(6, robot.getXcoor());
-        assertEquals(4, robot.getYcoor());
+        assertEquals(6, robot[0].getXcoor());
+        assertEquals(4, robot[0].getYcoor());
 
-        robot.setDir(Dir.WEST);
-        robot.setXcoor(6);
-        robot.setYcoor(2);
+        robot[0].setDir(Dir.WEST);
+        robot[0].setXcoor(6);
+        robot[0].setYcoor(2);
         // xcoor: 6, ycoor: 2, Dir: WEST
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 6);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 6, robot);
         // xcoor: 0, ycoor: 2, Dir: WEST
-        assertEquals(0, robot.getXcoor());
-        assertEquals(2, robot.getYcoor());
+        assertEquals(0, robot[0].getXcoor());
+        assertEquals(2, robot[0].getYcoor());
 
-        robot.setDir(Dir.SOUTH);
-        robot.setXcoor(2);
-        robot.setYcoor(0);
+        robot[0].setDir(Dir.SOUTH);
+        robot[0].setXcoor(2);
+        robot[0].setYcoor(0);
         // xcoor: 2, ycoor: 0, Dir: SOUTH
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 6);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 6, robot);
         // xcoor: 2, ycoor: 6, Dir: SOUTH
-        assertEquals(2, robot.getXcoor());
-        assertEquals(6, robot.getYcoor());
+        assertEquals(2, robot[0].getXcoor());
+        assertEquals(6, robot[0].getYcoor());
 
-        robot.setDir(Dir.NORTH);
-        robot.setXcoor(4);
-        robot.setYcoor(6);
+        robot[0].setDir(Dir.NORTH);
+        robot[0].setXcoor(4);
+        robot[0].setYcoor(6);
         // xcoor: 4, ycoor: 6, Dir: NORTH
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) 6);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 6, robot);
         // xcoor: 4, ycoor: 0, Dir: NORTH
-        assertEquals(4, robot.getXcoor());
-        assertEquals(0, robot.getYcoor());
+        assertEquals(4, robot[0].getXcoor());
+        assertEquals(0, robot[0].getYcoor());
 
 
         // Test for scenarios in which the robot move backwards
-        robot.setDir(Dir.EAST);
-        robot.setXcoor(3);
-        robot.setYcoor(3);
+        robot[0].setDir(Dir.EAST);
+        robot[0].setXcoor(3);
+        robot[0].setYcoor(3);
         // xcoor: 3, ycoor: 3, Dir: EAST
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) -1);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) -1, robot);
         // xcoor: 3, ycoor: 3, Dir: EAST
-        assertEquals(3, robot.getXcoor());
-        assertEquals(3, robot.getYcoor());
+        assertEquals(3, robot[0].getXcoor());
+        assertEquals(3, robot[0].getYcoor());
 
-        robot.setXcoor(2);
-        robot.setYcoor(3);
+        robot[0].setXcoor(2);
+        robot[0].setYcoor(3);
         // xcoor: 2, ycoor: 3, Dir: EAST
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) -1);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) -1, robot);
         // xcoor: 3, ycoor: 3, Dir: EAST
-        assertEquals(2, robot.getXcoor());
-        assertEquals(3, robot.getYcoor());
+        assertEquals(2, robot[0].getXcoor());
+        assertEquals(3, robot[0].getYcoor());
 
-        robot.setDir(Dir.WEST);
-        robot.setXcoor(0);
+        robot[0].setDir(Dir.WEST);
+        robot[0].setXcoor(0);
         // xcoor: 0, ycoor: 3, Dir: WEST
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) -1);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) -1, robot);
         // xcoor: 1, ycoor: 3, Dir: WEST
-        assertEquals(1, robot.getXcoor());
-        assertEquals(3, robot.getYcoor());
+        assertEquals(1, robot[0].getXcoor());
+        assertEquals(3, robot[0].getYcoor());
 
         // xcoor: 1, ycoor: 3, Dir: WEST
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) -1);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) -1, robot);
         // xcoor: 1, ycoor: 3, Dir: WEST
-        assertEquals(1, robot.getXcoor());
-        assertEquals(3, robot.getYcoor());
+        assertEquals(1, robot[0].getXcoor());
+        assertEquals(3, robot[0].getYcoor());
 
-        robot.setDir(Dir.SOUTH);
+        robot[0].setDir(Dir.SOUTH);
         // xcoor: 1, ycoor: 3, Dir: SOUTH
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) -1);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) -1, robot);
         // xcoor: 1, ycoor: 3, Dir: SOUTH
-        assertEquals(1, robot.getXcoor());
-        assertEquals(3, robot.getYcoor());
+        assertEquals(1, robot[0].getXcoor());
+        assertEquals(3, robot[0].getYcoor());
 
-        robot.setXcoor(3);
-        robot.setYcoor(4);
+        robot[0].setXcoor(3);
+        robot[0].setYcoor(4);
         // xcoor: 3, ycoor: 4, Dir: SOUTH
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) -1);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) -1, robot);
         // xcoor: 3, ycoor: 3, Dir: SOUTH
-        assertEquals(3, robot.getXcoor());
-        assertEquals(3, robot.getYcoor());
+        assertEquals(3, robot[0].getXcoor());
+        assertEquals(3, robot[0].getYcoor());
 
-        robot.setDir(Dir.NORTH);
-        robot.setXcoor(1);
-        robot.setYcoor(2);
+        robot[0].setDir(Dir.NORTH);
+        robot[0].setXcoor(1);
+        robot[0].setYcoor(2);
         // xcoor: 1, ycoor: 2, Dir: NORTH
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) -1);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) -1, robot);
         // xcoor: 1, ycoor: 2, Dir: NORTH
-        assertEquals(1, robot.getXcoor());
-        assertEquals(2, robot.getYcoor());
+        assertEquals(1, robot[0].getXcoor());
+        assertEquals(2, robot[0].getYcoor());
 
-        robot.setXcoor(3);
+        robot[0].setXcoor(3);
         // xcoor: 3, ycoor: 2, Dir: NORTH
-        robot.moveInDirectionByCard(board.fieldmatrix, (byte) -1);
+        robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) -1, robot);
         // xcoor: 3, ycoor: 3, Dir: NORTH
-        assertEquals(3, robot.getXcoor());
-        assertEquals(3, robot.getYcoor());
+        assertEquals(3, robot[0].getXcoor());
+        assertEquals(3, robot[0].getYcoor());
     }
 
     /**
-     * Methode that initialized the robot.
+     * Method that initialized the robot.
      */
     @BeforeEach
     public void initRobot() {
-        robot.setDir(Dir.NORTH);
-        robot.setXcoor(5);
-        robot.setYcoor(5);
+        robot[0].setDir(Dir.NORTH);
+        robot[0].setXcoor(5);
+        robot[0].setYcoor(5);
     }
 
     /**
