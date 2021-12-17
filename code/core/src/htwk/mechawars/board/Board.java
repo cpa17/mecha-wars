@@ -335,9 +335,19 @@ public class Board {
      */
     public void startRobot(int x, int y, Dir dir, Robot robot, boolean isTest) {
         int min = 1;
-        int max = 8;
-        int randomNumber =  ThreadLocalRandom.current().nextInt(min, max) + min;
-
+        int max = 0;
+        
+        for (int i = 0; i < fieldmatrix.length; i++) {
+            for (int j = 0; j < fieldmatrix[i].length; j++) {
+                if (fieldmatrix[i][j] instanceof StartField &&
+                        ((StartField) fieldmatrix[i][j]).getNumber() >= max) {
+                    max = ((StartField) fieldmatrix[i][j]).getNumber();
+                }
+            }
+        }
+        
+        int randomNumber =  ThreadLocalRandom.current().nextInt(min, max + 1);
+        
         if (!isTest) {
             for (int i = 0; i < fieldmatrix.length; i++) {
                 for (int j = 0; j < fieldmatrix[i].length; j++) {
