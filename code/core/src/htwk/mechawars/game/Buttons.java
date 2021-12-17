@@ -16,10 +16,6 @@ import htwk.mechawars.board.Robot;
 import static htwk.mechawars.game.GameScreen.board;
 import static htwk.mechawars.game.GameScreen.stage;
 
-import static htwk.mechawars.game.GameScreen.addButtonsToStage;
-import static htwk.mechawars.game.GameScreen.getStage;
-import static htwk.mechawars.game.GameScreen.addScrollPanelToStage;
-
 /**
  * Class that creates the ScrollPanel for the GameScreen.
  */

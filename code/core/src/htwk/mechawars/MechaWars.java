@@ -54,7 +54,6 @@ public class MechaWars extends Game {
         try {
             ConfigReader.readConfigs();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
