@@ -1,2 +1,8 @@
-playerNumber: 1
+playerNumber: 7
 playerposition: 0-3-3-1
+playerposition: 1-3-4-1
+playerposition: 2-3-5-1
+playerposition: 3-3-6-1
+playerposition: 4-3-7-1
+playerposition: 5-3-8-1
+playerposition: 6-3-9-1
