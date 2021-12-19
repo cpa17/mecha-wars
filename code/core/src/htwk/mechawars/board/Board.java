@@ -82,8 +82,8 @@ public class Board {
             ArrayList<Integer> row = new ArrayList<>();
             String[] values = currentLine.trim().split(" ");
             for (String string : values) {
-                if (values.length > 12) {
-                    System.out.println("The map has too many columns, only 12 are allowed!");
+                if (values.length > 16) {
+                    System.out.println("The map has too many columns, only 16 are allowed!");
                     Gdx.app.exit();
                 }
                 if (!string.isEmpty()) {
@@ -100,8 +100,8 @@ public class Board {
         int width = tempLayout.get(0).size();
         int height = tempLayout.size();
         
-        if (height > 12) {
-            System.out.println("The map has too many rows, only 12 are allowed!");
+        if (height > 16) {
+            System.out.println("The map has too many rows, only 16 are allowed!");
             Gdx.app.exit();
         }
 
@@ -112,8 +112,8 @@ public class Board {
          *                  [x]  [y]                         [y]  [x]
          * Therefore we need to switch them around.
          */
-        for (int col = 0; col < height; col++) {
-            for (int cell = 0; cell < width; cell++) {
+        for (int col = 0; col < width; col++) {
+            for (int cell = 0; cell < height; cell++) {
                 matrix[col][cell] = tempLayout.get(cell).get(col);
             }
         }
@@ -313,15 +313,15 @@ public class Board {
      * @param board Board whose matrix is to be converted into a string
      */
     public static void toAsset(SpriteBatch batch, Board board) {
-        for (int row = 0; row < board.fieldmatrix.length; row++) {
+        for (int row = 0; row < board.fieldmatrix[0].length; row++) {
             int x = 0;
-            for (int cell = 0; cell < board.fieldmatrix[row].length; cell++) {
-                int t = Gdx.graphics.getHeight() / board.fieldmatrix.length; //height of one tile
+            for (int cell = 0; cell < board.fieldmatrix.length; cell++) {
+                int t = Gdx.graphics.getHeight() / board.fieldmatrix[0].length; //height of one tile
                 int b = Gdx.graphics.getHeight(); //height of the entire board
                 int c = (row + 1) * t; //the current height in the loop
                 int r = b - c; //the result of the board height minus the current height
-                batch.draw(board.fieldmatrix[cell][row].getTile(), x, r);
-                x = x + (Gdx.graphics.getHeight() / board.fieldmatrix.length);
+                batch.draw(board.fieldmatrix[cell][row].getTile(), x, r, t, t);
+                x = x + (Gdx.graphics.getHeight() / board.fieldmatrix[0].length);
             }
         }
     }
@@ -338,7 +338,7 @@ public class Board {
     public void startRobot(int x, int y, Dir dir, Robot robot, boolean isTest) {
         int min = 1;
         int max = 0;
-        
+
         for (int i = 0; i < fieldmatrix.length; i++) {
             for (int j = 0; j < fieldmatrix[i].length; j++) {
                 if (fieldmatrix[i][j] instanceof StartField &&
@@ -347,9 +347,9 @@ public class Board {
                 }
             }
         }
-        
+
         int randomNumber =  ThreadLocalRandom.current().nextInt(min, max + 1);
-        
+
         if (!isTest) {
             for (int i = 0; i < fieldmatrix.length; i++) {
                 for (int j = 0; j < fieldmatrix[i].length; j++) {
@@ -377,10 +377,9 @@ public class Board {
     public void move(Robot[] players) {
         move(players, false);
     }
- 
+
     /**
      * Function that initialises Movement for the Robots.
-     *
      * @param players array of all players
      * @param isTest indicates that this is a test
      */
@@ -388,7 +387,7 @@ public class Board {
 
         int maxCardCount = 0; /* keeps track of the max number of cards any robot has
                                 -> determines the number of turns*/
-        LinkedList<LinkedList<Card>> allCards = new LinkedList<LinkedList<Card>>(); 
+        LinkedList<LinkedList<Card>> allCards = new LinkedList<LinkedList<Card>>();
         for (int i = 0; i < ConfigReader.getPlayerNumber(); i++) {
             if (i == 0) {
                 allCards.add(players[0].getSelectedCards()); /* List of Lists of cards,
@@ -397,7 +396,7 @@ public class Board {
             } else {
                 if (ConfigReader.getAimodes()[i]) {
 
-                    LinkedList<Card> generatedCards = 
+                    LinkedList<Card> generatedCards =
                             AiCardGeneration.generateRandomAiCardsfromDeck(i);
                     // Random Cards generation for the AI-Players
                     allCards.add(generatedCards);
@@ -408,9 +407,9 @@ public class Board {
             }
         }
         allCards = Deck.transposeList(maxCardCount, allCards);  /*turns a list of List of Cards
-                                                                    for each Player into a list 
+                                                                    for each Player into a list
                                                                of lists of cards for each turn*/
-        
+
         final LinkedList<LinkedList<Card>> allCard = allCards;
         if (!isTest) {
             Timer.schedule(new Task() {
@@ -460,7 +459,7 @@ public class Board {
                 state(robot);
             }
         }
-    
+
         if (!isTest) {
             for (int i = 1; i <= 9; i = i + 2) {
                 Timer.schedule(new Task() {
@@ -488,7 +487,7 @@ public class Board {
      */
 
     public void moveSingleTurn(LinkedList<Card> phase, Robot[] robots, boolean isTest) {
-        
+
         if (isTest) {
             for (Card card : phase) {
                 robotPosition = fieldmatrix[robots[card.getCardPlayerNumber()].getXcoor()]
@@ -497,7 +496,7 @@ public class Board {
                 robotMovement(card, robots[card.getCardPlayerNumber()], robots);
             }
         } else {
-            /* delay in seconds, increments for each 
+            /* delay in seconds, increments for each
             phase in the linked list for two more second*/
             int i = 0;
             for (Card card : phase) {
@@ -539,7 +538,7 @@ public class Board {
      * Outsourced code from the move function, that would otherwise be duplicated.
      *
      * @param robot The robot that should move
-      */
+     */
     public void state(Robot robot) {
         robot.setLastRound(robot.getShutDown());
         robot.setShutDown(robot.getNextRound());
@@ -663,7 +662,7 @@ public class Board {
                                     int x = players[s].getXcoor();
                                     int y = players[s].getYcoor();
                                     if ((x == currentLaser.getXcoor())
-                                             && (y == currentLaser.getYcoor())) {
+                                            && (y == currentLaser.getYcoor())) {
                                         players[s].damageUp();
                                         flag = 1;
                                     }
@@ -678,7 +677,7 @@ public class Board {
                             }
                             break;
 
-                            // begin bottom
+                        // begin bottom
                         case 3:
                             currentLaser = laser;
                             flag = 0;
@@ -704,6 +703,7 @@ public class Board {
                                 }
                             }
                             break;
+
                         default:
                             break;
                     }
@@ -718,8 +718,7 @@ public class Board {
      * @param players an array of robots
      */
     public void checkRobotLaser(Robot[] players) {
-        
-        
+
         BarrierSide barrierside;
         BarrierCorner barriercorner;
 

@@ -42,7 +42,7 @@ public class OptionScreen implements Screen {
     private Texture img;
     private TextButton start;
     private Skin skin;
-    private String mapPath = "../core/assets";
+    private String mapPath = "../core/assets/maps";
     private boolean mapNotFound;
     private boolean pathChoice;
     
@@ -133,7 +133,7 @@ public class OptionScreen implements Screen {
                     pathChoice = false;
                     start.setText("Starten");
                 } else {                  
-                    MechaWars.setMap("map.txt");
+                    MechaWars.setMap("test.txt");
                     toGameScreen(); 
                 }
             }

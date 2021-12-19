@@ -28,7 +28,7 @@ public class MechaWars extends Game {
     private static String map;
 
     public static void setMap(String fileName) {
-        map = fileName;
+        map = "maps/" + fileName;
     }
 
     public static String getMap() {
