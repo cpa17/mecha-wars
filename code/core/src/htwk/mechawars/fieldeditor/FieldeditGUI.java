@@ -126,21 +126,16 @@ public class FieldeditGUI implements Screen{
             }
         });
         
-        TextField textFieldInfo = new TextField("Text", skinFiEdit);
-        textFieldInfo.setAlignment(Align.center);
-        textFieldInfo.setSize(buttonWidth + 100, buttonHeight);
-        textFieldInfo.setPosition(funcButtonPosX + 40, funcButtonPosY - 610);
-        
         TextField xPositionChangeField = new TextField("", skinFiEdit);
         xPositionChangeField.setSize(buttonWidth / 2 + 50, buttonHeight / 2);
-        xPositionChangeField.setPosition(funcButtonPosX + 40, funcButtonPosY - 535);
+        xPositionChangeField.setPosition(funcButtonPosX + 40, funcButtonPosY - 575);
         xPositionChangeField.setMessageText("X Position");
         xPositionChangeField.setAlignment(Align.center);
         
         
         TextField yPositionChangeField = new TextField("", skinFiEdit);
         yPositionChangeField.setSize(buttonWidth / 2 + 50, buttonHeight / 2);
-        yPositionChangeField.setPosition(funcButtonPosX + 200, funcButtonPosY - 535);
+        yPositionChangeField.setPosition(funcButtonPosX + 200, funcButtonPosY - 575);
         yPositionChangeField.setMessageText("Y Position");
         yPositionChangeField.setAlignment(Align.center);
         
@@ -389,7 +384,6 @@ public class FieldeditGUI implements Screen{
         stageFiEdit.addActor(standardFieldButton);
         stageFiEdit.addActor(startFieldButton);
         stageFiEdit.addActor(pusherButton);
-        stageFiEdit.addActor(textFieldInfo);
         stageFiEdit.addActor(xPositionChangeField);
         stageFiEdit.addActor(yPositionChangeField);
        
