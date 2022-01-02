@@ -472,8 +472,8 @@ public class FieldeditGUI implements Screen{
     }
     
     private void drawOnField(String x, String y, String part, int startNum, int endNum) {
-        int xInt = Integer.parseInt(x);
-        int yInt = Integer.parseInt(y);
+        int xInt = Integer.parseInt(x) - 1;
+        int yInt = Integer.parseInt(y) - 1;
         switch (part) {
         case "BarrierCorner": boardFiEdit.fieldmatrix[xInt][yInt] = new BarrierCorner(0, 0, startNum);
             break;
