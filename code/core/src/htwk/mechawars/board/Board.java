@@ -3,6 +3,7 @@ package htwk.mechawars.board;
 import htwk.mechawars.ConfigReader;
 import htwk.mechawars.cards.AiCardGeneration;
 import htwk.mechawars.cards.Card;
+import htwk.mechawars.cards.Deck;
 import htwk.mechawars.cards.Type;
 import htwk.mechawars.fields.BarrierCorner;
 import htwk.mechawars.fields.BarrierSide;
@@ -81,8 +82,8 @@ public class Board {
             ArrayList<Integer> row = new ArrayList<>();
             String[] values = currentLine.trim().split(" ");
             for (String string : values) {
-                if (values.length > 12) {
-                    System.out.println("The map has too many columns, only 12 are allowed!");
+                if (values.length > 16) {
+                    System.out.println("The map has too many columns, only 16 are allowed!");
                     Gdx.app.exit();
                 }
                 if (!string.isEmpty()) {
@@ -99,8 +100,8 @@ public class Board {
         int width = tempLayout.get(0).size();
         int height = tempLayout.size();
         
-        if (height > 12) {
-            System.out.println("The map has too many rows, only 12 are allowed!");
+        if (height > 16) {
+            System.out.println("The map has too many rows, only 16 are allowed!");
             Gdx.app.exit();
         }
 
@@ -111,8 +112,8 @@ public class Board {
          *                  [x]  [y]                         [y]  [x]
          * Therefore we need to switch them around.
          */
-        for (int col = 0; col < height; col++) {
-            for (int cell = 0; cell < width; cell++) {
+        for (int col = 0; col < width; col++) {
+            for (int cell = 0; cell < height; cell++) {
                 matrix[col][cell] = tempLayout.get(cell).get(col);
             }
         }
@@ -124,6 +125,7 @@ public class Board {
      * Method that creates a field matrix from a int matrix.
      *
      * @param matrix A int matrix
+     * @param isTest indicates that this is a test
      */
     private void intToFieldMatrix(int[][] matrix, boolean isTest) {
         this.fieldmatrix = new Field[matrix.length][matrix[0].length];
@@ -311,15 +313,15 @@ public class Board {
      * @param board Board whose matrix is to be converted into a string
      */
     public static void toAsset(SpriteBatch batch, Board board) {
-        for (int row = 0; row < board.fieldmatrix.length; row++) {
+        for (int row = 0; row < board.fieldmatrix[0].length; row++) {
             int x = 0;
-            for (int cell = 0; cell < board.fieldmatrix[row].length; cell++) {
-                int t = Gdx.graphics.getHeight() / board.fieldmatrix.length; //height of one tile
+            for (int cell = 0; cell < board.fieldmatrix.length; cell++) {
+                int t = Gdx.graphics.getHeight() / board.fieldmatrix[0].length; //height of one tile
                 int b = Gdx.graphics.getHeight(); //height of the entire board
                 int c = (row + 1) * t; //the current height in the loop
                 int r = b - c; //the result of the board height minus the current height
-                batch.draw(board.fieldmatrix[cell][row].getTile(), x, r);
-                x = x + (Gdx.graphics.getHeight() / board.fieldmatrix.length);
+                batch.draw(board.fieldmatrix[cell][row].getTile(), x, r, t, t);
+                x = x + (Gdx.graphics.getHeight() / board.fieldmatrix[0].length);
             }
         }
     }
@@ -331,11 +333,22 @@ public class Board {
      * @param y y-coordinate of the robot
      * @param dir direction of the robot
      * @param robot robot to which this applies
+     * @param isTest indicates that this is a test
      */
     public void startRobot(int x, int y, Dir dir, Robot robot, boolean isTest) {
         int min = 1;
-        int max = 8;
-        int randomNumber =  ThreadLocalRandom.current().nextInt(min, max) + min;
+        int max = 0;
+
+        for (int i = 0; i < fieldmatrix.length; i++) {
+            for (int j = 0; j < fieldmatrix[i].length; j++) {
+                if (fieldmatrix[i][j] instanceof StartField &&
+                        ((StartField) fieldmatrix[i][j]).getNumber() >= max) {
+                    max = ((StartField) fieldmatrix[i][j]).getNumber();
+                }
+            }
+        }
+
+        int randomNumber =  ThreadLocalRandom.current().nextInt(min, max + 1);
 
         if (!isTest) {
             for (int i = 0; i < fieldmatrix.length; i++) {
@@ -364,26 +377,90 @@ public class Board {
     public void move(Robot[] players) {
         move(players, false);
     }
-    
+
     /**
      * Function that initialises Movement for the Robots.
-     *
      * @param players array of all players
+     * @param isTest indicates that this is a test
      */
     public void move(Robot[] players, boolean isTest) {
-        LinkedList<Card> phase;
-        moveSingleRobot(players[0].getSelectedCards(), players[0], isTest);
-        for (int i = 1; i < players.length; i++) {
-            if (ConfigReader.getAimodes()[i]) {
-                phase = AiCardGeneration.generateRandomAiCards(i);
-                moveSingleRobot(phase, players[i], isTest);
-            }
-            Robot.setPlayers(players);
-        }
-        if (!isTest) {
-            /* Delay of 5 seconds for the code to run so
-            that the robot has reached his final position */
 
+        int maxCardCount = 0; /* keeps track of the max number of cards any robot has
+                                -> determines the number of turns*/
+        LinkedList<LinkedList<Card>> allCards = new LinkedList<LinkedList<Card>>();
+        for (int i = 0; i < ConfigReader.getPlayerNumber(); i++) {
+            if (i == 0) {
+                allCards.add(players[0].getSelectedCards()); /* List of Lists of cards,
+                                                            each List for one Players cards*/
+                maxCardCount = players[0].getSelectedCards().size();
+            } else {
+                if (ConfigReader.getAimodes()[i]) {
+
+                    LinkedList<Card> generatedCards =
+                            AiCardGeneration.generateRandomAiCardsfromDeck(i);
+                    // Random Cards generation for the AI-Players
+                    allCards.add(generatedCards);
+                    maxCardCount = Integer.max(generatedCards.size(), maxCardCount);
+                } else {
+                    allCards.add(new LinkedList<Card>());
+                }
+            }
+        }
+        allCards = Deck.transposeList(maxCardCount, allCards);  /*turns a list of List of Cards
+                                                                    for each Player into a list
+                                                               of lists of cards for each turn*/
+
+        final LinkedList<LinkedList<Card>> allCard = allCards;
+        if (!isTest) {
+            Timer.schedule(new Task() {
+                int turnCounter = 0;
+                @Override
+                public void run() {
+                    
+                    moveSingleTurn(allCard.get(turnCounter), players, false);
+                    turnCounter++;
+                }
+            }, 0, 4, allCards.size() - 1);
+            
+        } else {
+            for (int i = 0; i < allCards.size(); i++) {
+                moveSingleTurn(allCard.get(i), players, true);
+            }
+        }
+        Robot.setPlayers(players);
+
+        // Delay of 15 seconds for the state-function to run so that the robot has reached his
+        // final position
+        if (!isTest) {
+            Timer.schedule(new Task() {
+                @Override
+                public void run() {
+                    for (Robot robot : players) {
+                        state(robot);
+                    }
+                }
+            }, 10);
+
+            // calls turnAction after each card
+            for (int i = 1; i <= 9; i = i + 2) {
+                Timer.schedule(new Task() {
+                    @Override
+                    public void run() {
+                        for (Robot robot : players) {
+                            robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+                            robotPosition.turnAction(robot);
+                        }
+                    }
+                }, i);
+            }
+        } else {
+            // No delay if this is a test
+            for (Robot robot : players) {
+                state(robot);
+            }
+        }
+
+        if (!isTest) {
             for (int i = 1; i <= 9; i = i + 2) {
                 Timer.schedule(new Task() {
 
@@ -405,57 +482,32 @@ public class Board {
      * Method that moves the robot in the matrix.
      *
      * @param phase List of cards
-     * @param robot the robot that should move
+     * @param robots array of all robots
+     * @param isTest indicates that this is a test
      */
-    public void moveSingleRobot(LinkedList<Card> phase, Robot robot, boolean isTest) {
-        robotPosition = this.fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-        robot.setLastField(robotPosition);
+
+    public void moveSingleTurn(LinkedList<Card> phase, Robot[] robots, boolean isTest) {
+
         if (isTest) {
             for (Card card : phase) {
-                robotMovement(card, robot);
+                robotPosition = fieldmatrix[robots[card.getCardPlayerNumber()].getXcoor()]
+                        [robots[card.getCardPlayerNumber()].getYcoor()];
+                robots[card.getCardPlayerNumber()].setLastField(robotPosition);
+                robotMovement(card, robots[card.getCardPlayerNumber()], robots);
             }
         } else {
-
-            // delay in seconds, increments for each phase in the linked list for two more second
+            /* delay in seconds, increments for each
+            phase in the linked list for two more second*/
             int i = 0;
             for (Card card : phase) {
                 Timer.schedule(new Task() {
-
                     @Override
                     public void run() {
-                        robotMovement(card, robot);
+                        robotMovement(card, robots[card.getCardPlayerNumber()], robots);
                     }
-                }, i);
+                }, (float) i / 2);
                 i += 2;
             }
-        }
-
-        // Delay of 15 seconds for the state-function to run so that the robot has reached his
-        // final position
-        if (!isTest) {
-            Timer.schedule(new Task() {
-
-                @Override
-                public void run() {
-                    state(robot);
-                }
-            }, 10);
-
-            // calls turnAction after each card
-            for (int i = 1; i <= 9; i = i + 2) {
-                Timer.schedule(new Task() {
-
-                    @Override
-                    public void run() {
-                        robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-                        robotPosition.turnAction(robot);
-                    }
-                }, i);
-            }
-        } else {
-
-            // No delay if this is a test
-            state(robot);
         }
     }
 
@@ -464,18 +516,21 @@ public class Board {
      *
      * @param card Current card
      * @param robot The robot that should move
+     * @param players array of all players
      */
-    public void robotMovement(Card card, Robot robot) {
+    public void robotMovement(Card card, Robot robot, Robot[] players) {
         if (card.getCardAttributeType() == Type.mov) {
-            robot.moveInDirectionByCard(fieldmatrix, card.getCardAttributeMovCount());
+            robot.moveInDirectionByCard(fieldmatrix, card.getCardAttributeMovCount(), players);
         } else {
             robot.turn(card.getCardAttributeMovCount());
         }
-        if (robot.getXcoor() >= fieldmatrix.length
-                || robot.getYcoor() >= fieldmatrix[1].length
-                || robot.getXcoor() < 0 || robot.getYcoor() < 0) {
-            robot.setXcoor(robot.getStartX());
-            robot.setYcoor(robot.getStartY());
+        for (Robot player : players) {
+            if (player.getXcoor() >= fieldmatrix.length
+                    || player.getYcoor() >= fieldmatrix[0].length
+                    || player.getXcoor() < 0 || player.getYcoor() < 0) {
+                player.setXcoor(player.getStartX());
+                player.setYcoor(player.getStartY());
+            }
         }
     }
 
@@ -492,7 +547,7 @@ public class Board {
     /**
      * Method that checks whether the robot receives 2 damage points.
      *
-     * @param players the robot that should check
+     * @param players array of all players
      */
     private void checkDoubleDamage(Robot[] players) {
         for (Robot player : players) {
@@ -512,7 +567,7 @@ public class Board {
     /**
      * Method that checks whether the robot is in shutdown mode.
      *
-     * @param players the robot that should check
+     * @param players array of all players
      */
     private void checkShutDown(Robot[] players) {
         for (Robot player : players) {
@@ -663,7 +718,7 @@ public class Board {
      * @param players an array of robots
      */
     public void checkRobotLaser(Robot[] players) {
-        
+
         BarrierSide barrierside;
         BarrierCorner barriercorner;
 
@@ -676,6 +731,7 @@ public class Board {
             int z = 0;
 
             switch (player.getDir()) {
+
                 case NORTH:
 
                     if (this.fieldmatrix[x][y] instanceof BarrierSide) {
@@ -696,29 +752,21 @@ public class Board {
                     for (int i2 = (y - 1); i2 >= 0 && (z == 0); i2--) {
 
                         if (this.fieldmatrix[x][i2] instanceof BarrierSide) {
-
                             barrierside = (BarrierSide) this.fieldmatrix[x][i2];
-
                             if (barrierside.getSide() == 4) {
                                 break;
                             }
-
                             if (barrierside.getSide() == 2) {
                                 z++;
                             }
                         }
 
                         if (this.fieldmatrix[x][i2] instanceof BarrierCorner) {
-
                             barriercorner = (BarrierCorner) this.fieldmatrix[x][i2];
-
-                            if (barriercorner.getCorner() == 3 ||
-                                    barriercorner.getCorner() == 4) {
+                            if (barriercorner.getCorner() == 3 || barriercorner.getCorner() == 4) {
                                 break;
                             }
-
-                            if (barriercorner.getCorner() == 1 ||
-                                    barriercorner.getCorner() == 2) {
+                            if (barriercorner.getCorner() == 1 || barriercorner.getCorner() == 2) {
                                 z++;
                             }
                         }
@@ -758,29 +806,21 @@ public class Board {
                     for (int i2 = (y + 1); i2 < this.fieldmatrix.length && (z == 0); i2++) {
 
                         if (this.fieldmatrix[x][i2] instanceof BarrierSide) {
-
                             barrierside = (BarrierSide) this.fieldmatrix[x][i2];
-
                             if (barrierside.getSide() == 2) {
                                 break;
                             }
-
                             if (barrierside.getSide() == 4) {
                                 z++;
                             }
                         }
 
                         if (this.fieldmatrix[x][i2] instanceof BarrierCorner) {
-
                             barriercorner = (BarrierCorner) this.fieldmatrix[x][i2];
-
-                            if (barriercorner.getCorner() == 1 ||
-                                    barriercorner.getCorner() == 2) {
+                            if (barriercorner.getCorner() == 1 || barriercorner.getCorner() == 2) {
                                 break;
                             }
-
-                            if (barriercorner.getCorner() == 3 ||
-                                    barriercorner.getCorner() == 4) {
+                            if (barriercorner.getCorner() == 3 || barriercorner.getCorner() == 4) {
                                 z++;
                             }
                         }
@@ -818,29 +858,21 @@ public class Board {
                     for (int i2 = (x + 1); i2 < this.fieldmatrix[0].length && (z == 0); i2++) {
 
                         if (this.fieldmatrix[i2][y] instanceof BarrierSide) {
-
                             barrierside = (BarrierSide) this.fieldmatrix[i2][y];
-
                             if (barrierside.getSide() == 1) {
                                 break;
                             }
-
                             if (barrierside.getSide() == 3) {
                                 z++;
                             }
                         }
 
                         if (this.fieldmatrix[i2][y] instanceof BarrierCorner) {
-
                             barriercorner = (BarrierCorner) this.fieldmatrix[i2][y];
-
-                            if (barriercorner.getCorner() == 1 ||
-                                    barriercorner.getCorner() == 4) {
+                            if (barriercorner.getCorner() == 1 || barriercorner.getCorner() == 4) {
                                 break;
                             }
-
-                            if (barriercorner.getCorner() == 2 ||
-                                    barriercorner.getCorner() == 3) {
+                            if (barriercorner.getCorner() == 2 || barriercorner.getCorner() == 3) {
                                 z++;
                             }
                         }
@@ -878,29 +910,21 @@ public class Board {
                     for (int i2 = (x - 1); i2 >= 0 && (z == 0); i2--) {
 
                         if (this.fieldmatrix[i2][y] instanceof BarrierSide) {
-
                             barrierside = (BarrierSide) this.fieldmatrix[i2][y];
-
                             if (barrierside.getSide() == 3) {
                                 break;
                             }
-
                             if (barrierside.getSide() == 1) {
                                 z++;
                             }
                         }
 
                         if (this.fieldmatrix[i2][y] instanceof BarrierCorner) {
-
                             barriercorner = (BarrierCorner) this.fieldmatrix[i2][y];
-
-                            if (barriercorner.getCorner() == 2 ||
-                                    barriercorner.getCorner() == 3) {
+                            if (barriercorner.getCorner() == 2 || barriercorner.getCorner() == 3) {
                                 break;
                             }
-
-                            if (barriercorner.getCorner() == 1 ||
-                                    barriercorner.getCorner() == 4) {
+                            if (barriercorner.getCorner() == 1 || barriercorner.getCorner() == 4) {
                                 z++;
                             }
                         }
@@ -921,6 +945,6 @@ public class Board {
                 default:
                     break;
             }
-        }
+        } 
     }
 }
