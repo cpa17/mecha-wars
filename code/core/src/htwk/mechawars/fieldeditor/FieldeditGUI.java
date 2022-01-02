@@ -2,6 +2,7 @@ package htwk.mechawars.fieldeditor;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -122,11 +123,13 @@ public class FieldeditGUI implements Screen{
         xPositionChangeField.setSize(buttonWidth / 2 + 50, buttonHeight / 2);
         xPositionChangeField.setPosition(funcButtonPosX + 40, funcButtonPosY - 535);
         xPositionChangeField.setMessageText("X Position");
+        xPositionChangeField.setAlignment(Align.center);
         
         TextField yPositionChangeField = new TextField("", skinFiEdit);
         yPositionChangeField.setSize(buttonWidth / 2 + 50, buttonHeight / 2);
         yPositionChangeField.setPosition(funcButtonPosX + 200, funcButtonPosY - 535);
         yPositionChangeField.setMessageText("Y Position");
+        yPositionChangeField.setAlignment(Align.center);
         
         
         ImageButton barrierCornerButton = new ImageButton(new TextureRegionDrawable(
@@ -134,9 +137,9 @@ public class FieldeditGUI implements Screen{
                         + "BarrierCorner0" + String.valueOf(corner) + ".png"))));
         barrierCornerButton.setSize(picButtonSize, picButtonSize);
         barrierCornerButton.setPosition(picButtonPosX, picButtonPosY);
-        barrierCornerButton.addListener(new ClickListener() {
+        barrierCornerButton.addListener(new ClickListener(Buttons.RIGHT) {
             public void clicked(InputEvent event, float x, float y) {
-//                drawOnField(x, y, corner);
+                drawOnField(corner);
                 ImageButtonStyle styleFiEdit = new ImageButtonStyle();
                 styleFiEdit.up = new TextureRegionDrawable(
                         new TextureRegion(new Texture("mapAssets/" + "barriercorner/"
@@ -152,9 +155,9 @@ public class FieldeditGUI implements Screen{
                         + "BarrierSide" + String.valueOf(side) + ".png"))));
         barrierSideButton.setSize(picButtonSize, picButtonSize);
         barrierSideButton.setPosition(picButtonPosX + 90, picButtonPosY);
-        barrierSideButton.addListener(new ClickListener() {
+        barrierSideButton.addListener(new ClickListener(Buttons.RIGHT) {
           public void clicked(InputEvent event, float x, float y) {
-//              drawOnField(x, y, side);
+              drawOnField(side);
               ImageButtonStyle styleFiEdit = new ImageButtonStyle();
               styleFiEdit.up = new TextureRegionDrawable(
                       new TextureRegion(new Texture("mapAssets/" + "barrierside/"
@@ -169,9 +172,9 @@ public class FieldeditGUI implements Screen{
                 new TextureRegion(new Texture("mapAssets/BlackHole.png"))));
         blackHoleButton.setSize(picButtonSize, picButtonSize);
         blackHoleButton.setPosition(picButtonPosX + 180, picButtonPosY);
-        blackHoleButton.addListener(new ClickListener() {
+        blackHoleButton.addListener(new ClickListener(Buttons.RIGHT) {
           public void clicked(InputEvent event, float x, float y) {
-//              drawOnField(x, y);
+//              drawOnField(blackholeID);
           }
         });
         blackHoleButton.addListener(new TextTooltip("Black Hole", tTM, skinFiEdit));
@@ -181,9 +184,9 @@ public class FieldeditGUI implements Screen{
                         + checkpointNumber + ".png"))));
         checkpointButton.setSize(picButtonSize, picButtonSize);
         checkpointButton.setPosition(picButtonPosX, picButtonPosY - 90);
-        checkpointButton.addListener(new ClickListener() {
+        checkpointButton.addListener(new ClickListener(Buttons.RIGHT) {
           public void clicked(InputEvent event, float x, float y) {
-//              drawOnField(x, y, checkpointNumber);
+              drawOnField(checkpointNumber);
               ImageButtonStyle styleFiEdit = new ImageButtonStyle();
               styleFiEdit.up = new TextureRegionDrawable(
                       new TextureRegion(new Texture("mapAssets/checkpoints/Check" 
@@ -200,9 +203,9 @@ public class FieldeditGUI implements Screen{
                         + String.valueOf(endConveyor) + ".png"))));
         conveyorBeltButton.setSize(picButtonSize, picButtonSize);
         conveyorBeltButton.setPosition(picButtonPosX + 90, picButtonPosY - 90);
-        conveyorBeltButton.addListener(new ClickListener() {
+        conveyorBeltButton.addListener(new ClickListener(Buttons.RIGHT) {
           public void clicked(InputEvent event, float x, float y) {
-//              drawOnField(x, y, endConveyor);
+              drawOnField(endConveyor);
               ImageButtonStyle styleFiEdit = new ImageButtonStyle();
               styleFiEdit.up = new TextureRegionDrawable(
                       new TextureRegion(new Texture("mapAssets/" + "conveyorBelt/"
@@ -225,9 +228,9 @@ public class FieldeditGUI implements Screen{
                         + String.valueOf(endExpressConveyor) + ".png"))));
         expressConveyorBeltButton.setSize(picButtonSize, picButtonSize);
         expressConveyorBeltButton.setPosition(picButtonPosX + 180, picButtonPosY - 90);
-        expressConveyorBeltButton.addListener(new ClickListener() {
+        expressConveyorBeltButton.addListener(new ClickListener(Buttons.RIGHT) {
           public void clicked(InputEvent event, float x, float y) {
-//              drawOnField(x, y, endExpressConveyor);
+              drawOnField(endExpressConveyor);
               ImageButtonStyle styleFiEdit = new ImageButtonStyle();
               styleFiEdit.up = new TextureRegionDrawable(
                       new TextureRegion(new Texture("mapAssets/" + "expressconveyorBelt/"
@@ -249,9 +252,9 @@ public class FieldeditGUI implements Screen{
                 new TextureRegion(new Texture("mapAssets/Checkpoint.png"))));
         backupButton.setSize(picButtonSize, picButtonSize);
         backupButton.setPosition(picButtonPosX, picButtonPosY - 180);
-        backupButton.addListener(new ClickListener() {
+        backupButton.addListener(new ClickListener(Buttons.RIGHT) {
           public void clicked(InputEvent event, float x, float y) {
-//              drawOnField(x, y);
+//              drawOnField(checkpointnumID);
           }
         });
         backupButton.addListener(new TextTooltip("Backup Checkpoint", tTM, skinFiEdit));
@@ -260,9 +263,9 @@ public class FieldeditGUI implements Screen{
                 new TextureRegion(new Texture("mapAssets/gear/Gear0" + gearNumber + ".png"))));
         gearButton.setSize(picButtonSize, picButtonSize);
         gearButton.setPosition(picButtonPosX + 90, picButtonPosY - 180);
-        gearButton.addListener(new ClickListener() {
+        gearButton.addListener(new ClickListener(Buttons.RIGHT) {
           public void clicked(InputEvent event, float x, float y) {
-//              drawOnField(x, y, gearNumber);
+              drawOnField(gearNumber);
               ImageButtonStyle styleFiEdit = new ImageButtonStyle();
               styleFiEdit.up = new TextureRegionDrawable(
                       new TextureRegion(new Texture("mapAssets/gear/Gear0" + gearNumber 
@@ -278,9 +281,9 @@ public class FieldeditGUI implements Screen{
                         + "Laser0" + String.valueOf(typeLaserNum) + ".png"))));
         laserButton.setSize(picButtonSize, picButtonSize);
         laserButton.setPosition(picButtonPosX + 180, picButtonPosY - 180);
-        laserButton.addListener(new ClickListener() {
+        laserButton.addListener(new ClickListener(Buttons.RIGHT) {
           public void clicked(InputEvent event, float x, float y) {
-//              drawOnField(x, y, typeLaser);
+              drawOnField(typeLaserNum);
               ImageButtonStyle styleFiEdit = new ImageButtonStyle();
               styleFiEdit.up = new TextureRegionDrawable(
                       new TextureRegion(new Texture("mapAssets/" + "laser/"
@@ -296,9 +299,9 @@ public class FieldeditGUI implements Screen{
                         + ".png"))));
         repairSiteButton.setSize(picButtonSize, picButtonSize);
         repairSiteButton.setPosition(picButtonPosX, picButtonPosY - 270);
-        repairSiteButton.addListener(new ClickListener() {
+        repairSiteButton.addListener(new ClickListener(Buttons.RIGHT) {
           public void clicked(InputEvent event, float x, float y) {
-//              drawOnField(x, y, repairNum);
+              drawOnField(repairNum);
               ImageButtonStyle styleFiEdit = new ImageButtonStyle();
               styleFiEdit.up = new TextureRegionDrawable(
                       new TextureRegion(new Texture("mapAssets/repairsite/RepairSite0" 
@@ -313,9 +316,9 @@ public class FieldeditGUI implements Screen{
                 new TextureRegion(new Texture("mapAssets/StandardField.png"))));
         standardFieldButton.setSize(picButtonSize, picButtonSize);
         standardFieldButton.setPosition(picButtonPosX + 90, picButtonPosY - 270);
-        standardFieldButton.addListener(new ClickListener() {
+        standardFieldButton.addListener(new ClickListener(Buttons.RIGHT) {
           public void clicked(InputEvent event, float x, float y) {
-//              drawOnField(x, y);
+//              drawOnField();!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
           }
         });
         standardFieldButton.addListener(new TextTooltip("Standard Feld", tTM, skinFiEdit));
@@ -325,9 +328,9 @@ public class FieldeditGUI implements Screen{
                         + "StartField0" + String.valueOf(startFieldNumber) + ".png"))));
         startFieldButton.setSize(picButtonSize, picButtonSize);
         startFieldButton.setPosition(picButtonPosX + 180, picButtonPosY - 270);
-        startFieldButton.addListener(new ClickListener() {
+        startFieldButton.addListener(new ClickListener(Buttons.RIGHT) {
           public void clicked(InputEvent event, float x, float y) {
-//              drawOnField(x, y, startFieldNumber);
+              drawOnField(startFieldNumber);
               ImageButtonStyle styleFiEdit = new ImageButtonStyle();
               styleFiEdit.up = new TextureRegionDrawable(
                       new TextureRegion(new Texture("mapAssets/" + "startfield/"
@@ -343,9 +346,9 @@ public class FieldeditGUI implements Screen{
                         + "Pusher0" + String.valueOf(pusherNumber) + ".png"))));
         pusherButton.setSize(picButtonSize, picButtonSize);
         pusherButton.setPosition(picButtonPosX + 90, picButtonPosY - 360);
-        pusherButton.addListener(new ClickListener() {
+        pusherButton.addListener(new ClickListener(Buttons.RIGHT) {
           public void clicked(InputEvent event, float x, float y) {
-//              drawOnField(x, y, pusherNumber);
+              drawOnField(pusherNumber);
               ImageButtonStyle styleFiEdit = new ImageButtonStyle();
               styleFiEdit.up = new TextureRegionDrawable(
                       new TextureRegion(new Texture("mapAssets/" + "pusher/"
@@ -459,5 +462,9 @@ public class FieldeditGUI implements Screen{
         }
         //zeichnen !!!!!!!!!
         return var;
+    }
+    
+    private void drawOnField(int partNum) {
+        
     }
 }
