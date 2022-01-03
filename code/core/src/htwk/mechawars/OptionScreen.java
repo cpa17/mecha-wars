@@ -103,16 +103,28 @@ public class OptionScreen implements Screen {
 
                 String input = chooseMap.getText().toLowerCase();
                 
-                if (!(chooseMap.getText().matches(" Bitte Map angeben")) 
-                        && !mapNotFound) {                       
+                if (!(chooseMap.getText().matches(" Bitte Map angeben")) && !mapNotFound) {                       
                     if (fileListRead(input)) {
                         if (!input.contains(".txt")) {
                             input = input + ".txt";
                         } 
                         
-                        MechaWars.setMap(input);
-                        
-                        toGameScreen();
+                        try {
+                            MechaWars.setMap(input);
+                            toGameScreen();
+                        } catch(exception) {
+                            Dialog dialogCloseOption = new Dialog("\t    Assets fehlen", skin) {
+                                @Override   
+                                protected void result(Object object) {
+                                    remove();
+                                }
+                            }.show(stage);
+                            
+                            dialogCloseOption.setSize(400, 100);
+                            dialogCloseOption.setPosition(440, 310);
+                            dialogCloseOption.button("Standartmap wird genommen", null);   
+                            dialogCloseOption.key(Input.Keys.ENTER, null);
+                        }
                         
                     } else if (!pathChoice) {                     
                         Dialog dialogCloseOption = new Dialog("\t Mapname falsch", skin) {
