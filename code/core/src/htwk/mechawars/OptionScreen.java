@@ -114,10 +114,12 @@ public class OptionScreen implements Screen {
                             MechaWars.setMap(input);
                             toGameScreen();
                         } catch(GdxRuntimeException e) {
-                            Dialog dialogCloseOption = new Dialog("\t    Assets fehlen", skin) {
+                            Dialog dialogCloseOption = new Dialog("\t   Assets fehlen", skin) {
                                 @Override   
                                 protected void result(Object object) {
                                     remove();
+                                    MechaWars.setMap("test.txt");
+                                    toGameScreen(); 
                                 }
                             }.show(stage);
                             
@@ -125,8 +127,6 @@ public class OptionScreen implements Screen {
                             dialogCloseOption.setPosition(440, 310);
                             dialogCloseOption.button("Standartmap nehmen", null);   
                             dialogCloseOption.key(Input.Keys.ENTER, null);
-                            MechaWars.setMap("test.txt");
-                            toGameScreen(); 
                         }
                         
                     } else if (!pathChoice) {                     
