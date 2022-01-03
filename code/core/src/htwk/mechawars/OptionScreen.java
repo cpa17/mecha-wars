@@ -104,7 +104,8 @@ public class OptionScreen implements Screen {
 
                 String input = chooseMap.getText().toLowerCase();
                 
-                if (!(chooseMap.getText().matches(" Bitte Map angeben")) && !mapNotFound) {                       
+                if (!(chooseMap.getText().matches(" Bitte Map angeben")) && 
+                        !mapNotFound) {                       
                     if (fileListRead(input)) {
                         if (!input.contains(".txt")) {
                             input = input + ".txt";
@@ -113,7 +114,7 @@ public class OptionScreen implements Screen {
                         try {
                             MechaWars.setMap(input);
                             toGameScreen();
-                        } catch(GdxRuntimeException e) {
+                        } catch (GdxRuntimeException e) {
                             Dialog dialogCloseOption = new Dialog("\t   Assets fehlen", skin) {
                                 @Override   
                                 protected void result(Object object) {
