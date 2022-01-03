@@ -23,6 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import htwk.mechawars.game.GameScreen;
@@ -112,7 +113,7 @@ public class OptionScreen implements Screen {
                         try {
                             MechaWars.setMap(input);
                             toGameScreen();
-                        } catch(exception) {
+                        } catch(GdxRuntimeException e) {
                             Dialog dialogCloseOption = new Dialog("\t    Assets fehlen", skin) {
                                 @Override   
                                 protected void result(Object object) {
@@ -122,8 +123,10 @@ public class OptionScreen implements Screen {
                             
                             dialogCloseOption.setSize(400, 100);
                             dialogCloseOption.setPosition(440, 310);
-                            dialogCloseOption.button("Standartmap wird genommen", null);   
+                            dialogCloseOption.button("Standartmap nehmen", null);   
                             dialogCloseOption.key(Input.Keys.ENTER, null);
+                            MechaWars.setMap("test.txt");
+                            toGameScreen(); 
                         }
                         
                     } else if (!pathChoice) {                     
