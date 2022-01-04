@@ -66,14 +66,7 @@ public class FieldeditGUI implements Screen{
     private int pusherNumber = 1; //Number of Pusher
     private boolean backToMain = false;
     private boolean mapChange = true;
-    private TooltipManager tTM = new TooltipManager();
-    protected Skin skinFiEdit = new Skin(Gdx.files.internal("skinMenu/star-soldier-ui.json"));
-    private ButtonfunctionsFieldEditor buFiEdit = 
-            new ButtonfunctionsFieldEditor(stageFiEdit, skinFiEdit);
-    private int mouseX = 0;
-    private int mouseY = 0;
-    private int fieldNumber = 0;
-    private int[][] fieldMatrixInt;
+    private TooltipManager tTM = new TooltipManager() ;
     
     public FieldeditGUI(FieldEditor fieldEditor, String map) {
         
@@ -84,6 +77,7 @@ public class FieldeditGUI implements Screen{
         stageFiEdit = new Stage();
         
         img = new Texture(Gdx.files.internal("background.png"));
+        Skin skinFiEdit = new Skin(Gdx.files.internal("skinMenu/star-soldier-ui.json"));
         Gdx.input.setInputProcessor(stageFiEdit);
         
         TextButton importButton = new TextButton("Import", skinFiEdit);
@@ -92,8 +86,9 @@ public class FieldeditGUI implements Screen{
         importButton.setSize(buttonWidth, buttonHeight);
         importButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                buFiEdit.importField();
+                
             }
+//                            importieren(skinFEdit);
         });
         
         TextButton exportButton = new TextButton("Export", skinFiEdit);
@@ -102,7 +97,8 @@ public class FieldeditGUI implements Screen{
         exportButton.setSize(buttonWidth, buttonHeight);
         exportButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                buFiEdit.exportField();
+                    
+//                            exportieren(skinFEdit);
             }
         });
         
@@ -112,7 +108,9 @@ public class FieldeditGUI implements Screen{
         backButton.setSize(buttonWidth, buttonHeight);
         backButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                buFiEdit.oneStepBack();
+
+//                zurueck();
+                
             }
         });
         
@@ -122,7 +120,9 @@ public class FieldeditGUI implements Screen{
         clearButton.setSize(buttonWidth, buttonHeight);
         clearButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                buFiEdit.resetField();
+
+//                resetField();
+                
             }
         });
         
@@ -366,8 +366,7 @@ public class FieldeditGUI implements Screen{
         standardFieldButton.setPosition(picButtonPosX + 90, picButtonPosY - 270);
         standardFieldButton.addListener(new ClickListener(Buttons.LEFT) {
           public void clicked(InputEvent event, float x, float y) {
-              buFiEdit.setCurrentField(fieldNumber, 10109);
-//              drawOnField(mouseX, mouseY);
+              drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "StandardField", 0, 0);
           }
         });
         standardFieldButton.addListener(new TextTooltip("Standard Field", tTM, skinFiEdit));
@@ -468,8 +467,8 @@ public class FieldeditGUI implements Screen{
         batchFiEdit = (SpriteBatch) stageFiEdit.getBatch();
         batchFiEdit.begin();
         batchFiEdit.draw(img, 0, 0, 1280, 720);
-        Board.toAsset(batchFiEdit, boardFiEdit);
 //        if(mapChange) {
+            Board.toAsset(batchFiEdit, boardFiEdit);
 //            mapChange = false;
 //        }
         batchFiEdit.end();
@@ -522,16 +521,46 @@ public class FieldeditGUI implements Screen{
         return var;
     }
     
-    private void drawOnField() {
-        this.fieldMatrixInt = new int[buFiEdit.sqrtOfList()]
-                [buFiEdit.sqrtOfList()];
-        fieldMatrixInt = buFiEdit.listToIntArray(buFiEdit.getCurrentField());
-        
-        for (int i = 0; i < fieldMatrixInt.length; i +=1 ) {
-            for (int j = 0; j < fieldMatrixInt.length; j += 1) {
-                boardFiEdit.intToFieldMatrix(fieldMatrixInt, false);
+    private void drawOnField(String x, String y, String part, int startNum, int endNum) {
+        if(checkChangeField(x, y)) {
+            int xInt = Integer.parseInt(x) - 1;
+            int yInt = Integer.parseInt(y) - 1;
+            switch (part) {
+            case "BarrierCorner": boardFiEdit.fieldmatrix[xInt][yInt] = new BarrierCorner(0, 0, startNum);
+                break;
+            case "BarrierSide": boardFiEdit.fieldmatrix[xInt][yInt] = new BarrierSide(0, 0, startNum);
+                break;
+            case "BlackHole": boardFiEdit.fieldmatrix[xInt][yInt] = new BlackHole(0, 0);
+                break;
+            case "Checkpoint": boardFiEdit.fieldmatrix[xInt][yInt] = new Checkpoint(0, 0, startNum);
+                break;
+            case "ConveyorBelt": boardFiEdit.fieldmatrix[xInt][yInt] = new ConveyorBelt(0, 0, startNum, endNum);
+                break;
+            case "ExpressConveyorBelt": boardFiEdit.fieldmatrix[xInt][yInt] = new ExpressConveyorBelt(0, 0, startNum, endNum);
+                break;
+            case "BackupCheckpoint": boardFiEdit.fieldmatrix[xInt][yInt] = new Checkpoint(0, 0, startNum);
+                break;
+            case "Gear": boardFiEdit.fieldmatrix[xInt][yInt] = new Gear(0, 0, startNum);
+                break;
+            case "Laser": boardFiEdit.fieldmatrix[xInt][yInt] = new Laser(0, 0, startNum);
+                break;
+            case "RepairSite": boardFiEdit.fieldmatrix[xInt][yInt] = new RepairSite(0, 0, startNum);
+                break;
+            case "StandardField": boardFiEdit.fieldmatrix[xInt][yInt] = new StandardField(0, 0);
+                break;
+            case "StartField": boardFiEdit.fieldmatrix[xInt][yInt] = new StartField(0, 0, startNum);
+                break;
+            case "Pusher": boardFiEdit.fieldmatrix[xInt][yInt] = new Pusher(0, 0, startNum);
+                break;
+            default: break;
             }
-        }        
-        buFiEdit.oneStepDone();
+        }
+    }
+    private boolean checkChangeField(String x, String y) {
+        if (x.length() != 0 && y.length() != 0 && x.matches("[+-]?\\d*(\\.\\d+)?") &&
+                y.matches("[+-]?\\d*(\\.\\d+)?")) {
+            return true;
+        }
+        return false;
     }
 }
