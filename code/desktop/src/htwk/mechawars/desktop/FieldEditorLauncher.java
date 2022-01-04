@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 
@@ -32,8 +33,6 @@ import picocli.CommandLine.Option;
         mixinStandardHelpOptions = true)
 public class FieldEditorLauncher implements Runnable {
 
-    private String fileName = "map.txt";
-
     /**
      * Main class, for the new CommandLine.
      */
@@ -49,7 +48,7 @@ public class FieldEditorLauncher implements Runnable {
      */
     @Override
     public void run() {
-        FieldEditor.setMap(fileName);
+        FieldEditor.setMap("maps/test.txt");
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
         config.setWindowedMode(1280, 720);
         new Lwjgl3Application(new FieldEditor(), config);

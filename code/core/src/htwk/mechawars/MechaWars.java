@@ -28,7 +28,7 @@ public class MechaWars extends Game {
     private static String map;
 
     public static void setMap(String fileName) {
-        map = fileName;
+        map = "maps/" + fileName;
     }
 
     public static String getMap() {
@@ -54,7 +54,6 @@ public class MechaWars extends Game {
         try {
             ConfigReader.readConfigs();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 

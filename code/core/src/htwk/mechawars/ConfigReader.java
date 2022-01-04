@@ -1,9 +1,6 @@
 package htwk.mechawars;
 
 import java.awt.Point;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 
 import com.badlogic.gdx.Gdx;
