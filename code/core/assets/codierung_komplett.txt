@@ -77,7 +77,7 @@ ExpressConveyorBelt91	10691			rechts + unten--> links
 ExpressConveyorBelt92	10692			rechts + unten--> oben
 
 Gear01			10701			rechtsrum		Gear
-Gear02			10702			linksrun
+Gear02			10702			linksrum
 
 Laser00			10800			Beginn links		Laser
 Laser01			10801			Beginn oben
