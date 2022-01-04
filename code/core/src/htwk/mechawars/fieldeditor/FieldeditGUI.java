@@ -147,16 +147,21 @@ public class FieldeditGUI implements Screen{
         barrierCornerButton.setPosition(picButtonPosX, picButtonPosY);
         barrierCornerButton.addListener(new ClickListener(Buttons.RIGHT) {
             public void clicked(InputEvent event, float x, float y) {
-                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "BarrierCorner", corner, 0);
+                corner = ror(1, 4, corner);
                 ImageButtonStyle styleFiEdit = new ImageButtonStyle();
                 styleFiEdit.up = new TextureRegionDrawable(
                         new TextureRegion(new Texture("mapAssets/" + "barriercorner/"
                                 + "BarrierCorner0" + String.valueOf(corner) + ".png")));
                 barrierCornerButton.setStyle(styleFiEdit);
-                corner = ror(1, 4, corner);
+            }
+        });
+        barrierCornerButton.addListener(new ClickListener(Buttons.LEFT) {
+            public void clicked(InputEvent event, float x, float y) {
+                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "BarrierCorner", corner, 0);
             }
         });
         barrierCornerButton.addListener(new TextTooltip("Barrier Corner", tTM, skinFiEdit));
+        
         
         ImageButton barrierSideButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "barrierside/"
@@ -165,27 +170,33 @@ public class FieldeditGUI implements Screen{
         barrierSideButton.setPosition(picButtonPosX + 90, picButtonPosY);
         barrierSideButton.addListener(new ClickListener(Buttons.RIGHT) {
           public void clicked(InputEvent event, float x, float y) {
-              drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "BarrierSide", side, 0);
+              side = ror(1, 4, side);
               ImageButtonStyle styleFiEdit = new ImageButtonStyle();
               styleFiEdit.up = new TextureRegionDrawable(
                       new TextureRegion(new Texture("mapAssets/" + "barrierside/"
                               + "BarrierSide" + String.valueOf(side) + ".png")));
               barrierSideButton.setStyle(styleFiEdit);
-              side = ror(1, 4, side);
           }
         });
+        barrierSideButton.addListener(new ClickListener(Buttons.LEFT) {
+            public void clicked(InputEvent event, float x, float y) {
+                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "BarrierSide", side, 0);
+            }
+          });
         barrierSideButton.addListener(new TextTooltip("Barrier Side", tTM, skinFiEdit));
-        
+
+
         ImageButton blackHoleButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/BlackHole.png"))));
         blackHoleButton.setSize(picButtonSize, picButtonSize);
         blackHoleButton.setPosition(picButtonPosX + 180, picButtonPosY);
-        blackHoleButton.addListener(new ClickListener(Buttons.RIGHT) {
+        blackHoleButton.addListener(new ClickListener(Buttons.LEFT) {
           public void clicked(InputEvent event, float x, float y) {
               drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "BlackHole", 0, 0);
           }
         });
         blackHoleButton.addListener(new TextTooltip("Black Hole", tTM, skinFiEdit));
+        
         
         ImageButton checkpointButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/checkpoints/Check" 
@@ -194,16 +205,21 @@ public class FieldeditGUI implements Screen{
         checkpointButton.setPosition(picButtonPosX, picButtonPosY - 90);
         checkpointButton.addListener(new ClickListener(Buttons.RIGHT) {
           public void clicked(InputEvent event, float x, float y) {
-              drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "Checkpoint", checkpointNumber, 0);
+              checkpointNumber = ror(1, 8, checkpointNumber);
               ImageButtonStyle styleFiEdit = new ImageButtonStyle();
               styleFiEdit.up = new TextureRegionDrawable(
                       new TextureRegion(new Texture("mapAssets/checkpoints/Check" 
                               + checkpointNumber + ".png")));
               checkpointButton.setStyle(styleFiEdit);
-              checkpointNumber = ror(1, 8, checkpointNumber);
           }
         });
+        checkpointButton.addListener(new ClickListener(Buttons.LEFT) {
+            public void clicked(InputEvent event, float x, float y) {
+                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "Checkpoint", checkpointNumber, 0);
+            }
+          });
         checkpointButton.addListener(new TextTooltip("Checkpoint", tTM, skinFiEdit));
+        
         
         ImageButton conveyorBeltButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "conveyorBelt/"
@@ -213,22 +229,27 @@ public class FieldeditGUI implements Screen{
         conveyorBeltButton.setPosition(picButtonPosX + 90, picButtonPosY - 90);
         conveyorBeltButton.addListener(new ClickListener(Buttons.RIGHT) {
           public void clicked(InputEvent event, float x, float y) {
-              drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "ConveyorBelt", startConveyor ,endConveyor);
-              ImageButtonStyle styleFiEdit = new ImageButtonStyle();
-              styleFiEdit.up = new TextureRegionDrawable(
-                      new TextureRegion(new Texture("mapAssets/" + "conveyorBelt/"
-                              + "ConveyorBelt" + String.valueOf(startConveyor) 
-                              + String.valueOf(endConveyor) + ".png")));
-              conveyorBeltButton.setStyle(styleFiEdit);
               startConveyor = ror(0, 9, startConveyor);
               if (!(((startConveyor == 5) && (endConveyor == 2)) ||
                       (startConveyor == 6) && (endConveyor == 1) ||
                       (startConveyor == 8) && (endConveyor == 4))) {
                   endConveyor = ror(1, 4, endConveyor);
               }
+              ImageButtonStyle styleFiEdit = new ImageButtonStyle();
+              styleFiEdit.up = new TextureRegionDrawable(
+                      new TextureRegion(new Texture("mapAssets/" + "conveyorBelt/"
+                              + "ConveyorBelt" + String.valueOf(startConveyor) 
+                              + String.valueOf(endConveyor) + ".png")));
+              conveyorBeltButton.setStyle(styleFiEdit);
           }
         });
+        conveyorBeltButton.addListener(new ClickListener(Buttons.LEFT) {
+            public void clicked(InputEvent event, float x, float y) {
+                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "ConveyorBelt", startConveyor ,endConveyor);
+            }
+          });
         conveyorBeltButton.addListener(new TextTooltip("Conveyorbelt", tTM, skinFiEdit));
+        
         
         ImageButton expressConveyorBeltButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "expressconveyorBelt/"
@@ -238,29 +259,33 @@ public class FieldeditGUI implements Screen{
         expressConveyorBeltButton.setPosition(picButtonPosX + 180, picButtonPosY - 90);
         expressConveyorBeltButton.addListener(new ClickListener(Buttons.RIGHT) {
           public void clicked(InputEvent event, float x, float y) {
-              drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "ExpressConveyorBelt", startExpressConveyor, endExpressConveyor);
-              ImageButtonStyle styleFiEdit = new ImageButtonStyle();
-              styleFiEdit.up = new TextureRegionDrawable(
-                      new TextureRegion(new Texture("mapAssets/" + "expressconveyorBelt/"
-                              + "ExpressConveyorBelt" + String.valueOf(startExpressConveyor) 
-                              + String.valueOf(endExpressConveyor) + ".png")));
-              expressConveyorBeltButton.setStyle(styleFiEdit);
               startExpressConveyor = ror(0, 9, startExpressConveyor);
               if (!(((startExpressConveyor == 5) && (endExpressConveyor == 2)) ||
                       (startExpressConveyor == 6) && (endExpressConveyor == 1) ||
                       (startExpressConveyor == 8) && (endExpressConveyor == 4))) {
                   endExpressConveyor = ror(1, 4, endExpressConveyor);
-              }
+              }ImageButtonStyle styleFiEdit = new ImageButtonStyle();
+              styleFiEdit.up = new TextureRegionDrawable(
+                      new TextureRegion(new Texture("mapAssets/" + "expressconveyorBelt/"
+                              + "ExpressConveyorBelt" + String.valueOf(startExpressConveyor) 
+                              + String.valueOf(endExpressConveyor) + ".png")));
+              expressConveyorBeltButton.setStyle(styleFiEdit);
           }
         });
+        expressConveyorBeltButton.addListener(new ClickListener(Buttons.LEFT) {
+            public void clicked(InputEvent event, float x, float y) {
+                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "ExpressConveyorBelt", startExpressConveyor, endExpressConveyor);
+            }
+          });
         expressConveyorBeltButton.addListener(new TextTooltip("Express Conveyorbelt", 
                 tTM, skinFiEdit));
+        
         
         ImageButton backupButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/Checkpoint.png"))));
         backupButton.setSize(picButtonSize, picButtonSize);
         backupButton.setPosition(picButtonPosX, picButtonPosY - 180);
-        backupButton.addListener(new ClickListener(Buttons.RIGHT) {
+        backupButton.addListener(new ClickListener(Buttons.LEFT) {
           public void clicked(InputEvent event, float x, float y) {
               drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "BackupCheckpoint", 0 , 0);
           }
@@ -273,16 +298,21 @@ public class FieldeditGUI implements Screen{
         gearButton.setPosition(picButtonPosX + 90, picButtonPosY - 180);
         gearButton.addListener(new ClickListener(Buttons.RIGHT) {
           public void clicked(InputEvent event, float x, float y) {
-              drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "Gear", gearNumber, 0);
+              gearNumber = ror(1, 2, gearNumber);
               ImageButtonStyle styleFiEdit = new ImageButtonStyle();
               styleFiEdit.up = new TextureRegionDrawable(
                       new TextureRegion(new Texture("mapAssets/gear/Gear0" + gearNumber 
                               + ".png")));
               gearButton.setStyle(styleFiEdit);
-              gearNumber = ror(1, 2, gearNumber);
           }
         });
+        gearButton.addListener(new ClickListener(Buttons.LEFT) {
+            public void clicked(InputEvent event, float x, float y) {
+                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "Gear", gearNumber, 0);
+            }
+          });
         gearButton.addListener(new TextTooltip("Gear", tTM, skinFiEdit));
+        
         
         ImageButton laserButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "laser/"
@@ -291,16 +321,21 @@ public class FieldeditGUI implements Screen{
         laserButton.setPosition(picButtonPosX + 180, picButtonPosY - 180);
         laserButton.addListener(new ClickListener(Buttons.RIGHT) {
           public void clicked(InputEvent event, float x, float y) {
-              drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "Laser", typeLaserNum, 0);
+              typeLaserNum = ror(0, 9, typeLaserNum);
               ImageButtonStyle styleFiEdit = new ImageButtonStyle();
               styleFiEdit.up = new TextureRegionDrawable(
                       new TextureRegion(new Texture("mapAssets/" + "laser/"
                               + "Laser0" + String.valueOf(typeLaserNum) + ".png")));
               laserButton.setStyle(styleFiEdit);
-              typeLaserNum = ror(0, 9, typeLaserNum);
           }
         });
+        laserButton.addListener(new ClickListener(Buttons.LEFT) {
+            public void clicked(InputEvent event, float x, float y) {
+                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "Laser", typeLaserNum, 0);
+            }
+          });
         laserButton.addListener(new TextTooltip("Laser", tTM, skinFiEdit));
+        
         
         ImageButton repairSiteButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/repairsite/RepairSite0" + repairNum
@@ -309,22 +344,27 @@ public class FieldeditGUI implements Screen{
         repairSiteButton.setPosition(picButtonPosX, picButtonPosY - 270);
         repairSiteButton.addListener(new ClickListener(Buttons.RIGHT) {
           public void clicked(InputEvent event, float x, float y) {
-              drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "RepairSite", repairNum, 0);
+              repairNum = ror(1, 2, repairNum);
               ImageButtonStyle styleFiEdit = new ImageButtonStyle();
               styleFiEdit.up = new TextureRegionDrawable(
                       new TextureRegion(new Texture("mapAssets/repairsite/RepairSite0" 
                               + repairNum + ".png")));
               repairSiteButton.setStyle(styleFiEdit);
-              repairNum = ror(1, 2, repairNum);
           }
         });
+        repairSiteButton.addListener(new ClickListener(Buttons.LEFT) {
+            public void clicked(InputEvent event, float x, float y) {
+                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "RepairSite", repairNum, 0);
+            }
+          });
         repairSiteButton.addListener(new TextTooltip("Repair Site", tTM, skinFiEdit));
+        
         
         ImageButton standardFieldButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/StandardField.png"))));
         standardFieldButton.setSize(picButtonSize, picButtonSize);
         standardFieldButton.setPosition(picButtonPosX + 90, picButtonPosY - 270);
-        standardFieldButton.addListener(new ClickListener(Buttons.RIGHT) {
+        standardFieldButton.addListener(new ClickListener(Buttons.LEFT) {
           public void clicked(InputEvent event, float x, float y) {
               drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "StandardField", 0, 0);
           }
@@ -338,17 +378,22 @@ public class FieldeditGUI implements Screen{
         startFieldButton.setPosition(picButtonPosX + 180, picButtonPosY - 270);
         startFieldButton.addListener(new ClickListener(Buttons.RIGHT) {
           public void clicked(InputEvent event, float x, float y) {
-              drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "StartField", startFieldNumber, 0);
+              startFieldNumber = ror(1, 8, startFieldNumber);
               ImageButtonStyle styleFiEdit = new ImageButtonStyle();
               styleFiEdit.up = new TextureRegionDrawable(
                       new TextureRegion(new Texture("mapAssets/" + "startfield/"
                               + "StartField0" + String.valueOf(startFieldNumber) + ".png")));
               startFieldButton.setStyle(styleFiEdit);
-              startFieldNumber = ror(1, 8, startFieldNumber);
           }
         });
+        startFieldButton.addListener(new ClickListener(Buttons.LEFT) {
+            public void clicked(InputEvent event, float x, float y) {
+                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "StartField", startFieldNumber, 0);
+            }
+          });
         startFieldButton.addListener(new TextTooltip("Start Field", tTM, skinFiEdit));
 
+        
         ImageButton pusherButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "pusher/"
                         + "Pusher0" + String.valueOf(pusherNumber) + ".png"))));
@@ -356,16 +401,21 @@ public class FieldeditGUI implements Screen{
         pusherButton.setPosition(picButtonPosX + 90, picButtonPosY - 360);
         pusherButton.addListener(new ClickListener(Buttons.RIGHT) {
           public void clicked(InputEvent event, float x, float y) {
-              drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "Pusher", pusherNumber, 0);
+              pusherNumber = ror(1, 4, pusherNumber);
               ImageButtonStyle styleFiEdit = new ImageButtonStyle();
               styleFiEdit.up = new TextureRegionDrawable(
                       new TextureRegion(new Texture("mapAssets/" + "pusher/"
                               + "Pusher0" + String.valueOf(pusherNumber) + ".png")));
               pusherButton.setStyle(styleFiEdit);
-              pusherNumber = ror(1, 4, pusherNumber);
           }
         });
+        pusherButton.addListener(new ClickListener(Buttons.LEFT) {
+            public void clicked(InputEvent event, float x, float y) {
+                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "Pusher", pusherNumber, 0);
+            }
+          });
         pusherButton.addListener(new TextTooltip("Pusher", tTM, skinFiEdit));
+        
         
         stageFiEdit.addActor(importButton);
         stageFiEdit.addActor(exportButton);
@@ -472,37 +522,45 @@ public class FieldeditGUI implements Screen{
     }
     
     private void drawOnField(String x, String y, String part, int startNum, int endNum) {
-        int xInt = Integer.parseInt(x) - 1;
-        int yInt = Integer.parseInt(y) - 1;
-        switch (part) {
-        case "BarrierCorner": boardFiEdit.fieldmatrix[xInt][yInt] = new BarrierCorner(0, 0, startNum);
-            break;
-        case "BarrierSide": boardFiEdit.fieldmatrix[xInt][yInt] = new BarrierSide(0, 0, startNum);
-            break;
-        case "BlackHole": boardFiEdit.fieldmatrix[xInt][yInt] = new BlackHole(0, 0);
-            break;
-        case "Checkpoint": boardFiEdit.fieldmatrix[xInt][yInt] = new Checkpoint(0, 0, startNum);
-            break;
-        case "ConveyorBelt": boardFiEdit.fieldmatrix[xInt][yInt] = new ConveyorBelt(0, 0, startNum, endNum);
-            break;
-        case "ExpressConveyorBelt": boardFiEdit.fieldmatrix[xInt][yInt] = new ExpressConveyorBelt(0, 0, startNum, endNum);
-            break;
-        case "BackupCheckpoint": boardFiEdit.fieldmatrix[xInt][yInt] = new Checkpoint(0, 0, startNum);
-            break;
-        case "Gear": boardFiEdit.fieldmatrix[xInt][yInt] = new Gear(0, 0, startNum);
-            break;
-        case "Laser": boardFiEdit.fieldmatrix[xInt][yInt] = new Laser(0, 0, startNum);
-            break;
-        case "RepairSite": boardFiEdit.fieldmatrix[xInt][yInt] = new RepairSite(0, 0, startNum);
-            break;
-        case "StandardField": boardFiEdit.fieldmatrix[xInt][yInt] = new StandardField(0, 0);
-            break;
-        case "StartField": boardFiEdit.fieldmatrix[xInt][yInt] = new StartField(0, 0, startNum);
-            break;
-        case "Pusher": boardFiEdit.fieldmatrix[xInt][yInt] = new Pusher(0, 0, startNum);
-            break;
-        default: break;
-
+        if(checkChangeField(x, y)) {
+            int xInt = Integer.parseInt(x) - 1;
+            int yInt = Integer.parseInt(y) - 1;
+            switch (part) {
+            case "BarrierCorner": boardFiEdit.fieldmatrix[xInt][yInt] = new BarrierCorner(0, 0, startNum);
+                break;
+            case "BarrierSide": boardFiEdit.fieldmatrix[xInt][yInt] = new BarrierSide(0, 0, startNum);
+                break;
+            case "BlackHole": boardFiEdit.fieldmatrix[xInt][yInt] = new BlackHole(0, 0);
+                break;
+            case "Checkpoint": boardFiEdit.fieldmatrix[xInt][yInt] = new Checkpoint(0, 0, startNum);
+                break;
+            case "ConveyorBelt": boardFiEdit.fieldmatrix[xInt][yInt] = new ConveyorBelt(0, 0, startNum, endNum);
+                break;
+            case "ExpressConveyorBelt": boardFiEdit.fieldmatrix[xInt][yInt] = new ExpressConveyorBelt(0, 0, startNum, endNum);
+                break;
+            case "BackupCheckpoint": boardFiEdit.fieldmatrix[xInt][yInt] = new Checkpoint(0, 0, startNum);
+                break;
+            case "Gear": boardFiEdit.fieldmatrix[xInt][yInt] = new Gear(0, 0, startNum);
+                break;
+            case "Laser": boardFiEdit.fieldmatrix[xInt][yInt] = new Laser(0, 0, startNum);
+                break;
+            case "RepairSite": boardFiEdit.fieldmatrix[xInt][yInt] = new RepairSite(0, 0, startNum);
+                break;
+            case "StandardField": boardFiEdit.fieldmatrix[xInt][yInt] = new StandardField(0, 0);
+                break;
+            case "StartField": boardFiEdit.fieldmatrix[xInt][yInt] = new StartField(0, 0, startNum);
+                break;
+            case "Pusher": boardFiEdit.fieldmatrix[xInt][yInt] = new Pusher(0, 0, startNum);
+                break;
+            default: break;
+            }
         }
+    }
+    private boolean checkChangeField(String x, String y) {
+        if (x.length() != 0 && y.length() != 0 && x.matches("[+-]?\\d*(\\.\\d+)?") &&
+                y.matches("[+-]?\\d*(\\.\\d+)?")) {
+            return true;
+        }
+        return false;
     }
 }
