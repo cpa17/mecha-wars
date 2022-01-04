@@ -24,49 +24,49 @@ public class BoardToInt {
                 switch(abc) {
                 case "BarrierCorner01" : list.add(10001);
                     break;
-                case "BarrierCorner02" : 
+                case "BarrierCorner02" : list.add(10002);
                     break;
-                case "BarrierCorner03" : 
+                case "BarrierCorner03" : list.add(10003);
                     break;
-                case "BarrierCorner04" : 
-                    break;
-                
-                case "BarrierSide1" :
-                    break;
-                case "BarrierSide2" :
-                    break;
-                case "BarrierSide3" :
-                    break;
-                case "BarrierSide4" :
-                    break;
-                    
-                case "BlackHole" :
+                case "BarrierCorner04" : list.add(10004);
                     break;
                 
-                case "Pusher01" :
+                case "BarrierSide1" : list.add(10101);
                     break;
-                case "Pusher02" :
+                case "BarrierSide2" : list.add(10102);
                     break;
-                case "Pusher03" :
+                case "BarrierSide3" : list.add(10103);
                     break;
-                case "Pusher04" :
+                case "BarrierSide4" : list.add(10104);
                     break;
                     
-                case "Check1" :
+                case "BlackHole" :  list.add(10200);
                     break;
-                case "Check2" :
+                
+                case "Pusher01" : list.add(10301);
                     break;
-                case "Check3" :
+                case "Pusher02" : list.add(10302);
                     break;
-                case "Check4" :
+                case "Pusher03" : list.add(10303);
                     break;
-                case "Check5" :
+                case "Pusher04" : list.add(10304);
                     break;
-                case "Check6" :
+                    
+                case "Check1" : list.add(10401);
                     break;
-                case "Check7" :
+                case "Check2" : list.add(10402);
                     break;
-                case "Check8" :
+                case "Check3" : list.add(10403);
+                    break;
+                case "Check4" : list.add(10404);
+                    break;
+                case "Check5" : list.add(10405);
+                    break;
+                case "Check6" : list.add(10406);
+                    break;
+                case "Check7" : list.add(10407);
+                    break;
+                case "Check8" : list.add(10408);
                     break;
                     
                 case "ConveyorBelt02" :
