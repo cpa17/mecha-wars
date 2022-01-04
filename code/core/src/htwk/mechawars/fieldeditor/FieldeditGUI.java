@@ -517,7 +517,7 @@ public class FieldeditGUI implements Screen{
         } else {
             var = min;
         }
-        //zeichnen !!!!!!!!!
+        //zeichnen !!!!!!!!
         return var;
     }
     
