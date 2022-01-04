@@ -59,14 +59,14 @@ public class ButtonfunctionsFieldEditor {
     /**
      * Function, that manage the import of a Map.
      */
-    public void importField() {
+    public String importField() {
 
         JFileChooser chooser = new JFileChooser();
 
         chooser.setDialogTitle("Map oeffnen");
 
         // Startfolder
-        File filepfadLinkListe = new File("code\\desktop\\bin\\main");
+        File filepfadLinkListe = new File("code\\core\\src\\assets\\maps");
         chooser.setCurrentDirectory(filepfadLinkListe);
 
         int chooseroption = chooser.showOpenDialog(null);
@@ -74,36 +74,45 @@ public class ButtonfunctionsFieldEditor {
             if (chooser.getSelectedFile().toString().matches("(.*)" + ".txt")) {
                 openFile(chooser.getSelectedFile());
 
-                // Control, if the field is not to large (because of manual manipulation e.g.)
-                if (currentField.size() != 144) {
-                    // ErrorDialog
-                    Dialog dialogCloseOption = new Dialog("Error beim Laden!"
-                            + "Bitte Datei ueberpruefen.",
-                            skin) {
-                        @Override
-                        protected void result(Object object) {
-                            remove();
-                        }
-                    }.show(stage);
-
-                    dialogCloseOption.setSize(450, 110);
-
-                    dialogCloseOption.button("Verstanden.", true);
-                    dialogCloseOption.key(Input.Keys.ENTER, true);   
-
-                    // clean ArrayList
-                    currentField.clear();
-                    for (int index = 0; index < 144; index += 1) {
-                        currentField.add(11000);
-                    }
-                }
-            } else {
-                currentField.clear();
-                for (int index = 0; index < 144; index += 1) {
-                    currentField.add(11000);
-                }
+                controlImportField();
+                
             }
         }
+        return chooser.getSelectedFile().toString();
+    }
+    
+    /**
+     * Function to check, if the imported Field is broken.
+     */
+    private void controlImportField() {
+//      // Control, if the field is not to large (because of manual manipulation e.g.)
+//      if (currentField.size() != 144) {
+//          // ErrorDialog
+//          Dialog dialogCloseOption = new Dialog("Error beim Laden!"
+//                  + "Bitte Datei ueberpruefen.",
+//                  skin) {
+//              @Override
+//              protected void result(Object object) {
+//                  remove();
+//              }
+//          }.show(stage);
+//
+//          dialogCloseOption.setSize(450, 110);
+//
+//          dialogCloseOption.button("Verstanden.", true);
+//          dialogCloseOption.key(Input.Keys.ENTER, true);   
+//
+//          // clean ArrayList
+//          currentField.clear();
+//          for (int index = 0; index < 144; index += 1) {
+//              currentField.add(11000);
+//          }
+//      }
+//  } else {
+//      currentField.clear();
+//      for (int index = 0; index < 144; index += 1) {
+//          currentField.add(11000);
+//      }
     }
 
     /**
