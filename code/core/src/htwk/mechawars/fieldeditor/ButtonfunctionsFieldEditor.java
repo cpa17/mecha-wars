@@ -16,6 +16,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -225,8 +227,16 @@ public class ButtonfunctionsFieldEditor {
                                  
         }.show(s);
         
+        int num = 1;
+        
         dialogSizeOption.setSize(700, 125);
-
+        dialogSizeOption.button("12x12", num = 12);
+        dialogSizeOption.button("16x16", num = 16);
+        dialogSizeOption.button("20x20", num = 20);
+        dialogSizeOption.button("24x24", num = 24);
+        dialogSizeOption.button("28x28", num = 28);
+        dialogSizeOption.button("32x32", num = 32);
+        
         for (int i = 0; i < board.fieldmatrix.length; i += 1) {
             for (int j = 0; j < board.fieldmatrix[i].length; j += 1) {
                 board.fieldmatrix[i][j] = new StandardField(i, j);
