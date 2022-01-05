@@ -101,7 +101,7 @@ public class FieldeditGUI implements Screen{
         exportButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 bfFiEdit.setCurrentField(boardFiEdit);
-                bfFiEdit.exportField();
+                bfFiEdit.exportField(boardFiEdit);
             }
         });
         

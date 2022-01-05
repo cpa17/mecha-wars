@@ -50,9 +50,10 @@ public class ButtonfunctionsFieldEditor {
     public ButtonfunctionsFieldEditor(Stage stage, Skin skin, boolean t) {
         this.stage = stage;
         this.skin = skin;
+        Board board = new Board("..\\core\\assets\\maps\\test.txt");
         if (t) {
             importField();
-            exportField();
+            exportField(board);
             resetField();
             oneStepBack();
             oneStepDone();
@@ -152,7 +153,7 @@ public class ButtonfunctionsFieldEditor {
     /**
      * Manage the exportfunction, to save a field in a .txt file permanently.
      */
-    public void exportField() {
+    public void exportField(Board board) {
 
         JFrame saveDialog = new JFrame();           
         JFileChooser fileChooser = new JFileChooser();
@@ -170,7 +171,7 @@ public class ButtonfunctionsFieldEditor {
             }
             // make every String in Lower-Case, so there are no misstakes, when open it in the Game
             fileToSave.getName().toLowerCase();
-            save(fileToSave);
+            save(fileToSave, board);
         }
 
     }
@@ -180,7 +181,7 @@ public class ButtonfunctionsFieldEditor {
      * 
      * @param file - show the file to save the field.
      */
-    private boolean save(File file) {
+    private boolean save(File file, Board board) {
 
         OutputStream ostream;
         try {
@@ -188,7 +189,7 @@ public class ButtonfunctionsFieldEditor {
             PrintWriter schreiber = new PrintWriter(ostream);
 
             for (int index = 0; index < currentField.size(); index += 1) {
-                for (int row = 0; row < 12; row += 1) {
+                for (int row = 0; row < board.fieldmatrix.length; row += 1) {
                     schreiber.print(currentField.get(index) + " ");
                 }
                 schreiber.println();
