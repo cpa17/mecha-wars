@@ -217,25 +217,6 @@ public class ButtonfunctionsFieldEditor {
     public Board resetField(Board board, Stage s) {
 
         currentField.clear();
-
-        //Board-Size
-        Dialog dialogSizeOption = new Dialog("           Bitte Spielfeldgroesse eintragen!", skin) {
-            @Override
-            protected void result(Object object) {
-                remove();
-            }
-                                 
-        }.show(s);
-        
-        int num = 1;
-        
-        dialogSizeOption.setSize(700, 125);
-        dialogSizeOption.button("12x12", num = 12);
-        dialogSizeOption.button("16x16", num = 16);
-        dialogSizeOption.button("20x20", num = 20);
-        dialogSizeOption.button("24x24", num = 24);
-        dialogSizeOption.button("28x28", num = 28);
-        dialogSizeOption.button("32x32", num = 32);
         
         for (int i = 0; i < board.fieldmatrix.length; i += 1) {
             for (int j = 0; j < board.fieldmatrix[i].length; j += 1) {
