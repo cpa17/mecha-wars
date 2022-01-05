@@ -1,5 +1,7 @@
 package htwk.mechawars.fieldeditor;
 
+import static htwk.mechawars.game.GameScreen.getStage;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -14,12 +16,15 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.utils.Align;
 
 import htwk.mechawars.board.Board;
+import htwk.mechawars.fields.StandardField;
 
 /**
  * ButtonFunctions for the FieldEditor.
@@ -31,7 +36,7 @@ public class ButtonfunctionsFieldEditor {
 
     private ArrayList<Integer> currentField = new ArrayList<>();
     private FieldBackupForBackStep backup = new FieldBackupForBackStep();
-    
+
     private BoardToInt boardToInt = new BoardToInt();
 
     private Stage stage;
@@ -54,7 +59,7 @@ public class ButtonfunctionsFieldEditor {
         if (t) {
             importField();
             exportField(board);
-            resetField();
+            resetField(board, stage);
             oneStepBack();
             oneStepDone();
             oneStepForward();
@@ -80,7 +85,7 @@ public class ButtonfunctionsFieldEditor {
                 openFile(chooser.getSelectedFile());
 
                 controlImportField();
-                
+
             }
             return chooser.getSelectedFile().toString();
         } else {
@@ -88,7 +93,7 @@ public class ButtonfunctionsFieldEditor {
             return "0";
         }
     }
-    
+
     /**
      * Function to check, if the imported Field is broken.
      */
@@ -117,9 +122,6 @@ public class ButtonfunctionsFieldEditor {
 //          }
 //      }
 //  } else {
-//      currentField.clear();
-//      for (int index = 0; index < 144; index += 1) {
-//          currentField.add(11000);
 //      }
     }
 
@@ -210,15 +212,30 @@ public class ButtonfunctionsFieldEditor {
      * Reset the hole(/y) Field. That means, everyfield is a "standard-Field" and at the center
      * is the startposition of the robot. 
      */
-    public void resetField() {
+    public Board resetField(Board board, Stage s) {
 
-        for (int index = 0; index < 53; index += 1) {
-            currentField.set(index, 11000);
+        currentField.clear();
+
+        //Board-Size
+        Dialog dialogSizeOption = new Dialog("           Bitte Spielfeldgroesse eintragen!", skin) {
+            @Override
+            protected void result(Object object) {
+                remove();
+            }
+                                 
+        }.show(s);
+        
+        dialogSizeOption.setSize(700, 125);
+
+        for (int i = 0; i < board.fieldmatrix.length; i += 1) {
+            for (int j = 0; j < board.fieldmatrix[i].length; j += 1) {
+                board.fieldmatrix[i][j] = new StandardField(i, j);
+            }        
         }
-        currentField.set(53, 10401);
-        for (int index = 54; index < 144; index += 1) {
-            currentField.set(index, 11000);
-        }
+
+        setCurrentField(board);
+
+        return board;
 
     }
 
