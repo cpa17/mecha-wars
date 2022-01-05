@@ -70,7 +70,7 @@ public class ButtonfunctionsFieldEditor {
         chooser.setDialogTitle("Map oeffnen");
 
         // Startfolder
-        File filepfadLinkListe = new File("code\\core\\src\\assets\\maps");
+        File filepfadLinkListe = new File("..\\core\\assets\\maps");
         chooser.setCurrentDirectory(filepfadLinkListe);
 
         int chooseroption = chooser.showOpenDialog(null);
@@ -81,8 +81,11 @@ public class ButtonfunctionsFieldEditor {
                 controlImportField();
                 
             }
+            return chooser.getSelectedFile().toString();
+        } else {
+            System.out.println("Keine Datei ausgewaehlt!");
+            return "0";
         }
-        return chooser.getSelectedFile().toString();
     }
     
     /**
@@ -155,7 +158,7 @@ public class ButtonfunctionsFieldEditor {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Datei speichern unter...");  
 
-        File filepfadLinkListe = new File("code\\desktop\\bin\\main");
+        File filepfadLinkListe = new File("..\\core\\assets\\maps");
         fileChooser.setCurrentDirectory(filepfadLinkListe);
 
         int userSelection = fileChooser.showSaveDialog(saveDialog);
