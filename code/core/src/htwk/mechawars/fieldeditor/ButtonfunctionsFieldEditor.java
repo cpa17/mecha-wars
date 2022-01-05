@@ -19,6 +19,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
+import htwk.mechawars.board.Board;
+
 /**
  * ButtonFunctions for the FieldEditor.
  * 
@@ -29,6 +31,8 @@ public class ButtonfunctionsFieldEditor {
 
     private ArrayList<Integer> currentField = new ArrayList<>();
     private FieldBackupForBackStep backup = new FieldBackupForBackStep();
+    
+    private BoardToInt boardToInt = new BoardToInt();
 
     private Stage stage;
     private Skin skin;
@@ -272,8 +276,13 @@ public class ButtonfunctionsFieldEditor {
         return currentField;
     }
 
-    public void setCurrentField(int index, int type) {
-        currentField.set(index, type);
+    /**
+     * Setter Function, that must be called, after the user clicked a change of the Map.
+     * 
+     * @param board -> give the current board / map
+     */
+    public void setCurrentField(Board board) {
+        currentField = boardToInt.convert(currentField, board);
     }
 
     /**
