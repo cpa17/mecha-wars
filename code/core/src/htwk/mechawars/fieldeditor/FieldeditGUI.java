@@ -87,7 +87,10 @@ public class FieldeditGUI implements Screen{
         importButton.setSize(buttonWidth, buttonHeight);
         importButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                initBoardFiEdit(bfFiEdit.importField());
+                String abc = bfFiEdit.importField();
+                if(!abc.equals("0")) {
+                    initBoardFiEdit(abc);
+                }
             }
         });
         
