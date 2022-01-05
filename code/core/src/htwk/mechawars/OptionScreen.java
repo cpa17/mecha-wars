@@ -114,8 +114,8 @@ public class OptionScreen implements Screen {
                         try {
                             MechaWars.setMap(input);
                             toGameScreen();
-                        } catch (GdxRuntimeException e) {
-                            Dialog dialogCloseOption = new Dialog("\t   Assets fehlen", skin) {
+                        } catch (Exception e) {
+                            Dialog dialogCloseOption = new Dialog("\t  Map Fehlerhaft", skin) {
                                 @Override   
                                 protected void result(Object object) {
                                     remove();
