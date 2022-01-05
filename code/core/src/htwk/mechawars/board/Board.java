@@ -490,7 +490,6 @@ public class Board {
                 player.setYcoor(player.getStartY());
             }
         }
-        robot.setLastMovementByConveyor(false);
     }
 
     /**

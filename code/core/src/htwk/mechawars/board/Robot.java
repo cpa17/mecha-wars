@@ -194,6 +194,7 @@ public class Robot {
                     }
                     if (!flag) {
                         setYcoor(getYcoor() - 1);
+                        setLastMovementByConveyor(false);
                     }
                 }
                 return this;
@@ -255,6 +256,7 @@ public class Robot {
                     }
                     if (!flag) {
                         setYcoor(getYcoor() + 1);
+                        setLastMovementByConveyor(false);
                     }
                 }
                 return this;
@@ -315,6 +317,7 @@ public class Robot {
                     }
                     if (!flag) {
                         setXcoor(getXcoor() + 1);
+                        setLastMovementByConveyor(false);
                     }
                 }
                 return this;
@@ -375,6 +378,7 @@ public class Robot {
                     }
                     if (!flag) {
                         setXcoor(getXcoor() - 1);
+                        setLastMovementByConveyor(false);
                     }
                 }
                 return this;
