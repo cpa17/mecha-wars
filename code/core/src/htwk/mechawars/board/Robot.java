@@ -809,21 +809,29 @@ public class Robot {
      * Function that draws the robot on the playing field.
      */
     public void drawRobot(Sprite sprite, Board board) {
-        int tileSize = (Gdx.graphics.getHeight() / board.fieldmatrix.length);
+        int tileSize = (Gdx.graphics.getHeight() / board.fieldmatrix[0].length);
         int x = xcoor;
-        int y = Math.abs(ycoor - (board.fieldmatrix.length - 1));
+        int y = Math.abs(ycoor - (board.fieldmatrix[0].length - 1));
 
         if (dir == Dir.NORTH) {
             sprite.setPosition(tileSize * x, tileSize * y);
+            sprite.setSize(tileSize, tileSize);
+            sprite.setOriginCenter();
             sprite.setRotation(0);
         } else if (dir == Dir.EAST) {
             sprite.setPosition(tileSize * x, tileSize * y);
+            sprite.setSize(tileSize, tileSize);
+            sprite.setOriginCenter();
             sprite.setRotation(270);
         } else if (dir == Dir.SOUTH) {
             sprite.setPosition(tileSize * x, tileSize * y);
+            sprite.setSize(tileSize, tileSize);
+            sprite.setOriginCenter();
             sprite.setRotation(180);
         } else if (dir == Dir.WEST) {
             sprite.setPosition(tileSize * x, tileSize * y);
+            sprite.setSize(tileSize, tileSize);
+            sprite.setOriginCenter();
             sprite.setRotation(90);
         }
     }
@@ -864,8 +872,10 @@ public class Robot {
         selectedCards = new LinkedList<Card>();       
     }
     
-    public void addCard(Card card) {
+    public void addCard(Card card, int playerNumber) {
+        card.setCardPlayerNumber(playerNumber);
         this.getSelectedCards().add(card);
     }
+
 
 }

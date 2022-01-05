@@ -25,7 +25,7 @@ public class ConveyorBelt extends Field {
         super(xcoor, ycoor);
         this.start = start;
         this.end = end;
-        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "conveyorBelt/"
+        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "conveyorbelt/"
                 + "ConveyorBelt" + String.valueOf(start) + String.valueOf(end) + ".png"));
     }
 
@@ -39,7 +39,7 @@ public class ConveyorBelt extends Field {
         this.start = start;
         this.end = end;
         if (!isTest) {
-            this.tile = new Texture(Gdx.files.internal("mapAssets/" + "conveyorBelt/"
+            this.tile = new Texture(Gdx.files.internal("mapAssets/" + "conveyorbelt/"
                     + "ConveyorBelt" + String.valueOf(start) + String.valueOf(end) + ".png"));
         }
     }
@@ -62,10 +62,9 @@ public class ConveyorBelt extends Field {
     public Texture getTile() {
         return this.tile;
     }
-    
+
     @Override
     public Robot turnAction(Robot robot) {
-
         switch (this.end) {
             // conveyor belt runs to the left
             case 1:
@@ -241,14 +240,14 @@ public class ConveyorBelt extends Field {
         robot.setLastMovementByConveyor(true);
         robot.setLastConveyorField(this);
 
-        return robot;     
+        return robot;
     }
-    
+
     @Override
     public Robot cardAction(Robot robot) {
-        return robot;       
+        return robot;
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {

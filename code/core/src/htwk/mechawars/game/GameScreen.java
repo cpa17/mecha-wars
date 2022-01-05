@@ -82,8 +82,33 @@ public class GameScreen implements Screen {
 
             board.startRobot(ConfigReader.getPlayerStartingPositions()[i].x, 
                     ConfigReader.getPlayerStartingPositions()[i].y, Dir.NORTH, players[i], false);
-        }
-        
+            
+            if (i != 0) {
+                boolean check = false;
+                
+                while (!check) {
+                    
+                    for (int j = (i - 1); j >= 0; j--) {
+                    
+                        int x1 = players[i].getXcoor();
+                        int x2 = players[j].getXcoor();
+                        int y1 = players[i].getYcoor();
+                        int y2 = players[j].getYcoor();
+                        
+                        if (x1 == x2 && y1 == y2) {
+                            board.startRobot(ConfigReader.getPlayerStartingPositions()[i].x, 
+                                    ConfigReader.getPlayerStartingPositions()[i].y,
+                                    Dir.NORTH, players[i], false);
+                            break;
+                        } else if (j == 0) {
+                            check = true;
+                        } else {
+                            continue;
+                        }
+                    } 
+                }
+            }
+        }   
     }
 
     /**
