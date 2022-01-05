@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 import htwk.mechawars.board.Board;
 
+/**
+ * 
+ * @author -.-
+ *
+ */
 public class BoardToInt {
     
     public BoardToInt() {
@@ -11,8 +16,10 @@ public class BoardToInt {
     }
     
     /**
+     * Function, to convert an Board / map to a List of Arrays, so it can be saved/exported.
      * 
-     * @param list
+     * @param list -> gives the ArrayList, in which the board should be saved.
+     * @param board -> gives the Board / map, which is the base of changes.
      * @return
      */
     public ArrayList<Integer> convert(ArrayList<Integer> list, Board board){
