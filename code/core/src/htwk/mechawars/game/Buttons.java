@@ -54,37 +54,35 @@ public class Buttons {
                             }
                         }, 25);
 
-                                setButtons(players);
-                                ScrollPanel.clearScrollPanel(skin, players);
-                            } else {
-                                startExecutionButton.setColor(Color.RED);
-                            }
-                        } else {
+                        setButtons(players);
+                        ScrollPanel.clearScrollPanel(skin, players);
+                    } else {
+                        startExecutionButton.setColor(Color.RED);
+                    }
+                } else {
 
-                            System.out.println(players[0].getShutDown());
+                    System.out.println(players[0].getShutDown());
 
-                            deactivateButtons();
+                    deactivateButtons();
 
-                            board.move(players, false);
+                    board.move(players, false);
 
+                    players[0].resetList();
+                    startExecutionButton.setColor(Color.LIGHT_GRAY);
+                    Timer.schedule(new Timer.Task() {
+                        @Override
+                        public void run() {
                             players[0].resetList();
                             startExecutionButton.setColor(Color.LIGHT_GRAY);
-                            Timer.schedule(new Timer.Task() {
-                                @Override
-                                public void run() {
-                                    players[0].resetList();
-                                    startExecutionButton.setColor(Color.LIGHT_GRAY);
-                                    ScrollPanel.cardOrderClear();
-                                    activateButtons();
-                                    setButtons(players);
-                                    ScrollPanel.clearScrollPanel(skin, players);
-                                }
-                            }, 15);
+                            ScrollPanel.cardOrderClear();
+                            activateButtons();
+                            setButtons(players);
+                            ScrollPanel.clearScrollPanel(skin, players);
                         }
-                ;
-
-                    } 
-                }); 
+                    }, 15);
+                }
+            }
+        });
      
         return startExecutionButton;
     }
