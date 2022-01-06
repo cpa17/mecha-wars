@@ -13,7 +13,7 @@ import htwk.mechawars.board.Board;
 public class FieldBackupForBackStep {
 
     private ArrayList<Board> backup = new ArrayList<>();
-    private Board tempBoard;
+    private Board tempBoard = new Board("..\\core\\assets\\maps\\test.txt");
     private int backupNumber = 0;
 
     /**
