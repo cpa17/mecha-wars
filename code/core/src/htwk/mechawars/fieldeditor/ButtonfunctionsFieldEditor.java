@@ -31,12 +31,7 @@ public class ButtonfunctionsFieldEditor {
     private Board currentField;
     private FieldBackupForBackStep backup = new FieldBackupForBackStep();
 
-    private Stage stage;
-    private Skin skin;
-
-    public ButtonfunctionsFieldEditor(Stage stage, Skin skin) {
-        this.stage = stage;
-        this.skin = skin;
+    public ButtonfunctionsFieldEditor() {
     }
 
     /**
@@ -44,15 +39,13 @@ public class ButtonfunctionsFieldEditor {
      * 
      * @param t -> says if the functions will be called.
      */
-    public ButtonfunctionsFieldEditor(Stage stage, Skin skin, boolean t) {
-        this.stage = stage;
-        this.skin = skin;
+    public ButtonfunctionsFieldEditor(boolean t) {
         Board board = new Board("..\\core\\assets\\maps\\test.txt");
         if (t) {
             importField();
             exportField(board);
-            resetField(board, stage);
-            oneStepBack(board);
+            resetField(board);
+            oneStepBack();
             oneStepDone(board);
         }
     }
@@ -143,7 +136,7 @@ public class ButtonfunctionsFieldEditor {
      * Reset the hole(/y) Field. That means, everyfield is a "standard-Field" and at the center
      * is the startposition of the robot. 
      */
-    public Board resetField(Board board, Stage s) {
+    public Board resetField(Board board) {
         
         for (int i = 0; i < board.fieldmatrix.length; i += 1) {
             for (int j = 0; j < board.fieldmatrix[i].length; j += 1) {
@@ -157,11 +150,9 @@ public class ButtonfunctionsFieldEditor {
     /**
      * Set the actuallField, which is draw continuously.
      */
-    public Board oneStepBack(Board board) {
+    public Board oneStepBack() {
         
-        board = backup.getBackup();
-        
-        return board;
+        return backup.getBackup();
         
     }
 
@@ -170,13 +161,11 @@ public class ButtonfunctionsFieldEditor {
      * 
      * @return boolean, that show`s the victorious of the function.
      */
-    public boolean oneStepDone(Board board) {
+    public void oneStepDone(Board board) {        
         try {
             backup.addBackup(board);
-            return true;
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Error by saving the actuallField.");
-            return false;
         }
     }
 }

@@ -70,7 +70,7 @@ public class FieldeditGUI implements Screen{
     private boolean mapChange = true;
     private TooltipManager tTM = new TooltipManager() ;
     private Skin skinFiEdit = new Skin(Gdx.files.internal("skinMenu/star-soldier-ui.json"));
-    private ButtonfunctionsFieldEditor bfFiEdit = new ButtonfunctionsFieldEditor(stageFiEdit, skinFiEdit);
+    private ButtonfunctionsFieldEditor bfFiEdit = new ButtonfunctionsFieldEditor();
     
     public FieldeditGUI(FieldEditor fieldEditor, String map) {
         
@@ -117,7 +117,7 @@ public class FieldeditGUI implements Screen{
         backButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
 
-                boardFiEdit = bfFiEdit.oneStepBack(boardFiEdit);
+                boardFiEdit = bfFiEdit.oneStepBack();
                 
             }
         });
@@ -128,7 +128,7 @@ public class FieldeditGUI implements Screen{
         clearButton.setSize(buttonWidth, buttonHeight);
         clearButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                boardFiEdit = bfFiEdit.resetField(boardFiEdit, stageFiEdit);
+                boardFiEdit = bfFiEdit.resetField(boardFiEdit);
             }
         });
         
@@ -163,10 +163,8 @@ public class FieldeditGUI implements Screen{
         });
         barrierCornerButton.addListener(new ClickListener(Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
-                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "BarrierCorner", corner, 0);
-                
                 bfFiEdit.oneStepDone(boardFiEdit);
-                
+                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "BarrierCorner", corner, 0);
             }
         });
         barrierCornerButton.addListener(new TextTooltip("Barrier Corner", tTM, skinFiEdit));
