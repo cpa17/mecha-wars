@@ -31,7 +31,7 @@ public class ButtonfunctionsFieldEditor {
     private ArrayList<Integer> currentField = new ArrayList<>();
     private FieldBackupForBackStep backup = new FieldBackupForBackStep();
 
-    private BoardToInt boardToInt = new BoardToInt();
+    private BoardConversion boardToInt = new BoardConversion();
 
     private Stage stage;
     private Skin skin;

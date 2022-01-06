@@ -22,9 +22,9 @@ import htwk.mechawars.fields.StartField;
  * @author -.-
  *
  */
-public class BoardToInt {
+public class BoardConversion {
     
-    public BoardToInt() {
+    public BoardConversion() {
         
     }
     
