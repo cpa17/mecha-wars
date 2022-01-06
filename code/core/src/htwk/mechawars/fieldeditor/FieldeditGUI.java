@@ -67,7 +67,6 @@ public class FieldeditGUI implements Screen{
     private int startFieldNumber = 1; //number of StartFieldButton
     private int pusherNumber = 1; //Number of Pusher
     private boolean backToMain = false;
-    private boolean mapChange = true;
     private TooltipManager tTM = new TooltipManager() ;
     private Skin skinFiEdit = new Skin(Gdx.files.internal("skinMenu/star-soldier-ui.json"));
     private ButtonfunctionsFieldEditor bfFiEdit = new ButtonfunctionsFieldEditor();
@@ -461,7 +460,6 @@ public class FieldeditGUI implements Screen{
 
     @Override
     public void show() {
-        // TODO Auto-generated method stub
         
     }
 
@@ -490,31 +488,26 @@ public class FieldeditGUI implements Screen{
 
     @Override
     public void resize(int width, int height) {
-        // TODO Auto-generated method stub
         
     }
 
     @Override
     public void pause() {
-        // TODO Auto-generated method stub
         
     }
 
     @Override
     public void resume() {
-        // TODO Auto-generated method stub
         
     }
 
     @Override
     public void hide() {
-        // TODO Auto-generated method stub
         
     }
 
     @Override
     public void dispose() {
-        // TODO Auto-generated method stub
         
     }
     
