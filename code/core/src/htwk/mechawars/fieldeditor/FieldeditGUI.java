@@ -128,6 +128,7 @@ public class FieldeditGUI implements Screen{
         clearButton.setSize(buttonWidth, buttonHeight);
         clearButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
+                bfFiEdit.oneStepDone(boardFiEdit);
                 boardFiEdit = bfFiEdit.resetField(boardFiEdit);
             }
         });

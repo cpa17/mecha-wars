@@ -13,6 +13,7 @@ import htwk.mechawars.board.Board;
 public class FieldBackupForBackStep {
 
     private ArrayList<Board> backup = new ArrayList<>();
+    private Board tempBoard;
     private int backupNumber = 0;
 
     /**
@@ -25,11 +26,11 @@ public class FieldBackupForBackStep {
     /**
      * Getter-Function for the last Backup, not the actuall.
      * 
-     * @return an ArrayList of Integer which includes the last field, before the last change.
+     * @return an Board which includes the last field, before the last change.
      */
     public Board getBackup() {
         if(backupNumber > 1) {
-            for (int i = 0; i < backup.size(); i++) {
+            for (int i = 0; i < backup.size(); i += 1) {
                 System.out.println(backup.get(i).toString() + "\n\n");
             }
             return backup.get(backupNumber - 2);
@@ -45,10 +46,11 @@ public class FieldBackupForBackStep {
      * @param backup -> Include the Backup as an Board, that should be save.
      */
     public void addBackup(Board toBackupBoard) {
+        this.tempBoard = toBackupBoard;
 //        if (backupNumber < backup.size()) {
 //            backup.set(backupNumber, toBackupBoard);
 //        } else {
-            backup.add(toBackupBoard);
+            backup.add(tempBoard);
 //        }
         backupNumber += 1;
     }
