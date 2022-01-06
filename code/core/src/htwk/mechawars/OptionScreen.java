@@ -105,7 +105,7 @@ public class OptionScreen implements Screen {
                         !mapNotFound) {                       
                     if (fileListRead(input)) {
                         inputToMap(input);
-                    } else {                     
+                    } else if (!mapNotFound) {                  
                         Dialog dialogCloseOption = new Dialog("\t Mapname falsch", skin) {
                             @Override
                             protected void result(Object object) {
