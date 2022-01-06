@@ -42,9 +42,8 @@ public class OptionScreen implements Screen {
     private Texture img;
     private TextButton start;
     private Skin skin;
-    private String mapPath = "./core/assets/maps";
+    private String mapPath = "../core/assets/maps";
     private boolean mapNotFound;
-    private boolean pathChoice;
     
     /**
      * Constructor of class VictoryScreen.
@@ -53,8 +52,6 @@ public class OptionScreen implements Screen {
         game = g;
         
         mapNotFound = false;
-        
-        pathChoice = false;
         
         stage = new Stage();
         
@@ -107,29 +104,8 @@ public class OptionScreen implements Screen {
                 if (!(chooseMap.getText().matches(" Bitte Map angeben")) && 
                         !mapNotFound) {                       
                     if (fileListRead(input)) {
-                        if (!input.contains(".txt")) {
-                            input = input + ".txt";
-                        } 
-                        
-                        try {
-                            MechaWars.setMap(input);
-                            toGameScreen();
-                        } catch (Exception e) {
-                            Dialog dialogCloseOption = new Dialog("\t  Map Fehlerhaft", skin) {
-                                @Override   
-                                protected void result(Object object) {
-                                    remove();
-                                    MechaWars.setMap("test.txt");
-                                    toGameScreen(); 
-                                }
-                            }.show(stage);
-                            
-                            dialogCloseOption.setSize(400, 100);
-                            dialogCloseOption.setPosition(440, 310);
-                            dialogCloseOption.button("Standartmap nehmen", null);   
-                            dialogCloseOption.key(Input.Keys.ENTER, null);
-                        }        
-                    } else if (!pathChoice) {                     
+                        inputToMap(input);
+                    } else {                     
                         Dialog dialogCloseOption = new Dialog("\t Mapname falsch", skin) {
                             @Override
                             protected void result(Object object) {
@@ -145,7 +121,6 @@ public class OptionScreen implements Screen {
                 } else if (mapNotFound) {
                     mapPath = input;
                     mapNotFound = false; 
-                    pathChoice = false;
                     start.setText("Starten");
                 } else {                  
                     MechaWars.setMap("test.txt");
@@ -165,6 +140,35 @@ public class OptionScreen implements Screen {
     public void toGameScreen() {
         game.setScreen(new GameScreen(game, MechaWars.getMap()));
         stage.dispose();
+    }
+    
+    /**
+     * Function to load the right map or change to default map if an exception is thrown.
+     * @param input - input of the Textfield
+     */
+    public void inputToMap(String input) {
+        if (!input.contains(".txt")) {
+            input = input + ".txt";
+        } 
+        
+        try {
+            MechaWars.setMap(input);
+            toGameScreen();
+        } catch (Exception e) {
+            Dialog dialogCloseOption = new Dialog("\t  Map Fehlerhaft", skin) {
+                @Override   
+                protected void result(Object object) {
+                    remove();
+                    MechaWars.setMap("test.txt");
+                    toGameScreen(); 
+                }
+            }.show(stage);
+            
+            dialogCloseOption.setSize(400, 100);
+            dialogCloseOption.setPosition(440, 310);
+            dialogCloseOption.button("Standartmap nehmen", null);   
+            dialogCloseOption.key(Input.Keys.ENTER, null);
+        } 
     }
     
     /**
@@ -252,7 +256,6 @@ public class OptionScreen implements Screen {
                     start.setText("Neuen Pfad nehmen");                 
                     chooseMap.setText("Bitte Pfad angeben");
                     mapNotFound = true;
-                    pathChoice = true;
                 }
             }.show(stage);
             
