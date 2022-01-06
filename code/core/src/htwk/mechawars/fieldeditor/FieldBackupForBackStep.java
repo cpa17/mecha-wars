@@ -28,11 +28,14 @@ public class FieldBackupForBackStep {
      * @return an ArrayList of Integer which includes the last field, before the last change.
      */
     public Board getBackup() {
-        try {
-            return backup.get(backupNumber - 1);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("[INDEXOUTOFBOUNDSE] - Backup not loadable");
-            return null;
+        if(backupNumber > 1) {
+            for (int i = 0; i < backup.size(); i++) {
+                System.out.println(backup.get(i).toString() + "\n\n");
+            }
+            return backup.get(backupNumber - 2);
+        } else {
+            System.out.println("Kein Backup da.");
+            return backup.get(0);
         }
     }
 
@@ -42,11 +45,11 @@ public class FieldBackupForBackStep {
      * @param backup -> Include the Backup as an Board, that should be save.
      */
     public void addBackup(Board toBackupBoard) {
-        if (backupNumber < backup.size()) {
-            this.backup.set(backupNumber, toBackupBoard);
-        } else {
-            this.backup.add(toBackupBoard);
-        }
+//        if (backupNumber < backup.size()) {
+//            backup.set(backupNumber, toBackupBoard);
+//        } else {
+            backup.add(toBackupBoard);
+//        }
         backupNumber += 1;
     }
 
