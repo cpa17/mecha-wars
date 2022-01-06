@@ -42,7 +42,7 @@ public class OptionScreen implements Screen {
     private Texture img;
     private TextButton start;
     private Skin skin;
-    private String mapPath = "./core/assets/maps";
+    private String mapPath = "../core/assets/maps";
     private boolean mapNotFound;
     
     /**
