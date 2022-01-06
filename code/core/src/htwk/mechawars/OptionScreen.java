@@ -42,7 +42,7 @@ public class OptionScreen implements Screen {
     private Texture img;
     private TextButton start;
     private Skin skin;
-    private String mapPath = "../core/assets/maps";
+    private String mapPath = "./core/assets/maps";
     private boolean mapNotFound;
     
     /**
@@ -249,13 +249,13 @@ public class OptionScreen implements Screen {
                 }
             }
         } catch (NullPointerException npe) {
+            mapNotFound = true;
             Dialog dialogCloseOption = new Dialog("\t    Keine Maps da", skin) {
                 @Override   
                 protected void result(Object object) {
                     remove();
                     start.setText("Neuen Pfad nehmen");                 
-                    chooseMap.setText("Bitte Pfad angeben");
-                    mapNotFound = true;
+                    chooseMap.setText("Bitte Pfad angeben");  
                 }
             }.show(stage);
             
