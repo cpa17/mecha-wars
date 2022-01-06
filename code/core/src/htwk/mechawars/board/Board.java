@@ -453,7 +453,14 @@ public class Board {
                         for (Robot robot : players) {
                             robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
                             robotPosition.turnAction(robot);
-                            checkRobotsOnBoard(players);
+                            for (Robot player : players) {
+                                if (player.getXcoor() >= fieldmatrix.length
+                                        || player.getYcoor() >= fieldmatrix[0].length
+                                        || player.getXcoor() < 0 || player.getYcoor() < 0) {
+                                    player.setXcoor(player.getStartX());
+                                    player.setYcoor(player.getStartY());
+                                }
+                            }
                             Robot.setPlayers(players);
                             checkRobotLaser(players);
                             checkBoardLaser(players);
@@ -467,6 +474,8 @@ public class Board {
             checkRobotLaser(players);
             checkBoardLaser(players);
             state(players);
+            checkDoubleDamage(players);
+            checkShutDown(players);
         }
     }
 
@@ -516,7 +525,14 @@ public class Board {
         } else {
             robot.turn(card.getCardAttributeMovCount());
         }
-        checkRobotsOnBoard(players);
+        for (Robot player : players) {
+            if (player.getXcoor() >= fieldmatrix.length
+                    || player.getYcoor() >= fieldmatrix[0].length
+                    || player.getXcoor() < 0 || player.getYcoor() < 0) {
+                player.setXcoor(player.getStartX());
+                player.setYcoor(player.getStartY());
+            }
+        }
         Robot.setPlayers(players);
     }
 
@@ -530,23 +546,6 @@ public class Board {
             player.setLastRound(player.getShutDown());
             player.setShutDown(player.getNextRound());
         }
-    }
-
-    /**
-     * Method that checks whether the robot is still on the board.
-     *
-     * @param players array of all players
-     */
-    private Robot[] checkRobotsOnBoard(Robot[] players) {
-        for (Robot player : players) {
-            if (player.getXcoor() >= fieldmatrix.length
-                    || player.getYcoor() >= fieldmatrix[0].length
-                    || player.getXcoor() < 0 || player.getYcoor() < 0) {
-                player.setXcoor(player.getStartX());
-                player.setYcoor(player.getStartY());
-            }
-        }
-        return players;
     }
 
     /**
