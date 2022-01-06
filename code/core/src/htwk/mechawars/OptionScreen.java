@@ -42,7 +42,7 @@ public class OptionScreen implements Screen {
     private Texture img;
     private TextButton start;
     private Skin skin;
-    private String mapPath = "../core/assets/maps";
+    private String mapPath = "./core/assets/maps";
     private boolean mapNotFound;
     private boolean pathChoice;
     
@@ -53,6 +53,7 @@ public class OptionScreen implements Screen {
         game = g;
         
         mapNotFound = false;
+        
         pathChoice = false;
         
         stage = new Stage();
@@ -127,8 +128,7 @@ public class OptionScreen implements Screen {
                             dialogCloseOption.setPosition(440, 310);
                             dialogCloseOption.button("Standartmap nehmen", null);   
                             dialogCloseOption.key(Input.Keys.ENTER, null);
-                        }
-                        
+                        }        
                     } else if (!pathChoice) {                     
                         Dialog dialogCloseOption = new Dialog("\t Mapname falsch", skin) {
                             @Override
@@ -230,17 +230,17 @@ public class OptionScreen implements Screen {
      * @return true if the file exist
      */
     public boolean fileListRead(String input) { 
-        ArrayList<String> filesInDirectory = new ArrayList<String>();
-        String regex = "(.*)";        
+        ArrayList<String> filesInDirectory = new ArrayList<String>();  
         File folder = new File(mapPath);
-
-        if (!input.matches(regex + ".txt")) {
+        
+        //(.*) is a group of zero or more of any character
+        if (!input.matches("(.*)" + ".txt")) {
             input = input + ".txt";
         }
         
         try {
             for (File file : folder.listFiles()) {
-                if (file.getName().matches(regex + ".txt")) {
+                if (file.getName().matches("(.*)" + ".txt")) {
                     filesInDirectory.add(file.getName());
                 }
             }
@@ -249,6 +249,10 @@ public class OptionScreen implements Screen {
                 @Override   
                 protected void result(Object object) {
                     remove();
+                    start.setText("Neuen Pfad nehmen");                 
+                    chooseMap.setText("Bitte Pfad angeben");
+                    mapNotFound = true;
+                    pathChoice = true;
                 }
             }.show(stage);
             
@@ -256,13 +260,6 @@ public class OptionScreen implements Screen {
             dialogCloseOption.setPosition(440, 310);
             dialogCloseOption.button("Neuen Pfad angeben", null);   
             dialogCloseOption.key(Input.Keys.ENTER, null);
-            
-            start.setText("Neuen Pfad nehmen");
-            
-            chooseMap.setText("Bitte Pfad angeben");
-            
-            mapNotFound = true;
-            pathChoice = true;
         }
         
         for (int i = 0; i < filesInDirectory.size(); i += 1) {
