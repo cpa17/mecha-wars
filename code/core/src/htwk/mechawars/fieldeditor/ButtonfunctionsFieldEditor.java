@@ -162,6 +162,11 @@ public class ButtonfunctionsFieldEditor {
         }
     }
     
+    /**
+     * Funktion that convert Assets to int-code.
+     * @param abc -> String with the asset
+     * @return the code of field as an int
+     */
     private int convert (String abc) {
         System.out.println(abc);
         abc = abc.substring(Math.abs(abc.lastIndexOf("/") + 1), Math.abs(abc.lastIndexOf(".")));
@@ -273,8 +278,7 @@ public class ButtonfunctionsFieldEditor {
         case "StandardField": return 11000;
             
         default : return 0;
-            
-        
+                    
         }  
     }
 }

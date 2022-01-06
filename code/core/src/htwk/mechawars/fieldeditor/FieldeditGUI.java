@@ -78,6 +78,7 @@ public class FieldeditGUI implements Screen{
         tTM.animations = false;
         tTM.initialTime = 0;
         initBoardFiEdit(map);
+        bfFiEdit.oneStepDone(boardFiEdit);      // first initial board saved
         stageFiEdit = new Stage();
         
         img = new Texture(Gdx.files.internal("background.png"));
