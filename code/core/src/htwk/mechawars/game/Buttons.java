@@ -11,6 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Timer;
+
+import htwk.mechawars.ConfigReader;
 import htwk.mechawars.board.Robot;
 
 import static htwk.mechawars.game.GameScreen.board;
@@ -52,7 +54,7 @@ public class Buttons {
 
                                 startExecutionButton.setTouchable(Touchable.enabled);
                             }
-                        }, 25);
+                        }, (ConfigReader.getPlayerNumber() * 5) + 5);
 
                         setButtons(players);
                         ScrollPanel.clearScrollPanel(skin, players);
@@ -79,7 +81,7 @@ public class Buttons {
                             setButtons(players);
                             ScrollPanel.clearScrollPanel(skin, players);
                         }
-                    }, 15);
+                    }, (ConfigReader.getPlayerNumber() * 5) + 5);
                 }
             }
         });
