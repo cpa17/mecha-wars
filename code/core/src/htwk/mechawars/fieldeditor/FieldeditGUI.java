@@ -1,5 +1,7 @@
 package htwk.mechawars.fieldeditor;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
@@ -88,8 +90,11 @@ public class FieldeditGUI implements Screen{
         importButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 String abc = bfFiEdit.importField();
-                if(!abc.equals("0")) {
+                if (!abc.equals("0")) {
                     initBoardFiEdit(abc);
+                }
+                if (abc.equals("2")) {
+                    System.out.println("Dateiformat nicht lesbar!");
                 }
             }
         });
@@ -100,7 +105,7 @@ public class FieldeditGUI implements Screen{
         exportButton.setSize(buttonWidth, buttonHeight);
         exportButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                bfFiEdit.setCurrentField(boardFiEdit);
+                bfFiEdit.oneStepDone(boardFiEdit);
                 bfFiEdit.exportField(boardFiEdit);
             }
         });
@@ -112,7 +117,7 @@ public class FieldeditGUI implements Screen{
         backButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
 
-//                zurueck();
+                boardFiEdit = bfFiEdit.oneStepBack(boardFiEdit);
                 
             }
         });
@@ -159,6 +164,9 @@ public class FieldeditGUI implements Screen{
         barrierCornerButton.addListener(new ClickListener(Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
                 drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "BarrierCorner", corner, 0);
+                
+                bfFiEdit.oneStepDone(boardFiEdit);
+                
             }
         });
         barrierCornerButton.addListener(new TextTooltip("Barrier Corner", tTM, skinFiEdit));
@@ -182,6 +190,9 @@ public class FieldeditGUI implements Screen{
         barrierSideButton.addListener(new ClickListener(Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
                 drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "BarrierSide", side, 0);
+                
+                bfFiEdit.oneStepDone(boardFiEdit);
+                
             }
           });
         barrierSideButton.addListener(new TextTooltip("Barrier Side", tTM, skinFiEdit));
@@ -194,6 +205,9 @@ public class FieldeditGUI implements Screen{
         blackHoleButton.addListener(new ClickListener(Buttons.LEFT) {
           public void clicked(InputEvent event, float x, float y) {
               drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "BlackHole", 0, 0);
+              
+              bfFiEdit.oneStepDone(boardFiEdit);
+              
           }
         });
         blackHoleButton.addListener(new TextTooltip("Black Hole", tTM, skinFiEdit));
@@ -217,6 +231,9 @@ public class FieldeditGUI implements Screen{
         checkpointButton.addListener(new ClickListener(Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
                 drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "Checkpoint", checkpointNumber, 0);
+                
+                bfFiEdit.oneStepDone(boardFiEdit);
+                
             }
           });
         checkpointButton.addListener(new TextTooltip("Checkpoint", tTM, skinFiEdit));
@@ -247,6 +264,9 @@ public class FieldeditGUI implements Screen{
         conveyorBeltButton.addListener(new ClickListener(Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
                 drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "ConveyorBelt", startConveyor ,endConveyor);
+            
+                bfFiEdit.oneStepDone(boardFiEdit);
+                
             }
           });
         conveyorBeltButton.addListener(new TextTooltip("Conveyorbelt", tTM, skinFiEdit));
@@ -276,6 +296,9 @@ public class FieldeditGUI implements Screen{
         expressConveyorBeltButton.addListener(new ClickListener(Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
                 drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "ExpressConveyorBelt", startExpressConveyor, endExpressConveyor);
+            
+                bfFiEdit.oneStepDone(boardFiEdit);
+            
             }
           });
         expressConveyorBeltButton.addListener(new TextTooltip("Express Conveyorbelt", 
@@ -289,6 +312,9 @@ public class FieldeditGUI implements Screen{
         backupButton.addListener(new ClickListener(Buttons.LEFT) {
           public void clicked(InputEvent event, float x, float y) {
               drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "BackupCheckpoint", 0 , 0);
+              
+              bfFiEdit.oneStepDone(boardFiEdit);
+              
           }
         });
         backupButton.addListener(new TextTooltip("Backup Checkpoint", tTM, skinFiEdit));
@@ -310,6 +336,9 @@ public class FieldeditGUI implements Screen{
         gearButton.addListener(new ClickListener(Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
                 drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "Gear", gearNumber, 0);
+                
+                bfFiEdit.oneStepDone(boardFiEdit);
+                
             }
           });
         gearButton.addListener(new TextTooltip("Gear", tTM, skinFiEdit));
@@ -333,6 +362,9 @@ public class FieldeditGUI implements Screen{
         laserButton.addListener(new ClickListener(Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
                 drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "Laser", typeLaserNum, 0);
+                
+                bfFiEdit.oneStepDone(boardFiEdit);
+                
             }
           });
         laserButton.addListener(new TextTooltip("Laser", tTM, skinFiEdit));
@@ -356,6 +388,9 @@ public class FieldeditGUI implements Screen{
         repairSiteButton.addListener(new ClickListener(Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
                 drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "RepairSite", repairNum, 0);
+                
+                bfFiEdit.oneStepDone(boardFiEdit);
+                
             }
           });
         repairSiteButton.addListener(new TextTooltip("Repair Site", tTM, skinFiEdit));
@@ -368,6 +403,9 @@ public class FieldeditGUI implements Screen{
         standardFieldButton.addListener(new ClickListener(Buttons.LEFT) {
           public void clicked(InputEvent event, float x, float y) {
               drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "StandardField", 0, 0);
+              
+              bfFiEdit.oneStepDone(boardFiEdit);
+              
           }
         });
         standardFieldButton.addListener(new TextTooltip("Standard Field", tTM, skinFiEdit));
@@ -390,6 +428,9 @@ public class FieldeditGUI implements Screen{
         startFieldButton.addListener(new ClickListener(Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
                 drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "StartField", startFieldNumber, 0);
+                
+                bfFiEdit.oneStepDone(boardFiEdit);
+                
             }
           });
         startFieldButton.addListener(new TextTooltip("Start Field", tTM, skinFiEdit));
@@ -413,6 +454,9 @@ public class FieldeditGUI implements Screen{
         pusherButton.addListener(new ClickListener(Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
                 drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "Pusher", pusherNumber, 0);
+                
+                bfFiEdit.oneStepDone(boardFiEdit);
+                
             }
           });
         pusherButton.addListener(new TextTooltip("Pusher", tTM, skinFiEdit));

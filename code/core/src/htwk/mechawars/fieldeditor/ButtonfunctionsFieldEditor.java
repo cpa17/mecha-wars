@@ -28,10 +28,8 @@ import htwk.mechawars.fields.StandardField;
  */
 public class ButtonfunctionsFieldEditor {
 
-    private ArrayList<Integer> currentField = new ArrayList<>();
+    private Board currentField;
     private FieldBackupForBackStep backup = new FieldBackupForBackStep();
-
-    private BoardConversion boardToInt = new BoardConversion();
 
     private Stage stage;
     private Skin skin;
@@ -54,9 +52,8 @@ public class ButtonfunctionsFieldEditor {
             importField();
             exportField(board);
             resetField(board, stage);
-            oneStepBack();
-            oneStepDone();
-            oneStepForward();
+            oneStepBack(board);
+            oneStepDone(board);
         }
     }
 
@@ -76,73 +73,13 @@ public class ButtonfunctionsFieldEditor {
         int chooseroption = chooser.showOpenDialog(null);
         if (chooseroption == JFileChooser.APPROVE_OPTION) {
             if (chooser.getSelectedFile().toString().matches("(.*)" + ".txt")) {
-                openFile(chooser.getSelectedFile());
-
-                controlImportField();
-
+                return chooser.getSelectedFile().toString();
+            } else {
+                return "2";
             }
-            return chooser.getSelectedFile().toString();
         } else {
             System.out.println("Keine Datei ausgewaehlt!");
             return "0";
-        }
-    }
-
-    /**
-     * Function to check, if the imported Field is broken.
-     */
-    private void controlImportField() {
-//      // Control, if the field is not to large (because of manual manipulation e.g.)
-//      if (currentField.size() != 144) {
-//          // ErrorDialog
-//          Dialog dialogCloseOption = new Dialog("Error beim Laden!"
-//                  + "Bitte Datei ueberpruefen.",
-//                  skin) {
-//              @Override
-//              protected void result(Object object) {
-//                  remove();
-//              }
-//          }.show(stage);
-//
-//          dialogCloseOption.setSize(450, 110);
-//
-//          dialogCloseOption.button("Verstanden.", true);
-//          dialogCloseOption.key(Input.Keys.ENTER, true);   
-//
-//          // clean ArrayList
-//          currentField.clear();
-//          for (int index = 0; index < 144; index += 1) {
-//              currentField.add(11000);
-//          }
-//      }
-//  } else {
-//      }
-    }
-
-    /**
-     * Function, that manage the Inputstream of the choosen file.
-     * 
-     * @param file -> show, what file should be open.
-     */
-    private void openFile(File file) {
-
-        currentField.clear();
-
-        InputStream istream;
-        try {
-            istream = new FileInputStream(file);
-            Scanner reader = new Scanner(istream);
-            while (reader.hasNext()) {
-                String[] arg = reader.nextLine().split(" ");
-                for (int i = 0; i < arg.length; i += 1) {
-                    int abc = Integer.parseInt(arg[i]);
-                    currentField.add(abc);               
-                }
-            }
-            reader.close();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         }
     }
 
@@ -184,9 +121,9 @@ public class ButtonfunctionsFieldEditor {
             ostream = new FileOutputStream(file);
             PrintWriter schreiber = new PrintWriter(ostream);
 
-            for (int index = 0; index < currentField.size(); index += 1) {
-                for (int row = 0; row < board.fieldmatrix.length; row += 1) {
-                    schreiber.print(currentField.get(index) + " ");
+            for (int index = 0; index < board.fieldmatrix.length; index += 1) {
+                for (int row = 0; row < board.fieldmatrix[index].length; row += 1) {
+                    schreiber.print(board.fieldmatrix[index][row] + " ");
                 }
                 schreiber.println();
             }
@@ -207,8 +144,6 @@ public class ButtonfunctionsFieldEditor {
      * is the startposition of the robot. 
      */
     public Board resetField(Board board, Stage s) {
-
-        currentField.clear();
         
         for (int i = 0; i < board.fieldmatrix.length; i += 1) {
             for (int j = 0; j < board.fieldmatrix[i].length; j += 1) {
@@ -216,17 +151,18 @@ public class ButtonfunctionsFieldEditor {
             }        
         }
 
-        setCurrentField(board);
-
         return board;
-
     }
 
     /**
      * Set the actuallField, which is draw continuously.
      */
-    public void oneStepBack() {
-        currentField = backup.getBackup();
+    public Board oneStepBack(Board board) {
+        
+        board = backup.getBackup();
+        
+        return board;
+        
     }
 
     /**
@@ -234,70 +170,13 @@ public class ButtonfunctionsFieldEditor {
      * 
      * @return boolean, that show`s the victorious of the function.
      */
-    public boolean oneStepDone() {
+    public boolean oneStepDone(Board board) {
         try {
-            backup.addBackup(currentField);
+            backup.addBackup(board);
             return true;
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Error by saving the actuallField.");
             return false;
-        }
-    }
-
-    /**
-     * Gives the Field, that are forward of the current Step, when the user accidently make
-     * a Step-Back.
-     * 
-     * @return boolean, which show of a forward is available of not.
-     */
-    public boolean oneStepForward() {
-        if (backup.getForwardBackup() != null) {
-            currentField = backup.getForwardBackup();
-            return true;
-        } else {
-            System.out.println("No Step-Forward available!");
-            return false;
-        }
-    }
-
-    /**
-     * Create an int[][]-Array out of the given ArrayList.
-     * 
-     * @param list -> the src-data for the int-Array
-     * @return an int[][] with 12x12 
-     */
-    public int[][] listToIntArray(ArrayList<Integer> list){
-        int[][] zw = new int[sqrtOfList()][sqrtOfList()];
-        for (int index = 0; index < sqrtOfList(); index += 1) {
-            for (int i = 0; i < sqrtOfList(); i += 1) {
-                zw[index][i] = list.get(index + i);
-            }
-        }
-        return zw;
-    }
-
-    public ArrayList<Integer> getCurrentField() {
-        return currentField;
-    }
-
-    /**
-     * Setter Function, that must be called, after the user clicked a change of the Map.
-     * 
-     * @param board -> give the current board / map
-     */
-    public void setCurrentField(Board board) {
-        currentField = boardToInt.convert(currentField, board);
-    }
-
-    /**
-     * Gives the squere-route of the size of arrayList.
-     * @return the squere-route as an int
-     */
-    public int sqrtOfList() {  
-        if ((currentField.size()%2) == 0) {
-            return (int) Math.sqrt(currentField.size());
-        } else {
-            return 0;
         }
     }
 }

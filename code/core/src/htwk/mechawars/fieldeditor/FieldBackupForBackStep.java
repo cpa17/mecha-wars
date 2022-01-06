@@ -2,6 +2,8 @@ package htwk.mechawars.fieldeditor;
 
 import java.util.ArrayList;
 
+import htwk.mechawars.board.Board;
+
 /**
  * Class, to organize the Step`s back and forward.
  * 
@@ -10,7 +12,7 @@ import java.util.ArrayList;
  */
 public class FieldBackupForBackStep {
 
-    private ArrayList<ArrayList<Integer>> backup = new ArrayList<>();
+    private ArrayList<Board> backup = new ArrayList<>();
     private int backupNumber = 0;
 
     /**
@@ -25,10 +27,9 @@ public class FieldBackupForBackStep {
      * 
      * @return an ArrayList of Integer which includes the last field, before the last change.
      */
-    public ArrayList<Integer> getBackup() {
+    public Board getBackup() {
         try {
-            backupNumber -= 1;
-            return backup.get(backupNumber + 1);
+            return backup.get(backupNumber - 1);
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("[INDEXOUTOFBOUNDSE] - Backup not loadable");
             return null;
@@ -38,13 +39,13 @@ public class FieldBackupForBackStep {
     /**
      * Function, to added a new BackupField.
      * 
-     * @param backup -> Include the Backup, that should be save.
+     * @param backup -> Include the Backup as an Board, that should be save.
      */
-    public void addBackup(ArrayList<Integer> backup) {
-        if (backupNumber <= backup.size()) {
-            this.backup.set(backupNumber, backup);
+    public void addBackup(Board toBackupBoard) {
+        if (backupNumber < backup.size()) {
+            this.backup.set(backupNumber, toBackupBoard);
         } else {
-            this.backup.add(backup);
+            this.backup.add(toBackupBoard);
         }
         backupNumber += 1;
     }
@@ -52,9 +53,9 @@ public class FieldBackupForBackStep {
     /**
      * Function, that return a forward step, when someone is available.
      * 
-     * @return an ArrayList of Integer which includes the field after the change.
+     * @return an Board which includes the fields.
      */
-    public ArrayList<Integer> getForwardBackup() {
+    public Board getForwardBackup() {
         try {
             backupNumber += 1;
             return backup.get(backupNumber);
