@@ -1,0 +1,16 @@
+Protokoll vom 03.01.2022
+
+Protokollführer: Marc Uxa
+
+Planning Meeting
+
+Anwesenheit: alle da
+
+Erster Tagesordnungspunkt:
+	- Verschobene Tickets: 42, 80, 69, 79, 85, 86, 87, 48, 67, 68, 90
+
+Zweiter Tagesordnungspunkt:
+	- Neue Tickets: 103, 105, 106
+
+Dritter Tagesordnungspunkt:
+	- Tickets schätzen
