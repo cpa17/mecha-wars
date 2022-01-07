@@ -1,0 +1,23 @@
+Protokoll 05.01.2022 13:30
+von Christoph Pascal Ahlner
+
+Anwesenheit:
+Marc, Antonia , Bernhard, Marc, Mark, Pascal, Tim, Lukas
+Fehlt:
+Till, Felix
+
+Marc: fängt exception ab, wenn falsche Datei ausgelesen wird
+
+Tim: Karteneditor wurde noch erweitert, Probleme damit wurden behoben 
+
+Pascal: Noch einige Bugs aufgefallen. Wenn es zu 10 Schadenpunkte kommt soll der Roboter repariert werden.
+
+Antonia: Zeiten stimmen nicht un es kommt zu bugs, ist dabei es zu beheben. Hat an altem Ticket weiter gearbeitet
+
+Konstantin: hat mit Tim den Karteneditor bearbeitet, Flackern ist immer noch da, soll nächste Woche fertig werden
+
+Mark: Hatte keine Zeit
+
+Bernhard: Hat sich mit Ticket 85 und 106 beschädigt, aber noch nicht angefangen
+
+
