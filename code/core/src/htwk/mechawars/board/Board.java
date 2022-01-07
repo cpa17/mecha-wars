@@ -127,7 +127,7 @@ public class Board {
      * @param matrix A int matrix
      * @param isTest indicates that this is a test
      */
-    public void intToFieldMatrix(int[][] matrix, boolean isTest) {
+    private void intToFieldMatrix(int[][] matrix, boolean isTest) {
         this.fieldmatrix = new Field[matrix.length][matrix[0].length];
         int[] allowed;
         for (int col = 0; col < matrix.length; col++) {
@@ -414,68 +414,69 @@ public class Board {
         if (!isTest) {
             Timer.schedule(new Task() {
                 int turnCounter = 0;
+
                 @Override
                 public void run() {
-                    
                     moveSingleTurn(allCard.get(turnCounter), players, false);
                     turnCounter++;
                 }
-            }, 0, 4, allCards.size() - 1);
+            }, 0, ConfigReader.getPlayerNumber() + 1,
+                    allCards.size() - 1);
             
         } else {
             for (int i = 0; i < allCards.size(); i++) {
                 moveSingleTurn(allCard.get(i), players, true);
             }
         }
-        Robot.setPlayers(players);
 
-        // Delay of 15 seconds for the state-function to run so that the robot has reached his
-        // final position
         if (!isTest) {
+            // Delay for the state-function to run so that the robot has reached his final position
             Timer.schedule(new Task() {
+
                 @Override
                 public void run() {
-                    for (Robot robot : players) {
-                        state(robot);
-                    }
+                    state(players);
+                    checkDoubleDamage(players);
+                    checkShutDown(players);
                 }
-            }, 10);
+            }, (ConfigReader.getPlayerNumber() * 5) + 5);
 
-            // calls turnAction after each card
-            for (int i = 1; i <= 9; i = i + 2) {
+            // calls turnAction after all robots have finished with their x. card
+            for (int i = ConfigReader.getPlayerNumber();
+                        i <= (ConfigReader.getPlayerNumber() * 5) + 4;
+                                i = i + ConfigReader.getPlayerNumber() + 1) {
+
                 Timer.schedule(new Task() {
+
                     @Override
                     public void run() {
                         for (Robot robot : players) {
                             robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
                             robotPosition.turnAction(robot);
+                            for (Robot player : players) {
+                                if (player.getXcoor() >= fieldmatrix.length
+                                        || player.getYcoor() >= fieldmatrix[0].length
+                                        || player.getXcoor() < 0 || player.getYcoor() < 0) {
+                                    player.setXcoor(player.getStartX());
+                                    player.setYcoor(player.getStartY());
+                                }
+                            }
+                            Robot.setPlayers(players);
+                            checkRobotLaser(players);
+                            checkBoardLaser(players);
                         }
                     }
                 }, i);
             }
         } else {
+
             // No delay if this is a test
-            for (Robot robot : players) {
-                state(robot);
-            }
-        }
-
-        if (!isTest) {
-            for (int i = 1; i <= 9; i = i + 2) {
-                Timer.schedule(new Task() {
-
-                    @Override
-                    public void run() {
-                        checkRobotLaser(players);
-                        checkBoardLaser(players);
-                    }
-                }, i);
-            }
-        } else {
             checkRobotLaser(players);
             checkBoardLaser(players);
+            state(players);
+            checkDoubleDamage(players);
+            checkShutDown(players);
         }
-        checkDoubleDamage(players);
     }
 
     /**
@@ -496,17 +497,17 @@ public class Board {
                 robotMovement(card, robots[card.getCardPlayerNumber()], robots);
             }
         } else {
-            /* delay in seconds, increments for each
-            phase in the linked list for two more second*/
+            // delay in seconds, increments for each card in the linked list for a second
             int i = 0;
             for (Card card : phase) {
                 Timer.schedule(new Task() {
+
                     @Override
                     public void run() {
                         robotMovement(card, robots[card.getCardPlayerNumber()], robots);
                     }
-                }, (float) i / 2);
-                i += 2;
+                }, i);
+                i += 1;
             }
         }
     }
@@ -532,16 +533,19 @@ public class Board {
                 player.setYcoor(player.getStartY());
             }
         }
+        Robot.setPlayers(players);
     }
 
     /**
      * Outsourced code from the move function, that would otherwise be duplicated.
      *
-     * @param robot The robot that should move
+     * @param players array of all players
      */
-    public void state(Robot robot) {
-        robot.setLastRound(robot.getShutDown());
-        robot.setShutDown(robot.getNextRound());
+    public void state(Robot[] players) {
+        for (Robot player : players) {
+            player.setLastRound(player.getShutDown());
+            player.setShutDown(player.getNextRound());
+        }
     }
 
     /**
@@ -561,7 +565,6 @@ public class Board {
                 }
             }
         }
-        checkShutDown(players);
     }
 
     /**
@@ -803,7 +806,7 @@ public class Board {
                         }
                     }
 
-                    for (int i2 = (y + 1); i2 < this.fieldmatrix.length && (z == 0); i2++) {
+                    for (int i2 = (y + 1); i2 < this.fieldmatrix[0].length && (z == 0); i2++) {
 
                         if (this.fieldmatrix[x][i2] instanceof BarrierSide) {
                             barrierside = (BarrierSide) this.fieldmatrix[x][i2];
@@ -855,7 +858,7 @@ public class Board {
                         }
                     }
 
-                    for (int i2 = (x + 1); i2 < this.fieldmatrix[0].length && (z == 0); i2++) {
+                    for (int i2 = (x + 1); i2 < this.fieldmatrix.length && (z == 0); i2++) {
 
                         if (this.fieldmatrix[i2][y] instanceof BarrierSide) {
                             barrierside = (BarrierSide) this.fieldmatrix[i2][y];

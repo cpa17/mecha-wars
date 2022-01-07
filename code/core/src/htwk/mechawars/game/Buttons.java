@@ -11,6 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Timer;
+
+import htwk.mechawars.ConfigReader;
 import htwk.mechawars.board.Robot;
 
 import static htwk.mechawars.game.GameScreen.board;
@@ -52,39 +54,37 @@ public class Buttons {
 
                                 startExecutionButton.setTouchable(Touchable.enabled);
                             }
-                        }, 25);
+                        }, (ConfigReader.getPlayerNumber() * 5) + 5);
 
-                                setButtons(players);
-                                ScrollPanel.clearScrollPanel(skin, players);
-                            } else {
-                                startExecutionButton.setColor(Color.RED);
-                            }
-                        } else {
+                        setButtons(players);
+                        ScrollPanel.clearScrollPanel(skin, players);
+                    } else {
+                        startExecutionButton.setColor(Color.RED);
+                    }
+                } else {
 
-                            System.out.println(players[0].getShutDown());
+                    System.out.println(players[0].getShutDown());
 
-                            deactivateButtons();
+                    deactivateButtons();
 
-                            board.move(players, false);
+                    board.move(players, false);
 
+                    players[0].resetList();
+                    startExecutionButton.setColor(Color.LIGHT_GRAY);
+                    Timer.schedule(new Timer.Task() {
+                        @Override
+                        public void run() {
                             players[0].resetList();
                             startExecutionButton.setColor(Color.LIGHT_GRAY);
-                            Timer.schedule(new Timer.Task() {
-                                @Override
-                                public void run() {
-                                    players[0].resetList();
-                                    startExecutionButton.setColor(Color.LIGHT_GRAY);
-                                    ScrollPanel.cardOrderClear();
-                                    activateButtons();
-                                    setButtons(players);
-                                    ScrollPanel.clearScrollPanel(skin, players);
-                                }
-                            }, 15);
+                            ScrollPanel.cardOrderClear();
+                            activateButtons();
+                            setButtons(players);
+                            ScrollPanel.clearScrollPanel(skin, players);
                         }
-                ;
-
-                    } 
-                }); 
+                    }, (ConfigReader.getPlayerNumber() * 5) + 5);
+                }
+            }
+        });
      
         return startExecutionButton;
     }
