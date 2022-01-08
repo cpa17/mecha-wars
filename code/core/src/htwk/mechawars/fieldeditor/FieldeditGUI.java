@@ -384,20 +384,21 @@ public class FieldeditGUI implements Screen{
         startFieldButton.setSize(picButtonSize, picButtonSize);
         startFieldButton.setPosition(picButtonPosX + 180, picButtonPosY - 270);
         startFieldButton.addListener(new ClickListener(Buttons.RIGHT) {
-          public void clicked(InputEvent event, float x, float y) {
+            public void clicked(InputEvent event, float x, float y) {
               startFieldNumber = ror(1, 8, startFieldNumber);
               ImageButtonStyle styleFiEdit = new ImageButtonStyle();
               styleFiEdit.up = new TextureRegionDrawable(
                       new TextureRegion(new Texture("mapAssets/" + "startfield/"
                               + "StartField0" + String.valueOf(startFieldNumber) + ".png")));
               startFieldButton.setStyle(styleFiEdit);
-          }
+            }
         });
         startFieldButton.addListener(new ClickListener(Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
-                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "StartField", startFieldNumber, 0);
+                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(),
+                        "StartField", startFieldNumber, 0);
             }
-          });
+        });
         startFieldButton.addListener(new TextTooltip("Start Field", tTM, skinFiEdit));
 
         
@@ -407,20 +408,21 @@ public class FieldeditGUI implements Screen{
         pusherButton.setSize(picButtonSize, picButtonSize);
         pusherButton.setPosition(picButtonPosX + 90, picButtonPosY - 360);
         pusherButton.addListener(new ClickListener(Buttons.RIGHT) {
-          public void clicked(InputEvent event, float x, float y) {
-              pusherNumber = ror(1, 4, pusherNumber);
-              ImageButtonStyle styleFiEdit = new ImageButtonStyle();
-              styleFiEdit.up = new TextureRegionDrawable(
+            public void clicked(InputEvent event, float x, float y) {
+                pusherNumber = ror(1, 4, pusherNumber);
+                ImageButtonStyle styleFiEdit = new ImageButtonStyle();
+                styleFiEdit.up = new TextureRegionDrawable(
                       new TextureRegion(new Texture("mapAssets/" + "pusher/"
                               + "Pusher0" + String.valueOf(pusherNumber) + ".png")));
-              pusherButton.setStyle(styleFiEdit);
-          }
+                pusherButton.setStyle(styleFiEdit);
+            }
         });
         pusherButton.addListener(new ClickListener(Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
-                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "Pusher", pusherNumber, 0);
+                drawOnField(xPositionChangeField.getText(),
+                        yPositionChangeField.getText(), "Pusher", pusherNumber, 0);
             }
-          });
+        });
         pusherButton.addListener(new TextTooltip("Pusher", tTM, skinFiEdit));
         
         
@@ -473,12 +475,10 @@ public class FieldeditGUI implements Screen{
         batchFiEdit = (SpriteBatch) stageFiEdit.getBatch();
         batchFiEdit.begin();
         batchFiEdit.draw(img, 0, 0, 1280, 720);
-//        if(mapChange) {
-            Board.toAsset(batchFiEdit, boardFiEdit);
-//            mapChange = false;
-//        }
+        
+        Board.toAsset(batchFiEdit, boardFiEdit);
+        
         batchFiEdit.end();
-
         stageFiEdit.act(delta);
         stageFiEdit.draw();
         
@@ -524,40 +524,49 @@ public class FieldeditGUI implements Screen{
     
     private void drawOnField(String x, String y, String part, int startNum, int endNum) {
         bfFiEdit.oneStepDone(boardFiEdit);
-        if(checkChangeField(x, y)) {
-            int xInt = Integer.parseInt(x) - 1;
-            int yInt = Integer.parseInt(y) - 1;
+        if (checkChangeField(x, y)) {
+            int xToInt = Integer.parseInt(x) - 1;
+            int yToInt = Integer.parseInt(y) - 1;
             switch (part) {
-                case "BarrierCorner": boardFiEdit.fieldmatrix[xInt][yInt] = new BarrierCorner(0, 0, startNum);
+                case "BarrierCorner": boardFiEdit.fieldmatrix[xToInt][yToInt]
+                        = new BarrierCorner(0, 0, startNum);
                     break;
-                case "BarrierSide": boardFiEdit.fieldmatrix[xInt][yInt] = new BarrierSide(0, 0, startNum);
+                case "BarrierSide": boardFiEdit.fieldmatrix[xToInt][yToInt]
+                        = new BarrierSide(0, 0, startNum);
                     break;
-                case "BlackHole": boardFiEdit.fieldmatrix[xInt][yInt] = new BlackHole(0, 0);
+                case "BlackHole": boardFiEdit.fieldmatrix[xToInt][yToInt] = new BlackHole(0, 0);
                     break;
-                case "Checkpoint": boardFiEdit.fieldmatrix[xInt][yInt] = new Checkpoint(0, 0, startNum);
+                case "Checkpoint": boardFiEdit.fieldmatrix[xToInt][yToInt]
+                        = new Checkpoint(0, 0, startNum);
                     break;
-                case "ConveyorBelt": boardFiEdit.fieldmatrix[xInt][yInt] = new ConveyorBelt(0, 0, startNum, endNum);
+                case "ConveyorBelt": boardFiEdit.fieldmatrix[xToInt][yToInt]
+                        = new ConveyorBelt(0, 0, startNum, endNum);
                     break;
-                case "ExpressConveyorBelt": boardFiEdit.fieldmatrix[xInt][yInt] = new ExpressConveyorBelt(0, 0, startNum, endNum);
+                case "ExpressConveyorBelt": boardFiEdit.fieldmatrix[xToInt][yToInt]
+                        = new ExpressConveyorBelt(0, 0, startNum, endNum);
                     break;
-                case "BackupCheckpoint": boardFiEdit.fieldmatrix[xInt][yInt] = new Checkpoint(0, 0, startNum);
+                case "BackupCheckpoint": boardFiEdit.fieldmatrix[xToInt][yToInt]
+                        = new Checkpoint(0, 0, startNum);
                     break;
-                case "Gear": boardFiEdit.fieldmatrix[xInt][yInt] = new Gear(0, 0, startNum);
+                case "Gear": boardFiEdit.fieldmatrix[xToInt][yToInt] = new Gear(0, 0, startNum);
                     break;
-                case "Laser": boardFiEdit.fieldmatrix[xInt][yInt] = new Laser(0, 0, startNum);
+                case "Laser": boardFiEdit.fieldmatrix[xToInt][yToInt] = new Laser(0, 0, startNum);
                     break;
-                case "RepairSite": boardFiEdit.fieldmatrix[xInt][yInt] = new RepairSite(0, 0, startNum);
+                case "RepairSite": boardFiEdit.fieldmatrix[xToInt][yToInt]
+                        = new RepairSite(0, 0, startNum);
                     break;
-                case "StandardField": boardFiEdit.fieldmatrix[xInt][yInt] = new StandardField(0, 0);
+                case "StandardField": boardFiEdit.fieldmatrix[xToInt][yToInt] = new StandardField(0, 0);
                     break;
-                case "StartField": boardFiEdit.fieldmatrix[xInt][yInt] = new StartField(0, 0, startNum);
+                case "StartField": boardFiEdit.fieldmatrix[xToInt][yToInt]
+                        = new StartField(0, 0, startNum);
                     break;
-                case "Pusher": boardFiEdit.fieldmatrix[xInt][yInt] = new Pusher(0, 0, startNum);
+                case "Pusher": boardFiEdit.fieldmatrix[xToInt][yToInt] = new Pusher(0, 0, startNum);
                     break;
                 default: break;
             }
         }
     }
+    
     private boolean checkChangeField(String x, String y) {
         if (x.length() != 0 && y.length() != 0 && x.matches("[+-]?\\d*(\\.\\d+)?") &&
                 y.matches("[+-]?\\d*(\\.\\d+)?")) {
