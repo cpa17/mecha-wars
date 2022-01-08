@@ -441,7 +441,7 @@ public class Board {
                 }
             }, (ConfigReader.getPlayerNumber() * 5) + 5);
 
-            // Calls turnAction after all robots have finished with their x. card
+            // Calls cardAction after all robots have finished with their x. card
             for (int i = ConfigReader.getPlayerNumber();
                         i <= (ConfigReader.getPlayerNumber() * 5) + 4;
                                 i = i + ConfigReader.getPlayerNumber() + 1) {
@@ -455,7 +455,7 @@ public class Board {
                         for (Robot robot : players) {
                             robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
                             if (robotPosition instanceof ExpressConveyorBelt) {
-                                robotPosition.turnAction(robot);
+                                robotPosition.cardAction(robot);
                             }
                         }
 
@@ -468,19 +468,19 @@ public class Board {
                             robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
                             if (robotPosition instanceof ExpressConveyorBelt ||
                                     robotPosition instanceof ConveyorBelt) {
-                                robotPosition.turnAction(robot);
+                                robotPosition.cardAction(robot);
                             }
                         }
 
                         checkRobotsOnBoard(players);
                         checkRobotsOnSamePosition(players);
 
-                        // Then all remaining turnActions are called
+                        // Then all remaining cardActions are called
                         for (Robot robot : players) {
                             robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
                             if (!(robotPosition instanceof ExpressConveyorBelt) &&
                                     !(robotPosition instanceof ConveyorBelt)) {
-                                robotPosition.turnAction(robot);
+                                robotPosition.cardAction(robot);
                             }
                         }
 

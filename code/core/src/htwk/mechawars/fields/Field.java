@@ -63,7 +63,7 @@ public class Field {
      * @param robot -> give the function the robot, that have an action.
      * @return the instance robot
      */
-    public Robot turnAction(Robot robot) {    
+    public Robot cardAction(Robot robot) {
         return robot; 
     }
     
@@ -73,7 +73,7 @@ public class Field {
      * @param robot -> give the function the robot, that have an action.
      * @return the instance robot
      */
-    public Robot cardAction(Robot robot) {   
+    public Robot turnAction(Robot robot) {
         return robot; 
     }
     
