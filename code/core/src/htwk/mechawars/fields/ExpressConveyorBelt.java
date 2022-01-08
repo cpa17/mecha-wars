@@ -66,38 +66,182 @@ public class ExpressConveyorBelt extends Field {
     
     @Override
     public Robot turnAction(Robot robot) {
-        if (robot.getLastConveyorField() instanceof ConveyorBelt ||
-                robot.getLastConveyorField() instanceof ExpressConveyorBelt) {
-            switch (this.end) {
-                case 1 :    
-                    while (robot.getDir() != Dir.WEST) {
+        switch (this.end) {
+            // express conveyor belt runs to the left
+            case 1:
+                // if the robot was pushed to its current position by a express conveyor belt,
+                // then the express conveyor belt could rotate the robot, otherwise not
+                if (robot.getLastMovementByConveyor()) {
+                    // express conveyor belt starts at the top
+                    if (this.start == 2) {
+                        robot.turn((byte) 1);
+                    }
+                    // express conveyor belt starts at the bottom
+                    if (this.start == 4) {
                         robot.turn((byte) 3);
                     }
-                    break;
-                
-                case 2 :
-                    while (robot.getDir() != Dir.NORTH) {
-                        robot.turn((byte) 3); 
+                    // express conveyor belt starts at the bottom and the top
+                    if (this.start == 6) {
+                        // robot comes from the bottom
+                        if (robot.getLastConveyorField().getYcoor() > this.ycoor) {
+                            robot.turn((byte) 3);
+                        }
+                        // robot comes from the top
+                        if (robot.getLastConveyorField().getYcoor() < this.ycoor) {
+                            robot.turn((byte) 1);
+                        }
                     }
-                    break;
-                
-                case 3 :
-                    while (robot.getDir() != Dir.EAST) {
-                        robot.turn((byte) 3); 
+                    // express conveyor belt starts at the right and the top
+                    if (this.start == 7) {
+                        // robot comes from the top
+                        if (robot.getLastConveyorField().getYcoor() < this.ycoor) {
+                            robot.turn((byte) 1);
+                        }
                     }
-                    break;
-                
-                case 4 :
-                    while (robot.getDir() != Dir.SOUTH) {
+                    // express conveyor belt starts at the right and the bottom
+                    if (this.start == 9) {
+                        // robot comes from the bottom
+                        if (robot.getLastConveyorField().getYcoor() > this.ycoor) {
+                            robot.turn((byte) 3);
+                        }
+                    }
+                }
+                robot.moveInDirectionByField((byte) 1, Dir.WEST);
+                break;
+
+            // express conveyor belt runs to the top
+            case 2:
+                // if the robot was pushed to its current position by a express conveyor belt,
+                // then the express conveyor belt could rotate the robot, otherwise not
+                if (robot.getLastMovementByConveyor()) {
+                    // express conveyor belt starts at the left and the bottom
+                    if (this.start == 0) {
+                        // robot comes from the left
+                        if (robot.getLastConveyorField().getXcoor() < this.xcoor) {
+                            robot.turn((byte) 3);
+                        }
+                    }
+                    // express conveyor belt starts at the left
+                    if (this.start == 1) {
                         robot.turn((byte) 3);
                     }
-                    break;
-                
-                default : break;
-            }
+                    // express conveyor belt starts at the right
+                    if (this.start == 3) {
+                        robot.turn((byte) 1);
+                    }
+                    // express conveyor belt starts at the left and the right
+                    if (this.start == 5) {
+                        // robot comes from the right
+                        if (robot.getLastConveyorField().getXcoor() > this.xcoor) {
+                            robot.turn((byte) 1);
+                        }
+                        // robot comes from the left
+                        if (robot.getLastConveyorField().getXcoor() < this.xcoor) {
+                            robot.turn((byte) 3);
+                        }
+                    }
+                    // express conveyor belt starts at the right and the bottom
+                    if (this.start == 9) {
+                        // robot comes from the right
+                        if (robot.getLastConveyorField().getXcoor() > this.xcoor) {
+                            robot.turn((byte) 1);
+                        }
+                    }
+                }
+                robot.moveInDirectionByField((byte) 1, Dir.NORTH);
+                break;
+
+            // express conveyor belt runs to the right
+            case 3:
+                // if the robot was pushed to its current position by a express conveyor belt,
+                // then the express conveyor belt could rotate the robot, otherwise not
+                if (robot.getLastMovementByConveyor()) {
+                    // express conveyor belt starts at the left and the bottom
+                    if (this.start == 0) {
+                        // robot comes from the bottom
+                        if (robot.getLastConveyorField().getYcoor() > this.ycoor) {
+                            robot.turn((byte) 1);
+                        }
+                    }
+                    // express conveyor belt starts at the top
+                    if (this.start == 2) {
+                        robot.turn((byte) 3);
+                    }
+                    // express conveyor belt starts at the bottom
+                    if (this.start == 4) {
+                        robot.turn((byte) 1);
+                    }
+                    // express conveyor belt starts at the top and the bottom
+                    if (this.start == 6) {
+                        // robot comes from the top
+                        if (robot.getLastConveyorField().getYcoor() < this.ycoor) {
+                            robot.turn((byte) 3);
+                        }
+                        // robot comes from the bottom
+                        if (robot.getLastConveyorField().getYcoor() > this.ycoor) {
+                            robot.turn((byte) 1);
+                        }
+                    }
+                    // express conveyor belt starts at the left and the top
+                    if (this.start == 8) {
+                        // robot comes from the top
+                        if (robot.getLastConveyorField().getYcoor() < this.ycoor) {
+                            robot.turn((byte) 3);
+                        }
+                    }
+                }
+                robot.moveInDirectionByField((byte) 1, Dir.EAST);
+                break;
+
+            // express conveyor belt runs to the bottom
+            case 4:
+                // if the robot was pushed to its current position by a express conveyor belt,
+                // then the express conveyor belt could rotate the robot, otherwise not
+                if (robot.getLastMovementByConveyor()) {
+                    // express conveyor belt starts at the left
+                    if (this.start == 1) {
+                        robot.turn((byte) 1);
+                    }
+                    // express conveyor belt starts at the right
+                    if (this.start == 3) {
+                        robot.turn((byte) 3);
+                    }
+                    // express conveyor belt starts at the left and the right
+                    if (this.start == 5) {
+                        // robot comes from the right
+                        if (robot.getLastConveyorField().getXcoor() > this.xcoor) {
+                            robot.turn((byte) 3);
+                        }
+                        // robot comes from the left
+                        if (robot.getLastConveyorField().getXcoor() < this.xcoor) {
+                            robot.turn((byte) 1);
+                        }
+                    }
+                    // express conveyor belt starts at the right and the top
+                    if (this.start == 7) {
+                        // robot comes from the right
+                        if (robot.getLastConveyorField().getXcoor() > this.xcoor) {
+                            robot.turn((byte) 3);
+                        }
+                    }
+                    // express conveyor belt starts at the left and the top
+                    if (this.start == 8) {
+                        // robot comes from the left
+                        if (robot.getLastConveyorField().getXcoor() < this.xcoor) {
+                            robot.turn((byte) 1);
+                        }
+                    }
+                }
+                robot.moveInDirectionByField((byte) 1, Dir.SOUTH);
+                break;
+
+            default:
+                break;
         }
-        robot.moveInDirectionByField((byte) 1, robot.getDir());
-        return robot;       
+        robot.setLastMovementByConveyor(true);
+        robot.setLastConveyorField(this);
+
+        return robot;
     }
     
     @Override

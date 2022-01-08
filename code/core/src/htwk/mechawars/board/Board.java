@@ -441,7 +441,7 @@ public class Board {
                 }
             }, (ConfigReader.getPlayerNumber() * 5) + 5);
 
-            // calls turnAction after all robots have finished with their x. card
+            // Calls turnAction after all robots have finished with their x. card
             for (int i = ConfigReader.getPlayerNumber();
                         i <= (ConfigReader.getPlayerNumber() * 5) + 4;
                                 i = i + ConfigReader.getPlayerNumber() + 1) {
@@ -450,21 +450,51 @@ public class Board {
 
                     @Override
                     public void run() {
+
+                        // First the ExpressConveyorBelts move the robot forward one field
                         for (Robot robot : players) {
                             robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
-                            robotPosition.turnAction(robot);
-                            for (Robot player : players) {
-                                if (player.getXcoor() >= fieldmatrix.length
-                                        || player.getYcoor() >= fieldmatrix[0].length
-                                        || player.getXcoor() < 0 || player.getYcoor() < 0) {
-                                    player.setXcoor(player.getStartX());
-                                    player.setYcoor(player.getStartY());
-                                }
+                            if (robotPosition instanceof ExpressConveyorBelt) {
+                                robotPosition.turnAction(robot);
                             }
-                            Robot.setPlayers(players);
-                            checkRobotLaser(players);
-                            checkBoardLaser(players);
                         }
+
+                        checkRobotsOnSamePosition(players);
+
+                        // Then the ExpressConveyorBelts an ConveyorBelts move the robot
+                        // forward one field
+                        for (Robot robot : players) {
+                            robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+                            if (robotPosition instanceof ExpressConveyorBelt ||
+                                    robotPosition instanceof ConveyorBelt) {
+                                robotPosition.turnAction(robot);
+                            }
+                        }
+
+                        checkRobotsOnSamePosition(players);
+
+                        // Then all remaining turnActions are called
+                        for (Robot robot : players) {
+                            robotPosition = fieldmatrix[robot.getXcoor()][robot.getYcoor()];
+                            if (!(robotPosition instanceof ExpressConveyorBelt) &&
+                                    !(robotPosition instanceof ConveyorBelt)) {
+                                robotPosition.turnAction(robot);
+                            }
+                        }
+
+                        // Check if all robots are still on the board
+                        for (Robot player : players) {
+                            if (player.getXcoor() >= fieldmatrix.length
+                                    || player.getYcoor() >= fieldmatrix[0].length
+                                    || player.getXcoor() < 0 || player.getYcoor() < 0) {
+                                player.setXcoor(player.getStartX());
+                                player.setYcoor(player.getStartY());
+                            }
+                        }
+
+                        Robot.setPlayers(players);
+                        checkRobotLaser(players);
+                        checkBoardLaser(players);
                     }
                 }, i);
             }
@@ -491,8 +521,6 @@ public class Board {
 
         if (isTest) {
             for (Card card : phase) {
-                robotPosition = fieldmatrix[robots[card.getCardPlayerNumber()].getXcoor()]
-                        [robots[card.getCardPlayerNumber()].getYcoor()];
                 robotMovement(card, robots[card.getCardPlayerNumber()], robots);
             }
         } else {
@@ -524,6 +552,7 @@ public class Board {
         } else {
             robot.turn(card.getCardAttributeMovCount());
         }
+        // Check if all robots are still on the board
         for (Robot player : players) {
             if (player.getXcoor() >= fieldmatrix.length
                     || player.getYcoor() >= fieldmatrix[0].length
@@ -544,6 +573,33 @@ public class Board {
         for (Robot player : players) {
             player.setLastRound(player.getShutDown());
             player.setShutDown(player.getNextRound());
+        }
+    }
+
+    /**
+     * Method that checks whether robots are on the same position because of a
+     * (Express)ConveyorBelt. If so, one or both robots will be set to their previous position,
+     * because robots never push other robots because of a (Express)ConveyorBelt.
+     *
+     * @param players array of all players
+     */
+    private void checkRobotsOnSamePosition(Robot[] players) {
+        for (Robot robotA : players) {
+            for (Robot robotB : players) {
+                if (robotA != robotB && robotA.getXcoor() == robotB.getXcoor()
+                        && robotA.getYcoor() == robotB.getYcoor()) {
+                    if (robotA.getLastMovementByConveyor()) {
+                        robotA.setXcoor(robotA.getLastConveyorField().getXcoor());
+                        robotA.setYcoor(robotA.getLastConveyorField().getYcoor());
+                        robotA.setLastMovementByConveyor(false);
+                    }
+                    if (robotB.getLastMovementByConveyor()) {
+                        robotB.setXcoor(robotB.getLastConveyorField().getXcoor());
+                        robotB.setYcoor(robotB.getLastConveyorField().getYcoor());
+                        robotB.setLastMovementByConveyor(false);
+                    }
+                }
+            }
         }
     }
 
