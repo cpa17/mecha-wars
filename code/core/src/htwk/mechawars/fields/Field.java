@@ -58,7 +58,7 @@ public class Field {
     }
     
     /**
-     * On the end of the turn a action can be done.
+     * On the end of card action a action can be done.
      * 
      * @param robot -> give the function the robot, that have an action.
      * @return the instance robot
@@ -68,7 +68,7 @@ public class Field {
     }
     
     /**
-     * On the end of card action a action can be done.
+     * On the end of the turn a action can be done.
      * 
      * @param robot -> give the function the robot, that have an action.
      * @return the instance robot
