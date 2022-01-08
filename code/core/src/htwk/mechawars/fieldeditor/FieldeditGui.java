@@ -43,7 +43,8 @@ import htwk.mechawars.fields.StartField;
  * @author -.-
  *
  */ 
-public class FieldeditGUI implements Screen {
+public class FieldeditGui implements Screen {
+    
     private Game gameFiEdit;
     private Stage stageFiEdit;
     private Texture img;
@@ -79,7 +80,7 @@ public class FieldeditGUI implements Screen {
     /**
     * Constructor of FieldeditGUI.
     */ 
-    public FieldeditGUI(FieldEditor fieldEditor, String map) {
+    public FieldeditGui(FieldEditor fieldEditor, String map) {
         
         toolTipManager.instant();
         toolTipManager.animations = false;

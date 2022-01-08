@@ -23,7 +23,7 @@ public class FieldEditor extends Game {
     @Override
     public void create() {
         
-        this.setScreen(new FieldeditGUI(this, map));
+        this.setScreen(new FieldeditGui(this, map));
     }
 
     @Override
