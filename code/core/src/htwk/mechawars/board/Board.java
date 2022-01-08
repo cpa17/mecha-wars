@@ -459,6 +459,7 @@ public class Board {
                             }
                         }
 
+                        checkRobotsOnBoard(players);
                         checkRobotsOnSamePosition(players);
 
                         // Then the ExpressConveyorBelts an ConveyorBelts move the robot
@@ -471,6 +472,7 @@ public class Board {
                             }
                         }
 
+                        checkRobotsOnBoard(players);
                         checkRobotsOnSamePosition(players);
 
                         // Then all remaining turnActions are called
@@ -482,15 +484,7 @@ public class Board {
                             }
                         }
 
-                        // Check if all robots are still on the board
-                        for (Robot player : players) {
-                            if (player.getXcoor() >= fieldmatrix.length
-                                    || player.getYcoor() >= fieldmatrix[0].length
-                                    || player.getXcoor() < 0 || player.getYcoor() < 0) {
-                                player.setXcoor(player.getStartX());
-                                player.setYcoor(player.getStartY());
-                            }
-                        }
+                        checkRobotsOnBoard(players);
 
                         Robot.setPlayers(players);
                         checkRobotLaser(players);
@@ -552,15 +546,7 @@ public class Board {
         } else {
             robot.turn(card.getCardAttributeMovCount());
         }
-        // Check if all robots are still on the board
-        for (Robot player : players) {
-            if (player.getXcoor() >= fieldmatrix.length
-                    || player.getYcoor() >= fieldmatrix[0].length
-                    || player.getXcoor() < 0 || player.getYcoor() < 0) {
-                player.setXcoor(player.getStartX());
-                player.setYcoor(player.getStartY());
-            }
-        }
+        checkRobotsOnBoard(players);
         Robot.setPlayers(players);
     }
 
@@ -599,6 +585,22 @@ public class Board {
                         robotB.setLastMovementByConveyor(false);
                     }
                 }
+            }
+        }
+    }
+
+    /**
+     * Method that checks whether all robots still on the board.
+     *
+     * @param players array of all players
+     */
+    private void checkRobotsOnBoard(Robot[] players) {
+        for (Robot player : players) {
+            if (player.getXcoor() >= fieldmatrix.length
+                    || player.getYcoor() >= fieldmatrix[0].length
+                    || player.getXcoor() < 0 || player.getYcoor() < 0) {
+                player.setXcoor(player.getStartX());
+                player.setYcoor(player.getStartY());
             }
         }
     }
