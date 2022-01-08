@@ -29,7 +29,7 @@ public class FieldBackupForBackStep {
      * @return an Board which includes the last field, before the last change.
      */
     public Board getBackup() {
-        if(backupNumber > 1) {
+        if (backupNumber > 1) {
             for (int i = 0; i < backup.size(); i += 1) {
                 System.out.println(backup.get(i).toString() + "\n\n");
             }
@@ -43,15 +43,15 @@ public class FieldBackupForBackStep {
     /**
      * Function, to added a new BackupField.
      * 
-     * @param backup -> Include the Backup as an Board, that should be save.
+     * @param toBackupBoard -> Include the Backup as an Board, that should be save.
      */
     public void addBackup(Board toBackupBoard) {
         this.tempBoard = toBackupBoard;
-//        if (backupNumber < backup.size()) {
-//            backup.set(backupNumber, toBackupBoard);
-//        } else {
-            backup.add(tempBoard);
-//        }
+        //if (backupNumber < backup.size()) {
+        //backup.set(backupNumber, toBackupBoard);
+        //} else {
+        backup.add(tempBoard);
+        //}
         backupNumber += 1;
     }
 

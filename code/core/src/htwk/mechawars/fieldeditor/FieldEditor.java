@@ -2,6 +2,12 @@ package htwk.mechawars.fieldeditor;
 
 import com.badlogic.gdx.Game;
 
+/**
+ * Class to set the maps and to create the screen for the Fieldeditor.
+ * 
+ * @author -.-
+ *
+ */ 
 public class FieldEditor extends Game {
 
     private static String map;

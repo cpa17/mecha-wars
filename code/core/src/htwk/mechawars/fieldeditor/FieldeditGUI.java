@@ -38,7 +38,7 @@ import htwk.mechawars.fields.StartField;
 
 
 /**
- * Class, for the GUI-Elements of the Fieldeditor
+ * Class, for the GUI-Elements of the Fieldeditor.
  * 
  * @author -.-
  *
@@ -77,7 +77,7 @@ public class FieldeditGUI implements Screen {
     private ButtonfunctionsFieldEditor bfFiEdit = new ButtonfunctionsFieldEditor();
     
     /**
-    * Constructor
+    * Constructor of FieldeditGUI.
     */ 
     public FieldeditGUI(FieldEditor fieldEditor, String map) {
         
