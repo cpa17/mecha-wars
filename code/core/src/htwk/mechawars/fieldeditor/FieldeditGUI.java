@@ -529,36 +529,36 @@ public class FieldeditGUI implements Screen{
             int yToInt = Integer.parseInt(y) - 1;
             switch (part) {
                 case "BarrierCorner": boardFiEdit.fieldmatrix[xToInt][yToInt]
-                        = new BarrierCorner(0, 0, startNum);
+                   = new BarrierCorner(0, 0, startNum);
                     break;
                 case "BarrierSide": boardFiEdit.fieldmatrix[xToInt][yToInt]
-                        = new BarrierSide(0, 0, startNum);
+                   = new BarrierSide(0, 0, startNum);
                     break;
                 case "BlackHole": boardFiEdit.fieldmatrix[xToInt][yToInt] = new BlackHole(0, 0);
                     break;
                 case "Checkpoint": boardFiEdit.fieldmatrix[xToInt][yToInt]
-                        = new Checkpoint(0, 0, startNum);
+                   = new Checkpoint(0, 0, startNum);
                     break;
                 case "ConveyorBelt": boardFiEdit.fieldmatrix[xToInt][yToInt]
-                        = new ConveyorBelt(0, 0, startNum, endNum);
+                   = new ConveyorBelt(0, 0, startNum, endNum);
                     break;
                 case "ExpressConveyorBelt": boardFiEdit.fieldmatrix[xToInt][yToInt]
-                        = new ExpressConveyorBelt(0, 0, startNum, endNum);
+                   = new ExpressConveyorBelt(0, 0, startNum, endNum);
                     break;
                 case "BackupCheckpoint": boardFiEdit.fieldmatrix[xToInt][yToInt]
-                        = new Checkpoint(0, 0, startNum);
+                   = new Checkpoint(0, 0, startNum);
                     break;
                 case "Gear": boardFiEdit.fieldmatrix[xToInt][yToInt] = new Gear(0, 0, startNum);
                     break;
                 case "Laser": boardFiEdit.fieldmatrix[xToInt][yToInt] = new Laser(0, 0, startNum);
                     break;
                 case "RepairSite": boardFiEdit.fieldmatrix[xToInt][yToInt]
-                        = new RepairSite(0, 0, startNum);
+                   = new RepairSite(0, 0, startNum);
                     break;
                 case "StandardField": boardFiEdit.fieldmatrix[xToInt][yToInt] = new StandardField(0, 0);
                     break;
                 case "StartField": boardFiEdit.fieldmatrix[xToInt][yToInt]
-                        = new StartField(0, 0, startNum);
+                   = new StartField(0, 0, startNum);
                     break;
                 case "Pusher": boardFiEdit.fieldmatrix[xToInt][yToInt] = new Pusher(0, 0, startNum);
                     break;
