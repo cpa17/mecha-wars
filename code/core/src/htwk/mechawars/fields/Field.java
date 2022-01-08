@@ -12,6 +12,12 @@ public class Field {
     protected int xcoor;
     protected int ycoor;
     protected Texture tile;
+    private int laserVertical;
+    private int laserHorizontal;
+    private boolean barrierLeft;
+    private boolean barrierTop;
+    private boolean barrierRight;
+    private boolean barrierBottom;
 
     /**
      * Constructor of a Field.
@@ -48,13 +54,36 @@ public class Field {
         return this.ycoor;
     }
 
-    /**
-     * Dummy.
-     * 
+    /** Dummy.
+     *
      * @return .
      */
     public Texture getTile() {
         return this.tile;
+    }
+
+    public int getLaserVertical() {
+        return laserVertical;
+    }
+
+    public int getLaserHorizontal() {
+        return laserHorizontal;
+    }
+
+    public boolean isBarrierLeft() {
+        return barrierLeft;
+    }
+
+    public boolean isBarrierTop() {
+        return barrierTop;
+    }
+
+    public boolean isBarrierRight() {
+        return barrierRight;
+    }
+
+    public boolean isBarrierBottom() {
+        return barrierBottom;
     }
     
     /**
