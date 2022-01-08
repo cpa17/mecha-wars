@@ -36,12 +36,12 @@ public class StandardField extends Field {
     }
     
     @Override
-    public Robot turnAction(Robot robot) {
+    public Robot cardAction(Robot robot) {
         return robot;       
     }
     
     @Override
-    public Robot cardAction(Robot robot) {
+    public Robot turnAction(Robot robot) {
         return robot;       
     }
     

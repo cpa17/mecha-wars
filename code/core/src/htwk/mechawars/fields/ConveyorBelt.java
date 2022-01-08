@@ -64,7 +64,7 @@ public class ConveyorBelt extends Field {
     }
 
     @Override
-    public Robot turnAction(Robot robot) {
+    public Robot cardAction(Robot robot) {
         switch (this.end) {
             // conveyor belt runs to the left
             case 1:
@@ -244,7 +244,7 @@ public class ConveyorBelt extends Field {
     }
 
     @Override
-    public Robot cardAction(Robot robot) {
+    public Robot turnAction(Robot robot) {
         return robot;
     }
 
