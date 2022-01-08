@@ -1,7 +1,5 @@
 package htwk.mechawars.fieldeditor;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
@@ -38,7 +36,14 @@ import htwk.mechawars.fields.RepairSite;
 import htwk.mechawars.fields.StandardField;
 import htwk.mechawars.fields.StartField;
 
-public class FieldeditGUI implements Screen{
+
+/**
+ * Class, for the GUI-Elements of the Fieldeditor
+ * 
+ * @author -.-
+ *
+ */ 
+public class FieldeditGUI implements Screen {
     private Game gameFiEdit;
     private Stage stageFiEdit;
     private Texture img;
@@ -51,11 +56,11 @@ public class FieldeditGUI implements Screen{
     private int funcButtonPosY = Gdx.graphics.getHeight() - 70;
     private int picButtonSize = 80;
     private int picButtonPosX = Gdx.graphics.getHeight()
-            + (((Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) * 2) / 3) - 194;;
+            + (((Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) * 2) / 3) - 194;
     private int picButtonPosY = Gdx.graphics.getHeight() - 200;
     private int corner = 1; //corner of ImageButton
     private int side = 1; //side of BarrierButton
-//    private int type = 0; //type of BlockadeButton
+    //private int type = 0; type of BlockadeButton
     private int checkpointNumber = 1; //number of CheckpointButton
     private int startConveyor = 4; //start of ConveyorButton
     private int endConveyor = 2; //end of ConveyorButton
@@ -67,15 +72,18 @@ public class FieldeditGUI implements Screen{
     private int startFieldNumber = 1; //number of StartFieldButton
     private int pusherNumber = 1; //Number of Pusher
     private boolean backToMain = false;
-    private TooltipManager tTM = new TooltipManager() ;
+    private TooltipManager toolTipManager = new TooltipManager();
     private Skin skinFiEdit = new Skin(Gdx.files.internal("skinMenu/star-soldier-ui.json"));
     private ButtonfunctionsFieldEditor bfFiEdit = new ButtonfunctionsFieldEditor();
     
+    /**
+    * Constructor
+    */ 
     public FieldeditGUI(FieldEditor fieldEditor, String map) {
         
-        tTM.instant();
-        tTM.animations = false;
-        tTM.initialTime = 0;
+        toolTipManager.instant();
+        toolTipManager.animations = false;
+        toolTipManager.initialTime = 0;
         initBoardFiEdit(map);
         bfFiEdit.oneStepDone(boardFiEdit);          // first initial board saved
         stageFiEdit = new Stage();
@@ -112,7 +120,7 @@ public class FieldeditGUI implements Screen{
         
         TextButton backButton = new TextButton("Zurueck", skinFiEdit);
         
-        backButton.setPosition(funcButtonPosX + 180 , funcButtonPosY);
+        backButton.setPosition(funcButtonPosX + 180, funcButtonPosY);
         backButton.setSize(buttonWidth, buttonHeight);
         backButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
@@ -133,18 +141,18 @@ public class FieldeditGUI implements Screen{
             }
         });
         
-        TextField xPositionChangeField = new TextField("", skinFiEdit);
-        xPositionChangeField.setSize(buttonWidth / 2 + 50, buttonHeight / 2);
-        xPositionChangeField.setPosition(funcButtonPosX + 40, funcButtonPosY - 575);
-        xPositionChangeField.setMessageText("X Position");
-        xPositionChangeField.setAlignment(Align.center);
+        TextField xpositionChangeField = new TextField("", skinFiEdit);
+        xpositionChangeField.setSize(buttonWidth / 2 + 50, buttonHeight / 2);
+        xpositionChangeField.setPosition(funcButtonPosX + 40, funcButtonPosY - 575);
+        xpositionChangeField.setMessageText("X Position");
+        xpositionChangeField.setAlignment(Align.center);
         
         
-        TextField yPositionChangeField = new TextField("", skinFiEdit);
-        yPositionChangeField.setSize(buttonWidth / 2 + 50, buttonHeight / 2);
-        yPositionChangeField.setPosition(funcButtonPosX + 200, funcButtonPosY - 575);
-        yPositionChangeField.setMessageText("Y Position");
-        yPositionChangeField.setAlignment(Align.center);
+        TextField ypositionChangeField = new TextField("", skinFiEdit);
+        ypositionChangeField.setSize(buttonWidth / 2 + 50, buttonHeight / 2);
+        ypositionChangeField.setPosition(funcButtonPosX + 200, funcButtonPosY - 575);
+        ypositionChangeField.setMessageText("Y Position");
+        ypositionChangeField.setAlignment(Align.center);
         
         
         ImageButton barrierCornerButton = new ImageButton(new TextureRegionDrawable(
@@ -164,10 +172,12 @@ public class FieldeditGUI implements Screen{
         });
         barrierCornerButton.addListener(new ClickListener(Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
-                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "BarrierCorner", corner, 0);
+                drawOnField(xpositionChangeField.getText(), ypositionChangeField.getText(),
+                        "BarrierCorner", corner, 0);
             }
         });
-        barrierCornerButton.addListener(new TextTooltip("Barrier Corner", tTM, skinFiEdit));
+        barrierCornerButton.addListener(new TextTooltip("Barrier Corner",
+                toolTipManager, skinFiEdit));
         
         
         ImageButton barrierSideButton = new ImageButton(new TextureRegionDrawable(
@@ -187,10 +197,11 @@ public class FieldeditGUI implements Screen{
         });
         barrierSideButton.addListener(new ClickListener(Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
-                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "BarrierSide", side, 0);
+                drawOnField(xpositionChangeField.getText(), ypositionChangeField.getText(),
+                        "BarrierSide", side, 0);
             }
         });
-        barrierSideButton.addListener(new TextTooltip("Barrier Side", tTM, skinFiEdit));
+        barrierSideButton.addListener(new TextTooltip("Barrier Side", toolTipManager, skinFiEdit));
 
 
         ImageButton blackHoleButton = new ImageButton(new TextureRegionDrawable(
@@ -199,10 +210,11 @@ public class FieldeditGUI implements Screen{
         blackHoleButton.setPosition(picButtonPosX + 180, picButtonPosY);
         blackHoleButton.addListener(new ClickListener(Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
-                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "BlackHole", 0, 0);
+                drawOnField(xpositionChangeField.getText(), ypositionChangeField.getText(),
+                        "BlackHole", 0, 0);
             }
         });
-        blackHoleButton.addListener(new TextTooltip("Black Hole", tTM, skinFiEdit));
+        blackHoleButton.addListener(new TextTooltip("Black Hole", toolTipManager, skinFiEdit));
         
         
         ImageButton checkpointButton = new ImageButton(new TextureRegionDrawable(
@@ -222,10 +234,11 @@ public class FieldeditGUI implements Screen{
         });
         checkpointButton.addListener(new ClickListener(Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
-                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "Checkpoint", checkpointNumber, 0);
+                drawOnField(xpositionChangeField.getText(), ypositionChangeField.getText(),
+                        "Checkpoint", checkpointNumber, 0);
             }
         });
-        checkpointButton.addListener(new TextTooltip("Checkpoint", tTM, skinFiEdit));
+        checkpointButton.addListener(new TextTooltip("Checkpoint", toolTipManager, skinFiEdit));
         
         
         ImageButton conveyorBeltButton = new ImageButton(new TextureRegionDrawable(
@@ -252,10 +265,12 @@ public class FieldeditGUI implements Screen{
         });
         conveyorBeltButton.addListener(new ClickListener(Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
-                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "ConveyorBelt", startConveyor ,endConveyor);
+                drawOnField(xpositionChangeField.getText(), ypositionChangeField.getText(),
+                        "ConveyorBelt", startConveyor, endConveyor);
             }
         });
-        conveyorBeltButton.addListener(new TextTooltip("Conveyorbelt", tTM, skinFiEdit));
+        conveyorBeltButton.addListener(new TextTooltip("Conveyorbelt",
+                toolTipManager, skinFiEdit));
         
         
         ImageButton expressConveyorBeltButton = new ImageButton(new TextureRegionDrawable(
@@ -282,11 +297,12 @@ public class FieldeditGUI implements Screen{
         });
         expressConveyorBeltButton.addListener(new ClickListener(Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
-                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "ExpressConveyorBelt", startExpressConveyor, endExpressConveyor);
+                drawOnField(xpositionChangeField.getText(), ypositionChangeField.getText(),
+                        "ExpressConveyorBelt", startExpressConveyor, endExpressConveyor);
             }
         });
         expressConveyorBeltButton.addListener(new TextTooltip("Express Conveyorbelt", 
-                tTM, skinFiEdit));
+                toolTipManager, skinFiEdit));
         
         
         ImageButton backupButton = new ImageButton(new TextureRegionDrawable(
@@ -295,31 +311,33 @@ public class FieldeditGUI implements Screen{
         backupButton.setPosition(picButtonPosX, picButtonPosY - 180);
         backupButton.addListener(new ClickListener(Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
-                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "BackupCheckpoint", 0 , 0);
+                drawOnField(xpositionChangeField.getText(), ypositionChangeField.getText(),
+                        "BackupCheckpoint", 0, 0);
             }
         });
-        backupButton.addListener(new TextTooltip("Backup Checkpoint", tTM, skinFiEdit));
+        backupButton.addListener(new TextTooltip("Backup Checkpoint", toolTipManager, skinFiEdit));
         
         ImageButton gearButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/gear/Gear0" + gearNumber + ".png"))));
         gearButton.setSize(picButtonSize, picButtonSize);
         gearButton.setPosition(picButtonPosX + 90, picButtonPosY - 180);
         gearButton.addListener(new ClickListener(Buttons.RIGHT) {
-          public void clicked(InputEvent event, float x, float y) {
+            public void clicked(InputEvent event, float x, float y) {
                 gearNumber = ror(1, 2, gearNumber);
                 ImageButtonStyle styleFiEdit = new ImageButtonStyle();
                 styleFiEdit.up = new TextureRegionDrawable(
-                      new TextureRegion(new Texture("mapAssets/gear/Gear0" + gearNumber 
+                      new TextureRegion(new Texture("mapAssets/gear/Gear0" + gearNumber
                               + ".png")));
                 gearButton.setStyle(styleFiEdit);
             }
         });
         gearButton.addListener(new ClickListener(Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
-                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), "Gear", gearNumber, 0);
+                drawOnField(xpositionChangeField.getText(), ypositionChangeField.getText(), 
+                        "Gear", gearNumber, 0);
             }
         });
-        gearButton.addListener(new TextTooltip("Gear", tTM, skinFiEdit));
+        gearButton.addListener(new TextTooltip("Gear", toolTipManager, skinFiEdit));
         
         
         ImageButton laserButton = new ImageButton(new TextureRegionDrawable(
@@ -339,11 +357,11 @@ public class FieldeditGUI implements Screen{
         });
         laserButton.addListener(new ClickListener(Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
-                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), 
+                drawOnField(xpositionChangeField.getText(), ypositionChangeField.getText(), 
                         "Laser", typeLaserNum, 0);
             }
         });
-        laserButton.addListener(new TextTooltip("Laser", tTM, skinFiEdit));
+        laserButton.addListener(new TextTooltip("Laser", toolTipManager, skinFiEdit));
         
         
         ImageButton repairSiteButton = new ImageButton(new TextureRegionDrawable(
@@ -363,11 +381,11 @@ public class FieldeditGUI implements Screen{
         });
         repairSiteButton.addListener(new ClickListener(Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
-                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), 
+                drawOnField(xpositionChangeField.getText(), ypositionChangeField.getText(), 
                         "RepairSite", repairNum, 0);
             }
         });
-        repairSiteButton.addListener(new TextTooltip("Repair Site", tTM, skinFiEdit));
+        repairSiteButton.addListener(new TextTooltip("Repair Site", toolTipManager, skinFiEdit));
         
         
         ImageButton standardFieldButton = new ImageButton(new TextureRegionDrawable(
@@ -376,11 +394,12 @@ public class FieldeditGUI implements Screen{
         standardFieldButton.setPosition(picButtonPosX + 90, picButtonPosY - 270);
         standardFieldButton.addListener(new ClickListener(Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
-                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(), 
+                drawOnField(xpositionChangeField.getText(), ypositionChangeField.getText(), 
                         "StandardField", 0, 0);
             }
         });
-        standardFieldButton.addListener(new TextTooltip("Standard Field", tTM, skinFiEdit));
+        standardFieldButton.addListener(new TextTooltip("Standard Field",
+                toolTipManager, skinFiEdit));
         
         ImageButton startFieldButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "startfield/"
@@ -399,11 +418,11 @@ public class FieldeditGUI implements Screen{
         });
         startFieldButton.addListener(new ClickListener(Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
-                drawOnField(xPositionChangeField.getText(), yPositionChangeField.getText(),
+                drawOnField(xpositionChangeField.getText(), ypositionChangeField.getText(),
                         "StartField", startFieldNumber, 0);
             }
         });
-        startFieldButton.addListener(new TextTooltip("Start Field", tTM, skinFiEdit));
+        startFieldButton.addListener(new TextTooltip("Start Field", toolTipManager, skinFiEdit));
 
         
         ImageButton pusherButton = new ImageButton(new TextureRegionDrawable(
@@ -423,11 +442,11 @@ public class FieldeditGUI implements Screen{
         });
         pusherButton.addListener(new ClickListener(Buttons.LEFT) {
             public void clicked(InputEvent event, float x, float y) {
-                drawOnField(xPositionChangeField.getText(),
-                        yPositionChangeField.getText(), "Pusher", pusherNumber, 0);
+                drawOnField(xpositionChangeField.getText(),
+                        ypositionChangeField.getText(), "Pusher", pusherNumber, 0);
             }
         });
-        pusherButton.addListener(new TextTooltip("Pusher", tTM, skinFiEdit));
+        pusherButton.addListener(new TextTooltip("Pusher", toolTipManager, skinFiEdit));
         
         
         stageFiEdit.addActor(importButton);
@@ -447,8 +466,8 @@ public class FieldeditGUI implements Screen{
         stageFiEdit.addActor(standardFieldButton);
         stageFiEdit.addActor(startFieldButton);
         stageFiEdit.addActor(pusherButton);
-        stageFiEdit.addActor(xPositionChangeField);
-        stageFiEdit.addActor(yPositionChangeField);
+        stageFiEdit.addActor(xpositionChangeField);
+        stageFiEdit.addActor(ypositionChangeField);
        
         
     }
