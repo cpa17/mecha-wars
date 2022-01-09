@@ -115,22 +115,22 @@ public class RobotPushesRobotTest {
         robot[0].setDir(Dir.EAST);
         robot[0].setXcoor(0);
         robot[0].setYcoor(5);
-        robot[0].setStartX(0);
-        robot[0].setStartY(5);
+        robot[0].setbackupCopyX(0);
+        robot[0].setbackupCopyY(5);
 
         robot[1] = new Robot();
         robot[1].setDir(Dir.NORTH);
         robot[1].setXcoor(1);
         robot[1].setYcoor(5);
-        robot[1].setStartX(1);
-        robot[1].setStartY(5);
+        robot[1].setbackupCopyX(1);
+        robot[1].setbackupCopyY(5);
 
         robot[2] = new Robot();
         robot[2].setDir(Dir.NORTH);
         robot[2].setXcoor(2);
         robot[2].setYcoor(5);
-        robot[2].setStartX(2);
-        robot[2].setStartY(5);
+        robot[2].setbackupCopyX(2);
+        robot[2].setbackupCopyY(5);
     }
 
     /**

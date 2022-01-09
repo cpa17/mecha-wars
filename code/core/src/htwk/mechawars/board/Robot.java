@@ -20,8 +20,6 @@ public class Robot {
     private Dir dir;
     private int xcoor;
     private int ycoor;
-    private int startX;
-    private int startY;
     private int lifePoints;
     private int damagePoints;
     private int backupCopyX;
@@ -45,8 +43,6 @@ public class Robot {
      * Constructor of the robot class.
      */
     public Robot() {
-        backupCopyX = 0;
-        backupCopyY = 0;
         lifePoints = 3;
         damagePoints = 0;
         shutDownMark = false;
@@ -461,24 +457,6 @@ public class Robot {
     }
 
     /**
-     * Getter-Function to get the startposition (x-coordinate) of the robot.
-     *
-     * @return the x-coordinate of the startposition as an int
-     */
-    public int getStartX() {
-        return startX;
-    }
-
-    /**
-     * Getter-Function to get the startposition (y-coordinate) of the robot.
-     *
-     * @return the y-coordinate of the startposition as an int
-     */
-    public int getStartY() {
-        return startY;
-    }
-
-    /**
      * Getter-Function to get ... .
      *
      * @return the ?
@@ -582,26 +560,6 @@ public class Robot {
      */
     public void setXcoor(int xcoor) {
         this.xcoor = xcoor;
-    }
-
-    /**
-     * Setter-Function to set the startposition (x-coordinate) of the robot.
-     *
-     * @param startX -> Integer of the x-coordinate
-     */
-    public void setStartX(int startX) {
-        this.startX = startX;
-        this.backupCopyX = startX;
-    }
-
-    /**
-     * Setter-Function to set the startposition (y-coordinate) of the robot.
-     *
-     * @param startY -> Integer of the y-coordinate
-     */
-    public void setStartY(int startY) {
-        this.startY = startY;
-        this.backupCopyY = startY;
     }
 
     /**

@@ -30,6 +30,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
+import htwk.mechawars.game.GameScreen;
 
 /**
  * Class that presents the game board.
@@ -363,9 +364,9 @@ public class Board {
         }
 
         robot.setXcoor(x);
-        robot.setStartX(x);
+        robot.setbackupCopyX(x);
         robot.setYcoor(y);
-        robot.setStartY(y);
+        robot.setbackupCopyY(y);
         robot.setDir(dir);
     }
 
@@ -438,10 +439,11 @@ public class Board {
                     state(players);
                     checkDoubleDamage(players);
                     checkShutDown(players);
+                    checkGameOver(players);
                 }
             }, (ConfigReader.getPlayerNumber() * 5) + 5);
 
-            // Calls cardAction after all robots have finished with their x. card
+            // calls turnAction after all robots have finished with their x. card
             for (int i = ConfigReader.getPlayerNumber();
                         i <= (ConfigReader.getPlayerNumber() * 5) + 4;
                                 i = i + ConfigReader.getPlayerNumber() + 1) {
@@ -489,6 +491,7 @@ public class Board {
                         Robot.setPlayers(players);
                         checkRobotLaser(players);
                         checkBoardLaser(players);
+                        checkDestroyed(players);
                     }
                 }, i);
             }
@@ -497,9 +500,11 @@ public class Board {
             // No delay if this is a test
             checkRobotLaser(players);
             checkBoardLaser(players);
+            checkDestroyed(players);
             state(players);
             checkDoubleDamage(players);
             checkShutDown(players);
+            checkGameOver(players);
         }
     }
 
@@ -541,6 +546,10 @@ public class Board {
      * @param players array of all players
      */
     public void robotMovement(Card card, Robot robot, Robot[] players) {
+        if (robot.getDestroyed()) {
+            return;
+        }
+
         if (card.getCardAttributeType() == Type.mov) {
             robot.moveInDirectionByCard(fieldmatrix, card.getCardAttributeMovCount(), players);
         } else {
@@ -599,8 +608,9 @@ public class Board {
             if (player.getXcoor() >= fieldmatrix.length
                     || player.getYcoor() >= fieldmatrix[0].length
                     || player.getXcoor() < 0 || player.getYcoor() < 0) {
-                player.setXcoor(player.getStartX());
-                player.setYcoor(player.getStartY());
+                player.setDamage(10);
+                player.setXcoor(player.getbackupCopyX());
+                player.setYcoor(player.getbackupCopyY());
             }
         }
     }
@@ -614,12 +624,13 @@ public class Board {
         for (Robot player : players) {
             if ((!player.getShutDown() && player.getLastRound()) || player.getDestroyed()) {
 
-                player.damageUp();
-                player.damageUp();
-
                 if (player.getDestroyed()) {
+                    player.lifeDown();
                     player.setDestroyed(false);
+                    player.damageReset();
                 }
+                player.damageUp();
+                player.damageUp();
             }
         }
     }
@@ -634,6 +645,34 @@ public class Board {
             if (player.getShutDown() || player.getNextRound()) {
                 player.damageReset();
             }
+        }
+    }
+
+    /**
+     * Method that checks whether the robot is Destroyed.
+     *
+     * @param players array of all players
+     */
+    private void checkDestroyed(Robot[] players) {
+        for (Robot player : players) {
+            if (player.getDamagePoints() >= 10) {
+                player.setDestroyed(true);
+                player.setXcoor(player.getbackupCopyX());
+                player.setYcoor(player.getbackupCopyY());
+            }
+        }
+    }
+
+    /**
+     * Method that checks whether the robot is Destroyed.
+     *
+     * @param players array of all players
+     */
+    private void checkGameOver(Robot[] players) {
+        Robot player = players[0];
+
+        if (player.getLifePoints() <= 0) {
+            GameScreen.setLoseCondition(true);
         }
     }
 
