@@ -187,6 +187,8 @@ public class Board {
 
                     // Pusher
                     case 1:
+                        // Takes the 9th digit, which represents the attribute type
+                        // from the subclass Pusher
                         int typeB = matrix[col][cell] % 10;
                         allowed = new int[]{1, 2, 3, 4};
                         if (Arrays.stream(allowed).anyMatch(x -> x == typeB)) {
@@ -201,6 +203,8 @@ public class Board {
 
                     // Checkpoint
                     case 2:
+                        // Takes the 9th digit, which represents the attribute number
+                        // from the subclass Checkpoint
                         int numberC = matrix[col][cell] % 10;
                         allowed = new int[]{1, 2, 3, 4, 5, 6, 7, 8};
                         if (Arrays.stream(allowed).anyMatch(x -> x == numberC)) {
@@ -215,9 +219,11 @@ public class Board {
 
                     // ConveyorBelt
                     case 3:
-                        // Divide by 10 and module 10 takes the next-to-last digit,
-                        // which represents another attribute
+                        // Takes the 8th digit, which represents the attribute start
+                        // from the subclass ConveyorBelt
                         int startC = (matrix[col][cell] / 10) % 10;
+                        // Takes the 9th digit, which represents the attribute end
+                        // from the subclass ConveyorBelt
                         int endC = matrix[col][cell] % 10;
                         allowed = new int[]{21, 31, 41, 61, 71, 91, 2, 12, 32, 42, 52, 92,
                                 3, 13, 23, 43, 63, 83, 14, 24, 34, 54, 74, 84};
@@ -233,7 +239,11 @@ public class Board {
 
                     // ExpressConveyorBelt
                     case 4:
+                        // Takes the 8th digit, which represents the attribute start
+                        // from the subclass ExpressConveyorBelt
                         int startEc = (matrix[col][cell] / 10) % 10;
+                        // Takes the 9th digit, which represents the attribute end
+                        // from the subclass ExpressConveyorBelt
                         int endEc = matrix[col][cell] % 10;
                         allowed = new int[]{21, 31, 41, 61, 71, 91, 2, 12, 32, 42, 52, 92,
                                 3, 13, 23, 43, 63, 83, 14, 24, 34, 54, 74, 84};
@@ -249,6 +259,8 @@ public class Board {
 
                     // Gear
                     case 5:
+                        // Takes the 9th digit, which represents the attribute direction
+                        // from the subclass Gear
                         int direction = matrix[col][cell] % 10;
                         allowed = new int[]{1, 2};
                         if (Arrays.stream(allowed).anyMatch(x -> x == direction)) {
@@ -263,6 +275,8 @@ public class Board {
 
                     // RepairSite
                     case 6:
+                        // Takes the 9th digit, which represents the attribute type
+                        // from the subclass RepairSite
                         int typeR = matrix[col][cell] % 10;
                         allowed = new int[]{1, 2};
                         if (Arrays.stream(allowed).anyMatch(x -> x == typeR)) {
@@ -284,6 +298,8 @@ public class Board {
 
                     // StartField
                     case 8:
+                        // Takes the 9th digit, which represents the attribute number
+                        // from the subclass StartField
                         int numberS = matrix[col][cell] % 10;
                         allowed = new int[]{1, 2, 3, 4, 5, 6, 7, 8};
                         if (Arrays.stream(allowed).anyMatch(x -> x == numberS)) {
