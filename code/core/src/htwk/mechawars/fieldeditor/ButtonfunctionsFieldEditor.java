@@ -86,7 +86,9 @@ public class ButtonfunctionsFieldEditor {
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File fileToSave = fileChooser.getSelectedFile();
             if (!fileToSave.getAbsolutePath().endsWith(".txt")) {
-                fileToSave = new File(fileToSave.getAbsoluteFile() + ".txt");
+                fileToSave = new File(fileToSave.getAbsoluteFile().toString() + ".txt");
+            } else {
+                fileToSave = new File(fileToSave.getAbsoluteFile().toString());
             }
             // make every String in Lower-Case, so there are no misstakes, when open it in the Game
             fileToSave.getName().toLowerCase();
