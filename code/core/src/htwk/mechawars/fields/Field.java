@@ -13,13 +13,13 @@ public class Field {
     protected int ycoor;
     protected Texture tile;
 
-    private int laserVertical;
-    private int laserHorizontal;
+    protected int laserVertical;
+    protected int laserHorizontal;
 
-    private boolean barrierLeft;
-    private boolean barrierTop;
-    private boolean barrierRight;
-    private boolean barrierBottom;
+    protected boolean barrierLeft;
+    protected boolean barrierTop;
+    protected boolean barrierRight;
+    protected boolean barrierBottom;
 
     /**
      * Constructor of a Field with no lasers or barriers.
@@ -105,7 +105,28 @@ public class Field {
     }
 
     public String toString() {
-        String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor;
+        String attributes = "";
+        attributes = attributes + "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor;
+
+        if (this.laserVertical != 9) {
+            attributes = attributes + ", laserVertical:" + this.laserVertical;
+        }
+        if (this.laserHorizontal != 9) {
+            attributes = attributes + ", laserHorizontal:" + this.laserHorizontal;
+        }
+        if (this.barrierLeft) {
+            attributes = attributes + ", barrierLeft:" + this.barrierLeft;
+        }
+        if (this.barrierTop) {
+            attributes = attributes + ", barrierTop:" + this.barrierTop;
+        }
+        if (this.barrierRight) {
+            attributes = attributes + ", barrierRight:" + this.barrierRight;
+        }
+        if (this.barrierBottom) {
+            attributes = attributes + ", barrierBottom:" + this.barrierBottom;
+        }
+
         return attributes;
     }
     
