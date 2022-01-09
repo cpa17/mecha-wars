@@ -128,52 +128,71 @@ public class Board {
      * @param isTest indicates that this is a test
      */
     private void intToFieldMatrix(int[][] matrix, boolean isTest) {
+
         this.fieldmatrix = new Field[matrix.length][matrix[0].length];
+
         int[] allowed;
+
+        boolean barrierLeft;
+        boolean barrierTop;
+        boolean barrierRight;
+        boolean barrierBottom;
+
         for (int col = 0; col < matrix.length; col++) {
             for (int cell = 0; cell < matrix[col].length; cell++) {
-                // Switch with the first three digits that represent the class
-                switch (matrix[col][cell] / 100) {
 
-                    // BarrierCorner
-                    case 100:
-                        // Modulo 10 takes the last digit that represents the attribute
-                        int corner = matrix[col][cell] % 10;
-                        allowed = new int[]{1, 2, 3, 4};
-                        // Test that the read-out attribute value is in the set
-                        // of allowed attribute values
-                        if (Arrays.stream(allowed).anyMatch(x -> x == corner)) {
-                            this.fieldmatrix[col][cell] = new BarrierCorner(col, cell, corner,
-                                    isTest);
-                        } else {
-                            System.out.println("Codierung " + matrix[col][cell]
-                                    + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
-                        }
-                        break;
+                // Takes the 1st digit, which represents the attribute laserVertical
+                int laserVertical = matrix[col][cell] / 100000000;
 
-                    // BarrierSide
-                    case 101:
-                        int side = matrix[col][cell] % 10;
-                        allowed = new int[]{1, 2, 3, 4};
-                        if (Arrays.stream(allowed).anyMatch(x -> x == side)) {
-                            this.fieldmatrix[col][cell] = new BarrierSide(col, cell, side, isTest);
-                        } else {
-                            System.out.println("Codierung " + matrix[col][cell]
-                                    + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
-                        }
-                        break;
+                // Takes the 2nd digit, which represents the attribute laserHorizontal
+                int laserHorizontal = (matrix[col][cell] / 10000000) % 10;
+
+                // Takes the 3rd digit, which represents the attribute barrierLeft
+                if (((matrix[col][cell] / 1000000) % 10) == 1) {
+                    barrierLeft = true;
+                } else {
+                    barrierLeft = false;
+                }
+
+                // Takes the 4th digit, which represents the attribute barrierTop
+                if (((matrix[col][cell] / 100000) % 10) == 1) {
+                    barrierTop = true;
+                } else {
+                    barrierTop = false;
+                }
+
+                // Takes the 5th digit, which represents the attribute barrierRight
+                if (((matrix[col][cell] / 10000) % 10) == 1) {
+                    barrierRight = true;
+                } else {
+                    barrierRight = false;
+                }
+
+                // Takes the 6th digit, which represents the attribute barrierBottom
+                if (((matrix[col][cell] / 1000) % 10) == 1) {
+                    barrierBottom = true;
+                } else {
+                    barrierBottom = false;
+                }
+
+                // Switch with the 7th digits that represent the subclass
+                switch ((matrix[col][cell] / 100) % 10) {
 
                     // BlackHole
-                    case 102:
-                        fieldmatrix[col][cell] = new BlackHole(col, cell, isTest);
+                    case 0:
+                        fieldmatrix[col][cell] = new BlackHole(col, cell, laserVertical,
+                                laserHorizontal, barrierLeft, barrierTop, barrierRight,
+                                barrierBottom, isTest);
                         break;
 
                     // Pusher
-                    case 103:
+                    case 1:
                         int typeB = matrix[col][cell] % 10;
                         allowed = new int[]{1, 2, 3, 4};
                         if (Arrays.stream(allowed).anyMatch(x -> x == typeB)) {
-                            this.fieldmatrix[col][cell] = new Pusher(col, cell, typeB, isTest);
+                            this.fieldmatrix[col][cell] = new Pusher(col, cell, typeB,
+                                    laserVertical, laserHorizontal, barrierLeft, barrierTop,
+                                    barrierRight, barrierBottom, isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
@@ -181,12 +200,13 @@ public class Board {
                         break;
 
                     // Checkpoint
-                    case 104:
+                    case 2:
                         int numberC = matrix[col][cell] % 10;
                         allowed = new int[]{1, 2, 3, 4, 5, 6, 7, 8};
                         if (Arrays.stream(allowed).anyMatch(x -> x == numberC)) {
                             this.fieldmatrix[col][cell] = new Checkpoint(col, cell, numberC,
-                                    isTest);
+                                    laserVertical, laserHorizontal, barrierLeft, barrierTop,
+                                    barrierRight, barrierBottom, isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
@@ -194,7 +214,7 @@ public class Board {
                         break;
 
                     // ConveyorBelt
-                    case 105:
+                    case 3:
                         // Divide by 10 and module 10 takes the next-to-last digit,
                         // which represents another attribute
                         int startC = (matrix[col][cell] / 10) % 10;
@@ -203,7 +223,8 @@ public class Board {
                                 3, 13, 23, 43, 63, 83, 14, 24, 34, 54, 74, 84};
                         if (Arrays.stream(allowed).anyMatch(x -> x == (10 * startC) + endC)) {
                             this.fieldmatrix[col][cell] = new ConveyorBelt(col, cell, startC,
-                                    endC, isTest);
+                                    endC, laserVertical, laserHorizontal, barrierLeft, barrierTop,
+                                    barrierRight, barrierBottom, isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
@@ -211,14 +232,15 @@ public class Board {
                         break;
 
                     // ExpressConveyorBelt
-                    case 106:
+                    case 4:
                         int startEc = (matrix[col][cell] / 10) % 10;
                         int endEc = matrix[col][cell] % 10;
                         allowed = new int[]{21, 31, 41, 61, 71, 91, 2, 12, 32, 42, 52, 92,
                                 3, 13, 23, 43, 63, 83, 14, 24, 34, 54, 74, 84};
                         if (Arrays.stream(allowed).anyMatch(x -> x == (10 * startEc) + endEc)) {
                             this.fieldmatrix[col][cell] = new ExpressConveyorBelt(col, cell,
-                                    startEc, endEc, isTest);
+                                    startEc, endEc, laserVertical, laserHorizontal, barrierLeft,
+                                    barrierTop, barrierRight, barrierBottom, isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
@@ -226,23 +248,13 @@ public class Board {
                         break;
 
                     // Gear
-                    case 107:
+                    case 5:
                         int direction = matrix[col][cell] % 10;
                         allowed = new int[]{1, 2};
                         if (Arrays.stream(allowed).anyMatch(x -> x == direction)) {
-                            this.fieldmatrix[col][cell] = new Gear(col, cell, direction, isTest);
-                        } else {
-                            System.out.println("Codierung " + matrix[col][cell]
-                                    + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
-                        }
-                        break;
-
-                    // Laser
-                    case 108:
-                        int typeL = matrix[col][cell] % 10;
-                        allowed = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-                        if (Arrays.stream(allowed).anyMatch(x -> x == typeL)) {
-                            this.fieldmatrix[col][cell] = new Laser(col, cell, typeL, isTest);
+                            this.fieldmatrix[col][cell] = new Gear(col, cell, direction,
+                                    laserVertical, laserHorizontal, barrierLeft, barrierTop,
+                                    barrierRight, barrierBottom, isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
@@ -250,11 +262,13 @@ public class Board {
                         break;
 
                     // RepairSite
-                    case 109:
+                    case 6:
                         int typeR = matrix[col][cell] % 10;
                         allowed = new int[]{1, 2};
                         if (Arrays.stream(allowed).anyMatch(x -> x == typeR)) {
-                            this.fieldmatrix[col][cell] = new RepairSite(col, cell, typeR, isTest);
+                            this.fieldmatrix[col][cell] = new RepairSite(col, cell, typeR,
+                                    laserVertical, laserHorizontal, barrierLeft, barrierTop,
+                                    barrierRight, barrierBottom, isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
@@ -262,17 +276,20 @@ public class Board {
                         break;
 
                     // StandardField
-                    case 110:
-                        this.fieldmatrix[col][cell] = new StandardField(col, cell, isTest);
+                    case 7:
+                        this.fieldmatrix[col][cell] = new StandardField(col, cell, laserVertical,
+                                laserHorizontal, barrierLeft, barrierTop, barrierRight,
+                                barrierBottom, isTest);
                         break;
 
                     // StartField
-                    case 111:
+                    case 8:
                         int numberS = matrix[col][cell] % 10;
                         allowed = new int[]{1, 2, 3, 4, 5, 6, 7, 8};
                         if (Arrays.stream(allowed).anyMatch(x -> x == numberS)) {
                             this.fieldmatrix[col][cell] = new StartField(col, cell, numberS,
-                                    isTest);
+                                    laserVertical, laserHorizontal, barrierLeft, barrierTop,
+                                    barrierRight, barrierBottom, isTest);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");

@@ -1,3 +1,13 @@
+Ziffer 1 steht für die vertikalen Laser
+Ziffer 2 steht für die horizontalen Laser
+Ziffer 3 steht für die Wand links
+Ziffer 4 steht für die Wand oben
+Ziffer 5 steht für die Wand rechts
+Ziffer 6 steht für die Wand unten
+Ziffer 7 steht für die Unterklasse
+Ziffer 8 und 9 stehen für die Attribute der Unterklasse
+
+
 Attribut/Klasse     Spezifikation                           Codierung
 
 laserVertical       1 vertikaler Laser                      1xxxxxxxx
