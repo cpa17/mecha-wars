@@ -30,7 +30,8 @@ public class Robot {
     private boolean lastRound;
     private boolean nextRound;
     private boolean destroyed;
-    private Field field;
+    private boolean lastMovementByConveyor;
+    private Field lastConveyorField;
     private Texture life;
     private Texture damage;
     private Texture shutDown;
@@ -49,17 +50,19 @@ public class Robot {
         nextRound = false;
         destroyed = false;
         checkPointNumber = 1;
-        field = null;
+        lastMovementByConveyor = false;
+        lastConveyorField = null;
     }
 
     /**
      * Method that makes the robot move forward by a field. Therefore the function don't checks
      * whether walls are in the way, because a field never moves a robot towards a wall.
      * @param mov byte of move
+     * @param dir direction in which the field moves the robot
      * @return new position
      */
-    public Robot moveInDirectionByField(byte mov) {
-        switch (getDir()) {
+    public Robot moveInDirectionByField(byte mov, Dir dir) {
+        switch (dir) {
             case NORTH:
                 setYcoor(getYcoor() - mov);
                 return this;
@@ -187,6 +190,7 @@ public class Robot {
                     }
                     if (!flag) {
                         setYcoor(getYcoor() - 1);
+                        setLastMovementByConveyor(false);
                     }
                 }
                 return this;
@@ -248,6 +252,7 @@ public class Robot {
                     }
                     if (!flag) {
                         setYcoor(getYcoor() + 1);
+                        setLastMovementByConveyor(false);
                     }
                 }
                 return this;
@@ -308,6 +313,7 @@ public class Robot {
                     }
                     if (!flag) {
                         setXcoor(getXcoor() + 1);
+                        setLastMovementByConveyor(false);
                     }
                 }
                 return this;
@@ -368,6 +374,7 @@ public class Robot {
                     }
                     if (!flag) {
                         setXcoor(getXcoor() - 1);
+                        setLastMovementByConveyor(false);
                     }
                 }
                 return this;
@@ -497,11 +504,25 @@ public class Robot {
     public int getCheckPointNumber() {
         return checkPointNumber;
     }
-    
-    public Field getLastField() {
-        return field;
+
+    /**
+     * Getter-function whether the robots last movement was because of a conveyor field.
+     *
+     * @return lastMovementByConveyor
+     */
+    public boolean getLastMovementByConveyor() {
+        return lastMovementByConveyor;
     }
 
+    /**
+     * Getter-function for the last field of the robot, which was a conveyor field.
+     * Use it only if (lastMovementByConveyor == true).
+     *
+     * @return the last field of the robot which was a conveyor field
+     */
+    public Field getLastConveyorField() {
+        return lastConveyorField;
+    }
     // Setters. ------------------------------------------------------------------------------
     
     /**
@@ -585,9 +606,24 @@ public class Robot {
     public void setDestroyed(boolean destroyed) {
         this.destroyed = destroyed;
     }
-    
-    public void setLastField(Field field) {
-        this.field = field;
+
+    /**
+     * Setter-function whether the robots last movement was because of a conveyor field.
+     *
+     * @param lastMovementByConveyor true if the last movement was because of a conveyor field
+     */
+    public void setLastMovementByConveyor(boolean lastMovementByConveyor) {
+        this.lastMovementByConveyor = lastMovementByConveyor;
+    }
+
+    /**
+     * Setter-function for the last field of the robot, which was a conveyor field.
+     * If you use this setter, you have to set lastMovementByConveyor to true.
+     *
+     * @param lastConveyorField last field of the robot, which was a conveyor field
+     */
+    public void setLastConveyorField(Field lastConveyorField) {
+        this.lastConveyorField = lastConveyorField;
     }
     
     /**
@@ -598,7 +634,7 @@ public class Robot {
     }
     
     public void setDamage(int damage) {
-        damagePoints = damage;
+        damagePoints += damage;
     }
     
     /**
@@ -683,6 +719,7 @@ public class Robot {
                         break;
 
             case 10:    damage = new Texture(Gdx.files.internal("parameters/damage10.png"));
+                        backupDraw = true;
                         break;
 
             default:    break;

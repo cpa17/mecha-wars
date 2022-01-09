@@ -57,20 +57,20 @@ public class Pusher extends Field {
     }
 
     @Override
-    public Robot turnAction(Robot robot) {
+    public Robot cardAction(Robot robot) {
         if (type == 1) {
-            robot.moveInDirectionByField((byte) -1);
+            robot.moveInDirectionByField((byte) -1, robot.getDir());
         } else if (type == 3) {
             while (robot.getDir() != Dir.EAST) {
                 robot.turn((byte) 3); 
             }
-            robot.moveInDirectionByField((byte) 1);
+            robot.moveInDirectionByField((byte) 1, robot.getDir());
         }
         return robot;       
     }
     
     @Override
-    public Robot cardAction(Robot robot) {
+    public Robot turnAction(Robot robot) {
         return robot;       
     }
     
