@@ -19,7 +19,7 @@ public class ConveyorBelt extends Field {
     private Texture tile;
 
     /**
-     * Constructor of a Conveyor Belt.
+     * Constructor of a Conveyor Belt with no lasers or barriers.
      */
     public ConveyorBelt(int xcoor, int ycoor, int start, int end) {
         super(xcoor, ycoor);
@@ -30,12 +30,49 @@ public class ConveyorBelt extends Field {
     }
 
     /**
-     * Constructor of a Conveyor Belt which can skip creating the assets.
+     * Constructor of a Conveyor Belt with no lasers or barriers which can skip creating the assets.
      *
      * @param isTest indicates that this is a test
      */
     public ConveyorBelt(int xcoor, int ycoor, int start, int end, boolean isTest) {
         super(xcoor, ycoor, isTest);
+        this.start = start;
+        this.end = end;
+        if (!isTest) {
+            this.tile = new Texture(Gdx.files.internal("mapAssets/" + "conveyorbelt/"
+                    + "ConveyorBelt" + String.valueOf(start) + String.valueOf(end) + ".png"));
+        }
+    }
+
+    /**
+     * Constructor of a Conveyor Belt with barrier- and laser-attributes.
+     */
+    public ConveyorBelt(int xcoor, int ycoor, int start, int end, int laserVertical,
+                        int laserHorizontal, boolean barrierLeft, boolean barrierTop,
+                        boolean barrierRight, boolean barrierBottom) {
+
+        super(xcoor, ycoor, laserVertical, laserHorizontal,
+                barrierLeft, barrierTop, barrierRight, barrierBottom);
+
+        this.start = start;
+        this.end = end;
+        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "conveyorbelt/"
+                + "ConveyorBelt" + String.valueOf(start) + String.valueOf(end) + ".png"));
+    }
+
+    /**
+     * Constructor of a Conveyor Belt with barrier- and laser-attributes
+     * which can skip creating the assets.
+     *
+     * @param isTest indicates that this is a test
+     */
+    public ConveyorBelt(int xcoor, int ycoor, int start, int end, int laserVertical,
+                        int laserHorizontal, boolean barrierLeft, boolean barrierTop,
+                        boolean barrierRight, boolean barrierBottom, boolean isTest) {
+
+        super(xcoor, ycoor, laserVertical, laserHorizontal,
+                barrierLeft, barrierTop, barrierRight, barrierBottom, isTest);
+
         this.start = start;
         this.end = end;
         if (!isTest) {

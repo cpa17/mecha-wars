@@ -16,7 +16,7 @@ public class RepairSite extends Field {
     
 
     /**
-     * Constructor of a Repair Site.
+     * Constructor of a Repair Site with no lasers or barriers.
      */
     public RepairSite(int xcoor, int ycoor, int type) {
         super(xcoor, ycoor);
@@ -30,13 +30,54 @@ public class RepairSite extends Field {
     }
 
     /**
-     * Constructor of a Repair Site which can skip creating the assets.
+     * Constructor of a Repair Site with no lasers or barriers which can skip creating the assets.
      *
      * @param isTest indicates that this is a test
      */
     public RepairSite(int xcoor, int ycoor, int type, boolean isTest) {
         super(xcoor, ycoor, isTest);
         this.type = type;
+        if (!isTest) {
+            if (type == 1) {
+                this.tile = new Texture("mapAssets/repairsite/RepairSite01.png");
+            } else {
+                this.tile = new Texture("mapAssets/repairsite/RepairSite02.png");
+            }
+        }
+    }
+
+    /**
+     * Constructor of a Repair Site with barrier- and laser-attributes.
+     */
+    public RepairSite(int xcoor, int ycoor, int type, int laserVertical, int laserHorizontal,
+                     boolean barrierLeft, boolean barrierTop, boolean barrierRight,
+                     boolean barrierBottom) {
+
+        super(xcoor, ycoor, laserVertical, laserHorizontal,
+                barrierLeft, barrierTop, barrierRight, barrierBottom);
+        this.type = type;
+
+        if (type == 1) {
+            this.tile = new Texture("mapAssets/repairsite/RepairSite01.png");
+        } else {
+            this.tile = new Texture("mapAssets/repairsite/RepairSite02.png");
+        }
+    }
+
+    /**
+     * Constructor of a Repair Site with barrier- and laser-attributes
+     * which can skip creating the assets.
+     *
+     * @param isTest indicates that this is a test
+     */
+    public RepairSite(int xcoor, int ycoor, int type, int laserVertical, int laserHorizontal,
+                      boolean barrierLeft, boolean barrierTop, boolean barrierRight,
+                      boolean barrierBottom, boolean isTest) {
+
+        super(xcoor, ycoor, laserVertical, laserHorizontal,
+                barrierLeft, barrierTop, barrierRight, barrierBottom, isTest);
+        this.type = type;
+
         if (!isTest) {
             if (type == 1) {
                 this.tile = new Texture("mapAssets/repairsite/RepairSite01.png");

@@ -22,16 +22,19 @@ public class Field {
     private boolean barrierBottom;
 
     /**
-     * Constructor of a Field with no lasers and barriers.
+     * Constructor of a Field with no lasers or barriers.
      */
     public Field(int xcoor, int ycoor) {
         this.xcoor = xcoor;
         this.ycoor = ycoor;
         this.tile = new Texture("mapAssets/StandardField.png");
 
+        // attributes that indicates the number of vertical/ horizontal lasers
+        // 1 = 1 laser, 2 = 2 laser, 3 = 3 laser, 9 = 0 laser
         this.laserVertical = 9;
         this.laserHorizontal = 9;
 
+        // attributes that indicate whether there is a barrier on the left/ top/ right/ bottom
         this.barrierLeft = false;
         this.barrierTop = false;
         this.barrierRight = false;
@@ -39,7 +42,7 @@ public class Field {
     }
 
     /**
-     * Constructor of a Field with no lasers and barriers which can skip creating the assets.
+     * Constructor of a Field with no lasers or barriers which can skip creating the assets.
      *
      * @param isTest indicates that this is a test
      */

@@ -18,7 +18,7 @@ public class Pusher extends Field {
     private Texture tile;
 
     /**
-     * Constructor of a Pusher.
+     * Constructor of a Pusher with no lasers or barriers.
      */
     public Pusher(int xcoor, int ycoor, int type) {
         super(xcoor, ycoor);
@@ -28,7 +28,7 @@ public class Pusher extends Field {
     }
 
     /**
-     * Constructor of a Pusher which can skip creating the assets.
+     * Constructor of a Pusher with no lasers or barriers which can skip creating the assets.
      *
      * @param isTest indicates that this is a test
      */
@@ -39,7 +39,42 @@ public class Pusher extends Field {
             this.tile = new Texture(Gdx.files.internal("mapAssets/" + "pusher/"
                     + "Pusher0" + String.valueOf(type) + ".png"));
         }
-    }  
+    }
+
+    /**
+     * Constructor of a Pusher with barrier- and laser-attributes.
+     */
+    public Pusher(int xcoor, int ycoor, int type, int laserVertical, int laserHorizontal,
+                     boolean barrierLeft, boolean barrierTop, boolean barrierRight,
+                     boolean barrierBottom) {
+
+        super(xcoor, ycoor, laserVertical, laserHorizontal,
+                barrierLeft, barrierTop, barrierRight, barrierBottom);
+        this.type = type;
+
+        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "pusher/"
+                + "Pusher0" + String.valueOf(type) + ".png"));
+    }
+
+    /**
+     * Constructor of a Pusher with barrier- and laser-attributes
+     * which can skip creating the assets.
+     *
+     * @param isTest indicates that this is a test
+     */
+    public Pusher(int xcoor, int ycoor, int type, int laserVertical, int laserHorizontal,
+                  boolean barrierLeft, boolean barrierTop, boolean barrierRight,
+                  boolean barrierBottom, boolean isTest) {
+
+        super(xcoor, ycoor, laserVertical, laserHorizontal,
+                barrierLeft, barrierTop, barrierRight, barrierBottom, isTest);
+        this.type = type;
+
+        if (!isTest) {
+            this.tile = new Texture(Gdx.files.internal("mapAssets/" + "pusher/"
+                    + "Pusher0" + String.valueOf(type) + ".png"));
+        }
+    }
     
     @Override
     public String toString() {

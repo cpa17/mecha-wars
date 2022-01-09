@@ -13,7 +13,7 @@ public class Gear extends Field {
     private Texture tile;
 
     /**
-     * Constructor of a Gear.
+     * Constructor of a Gear with no lasers or barriers.
      */
     public Gear(int xcoor, int ycoor, int direction) {
         super(xcoor, ycoor);
@@ -27,12 +27,52 @@ public class Gear extends Field {
     }
 
     /**
-     * Constructor of a Gear which can skip creating the assets.
+     * Constructor of a Gear with no lasers or barriers which can skip creating the assets.
      *
      * @param isTest indicates that this is a test
      */
     public Gear(int xcoor, int ycoor, int direction, boolean isTest) {
         super(xcoor, ycoor, isTest);
+        this.direction = direction;
+
+        if (!isTest) {
+            if (direction == 1) {
+                this.tile = new Texture("mapAssets/gear/Gear01.png");
+            } else {
+                this.tile = new Texture("mapAssets/gear/Gear02.png");
+            }
+        }
+    }
+
+    /**
+     * Constructor of a Gear with barrier- and laser-attributes.
+     */
+    public Gear(int xcoor, int ycoor, int direction, int laserVertical, int laserHorizontal,
+                boolean barrierLeft, boolean barrierTop, boolean barrierRight,
+                boolean barrierBottom) {
+
+        super(xcoor, ycoor, laserVertical, laserHorizontal,
+                barrierLeft, barrierTop, barrierRight, barrierBottom);
+        this.direction = direction;
+
+        if (direction == 1) {
+            this.tile = new Texture("mapAssets/gear/Gear01.png");
+        } else {
+            this.tile = new Texture("mapAssets/gear/Gear02.png");
+        }
+    }
+
+    /**
+     * Constructor of a Gear with barrier- and laser-attributes which can skip creating the assets.
+     *
+     * @param isTest indicates that this is a test
+     */
+    public Gear(int xcoor, int ycoor, int direction, int laserVertical, int laserHorizontal,
+                boolean barrierLeft, boolean barrierTop, boolean barrierRight,
+                boolean barrierBottom, boolean isTest) {
+
+        super(xcoor, ycoor, laserVertical, laserHorizontal, barrierLeft, barrierTop,
+                barrierRight, barrierBottom, isTest);
         this.direction = direction;
 
         if (!isTest) {

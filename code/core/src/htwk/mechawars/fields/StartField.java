@@ -15,7 +15,7 @@ public class StartField extends Field {
     private Texture tile;
 
     /**
-     * Constructor of a Start Field.
+     * Constructor of a Start Field with no lasers or barriers.
      */
     public StartField(int xcoor, int ycoor, int number) {
         super(xcoor, ycoor);
@@ -25,12 +25,47 @@ public class StartField extends Field {
     }
 
     /**
-     * Constructor of a Start Field which can skip creating the assets.
+     * Constructor of a Start Field with no lasers or barriers which can skip creating the assets.
      *
      * @param isTest indicates that this is a test
      */
     public StartField(int xcoor, int ycoor, int number, boolean isTest) {
         super(xcoor, ycoor, isTest);
+        this.number = number;
+        if (!isTest) {
+            this.tile = new Texture(Gdx.files.internal("mapAssets/" + "startfield/"
+                    + "StartField0" + String.valueOf(number) + ".png"));
+        }
+    }
+
+    /**
+     * Constructor of a Start Field with barrier- and laser-attributes.
+     */
+    public StartField(int xcoor, int ycoor, int number, int laserVertical, int laserHorizontal,
+                     boolean barrierLeft, boolean barrierTop, boolean barrierRight,
+                     boolean barrierBottom) {
+
+        super(xcoor, ycoor, laserVertical, laserHorizontal,
+                barrierLeft, barrierTop, barrierRight, barrierBottom);
+
+        this.number = number;
+        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "startfield/"
+                + "StartField0" + String.valueOf(number) + ".png"));
+    }
+
+    /**
+     * Constructor of a Start Field with barrier- and laser-attributes
+     * which can skip creating the assets.
+     *
+     * @param isTest indicates that this is a test
+     */
+    public StartField(int xcoor, int ycoor, int number, int laserVertical, int laserHorizontal,
+                      boolean barrierLeft, boolean barrierTop, boolean barrierRight,
+                      boolean barrierBottom, boolean isTest) {
+
+        super(xcoor, ycoor, laserVertical, laserHorizontal,
+                barrierLeft, barrierTop, barrierRight, barrierBottom, isTest);
+
         this.number = number;
         if (!isTest) {
             this.tile = new Texture(Gdx.files.internal("mapAssets/" + "startfield/"
