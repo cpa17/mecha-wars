@@ -54,8 +54,8 @@ public class RobotPushesRobotTest {
         assertEquals(5, robot[1].getYcoor());
         assertEquals(Dir.EAST, robot[1].getDir());
 
-        assertEquals(robot[2].getStartX(), robot[2].getXcoor());
-        assertEquals(robot[2].getStartY(), robot[2].getYcoor());
+        assertEquals(robot[2].getbackupCopyX(), robot[2].getXcoor());
+        assertEquals(robot[2].getbackupCopyY(), robot[2].getYcoor());
         assertEquals(Dir.NORTH, robot[2].getDir());
 
 
