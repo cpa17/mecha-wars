@@ -137,6 +137,9 @@ public class OptionScreen implements Screen {
         stage.addActor(start);
     }
     
+    /**
+     * Function to switch to the GameScreen Surface.
+     */
     public void toGameScreen() {
         game.setScreen(new GameScreen(game, MechaWars.getMap()));
         stage.dispose();
