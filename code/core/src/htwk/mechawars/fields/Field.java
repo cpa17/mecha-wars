@@ -12,24 +12,34 @@ public class Field {
     protected int xcoor;
     protected int ycoor;
     protected Texture tile;
+
     private int laserVertical;
     private int laserHorizontal;
+
     private boolean barrierLeft;
     private boolean barrierTop;
     private boolean barrierRight;
     private boolean barrierBottom;
 
     /**
-     * Constructor of a Field.
+     * Constructor of a Field with no lasers and barriers.
      */
     public Field(int xcoor, int ycoor) {
         this.xcoor = xcoor;
         this.ycoor = ycoor;
         this.tile = new Texture("mapAssets/StandardField.png");
+
+        this.laserVertical = 9;
+        this.laserHorizontal = 9;
+
+        this.barrierLeft = false;
+        this.barrierTop = false;
+        this.barrierRight = false;
+        this.barrierBottom = false;
     }
 
     /**
-     * Constructor of a Field which can skip creating the assets.
+     * Constructor of a Field with no lasers and barriers which can skip creating the assets.
      *
      * @param isTest indicates that this is a test
      */
@@ -39,12 +49,84 @@ public class Field {
         if (!isTest) {
             this.tile = new Texture("mapAssets/StandardField.png");
         }
+
+        this.laserVertical = 9;
+        this.laserHorizontal = 9;
+
+        this.barrierLeft = false;
+        this.barrierTop = false;
+        this.barrierRight = false;
+        this.barrierBottom = false;
+    }
+
+    /**
+     * Constructor of a Field with barrier- and laser-attributes.
+     */
+    public Field(int xcoor, int ycoor, int laserVertical, int laserHorizontal, boolean barrierLeft,
+                 boolean barrierTop, boolean barrierRight, boolean barrierBottom) {
+
+        this.xcoor = xcoor;
+        this.ycoor = ycoor;
+        this.tile = new Texture("mapAssets/StandardField.png");
+
+        this.laserVertical = laserVertical;
+        this.laserHorizontal = laserHorizontal;
+
+        this.barrierLeft = barrierLeft;
+        this.barrierTop = barrierTop;
+        this.barrierRight = barrierRight;
+        this.barrierBottom = barrierBottom;
+    }
+
+    /**
+     * Constructor of a Field with barrier- and laser-attributes which can skip creating the assets.
+     *
+     * @param isTest indicates that this is a test
+     */
+    public Field(int xcoor, int ycoor, int laserVertical, int laserHorizontal, boolean barrierLeft,
+                 boolean barrierTop, boolean barrierRight, boolean barrierBottom, boolean isTest) {
+
+        this.xcoor = xcoor;
+        this.ycoor = ycoor;
+        if (!isTest) {
+            this.tile = new Texture("mapAssets/StandardField.png");
+        }
+
+        this.laserVertical = laserVertical;
+        this.laserHorizontal = laserHorizontal;
+
+        this.barrierLeft = barrierLeft;
+        this.barrierTop = barrierTop;
+        this.barrierRight = barrierRight;
+        this.barrierBottom = barrierBottom;
     }
 
     public String toString() {
         String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor;
         return attributes;
     }
+    
+    /**
+     * On the end of the turn a action can be done.
+     * 
+     * @param robot -> give the function the robot, that have an action.
+     * @return the instance robot
+     */
+    public Robot cardAction(Robot robot) {
+        return robot; 
+    }
+    
+    /**
+     * On the end of card action a action can be done.
+     * 
+     * @param robot -> give the function the robot, that have an action.
+     * @return the instance robot
+     */
+    public Robot turnAction(Robot robot) {
+        return robot; 
+    }
+
+    // Getters. ------------------------------------------------------------------------------
 
     public int getXcoor() {
         return this.xcoor;
@@ -70,42 +152,47 @@ public class Field {
         return laserHorizontal;
     }
 
-    public boolean isBarrierLeft() {
+    public boolean getBarrierLeft() {
         return barrierLeft;
     }
 
-    public boolean isBarrierTop() {
+    public boolean getBarrierTop() {
         return barrierTop;
     }
 
-    public boolean isBarrierRight() {
+    public boolean getBarrierRight() {
         return barrierRight;
     }
 
-    public boolean isBarrierBottom() {
+    public boolean getBarrierBottom() {
         return barrierBottom;
     }
-    
-    /**
-     * On the end of the turn a action can be done.
-     * 
-     * @param robot -> give the function the robot, that have an action.
-     * @return the instance robot
-     */
-    public Robot cardAction(Robot robot) {
-        return robot; 
+
+    // Setters. ------------------------------------------------------------------------------
+
+    public void setLaserVertical(int laserVertical) {
+        this.laserVertical = laserVertical;
     }
-    
-    /**
-     * On the end of card action a action can be done.
-     * 
-     * @param robot -> give the function the robot, that have an action.
-     * @return the instance robot
-     */
-    public Robot turnAction(Robot robot) {
-        return robot; 
+
+    public void setLaserHorizontal(int laserHorizontal) {
+        this.laserHorizontal = laserHorizontal;
     }
-    
+
+    public void setBarrierLeft(boolean barrierLeft) {
+        this.barrierLeft = barrierLeft;
+    }
+
+    public void setBarrierTop(boolean barrierTop) {
+        this.barrierTop = barrierTop;
+    }
+
+    public void setBarrierRight(boolean barrierRight) {
+        this.barrierRight = barrierRight;
+    }
+
+    public void setBarrierBottom(boolean barrierBottom) {
+        this.barrierBottom = barrierBottom;
+    }
 
     @Override
     public boolean equals(Object obj) {
