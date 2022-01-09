@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import htwk.mechawars.ConfigReader;
+import htwk.mechawars.GameOverScreen;
 import htwk.mechawars.VictoryScreen;
 import htwk.mechawars.board.Board;
 import htwk.mechawars.board.Dir;
@@ -25,6 +26,7 @@ import htwk.mechawars.board.Robot;
 public class GameScreen implements Screen {
     private Game game;
     private static boolean winCondition = false;
+    private static boolean loseCondition = false;
     private Texture industrialTile;
     private Texture robot;
     static Stage stage;
@@ -149,9 +151,18 @@ public class GameScreen implements Screen {
     public static void setWinCondition(boolean win) {
         winCondition = win;
     }
+
+    public static void setLoseCondition(boolean lose) {
+        loseCondition = lose;
+    }
     
-    public void changeScreen() {
+    public void changeScreenWin() {
         game.setScreen(new VictoryScreen(game));
+        getStage().dispose();
+    }
+
+    public void changeScreenLose() {
+        game.setScreen(new GameOverScreen(game));
         getStage().dispose();
     }
     
@@ -172,8 +183,12 @@ public class GameScreen implements Screen {
         }
         batch.end();       
         if (winCondition) {
-            changeScreen();
+            changeScreenWin();
             GameScreen.setWinCondition(false);
+        }
+        if (loseCondition) {
+            changeScreenLose();
+            GameScreen.setLoseCondition(false);
         }
         getStage().act();
         getStage().draw();

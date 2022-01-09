@@ -17,24 +17,24 @@ public class RobotTest {
         assertEquals(5, robot.getXcoor());
         assertEquals(5, robot.getYcoor());
         assertEquals(Dir.NORTH, robot.getDir());
-        assertEquals(0, robot.getStartX());
-        assertEquals(0, robot.getStartY());
+        assertEquals(0, robot.getbackupCopyX());
+        assertEquals(0, robot.getbackupCopyY());
 
         robot.turn((byte) 3);
 
         assertEquals(5, robot.getXcoor());
         assertEquals(5, robot.getYcoor());
         assertEquals(Dir.WEST, robot.getDir());
-        assertEquals(0, robot.getStartX());
-        assertEquals(0, robot.getStartY());
+        assertEquals(0, robot.getbackupCopyX());
+        assertEquals(0, robot.getbackupCopyY());
 
         robot.moveInDirectionByField((byte) 3);
 
         assertEquals(2, robot.getXcoor());
         assertEquals(5, robot.getYcoor());
         assertEquals(Dir.WEST, robot.getDir());
-        assertEquals(0, robot.getStartX());
-        assertEquals(0, robot.getStartY());
+        assertEquals(0, robot.getbackupCopyX());
+        assertEquals(0, robot.getbackupCopyY());
 
         robot.turn((byte) 2);
         robot.moveInDirectionByField((byte) 1);
@@ -46,8 +46,8 @@ public class RobotTest {
         assertEquals(3, robot.getXcoor());
         assertEquals(1, robot.getYcoor());
         assertEquals(Dir.NORTH, robot.getDir());
-        assertEquals(0, robot.getStartX());
-        assertEquals(0, robot.getStartY());
+        assertEquals(0, robot.getbackupCopyX());
+        assertEquals(0, robot.getbackupCopyY());
 
     }
 
@@ -59,8 +59,8 @@ public class RobotTest {
         robot.setDir(Dir.NORTH);
         robot.setXcoor(5);
         robot.setYcoor(5);
-        robot.setStartX(0);
-        robot.setStartY(0);
+        robot.setbackupCopyX(0);
+        robot.setbackupCopyY(0);
     }
 
 }
