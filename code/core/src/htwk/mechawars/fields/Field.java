@@ -104,6 +104,11 @@ public class Field {
         this.barrierBottom = barrierBottom;
     }
 
+    /**
+     * Method that create a String from a Field that contains the attribute values.
+     *
+     * @return A String with the attribute values of the Field
+     */
     public String toString() {
         String attributes = "";
         attributes = attributes + "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor;
