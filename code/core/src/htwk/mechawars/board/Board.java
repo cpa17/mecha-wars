@@ -520,9 +520,6 @@ public class Board {
 
         if (isTest) {
             for (Card card : phase) {
-                robotPosition = fieldmatrix[robots[card.getCardPlayerNumber()].getXcoor()]
-                        [robots[card.getCardPlayerNumber()].getYcoor()];
-                robots[card.getCardPlayerNumber()].setLastField(robotPosition);
                 robotMovement(card, robots[card.getCardPlayerNumber()], robots);
             }
         } else {

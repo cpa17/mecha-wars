@@ -21,24 +21,24 @@ public class RobotTest {
         assertEquals(5, robot[0].getXcoor());
         assertEquals(5, robot[0].getYcoor());
         assertEquals(Dir.NORTH, robot[0].getDir());
-        assertEquals(0, robot[0].getStartX());
-        assertEquals(0, robot[0].getStartY());
+        assertEquals(0, robot[0].getbackupCopyX());
+        assertEquals(0, robot[0].getbackupCopyY());
 
         robot[0].turn((byte) 3);
 
         assertEquals(5, robot[0].getXcoor());
         assertEquals(5, robot[0].getYcoor());
         assertEquals(Dir.WEST, robot[0].getDir());
-        assertEquals(0, robot[0].getStartX());
-        assertEquals(0, robot[0].getStartY());
+        assertEquals(0, robot[0].getbackupCopyX());
+        assertEquals(0, robot[0].getbackupCopyY());
 
         robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 3, robot);
 
         assertEquals(2, robot[0].getXcoor());
         assertEquals(5, robot[0].getYcoor());
         assertEquals(Dir.WEST, robot[0].getDir());
-        assertEquals(0, robot[0].getStartX());
-        assertEquals(0, robot[0].getStartY());
+        assertEquals(0, robot[0].getbackupCopyX());
+        assertEquals(0, robot[0].getbackupCopyY());
 
         robot[0].turn((byte) 2);
         robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 1, robot);
@@ -50,8 +50,8 @@ public class RobotTest {
         assertEquals(3, robot[0].getXcoor());
         assertEquals(1, robot[0].getYcoor());
         assertEquals(Dir.NORTH, robot[0].getDir());
-        assertEquals(0, robot[0].getStartX());
-        assertEquals(0, robot[0].getStartY());
+        assertEquals(0, robot[0].getbackupCopyX());
+        assertEquals(0, robot[0].getbackupCopyY());
 
     }
 
@@ -63,8 +63,8 @@ public class RobotTest {
         robot[0].setDir(Dir.NORTH);
         robot[0].setXcoor(5);
         robot[0].setYcoor(5);
-        robot[0].setStartX(0);
-        robot[0].setStartY(0);
+        robot[0].getbackupCopyX();
+        robot[0].getbackupCopyY();
     }
 
     /**
