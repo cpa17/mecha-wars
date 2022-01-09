@@ -526,7 +526,9 @@ public class Board {
      * @param players array of all players
      */
     public void robotMovement(Card card, Robot robot, Robot[] players) {
-        if (robot.getDestroyed()) return;
+        if (robot.getDestroyed()) {
+            return;
+        }
 
         if (card.getCardAttributeType() == Type.mov) {
             robot.moveInDirectionByCard(fieldmatrix, card.getCardAttributeMovCount(), players);
@@ -616,7 +618,7 @@ public class Board {
     private void checkGameOver(Robot[] players) {
         Robot player = players[0];
 
-        if(player.getLifePoints() <= 0) {
+        if (player.getLifePoints() <= 0) {
             GameScreen.setLoseCondition(true);
         }
     }
