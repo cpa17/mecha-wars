@@ -63,8 +63,8 @@ public class RobotTest {
         robot[0].setDir(Dir.NORTH);
         robot[0].setXcoor(5);
         robot[0].setYcoor(5);
-        robot[0].getbackupCopyX();
-        robot[0].getbackupCopyY();
+        robot[0].setbackupCopyX(0);
+        robot[0].setbackupCopyY(0);
     }
 
     /**
