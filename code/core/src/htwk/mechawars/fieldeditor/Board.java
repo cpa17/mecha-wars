@@ -8,19 +8,19 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import htwk.mechawars.fieldsFiEdit.BarrierCorner;
-import htwk.mechawars.fieldsFiEdit.BarrierSide;
-import htwk.mechawars.fieldsFiEdit.BlackHole;
-import htwk.mechawars.fieldsFiEdit.Checkpoint;
-import htwk.mechawars.fieldsFiEdit.ConveyorBelt;
-import htwk.mechawars.fieldsFiEdit.ExpressConveyorBelt;
-import htwk.mechawars.fieldsFiEdit.Field;
-import htwk.mechawars.fieldsFiEdit.Gear;
-import htwk.mechawars.fieldsFiEdit.Laser;
-import htwk.mechawars.fieldsFiEdit.Pusher;
-import htwk.mechawars.fieldsFiEdit.RepairSite;
-import htwk.mechawars.fieldsFiEdit.StandardField;
-import htwk.mechawars.fieldsFiEdit.StartField;
+import htwk.mechawars.fieldsfiedit.BarrierCorner;
+import htwk.mechawars.fieldsfiedit.BarrierSide;
+import htwk.mechawars.fieldsfiedit.BlackHole;
+import htwk.mechawars.fieldsfiedit.Checkpoint;
+import htwk.mechawars.fieldsfiedit.ConveyorBelt;
+import htwk.mechawars.fieldsfiedit.ExpressConveyorBelt;
+import htwk.mechawars.fieldsfiedit.Field;
+import htwk.mechawars.fieldsfiedit.Gear;
+import htwk.mechawars.fieldsfiedit.Laser;
+import htwk.mechawars.fieldsfiedit.Pusher;
+import htwk.mechawars.fieldsfiedit.RepairSite;
+import htwk.mechawars.fieldsfiedit.StandardField;
+import htwk.mechawars.fieldsfiedit.StartField;
 
 /**
  * Class that presents the game board.

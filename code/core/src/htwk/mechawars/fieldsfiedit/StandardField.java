@@ -1,60 +1,38 @@
-package htwk.mechawars.fieldsFiEdit;
+package htwk.mechawars.fieldsfiedit;
 
 import com.badlogic.gdx.graphics.Texture;
 
 /**
- * Class of a Field.
+ * Class of a Standard Field.
  */
-public class Field {
+public class StandardField extends Field {
 
-    protected int xcoor;
-    protected int ycoor;
-    protected Texture tile;
+    private Texture tile;
 
     /**
-     * Constructor of a Field.
+     * Constructor of a Standard Field.
      */
-    public Field(int xcoor, int ycoor) {
-        this.xcoor = xcoor;
-        this.ycoor = ycoor;
+    public StandardField(int xcoor, int ycoor) {
+        super(xcoor, ycoor);
         this.tile = new Texture("mapAssets/StandardField.png");
     }
 
     /**
-     * Constructor of a Field which can skip creating the assets.
+     * Constructor of a Standard Field which can skip creating the assets.
      *
      * @param isTest indicates that this is a test
      */
-    public Field(int xcoor, int ycoor, boolean isTest) {
-        this.xcoor = xcoor;
-        this.ycoor = ycoor;
+    public StandardField(int xcoor, int ycoor, boolean isTest) {
+        super(xcoor, ycoor, isTest);
         if (!isTest) {
             this.tile = new Texture("mapAssets/StandardField.png");
         }
     }
 
-    public String toString() {
-        String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor;
-        return attributes;
-    }
-
-    public int getXcoor() {
-        return this.xcoor;
-    }
-
-    public int getYcoor() {
-        return this.ycoor;
-    }
-
-    /**
-     * Dummy.
-     * 
-     * @return .
-     */
     public Texture getTile() {
         return this.tile;
     }
-
+    
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {

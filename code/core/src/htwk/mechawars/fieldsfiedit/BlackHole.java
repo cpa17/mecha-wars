@@ -1,31 +1,31 @@
-package htwk.mechawars.fieldsFiEdit;
+package htwk.mechawars.fieldsfiedit;
 
 import com.badlogic.gdx.graphics.Texture;
 
 /**
- * Class of a Standard Field.
+ * Class of a Black Hole.
  */
-public class StandardField extends Field {
+public class BlackHole extends Field {
 
     private Texture tile;
 
     /**
-     * Constructor of a Standard Field.
+     * Constructor of a Black Hole.
      */
-    public StandardField(int xcoor, int ycoor) {
+    public BlackHole(int xcoor, int ycoor) {
         super(xcoor, ycoor);
-        this.tile = new Texture("mapAssets/StandardField.png");
+        this.tile = new Texture("mapAssets/BlackHole.png");
     }
 
     /**
-     * Constructor of a Standard Field which can skip creating the assets.
+     * Constructor of a Black Hole which can skip creating the assets.
      *
      * @param isTest indicates that this is a test
      */
-    public StandardField(int xcoor, int ycoor, boolean isTest) {
+    public BlackHole(int xcoor, int ycoor, boolean isTest) {
         super(xcoor, ycoor, isTest);
         if (!isTest) {
-            this.tile = new Texture("mapAssets/StandardField.png");
+            this.tile = new Texture("mapAssets/BlackHole.png");
         }
     }
 
@@ -42,7 +42,7 @@ public class StandardField extends Field {
             return false;
         }
 
-        StandardField other = (StandardField) obj;
+        BlackHole other = (BlackHole) obj;
         if (xcoor != other.xcoor) {
             return false;
         }

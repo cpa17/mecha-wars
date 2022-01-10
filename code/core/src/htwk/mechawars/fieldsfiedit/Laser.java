@@ -1,43 +1,44 @@
-package htwk.mechawars.fieldsFiEdit;
+package htwk.mechawars.fieldsfiedit;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
 /**
- * Class of a Pusher.
+ * Class of a Laser.
  */
-public class Pusher extends Field {
+public class Laser extends Field {
 
-    // attribute which represents the type of the pusher
-    // 1 = horizontal with the numbers 2 and 4, 2 = horizontal with the numbers 1, 3 and 5
-    // 3 = vertical with the numbers 2 and 4, 4 = vertical with the numbers 1, 3 and 5
+    // attribute which stands for the type of a laser
+    // 0 = begin left, 1 = begin top, 2 = begin right, 3 = begin bottom,
+    // 4 = center horizontal, 5 = center vertical,
+    // 6 = end left, 7 = end top, 8 = end right, 9 = end bottom
     private int type;
     private Texture tile;
 
     /**
-     * Constructor of a Pusher.
+     * Constructor of a Laser.
      */
-    public Pusher(int xcoor, int ycoor, int type) {
+    public Laser(int xcoor, int ycoor, int type) {
         super(xcoor, ycoor);
         this.type = type;
-        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "pusher/"
-                + "Pusher0" + String.valueOf(type) + ".png"));
+        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "laser/"
+                + "Laser0" + String.valueOf(type) + ".png"));
     }
 
     /**
-     * Constructor of a Pusher which can skip creating the assets.
+     * Constructor of a Laser which can skip creating the assets.
      *
      * @param isTest indicates that this is a test
      */
-    public Pusher(int xcoor, int ycoor, int type, boolean isTest) {
+    public Laser(int xcoor, int ycoor, int type, boolean isTest) {
         super(xcoor, ycoor, isTest);
         this.type = type;
         if (!isTest) {
-            this.tile = new Texture(Gdx.files.internal("mapAssets/" + "pusher/"
-                    + "Pusher0" + String.valueOf(type) + ".png"));
+            this.tile = new Texture(Gdx.files.internal("mapAssets/" + "laser/"
+                    + "Laser0" + String.valueOf(type) + ".png"));
         }
-    }  
-    
+    }
+
     @Override
     public String toString() {
         String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor
@@ -62,7 +63,7 @@ public class Pusher extends Field {
             return false;
         }
 
-        Pusher other = (Pusher) obj;
+        Laser other = (Laser) obj;
         if (xcoor != other.xcoor) {
             return false;
         }

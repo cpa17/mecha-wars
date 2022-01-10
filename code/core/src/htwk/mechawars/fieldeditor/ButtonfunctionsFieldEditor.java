@@ -10,7 +10,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import htwk.mechawars.fieldsFiEdit.StandardField;
+import htwk.mechawars.fieldsfiedit.StandardField;
 
 /**
  * ButtonFunctions for the FieldEditor.

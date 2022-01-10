@@ -1,58 +1,54 @@
-package htwk.mechawars.fieldsFiEdit;
+package htwk.mechawars.fieldsfiedit;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
 /**
- * Class of a Gear.
+ * Class of a Corner Barrier.
  */
-public class Gear extends Field {
+public class BarrierCorner extends Field {
 
-    private int direction;
+    // attribute which shows where the corner of the barrier is located
+    // 1 = top-left, 2 = top-right, 3 = bottom-right, 4 = bottom-left
+    private int corner;
     private Texture tile;
 
     /**
-     * Constructor of a Gear.
+     * Constructor of a Corner Barrier.
      */
-    public Gear(int xcoor, int ycoor, int direction) {
+    public BarrierCorner(int xcoor, int ycoor, int corner) {
         super(xcoor, ycoor);
-        this.direction = direction;
-        
-        if (direction == 1) {
-            this.tile = new Texture("mapAssets/gear/Gear01.png");
-        } else {
-            this.tile = new Texture("mapAssets/gear/Gear02.png");
-        }
+        this.corner = corner;
+        this.tile = new Texture(Gdx.files.internal("mapAssets/"
+                + "barriercorner/" + "BarrierCorner0" + String.valueOf(corner) + ".png"));
     }
 
     /**
-     * Constructor of a Gear which can skip creating the assets.
+     * Constructor of a Corner Barrier which can skip creating the assets.
      *
      * @param isTest indicates that this is a test
      */
-    public Gear(int xcoor, int ycoor, int direction, boolean isTest) {
+    public BarrierCorner(int xcoor, int ycoor, int corner, boolean isTest) {
         super(xcoor, ycoor, isTest);
-        this.direction = direction;
-
+        this.corner = corner;
         if (!isTest) {
-            if (direction == 1) {
-                this.tile = new Texture("mapAssets/gear/Gear01.png");
-            } else {
-                this.tile = new Texture("mapAssets/gear/Gear02.png");
-            }
+            this.tile = new Texture(Gdx.files.internal("mapAssets/" + "barriercorner/"
+                    + "BarrierCorner0" + String.valueOf(corner) + ".png"));
         }
     }
-
+    
     @Override
     public String toString() {
         String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor
-                + ", direction: " + this.direction;
+                + ", corner: " + this.corner;
         return attributes;
     }
 
-    public int getDirection() {
-        return this.direction;
+    public int getCorner() {
+        return this.corner;
     }
 
+    @Override
     public Texture getTile() {
         return this.tile;
     }
@@ -66,14 +62,14 @@ public class Gear extends Field {
             return false;
         }
 
-        Gear other = (Gear) obj;
+        BarrierCorner other = (BarrierCorner) obj;
         if (xcoor != other.xcoor) {
             return false;
         }
         if (ycoor != other.ycoor) {
             return false;
         }
-        if (direction != other.direction) {
+        if (corner != other.corner) {
             return false;
         }
 

@@ -1,4 +1,4 @@
-package htwk.mechawars.fieldsFiEdit;
+package htwk.mechawars.fieldsfiedit;
 
 import com.badlogic.gdx.graphics.Texture;
 

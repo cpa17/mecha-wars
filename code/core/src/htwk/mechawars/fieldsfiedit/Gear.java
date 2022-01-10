@@ -1,50 +1,56 @@
-package htwk.mechawars.fieldsFiEdit;
+package htwk.mechawars.fieldsfiedit;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
 /**
- * Class of a Start Field.
+ * Class of a Gear.
  */
-public class StartField extends Field {
+public class Gear extends Field {
 
-    // attribute which indicates the number of a certain start field
-    private int number;
+    private int direction;
     private Texture tile;
 
     /**
-     * Constructor of a Start Field.
+     * Constructor of a Gear.
      */
-    public StartField(int xcoor, int ycoor, int number) {
+    public Gear(int xcoor, int ycoor, int direction) {
         super(xcoor, ycoor);
-        this.number = number; 
-        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "startfield/"
-                + "StartField0" + String.valueOf(number) + ".png"));
+        this.direction = direction;
+        
+        if (direction == 1) {
+            this.tile = new Texture("mapAssets/gear/Gear01.png");
+        } else {
+            this.tile = new Texture("mapAssets/gear/Gear02.png");
+        }
     }
 
     /**
-     * Constructor of a Start Field which can skip creating the assets.
+     * Constructor of a Gear which can skip creating the assets.
      *
      * @param isTest indicates that this is a test
      */
-    public StartField(int xcoor, int ycoor, int number, boolean isTest) {
+    public Gear(int xcoor, int ycoor, int direction, boolean isTest) {
         super(xcoor, ycoor, isTest);
-        this.number = number;
+        this.direction = direction;
+
         if (!isTest) {
-            this.tile = new Texture(Gdx.files.internal("mapAssets/" + "startfield/"
-                    + "StartField0" + String.valueOf(number) + ".png"));
+            if (direction == 1) {
+                this.tile = new Texture("mapAssets/gear/Gear01.png");
+            } else {
+                this.tile = new Texture("mapAssets/gear/Gear02.png");
+            }
         }
     }
 
     @Override
     public String toString() {
         String attributes = "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor
-                + ", number: " + this.number;
+                + ", direction: " + this.direction;
         return attributes;
     }
 
-    public int getNumber() {
-        return this.number;
+    public int getDirection() {
+        return this.direction;
     }
 
     public Texture getTile() {
@@ -60,14 +66,14 @@ public class StartField extends Field {
             return false;
         }
 
-        StartField other = (StartField) obj;
+        Gear other = (Gear) obj;
         if (xcoor != other.xcoor) {
             return false;
         }
         if (ycoor != other.ycoor) {
             return false;
         }
-        if (number != other.number) {
+        if (direction != other.direction) {
             return false;
         }
 
