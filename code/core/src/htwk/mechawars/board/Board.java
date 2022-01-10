@@ -416,14 +416,14 @@ public class Board {
         if (players.length != 1 || allCard.size() != 0) {
             if (!isTest) {
                 Timer.schedule(new Task() {
-                                   int turnCounter = 0;
+                    int turnCounter = 0;
 
-                                   @Override
-                                   public void run() {
-                                       moveSingleTurn(allCard.get(turnCounter), players, false);
-                                       turnCounter++;
-                                   }
-                               }, 0, ConfigReader.getPlayerNumber() + 1,
+                    @Override
+                    public void run() {
+                        moveSingleTurn(allCard.get(turnCounter), players, false);
+                        turnCounter++;
+                        }
+                    }, 0, ConfigReader.getPlayerNumber() + 1,
                         allCards.size() - 1);
 
             } else {
