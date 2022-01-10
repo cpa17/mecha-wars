@@ -93,46 +93,46 @@ public class DamageTest {
         assertTrue(robot[0].getDestroyed());
         board.move(robot, true);
         /* Robot:
-         *   DamagePoint: 4
+         *   DamagePoint: 2
          *   ShutDown: false
          *   NextRound: false
          *   LastRound: false
          *   destroyed: false
-         *   Life: 3
+         *   Life: 2
          * */
 
-        assertEquals(4, robot[0].getDamagePoints());
+        assertEquals(2, robot[0].getDamagePoints());
         assertFalse(robot[0].getShutDown());
         assertFalse(robot[0].getDestroyed());
-        assertEquals(3, robot[0].getLifePoints());
+        assertEquals(2, robot[0].getLifePoints());
 
         robot[0].setNextRound(true);
         robot[0].setDestroyed(true);
         /* Robot:
-         *   DamagePoint: 4
+         *   DamagePoint: 2
          *   ShutDown: false
          *   NextRound: true
          *   LastRound: false
          *   destroyed: true
-         *   Life: 3
+         *   Life: 2
          * */
 
         assertTrue(robot[0].getDestroyed());
 
         board.move(robot, true);
         /* Robot:
-         *   DamagePoint: 4
+         *   DamagePoint: 2
          *   ShutDown: true
          *   NextRound: true
          *   LastRound: false
          *   destroyed: false
-         *   Life: 3
+         *   Life: 1
          * */
 
         assertEquals(0, robot[0].getDamagePoints());
         assertTrue(robot[0].getShutDown());
         assertFalse(robot[0].getDestroyed());
-        assertEquals(3, robot[0].getLifePoints());
+        assertEquals(1, robot[0].getLifePoints());
 
         board.move(robot, true);
         /* Robot:
@@ -141,13 +141,13 @@ public class DamageTest {
          *   NextRound: true
          *   LastRound: true
          *   destroyed: false
-         *   Life: 3
+         *   Life: 1
          * */
 
         assertEquals(0, robot[0].getDamagePoints());
         assertTrue(robot[0].getShutDown());
         assertFalse(robot[0].getDestroyed());
-        assertEquals(3, robot[0].getLifePoints());
+        assertEquals(1, robot[0].getLifePoints());
     }
 
     /**
