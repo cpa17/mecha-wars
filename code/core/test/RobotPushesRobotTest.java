@@ -135,18 +135,18 @@ public class RobotPushesRobotTest {
 
     /**
      * Method that generates a String for the board constructor.
-     * Side barrier at Field(1,2) at the top.
-     * Corner barrier at Field(5,2) at the upper left corner.
+     * StandardField(1,2): barrier at the top
+     * StandardField(5,2): barrier at the bottom and left
      */
     private String createBoardString() {
         String dummyVar = "";
         String boardString = dummyVar +
-                "11000 11000 11000 11000 11000 11000 \n" +
-                "11000 11000 11000 11000 11000 11000 \n" +
-                "11000 10102 11000 11000 11000 10001 \n" +
-                "11000 11000 11000 11000 11000 11000 \n" +
-                "11000 11000 11000 11000 11000 11000 \n" +
-                "11000 11000 11000 11000 11000 11000";
+                "990000700 990000700 990000700 990000700 990000700 990000700 \n" +
+                "990000700 990000700 990000700 990000700 990000700 990000700 \n" +
+                "990000700 990100700 990000700 990000700 990000700 991100700 \n" +
+                "990000700 990000700 990000700 990000700 990000700 990000700 \n" +
+                "990000700 990000700 990000700 990000700 990000700 990000700 \n" +
+                "990000700 990000700 990000700 990000700 990000700 990000700";
         return boardString;
     }
 }

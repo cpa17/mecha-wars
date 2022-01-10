@@ -151,7 +151,7 @@ public class DamageTest {
     }
 
     /**
-     * Methode that initialized the robot.
+     * Method that initialized the robot.
      */
     @BeforeEach
     public void initRobot() {
@@ -165,7 +165,7 @@ public class DamageTest {
      * Method that generates a String for the board constructor.
      */
     private String createBoardString() {
-        return "11000 11000 \n" +
-               "11000 11000";
+        return "990000700 990000700 \n" +
+               "990000700 990000700";
     }
 }
