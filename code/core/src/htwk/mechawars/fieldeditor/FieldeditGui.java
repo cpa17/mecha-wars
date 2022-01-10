@@ -22,19 +22,18 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 
 import htwk.mechawars.MainMenu;
-import htwk.mechawars.board.Board;
-import htwk.mechawars.fields.BarrierCorner;
-import htwk.mechawars.fields.BarrierSide;
-import htwk.mechawars.fields.BlackHole;
-import htwk.mechawars.fields.Checkpoint;
-import htwk.mechawars.fields.ConveyorBelt;
-import htwk.mechawars.fields.ExpressConveyorBelt;
-import htwk.mechawars.fields.Gear;
-import htwk.mechawars.fields.Laser;
-import htwk.mechawars.fields.Pusher;
-import htwk.mechawars.fields.RepairSite;
-import htwk.mechawars.fields.StandardField;
-import htwk.mechawars.fields.StartField;
+import htwk.mechawars.fieldsFiEdit.BarrierCorner;
+import htwk.mechawars.fieldsFiEdit.BarrierSide;
+import htwk.mechawars.fieldsFiEdit.BlackHole;
+import htwk.mechawars.fieldsFiEdit.Checkpoint;
+import htwk.mechawars.fieldsFiEdit.ConveyorBelt;
+import htwk.mechawars.fieldsFiEdit.ExpressConveyorBelt;
+import htwk.mechawars.fieldsFiEdit.Gear;
+import htwk.mechawars.fieldsFiEdit.Laser;
+import htwk.mechawars.fieldsFiEdit.Pusher;
+import htwk.mechawars.fieldsFiEdit.RepairSite;
+import htwk.mechawars.fieldsFiEdit.StandardField;
+import htwk.mechawars.fieldsFiEdit.StartField;
 
 
 /**

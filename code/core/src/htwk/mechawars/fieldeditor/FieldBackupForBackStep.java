@@ -2,8 +2,6 @@ package htwk.mechawars.fieldeditor;
 
 import java.util.ArrayList;
 
-import htwk.mechawars.board.Board;
-
 /**
  * Class, to organize the Step`s back and forward.
  * 

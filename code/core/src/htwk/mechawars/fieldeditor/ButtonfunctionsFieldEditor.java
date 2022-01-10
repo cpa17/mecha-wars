@@ -10,8 +10,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import htwk.mechawars.board.Board;
-import htwk.mechawars.fields.StandardField;
+import htwk.mechawars.fieldsFiEdit.StandardField;
 
 /**
  * ButtonFunctions for the FieldEditor.
@@ -33,7 +32,12 @@ public class ButtonfunctionsFieldEditor {
      * @param t -> says if the functions will be called.
      */
     public ButtonfunctionsFieldEditor(boolean t) {
-        Board board = new Board("..\\core\\assets\\maps\\test.txt");
+        Board board;
+        if(t) {
+            board = new Board("..\\core\\assets\\maps\\test.txt");
+        } else {
+            board = currentField;
+        }
         if (t) {
             importField();
             exportField(board);
