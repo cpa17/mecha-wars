@@ -13,9 +13,14 @@ public class Field {
     protected int ycoor;
     protected Texture tile;
 
+    // attributes that indicates the number of vertical/ horizontal lasers
+    // and whether it is the start of the laser or not
+    // 1 = 1 laser, 2 = 2 laser, 3 = 3 laser, 4 = start of 1 laser,
+    // 5 = start of 2 lasers, 6 = start of 3 lasers, 9 = 0 laser
     protected int laserVertical;
     protected int laserHorizontal;
 
+    // attributes that indicate whether there is a barrier on the left/ top/ right/ bottom
     protected boolean barrierLeft;
     protected boolean barrierTop;
     protected boolean barrierRight;
@@ -29,12 +34,9 @@ public class Field {
         this.ycoor = ycoor;
         this.tile = new Texture("mapAssets/StandardField.png");
 
-        // attributes that indicates the number of vertical/ horizontal lasers
-        // 1 = 1 laser, 2 = 2 laser, 3 = 3 laser, 9 = 0 laser
         this.laserVertical = 9;
         this.laserHorizontal = 9;
 
-        // attributes that indicate whether there is a barrier on the left/ top/ right/ bottom
         this.barrierLeft = false;
         this.barrierTop = false;
         this.barrierRight = false;
@@ -114,22 +116,22 @@ public class Field {
         attributes = attributes + "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor;
 
         if (this.laserVertical != 9) {
-            attributes = attributes + ", laserVertical:" + this.laserVertical;
+            attributes = attributes + ", laserVertical: " + this.laserVertical;
         }
         if (this.laserHorizontal != 9) {
-            attributes = attributes + ", laserHorizontal:" + this.laserHorizontal;
+            attributes = attributes + ", laserHorizontal: " + this.laserHorizontal;
         }
         if (this.barrierLeft) {
-            attributes = attributes + ", barrierLeft:" + this.barrierLeft;
+            attributes = attributes + ", barrierLeft: " + this.barrierLeft;
         }
         if (this.barrierTop) {
-            attributes = attributes + ", barrierTop:" + this.barrierTop;
+            attributes = attributes + ", barrierTop: " + this.barrierTop;
         }
         if (this.barrierRight) {
-            attributes = attributes + ", barrierRight:" + this.barrierRight;
+            attributes = attributes + ", barrierRight: " + this.barrierRight;
         }
         if (this.barrierBottom) {
-            attributes = attributes + ", barrierBottom:" + this.barrierBottom;
+            attributes = attributes + ", barrierBottom: " + this.barrierBottom;
         }
 
         return attributes;
@@ -236,7 +238,22 @@ public class Field {
         if (xcoor != other.xcoor) {
             return false;
         }
-        if (ycoor != other.ycoor) {
+        if (laserVertical != other.laserVertical) {
+            return false;
+        }
+        if (laserHorizontal != other.laserHorizontal) {
+            return false;
+        }
+        if (barrierLeft != other.barrierLeft) {
+            return false;
+        }
+        if (barrierTop != other.barrierTop) {
+            return false;
+        }
+        if (barrierRight != other.barrierRight) {
+            return false;
+        }
+        if (barrierBottom != other.barrierBottom) {
             return false;
         }
 

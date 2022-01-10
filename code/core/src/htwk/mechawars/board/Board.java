@@ -143,9 +143,19 @@ public class Board {
 
                 // Takes the 1st digit, which represents the attribute laserVertical
                 int laserVertical = matrix[col][cell] / 100000000;
+                allowed = new int[]{1, 2, 3, 4, 5, 6, 9};
+                if (!(Arrays.stream(allowed).anyMatch(x -> x == laserVertical))) {
+                    System.out.println("Codierung " + laserVertical
+                            + " beschreibt keinen gültigen Wert für das Attribut laserVertical");
+                }
 
                 // Takes the 2nd digit, which represents the attribute laserHorizontal
                 int laserHorizontal = (matrix[col][cell] / 10000000) % 10;
+                allowed = new int[]{1, 2, 3, 4, 5, 6, 9};
+                if (!(Arrays.stream(allowed).anyMatch(x -> x == laserHorizontal))) {
+                    System.out.println("Codierung " + laserVertical
+                            + " beschreibt keinen gültigen Wert für das Attribut laserHorizontal");
+                }
 
                 // Takes the 3rd digit, which represents the attribute barrierLeft
                 if (((matrix[col][cell] / 1000000) % 10) == 1) {

@@ -93,6 +93,24 @@ public class BlackHole extends Field {
         if (ycoor != other.ycoor) {
             return false;
         }
+        if (laserVertical != other.laserVertical) {
+            return false;
+        }
+        if (laserHorizontal != other.laserHorizontal) {
+            return false;
+        }
+        if (barrierLeft != other.barrierLeft) {
+            return false;
+        }
+        if (barrierTop != other.barrierTop) {
+            return false;
+        }
+        if (barrierRight != other.barrierRight) {
+            return false;
+        }
+        if (barrierBottom != other.barrierBottom) {
+            return false;
+        }
 
         return true;
     }

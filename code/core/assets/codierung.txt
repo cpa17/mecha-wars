@@ -7,17 +7,25 @@ Ziffer 6 steht für die Wand unten
 Ziffer 7 steht für die Unterklasse
 Ziffer 8 und 9 stehen für die Attribute der Unterklasse
 
+(x ist ein Platzhalter für eine Ziffer, für die Bedeutung dieser siehe weiter unten)
+
 
 Attribut/Klasse     Spezifikation                           Codierung
 
 laserVertical       1 vertikaler Laser                      1xxxxxxxx
-                    2 vertikaler Laser                      2xxxxxxxx
-                    3 vertikaler Laser                      3xxxxxxxx
+                    2 vertikale Laser                       2xxxxxxxx
+                    3 vertikale Laser                       3xxxxxxxx
+                    Laserbeginn, 1 vertikaler               4xxxxxxxx
+                    Laserbeginn, 2 vertikale                5xxxxxxxx
+                    Laserbeginn, 3 vertikale                6xxxxxxxx
                     0 vertikaler Laser                      9xxxxxxxx
 
 laserHorizontal     1 horizontaler Laser                    x1xxxxxxx
-                    2 horizontaler Laser                    x2xxxxxxx
-                    3 horizontaler Laser                    x3xxxxxxx
+                    2 horizontale Laser                     x2xxxxxxx
+                    3 horizontale Laser                     x3xxxxxxx
+                    Laserbeginn, 1 horizontaler             x4xxxxxxx
+                    Laserbeginn, 2 horizontale              x5xxxxxxx
+                    Laserbeginn, 3 horizontale              x6xxxxxxx
                     0 horizontaler Laser                    x9xxxxxxx
 
 barrierLeft         false                                   xx0xxxxxx
