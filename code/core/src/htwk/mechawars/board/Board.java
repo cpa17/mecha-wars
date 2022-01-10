@@ -1,7 +1,6 @@
 package htwk.mechawars.board;
 
 import htwk.mechawars.ConfigReader;
-import htwk.mechawars.cards.AiCardGeneration;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.Deck;
 import htwk.mechawars.cards.Type;
@@ -30,6 +29,10 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
+
+import ai.AiInterface;
+
+//import ai.AiCardGeneration;
 
 /**
  * Class that presents the game board.
@@ -397,7 +400,7 @@ public class Board {
                 if (ConfigReader.getAimodes()[i]) {
 
                     LinkedList<Card> generatedCards =
-                            AiCardGeneration.generateRandomAiCardsfromDeck(i);
+                            AiInterface.generateCards(i, getNumberOfChoosableCards(players[i].getDamagePoints()));
                     // Random Cards generation for the AI-Players
                     allCards.add(generatedCards);
                     maxCardCount = Integer.max(generatedCards.size(), maxCardCount);
@@ -947,4 +950,13 @@ public class Board {
             }
         } 
     }
+    private static int getNumberOfChoosableCards(int damage)
+    {
+        if(damage < 5)
+        {
+            return 5;
+        }
+        return 9 - damage;  
+    }
+
 }

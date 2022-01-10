@@ -69,6 +69,10 @@ public class GameScreen implements Screen {
         board = new Board(fileName);
     }
     
+
+
+
+
     private Sprite[] createSprites(int numberRobots) {
         Sprite[] sprites = new Sprite[numberRobots];
         for (int i = 0; i < sprites.length; i++) {
@@ -211,6 +215,16 @@ public class GameScreen implements Screen {
 
     public static void setStage(Stage stage) {
         GameScreen.stage = stage;
+    }
+    
+    public static Board getBoard() {
+        return board;
+    }
+
+
+
+    public static void setBoard(Board board) {
+        GameScreen.board = board;
     }
 
 }
