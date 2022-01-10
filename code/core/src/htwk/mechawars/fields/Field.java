@@ -13,9 +13,14 @@ public class Field {
     protected int ycoor;
     protected Texture tile;
 
+    // attributes that indicates the number of vertical/ horizontal lasers
+    // and whether it is the start of the laser or not
+    // 1 = 1 laser, 2 = 2 laser, 3 = 3 laser, 4 = start of 1 laser,
+    // 5 = start of 2 lasers, 6 = start of 3 lasers, 9 = 0 laser
     protected int laserVertical;
     protected int laserHorizontal;
 
+    // attributes that indicate whether there is a barrier on the left/ top/ right/ bottom
     protected boolean barrierLeft;
     protected boolean barrierTop;
     protected boolean barrierRight;
@@ -29,12 +34,9 @@ public class Field {
         this.ycoor = ycoor;
         this.tile = new Texture("mapAssets/StandardField.png");
 
-        // attributes that indicates the number of vertical/ horizontal lasers
-        // 1 = 1 laser, 2 = 2 laser, 3 = 3 laser, 9 = 0 laser
         this.laserVertical = 9;
         this.laserHorizontal = 9;
 
-        // attributes that indicate whether there is a barrier on the left/ top/ right/ bottom
         this.barrierLeft = false;
         this.barrierTop = false;
         this.barrierRight = false;
