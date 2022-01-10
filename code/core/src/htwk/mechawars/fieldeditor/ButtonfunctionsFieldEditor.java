@@ -33,7 +33,7 @@ public class ButtonfunctionsFieldEditor {
      */
     public ButtonfunctionsFieldEditor(boolean t) {
         Board board;
-        if(t) {
+        if (t) {
             board = new Board("..\\core\\assets\\maps\\test.txt");
         } else {
             board = currentField;
