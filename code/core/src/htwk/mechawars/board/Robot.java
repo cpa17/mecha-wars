@@ -146,36 +146,16 @@ public class Robot {
                     // currently standing, stops the current step
                     if ((y >= 0) && (y < fieldmatrix[0].length)
                             && (x >= 0) && (x < fieldmatrix.length)) {
-                        if (fieldmatrix[x][y] instanceof BarrierSide) {
-                            barrierSide = (BarrierSide) fieldmatrix[x][y];
-                            if (barrierSide.getSide() == 2) {
-                                flag = true;
-                            }
-                        }
-                        if (fieldmatrix[x][y] instanceof BarrierCorner) {
-                            barrierCorner = (BarrierCorner) fieldmatrix[x][y];
-                            if ((barrierCorner.getCorner() == 1)
-                                    || (barrierCorner.getCorner() == 2)) {
-                                flag = true;
-                            }
+                        if (fieldmatrix[x][y].getBarrierTop() == true) {
+                            flag = true;
                         }
                     }
                     // Checks whether a side or corner barrier on the next field in the moving
                     // direction, stops the current step
                     if ((y - 1 >= 0) && (y - 1 < fieldmatrix[0].length)
                             && (x >= 0) && (x < fieldmatrix.length)) {
-                        if (fieldmatrix[x][y - 1] instanceof BarrierSide) {
-                            barrierSide = (BarrierSide) fieldmatrix[x][y - 1];
-                            if (barrierSide.getSide() == 4) {
-                                flag = true;
-                            }
-                        }
-                        if (fieldmatrix[x][y - 1] instanceof BarrierCorner) {
-                            barrierCorner = (BarrierCorner) fieldmatrix[x][y - 1];
-                            if ((barrierCorner.getCorner() == 3)
-                                    || (barrierCorner.getCorner() == 4)) {
-                                flag = true;
-                            }
+                        if (fieldmatrix[x][y - 1].getBarrierBottom() == true) {
+                            flag = true;
                         }
                     }
                     // Checks whether the robot is pushing another robot
@@ -207,37 +187,17 @@ public class Robot {
                     // currently standing, stops the current step
                     if ((y >= 0) && (y < fieldmatrix[0].length)
                             && (x >= 0) && (x < fieldmatrix.length)) {
-                        if (fieldmatrix[x][y] instanceof BarrierSide) {
-                            barrierSide = (BarrierSide) fieldmatrix[x][y];
-                            if (barrierSide.getSide() == 4) {
-                                flag = true;
-
-                            }
-                        }
-                        if (fieldmatrix[x][y] instanceof BarrierCorner) {
-                            barrierCorner = (BarrierCorner) fieldmatrix[x][y];
-                            if ((barrierCorner.getCorner() == 3)
-                                    || (barrierCorner.getCorner() == 4)) {
-                                flag = true;
-                            }
+                        if (fieldmatrix[x][y].getBarrierBottom() == true) {
+                            flag = true;
                         }
                     }
+                    
                     // Checks whether a side or corner barrier on the next field in the moving
                     // direction, stops the current step
                     if ((y + 1 >= 0) && (y + 1 < fieldmatrix[0].length)
                             && (x >= 0) && (x < fieldmatrix.length)) {
-                        if (fieldmatrix[x][y + 1] instanceof BarrierSide) {
-                            barrierSide = (BarrierSide) fieldmatrix[x][y + 1];
-                            if (barrierSide.getSide() == 2) {
-                                flag = true;
-                            }
-                        }
-                        if (fieldmatrix[x][y + 1] instanceof BarrierCorner) {
-                            barrierCorner = (BarrierCorner) fieldmatrix[x][y + 1];
-                            if ((barrierCorner.getCorner() == 1)
-                                    || (barrierCorner.getCorner() == 2)) {
-                                flag = true;
-                            }
+                        if (fieldmatrix[x][y + 1].getBarrierTop() == true) {
+                            flag = true;
                         }
                     }
                     // Checks whether the robot is pushing another robot
@@ -269,36 +229,16 @@ public class Robot {
                     // currently standing, stops the current step
                     if ((y >= 0) && (y < fieldmatrix[0].length)
                             && (x >= 0) && (x < fieldmatrix.length)) {
-                        if (fieldmatrix[x][y] instanceof BarrierSide) {
-                            barrierSide = (BarrierSide) fieldmatrix[x][y];
-                            if (barrierSide.getSide() == 3) {
-                                flag = true;
-                            }
-                        }
-                        if (fieldmatrix[x][y] instanceof BarrierCorner) {
-                            barrierCorner = (BarrierCorner) fieldmatrix[x][y];
-                            if ((barrierCorner.getCorner() == 2)
-                                    || (barrierCorner.getCorner() == 3)) {
-                                flag = true;
-                            }
-                        }
+                        if (fieldmatrix[x][y].getBarrierRight() == true) {
+                            flag = true;
+                    }
                     }
                     // Checks whether a side or corner barrier on the next field in the moving
                     // direction, stops the current step
                     if ((y >= 0) && (y < fieldmatrix[0].length)
                             && (x + 1 >= 0) && (x + 1 < fieldmatrix.length)) {
-                        if (fieldmatrix[x + 1][y] instanceof BarrierSide) {
-                            barrierSide = (BarrierSide) fieldmatrix[x + 1][y];
-                            if (barrierSide.getSide() == 1) {
-                                flag = true;
-                            }
-                        }
-                        if (fieldmatrix[x + 1][y] instanceof BarrierCorner) {
-                            barrierCorner = (BarrierCorner) fieldmatrix[x + 1][y];
-                            if ((barrierCorner.getCorner() == 1)
-                                    || (barrierCorner.getCorner() == 4)) {
-                                flag = true;
-                            }
+                        if (fieldmatrix[x + 1][y].getBarrierLeft() == true) {
+                            flag = true;
                         }
                     }
                     // Checks whether the robot is pushing another robot
@@ -330,36 +270,16 @@ public class Robot {
                     // currently standing, stops the current step
                     if ((y >= 0) && (y < fieldmatrix[0].length)
                             && (x >= 0) && (x < fieldmatrix.length)) {
-                        if (fieldmatrix[x][y] instanceof BarrierSide) {
-                            barrierSide = (BarrierSide) fieldmatrix[x][y];
-                            if (barrierSide.getSide() == 1) {
-                                flag = true;
-                            }
-                        }
-                        if (fieldmatrix[x][y] instanceof BarrierCorner) {
-                            barrierCorner = (BarrierCorner) fieldmatrix[x][y];
-                            if ((barrierCorner.getCorner() == 1)
-                                    || (barrierCorner.getCorner() == 4)) {
-                                flag = true;
-                            }
+                        if (fieldmatrix[x][y].getBarrierLeft() == true) {
+                            flag = true;
                         }
                     }
                     // Checks whether a side or corner barrier on the next field in the moving
                     // direction, stops the current step
                     if ((y >= 0) && (y < fieldmatrix[0].length)
                             && (x - 1 >= 0) && (x - 1 < fieldmatrix.length)) {
-                        if (fieldmatrix[x - 1][y] instanceof BarrierSide) {
-                            barrierSide = (BarrierSide) fieldmatrix[x - 1][y];
-                            if (barrierSide.getSide() == 3) {
-                                flag = true;
-                            }
-                        }
-                        if (fieldmatrix[x - 1][y] instanceof BarrierCorner) {
-                            barrierCorner = (BarrierCorner) fieldmatrix[x - 1][y];
-                            if ((barrierCorner.getCorner() == 2)
-                                    || (barrierCorner.getCorner() == 3)) {
-                                flag = true;
-                            }
+                        if (fieldmatrix[x - 1][y].getBarrierRight() == true) {
+                            flag = true;
                         }
                     }
                     // Checks whether the robot is pushing another robot
