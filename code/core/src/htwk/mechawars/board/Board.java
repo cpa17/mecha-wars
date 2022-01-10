@@ -412,21 +412,24 @@ public class Board {
                                                                of lists of cards for each turn*/
 
         final LinkedList<LinkedList<Card>> allCard = allCards;
-        if (!isTest) {
-            Timer.schedule(new Task() {
-                int turnCounter = 0;
 
-                @Override
-                public void run() {
-                    moveSingleTurn(allCard.get(turnCounter), players, false);
-                    turnCounter++;
+        if (players.length != 1 || allCard.size() != 0) {
+            if (!isTest) {
+                Timer.schedule(new Task() {
+                                   int turnCounter = 0;
+
+                                   @Override
+                                   public void run() {
+                                       moveSingleTurn(allCard.get(turnCounter), players, false);
+                                       turnCounter++;
+                                   }
+                               }, 0, ConfigReader.getPlayerNumber() + 1,
+                        allCards.size() - 1);
+
+            } else {
+                for (int i = 0; i < allCards.size(); i++) {
+                    moveSingleTurn(allCard.get(i), players, true);
                 }
-            }, 0, ConfigReader.getPlayerNumber() + 1,
-                    allCards.size() - 1);
-            
-        } else {
-            for (int i = 0; i < allCards.size(); i++) {
-                moveSingleTurn(allCard.get(i), players, true);
             }
         }
 
