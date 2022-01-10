@@ -62,7 +62,7 @@ public class Board {
      */
     public Board(String mapString, boolean isTest) {
         ArrayList<ArrayList<Integer>> tempLayout = new ArrayList<>();
-           
+
         String[] linesArray = mapString.split("\\r?\\n");
         String currentLine;
 
@@ -100,7 +100,7 @@ public class Board {
 
         int width = tempLayout.get(0).size();
         int height = tempLayout.size();
-        
+
         if (height > 16) {
             System.out.println("The map has too many rows, only 16 are allowed!");
             Gdx.app.exit();
@@ -136,154 +136,154 @@ public class Board {
                 // Switch with the first three digits that represent the class
                 switch (matrix[col][cell] / 100) {
 
-                    // BarrierCorner
-                    case 100:
-                        // Modulo 10 takes the last digit that represents the attribute
-                        int corner = matrix[col][cell] % 10;
-                        allowed = new int[]{1, 2, 3, 4};
-                        // Test that the read-out attribute value is in the set
-                        // of allowed attribute values
-                        if (Arrays.stream(allowed).anyMatch(x -> x == corner)) {
-                            this.fieldmatrix[col][cell] = new BarrierCorner(col, cell, corner,
-                                    isTest);
-                        } else {
-                            System.out.println("Codierung " + matrix[col][cell]
-                                    + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
-                        }
-                        break;
+                // BarrierCorner
+                case 100:
+                    // Modulo 10 takes the last digit that represents the attribute
+                    int corner = matrix[col][cell] % 10;
+                    allowed = new int[]{1, 2, 3, 4};
+                    // Test that the read-out attribute value is in the set
+                    // of allowed attribute values
+                    if (Arrays.stream(allowed).anyMatch(x -> x == corner)) {
+                        this.fieldmatrix[col][cell] = new BarrierCorner(col, cell, corner,
+                                isTest);
+                    } else {
+                        System.out.println("Codierung " + matrix[col][cell]
+                                + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
+                    }
+                    break;
 
                     // BarrierSide
-                    case 101:
-                        int side = matrix[col][cell] % 10;
-                        allowed = new int[]{1, 2, 3, 4};
-                        if (Arrays.stream(allowed).anyMatch(x -> x == side)) {
-                            this.fieldmatrix[col][cell] = new BarrierSide(col, cell, side, isTest);
-                        } else {
-                            System.out.println("Codierung " + matrix[col][cell]
-                                    + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
-                        }
-                        break;
+                case 101:
+                    int side = matrix[col][cell] % 10;
+                    allowed = new int[]{1, 2, 3, 4};
+                    if (Arrays.stream(allowed).anyMatch(x -> x == side)) {
+                        this.fieldmatrix[col][cell] = new BarrierSide(col, cell, side, isTest);
+                    } else {
+                        System.out.println("Codierung " + matrix[col][cell]
+                                + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
+                    }
+                    break;
 
                     // BlackHole
-                    case 102:
-                        fieldmatrix[col][cell] = new BlackHole(col, cell, isTest);
-                        break;
+                case 102:
+                    fieldmatrix[col][cell] = new BlackHole(col, cell, isTest);
+                    break;
 
                     // Pusher
-                    case 103:
-                        int typeB = matrix[col][cell] % 10;
-                        allowed = new int[]{1, 2, 3, 4};
-                        if (Arrays.stream(allowed).anyMatch(x -> x == typeB)) {
-                            this.fieldmatrix[col][cell] = new Pusher(col, cell, typeB, isTest);
-                        } else {
-                            System.out.println("Codierung " + matrix[col][cell]
-                                    + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
-                        }
-                        break;
+                case 103:
+                    int typeB = matrix[col][cell] % 10;
+                    allowed = new int[]{1, 2, 3, 4};
+                    if (Arrays.stream(allowed).anyMatch(x -> x == typeB)) {
+                        this.fieldmatrix[col][cell] = new Pusher(col, cell, typeB, isTest);
+                    } else {
+                        System.out.println("Codierung " + matrix[col][cell]
+                                + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
+                    }
+                    break;
 
                     // Checkpoint
-                    case 104:
-                        int numberC = matrix[col][cell] % 10;
-                        allowed = new int[]{1, 2, 3, 4, 5, 6, 7, 8};
-                        if (Arrays.stream(allowed).anyMatch(x -> x == numberC)) {
-                            this.fieldmatrix[col][cell] = new Checkpoint(col, cell, numberC,
-                                    isTest);
-                        } else {
-                            System.out.println("Codierung " + matrix[col][cell]
-                                    + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
-                        }
-                        break;
+                case 104:
+                    int numberC = matrix[col][cell] % 10;
+                    allowed = new int[]{1, 2, 3, 4, 5, 6, 7, 8};
+                    if (Arrays.stream(allowed).anyMatch(x -> x == numberC)) {
+                        this.fieldmatrix[col][cell] = new Checkpoint(col, cell, numberC,
+                                isTest);
+                    } else {
+                        System.out.println("Codierung " + matrix[col][cell]
+                                + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
+                    }
+                    break;
 
                     // ConveyorBelt
-                    case 105:
-                        // Divide by 10 and module 10 takes the next-to-last digit,
-                        // which represents another attribute
-                        int startC = (matrix[col][cell] / 10) % 10;
-                        int endC = matrix[col][cell] % 10;
-                        allowed = new int[]{21, 31, 41, 61, 71, 91, 2, 12, 32, 42, 52, 92,
-                                3, 13, 23, 43, 63, 83, 14, 24, 34, 54, 74, 84};
-                        if (Arrays.stream(allowed).anyMatch(x -> x == (10 * startC) + endC)) {
-                            this.fieldmatrix[col][cell] = new ConveyorBelt(col, cell, startC,
-                                    endC, isTest);
-                        } else {
-                            System.out.println("Codierung " + matrix[col][cell]
-                                    + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
-                        }
-                        break;
+                case 105:
+                    // Divide by 10 and module 10 takes the next-to-last digit,
+                    // which represents another attribute
+                    int startC = (matrix[col][cell] / 10) % 10;
+                    int endC = matrix[col][cell] % 10;
+                    allowed = new int[]{21, 31, 41, 61, 71, 91, 2, 12, 32, 42, 52, 92,
+                            3, 13, 23, 43, 63, 83, 14, 24, 34, 54, 74, 84};
+                    if (Arrays.stream(allowed).anyMatch(x -> x == (10 * startC) + endC)) {
+                        this.fieldmatrix[col][cell] = new ConveyorBelt(col, cell, startC,
+                                endC, isTest);
+                    } else {
+                        System.out.println("Codierung " + matrix[col][cell]
+                                + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
+                    }
+                    break;
 
                     // ExpressConveyorBelt
-                    case 106:
-                        int startEc = (matrix[col][cell] / 10) % 10;
-                        int endEc = matrix[col][cell] % 10;
-                        allowed = new int[]{21, 31, 41, 61, 71, 91, 2, 12, 32, 42, 52, 92,
-                                3, 13, 23, 43, 63, 83, 14, 24, 34, 54, 74, 84};
-                        if (Arrays.stream(allowed).anyMatch(x -> x == (10 * startEc) + endEc)) {
-                            this.fieldmatrix[col][cell] = new ExpressConveyorBelt(col, cell,
-                                    startEc, endEc, isTest);
-                        } else {
-                            System.out.println("Codierung " + matrix[col][cell]
-                                    + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
-                        }
-                        break;
+                case 106:
+                    int startEc = (matrix[col][cell] / 10) % 10;
+                    int endEc = matrix[col][cell] % 10;
+                    allowed = new int[]{21, 31, 41, 61, 71, 91, 2, 12, 32, 42, 52, 92,
+                            3, 13, 23, 43, 63, 83, 14, 24, 34, 54, 74, 84};
+                    if (Arrays.stream(allowed).anyMatch(x -> x == (10 * startEc) + endEc)) {
+                        this.fieldmatrix[col][cell] = new ExpressConveyorBelt(col, cell,
+                                startEc, endEc, isTest);
+                    } else {
+                        System.out.println("Codierung " + matrix[col][cell]
+                                + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
+                    }
+                    break;
 
                     // Gear
-                    case 107:
-                        int direction = matrix[col][cell] % 10;
-                        allowed = new int[]{1, 2};
-                        if (Arrays.stream(allowed).anyMatch(x -> x == direction)) {
-                            this.fieldmatrix[col][cell] = new Gear(col, cell, direction, isTest);
-                        } else {
-                            System.out.println("Codierung " + matrix[col][cell]
-                                    + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
-                        }
-                        break;
+                case 107:
+                    int direction = matrix[col][cell] % 10;
+                    allowed = new int[]{1, 2};
+                    if (Arrays.stream(allowed).anyMatch(x -> x == direction)) {
+                        this.fieldmatrix[col][cell] = new Gear(col, cell, direction, isTest);
+                    } else {
+                        System.out.println("Codierung " + matrix[col][cell]
+                                + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
+                    }
+                    break;
 
                     // Laser
-                    case 108:
-                        int typeL = matrix[col][cell] % 10;
-                        allowed = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-                        if (Arrays.stream(allowed).anyMatch(x -> x == typeL)) {
-                            this.fieldmatrix[col][cell] = new Laser(col, cell, typeL, isTest);
-                        } else {
-                            System.out.println("Codierung " + matrix[col][cell]
-                                    + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
-                        }
-                        break;
+                case 108:
+                    int typeL = matrix[col][cell] % 10;
+                    allowed = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+                    if (Arrays.stream(allowed).anyMatch(x -> x == typeL)) {
+                        this.fieldmatrix[col][cell] = new Laser(col, cell, typeL, isTest);
+                    } else {
+                        System.out.println("Codierung " + matrix[col][cell]
+                                + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
+                    }
+                    break;
 
                     // RepairSite
-                    case 109:
-                        int typeR = matrix[col][cell] % 10;
-                        allowed = new int[]{1, 2};
-                        if (Arrays.stream(allowed).anyMatch(x -> x == typeR)) {
-                            this.fieldmatrix[col][cell] = new RepairSite(col, cell, typeR, isTest);
-                        } else {
-                            System.out.println("Codierung " + matrix[col][cell]
-                                    + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
-                        }
-                        break;
+                case 109:
+                    int typeR = matrix[col][cell] % 10;
+                    allowed = new int[]{1, 2};
+                    if (Arrays.stream(allowed).anyMatch(x -> x == typeR)) {
+                        this.fieldmatrix[col][cell] = new RepairSite(col, cell, typeR, isTest);
+                    } else {
+                        System.out.println("Codierung " + matrix[col][cell]
+                                + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
+                    }
+                    break;
 
                     // StandardField
-                    case 110:
-                        this.fieldmatrix[col][cell] = new StandardField(col, cell, isTest);
-                        break;
+                case 110:
+                    this.fieldmatrix[col][cell] = new StandardField(col, cell, isTest);
+                    break;
 
                     // StartField
-                    case 111:
-                        int numberS = matrix[col][cell] % 10;
-                        allowed = new int[]{1, 2, 3, 4, 5, 6, 7, 8};
-                        if (Arrays.stream(allowed).anyMatch(x -> x == numberS)) {
-                            this.fieldmatrix[col][cell] = new StartField(col, cell, numberS,
-                                    isTest);
-                        } else {
-                            System.out.println("Codierung " + matrix[col][cell]
-                                    + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
-                        }
-                        break;
-
-                    default:
+                case 111:
+                    int numberS = matrix[col][cell] % 10;
+                    allowed = new int[]{1, 2, 3, 4, 5, 6, 7, 8};
+                    if (Arrays.stream(allowed).anyMatch(x -> x == numberS)) {
+                        this.fieldmatrix[col][cell] = new StartField(col, cell, numberS,
+                                isTest);
+                    } else {
                         System.out.println("Codierung " + matrix[col][cell]
-                                + " beschreibt kein gueltige Feldklasse");
-                        break;
+                                + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
+                    }
+                    break;
+
+                default:
+                    System.out.println("Codierung " + matrix[col][cell]
+                            + " beschreibt kein gueltige Feldklasse");
+                    break;
                 }
             }
         }
@@ -423,7 +423,7 @@ public class Board {
                 }
             }, 0, ConfigReader.getPlayerNumber() + 1,
                     allCards.size() - 1);
-            
+
         } else {
             for (int i = 0; i < allCards.size(); i++) {
                 moveSingleTurn(allCard.get(i), players, true);
@@ -445,8 +445,8 @@ public class Board {
 
             // calls turnAction after all robots have finished with their x. card
             for (int i = ConfigReader.getPlayerNumber();
-                        i <= (ConfigReader.getPlayerNumber() * 5) + 4;
-                                i = i + ConfigReader.getPlayerNumber() + 1) {
+                    i <= (ConfigReader.getPlayerNumber() * 5) + 4;
+                    i = i + ConfigReader.getPlayerNumber() + 1) {
 
                 Timer.schedule(new Task() {
 
@@ -695,116 +695,116 @@ public class Board {
                     laser = (Laser) this.fieldmatrix[i][j];
                     switch (laser.getType()) {
 
-                        // begin left
-                        case 0:
-                            currentLaser = laser;
-                            flag = 0;
-                            q = 1;
+                    // begin left
+                    case 0:
+                        currentLaser = laser;
+                        flag = 0;
+                        q = 1;
 
-                            while (flag == 0) {
+                        while (flag == 0) {
 
-                                for (int s = 0; (s < players.length) && (flag == 0); s++) {
-                                    int x = players[s].getXcoor();
-                                    int y = players[s].getYcoor();
-                                    if ((x == currentLaser.getXcoor())
-                                            && (y == currentLaser.getYcoor())) {
-                                        players[s].damageUp();
-                                        flag = 1;
-                                    }
-                                }
-
-                                if (fieldmatrix[i + q][j] instanceof Laser) {
-                                    currentLaser = (Laser) fieldmatrix[i + q][j];
-                                    q = q + 1;
-                                } else {
+                            for (int s = 0; (s < players.length) && (flag == 0); s++) {
+                                int x = players[s].getXcoor();
+                                int y = players[s].getYcoor();
+                                if ((x == currentLaser.getXcoor())
+                                        && (y == currentLaser.getYcoor())) {
+                                    players[s].damageUp();
                                     flag = 1;
                                 }
                             }
-                            break;
+
+                            if (fieldmatrix[i + q][j] instanceof Laser) {
+                                currentLaser = (Laser) fieldmatrix[i + q][j];
+                                q = q + 1;
+                            } else {
+                                flag = 1;
+                            }
+                        }
+                        break;
 
                         // begin top
-                        case 1:
-                            currentLaser = laser;
-                            flag = 0;
-                            q = 1;
+                    case 1:
+                        currentLaser = laser;
+                        flag = 0;
+                        q = 1;
 
-                            while (flag == 0) {
+                        while (flag == 0) {
 
-                                for (int s = 0; (s < players.length) && (flag == 0); s++) {
-                                    int x = players[s].getXcoor();
-                                    int y = players[s].getYcoor();
-                                    if ((x == currentLaser.getXcoor())
-                                            && (y == currentLaser.getYcoor())) {
-                                        players[s].damageUp();
-                                        flag = 1;
-                                    }
-                                }
-
-                                if (fieldmatrix[i][j + q] instanceof Laser) {
-                                    currentLaser = (Laser) fieldmatrix[i][j + q];
-                                    q = q + 1;
-                                } else {
+                            for (int s = 0; (s < players.length) && (flag == 0); s++) {
+                                int x = players[s].getXcoor();
+                                int y = players[s].getYcoor();
+                                if ((x == currentLaser.getXcoor())
+                                        && (y == currentLaser.getYcoor())) {
+                                    players[s].damageUp();
                                     flag = 1;
                                 }
                             }
-                            break;
+
+                            if (fieldmatrix[i][j + q] instanceof Laser) {
+                                currentLaser = (Laser) fieldmatrix[i][j + q];
+                                q = q + 1;
+                            } else {
+                                flag = 1;
+                            }
+                        }
+                        break;
 
                         // begin right
-                        case 2:
-                            currentLaser = laser;
-                            flag = 0;
-                            q = 1;
+                    case 2:
+                        currentLaser = laser;
+                        flag = 0;
+                        q = 1;
 
-                            while (flag == 0) {
+                        while (flag == 0) {
 
-                                for (int s = 0; (s < players.length) && (flag == 0); s++) {
-                                    int x = players[s].getXcoor();
-                                    int y = players[s].getYcoor();
-                                    if ((x == currentLaser.getXcoor())
-                                            && (y == currentLaser.getYcoor())) {
-                                        players[s].damageUp();
-                                        flag = 1;
-                                    }
-                                }
-
-                                if (fieldmatrix[i - q][j] instanceof Laser) {
-                                    currentLaser = (Laser) fieldmatrix[i - q][j];
-                                    q = q + 1;
-                                } else {
+                            for (int s = 0; (s < players.length) && (flag == 0); s++) {
+                                int x = players[s].getXcoor();
+                                int y = players[s].getYcoor();
+                                if ((x == currentLaser.getXcoor())
+                                        && (y == currentLaser.getYcoor())) {
+                                    players[s].damageUp();
                                     flag = 1;
                                 }
                             }
-                            break;
+
+                            if (fieldmatrix[i - q][j] instanceof Laser) {
+                                currentLaser = (Laser) fieldmatrix[i - q][j];
+                                q = q + 1;
+                            } else {
+                                flag = 1;
+                            }
+                        }
+                        break;
 
                         // begin bottom
-                        case 3:
-                            currentLaser = laser;
-                            flag = 0;
-                            q = 1;
+                    case 3:
+                        currentLaser = laser;
+                        flag = 0;
+                        q = 1;
 
-                            while (flag == 0) {
+                        while (flag == 0) {
 
-                                for (int s = 0; (s < players.length) && (flag == 0); s++) {
-                                    int x = players[s].getXcoor();
-                                    int y = players[s].getYcoor();
-                                    if ((x == currentLaser.getXcoor())
-                                            && (y == currentLaser.getYcoor())) {
-                                        players[s].damageUp();
-                                        flag = 1;
-                                    }
-                                }
-
-                                if (fieldmatrix[i][j - q] instanceof Laser) {
-                                    currentLaser = (Laser) fieldmatrix[i][j - q];
-                                    q = q + 1;
-                                } else {
+                            for (int s = 0; (s < players.length) && (flag == 0); s++) {
+                                int x = players[s].getXcoor();
+                                int y = players[s].getYcoor();
+                                if ((x == currentLaser.getXcoor())
+                                        && (y == currentLaser.getYcoor())) {
+                                    players[s].damageUp();
                                     flag = 1;
                                 }
                             }
-                            break;
 
-                        default:
-                            break;
+                            if (fieldmatrix[i][j - q] instanceof Laser) {
+                                currentLaser = (Laser) fieldmatrix[i][j - q];
+                                q = q + 1;
+                            } else {
+                                flag = 1;
+                            }
+                        }
+                        break;
+
+                    default:
+                        break;
                     }
                 }
             }
@@ -831,218 +831,218 @@ public class Board {
 
             switch (player.getDir()) {
 
-                case NORTH:
+            case NORTH:
 
-                    if (this.fieldmatrix[x][y] instanceof BarrierSide) {
-                        barrierside = (BarrierSide) this.fieldmatrix[x][y];
-                        if (barrierside.getSide() == 2) {
-                            break;
-                        }
+                if (this.fieldmatrix[x][y] instanceof BarrierSide) {
+                    barrierside = (BarrierSide) this.fieldmatrix[x][y];
+                    if (barrierside.getSide() == 2) {
+                        break;
                     }
+                }
 
-                    if (this.fieldmatrix[x][y] instanceof BarrierCorner) {
-                        barriercorner = (BarrierCorner) this.fieldmatrix[x][y];
-                        if (barriercorner.getCorner() == 1 || barriercorner.getCorner() == 2) {
-                            break;
-                        }
+                if (this.fieldmatrix[x][y] instanceof BarrierCorner) {
+                    barriercorner = (BarrierCorner) this.fieldmatrix[x][y];
+                    if (barriercorner.getCorner() == 1 || barriercorner.getCorner() == 2) {
+                        break;
                     }
+                }
 
-                    //i2 is the next tile the robot is facing
-                    for (int i2 = (y - 1); i2 >= 0 && (z == 0); i2--) {
+                //i2 is the next tile the robot is facing
+                for (int i2 = (y - 1); i2 >= 0 && (z == 0); i2--) {
 
-                        if (this.fieldmatrix[x][i2] instanceof BarrierSide) {
-                            barrierside = (BarrierSide) this.fieldmatrix[x][i2];
-                            if (barrierside.getSide() == 4) {
-                                break;
-                            }
-                            if (barrierside.getSide() == 2) {
-                                z++;
-                            }
-                        }
-
-                        if (this.fieldmatrix[x][i2] instanceof BarrierCorner) {
-                            barriercorner = (BarrierCorner) this.fieldmatrix[x][i2];
-                            if (barriercorner.getCorner() == 3 || barriercorner.getCorner() == 4) {
-                                break;
-                            }
-                            if (barriercorner.getCorner() == 1 || barriercorner.getCorner() == 2) {
-                                z++;
-                            }
-                        }
-
-                        /* checks if one of the players is on the current field [x][i2], if yes
-                        gets damage and z becomes 1, so the loop breaks */
-                        for (Robot robot : players) {
-
-                            int x2 = robot.getXcoor();
-                            int y2 = robot.getYcoor();
-
-                            if (x2 == x && y2 == i2) {
-                                robot.damageUp();
-                                z++;
-                            }
-                        }
-                    }
-                    break;
-
-
-                case SOUTH:
-
-                    if (this.fieldmatrix[x][y] instanceof BarrierSide) {
-                        barrierside = (BarrierSide) this.fieldmatrix[x][y];
+                    if (this.fieldmatrix[x][i2] instanceof BarrierSide) {
+                        barrierside = (BarrierSide) this.fieldmatrix[x][i2];
                         if (barrierside.getSide() == 4) {
                             break;
                         }
+                        if (barrierside.getSide() == 2) {
+                            z++;
+                        }
                     }
 
-                    if (this.fieldmatrix[x][y] instanceof BarrierCorner) {
-                        barriercorner = (BarrierCorner) this.fieldmatrix[x][y];
+                    if (this.fieldmatrix[x][i2] instanceof BarrierCorner) {
+                        barriercorner = (BarrierCorner) this.fieldmatrix[x][i2];
                         if (barriercorner.getCorner() == 3 || barriercorner.getCorner() == 4) {
                             break;
                         }
-                    }
-
-                    for (int i2 = (y + 1); i2 < this.fieldmatrix[0].length && (z == 0); i2++) {
-
-                        if (this.fieldmatrix[x][i2] instanceof BarrierSide) {
-                            barrierside = (BarrierSide) this.fieldmatrix[x][i2];
-                            if (barrierside.getSide() == 2) {
-                                break;
-                            }
-                            if (barrierside.getSide() == 4) {
-                                z++;
-                            }
-                        }
-
-                        if (this.fieldmatrix[x][i2] instanceof BarrierCorner) {
-                            barriercorner = (BarrierCorner) this.fieldmatrix[x][i2];
-                            if (barriercorner.getCorner() == 1 || barriercorner.getCorner() == 2) {
-                                break;
-                            }
-                            if (barriercorner.getCorner() == 3 || barriercorner.getCorner() == 4) {
-                                z++;
-                            }
-                        }
-
-                        for (Robot robot : players) {
-
-                            int x2 = robot.getXcoor();
-                            int y2 = robot.getYcoor();
-
-                            if (x2 == x && y2 == i2) {
-                                robot.damageUp();
-                                z++;
-                            }
+                        if (barriercorner.getCorner() == 1 || barriercorner.getCorner() == 2) {
+                            z++;
                         }
                     }
-                    break;
+
+                    /* checks if one of the players is on the current field [x][i2], if yes
+                        gets damage and z becomes 1, so the loop breaks */
+                    for (Robot robot : players) {
+
+                        int x2 = robot.getXcoor();
+                        int y2 = robot.getYcoor();
+
+                        if (x2 == x && y2 == i2) {
+                            robot.damageUp();
+                            z++;
+                        }
+                    }
+                }
+                break;
 
 
-                case EAST:
+            case SOUTH:
 
-                    if (this.fieldmatrix[x][y] instanceof BarrierSide) {
-                        barrierside = (BarrierSide) this.fieldmatrix[x][y];
-                        if (barrierside.getSide() == 3) {
+                if (this.fieldmatrix[x][y] instanceof BarrierSide) {
+                    barrierside = (BarrierSide) this.fieldmatrix[x][y];
+                    if (barrierside.getSide() == 4) {
+                        break;
+                    }
+                }
+
+                if (this.fieldmatrix[x][y] instanceof BarrierCorner) {
+                    barriercorner = (BarrierCorner) this.fieldmatrix[x][y];
+                    if (barriercorner.getCorner() == 3 || barriercorner.getCorner() == 4) {
+                        break;
+                    }
+                }
+
+                for (int i2 = (y + 1); i2 < this.fieldmatrix[0].length && (z == 0); i2++) {
+
+                    if (this.fieldmatrix[x][i2] instanceof BarrierSide) {
+                        barrierside = (BarrierSide) this.fieldmatrix[x][i2];
+                        if (barrierside.getSide() == 2) {
                             break;
                         }
+                        if (barrierside.getSide() == 4) {
+                            z++;
+                        }
                     }
 
-                    if (this.fieldmatrix[x][y] instanceof BarrierCorner) {
-                        barriercorner = (BarrierCorner) this.fieldmatrix[x][y];
-                        if (barriercorner.getCorner() == 2 || barriercorner.getCorner() == 3) {
+                    if (this.fieldmatrix[x][i2] instanceof BarrierCorner) {
+                        barriercorner = (BarrierCorner) this.fieldmatrix[x][i2];
+                        if (barriercorner.getCorner() == 1 || barriercorner.getCorner() == 2) {
                             break;
                         }
-                    }
-
-                    for (int i2 = (x + 1); i2 < this.fieldmatrix.length && (z == 0); i2++) {
-
-                        if (this.fieldmatrix[i2][y] instanceof BarrierSide) {
-                            barrierside = (BarrierSide) this.fieldmatrix[i2][y];
-                            if (barrierside.getSide() == 1) {
-                                break;
-                            }
-                            if (barrierside.getSide() == 3) {
-                                z++;
-                            }
-                        }
-
-                        if (this.fieldmatrix[i2][y] instanceof BarrierCorner) {
-                            barriercorner = (BarrierCorner) this.fieldmatrix[i2][y];
-                            if (barriercorner.getCorner() == 1 || barriercorner.getCorner() == 4) {
-                                break;
-                            }
-                            if (barriercorner.getCorner() == 2 || barriercorner.getCorner() == 3) {
-                                z++;
-                            }
-                        }
-
-                        for (Robot robot : players) {
-
-                            int x2 = robot.getXcoor();
-                            int y2 = robot.getYcoor();
-
-                            if (x2 == i2 && y2 == y) {
-                                robot.damageUp();
-                                z++;
-                            }
+                        if (barriercorner.getCorner() == 3 || barriercorner.getCorner() == 4) {
+                            z++;
                         }
                     }
-                    break;
+
+                    for (Robot robot : players) {
+
+                        int x2 = robot.getXcoor();
+                        int y2 = robot.getYcoor();
+
+                        if (x2 == x && y2 == i2) {
+                            robot.damageUp();
+                            z++;
+                        }
+                    }
+                }
+                break;
 
 
-                case WEST:
+            case EAST:
 
-                    if (this.fieldmatrix[x][y] instanceof BarrierSide) {
-                        barrierside = (BarrierSide) this.fieldmatrix[x][y];
+                if (this.fieldmatrix[x][y] instanceof BarrierSide) {
+                    barrierside = (BarrierSide) this.fieldmatrix[x][y];
+                    if (barrierside.getSide() == 3) {
+                        break;
+                    }
+                }
+
+                if (this.fieldmatrix[x][y] instanceof BarrierCorner) {
+                    barriercorner = (BarrierCorner) this.fieldmatrix[x][y];
+                    if (barriercorner.getCorner() == 2 || barriercorner.getCorner() == 3) {
+                        break;
+                    }
+                }
+
+                for (int i2 = (x + 1); i2 < this.fieldmatrix.length && (z == 0); i2++) {
+
+                    if (this.fieldmatrix[i2][y] instanceof BarrierSide) {
+                        barrierside = (BarrierSide) this.fieldmatrix[i2][y];
                         if (barrierside.getSide() == 1) {
                             break;
                         }
+                        if (barrierside.getSide() == 3) {
+                            z++;
+                        }
                     }
 
-                    if (this.fieldmatrix[x][y] instanceof BarrierCorner) {
-                        barriercorner = (BarrierCorner) this.fieldmatrix[x][y];
+                    if (this.fieldmatrix[i2][y] instanceof BarrierCorner) {
+                        barriercorner = (BarrierCorner) this.fieldmatrix[i2][y];
                         if (barriercorner.getCorner() == 1 || barriercorner.getCorner() == 4) {
                             break;
                         }
-                    }
-
-                    for (int i2 = (x - 1); i2 >= 0 && (z == 0); i2--) {
-
-                        if (this.fieldmatrix[i2][y] instanceof BarrierSide) {
-                            barrierside = (BarrierSide) this.fieldmatrix[i2][y];
-                            if (barrierside.getSide() == 3) {
-                                break;
-                            }
-                            if (barrierside.getSide() == 1) {
-                                z++;
-                            }
-                        }
-
-                        if (this.fieldmatrix[i2][y] instanceof BarrierCorner) {
-                            barriercorner = (BarrierCorner) this.fieldmatrix[i2][y];
-                            if (barriercorner.getCorner() == 2 || barriercorner.getCorner() == 3) {
-                                break;
-                            }
-                            if (barriercorner.getCorner() == 1 || barriercorner.getCorner() == 4) {
-                                z++;
-                            }
-                        }
-
-                        for (Robot robot : players) {
-
-                            int x2 = robot.getXcoor();
-                            int y2 = robot.getYcoor();
-
-                            if (x2 == i2 && y2 == y) {
-                                robot.damageUp();
-                                z++;
-                            }
+                        if (barriercorner.getCorner() == 2 || barriercorner.getCorner() == 3) {
+                            z++;
                         }
                     }
-                    break;
 
-                default:
-                    break;
+                    for (Robot robot : players) {
+
+                        int x2 = robot.getXcoor();
+                        int y2 = robot.getYcoor();
+
+                        if (x2 == i2 && y2 == y) {
+                            robot.damageUp();
+                            z++;
+                        }
+                    }
+                }
+                break;
+
+
+            case WEST:
+
+                if (this.fieldmatrix[x][y] instanceof BarrierSide) {
+                    barrierside = (BarrierSide) this.fieldmatrix[x][y];
+                    if (barrierside.getSide() == 1) {
+                        break;
+                    }
+                }
+
+                if (this.fieldmatrix[x][y] instanceof BarrierCorner) {
+                    barriercorner = (BarrierCorner) this.fieldmatrix[x][y];
+                    if (barriercorner.getCorner() == 1 || barriercorner.getCorner() == 4) {
+                        break;
+                    }
+                }
+
+                for (int i2 = (x - 1); i2 >= 0 && (z == 0); i2--) {
+
+                    if (this.fieldmatrix[i2][y] instanceof BarrierSide) {
+                        barrierside = (BarrierSide) this.fieldmatrix[i2][y];
+                        if (barrierside.getSide() == 3) {
+                            break;
+                        }
+                        if (barrierside.getSide() == 1) {
+                            z++;
+                        }
+                    }
+
+                    if (this.fieldmatrix[i2][y] instanceof BarrierCorner) {
+                        barriercorner = (BarrierCorner) this.fieldmatrix[i2][y];
+                        if (barriercorner.getCorner() == 2 || barriercorner.getCorner() == 3) {
+                            break;
+                        }
+                        if (barriercorner.getCorner() == 1 || barriercorner.getCorner() == 4) {
+                            z++;
+                        }
+                    }
+
+                    for (Robot robot : players) {
+
+                        int x2 = robot.getXcoor();
+                        int y2 = robot.getYcoor();
+
+                        if (x2 == i2 && y2 == y) {
+                            robot.damageUp();
+                            z++;
+                        }
+                    }
+                }
+                break;
+
+            default:
+                break;
             }
         } 
     }
