@@ -101,7 +101,7 @@ public class Checkpoint extends Field {
      */
     public void checkPointChoice(Robot robot) {
         if (robot.getCheckPointNumber() == this.number) {
-            if (this.number == Board.checkpoint) {
+            if (this.number == Board.getCheckpoint()) {
                 GameScreen.setWinCondition(true);
             }
             robot.setbackupCopyX(robot.getXcoor());
