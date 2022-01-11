@@ -85,7 +85,7 @@ public class Checkpoint extends Field {
     }
     
     @Override
-    public Robot turnAction(Robot robot) {
+    public Robot cardAction(Robot robot) {
         robot.setbackupCopyX(robot.getXcoor());
         robot.setbackupCopyY(robot.getYcoor());         
         checkPointChoice(robot);
@@ -93,7 +93,7 @@ public class Checkpoint extends Field {
     }
     
     @Override
-    public Robot cardAction(Robot robot) {
+    public Robot turnAction(Robot robot) {
         return robot;       
     }
     

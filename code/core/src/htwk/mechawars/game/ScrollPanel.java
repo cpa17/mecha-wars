@@ -109,7 +109,7 @@ public class ScrollPanel {
 
     static void clearScrollPanel(Skin skin, Robot[] players) {
         table.clear();
-        if (!players[0].getShutDown()) {
+        if (!players[0].getNextRound()) {
             scrollPanel(skin);
         }
     }

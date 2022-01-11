@@ -36,13 +36,13 @@ public class BlackHole extends Field {
     }
     
     @Override
-    public Robot turnAction(Robot robot) {
+    public Robot cardAction(Robot robot) {
         robot.setDamage(10);
         return robot;       
     }
     
     @Override
-    public Robot cardAction(Robot robot) {
+    public Robot turnAction(Robot robot) {
         return robot;       
     }
     
