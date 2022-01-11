@@ -2,6 +2,7 @@ package htwk.mechawars.game;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -37,20 +38,18 @@ public class ScrollPanel {
     public static ScrollPane scrollPanel(Skin skin) {
         // shuffle Deck
         deck.shuffle();
-        Robot.getPlayers()[0].damageUp();
-        Robot.getPlayers()[0].damageUp();
-        Robot.getPlayers()[0].damageUp();
-        Robot.getPlayers()[0].damageUp();
-        if (Robot.getPlayers()[0].getDamagePoints() > 4) {
+        
+        if (Robot.getPlayers()[0].getDamagePoints() > 4 
+                && !Robot.getPlayers()[0].getDestroyed()) {
             
-            for (int i = 0; i < (Robot.getPlayers()[0].getDamagePoints() - 4); i += 1) {
+            for (int i = 4; i > (9 - Robot.getPlayers()[0].getDamagePoints()); i -= 1) {
                 
-                Card currentCard = lockedCardOrder[5 - i];
+                Card currentCard = lockedCardOrder[i];
             
                 buttons[i] = new TextButton(currentCard.getCardAttributePriority()
-                    + " - " + currentCard + " " + (5 - i), skin);
+                    + " - " + currentCard + " " + (i + 1), skin);
                 buttons[i].setColor(Color.RED);
-                
+                buttons[i].setTouchable(Touchable.disabled);
                 table.row();
                 table.add(buttons[i]);
             }
@@ -79,7 +78,7 @@ public class ScrollPanel {
                 
             }
             
-        } else {
+        } else if (!Robot.getPlayers()[0].getDestroyed()) {
             
             for (int i = 0; i < (9 - Robot.getPlayers()[0].getDamagePoints()); i += 1) {
 
@@ -104,6 +103,7 @@ public class ScrollPanel {
                 });
                 
             }
+            
         }
         return scrollPanel;
     }
