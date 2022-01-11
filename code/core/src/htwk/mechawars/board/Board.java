@@ -3,7 +3,7 @@ package htwk.mechawars.board;
 import htwk.mechawars.ConfigReader;
 import htwk.mechawars.ai.AiCardGeneration;
 import htwk.mechawars.ai.AiInterface;
-import htwk.mechawars.ai.aiManager;
+import htwk.mechawars.ai.AiManager;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.Deck;
 import htwk.mechawars.cards.Type;
@@ -401,9 +401,11 @@ public class Board {
                 maxCardCount = players[0].getSelectedCards().size();
             } else {
                 if (ConfigReader.getAimodes()[i] != 0) {
-                    aiManager m = new aiManager();
+                    AiManager m = new AiManager();
                     LinkedList<Card> generatedCards =
-                            m.getAI(ConfigReader.getAimodes()[i]).generateCards(ScrollPanel.getDeck().getDeck() , i, getNumberOfChoosableCards(players[i].getDamagePoints()));
+                            m.getAi(ConfigReader.getAimodes()[i])
+                            .generateCards(ScrollPanel.getDeck().getDeck(), 
+                                    i, getNumberOfChoosableCards(players[i].getDamagePoints()));
                     // Random Cards generation for the AI-Players
                     allCards.add(generatedCards);
                     maxCardCount = Integer.max(generatedCards.size(), maxCardCount);
@@ -1076,12 +1078,12 @@ public class Board {
             }
         }
     }
-    private static int getNumberOfChoosableCards(int damage)
-    {
-        if(damage < 5)
-        {
+    
+    private static int getNumberOfChoosableCards(int damage) {
+        if (damage < 5) {
             return 5;
         }
+        
         return 9 - damage;  
     }
 

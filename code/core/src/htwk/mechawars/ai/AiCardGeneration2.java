@@ -19,7 +19,8 @@ public class AiCardGeneration2 implements AiInterface {
      * @param playercount index of player that the Cards are generated for.
      * @return list of generated Cards. 
      */
-    public LinkedList<Card> generateCards(ArrayList<Card> liste, int playercount, int availableCards) {
+    public LinkedList<Card> generateCards(ArrayList<Card> liste,
+            int playercount, int availableCards) {
         LinkedList<Card> cards = new LinkedList<Card>();
         System.out.println("");
         System.out.println("Player: " + (playercount + 1));

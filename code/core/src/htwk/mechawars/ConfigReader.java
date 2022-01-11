@@ -63,8 +63,7 @@ public class ConfigReader {
             aiModes[Integer.parseInt(s[0])] = ai;   
         
         }
-        if (line.contains("AiImport: "))
-        {
+        if (line.contains("AiImport: ")) {
             line = line.replace("AiImport: ", "");
             System.out.println(line + "  eingelesen!");
             aiList.add(line);

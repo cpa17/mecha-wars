@@ -10,6 +10,10 @@ import htwk.mechawars.cards.Deck;
 import htwk.mechawars.game.GameScreen;
 import htwk.mechawars.game.ScrollPanel;
 
+/**
+ * Interface for the AI Classes.
+ *
+ */
 public interface AiInterface {
     
     Robot[] players = Robot.getPlayers();
@@ -22,5 +26,6 @@ public interface AiInterface {
      * @param playercount index of player that the Cards are generated for.
      * @return list of generated Cards. 
      */
-    public LinkedList<Card> generateCards(ArrayList<Card> liste, int playercount, int availableCards);
+    public LinkedList<Card> generateCards(ArrayList<Card> liste,
+            int playercount, int availableCards);
 }
