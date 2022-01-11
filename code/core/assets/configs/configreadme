@@ -6,4 +6,9 @@ determine number of players:
 'playerNumber: [1...8]'
 
 determine behavior and startPosition of AI-Players on the Board
-'playerConfig: [index of Player - x-coordinate - y-coordinate - behavior(1 for Random generated Cards, 0 for no Cards)]
+'playerConfig: [index of Player - x-coordinate - y-coordinate - behavior(0: for nothing, 1: for random generation, 2-n: custom AI in order in which they are imported below)]
+
+Importing AI-Class-files
+syntax:
+'AiImport: Class-file-Name'
+Make sure the Class file is located in the htwk.mechawars.ai-package and Implements the AiInterface!
