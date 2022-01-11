@@ -1,6 +1,9 @@
 package htwk.mechawars.board;
 
 import htwk.mechawars.ConfigReader;
+import htwk.mechawars.ai.AiCardGeneration;
+import htwk.mechawars.ai.AiInterface;
+import htwk.mechawars.ai.aiManager;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.Deck;
 import htwk.mechawars.cards.Type;
@@ -30,9 +33,6 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
-
-import ai.AiCardGeneration;
-import ai.AiInterface;
 
 //import ai.AiCardGeneration;
 
@@ -399,10 +399,10 @@ public class Board {
                                                             each List for one Players cards*/
                 maxCardCount = players[0].getSelectedCards().size();
             } else {
-                if (ConfigReader.getAimodes()[i]) {
-
+                if (ConfigReader.getAimodes()[i] != 0) {
+                    aiManager m = new aiManager();
                     LinkedList<Card> generatedCards =
-                            new AiCardGeneration().generateCards(ScrollPanel.getDeck().getDeck() , i, getNumberOfChoosableCards(players[i].getDamagePoints()));
+                            m.getAI(ConfigReader.getAimodes()[i]).generateCards(ScrollPanel.getDeck().getDeck() , i, getNumberOfChoosableCards(players[i].getDamagePoints()));
                     // Random Cards generation for the AI-Players
                     allCards.add(generatedCards);
                     maxCardCount = Integer.max(generatedCards.size(), maxCardCount);

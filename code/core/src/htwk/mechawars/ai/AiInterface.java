@@ -1,4 +1,4 @@
-package ai;
+package htwk.mechawars.ai;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

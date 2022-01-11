@@ -2,6 +2,7 @@ package htwk.mechawars;
 
 import java.awt.Point;
 import java.io.IOException;
+import java.util.LinkedList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -12,7 +13,7 @@ import com.badlogic.gdx.files.FileHandle;
  */
 public class ConfigReader {
     private static int playerNumber = 1;
-    private static boolean[] aiModes = {false, false, false, false, false, false, false, false};
+    private static int[] aiModes = {0, 0, 0, 0, 0, 0, 0, 0};
     private static Point[] playerStartingPositions = {
             new Point(1, 1), 
             new Point(2, 2), 
@@ -23,6 +24,7 @@ public class ConfigReader {
             new Point(7, 7), 
             new Point(8, 8)
     };
+    private static LinkedList<String> aiList = new LinkedList<String>();
     
     /**
      * Function that reads the Game Configurations from Startupconfig.txt.
@@ -43,7 +45,7 @@ public class ConfigReader {
      */
     private static void readConfig(String line) {
         // TODO Auto-generated method stub
-
+        aiList = new LinkedList<String>();
         if (line.contains("playerNumber")) {
             playerNumber = Integer.parseInt(line.replaceAll("\\D+", ""));
         }
@@ -56,13 +58,18 @@ public class ConfigReader {
                 s[i] = s[i].replaceAll(" ", "");  
             }
             playerStartingPositions[Integer.parseInt(s[0])] =
-                    new Point(Integer.parseInt(s[1]), Integer.parseInt(s[2]));
-            boolean ai = false;
-            if (Integer.parseInt(s[3]) == 1) {
-                ai = true;
-            }
+            new Point(Integer.parseInt(s[1]), Integer.parseInt(s[2]));
+            int ai = Integer.parseInt(s[3]);
             aiModes[Integer.parseInt(s[0])] = ai;   
-        }      
+        
+        }
+        if (line.contains("AiImport: "))
+        {
+            line = line.replace("AiImport: ", "");
+            System.out.println(line + "  eingelesen!");
+            aiList.add(line);
+        }
+        
     }
     
     
@@ -71,8 +78,8 @@ public class ConfigReader {
      * 
      * @return Array of the ai mode of each individual Player.
      */
-    public static boolean[] getAimodes() {
-        boolean[] aiModesCopy = aiModes;
+    public static int[] getAimodes() {
+        int[] aiModesCopy = aiModes;
         return aiModesCopy;
     }
 
@@ -109,8 +116,18 @@ public class ConfigReader {
 
         for (int current = 0; current < playerNumber; current++) {
             file.writeString("\nplayerposition: "
-                    + current + "-" + 3 + "-" + (3 + current) + "-" + "1", true);
+                    + current + "-" + 3 + "-" + (3 + current) + "-" + "2", true);
         }
+        file.writeString("\nAiImport: AiCardGeneration2", true);
 
     }
+
+    public static LinkedList<String> getAiList() {
+        return aiList;
+    }
+
+    public static void setAiList(LinkedList<String> aiList) {
+        ConfigReader.aiList = aiList;
+    }
 }
+
