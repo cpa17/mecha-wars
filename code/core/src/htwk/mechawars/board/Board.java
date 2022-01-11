@@ -737,7 +737,7 @@ public class Board {
                                     flag = 1;
                                 }
                                 
-                                if ((i + q + 1) < 12) {
+                                if ((i + q + 1) < fieldmatrix[0].length) {
                                     if (fieldmatrix[i + q + 1][j].getBarrierTop() == true) {
                                         flag = 1;
                                     }
@@ -828,7 +828,7 @@ public class Board {
                                     flag = 1;
                                 }
                                 
-                                if ((i + q + 1) < 12) {
+                                if ((i + q + 1) < fieldmatrix.length) {
                                     if (fieldmatrix[i + q + 1][j].getBarrierLeft() == true) {
                                         flag = 1;
                                     }

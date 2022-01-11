@@ -116,7 +116,7 @@ public class BarrierTest {
         // xcoor: 5, ycoor: 5, Dir: WEST
         robot[0].moveInDirectionByCard(board.fieldmatrix, (byte) 4, robot);
         // xcoor: 2, ycoor: 5, Dir: WEST
-        assertEquals(2, robot[0].getXcoor());
+        assertEquals(1, robot[0].getXcoor());
         assertEquals(5, robot[0].getYcoor());
 
         robot[0].setXcoor(6);
