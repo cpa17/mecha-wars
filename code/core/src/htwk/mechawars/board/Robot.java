@@ -231,7 +231,7 @@ public class Robot {
                             && (x >= 0) && (x < fieldmatrix.length)) {
                         if (fieldmatrix[x][y].getBarrierRight() == true) {
                             flag = true;
-                    }
+                        }
                     }
                     // Checks whether a side or corner barrier on the next field in the moving
                     // direction, stops the current step

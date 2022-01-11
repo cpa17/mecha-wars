@@ -723,8 +723,8 @@ public class Board {
                                 for (int s = 0; (s < players.length) && (flag == 0); s++) {
                                     int x = players[s].getXcoor();
                                     int y = players[s].getYcoor();
-                                    if ((x == fieldmatrix[i][j].getXcoor())
-                                            && (y == fieldmatrix[i][j].getYcoor())) {
+                                    if ((x == fieldmatrix[i][j + q - 1].getXcoor())
+                                            && (y == fieldmatrix[i][j + q - 1].getYcoor())) {
                                         
                                         for (int z = 3; z < v; z++) {
                                             players[s].damageUp();
@@ -732,8 +732,18 @@ public class Board {
                                         flag = 1;
                                     }
                                 }
+                                
+                                if (fieldmatrix[i][j + q].getBarrierBottom() == true) {
+                                    flag = 1;
+                                }
+                                
+                                if ((i + q + 1) < 12) {
+                                    if (fieldmatrix[i + q + 1][j].getBarrierTop() == true) {
+                                        flag = 1;
+                                    }
+                                }
 
-                                if (fieldmatrix[i][j + q].getLaserVertical() != 9) {
+                                if (fieldmatrix[i][j + q].getLaserVertical() == (v - 3)) {
                                     q = q + 1;
                                 } else {
                                     flag = 1;
@@ -741,7 +751,7 @@ public class Board {
                             }
                             break;
                             
-                         // BarrierBottom
+                        // BarrierBottom
                         case 1:
                             flag = 0;
                             q = 1;
@@ -751,8 +761,8 @@ public class Board {
                                 for (int s = 0; (s < players.length) && (flag == 0); s++) {
                                     int x = players[s].getXcoor();
                                     int y = players[s].getYcoor();
-                                    if ((x == fieldmatrix[i][j].getXcoor())
-                                            && (y == fieldmatrix[i][j].getYcoor())) {
+                                    if ((x == fieldmatrix[i][j - q + 1].getXcoor())
+                                            && (y == fieldmatrix[i][j - q + 1].getYcoor())) {
                                         
                                         for (int z = 3; z < v; z++) {
                                             players[s].damageUp();
@@ -760,9 +770,19 @@ public class Board {
                                         flag = 1;
                                     }
                                 }
+                                
+                                if (fieldmatrix[i][j - q].getBarrierTop() == true) {
+                                    flag = 1;
+                                }
+                                
+                                if ((i - q - 1) == 0) {
+                                    if (fieldmatrix[i - q - 1][j].getBarrierBottom() == true) {
+                                        flag = 1;
+                                    }
+                                }
 
-                                if (fieldmatrix[i][j + q].getLaserVertical() != 9) {
-                                    q = q - 1;
+                                if (fieldmatrix[i][j - q].getLaserVertical() == (v - 3)) {
+                                    q = q + 1;
                                 } else {
                                     flag = 1;
                                 }
@@ -794,17 +814,28 @@ public class Board {
                                 for (int s = 0; (s < players.length) && (flag == 0); s++) {
                                     int x = players[s].getXcoor();
                                     int y = players[s].getYcoor();
-                                    if ((x == fieldmatrix[i][j].getXcoor())
-                                            && (y == fieldmatrix[i][j].getYcoor())) {
+                                    if ((x == fieldmatrix[i + q - 1][j].getXcoor())
+                                            && (y == fieldmatrix[i + q - 1][j].getYcoor())) {
                                         
-                                        for (int z = 3; z < v; z++) {
+                                        for (int z = 3; z < h; z++) {
                                             players[s].damageUp();
                                         }                                        
                                         flag = 1;
                                     }
                                 }
+                                
+                                if (fieldmatrix[i + q][j].getBarrierRight() == true) {
+                                    flag = 1;
+                                }
+                                
+                                if ((i + q + 1) < 12) {
+                                    if (fieldmatrix[i + q + 1][j].getBarrierLeft() == true) {
+                                        flag = 1;
+                                    }
+                                }
+                                
 
-                                if (fieldmatrix[i + q][j].getLaserHorizontal() != 9) {
+                                if (fieldmatrix[i + q][j].getLaserHorizontal() == (h - 3)) { 
                                     q = q + 1;
                                 } else {
                                     flag = 1;
@@ -812,7 +843,7 @@ public class Board {
                             }
                             break;
                             
-                         // BarrierBottom
+                        // BarrierRight
                         case 1:
                             flag = 0;
                             q = 1;
@@ -822,18 +853,28 @@ public class Board {
                                 for (int s = 0; (s < players.length) && (flag == 0); s++) {
                                     int x = players[s].getXcoor();
                                     int y = players[s].getYcoor();
-                                    if ((x == fieldmatrix[i][j].getXcoor())
-                                            && (y == fieldmatrix[i][j].getYcoor())) {
+                                    if ((x == fieldmatrix[i - q + 1][j].getXcoor())
+                                            && (y == fieldmatrix[i - q + 1][j].getYcoor())) {
                                         
-                                        for (int z = 3; z < v; z++) {
+                                        for (int z = 3; z < h; z++) {
                                             players[s].damageUp();
                                         }                                        
                                         flag = 1;
                                     }
                                 }
-
-                                if (fieldmatrix[i - q][j].getLaserHorizontal() != 9) {
-                                    q = q - 1;
+                                
+                                if (fieldmatrix[i - q][j].getBarrierLeft() == true) {
+                                    flag = 1;
+                                }
+                                
+                                if ((i - q - 1) == 0) {
+                                    if (fieldmatrix[i - q - 1][j].getBarrierRight() == true) {
+                                        flag = 1;
+                                    }
+                                }
+                                
+                                if (fieldmatrix[i - q][j].getLaserHorizontal() == (h - 3)) {
+                                    q = q + 1;
                                 } else {
                                     flag = 1;
                                 }
@@ -874,12 +915,12 @@ public class Board {
                     //i is the next tile the robot is facing
                     for (int i = (y - 1); i >= 0 && (z == 0); i--) {
 
-                            if (this.fieldmatrix[x][y].getBarrierBottom() == true) {
-                                break;
-                            }
-                            if (this.fieldmatrix[x][y].getBarrierTop() == true) {
-                                z++;
-                            }
+                        if (this.fieldmatrix[x][y].getBarrierBottom() == true) {
+                            break;
+                        }
+                        if (this.fieldmatrix[x][y].getBarrierTop() == true) {
+                            z++;
+                        }
                         
 
                         /* checks if one of the players is on the current field [x][i2], if yes
@@ -906,12 +947,12 @@ public class Board {
                     //i is the next tile the robot is facing
                     for (int i = (y + 1); i < this.fieldmatrix[0].length && (z == 0); i++) {
 
-                            if (this.fieldmatrix[x][y].getBarrierBottom() == true) {
-                                z++;
-                            }
-                            if (this.fieldmatrix[x][y].getBarrierTop() == true) {
-                                break;
-                            }
+                        if (this.fieldmatrix[x][y].getBarrierBottom() == true) {
+                            z++;
+                        }
+                        if (this.fieldmatrix[x][y].getBarrierTop() == true) {
+                            break;
+                        }
                         
 
                         /* checks if one of the players is on the current field [x][i2], if yes
@@ -938,12 +979,12 @@ public class Board {
                     //i is the next tile the robot is facing
                     for (int i = (x + 1); i < this.fieldmatrix.length && (z == 0); i++) {
 
-                            if (this.fieldmatrix[x][y].getBarrierRight() == true) {
-                                z++;
-                            }
-                            if (this.fieldmatrix[x][y].getBarrierLeft() == true) {
-                                break;
-                            }
+                        if (this.fieldmatrix[x][y].getBarrierRight() == true) {
+                            z++;
+                        }
+                        if (this.fieldmatrix[x][y].getBarrierLeft() == true) {
+                            break;
+                        }
                         
 
                         /* checks if one of the players is on the current field [x][i2], if yes
@@ -971,12 +1012,12 @@ public class Board {
                     //i is the next tile the robot is facing
                     for (int i = (x - 1); i < this.fieldmatrix.length && (z == 0); i++) {
 
-                            if (this.fieldmatrix[x][y].getBarrierRight() == true) {
-                                break;
-                            }
-                            if (this.fieldmatrix[x][y].getBarrierLeft() == true) {
-                                z++;
-                            }
+                        if (this.fieldmatrix[x][y].getBarrierRight() == true) {
+                            break;
+                        }
+                        if (this.fieldmatrix[x][y].getBarrierLeft() == true) {
+                            z++;
+                        }
                         
 
                         /* checks if one of the players is on the current field [x][i2], if yes
