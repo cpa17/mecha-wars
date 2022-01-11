@@ -31,6 +31,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import htwk.mechawars.game.GameScreen;
+
 /**
  * Class that presents the game board.
  */
