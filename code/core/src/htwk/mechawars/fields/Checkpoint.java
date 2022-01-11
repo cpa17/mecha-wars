@@ -2,6 +2,7 @@ package htwk.mechawars.fields;
 
 import com.badlogic.gdx.graphics.Texture;
 
+import htwk.mechawars.board.Board;
 import htwk.mechawars.board.Robot;
 import htwk.mechawars.game.GameScreen;
 
@@ -86,8 +87,6 @@ public class Checkpoint extends Field {
     
     @Override
     public Robot cardAction(Robot robot) {
-        robot.setbackupCopyX(robot.getXcoor());
-        robot.setbackupCopyY(robot.getYcoor());         
         checkPointChoice(robot);
         return robot;       
     }
@@ -102,9 +101,11 @@ public class Checkpoint extends Field {
      */
     public void checkPointChoice(Robot robot) {
         if (robot.getCheckPointNumber() == this.number) {
-            if (this.number == 8) {
+            if (this.number == Board.checkpoint) {
                 GameScreen.setWinCondition(true);
             }
+            robot.setbackupCopyX(robot.getXcoor());
+            robot.setbackupCopyY(robot.getYcoor());
             robot.incCheckPointNumber();
         }
     }

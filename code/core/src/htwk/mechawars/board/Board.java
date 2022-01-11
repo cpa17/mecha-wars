@@ -31,13 +31,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import htwk.mechawars.game.GameScreen;
-
 /**
  * Class that presents the game board.
  */
 public class Board {
     public Field[][] fieldmatrix;
     private Field robotPosition;
+    public static int checkpoint;
 
     /**
      * Method that reads the game plan as a int matrix from a file and constructs the game board
@@ -188,6 +188,8 @@ public class Board {
                         if (Arrays.stream(allowed).anyMatch(x -> x == numberC)) {
                             this.fieldmatrix[col][cell] = new Checkpoint(col, cell, numberC,
                                     isTest);
+                            checkpoint++;
+                            System.out.println(checkpoint);
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
