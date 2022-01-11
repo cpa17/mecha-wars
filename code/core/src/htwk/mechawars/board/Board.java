@@ -705,7 +705,7 @@ public class Board {
                 
                 if (v == 4 || v == 5 || v == 6) {
                     
-                    if (this.fieldmatrix[i][j].getBarrierTop() == true) {
+                    if (this.fieldmatrix[i][j].getBarrierTop()) {
                         b = 0;
                     } else {
                         b = 1;
@@ -733,12 +733,12 @@ public class Board {
                                     }
                                 }
                                 
-                                if (fieldmatrix[i][j + q - 1].getBarrierBottom() == true) {
+                                if (fieldmatrix[i][j + q - 1].getBarrierBottom()) {
                                     flag = 1;
                                 }
                                 
                                 if ((i + q + 1) < fieldmatrix[0].length) {
-                                    if (fieldmatrix[i + q + 1][j].getBarrierTop() == true) {
+                                    if (fieldmatrix[i + q + 1][j].getBarrierTop()) {
                                         flag = 1;
                                     }
                                 }
@@ -771,12 +771,12 @@ public class Board {
                                     }
                                 }
                                 
-                                if (fieldmatrix[i][j - q + 1].getBarrierTop() == true) {
+                                if (fieldmatrix[i][j - q + 1].getBarrierTop()) {
                                     flag = 1;
                                 }
                                 
                                 if ((i - q - 1) == 0) {
-                                    if (fieldmatrix[i - q - 1][j].getBarrierBottom() == true) {
+                                    if (fieldmatrix[i - q - 1][j].getBarrierBottom()) {
                                         flag = 1;
                                     }
                                 }
@@ -796,7 +796,7 @@ public class Board {
                 
                 if (h == 4 || h == 5 || h == 6) {
                     
-                    if (this.fieldmatrix[i][j].getBarrierLeft() == true) {
+                    if (this.fieldmatrix[i][j].getBarrierLeft()) {
                         b = 0;
                     } else {
                         b = 1;
@@ -824,16 +824,15 @@ public class Board {
                                     }
                                 }
                                 
-                                if (fieldmatrix[i + q - 1][j].getBarrierRight() == true) {
+                                if (fieldmatrix[i + q - 1][j].getBarrierRight()) {
                                     flag = 1;
                                 }
                                 
                                 if ((i + q + 1) < fieldmatrix.length) {
-                                    if (fieldmatrix[i + q + 1][j].getBarrierLeft() == true) {
+                                    if (fieldmatrix[i + q + 1][j].getBarrierLeft()) {
                                         flag = 1;
                                     }
                                 }
-                                
 
                                 if (fieldmatrix[i + q][j].getLaserHorizontal() == (h - 3)) { 
                                     q = q + 1;
@@ -863,12 +862,12 @@ public class Board {
                                     }
                                 }
                                 
-                                if (fieldmatrix[i - q + 1][j].getBarrierLeft() == true) {
+                                if (fieldmatrix[i - q + 1][j].getBarrierLeft()) {
                                     flag = 1;
                                 }
                                 
                                 if ((i - q - 1) == 0) {
-                                    if (fieldmatrix[i - q - 1][j].getBarrierRight() == true) {
+                                    if (fieldmatrix[i - q - 1][j].getBarrierRight()) {
                                         flag = 1;
                                     }
                                 }
@@ -908,20 +907,19 @@ public class Board {
 
                 case NORTH:
 
-                    if (this.fieldmatrix[x][y].getBarrierTop() == true) {
+                    if (this.fieldmatrix[x][y].getBarrierTop()) {
                         break;
                     }
 
                     //i is the next tile the robot is facing
                     for (int i = (y - 1); i >= 0 && (z == 0); i--) {
 
-                        if (this.fieldmatrix[x][i].getBarrierBottom() == true) {
+                        if (this.fieldmatrix[x][i].getBarrierBottom()) {
                             break;
                         }
-                        if (this.fieldmatrix[x][i].getBarrierTop() == true) {
+                        if (this.fieldmatrix[x][i].getBarrierTop()) {
                             z++;
                         }
-                        
 
                         /* checks if one of the players is on the current field [x][i2], if yes
                         gets damage and z becomes 1, so the loop breaks */
@@ -940,20 +938,19 @@ public class Board {
 
                 case SOUTH:
 
-                    if (this.fieldmatrix[x][y].getBarrierBottom() == true) {
+                    if (this.fieldmatrix[x][y].getBarrierBottom()) {
                         break;
                     }
 
                     //i is the next tile the robot is facing
                     for (int i = (y + 1); i < this.fieldmatrix[0].length && (z == 0); i++) {
 
-                        if (this.fieldmatrix[x][i].getBarrierBottom() == true) {
+                        if (this.fieldmatrix[x][i].getBarrierBottom()) {
                             z++;
                         }
-                        if (this.fieldmatrix[x][i].getBarrierTop() == true) {
+                        if (this.fieldmatrix[x][i].getBarrierTop()) {
                             break;
                         }
-                        
 
                         /* checks if one of the players is on the current field [x][i2], if yes
                         gets damage and z becomes 1, so the loop breaks */
@@ -972,20 +969,19 @@ public class Board {
 
                 case EAST:
 
-                    if (this.fieldmatrix[x][y].getBarrierRight() == true) {
+                    if (this.fieldmatrix[x][y].getBarrierRight()) {
                         break;
                     }
 
                     //i is the next tile the robot is facing
                     for (int i = (x + 1); i < this.fieldmatrix.length && (z == 0); i++) {
 
-                        if (this.fieldmatrix[i][y].getBarrierRight() == true) {
+                        if (this.fieldmatrix[i][y].getBarrierRight()) {
                             z++;
                         }
-                        if (this.fieldmatrix[i][y].getBarrierLeft() == true) {
+                        if (this.fieldmatrix[i][y].getBarrierLeft()) {
                             break;
                         }
-                        
 
                         /* checks if one of the players is on the current field [x][i2], if yes
                         gets damage and z becomes 1, so the loop breaks */
@@ -1005,20 +1001,19 @@ public class Board {
 
                 case WEST:
 
-                    if (this.fieldmatrix[x][y].getBarrierLeft() == true) {
+                    if (this.fieldmatrix[x][y].getBarrierLeft()) {
                         break;
                     }
 
                     //i is the next tile the robot is facing
                     for (int i = (x - 1); i >= 0 && (z == 0); i--) {
 
-                        if (this.fieldmatrix[i][y].getBarrierRight() == true) {
+                        if (this.fieldmatrix[i][y].getBarrierRight()) {
                             break;
                         }
-                        if (this.fieldmatrix[i][y].getBarrierLeft() == true) {
+                        if (this.fieldmatrix[i][y].getBarrierLeft()) {
                             z++;
                         }
-                        
 
                         /* checks if one of the players is on the current field [x][i2], if yes
                         gets damage and z becomes 1, so the loop breaks */

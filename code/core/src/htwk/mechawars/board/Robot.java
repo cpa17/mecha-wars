@@ -109,8 +109,6 @@ public class Robot {
     public Robot moveInDirection(Field[][] fieldmatrix, byte mov, Dir dir, Robot[] players) {
 
         boolean flag = false;
-        BarrierSide barrierSide;
-        BarrierCorner barrierCorner;
         Dir moveDir;
 
         // If the robot is moving backwards, the moving direction is the opposite direction
@@ -142,19 +140,19 @@ public class Robot {
                 for (int i = 0; (i < mov) && (!flag); i++) {
                     int x = getXcoor();
                     int y = getYcoor();
-                    // Checks whether a side or corner barrier on the field on which the robot is
+                    // Checks whether a barrier on the field on which the robot is
                     // currently standing, stops the current step
                     if ((y >= 0) && (y < fieldmatrix[0].length)
                             && (x >= 0) && (x < fieldmatrix.length)) {
-                        if (fieldmatrix[x][y].getBarrierTop() == true) {
+                        if (fieldmatrix[x][y].getBarrierTop()) {
                             flag = true;
                         }
                     }
-                    // Checks whether a side or corner barrier on the next field in the moving
+                    // Checks whether a barrier on the next field in the moving
                     // direction, stops the current step
                     if ((y - 1 >= 0) && (y - 1 < fieldmatrix[0].length)
                             && (x >= 0) && (x < fieldmatrix.length)) {
-                        if (fieldmatrix[x][y - 1].getBarrierBottom() == true) {
+                        if (fieldmatrix[x][y - 1].getBarrierBottom()) {
                             flag = true;
                         }
                     }
@@ -183,20 +181,20 @@ public class Robot {
                 for (int i = 0; (i < mov) && (!flag); i++) {
                     int x = getXcoor();
                     int y = getYcoor();
-                    // Checks whether a side or corner barrier on the field on which the robot is
+                    // Checks whether a barrier on the field on which the robot is
                     // currently standing, stops the current step
                     if ((y >= 0) && (y < fieldmatrix[0].length)
                             && (x >= 0) && (x < fieldmatrix.length)) {
-                        if (fieldmatrix[x][y].getBarrierBottom() == true) {
+                        if (fieldmatrix[x][y].getBarrierBottom()) {
                             flag = true;
                         }
                     }
                     
-                    // Checks whether a side or corner barrier on the next field in the moving
+                    // Checks whether a barrier on the next field in the moving
                     // direction, stops the current step
                     if ((y + 1 >= 0) && (y + 1 < fieldmatrix[0].length)
                             && (x >= 0) && (x < fieldmatrix.length)) {
-                        if (fieldmatrix[x][y + 1].getBarrierTop() == true) {
+                        if (fieldmatrix[x][y + 1].getBarrierTop()) {
                             flag = true;
                         }
                     }
@@ -225,19 +223,19 @@ public class Robot {
                 for (int i = 0; (i < mov) && (!flag); i++) {
                     int x = getXcoor();
                     int y = getYcoor();
-                    // Checks whether a side or corner barrier on the field on which the robot is
+                    // Checks whether a barrier on the field on which the robot is
                     // currently standing, stops the current step
                     if ((y >= 0) && (y < fieldmatrix[0].length)
                             && (x >= 0) && (x < fieldmatrix.length)) {
-                        if (fieldmatrix[x][y].getBarrierRight() == true) {
+                        if (fieldmatrix[x][y].getBarrierRight()) {
                             flag = true;
                         }
                     }
-                    // Checks whether a side or corner barrier on the next field in the moving
+                    // Checks whether a barrier on the next field in the moving
                     // direction, stops the current step
                     if ((y >= 0) && (y < fieldmatrix[0].length)
                             && (x + 1 >= 0) && (x + 1 < fieldmatrix.length)) {
-                        if (fieldmatrix[x + 1][y].getBarrierLeft() == true) {
+                        if (fieldmatrix[x + 1][y].getBarrierLeft()) {
                             flag = true;
                         }
                     }
@@ -266,19 +264,19 @@ public class Robot {
                 for (int i = 0; (i < mov) && (!flag); i++) {
                     int x = getXcoor();
                     int y = getYcoor();
-                    // Checks whether a side or corner barrier on the field on which the robot is
+                    // Checks whether a barrier on the field on which the robot is
                     // currently standing, stops the current step
                     if ((y >= 0) && (y < fieldmatrix[0].length)
                             && (x >= 0) && (x < fieldmatrix.length)) {
-                        if (fieldmatrix[x][y].getBarrierLeft() == true) {
+                        if (fieldmatrix[x][y].getBarrierLeft()) {
                             flag = true;
                         }
                     }
-                    // Checks whether a side or corner barrier on the next field in the moving
+                    // Checks whether a barrier on the next field in the moving
                     // direction, stops the current step
                     if ((y >= 0) && (y < fieldmatrix[0].length)
                             && (x - 1 >= 0) && (x - 1 < fieldmatrix.length)) {
-                        if (fieldmatrix[x - 1][y].getBarrierRight() == true) {
+                        if (fieldmatrix[x - 1][y].getBarrierRight()) {
                             flag = true;
                         }
                     }
