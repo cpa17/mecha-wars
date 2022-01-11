@@ -40,7 +40,7 @@ public class Buttons {
             public void clicked(InputEvent event, float x, float y) {
                 if (!players[0].getShutDown()) {
                     //If All Cards are chosen
-                    if (ScrollPanel.cardOrder[4 - ScrollPanel.damagePoints] != -1) {
+                    if (ScrollPanel.allChosen()) {
                         deactivateButtons();
                         startExecutionButton.setTouchable(Touchable.disabled);
                         board.move(players, false);
@@ -57,7 +57,7 @@ public class Buttons {
                         }, (ConfigReader.getPlayerNumber() * 5) + 5);
 
                         setButtons(players);
-                        ScrollPanel.clearScrollPanel(skin, players);
+                        ScrollPanel.clearScrollPanel(skin);
                     } else {
                         startExecutionButton.setColor(Color.RED);
                     }
@@ -79,7 +79,7 @@ public class Buttons {
                             ScrollPanel.cardOrderClear();
                             activateButtons();
                             setButtons(players);
-                            ScrollPanel.clearScrollPanel(skin, players);
+                            ScrollPanel.clearScrollPanel(skin);
                         }
                     }, (ConfigReader.getPlayerNumber() * 5) + 5);
                 }
