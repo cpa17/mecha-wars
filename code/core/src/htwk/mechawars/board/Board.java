@@ -733,7 +733,7 @@ public class Board {
                                     }
                                 }
                                 
-                                if (fieldmatrix[i][j + q].getBarrierBottom() == true) {
+                                if (fieldmatrix[i][j + q - 1].getBarrierBottom() == true) {
                                     flag = 1;
                                 }
                                 
@@ -771,7 +771,7 @@ public class Board {
                                     }
                                 }
                                 
-                                if (fieldmatrix[i][j - q].getBarrierTop() == true) {
+                                if (fieldmatrix[i][j - q + 1].getBarrierTop() == true) {
                                     flag = 1;
                                 }
                                 
@@ -824,7 +824,7 @@ public class Board {
                                     }
                                 }
                                 
-                                if (fieldmatrix[i + q][j].getBarrierRight() == true) {
+                                if (fieldmatrix[i + q - 1][j].getBarrierRight() == true) {
                                     flag = 1;
                                 }
                                 
@@ -863,7 +863,7 @@ public class Board {
                                     }
                                 }
                                 
-                                if (fieldmatrix[i - q][j].getBarrierLeft() == true) {
+                                if (fieldmatrix[i - q + 1][j].getBarrierLeft() == true) {
                                     flag = 1;
                                 }
                                 
@@ -915,10 +915,10 @@ public class Board {
                     //i is the next tile the robot is facing
                     for (int i = (y - 1); i >= 0 && (z == 0); i--) {
 
-                        if (this.fieldmatrix[x][y].getBarrierBottom() == true) {
+                        if (this.fieldmatrix[x][i].getBarrierBottom() == true) {
                             break;
                         }
-                        if (this.fieldmatrix[x][y].getBarrierTop() == true) {
+                        if (this.fieldmatrix[x][i].getBarrierTop() == true) {
                             z++;
                         }
                         
@@ -947,10 +947,10 @@ public class Board {
                     //i is the next tile the robot is facing
                     for (int i = (y + 1); i < this.fieldmatrix[0].length && (z == 0); i++) {
 
-                        if (this.fieldmatrix[x][y].getBarrierBottom() == true) {
+                        if (this.fieldmatrix[x][i].getBarrierBottom() == true) {
                             z++;
                         }
-                        if (this.fieldmatrix[x][y].getBarrierTop() == true) {
+                        if (this.fieldmatrix[x][i].getBarrierTop() == true) {
                             break;
                         }
                         
@@ -979,10 +979,10 @@ public class Board {
                     //i is the next tile the robot is facing
                     for (int i = (x + 1); i < this.fieldmatrix.length && (z == 0); i++) {
 
-                        if (this.fieldmatrix[x][y].getBarrierRight() == true) {
+                        if (this.fieldmatrix[i][y].getBarrierRight() == true) {
                             z++;
                         }
-                        if (this.fieldmatrix[x][y].getBarrierLeft() == true) {
+                        if (this.fieldmatrix[i][y].getBarrierLeft() == true) {
                             break;
                         }
                         
@@ -994,7 +994,7 @@ public class Board {
                             int x2 = robot.getXcoor();
                             int y2 = robot.getYcoor();
 
-                            if (x2 == x && y2 == i) {
+                            if (x2 == i && y2 == y) {
                                 robot.damageUp();
                                 z++;
                             }
@@ -1010,12 +1010,12 @@ public class Board {
                     }
 
                     //i is the next tile the robot is facing
-                    for (int i = (x - 1); i < this.fieldmatrix.length && (z == 0); i++) {
+                    for (int i = (x - 1); i >= 0 && (z == 0); i--) {
 
-                        if (this.fieldmatrix[x][y].getBarrierRight() == true) {
+                        if (this.fieldmatrix[i][y].getBarrierRight() == true) {
                             break;
                         }
-                        if (this.fieldmatrix[x][y].getBarrierLeft() == true) {
+                        if (this.fieldmatrix[i][y].getBarrierLeft() == true) {
                             z++;
                         }
                         
@@ -1027,7 +1027,7 @@ public class Board {
                             int x2 = robot.getXcoor();
                             int y2 = robot.getYcoor();
 
-                            if (x2 == x && y2 == i) {
+                            if (x2 == i && y2 == y) {
                                 robot.damageUp();
                                 z++;
                             }
