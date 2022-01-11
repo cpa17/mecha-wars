@@ -17,6 +17,7 @@ import htwk.mechawars.fields.Laser;
 import htwk.mechawars.fields.RepairSite;
 import htwk.mechawars.fields.StandardField;
 import htwk.mechawars.fields.StartField;
+import htwk.mechawars.game.ScrollPanel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,6 +31,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
+import ai.AiCardGeneration;
 import ai.AiInterface;
 
 //import ai.AiCardGeneration;
@@ -400,7 +402,7 @@ public class Board {
                 if (ConfigReader.getAimodes()[i]) {
 
                     LinkedList<Card> generatedCards =
-                            AiInterface.generateCards(i, getNumberOfChoosableCards(players[i].getDamagePoints()));
+                            new AiCardGeneration().generateCards(ScrollPanel.getDeck().getDeck() , i, getNumberOfChoosableCards(players[i].getDamagePoints()));
                     // Random Cards generation for the AI-Players
                     allCards.add(generatedCards);
                     maxCardCount = Integer.max(generatedCards.size(), maxCardCount);
