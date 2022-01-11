@@ -694,8 +694,6 @@ public class Board {
         int h;
         //for vertical
         int v;
-        //for barrier
-        int b;
 
         for (int i = 0; i < this.fieldmatrix.length; i++) {
             for (int j = 0; j < this.fieldmatrix[i].length; j++) {
@@ -705,183 +703,157 @@ public class Board {
                 
                 if (v == 4 || v == 5 || v == 6) {
                     
+                    // BarrierTop
                     if (this.fieldmatrix[i][j].getBarrierTop()) {
-                        b = 0;
+                        flag = 0;
+                        q = 1;
+
+                        while (flag == 0) {
+
+                            for (int s = 0; (s < players.length) && (flag == 0); s++) {
+                                int x = players[s].getXcoor();
+                                int y = players[s].getYcoor();
+                                if ((x == fieldmatrix[i][j + q - 1].getXcoor())
+                                        && (y == fieldmatrix[i][j + q - 1].getYcoor())) {
+
+                                    for (int z = 3; z < v; z++) {
+                                        players[s].damageUp();
+                                    }
+                                    flag = 1;
+                                }
+                            }
+
+                            if (fieldmatrix[i][j + q - 1].getBarrierBottom()) {
+                                flag = 1;
+                            }
+
+                            if ((i + q + 1) < fieldmatrix[0].length) {
+                                if (fieldmatrix[i + q + 1][j].getBarrierTop()) {
+                                    flag = 1;
+                                }
+                            }
+
+                            if (fieldmatrix[i][j + q].getLaserVertical() == (v - 3)) {
+                                q = q + 1;
+                            } else {
+                                flag = 1;
+                            }
+                        }
+
+                    // BarrierBottom
                     } else {
-                        b = 1;
-                    }
-                    
-                    switch (b) {
+                        flag = 0;
+                        q = 1;
 
-                        // BarrierTop
-                        case 0:
-                            flag = 0;
-                            q = 1;
+                        while (flag == 0) {
 
-                            while (flag == 0) {
+                            for (int s = 0; (s < players.length) && (flag == 0); s++) {
+                                int x = players[s].getXcoor();
+                                int y = players[s].getYcoor();
+                                if ((x == fieldmatrix[i][j - q + 1].getXcoor())
+                                        && (y == fieldmatrix[i][j - q + 1].getYcoor())) {
 
-                                for (int s = 0; (s < players.length) && (flag == 0); s++) {
-                                    int x = players[s].getXcoor();
-                                    int y = players[s].getYcoor();
-                                    if ((x == fieldmatrix[i][j + q - 1].getXcoor())
-                                            && (y == fieldmatrix[i][j + q - 1].getYcoor())) {
-                                        
-                                        for (int z = 3; z < v; z++) {
-                                            players[s].damageUp();
-                                        }                                        
-                                        flag = 1;
+                                    for (int z = 3; z < v; z++) {
+                                        players[s].damageUp();
                                     }
-                                }
-                                
-                                if (fieldmatrix[i][j + q - 1].getBarrierBottom()) {
-                                    flag = 1;
-                                }
-                                
-                                if ((i + q + 1) < fieldmatrix[0].length) {
-                                    if (fieldmatrix[i + q + 1][j].getBarrierTop()) {
-                                        flag = 1;
-                                    }
-                                }
-
-                                if (fieldmatrix[i][j + q].getLaserVertical() == (v - 3)) {
-                                    q = q + 1;
-                                } else {
                                     flag = 1;
                                 }
                             }
-                            break;
-                            
-                        // BarrierBottom
-                        case 1:
-                            flag = 0;
-                            q = 1;
 
-                            while (flag == 0) {
+                            if (fieldmatrix[i][j - q + 1].getBarrierTop()) {
+                                flag = 1;
+                            }
 
-                                for (int s = 0; (s < players.length) && (flag == 0); s++) {
-                                    int x = players[s].getXcoor();
-                                    int y = players[s].getYcoor();
-                                    if ((x == fieldmatrix[i][j - q + 1].getXcoor())
-                                            && (y == fieldmatrix[i][j - q + 1].getYcoor())) {
-                                        
-                                        for (int z = 3; z < v; z++) {
-                                            players[s].damageUp();
-                                        }                                        
-                                        flag = 1;
-                                    }
-                                }
-                                
-                                if (fieldmatrix[i][j - q + 1].getBarrierTop()) {
-                                    flag = 1;
-                                }
-                                
-                                if ((i - q - 1) == 0) {
-                                    if (fieldmatrix[i - q - 1][j].getBarrierBottom()) {
-                                        flag = 1;
-                                    }
-                                }
-
-                                if (fieldmatrix[i][j - q].getLaserVertical() == (v - 3)) {
-                                    q = q + 1;
-                                } else {
+                            if ((i - q - 1) == 0) {
+                                if (fieldmatrix[i - q - 1][j].getBarrierBottom()) {
                                     flag = 1;
                                 }
                             }
-                            break;
 
-                        default:
-                            break;
+                            if (fieldmatrix[i][j - q].getLaserVertical() == (v - 3)) {
+                                q = q + 1;
+                            } else {
+                                flag = 1;
+                            }
+                        }
                     }
                 }
                 
                 if (h == 4 || h == 5 || h == 6) {
                     
+                    // BarrierLeft
                     if (this.fieldmatrix[i][j].getBarrierLeft()) {
-                        b = 0;
+                        flag = 0;
+                        q = 1;
+
+                        while (flag == 0) {
+
+                            for (int s = 0; (s < players.length) && (flag == 0); s++) {
+                                int x = players[s].getXcoor();
+                                int y = players[s].getYcoor();
+                                if ((x == fieldmatrix[i + q - 1][j].getXcoor())
+                                        && (y == fieldmatrix[i + q - 1][j].getYcoor())) {
+
+                                    for (int z = 3; z < h; z++) {
+                                        players[s].damageUp();
+                                    }
+                                    flag = 1;
+                                }
+                            }
+
+                            if (fieldmatrix[i + q - 1][j].getBarrierRight()) {
+                                flag = 1;
+                            }
+
+                            if ((i + q + 1) < fieldmatrix.length) {
+                                if (fieldmatrix[i + q + 1][j].getBarrierLeft()) {
+                                    flag = 1;
+                                }
+                            }
+
+                            if (fieldmatrix[i + q][j].getLaserHorizontal() == (h - 3)) {
+                                q = q + 1;
+                            } else {
+                                flag = 1;
+                            }
+                        }
+
+                    // BarrierRight
                     } else {
-                        b = 1;
-                    }
-                    
-                    switch (b) {
+                        flag = 0;
+                        q = 1;
 
-                        // BarrierLeft
-                        case 0:
-                            flag = 0;
-                            q = 1;
+                        while (flag == 0) {
 
-                            while (flag == 0) {
+                            for (int s = 0; (s < players.length) && (flag == 0); s++) {
+                                int x = players[s].getXcoor();
+                                int y = players[s].getYcoor();
+                                if ((x == fieldmatrix[i - q + 1][j].getXcoor())
+                                        && (y == fieldmatrix[i - q + 1][j].getYcoor())) {
 
-                                for (int s = 0; (s < players.length) && (flag == 0); s++) {
-                                    int x = players[s].getXcoor();
-                                    int y = players[s].getYcoor();
-                                    if ((x == fieldmatrix[i + q - 1][j].getXcoor())
-                                            && (y == fieldmatrix[i + q - 1][j].getYcoor())) {
-                                        
-                                        for (int z = 3; z < h; z++) {
-                                            players[s].damageUp();
-                                        }                                        
-                                        flag = 1;
+                                    for (int z = 3; z < h; z++) {
+                                        players[s].damageUp();
                                     }
-                                }
-                                
-                                if (fieldmatrix[i + q - 1][j].getBarrierRight()) {
-                                    flag = 1;
-                                }
-                                
-                                if ((i + q + 1) < fieldmatrix.length) {
-                                    if (fieldmatrix[i + q + 1][j].getBarrierLeft()) {
-                                        flag = 1;
-                                    }
-                                }
-
-                                if (fieldmatrix[i + q][j].getLaserHorizontal() == (h - 3)) { 
-                                    q = q + 1;
-                                } else {
                                     flag = 1;
                                 }
                             }
-                            break;
-                            
-                        // BarrierRight
-                        case 1:
-                            flag = 0;
-                            q = 1;
 
-                            while (flag == 0) {
+                            if (fieldmatrix[i - q + 1][j].getBarrierLeft()) {
+                                flag = 1;
+                            }
 
-                                for (int s = 0; (s < players.length) && (flag == 0); s++) {
-                                    int x = players[s].getXcoor();
-                                    int y = players[s].getYcoor();
-                                    if ((x == fieldmatrix[i - q + 1][j].getXcoor())
-                                            && (y == fieldmatrix[i - q + 1][j].getYcoor())) {
-                                        
-                                        for (int z = 3; z < h; z++) {
-                                            players[s].damageUp();
-                                        }                                        
-                                        flag = 1;
-                                    }
-                                }
-                                
-                                if (fieldmatrix[i - q + 1][j].getBarrierLeft()) {
-                                    flag = 1;
-                                }
-                                
-                                if ((i - q - 1) == 0) {
-                                    if (fieldmatrix[i - q - 1][j].getBarrierRight()) {
-                                        flag = 1;
-                                    }
-                                }
-                                
-                                if (fieldmatrix[i - q][j].getLaserHorizontal() == (h - 3)) {
-                                    q = q + 1;
-                                } else {
+                            if ((i - q - 1) == 0) {
+                                if (fieldmatrix[i - q - 1][j].getBarrierRight()) {
                                     flag = 1;
                                 }
                             }
-                            break;
 
-                        default:
-                            break;
+                            if (fieldmatrix[i - q][j].getLaserHorizontal() == (h - 3)) {
+                                q = q + 1;
+                            } else {
+                                flag = 1;
+                            }
+                        }
                     }
                 }
             }
