@@ -42,8 +42,8 @@ public class Buttons {
                     //If All Cards are chosen
                     if (ScrollPanel.cardOrder[4 - ScrollPanel.damagePoints] != -1) {
                         deactivateButtons();
-                        startExecutionButton.setTouchable(Touchable.disabled);
                         board.move(players, false);
+
                         Timer.schedule(new Timer.Task() {
                             @Override
                             public void run() {
@@ -51,26 +51,19 @@ public class Buttons {
                                 startExecutionButton.setColor(Color.LIGHT_GRAY);
                                 ScrollPanel.cardOrderClear();
                                 activateButtons();
-
-                                startExecutionButton.setTouchable(Touchable.enabled);
+                                setButtons(players);
+                                ScrollPanel.clearScrollPanel(skin, players);
                             }
                         }, (ConfigReader.getPlayerNumber() * 5) + 5);
-
-                        setButtons(players);
-                        ScrollPanel.clearScrollPanel(skin, players);
                     } else {
                         startExecutionButton.setColor(Color.RED);
                     }
                 } else {
 
                     System.out.println(players[0].getShutDown());
-
                     deactivateButtons();
-
                     board.move(players, false);
 
-                    players[0].resetList();
-                    startExecutionButton.setColor(Color.LIGHT_GRAY);
                     Timer.schedule(new Timer.Task() {
                         @Override
                         public void run() {
@@ -278,7 +271,7 @@ public class Buttons {
      * @param players Array of Robots.
      */
     static void setButtons(Robot[] players) {
-        if (players[0].getShutDown()) {
+        if (players[0].getNextRound()) {
             GameScreen.removeCardOrder.setTouchable(Touchable.disabled);
             GameScreen.removeCardOrder.setDisabled(true);
             GameScreen.shutDownButton.setTouchable(Touchable.disabled);
