@@ -190,12 +190,12 @@ public class Buttons {
         // add Button for hint and infos
         Button buttonInfo = new TextButton("Infos", skin);
 
-        int a = 60;     // width
-        int b = 40;     // height
+        int width = 60;
+        int height = 40;
 
-        buttonInfo.setSize(a, b);
-        int buttonInfoX = Gdx.graphics.getWidth() - (a + 10);
-        int buttonInfoY = Gdx.graphics.getHeight() - (b + 10);
+        buttonInfo.setSize(width, height);
+        int buttonInfoX = Gdx.graphics.getWidth() - (width + 10);
+        int buttonInfoY = Gdx.graphics.getHeight() - (height + 10);
 
         buttonInfo.setPosition(buttonInfoX, buttonInfoY);
 
