@@ -54,8 +54,6 @@ public class ScrollPanel {
                 
                 Card currentCard = cardOrder[i-1];
                 
-                System.out.println(currentCard.getCardAttributePriority());
-                
                 buttons[i - 1] = new TextButton(currentCard.getCardAttributePriority()
                     + " - " + currentCard + " " + (i), skin);
                 buttons[i - 1].setColor(Color.RED);
@@ -132,7 +130,7 @@ public class ScrollPanel {
                 buttons[buttonNumber - 1].setText(card.getCardAttributePriority()
                         + " - " + card + " " + (buttonNumber));
                 buttons[buttonNumber - 1].setColor(Color.GREEN);
-                cardOrder[pressCounter - 1] = card;
+                cardOrder[pressCounter - 1] = card; //fehlerhaft
                 return true;
             }
         } else {
@@ -158,6 +156,7 @@ public class ScrollPanel {
                 cardOrder[i] = null;
             }
             pressCounter = Robot.getPlayers()[0].getDamagePoints() - 4;
+            System.out.println(pressCounter);
         }
         
     }
