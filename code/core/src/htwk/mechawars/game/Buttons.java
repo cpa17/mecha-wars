@@ -165,7 +165,9 @@ public class Buttons {
      */
     protected static void deactivateButtons() {
         for (TextButton button : ScrollPanel.buttons) {
-            button.setTouchable(Touchable.disabled);
+            if(button != null) {
+                button.setTouchable(Touchable.disabled);
+            }
         }
         GameScreen.removeCardOrder.setTouchable(Touchable.disabled);
         GameScreen.startExecutionButton.setTouchable(Touchable.disabled);
@@ -178,7 +180,9 @@ public class Buttons {
      */
     protected static void activateButtons() {
         for (TextButton button : ScrollPanel.buttons) {
-            button.setTouchable(Touchable.enabled);
+            if(button != null) {
+                button.setTouchable(Touchable.enabled);
+            }
         }
         GameScreen.removeCardOrder.setTouchable(Touchable.enabled);
         GameScreen.startExecutionButton.setTouchable(Touchable.enabled);
