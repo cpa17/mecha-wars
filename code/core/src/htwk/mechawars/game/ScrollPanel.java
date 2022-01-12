@@ -44,7 +44,7 @@ public class ScrollPanel {
             
             for (int i = 5; i > (4 - (Robot.getPlayers()[0].getDamagePoints() - 5)); i -= 1) {
                 
-                Card currentCard = cardOrder[i-1];
+                Card currentCard = cardOrder[i - 1];
                 
                 buttons[i - 1] = new TextButton(currentCard.getCardAttributePriority()
                     + " - " + currentCard + " " + (i), skin);
@@ -113,9 +113,9 @@ public class ScrollPanel {
      * @param buttonNumber -> ID-number of clicked button
      */
     protected static boolean buttonClickOrder(int buttonNumber, Card card) {
-        if(pressCounter < 6) {
+        if (pressCounter < 6) {
             //Card already pressed
-            if(card == cardOrder[0] || card == cardOrder[1] || card == cardOrder[2]
+            if (card == cardOrder[0] || card == cardOrder[1] || card == cardOrder[2]
                     || card == cardOrder[3] || card == cardOrder[4]) {
                 pressCounter -= 1;
                 return false;
@@ -138,7 +138,7 @@ public class ScrollPanel {
             }
             
         } else {
-              return false;
+          return false;
         }
     }
 
@@ -169,7 +169,7 @@ public class ScrollPanel {
      */
     private static void buttonsClean() {
         for (int i = 0; i < 9; i += 1) {
-            if(buttons[i] != null) {
+            if (buttons[i] != null) {
                 buttons[i].setColor(Color.LIGHT_GRAY);
                 buttons[i].setText(deck.getDeck().get(i).getCardAttributePriority() 
                         + " - " + deck.getDeck().get(i));
@@ -192,6 +192,12 @@ public class ScrollPanel {
         ScrollPanel.deck = deck;
     }
     
+    /**
+     *
+     * Returns if all cards are chosen.
+     * 
+     * @return --> all cards chosen
+     */
     public static boolean allChosen() {
         if (pressCounter == 5) {
             return true;
