@@ -68,7 +68,6 @@ public class FieldeditGui implements Screen {
     private int repairNum = 2; //number of RepairButton
     private int startFieldNumber = 1; //number of StartFieldButton
     private int pusherNumber = 1; //Number of Pusher
-    private boolean backToMain = false;
     private TooltipManager toolTipManager = new TooltipManager();
     private Skin skinFiEdit = new Skin(Gdx.files.internal("skinMenu/star-soldier-ui.json"));
     private ButtonfunctionsFieldEditor bfFiEdit = new ButtonfunctionsFieldEditor();
