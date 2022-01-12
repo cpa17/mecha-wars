@@ -835,8 +835,6 @@ public class Board {
         for (Robot player : players) {
             if (player.getLifePoints() > 0 && !player.getDestroyed() && !player.getShutDown()) {
 
-                System.out.println(player);
-
                 int x = player.getXcoor();
                 int y = player.getYcoor();
 
