@@ -1,0 +1,30 @@
+10.01.2022 - 16:00 - Daily "Robo Rally"
+
+entschuldigt: Konstantin
+Anwesend: Alle anderen
+Protokollführung: Antonia Swiridoff
+
+
+## Runde
+
+- Bernhard: Bug-Ticket bearbeitet, sollte jetzt mergbar sein, arbeitet jetzt an MW106
+- Antonia: MW90 fertig und gemerged, arbeitet jetzt am Umbau der Laser und Wände
+- Mark: arbeitet am Umbau der Laser und Wände
+- Pascal: hat verschiedene Bug-Tickets bearbeitet 
+- Tim: Spielkarten-Editor fast fertig, arbeitet noch weiter am Handbuch
+- Marc: MW87 fertig gemacht, wendet sich jetzt seinen anderen Tickets zu
+
+
+## Allgemein
+
+- am Freitag den 14.01. Codewalkthrough!!!
+
+ 
+
+
+
+
+
+
+ 
+
