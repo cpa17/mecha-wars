@@ -35,10 +35,7 @@ public class ScrollPanel {
     public static ScrollPane scrollPanel(Skin skin) {
         // shuffle Deck
         deck.shuffle();
-
-        Robot.getPlayers()[0].damageUp();
-        Robot.getPlayers()[0].damageUp();
-        Robot.getPlayers()[0].damageUp();
+        
         if (10 > Robot.getPlayers()[0].getDamagePoints() 
                 && Robot.getPlayers()[0].getDamagePoints() > 4) {
             
