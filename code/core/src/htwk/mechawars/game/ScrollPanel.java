@@ -46,7 +46,16 @@ public class ScrollPanel {
             
             for (int i = 5; i > (4 - (Robot.getPlayers()[0].getDamagePoints() - 5)); i -= 1) {
                 
+                System.out.print(cardOrder[0].getCardAttributePriority());
+                System.out.print(cardOrder[1].getCardAttributePriority());
+                System.out.print(cardOrder[2].getCardAttributePriority());
+                System.out.print(cardOrder[3].getCardAttributePriority());
+                System.out.println(cardOrder[4].getCardAttributePriority());
+                
                 Card currentCard = cardOrder[i-1];
+                
+                System.out.println(currentCard.getCardAttributePriority());
+                
                 buttons[i - 1] = new TextButton(currentCard.getCardAttributePriority()
                     + " - " + currentCard + " " + (i), skin);
                 buttons[i - 1].setColor(Color.RED);
@@ -145,7 +154,7 @@ public class ScrollPanel {
             buttonsClean();
             pressCounter = 0;
         } else {
-            for (int i = 0; i < 10 - Robot.getPlayers()[0].getDamagePoints(); i += 1) {
+            for (int i = 0; i < 9 - Robot.getPlayers()[0].getDamagePoints(); i += 1) {
                 cardOrder[i] = null;
             }
             pressCounter = Robot.getPlayers()[0].getDamagePoints() - 4;
@@ -182,12 +191,13 @@ public class ScrollPanel {
     }
     
     public static boolean allChosen() {
-        if(cardOrder[0] != null && cardOrder[1] != null && cardOrder[2] != null 
-                && cardOrder[3] != null && cardOrder[4] != null 
-                || cardOrder[0] == null && cardOrder[1] != null
-                || cardOrder[1] == null && cardOrder[2] != null
-                || cardOrder[2] == null && cardOrder[3] != null
-                || cardOrder[3] == null && cardOrder[4] != null) {
+//        if(cardOrder[0] != null && cardOrder[1] != null && cardOrder[2] != null 
+//                && cardOrder[3] != null && cardOrder[4] != null 
+//                || cardOrder[0] == null && cardOrder[1] != null
+//                || cardOrder[1] == null && cardOrder[2] != null
+//                || cardOrder[2] == null && cardOrder[3] != null
+//                || cardOrder[3] == null && cardOrder[4] != null) {
+        if (pressCounter == 5) {
             return true;
         } else {
             return false;
