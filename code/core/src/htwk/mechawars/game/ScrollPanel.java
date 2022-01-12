@@ -87,12 +87,12 @@ public class ScrollPanel {
      * Initialize cardOrder[] to non reachable values.
      */
     protected static void cardOrderClear() {
+        buttonsClean();
         cardOrder[0] = -1;
         cardOrder[1] = -1;
         cardOrder[2] = -1;
         cardOrder[3] = -1;
         cardOrder[4] = -1;
-        buttonsClean();
         pressCounter = 0;
     }
 
@@ -102,14 +102,17 @@ public class ScrollPanel {
     private static void buttonsClean() {
         for (int i = 0; i < choosableCardCount; i += 1) {
             buttons[i].setColor(Color.LIGHT_GRAY);
-            buttons[i].setText(deck.getDeck().get(i).getCardAttributePriority() 
-                    + " - " + deck.getDeck().get(i));
+            String str = buttons[i].getText() + " ";
+            if (str.contains(" | Nr: ")) {
+                str = str.substring(0, str.length() - 9);
+                buttons[i].setText(str);
+            }
         }
     }
 
     static void clearScrollPanel(Skin skin, Robot[] players) {
         table.clear();
-        if (!players[0].getShutDown()) {
+        if (!players[0].getNextRound()) {
             scrollPanel(skin);
         }
     }

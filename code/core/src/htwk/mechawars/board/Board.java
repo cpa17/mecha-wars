@@ -38,6 +38,7 @@ import htwk.mechawars.game.GameScreen;
 public class Board {
     public Field[][] fieldmatrix;
     private Field robotPosition;
+    private static int checkpoint;
 
     /**
      * Method that reads the game plan as a int matrix from a file and constructs the game board
@@ -188,6 +189,7 @@ public class Board {
                         if (Arrays.stream(allowed).anyMatch(x -> x == numberC)) {
                             this.fieldmatrix[col][cell] = new Checkpoint(col, cell, numberC,
                                     isTest);
+                            checkpoint++;
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
@@ -412,21 +414,24 @@ public class Board {
                                                                of lists of cards for each turn*/
 
         final LinkedList<LinkedList<Card>> allCard = allCards;
-        if (!isTest) {
-            Timer.schedule(new Task() {
-                int turnCounter = 0;
 
-                @Override
-                public void run() {
-                    moveSingleTurn(allCard.get(turnCounter), players, false);
-                    turnCounter++;
+        if (players.length != 1 || allCard.size() != 0) {
+            if (!isTest) {
+                Timer.schedule(new Task() {
+                    int turnCounter = 0;
+
+                    @Override
+                    public void run() {
+                        moveSingleTurn(allCard.get(turnCounter), players, false);
+                        turnCounter++;
+                        }
+                    }, 0, ConfigReader.getPlayerNumber() + 1,
+                        allCards.size() - 1);
+
+            } else {
+                for (int i = 0; i < allCards.size(); i++) {
+                    moveSingleTurn(allCard.get(i), players, true);
                 }
-            }, 0, ConfigReader.getPlayerNumber() + 1,
-                    allCards.size() - 1);
-            
-        } else {
-            for (int i = 0; i < allCards.size(); i++) {
-                moveSingleTurn(allCard.get(i), players, true);
             }
         }
 
@@ -489,6 +494,7 @@ public class Board {
                         checkRobotsOnBoard(players);
 
                         Robot.setPlayers(players);
+                        checkDestroyed(players);
                         checkRobotLaser(players);
                         checkBoardLaser(players);
                         checkDestroyed(players);
@@ -498,6 +504,7 @@ public class Board {
         } else {
 
             // No delay if this is a test
+            checkDestroyed(players);
             checkRobotLaser(players);
             checkBoardLaser(players);
             checkDestroyed(players);
@@ -669,6 +676,12 @@ public class Board {
      * @param players array of all players
      */
     private void checkGameOver(Robot[] players) {
+        for (Robot player : players) {
+            if (player.getLifePoints() <= 0) {
+                player.setDamage(10);
+            }
+        }
+
         Robot player = players[0];
 
         if (player.getLifePoints() <= 0) {
@@ -822,228 +835,244 @@ public class Board {
         BarrierCorner barriercorner;
 
         for (Robot player : players) {
+            if (player.getLifePoints() > 0 && !player.getDestroyed() && !player.getShutDown()) {
 
-            int x = player.getXcoor();
-            int y = player.getYcoor();
+                int x = player.getXcoor();
+                int y = player.getYcoor();
 
-            //the variable z, checks if a player or a wall already have been hit
-            int z = 0;
+                //the variable z, checks if a player or a wall already have been hit
+                int z = 0;
 
-            switch (player.getDir()) {
+                switch (player.getDir()) {
 
-                case NORTH:
+                    case NORTH:
 
-                    if (this.fieldmatrix[x][y] instanceof BarrierSide) {
-                        barrierside = (BarrierSide) this.fieldmatrix[x][y];
-                        if (barrierside.getSide() == 2) {
-                            break;
-                        }
-                    }
-
-                    if (this.fieldmatrix[x][y] instanceof BarrierCorner) {
-                        barriercorner = (BarrierCorner) this.fieldmatrix[x][y];
-                        if (barriercorner.getCorner() == 1 || barriercorner.getCorner() == 2) {
-                            break;
-                        }
-                    }
-
-                    //i2 is the next tile the robot is facing
-                    for (int i2 = (y - 1); i2 >= 0 && (z == 0); i2--) {
-
-                        if (this.fieldmatrix[x][i2] instanceof BarrierSide) {
-                            barrierside = (BarrierSide) this.fieldmatrix[x][i2];
-                            if (barrierside.getSide() == 4) {
-                                break;
-                            }
-                            if (barrierside.getSide() == 2) {
-                                z++;
-                            }
-                        }
-
-                        if (this.fieldmatrix[x][i2] instanceof BarrierCorner) {
-                            barriercorner = (BarrierCorner) this.fieldmatrix[x][i2];
-                            if (barriercorner.getCorner() == 3 || barriercorner.getCorner() == 4) {
-                                break;
-                            }
-                            if (barriercorner.getCorner() == 1 || barriercorner.getCorner() == 2) {
-                                z++;
-                            }
-                        }
-
-                        /* checks if one of the players is on the current field [x][i2], if yes
-                        gets damage and z becomes 1, so the loop breaks */
-                        for (Robot robot : players) {
-
-                            int x2 = robot.getXcoor();
-                            int y2 = robot.getYcoor();
-
-                            if (x2 == x && y2 == i2) {
-                                robot.damageUp();
-                                z++;
-                            }
-                        }
-                    }
-                    break;
-
-
-                case SOUTH:
-
-                    if (this.fieldmatrix[x][y] instanceof BarrierSide) {
-                        barrierside = (BarrierSide) this.fieldmatrix[x][y];
-                        if (barrierside.getSide() == 4) {
-                            break;
-                        }
-                    }
-
-                    if (this.fieldmatrix[x][y] instanceof BarrierCorner) {
-                        barriercorner = (BarrierCorner) this.fieldmatrix[x][y];
-                        if (barriercorner.getCorner() == 3 || barriercorner.getCorner() == 4) {
-                            break;
-                        }
-                    }
-
-                    for (int i2 = (y + 1); i2 < this.fieldmatrix[0].length && (z == 0); i2++) {
-
-                        if (this.fieldmatrix[x][i2] instanceof BarrierSide) {
-                            barrierside = (BarrierSide) this.fieldmatrix[x][i2];
+                        if (this.fieldmatrix[x][y] instanceof BarrierSide) {
+                            barrierside = (BarrierSide) this.fieldmatrix[x][y];
                             if (barrierside.getSide() == 2) {
                                 break;
                             }
-                            if (barrierside.getSide() == 4) {
-                                z++;
-                            }
                         }
 
-                        if (this.fieldmatrix[x][i2] instanceof BarrierCorner) {
-                            barriercorner = (BarrierCorner) this.fieldmatrix[x][i2];
+                        if (this.fieldmatrix[x][y] instanceof BarrierCorner) {
+                            barriercorner = (BarrierCorner) this.fieldmatrix[x][y];
                             if (barriercorner.getCorner() == 1 || barriercorner.getCorner() == 2) {
                                 break;
                             }
+                        }
+
+                        //i2 is the next tile the robot is facing
+                        for (int i2 = (y - 1); i2 >= 0 && (z == 0); i2--) {
+
+                            if (this.fieldmatrix[x][i2] instanceof BarrierSide) {
+                                barrierside = (BarrierSide) this.fieldmatrix[x][i2];
+                                if (barrierside.getSide() == 4) {
+                                    break;
+                                }
+                                if (barrierside.getSide() == 2) {
+                                    z++;
+                                }
+                            }
+
+                            if (this.fieldmatrix[x][i2] instanceof BarrierCorner) {
+                                barriercorner = (BarrierCorner) this.fieldmatrix[x][i2];
+                                if (barriercorner.getCorner() == 3
+                                        || barriercorner.getCorner() == 4) {
+                                    break;
+                                }
+                                if (barriercorner.getCorner() == 1
+                                        || barriercorner.getCorner() == 2) {
+                                    z++;
+                                }
+                            }
+
+                            /* checks if one of the players is on the current field [x][i2],
+                            if yes gets damage and z becomes 1, so the loop breaks */
+                            for (Robot robot : players) {
+
+                                int x2 = robot.getXcoor();
+                                int y2 = robot.getYcoor();
+
+                                if (x2 == x && y2 == i2) {
+                                    robot.damageUp();
+                                    z++;
+                                }
+                            }
+                        }
+                        break;
+
+
+                    case SOUTH:
+
+                        if (this.fieldmatrix[x][y] instanceof BarrierSide) {
+                            barrierside = (BarrierSide) this.fieldmatrix[x][y];
+                            if (barrierside.getSide() == 4) {
+                                break;
+                            }
+                        }
+
+                        if (this.fieldmatrix[x][y] instanceof BarrierCorner) {
+                            barriercorner = (BarrierCorner) this.fieldmatrix[x][y];
                             if (barriercorner.getCorner() == 3 || barriercorner.getCorner() == 4) {
-                                z++;
-                            }
-                        }
-
-                        for (Robot robot : players) {
-
-                            int x2 = robot.getXcoor();
-                            int y2 = robot.getYcoor();
-
-                            if (x2 == x && y2 == i2) {
-                                robot.damageUp();
-                                z++;
-                            }
-                        }
-                    }
-                    break;
-
-
-                case EAST:
-
-                    if (this.fieldmatrix[x][y] instanceof BarrierSide) {
-                        barrierside = (BarrierSide) this.fieldmatrix[x][y];
-                        if (barrierside.getSide() == 3) {
-                            break;
-                        }
-                    }
-
-                    if (this.fieldmatrix[x][y] instanceof BarrierCorner) {
-                        barriercorner = (BarrierCorner) this.fieldmatrix[x][y];
-                        if (barriercorner.getCorner() == 2 || barriercorner.getCorner() == 3) {
-                            break;
-                        }
-                    }
-
-                    for (int i2 = (x + 1); i2 < this.fieldmatrix.length && (z == 0); i2++) {
-
-                        if (this.fieldmatrix[i2][y] instanceof BarrierSide) {
-                            barrierside = (BarrierSide) this.fieldmatrix[i2][y];
-                            if (barrierside.getSide() == 1) {
                                 break;
                             }
-                            if (barrierside.getSide() == 3) {
-                                z++;
+                        }
+
+                        for (int i2 = (y + 1); i2 < this.fieldmatrix[0].length && (z == 0); i2++) {
+
+                            if (this.fieldmatrix[x][i2] instanceof BarrierSide) {
+                                barrierside = (BarrierSide) this.fieldmatrix[x][i2];
+                                if (barrierside.getSide() == 2) {
+                                    break;
+                                }
+                                if (barrierside.getSide() == 4) {
+                                    z++;
+                                }
+                            }
+
+                            if (this.fieldmatrix[x][i2] instanceof BarrierCorner) {
+                                barriercorner = (BarrierCorner) this.fieldmatrix[x][i2];
+                                if (barriercorner.getCorner() == 1
+                                        || barriercorner.getCorner() == 2) {
+                                    break;
+                                }
+                                if (barriercorner.getCorner() == 3
+                                        || barriercorner.getCorner() == 4) {
+                                    z++;
+                                }
+                            }
+
+                            for (Robot robot : players) {
+
+                                int x2 = robot.getXcoor();
+                                int y2 = robot.getYcoor();
+
+                                if (x2 == x && y2 == i2) {
+                                    robot.damageUp();
+                                    z++;
+                                }
                             }
                         }
-
-                        if (this.fieldmatrix[i2][y] instanceof BarrierCorner) {
-                            barriercorner = (BarrierCorner) this.fieldmatrix[i2][y];
-                            if (barriercorner.getCorner() == 1 || barriercorner.getCorner() == 4) {
-                                break;
-                            }
-                            if (barriercorner.getCorner() == 2 || barriercorner.getCorner() == 3) {
-                                z++;
-                            }
-                        }
-
-                        for (Robot robot : players) {
-
-                            int x2 = robot.getXcoor();
-                            int y2 = robot.getYcoor();
-
-                            if (x2 == i2 && y2 == y) {
-                                robot.damageUp();
-                                z++;
-                            }
-                        }
-                    }
-                    break;
+                        break;
 
 
-                case WEST:
+                    case EAST:
 
-                    if (this.fieldmatrix[x][y] instanceof BarrierSide) {
-                        barrierside = (BarrierSide) this.fieldmatrix[x][y];
-                        if (barrierside.getSide() == 1) {
-                            break;
-                        }
-                    }
-
-                    if (this.fieldmatrix[x][y] instanceof BarrierCorner) {
-                        barriercorner = (BarrierCorner) this.fieldmatrix[x][y];
-                        if (barriercorner.getCorner() == 1 || barriercorner.getCorner() == 4) {
-                            break;
-                        }
-                    }
-
-                    for (int i2 = (x - 1); i2 >= 0 && (z == 0); i2--) {
-
-                        if (this.fieldmatrix[i2][y] instanceof BarrierSide) {
-                            barrierside = (BarrierSide) this.fieldmatrix[i2][y];
+                        if (this.fieldmatrix[x][y] instanceof BarrierSide) {
+                            barrierside = (BarrierSide) this.fieldmatrix[x][y];
                             if (barrierside.getSide() == 3) {
                                 break;
                             }
-                            if (barrierside.getSide() == 1) {
-                                z++;
-                            }
                         }
 
-                        if (this.fieldmatrix[i2][y] instanceof BarrierCorner) {
-                            barriercorner = (BarrierCorner) this.fieldmatrix[i2][y];
-                            if (barriercorner.getCorner() == 2 || barriercorner.getCorner() == 3) {
+                        if (this.fieldmatrix[x][y] instanceof BarrierCorner) {
+                            barriercorner = (BarrierCorner) this.fieldmatrix[x][y];
+                            if (barriercorner.getCorner() == 2
+                                    || barriercorner.getCorner() == 3) {
                                 break;
                             }
-                            if (barriercorner.getCorner() == 1 || barriercorner.getCorner() == 4) {
-                                z++;
+                        }
+
+                        for (int i2 = (x + 1); i2 < this.fieldmatrix.length && (z == 0); i2++) {
+
+                            if (this.fieldmatrix[i2][y] instanceof BarrierSide) {
+                                barrierside = (BarrierSide) this.fieldmatrix[i2][y];
+                                if (barrierside.getSide() == 1) {
+                                    break;
+                                }
+                                if (barrierside.getSide() == 3) {
+                                    z++;
+                                }
+                            }
+
+                            if (this.fieldmatrix[i2][y] instanceof BarrierCorner) {
+                                barriercorner = (BarrierCorner) this.fieldmatrix[i2][y];
+                                if (barriercorner.getCorner() == 1
+                                        || barriercorner.getCorner() == 4) {
+                                    break;
+                                }
+                                if (barriercorner.getCorner() == 2
+                                        || barriercorner.getCorner() == 3) {
+                                    z++;
+                                }
+                            }
+
+                            for (Robot robot : players) {
+
+                                int x2 = robot.getXcoor();
+                                int y2 = robot.getYcoor();
+
+                                if (x2 == i2 && y2 == y) {
+                                    robot.damageUp();
+                                    z++;
+                                }
+                            }
+                        }
+                        break;
+
+
+                    case WEST:
+
+                        if (this.fieldmatrix[x][y] instanceof BarrierSide) {
+                            barrierside = (BarrierSide) this.fieldmatrix[x][y];
+                            if (barrierside.getSide() == 1) {
+                                break;
                             }
                         }
 
-                        for (Robot robot : players) {
-
-                            int x2 = robot.getXcoor();
-                            int y2 = robot.getYcoor();
-
-                            if (x2 == i2 && y2 == y) {
-                                robot.damageUp();
-                                z++;
+                        if (this.fieldmatrix[x][y] instanceof BarrierCorner) {
+                            barriercorner = (BarrierCorner) this.fieldmatrix[x][y];
+                            if (barriercorner.getCorner() == 1
+                                    || barriercorner.getCorner() == 4) {
+                                break;
                             }
                         }
-                    }
-                    break;
 
-                default:
-                    break;
+                        for (int i2 = (x - 1); i2 >= 0 && (z == 0); i2--) {
+
+                            if (this.fieldmatrix[i2][y] instanceof BarrierSide) {
+                                barrierside = (BarrierSide) this.fieldmatrix[i2][y];
+                                if (barrierside.getSide() == 3) {
+                                    break;
+                                }
+                                if (barrierside.getSide() == 1) {
+                                    z++;
+                                }
+                            }
+
+                            if (this.fieldmatrix[i2][y] instanceof BarrierCorner) {
+                                barriercorner = (BarrierCorner) this.fieldmatrix[i2][y];
+                                if (barriercorner.getCorner() == 2
+                                        || barriercorner.getCorner() == 3) {
+                                    break;
+                                }
+                                if (barriercorner.getCorner() == 1
+                                        || barriercorner.getCorner() == 4) {
+                                    z++;
+                                }
+                            }
+
+                            for (Robot robot : players) {
+
+                                int x2 = robot.getXcoor();
+                                int y2 = robot.getYcoor();
+
+                                if (x2 == i2 && y2 == y) {
+                                    robot.damageUp();
+                                    z++;
+                                }
+                            }
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
             }
-        } 
+        }
+    }
+
+    public static int getCheckpoint() {
+        return checkpoint;
     }
 }
