@@ -38,6 +38,7 @@ import htwk.mechawars.game.GameScreen;
 public class Board {
     public Field[][] fieldmatrix;
     private Field robotPosition;
+    private static int checkpoint;
 
     /**
      * Method that reads the game plan as a int matrix from a file and constructs the game board
@@ -188,6 +189,7 @@ public class Board {
                         if (Arrays.stream(allowed).anyMatch(x -> x == numberC)) {
                             this.fieldmatrix[col][cell] = new Checkpoint(col, cell, numberC,
                                     isTest);
+                            checkpoint++;
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
@@ -1068,5 +1070,9 @@ public class Board {
                 }
             }
         }
+    }
+
+    public static int getCheckpoint() {
+        return checkpoint;
     }
 }
