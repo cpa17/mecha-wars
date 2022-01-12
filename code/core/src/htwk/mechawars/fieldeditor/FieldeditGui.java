@@ -1,6 +1,5 @@
 package htwk.mechawars.fieldeditor;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Screen;
@@ -21,7 +20,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 
-import htwk.mechawars.MainMenu;
 import htwk.mechawars.fieldsfiedit.BarrierCorner;
 import htwk.mechawars.fieldsfiedit.BarrierSide;
 import htwk.mechawars.fieldsfiedit.BlackHole;
@@ -43,12 +41,11 @@ import htwk.mechawars.fieldsfiedit.StartField;
  *
  */ 
 public class FieldeditGui implements Screen {
-    
-    private Game gameFiEdit;
+
     private Stage stageFiEdit;
     private Texture img;
     private SpriteBatch batchFiEdit;
-    private static Board boardFiEdit;
+    private Board boardFiEdit;
     private int buttonWidth = 220;
     private int buttonHeight = 75;
     private int funcButtonPosX = Gdx.graphics.getHeight()
@@ -124,9 +121,7 @@ public class FieldeditGui implements Screen {
         backButton.setSize(buttonWidth, buttonHeight);
         backButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-
                 boardFiEdit = bfFiEdit.oneStepBack();
-                
             }
         });
         
@@ -142,14 +137,14 @@ public class FieldeditGui implements Screen {
         });
         
         TextField xpositionChangeField = new TextField("", skinFiEdit);
-        xpositionChangeField.setSize(buttonWidth / 2 + 50, buttonHeight / 2);
+        xpositionChangeField.setSize((int) (buttonWidth / 2.0) + 50, (int) (buttonHeight / 2.0));
         xpositionChangeField.setPosition(funcButtonPosX + 40, funcButtonPosY - 575);
         xpositionChangeField.setMessageText("X Position");
         xpositionChangeField.setAlignment(Align.center);
         
         
         TextField ypositionChangeField = new TextField("", skinFiEdit);
-        ypositionChangeField.setSize(buttonWidth / 2 + 50, buttonHeight / 2);
+        ypositionChangeField.setSize((int) (buttonWidth / 2.0) + 50, (int) (buttonHeight / 2.0));
         ypositionChangeField.setPosition(funcButtonPosX + 200, funcButtonPosY - 575);
         ypositionChangeField.setMessageText("Y Position");
         ypositionChangeField.setAlignment(Align.center);
@@ -157,7 +152,7 @@ public class FieldeditGui implements Screen {
         
         ImageButton barrierCornerButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "barriercorner/"
-                        + "BarrierCorner0" + String.valueOf(corner) + ".png"))));
+                        + "BarrierCorner0" + corner + ".png"))));
         barrierCornerButton.setSize(picButtonSize, picButtonSize);
         barrierCornerButton.setPosition(picButtonPosX, picButtonPosY);
         barrierCornerButton.addListener(new ClickListener(Buttons.RIGHT) {
@@ -166,7 +161,7 @@ public class FieldeditGui implements Screen {
                 ImageButtonStyle styleFiEdit = new ImageButtonStyle();
                 styleFiEdit.up = new TextureRegionDrawable(
                         new TextureRegion(new Texture("mapAssets/" + "barriercorner/"
-                                + "BarrierCorner0" + String.valueOf(corner) + ".png")));
+                                + "BarrierCorner0" + corner + ".png")));
                 barrierCornerButton.setStyle(styleFiEdit);
             }
         });
@@ -182,7 +177,7 @@ public class FieldeditGui implements Screen {
         
         ImageButton barrierSideButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "barrierside/"
-                        + "BarrierSide" + String.valueOf(side) + ".png"))));
+                        + "BarrierSide" + side + ".png"))));
         barrierSideButton.setSize(picButtonSize, picButtonSize);
         barrierSideButton.setPosition(picButtonPosX + 90, picButtonPosY);
         barrierSideButton.addListener(new ClickListener(Buttons.RIGHT) {
@@ -191,7 +186,7 @@ public class FieldeditGui implements Screen {
                 ImageButtonStyle styleFiEdit = new ImageButtonStyle();
                 styleFiEdit.up = new TextureRegionDrawable(
                       new TextureRegion(new Texture("mapAssets/" + "barrierside/"
-                              + "BarrierSide" + String.valueOf(side) + ".png")));
+                              + "BarrierSide" + side + ".png")));
                 barrierSideButton.setStyle(styleFiEdit);
             }
         });
@@ -243,8 +238,8 @@ public class FieldeditGui implements Screen {
         
         ImageButton conveyorBeltButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "conveyorBelt/"
-                        + "ConveyorBelt" + String.valueOf(startConveyor) 
-                        + String.valueOf(endConveyor) + ".png"))));
+                        + "ConveyorBelt" + startConveyor
+                        + endConveyor + ".png"))));
         conveyorBeltButton.setSize(picButtonSize, picButtonSize);
         conveyorBeltButton.setPosition(picButtonPosX + 90, picButtonPosY - 90);
         conveyorBeltButton.addListener(new ClickListener(Buttons.RIGHT) {
@@ -258,8 +253,8 @@ public class FieldeditGui implements Screen {
                 ImageButtonStyle styleFiEdit = new ImageButtonStyle();
                 styleFiEdit.up = new TextureRegionDrawable(
                       new TextureRegion(new Texture("mapAssets/" + "conveyorBelt/"
-                              + "ConveyorBelt" + String.valueOf(startConveyor) 
-                              + String.valueOf(endConveyor) + ".png")));
+                              + "ConveyorBelt" + startConveyor
+                              + endConveyor + ".png")));
                 conveyorBeltButton.setStyle(styleFiEdit);
             }
         });
@@ -275,8 +270,8 @@ public class FieldeditGui implements Screen {
         
         ImageButton expressConveyorBeltButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "expressconveyorBelt/"
-                        + "ExpressConveyorBelt" + String.valueOf(startExpressConveyor) 
-                        + String.valueOf(endExpressConveyor) + ".png"))));
+                        + "ExpressConveyorBelt" + startExpressConveyor
+                        + endExpressConveyor + ".png"))));
         expressConveyorBeltButton.setSize(picButtonSize, picButtonSize);
         expressConveyorBeltButton.setPosition(picButtonPosX + 180, picButtonPosY - 90);
         expressConveyorBeltButton.addListener(new ClickListener(Buttons.RIGHT) {
@@ -290,8 +285,8 @@ public class FieldeditGui implements Screen {
                 ImageButtonStyle styleFiEdit = new ImageButtonStyle();
                 styleFiEdit.up = new TextureRegionDrawable(
                       new TextureRegion(new Texture("mapAssets/" + "expressconveyorBelt/"
-                              + "ExpressConveyorBelt" + String.valueOf(startExpressConveyor) 
-                              + String.valueOf(endExpressConveyor) + ".png")));
+                              + "ExpressConveyorBelt" + startExpressConveyor
+                              + endExpressConveyor + ".png")));
                 expressConveyorBeltButton.setStyle(styleFiEdit);
             }
         });
@@ -342,7 +337,7 @@ public class FieldeditGui implements Screen {
         
         ImageButton laserButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "laser/"
-                        + "Laser0" + String.valueOf(typeLaserNum) + ".png"))));
+                        + "Laser0" + typeLaserNum + ".png"))));
         laserButton.setSize(picButtonSize, picButtonSize);
         laserButton.setPosition(picButtonPosX + 180, picButtonPosY - 180);
         laserButton.addListener(new ClickListener(Buttons.RIGHT) {
@@ -351,7 +346,7 @@ public class FieldeditGui implements Screen {
                 ImageButtonStyle styleFiEdit = new ImageButtonStyle();
                 styleFiEdit.up = new TextureRegionDrawable(
                       new TextureRegion(new Texture("mapAssets/" + "laser/"
-                              + "Laser0" + String.valueOf(typeLaserNum) + ".png")));
+                              + "Laser0" + typeLaserNum + ".png")));
                 laserButton.setStyle(styleFiEdit);
             }
         });
@@ -403,7 +398,7 @@ public class FieldeditGui implements Screen {
         
         ImageButton startFieldButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "startfield/"
-                        + "StartField0" + String.valueOf(startFieldNumber) + ".png"))));
+                        + "StartField0" + startFieldNumber + ".png"))));
         startFieldButton.setSize(picButtonSize, picButtonSize);
         startFieldButton.setPosition(picButtonPosX + 180, picButtonPosY - 270);
         startFieldButton.addListener(new ClickListener(Buttons.RIGHT) {
@@ -412,7 +407,7 @@ public class FieldeditGui implements Screen {
                 ImageButtonStyle styleFiEdit = new ImageButtonStyle();
                 styleFiEdit.up = new TextureRegionDrawable(
                       new TextureRegion(new Texture("mapAssets/" + "startfield/"
-                              + "StartField0" + String.valueOf(startFieldNumber) + ".png")));
+                              + "StartField0" + startFieldNumber + ".png")));
                 startFieldButton.setStyle(styleFiEdit);
             }
         });
@@ -427,7 +422,7 @@ public class FieldeditGui implements Screen {
         
         ImageButton pusherButton = new ImageButton(new TextureRegionDrawable(
                 new TextureRegion(new Texture("mapAssets/" + "pusher/"
-                        + "Pusher0" + String.valueOf(pusherNumber) + ".png"))));
+                        + "Pusher0" + pusherNumber + ".png"))));
         pusherButton.setSize(picButtonSize, picButtonSize);
         pusherButton.setPosition(picButtonPosX + 90, picButtonPosY - 360);
         pusherButton.addListener(new ClickListener(Buttons.RIGHT) {
@@ -436,7 +431,7 @@ public class FieldeditGui implements Screen {
                 ImageButtonStyle styleFiEdit = new ImageButtonStyle();
                 styleFiEdit.up = new TextureRegionDrawable(
                       new TextureRegion(new Texture("mapAssets/" + "pusher/"
-                              + "Pusher0" + String.valueOf(pusherNumber) + ".png")));
+                              + "Pusher0" + pusherNumber + ".png")));
                 pusherButton.setStyle(styleFiEdit);
             }
         });
@@ -471,16 +466,8 @@ public class FieldeditGui implements Screen {
        
         
     }
-    
-    /**
-     * changeScreen function to switch to GameScreen.
-     */
-    public void changeScreen() {
-        gameFiEdit.setScreen(new MainMenu(gameFiEdit));
-        stageFiEdit.dispose();
-    }
-    
-    private static void initBoardFiEdit(String fileName) {
+
+    private void initBoardFiEdit(String fileName) {
         boardFiEdit = new Board(fileName);
     }
 
@@ -504,10 +491,6 @@ public class FieldeditGui implements Screen {
         batchFiEdit.end();
         stageFiEdit.act(delta);
         stageFiEdit.draw();
-        
-        if (backToMain) {
-            //draw main Menu
-        }
     }
 
     @Override
@@ -598,10 +581,7 @@ public class FieldeditGui implements Screen {
     }
     
     private boolean checkChangeField(String x, String y) {
-        if (x.length() != 0 && y.length() != 0 && x.matches("[+-]?\\d*(\\.\\d+)?") &&
-                y.matches("[+-]?\\d*(\\.\\d+)?")) {
-            return true;
-        }
-        return false;
+        return x.length() != 0 && y.length() != 0 && x.matches("[+-]?\\d*(\\.\\d+)?") &&
+                y.matches("[+-]?\\d*(\\.\\d+)?");
     }
 }

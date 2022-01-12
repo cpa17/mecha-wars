@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -19,8 +21,6 @@ import htwk.mechawars.fieldsfiedit.StandardField;
  *
  */
 public class ButtonfunctionsFieldEditor {
-
-    private Board currentField;
     private FieldBackupForBackStep backup = new FieldBackupForBackStep();
 
     public ButtonfunctionsFieldEditor() {
@@ -32,13 +32,9 @@ public class ButtonfunctionsFieldEditor {
      * @param t -> says if the functions will be called.
      */
     public ButtonfunctionsFieldEditor(boolean t) {
-        Board board;
+        Board board = null;
         if (t) {
             board = new Board("..\\core\\assets\\maps\\test.txt");
-        } else {
-            board = currentField;
-        }
-        if (t) {
             importField();
             exportField(board);
             resetField(board);
@@ -90,12 +86,10 @@ public class ButtonfunctionsFieldEditor {
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File fileToSave = fileChooser.getSelectedFile();
             if (!fileToSave.getAbsolutePath().endsWith(".txt")) {
-                fileToSave = new File(fileToSave.getAbsoluteFile().toString() + ".txt");
+                fileToSave = new File(fileToSave.getAbsoluteFile() + ".txt");
             } else {
                 fileToSave = new File(fileToSave.getAbsoluteFile().toString());
             }
-            // make every String in Lower-Case, so there are no misstakes, when open it in the Game
-            fileToSave.getName().toLowerCase();
             save(fileToSave, board);
         }
 
@@ -111,7 +105,8 @@ public class ButtonfunctionsFieldEditor {
         OutputStream ostream;
         try {
             ostream = new FileOutputStream(file);
-            PrintWriter schreiber = new PrintWriter(ostream);
+            PrintWriter schreiber =
+                    new PrintWriter(new OutputStreamWriter(ostream, StandardCharsets.UTF_8), true);
 
             for (int index = 0; index < board.fieldmatrix.length; index += 1) {
                 for (int row = 0; row < board.fieldmatrix[index].length; row += 1) {
