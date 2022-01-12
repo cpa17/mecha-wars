@@ -23,7 +23,6 @@ public class ScrollPanel {
     protected static final int damagePoints = 0;
     static final TextButton[] buttons = new TextButton[9];
     private static Deck deck = new Deck();
-    private static boolean round1 = true;
 
     private static Table table = new Table();
     private static final ScrollPane scrollPanel = new ScrollPane(table, GameScreen.skin);
@@ -42,15 +41,8 @@ public class ScrollPanel {
         Robot.getPlayers()[0].damageUp();
         if (10 > Robot.getPlayers()[0].getDamagePoints() 
                 && Robot.getPlayers()[0].getDamagePoints() > 4) {
-            System.out.println("Red");
             
             for (int i = 5; i > (4 - (Robot.getPlayers()[0].getDamagePoints() - 5)); i -= 1) {
-                
-                System.out.print(cardOrder[0].getCardAttributePriority());
-                System.out.print(cardOrder[1].getCardAttributePriority());
-                System.out.print(cardOrder[2].getCardAttributePriority());
-                System.out.print(cardOrder[3].getCardAttributePriority());
-                System.out.println(cardOrder[4].getCardAttributePriority());
                 
                 Card currentCard = cardOrder[i-1];
                 
@@ -122,17 +114,29 @@ public class ScrollPanel {
      */
     protected static boolean buttonClickOrder(int buttonNumber, Card card) {
         if(pressCounter < 6) {
+            //Card already pressed
             if(card == cardOrder[0] || card == cardOrder[1] || card == cardOrder[2]
                     || card == cardOrder[3] || card == cardOrder[4]) {
                 pressCounter -= 1;
                 return false;
+            //Card not pressed yet
             } else {
                 buttons[buttonNumber - 1].setText(card.getCardAttributePriority()
                         + " - " + card + " " + (buttonNumber));
                 buttons[buttonNumber - 1].setColor(Color.GREEN);
-                cardOrder[pressCounter - 1] = card; //fehlerhaft
+                //while more than 4 damage --> pressCounter has offset of (damage - 4)
+                if (Robot.getPlayers()[0].getDamagePoints() > 4) {
+                    cardOrder[pressCounter 
+                              - (Robot.getPlayers()[0].getDamagePoints() - 3)] = card;
+                    System.out.println(pressCounter 
+                              - (Robot.getPlayers()[0].getDamagePoints() - 5));
+                } else {
+                    cardOrder[pressCounter - 1] = card;
+                }
                 return true;
+                
             }
+            
         } else {
               return false;
         }
@@ -156,7 +160,6 @@ public class ScrollPanel {
                 cardOrder[i] = null;
             }
             pressCounter = Robot.getPlayers()[0].getDamagePoints() - 4;
-            System.out.println(pressCounter);
         }
         
     }
@@ -190,12 +193,6 @@ public class ScrollPanel {
     }
     
     public static boolean allChosen() {
-//        if(cardOrder[0] != null && cardOrder[1] != null && cardOrder[2] != null 
-//                && cardOrder[3] != null && cardOrder[4] != null 
-//                || cardOrder[0] == null && cardOrder[1] != null
-//                || cardOrder[1] == null && cardOrder[2] != null
-//                || cardOrder[2] == null && cardOrder[3] != null
-//                || cardOrder[3] == null && cardOrder[4] != null) {
         if (pressCounter == 5) {
             return true;
         } else {
