@@ -26,7 +26,6 @@ public class ScrollPanel {
     private static Deck deck = new Deck();
     private static boolean round1 = true;
 
-
     private static Table table = new Table();
     private static final ScrollPane scrollPanel = new ScrollPane(table, GameScreen.skin);
 
@@ -38,6 +37,11 @@ public class ScrollPanel {
     public static ScrollPane scrollPanel(Skin skin) {
         // shuffle Deck
         deck.shuffle();
+        
+        Robot.getPlayers()[0].damageUp();
+        Robot.getPlayers()[0].damageUp();
+        Robot.getPlayers()[0].damageUp();
+        Robot.getPlayers()[0].damageUp();
         
         if (Robot.getPlayers()[0].getDamagePoints() > 4 
                 && !Robot.getPlayers()[0].getDestroyed()) {
@@ -52,21 +56,22 @@ public class ScrollPanel {
                 buttons[i].setTouchable(Touchable.disabled);
                 table.row();
                 table.add(buttons[i]);
+                System.out.println("Buttons ROT");
             }
             
-            for (int i = 0; i < (9 - Robot.getPlayers()[0].getDamagePoints()); i += 1) {
+            for (int j = 0; j < (9 - Robot.getPlayers()[0].getDamagePoints()); j += 1) {
                 
-                Card currentCard = deck.getDeck().get(i);
+                Card currentCard = deck.getDeck().get(j);
                 
-                buttons[i] = new TextButton(currentCard.getCardAttributePriority()
+                buttons[j] = new TextButton(currentCard.getCardAttributePriority()
                         + " - " + currentCard, skin);
                 table.row();
-                table.add(buttons[i]);
+                table.add(buttons[j]);
                 
-                int buttonNumber = i + 1;
+                int buttonNumber = j + 1;
                 
                 // Button-ClickListener
-                buttons[i].addListener(new ClickListener() {
+                buttons[j].addListener(new ClickListener() {
                         public void clicked(InputEvent event, float x, float y) {
                             pressCounter += 1;
                             if (buttonClickOrder(buttonNumber, currentCard)) {
@@ -75,6 +80,7 @@ public class ScrollPanel {
                             }
                         }
                 });
+                System.out.println("Buttons ROT/GRUEN");
                 
             }
             
@@ -101,7 +107,8 @@ public class ScrollPanel {
                             }
                         }
                 });
-                
+
+                System.out.println("Buttons GRUEN");
             }
             
         }
