@@ -138,7 +138,7 @@ public class ScrollPanel {
             }
             
         } else {
-          return false;
+            return false;
         }
     }
 
@@ -193,7 +193,6 @@ public class ScrollPanel {
     }
     
     /**
-     *
      * Returns if all cards are chosen.
      * 
      * @return --> all cards chosen
