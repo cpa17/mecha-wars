@@ -1,8 +1,6 @@
 package htwk.mechawars.board;
 
 import htwk.mechawars.ConfigReader;
-import htwk.mechawars.ai.AiCardGeneration;
-import htwk.mechawars.ai.AiInterface;
 import htwk.mechawars.ai.AiManager;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.Deck;
@@ -43,6 +41,7 @@ import htwk.mechawars.game.GameScreen;
 public class Board {
     public Field[][] fieldmatrix;
     private Field robotPosition;
+    private static int checkpoint;
 
     /**
      * Method that reads the game plan as a int matrix from a file and constructs the game board
@@ -193,6 +192,7 @@ public class Board {
                         if (Arrays.stream(allowed).anyMatch(x -> x == numberC)) {
                             this.fieldmatrix[col][cell] = new Checkpoint(col, cell, numberC,
                                     isTest);
+                            checkpoint++;
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
@@ -842,8 +842,6 @@ public class Board {
         for (Robot player : players) {
             if (player.getLifePoints() > 0 && !player.getDestroyed() && !player.getShutDown()) {
 
-                System.out.println(player);
-
                 int x = player.getXcoor();
                 int y = player.getYcoor();
 
@@ -1085,6 +1083,11 @@ public class Board {
         }
         
         return 9 - damage;  
+    }
+
+
+    public static int getCheckpoint() {
+        return checkpoint;
     }
 
 }
