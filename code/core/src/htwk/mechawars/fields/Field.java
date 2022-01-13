@@ -199,32 +199,6 @@ public class Field {
         return barrierBottom;
     }
 
-    // Setters. ------------------------------------------------------------------------------
-
-    public void setLaserVertical(int laserVertical) {
-        this.laserVertical = laserVertical;
-    }
-
-    public void setLaserHorizontal(int laserHorizontal) {
-        this.laserHorizontal = laserHorizontal;
-    }
-
-    public void setBarrierLeft(boolean barrierLeft) {
-        this.barrierLeft = barrierLeft;
-    }
-
-    public void setBarrierTop(boolean barrierTop) {
-        this.barrierTop = barrierTop;
-    }
-
-    public void setBarrierRight(boolean barrierRight) {
-        this.barrierRight = barrierRight;
-    }
-
-    public void setBarrierBottom(boolean barrierBottom) {
-        this.barrierBottom = barrierBottom;
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
