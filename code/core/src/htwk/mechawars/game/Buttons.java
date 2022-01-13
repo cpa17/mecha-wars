@@ -42,8 +42,8 @@ public class Buttons {
                     //If All Cards are chosen
                     if (ScrollPanel.allChosen()) {
                         deactivateButtons();
-                        startExecutionButton.setTouchable(Touchable.disabled);
                         board.move(players, false);
+
                         Timer.schedule(new Timer.Task() {
                             @Override
                             public void run() {
@@ -51,26 +51,19 @@ public class Buttons {
                                 startExecutionButton.setColor(Color.LIGHT_GRAY);
                                 ScrollPanel.cardOrderClear();
                                 activateButtons();
-
-                                startExecutionButton.setTouchable(Touchable.enabled);
+                                setButtons(players);
+                                ScrollPanel.clearScrollPanel(skin);
                             }
                         }, (ConfigReader.getPlayerNumber() * 5) + 5);
-
-                        setButtons(players);
-                        ScrollPanel.clearScrollPanel(skin);
                     } else {
                         startExecutionButton.setColor(Color.RED);
                     }
                 } else {
 
                     System.out.println(players[0].getShutDown());
-
                     deactivateButtons();
-
                     board.move(players, false);
 
-                    players[0].resetList();
-                    startExecutionButton.setColor(Color.LIGHT_GRAY);
                     Timer.schedule(new Timer.Task() {
                         @Override
                         public void run() {
@@ -201,12 +194,12 @@ public class Buttons {
         // add Button for hint and infos
         Button buttonInfo = new TextButton("Infos", skin);
 
-        int a = 60;     // width
-        int b = 40;     // height
+        int width = 60;
+        int height = 40;
 
-        buttonInfo.setSize(a, b);
-        int buttonInfoX = Gdx.graphics.getWidth() - (a + 10);
-        int buttonInfoY = Gdx.graphics.getHeight() - (b + 10);
+        buttonInfo.setSize(width, height);
+        int buttonInfoX = Gdx.graphics.getWidth() - (width + 10);
+        int buttonInfoY = Gdx.graphics.getHeight() - (height + 10);
 
         buttonInfo.setPosition(buttonInfoX, buttonInfoY);
 
@@ -282,7 +275,7 @@ public class Buttons {
      * @param players Array of Robots.
      */
     static void setButtons(Robot[] players) {
-        if (players[0].getShutDown()) {
+        if (players[0].getNextRound()) {
             GameScreen.removeCardOrder.setTouchable(Touchable.disabled);
             GameScreen.removeCardOrder.setDisabled(true);
             GameScreen.shutDownButton.setTouchable(Touchable.disabled);

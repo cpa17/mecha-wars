@@ -1,0 +1,110 @@
+Name der ".png"		Codierung der ".txt"	Beschreibung		Klasse
+
+BarrierCorner01		10001			links oben		BarrierCorner
+BarrierCorner02		10002			rechts oben
+BarrierCorner03		10003			rechts unten
+BarrierCorner04		10004			links unten
+
+BarrierSide1		10101			links			BarrierSide
+BarrierSide2		10102			oben
+BarrierSide3		10103			rechts
+BarrierSide4		10104			unten
+
+BlackHole		10200						Black Hole
+
+Pusher01		10301			horizontal 2, 4		Pusher
+Pusher02		10302			horizontal 1, 3, 5
+Pusher03		10303			vertikal 2, 4
+Pusher04		10304			vertikal 1, 3, 5
+
+Check1			10401						Checkpoint
+Check2			10402
+Check3			10403
+Check4			10404
+Check5			10405
+Check6			10406
+Check7			10407
+Check8			10408
+
+ConveyorBelt02		10502			links + unten --> oben	ConveyorBelt
+ConveyorBelt03		10503			links + unten --> rechts
+ConveyorBelt12		10512			links 	      --> oben
+ConveyorBelt13		10513			links	      --> rechts
+ConveyorBelt14		10514			links	      --> unten
+ConveyorBelt21		10521			oben	      --> links
+ConveyorBelt23		10523			oben	      --> rechts
+ConveyorBelt24		10524			oben	      --> unten
+ConveyorBelt31		10531			rechts	      --> links
+ConveyorBelt32		10532			rechts	      --> oben
+ConveyorBelt34		10534			rechts	      --> unten
+ConveyorBelt41		10541			unten	      --> links
+ConveyorBelt42		10542			unten	      --> oben
+ConveyorBelt43		10543			unten	      --> rechts
+ConveyorBelt52		10552			links + rechts--> oben
+ConveyorBelt54		10554			links + rechts--> unten
+ConveyorBelt61		10561			oben + unten  --> links
+ConveyorBelt63		10563			oben + unten  --> rechts
+ConveyorBelt71		10571			rechts + oben --> links
+ConveyorBelt74		10574			rechts + oben --> unten
+ConveyorBelt83		10583			links + oben  --> rechts
+ConveyorBelt84		10584			links + oben  --> unten
+ConveyorBelt91		10591			rechts + unten--> links
+ConveyorBelt92		10592			rechts + unten--> oben
+
+ExpressConveyorBelt02	10602			links + unten --> oben	ExpressConveyorBelt
+ExpressConveyorBelt03	10603			links + unten --> rechts
+ExpressConveyorBelt12	10612			links 	      --> oben
+ExpressConveyorBelt13	10613			links	      --> rechts
+ExpressConveyorBelt14	10614			links	      --> unten
+ExpressConveyorBelt21	10621			oben	      --> links
+ExpressConveyorBelt23	10623			oben	      --> rechts
+ExpressConveyorBelt24	10624			oben	      --> unten
+ExpressConveyorBelt31	10631			rechts	      --> links
+ExpressConveyorBelt32	10632			rechts	      --> oben
+ExpressConveyorBelt34	10634			rechts	      --> unten
+ExpressConveyorBelt41	10641			unten	      --> links
+ExpressConveyorBelt42	10642			unten	      --> oben
+ExpressConveyorBelt43	10643			unten	      --> rechts
+ExpressConveyorBelt52	10652			links + rechts--> oben
+ExpressConveyorBelt54	10654			links + rechts--> unten
+ExpressConveyorBelt61	10661			oben + unten  --> links
+ExpressConveyorBelt63	10663			oben + unten  --> rechts
+ExpressConveyorBelt71	10671			rechts + oben --> links
+ExpressConveyorBelt74	10674			rechts + oben --> unten
+ExpressConveyorBelt83	10683			links + oben  --> rechts
+ExpressConveyorBelt84	10684			links + oben  --> unten
+ExpressConveyorBelt91	10691			rechts + unten--> links
+ExpressConveyorBelt92	10692			rechts + unten--> oben
+
+Gear01			10701			rechtsrum		Gear
+Gear02			10702			linksrum
+
+Laser00			10800			Beginn links		Laser
+Laser01			10801			Beginn oben
+Laser02			10802			Beginn rechts
+Laser03			10803			Beginn unten
+Laser04			10804			Mittelteil horizontal
+Laser05			10805			Mittelteil vertikal
+Laser06			10806			Ende links
+Laser07			10807			Ende oben
+Laser08			10808			Ende rechts
+Laser09			10809			Ende unten
+
+RepairSite01		10901			Einfaches Reparaturfeld	RepairSite
+RepairSite02		10902			Doppeltes Reparaturfeld
+
+StandardField		11000			Feld ohne Funktion	StandardField
+
+StartField01		11101			Nummer 1		StartField
+StartField02		11102			Nummer 2
+StartField03		11103			Nummer 3
+StartField04		11104			Nummer 4
+StartField05		11105			Nummer 5
+StartField06		11106			Nummer 6
+StartField07		11107			Nummer 7
+StartField08		11108			Nummer 8
+
+
+
+
+//kblechsc hat es in die eigene Hand genommen das ganze einmal ordentlich zusammen zu fuehren :)

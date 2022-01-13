@@ -634,7 +634,7 @@ public class Robot {
     }
     
     public void setDamage(int damage) {
-        damagePoints += damage;
+        damagePoints = damage;
     }
     
     /**
@@ -719,7 +719,6 @@ public class Robot {
                         break;
 
             case 10:    damage = new Texture(Gdx.files.internal("parameters/damage10.png"));
-                        backupDraw = true;
                         break;
 
             default:    break;

@@ -35,14 +35,14 @@ public class ScrollPanel {
     public static ScrollPane scrollPanel(Skin skin) {
         // shuffle Deck
         deck.shuffle();
-        
-        if (10 > Robot.getPlayers()[0].getDamagePoints() 
+
+        if (10 > Robot.getPlayers()[0].getDamagePoints()
                 && Robot.getPlayers()[0].getDamagePoints() > 4) {
-            
+
             for (int i = 5; i > (4 - (Robot.getPlayers()[0].getDamagePoints() - 5)); i -= 1) {
-                
+
                 Card currentCard = cardOrder[i - 1];
-                
+
                 buttons[i - 1] = new TextButton(currentCard.getCardAttributePriority()
                     + " - " + currentCard + " " + (i), skin);
                 buttons[i - 1].setColor(Color.RED);
@@ -50,18 +50,18 @@ public class ScrollPanel {
                 table.row();
                 table.add(buttons[i - 1]);
             }
-            
+
             for (int j = 0; j < (9 - Robot.getPlayers()[0].getDamagePoints()); j += 1) {
-                
+
                 Card currentCard = deck.getDeck().get(j);
-                
+
                 buttons[j] = new TextButton(currentCard.getCardAttributePriority()
                         + " - " + currentCard, skin);
                 table.row();
                 table.add(buttons[j]);
-                
+
                 int buttonNumber = j + 1;
-                
+
                 // Button-ClickListener
                 buttons[j].addListener(new ClickListener() {
                         public void clicked(InputEvent event, float x, float y) {
@@ -72,22 +72,22 @@ public class ScrollPanel {
                             }
                         }
                 });
-                
+
             }
-            
+
         } else if (!Robot.getPlayers()[0].getDestroyed()) {
-            
+
             for (int i = 0; i < (9 - Robot.getPlayers()[0].getDamagePoints()); i += 1) {
 
                 Card currentCard = deck.getDeck().get(i);
-                
+
                 buttons[i] = new TextButton(currentCard.getCardAttributePriority()
                         + " - " + currentCard, skin);
                 table.row();
                 table.add(buttons[i]);
-                
+
                 int buttonNumber = i + 1;
-                
+
                 // Button-ClickListener
                 buttons[i].addListener(new ClickListener() {
                         public void clicked(InputEvent event, float x, float y) {
@@ -99,7 +99,7 @@ public class ScrollPanel {
                         }
                 });
             }
-            
+
         }
         return scrollPanel;
     }
@@ -121,11 +121,11 @@ public class ScrollPanel {
                 //while more than 4 damage --> pressCounter has offset of (damage - 4)
                 if (Robot.getPlayers()[0].getDamagePoints() > 4) {
                     buttons[buttonNumber - 1].setText(card.getCardAttributePriority()
-                            + " - " + card + " " + (pressCounter 
+                            + " - " + card + " " + (pressCounter
                             - (Robot.getPlayers()[0].getDamagePoints() - 3)));
-                    cardOrder[pressCounter 
+                    cardOrder[pressCounter
                               - (Robot.getPlayers()[0].getDamagePoints() - 3)] = card;
-                    System.out.println(pressCounter 
+                    System.out.println(pressCounter
                               - (Robot.getPlayers()[0].getDamagePoints() - 5));
                 } else {
                     buttons[buttonNumber - 1].setText(card.getCardAttributePriority()
@@ -134,9 +134,9 @@ public class ScrollPanel {
                 }
                 buttons[buttonNumber - 1].setColor(Color.GREEN);
                 return true;
-                
+
             }
-            
+
         } else {
             return false;
         }
@@ -146,7 +146,6 @@ public class ScrollPanel {
      * Initialize cardOrder[] to non reachable values.
      */
     protected static void cardOrderClear() {
-        
         if (Robot.getPlayers()[0].getDamagePoints() < 5) {
             cardOrder[0] = null;
             cardOrder[1] = null;
@@ -161,18 +160,21 @@ public class ScrollPanel {
             }
             pressCounter = Robot.getPlayers()[0].getDamagePoints() - 4;
         }
-        
+
     }
 
     /**
      *  Renames every button to " - " and sets the button color to light grey.
      */
     private static void buttonsClean() {
-        for (int i = 0; i < 9; i += 1) {
+        for (int i = 0; i < choosableCardCount; i += 1) {
             if (buttons[i] != null) {
                 buttons[i].setColor(Color.LIGHT_GRAY);
-                buttons[i].setText(deck.getDeck().get(i).getCardAttributePriority() 
-                        + " - " + deck.getDeck().get(i));
+                String str = buttons[i].getText() + " ";
+                if (str.contains(" | Nr: ")) {
+                    str = str.substring(0, str.length() - 9);
+                    buttons[i].setText(str);
+                }
             }
         }
     }
@@ -191,10 +193,10 @@ public class ScrollPanel {
     public static void setDeck(Deck deck) {
         ScrollPanel.deck = deck;
     }
-    
+
     /**
      * Returns if all cards are chosen.
-     * 
+     *
      * @return --> all cards chosen
      */
     public static boolean allChosen() {
