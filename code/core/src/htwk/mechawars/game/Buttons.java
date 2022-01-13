@@ -50,11 +50,11 @@ public class Buttons {
                                 players[0].resetList();
                                 startExecutionButton.setColor(Color.LIGHT_GRAY);
                                 ScrollPanel.cardOrderClear();
-                                activateButtons();
                                 setButtons(players);
-                                ScrollPanel.clearScrollPanel(skin);
+                                activateButtons();
                             }
                         }, (ConfigReader.getPlayerNumber() * 5) + 5);
+                        ScrollPanel.clearScrollPanel(skin);
                     } else {
                         startExecutionButton.setColor(Color.RED);
                     }
@@ -70,11 +70,11 @@ public class Buttons {
                             players[0].resetList();
                             startExecutionButton.setColor(Color.LIGHT_GRAY);
                             ScrollPanel.cardOrderClear();
-                            activateButtons();
                             setButtons(players);
-                            ScrollPanel.clearScrollPanel(skin);
+                            activateButtons();
                         }
                     }, (ConfigReader.getPlayerNumber() * 5) + 5);
+                    ScrollPanel.clearScrollPanel(skin);
                 }
             }
         });

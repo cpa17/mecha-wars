@@ -40,11 +40,13 @@ public class ScrollPanel {
                 && Robot.getPlayers()[0].getDamagePoints() > 4) {
 
             for (int i = 5; i > (4 - (Robot.getPlayers()[0].getDamagePoints() - 5)); i -= 1) {
-
                 Card currentCard = cardOrder[i - 1];
+                for (int k = 0; k < 5; k++) {
+                    System.out.println(cardOrder[k]);
+                }
 
                 buttons[i - 1] = new TextButton(currentCard.getCardAttributePriority()
-                    + " - " + currentCard + " " + (i), skin);
+                    + " - " + currentCard + " | Nr. " + (i), skin);
                 buttons[i - 1].setColor(Color.RED);
                 buttons[i - 1].setTouchable(Touchable.disabled);
                 table.row();
@@ -52,7 +54,6 @@ public class ScrollPanel {
             }
 
             for (int j = 0; j < (9 - Robot.getPlayers()[0].getDamagePoints()); j += 1) {
-
                 Card currentCard = deck.getDeck().get(j);
 
                 buttons[j] = new TextButton(currentCard.getCardAttributePriority()
@@ -101,6 +102,7 @@ public class ScrollPanel {
             }
 
         }
+
         return scrollPanel;
     }
 
@@ -121,15 +123,15 @@ public class ScrollPanel {
                 //while more than 4 damage --> pressCounter has offset of (damage - 4)
                 if (Robot.getPlayers()[0].getDamagePoints() > 4) {
                     buttons[buttonNumber - 1].setText(card.getCardAttributePriority()
-                            + " - " + card + " " + (pressCounter
-                            - (Robot.getPlayers()[0].getDamagePoints() - 3)));
+                            + " - " + card + " | Nr. " + (pressCounter
+                            - (Robot.getPlayers()[0].getDamagePoints() - 4)));
                     cardOrder[pressCounter
                               - (Robot.getPlayers()[0].getDamagePoints() - 3)] = card;
                     System.out.println(pressCounter
                               - (Robot.getPlayers()[0].getDamagePoints() - 5));
                 } else {
                     buttons[buttonNumber - 1].setText(card.getCardAttributePriority()
-                            + " - " + card + " " + (pressCounter));
+                            + " - " + card + " | Nr. " + (pressCounter));
                     cardOrder[pressCounter - 1] = card;
                 }
                 buttons[buttonNumber - 1].setColor(Color.GREEN);
@@ -167,11 +169,11 @@ public class ScrollPanel {
      *  Renames every button to " - " and sets the button color to light grey.
      */
     private static void buttonsClean() {
-        for (int i = 0; i < choosableCardCount; i += 1) {
+        for (int i = 0; i < 9; i += 1) {
             if (buttons[i] != null) {
                 buttons[i].setColor(Color.LIGHT_GRAY);
                 String str = buttons[i].getText() + " ";
-                if (str.contains(" | Nr: ")) {
+                if (str.contains(" | Nr. ")) {
                     str = str.substring(0, str.length() - 9);
                     buttons[i].setText(str);
                 }
@@ -200,11 +202,7 @@ public class ScrollPanel {
      * @return --> all cards chosen
      */
     public static boolean allChosen() {
-        if (pressCounter == 5) {
-            return true;
-        } else {
-            return false;
-        }
+        return pressCounter == 5;
     }
 
 }
