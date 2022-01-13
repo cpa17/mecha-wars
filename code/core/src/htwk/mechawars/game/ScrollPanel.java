@@ -118,18 +118,21 @@ public class ScrollPanel {
                 return false;
             //Card not pressed yet
             } else {
-                buttons[buttonNumber - 1].setText(card.getCardAttributePriority()
-                        + " - " + card + " " + (buttonNumber));
-                buttons[buttonNumber - 1].setColor(Color.GREEN);
                 //while more than 4 damage --> pressCounter has offset of (damage - 4)
                 if (Robot.getPlayers()[0].getDamagePoints() > 4) {
+                    buttons[buttonNumber - 1].setText(card.getCardAttributePriority()
+                            + " - " + card + " " + (pressCounter 
+                            - (Robot.getPlayers()[0].getDamagePoints() - 3)));
                     cardOrder[pressCounter 
                               - (Robot.getPlayers()[0].getDamagePoints() - 3)] = card;
                     System.out.println(pressCounter 
                               - (Robot.getPlayers()[0].getDamagePoints() - 5));
                 } else {
+                    buttons[buttonNumber - 1].setText(card.getCardAttributePriority()
+                            + " - " + card + " " + (pressCounter));
                     cardOrder[pressCounter - 1] = card;
                 }
+                buttons[buttonNumber - 1].setColor(Color.GREEN);
                 return true;
                 
             }
