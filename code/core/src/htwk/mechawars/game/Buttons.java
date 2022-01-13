@@ -40,7 +40,7 @@ public class Buttons {
             public void clicked(InputEvent event, float x, float y) {
                 if (!players[0].getShutDown()) {
                     //If All Cards are chosen
-                    if (ScrollPanel.cardOrder[4 - ScrollPanel.damagePoints] != -1) {
+                    if (ScrollPanel.allChosen()) {
                         deactivateButtons();
                         board.move(players, false);
 
@@ -50,11 +50,11 @@ public class Buttons {
                                 players[0].resetList();
                                 startExecutionButton.setColor(Color.LIGHT_GRAY);
                                 ScrollPanel.cardOrderClear();
-                                activateButtons();
                                 setButtons(players);
-                                ScrollPanel.clearScrollPanel(skin, players);
+                                activateButtons();
                             }
                         }, (ConfigReader.getPlayerNumber() * 5) + 5);
+                        ScrollPanel.clearScrollPanel(skin);
                     } else {
                         startExecutionButton.setColor(Color.RED);
                     }
@@ -70,11 +70,11 @@ public class Buttons {
                             players[0].resetList();
                             startExecutionButton.setColor(Color.LIGHT_GRAY);
                             ScrollPanel.cardOrderClear();
-                            activateButtons();
                             setButtons(players);
-                            ScrollPanel.clearScrollPanel(skin, players);
+                            activateButtons();
                         }
                     }, (ConfigReader.getPlayerNumber() * 5) + 5);
+                    ScrollPanel.clearScrollPanel(skin);
                 }
             }
         });
@@ -158,7 +158,9 @@ public class Buttons {
      */
     protected static void deactivateButtons() {
         for (TextButton button : ScrollPanel.buttons) {
-            button.setTouchable(Touchable.disabled);
+            if  (button != null) {
+                button.setTouchable(Touchable.disabled);
+            }
         }
         GameScreen.removeCardOrder.setTouchable(Touchable.disabled);
         GameScreen.startExecutionButton.setTouchable(Touchable.disabled);
@@ -171,7 +173,9 @@ public class Buttons {
      */
     protected static void activateButtons() {
         for (TextButton button : ScrollPanel.buttons) {
-            button.setTouchable(Touchable.enabled);
+            if (button != null) {
+                button.setTouchable(Touchable.enabled);
+            }
         }
         GameScreen.removeCardOrder.setTouchable(Touchable.enabled);
         GameScreen.startExecutionButton.setTouchable(Touchable.enabled);
