@@ -14,7 +14,7 @@ public class Laser extends Field {
     // 0 = begin left, 1 = begin top, 2 = begin right, 3 = begin bottom,
     // 4 = center horizontal, 5 = center vertical,
     // 6 = end left, 7 = end top, 8 = end right, 9 = end bottom
-    private int type;
+    final int type;
     private Texture tile;
 
     /**

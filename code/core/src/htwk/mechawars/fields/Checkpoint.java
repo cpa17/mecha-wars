@@ -12,7 +12,7 @@ import htwk.mechawars.game.GameScreen;
 public class Checkpoint extends Field {
 
     // attribute which indicates the number of a certain checkpoint
-    private int number;
+    final int number;
     private Texture tile;
 
     /**
