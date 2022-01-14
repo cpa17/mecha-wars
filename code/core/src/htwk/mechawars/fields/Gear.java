@@ -9,7 +9,7 @@ import htwk.mechawars.board.Robot;
  */
 public class Gear extends Field {
 
-    private int direction;
+    final int direction;
     private Texture tile;
 
     /**
