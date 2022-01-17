@@ -1,7 +1,7 @@
 package htwk.mechawars.board;
 
 import htwk.mechawars.ConfigReader;
-import htwk.mechawars.cards.AiCardGeneration;
+import htwk.mechawars.ai.AiManager;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.Deck;
 import htwk.mechawars.cards.Type;
@@ -18,6 +18,7 @@ import htwk.mechawars.fields.Laser;
 import htwk.mechawars.fields.RepairSite;
 import htwk.mechawars.fields.StandardField;
 import htwk.mechawars.fields.StartField;
+import htwk.mechawars.game.ScrollPanel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,6 +32,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import htwk.mechawars.game.GameScreen;
+
+//import ai.AiCardGeneration;
 
 /**
  * Class that presents the game board.
@@ -397,10 +400,12 @@ public class Board {
                                                             each List for one Players cards*/
                 maxCardCount = players[0].getSelectedCards().size();
             } else {
-                if (ConfigReader.getAimodes()[i]) {
-
+                if (ConfigReader.getAimodes()[i] != 0) {
+                    AiManager m = new AiManager();
                     LinkedList<Card> generatedCards =
-                            AiCardGeneration.generateRandomAiCardsfromDeck(i);
+                            m.getAi(ConfigReader.getAimodes()[i])
+                            .generateCards(ScrollPanel.getDeck().getDeck(), 
+                                    i, getNumberOfChoosableCards(players[i].getDamagePoints()));
                     // Random Cards generation for the AI-Players
                     allCards.add(generatedCards);
                     maxCardCount = Integer.max(generatedCards.size(), maxCardCount);
@@ -1071,8 +1076,18 @@ public class Board {
             }
         }
     }
+    
+    private static int getNumberOfChoosableCards(int damage) {
+        if (damage < 5) {
+            return 5;
+        }
+        
+        return 9 - damage;  
+    }
+
 
     public static int getCheckpoint() {
         return checkpoint;
     }
+
 }
