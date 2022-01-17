@@ -24,7 +24,7 @@ public class ConfigReader {
             new Point(7, 7), 
             new Point(8, 8)
     };
-    private static LinkedList<String> aiList = new LinkedList<String>();
+    private static LinkedList<String> aiList = new LinkedList<>();
     
     /**
      * Function that reads the Game Configurations from Startupconfig.txt.
@@ -45,7 +45,7 @@ public class ConfigReader {
      */
     private static void readConfig(String line) {
         // TODO Auto-generated method stub
-        aiList = new LinkedList<String>();
+        aiList = new LinkedList<>();
         if (line.contains("playerNumber")) {
             playerNumber = Integer.parseInt(line.replaceAll("\\D+", ""));
         }
@@ -78,8 +78,7 @@ public class ConfigReader {
      * @return Array of the ai mode of each individual Player.
      */
     public static int[] getAimodes() {
-        int[] aiModesCopy = aiModes;
-        return aiModesCopy;
+        return aiModes;
     }
 
     /**
@@ -88,8 +87,7 @@ public class ConfigReader {
      * @return Array of the starting position of each individual Player.
      */
     public static Point[] getPlayerStartingPositions() {
-        Point[] playerPointsCopy = playerStartingPositions;
-        return playerPointsCopy;
+        return playerStartingPositions;
     }
 
 
@@ -99,8 +97,7 @@ public class ConfigReader {
      * @return the number of players.
      */
     public static int getPlayerNumber() {
-        int playerNumberCopy = playerNumber;
-        return playerNumberCopy;
+        return playerNumber;
     }
 
     /**
@@ -117,7 +114,7 @@ public class ConfigReader {
             file.writeString("\nplayerposition: "
                     + current + "-" + 3 + "-" + (3 + current) + "-" + "2", true);
         }
-        file.writeString("\nAiImport: AiCardGeneration2", true);
+        file.writeString("\nAiImport: AiCardGeneration", true);
 
     }
 

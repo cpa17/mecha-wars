@@ -3,4 +3,4 @@ playerposition: 0-3-3-2
 playerposition: 1-3-4-2
 playerposition: 2-3-5-2
 playerposition: 3-3-6-2
-AiImport: AiCardGeneration2
+AiImport: AiCardGeneration
