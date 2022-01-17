@@ -40,7 +40,7 @@ public class Buttons {
             public void clicked(InputEvent event, float x, float y) {
                 if (!players[0].getShutDown()) {
                     //If All Cards are chosen
-                    if (ScrollPanel.cardOrder[4 - ScrollPanel.damagePoints] != -1) {
+                    if (ScrollPanel.allChosen()) {
                         deactivateButtons();
                         board.move(players, false);
 
@@ -50,11 +50,11 @@ public class Buttons {
                                 players[0].resetList();
                                 startExecutionButton.setColor(Color.LIGHT_GRAY);
                                 ScrollPanel.cardOrderClear();
-                                activateButtons();
                                 setButtons(players);
-                                ScrollPanel.clearScrollPanel(skin, players);
+                                activateButtons();
                             }
                         }, (ConfigReader.getPlayerNumber() * 5) + 5);
+                        ScrollPanel.clearScrollPanel(skin);
                     } else {
                         startExecutionButton.setColor(Color.RED);
                     }
@@ -70,11 +70,11 @@ public class Buttons {
                             players[0].resetList();
                             startExecutionButton.setColor(Color.LIGHT_GRAY);
                             ScrollPanel.cardOrderClear();
-                            activateButtons();
                             setButtons(players);
-                            ScrollPanel.clearScrollPanel(skin, players);
+                            activateButtons();
                         }
                     }, (ConfigReader.getPlayerNumber() * 5) + 5);
+                    ScrollPanel.clearScrollPanel(skin);
                 }
             }
         });
@@ -158,7 +158,9 @@ public class Buttons {
      */
     protected static void deactivateButtons() {
         for (TextButton button : ScrollPanel.buttons) {
-            button.setTouchable(Touchable.disabled);
+            if  (button != null) {
+                button.setTouchable(Touchable.disabled);
+            }
         }
         GameScreen.removeCardOrder.setTouchable(Touchable.disabled);
         GameScreen.startExecutionButton.setTouchable(Touchable.disabled);
@@ -171,7 +173,9 @@ public class Buttons {
      */
     protected static void activateButtons() {
         for (TextButton button : ScrollPanel.buttons) {
-            button.setTouchable(Touchable.enabled);
+            if (button != null) {
+                button.setTouchable(Touchable.enabled);
+            }
         }
         GameScreen.removeCardOrder.setTouchable(Touchable.enabled);
         GameScreen.startExecutionButton.setTouchable(Touchable.enabled);
@@ -190,12 +194,12 @@ public class Buttons {
         // add Button for hint and infos
         Button buttonInfo = new TextButton("Infos", skin);
 
-        int a = 60;     // width
-        int b = 40;     // height
+        int width = 60;
+        int height = 40;
 
-        buttonInfo.setSize(a, b);
-        int buttonInfoX = Gdx.graphics.getWidth() - (a + 10);
-        int buttonInfoY = Gdx.graphics.getHeight() - (b + 10);
+        buttonInfo.setSize(width, height);
+        int buttonInfoX = Gdx.graphics.getWidth() - (width + 10);
+        int buttonInfoY = Gdx.graphics.getHeight() - (height + 10);
 
         buttonInfo.setPosition(buttonInfoX, buttonInfoY);
 

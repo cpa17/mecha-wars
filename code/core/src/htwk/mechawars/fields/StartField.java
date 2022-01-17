@@ -11,7 +11,7 @@ import htwk.mechawars.board.Robot;
 public class StartField extends Field {
 
     // attribute which indicates the number of a certain start field
-    private int number;
+    final int number;
     private Texture tile;
 
     /**

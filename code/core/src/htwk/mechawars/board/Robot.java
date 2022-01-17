@@ -59,24 +59,22 @@ public class Robot {
      * whether walls are in the way, because a field never moves a robot towards a wall.
      * @param mov byte of move
      * @param dir direction in which the field moves the robot
-     * @return new position
      */
-    public Robot moveInDirectionByField(byte mov, Dir dir) {
+    public void moveInDirectionByField(byte mov, Dir dir) {
         switch (dir) {
             case NORTH:
-                setYcoor(getYcoor() - mov);
-                return this;
+                this.ycoor = this.ycoor - mov;
+                return;
             case SOUTH:
-                setYcoor(getYcoor() + mov);
-                return this;
+                this.ycoor = this.ycoor + mov;
+                return;
             case EAST:
-                setXcoor(getXcoor() + mov);
-                return this;
+                this.ycoor = this.xcoor + mov;
+                return;
             case WEST:
-                setXcoor(getXcoor() - mov);
-                return this;
+                this.xcoor = this.xcoor - mov;
+                return;
             default:
-                return this;
         }
     }
 
@@ -100,9 +98,8 @@ public class Robot {
      * @param dir If the robot moves by a card, it is the direction of the robot.
      *            If the robot is pushed by another robot, it is the direction of the other robot.
      * @param players array of all players
-     * @return new position
      */
-    public Robot moveInDirection(Field[][] fieldmatrix, byte mov, Dir dir, Robot[] players) {
+    public void moveInDirection(Field[][] fieldmatrix, byte mov, Dir dir, Robot[] players) {
 
         boolean flag = false;
         BarrierSide barrierSide;
@@ -136,8 +133,8 @@ public class Robot {
         switch (moveDir) {
             case NORTH:
                 for (int i = 0; (i < mov) && (!flag); i++) {
-                    int x = getXcoor();
-                    int y = getYcoor();
+                    int x = this.xcoor;
+                    int y = this.ycoor;
                     // Checks whether a side or corner barrier on the field on which the robot is
                     // currently standing, stops the current step
                     if ((y >= 0) && (y < fieldmatrix[0].length)
@@ -178,27 +175,27 @@ public class Robot {
                     if ((y - 1 >= 0) && (y - 1 < fieldmatrix[0].length)
                             && (x >= 0) && (x < fieldmatrix.length)) {
                         for (Robot player : players) {
-                            int currX = player.getXcoor();
-                            int currY = player.getYcoor();
+                            int currX = player.xcoor;
+                            int currY = player.ycoor;
                             if ((currX == x) && (currY == y - 1)) {
                                 player.moveInDirection(fieldmatrix, (byte) 1, moveDir, players);
-                                if ((player.getXcoor() == currX) && (player.getYcoor() == currY)) {
+                                if ((player.xcoor == currX) && (player.ycoor == currY)) {
                                     flag = true;
                                 }
                             }
                         }
                     }
                     if (!flag) {
-                        setYcoor(getYcoor() - 1);
+                        this.ycoor = this.ycoor - 1;
                         setLastMovementByConveyor(false);
                     }
                 }
-                return this;
+                return;
 
             case SOUTH:
                 for (int i = 0; (i < mov) && (!flag); i++) {
-                    int x = getXcoor();
-                    int y = getYcoor();
+                    int x = this.xcoor;
+                    int y = this.ycoor;
                     // Checks whether a side or corner barrier on the field on which the robot is
                     // currently standing, stops the current step
                     if ((y >= 0) && (y < fieldmatrix[0].length)
@@ -240,27 +237,27 @@ public class Robot {
                     if ((y + 1 >= 0) && (y + 1 < fieldmatrix[0].length)
                             && (x >= 0) && (x < fieldmatrix.length)) {
                         for (Robot player : players) {
-                            int currX = player.getXcoor();
-                            int currY = player.getYcoor();
+                            int currX = player.xcoor;
+                            int currY = player.ycoor;
                             if ((currX == x) && (currY == y + 1)) {
                                 player.moveInDirection(fieldmatrix, (byte) 1, moveDir, players);
-                                if ((player.getXcoor() == currX) && (player.getYcoor() == currY)) {
+                                if ((player.xcoor == currX) && (player.xcoor == currY)) {
                                     flag = true;
                                 }
                             }
                         }
                     }
                     if (!flag) {
-                        setYcoor(getYcoor() + 1);
+                        this.ycoor = this.ycoor + 1;
                         setLastMovementByConveyor(false);
                     }
                 }
-                return this;
+                return;
 
             case EAST:
                 for (int i = 0; (i < mov) && (!flag); i++) {
-                    int x = getXcoor();
-                    int y = getYcoor();
+                    int x = this.xcoor;
+                    int y = this.ycoor;
                     // Checks whether a side or corner barrier on the field on which the robot is
                     // currently standing, stops the current step
                     if ((y >= 0) && (y < fieldmatrix[0].length)
@@ -301,27 +298,27 @@ public class Robot {
                     if ((y >= 0) && (y < fieldmatrix[0].length)
                             && (x + 1 >= 0) && (x + 1 < fieldmatrix.length)) {
                         for (Robot player : players) {
-                            int currX = player.getXcoor();
-                            int currY = player.getYcoor();
+                            int currX = player.xcoor;
+                            int currY = player.ycoor;
                             if ((currX == x + 1) && (currY == y)) {
                                 player.moveInDirection(fieldmatrix, (byte) 1, moveDir, players);
-                                if ((player.getXcoor() == currX) && (player.getYcoor() == currY)) {
+                                if ((player.xcoor == currX) && (player.ycoor == currY)) {
                                     flag = true;
                                 }
                             }
                         }
                     }
                     if (!flag) {
-                        setXcoor(getXcoor() + 1);
+                        this.xcoor = xcoor + 1;
                         setLastMovementByConveyor(false);
                     }
                 }
-                return this;
+                return;
 
             case WEST:
                 for (int i = 0; (i < mov) && (!flag); i++) {
-                    int x = getXcoor();
-                    int y = getYcoor();
+                    int x = this.xcoor;
+                    int y = this.ycoor;
                     // Checks whether a side or corner barrier on the field on which the robot is
                     // currently standing, stops the current step
                     if ((y >= 0) && (y < fieldmatrix[0].length)
@@ -362,25 +359,24 @@ public class Robot {
                     if ((y >= 0) && (y < fieldmatrix[0].length)
                             && (x - 1 >= 0) && (x - 1 < fieldmatrix.length)) {
                         for (Robot player : players) {
-                            int currX = player.getXcoor();
-                            int currY = player.getYcoor();
+                            int currX = player.xcoor;
+                            int currY = player.ycoor;
                             if ((currX == x - 1) && (currY == y)) {
                                 player.moveInDirection(fieldmatrix, (byte) 1, moveDir, players);
-                                if ((player.getXcoor() == currX) && (player.getYcoor() == currY)) {
+                                if ((player.xcoor == currX) && (player.ycoor == currY)) {
                                     flag = true;
                                 }
                             }
                         }
                     }
                     if (!flag) {
-                        setXcoor(getXcoor() - 1);
+                        this.xcoor = xcoor - 1;
                         setLastMovementByConveyor(false);
                     }
                 }
-                return this;
+                return;
 
             default:
-                return this;
         }
     }
 

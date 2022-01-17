@@ -11,7 +11,7 @@ public class RepairSite extends Field {
 
     // attribut which indicates the type 
     // 1 = simple repairsite, 2 = double repairsite
-    private int type;
+    final int type;
     private Texture tile;
     
 

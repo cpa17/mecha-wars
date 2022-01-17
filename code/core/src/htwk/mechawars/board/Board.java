@@ -78,7 +78,7 @@ public class Board {
                 Integer.parseInt(s); 
             } catch (NumberFormatException z) {
                 System.out.println("The map obtains elements which are not integer!");
-                Gdx.app.exit();
+                //Gdx.app.exit();
             }
         }
 
@@ -89,7 +89,7 @@ public class Board {
             for (String string : values) {
                 if (values.length > 16) {
                     System.out.println("The map has too many columns, only 16 are allowed!");
-                    Gdx.app.exit();
+                    //Gdx.app.exit();
                 }
                 if (!string.isEmpty()) {
                     int id = Integer.parseInt(string);
@@ -107,7 +107,7 @@ public class Board {
         
         if (height > 16) {
             System.out.println("The map has too many rows, only 16 are allowed!");
-            Gdx.app.exit();
+            //Gdx.app.exit();
         }
 
         int[][] matrix = new int[width][height];

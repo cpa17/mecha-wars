@@ -44,7 +44,6 @@ public class OptionScreen implements Screen {
     private Skin skin;
     private String mapPath = "../core/assets/maps";
     private boolean mapNotFound;
-    private boolean pathChoice;
     
     /**
      * Constructor of class VictoryScreen.
@@ -53,7 +52,6 @@ public class OptionScreen implements Screen {
         game = g;
         
         mapNotFound = false;
-        pathChoice = false;
         
         stage = new Stage();
         
@@ -103,18 +101,11 @@ public class OptionScreen implements Screen {
 
                 String input = chooseMap.getText().toLowerCase();
                 
-                if (!(chooseMap.getText().matches(" Bitte Map angeben")) 
-                        && !mapNotFound) {                       
+                if (!(chooseMap.getText().matches(" Bitte Map angeben")) && 
+                        !mapNotFound) {                       
                     if (fileListRead(input)) {
-                        if (!input.contains(".txt")) {
-                            input = input + ".txt";
-                        } 
-                        
-                        MechaWars.setMap(input);
-                        
-                        toGameScreen();
-                        
-                    } else if (!pathChoice) {                     
+                        inputToMap(input);
+                    } else if (!mapNotFound) {                  
                         Dialog dialogCloseOption = new Dialog("\t Mapname falsch", skin) {
                             @Override
                             protected void result(Object object) {
@@ -130,7 +121,6 @@ public class OptionScreen implements Screen {
                 } else if (mapNotFound) {
                     mapPath = input;
                     mapNotFound = false; 
-                    pathChoice = false;
                     start.setText("Starten");
                 } else {                  
                     MechaWars.setMap("test.txt");
@@ -147,9 +137,41 @@ public class OptionScreen implements Screen {
         stage.addActor(start);
     }
     
+    /**
+     * Function to switch to the GameScreen Surface.
+     */
     public void toGameScreen() {
         game.setScreen(new GameScreen(game, MechaWars.getMap()));
         stage.dispose();
+    }
+    
+    /**
+     * Function to load the right map or change to default map if an exception is thrown.
+     * @param input - input of the Textfield
+     */
+    public void inputToMap(String input) {
+        if (!input.contains(".txt")) {
+            input = input + ".txt";
+        } 
+        
+        try {
+            MechaWars.setMap(input);
+            toGameScreen();
+        } catch (Exception e) {
+            Dialog dialogCloseOption = new Dialog("\t  Map Fehlerhaft", skin) {
+                @Override   
+                protected void result(Object object) {
+                    remove();
+                    MechaWars.setMap("test.txt");
+                    toGameScreen(); 
+                }
+            }.show(stage);
+            
+            dialogCloseOption.setSize(400, 100);
+            dialogCloseOption.setPosition(440, 310);
+            dialogCloseOption.button("Standartmap nehmen", null);   
+            dialogCloseOption.key(Input.Keys.ENTER, null);
+        } 
     }
     
     /**
@@ -215,25 +237,28 @@ public class OptionScreen implements Screen {
      * @return true if the file exist
      */
     public boolean fileListRead(String input) { 
-        ArrayList<String> filesInDirectory = new ArrayList<String>();
-        String regex = "(.*)";        
+        ArrayList<String> filesInDirectory = new ArrayList<String>();  
         File folder = new File(mapPath);
-
-        if (!input.matches(regex + ".txt")) {
+        
+        //(.*) is a group of zero or more of any character
+        if (!input.matches("(.*)" + ".txt")) {
             input = input + ".txt";
         }
         
         try {
             for (File file : folder.listFiles()) {
-                if (file.getName().matches(regex + ".txt")) {
+                if (file.getName().matches("(.*)" + ".txt")) {
                     filesInDirectory.add(file.getName());
                 }
             }
         } catch (NullPointerException npe) {
+            mapNotFound = true;
             Dialog dialogCloseOption = new Dialog("\t    Keine Maps da", skin) {
                 @Override   
                 protected void result(Object object) {
                     remove();
+                    start.setText("Neuen Pfad nehmen");                 
+                    chooseMap.setText("Bitte Pfad angeben");  
                 }
             }.show(stage);
             
@@ -241,13 +266,6 @@ public class OptionScreen implements Screen {
             dialogCloseOption.setPosition(440, 310);
             dialogCloseOption.button("Neuen Pfad angeben", null);   
             dialogCloseOption.key(Input.Keys.ENTER, null);
-            
-            start.setText("Neuen Pfad nehmen");
-            
-            chooseMap.setText("Bitte Pfad angeben");
-            
-            mapNotFound = true;
-            pathChoice = true;
         }
         
         for (int i = 0; i < filesInDirectory.size(); i += 1) {
