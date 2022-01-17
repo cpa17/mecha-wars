@@ -78,6 +78,7 @@ public class ConfigReader {
      * @return Array of the ai mode of each individual Player.
      */
     public static int[] getAimodes() {
+        int[] aiModes = ConfigReader.aiModes;
         return aiModes;
     }
 
@@ -87,6 +88,7 @@ public class ConfigReader {
      * @return Array of the starting position of each individual Player.
      */
     public static Point[] getPlayerStartingPositions() {
+        Point[] playerStartingPositions = ConfigReader.playerStartingPositions;
         return playerStartingPositions;
     }
 
