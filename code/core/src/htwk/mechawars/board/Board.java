@@ -737,16 +737,16 @@ public class Board {
                                     flag = 1;
                                 }
                                 
-                                if ((i + q + 1) < fieldmatrix[0].length) {
-                                    if (fieldmatrix[i + q + 1][j].getBarrierTop()) {
+                                if ((j + q + 1) < fieldmatrix[0].length) {
+                                    if (fieldmatrix[i][j  + q + 1].getBarrierTop()) {
                                         flag = 1;
                                     }
-                                }
-
-                                if (fieldmatrix[i][j + q].getLaserVertical() == (v - 3)) {
-                                    q = q + 1;
-                                } else {
-                                    flag = 1;
+                                    
+                                    if (fieldmatrix[i][j + q].getLaserVertical() == (v - 3)) {
+                                        q = q + 1;
+                                    } else {
+                                        flag = 1;
+                                    }
                                 }
                             }
                             break;
@@ -775,16 +775,16 @@ public class Board {
                                     flag = 1;
                                 }
                                 
-                                if ((i - q - 1) == 0) {
-                                    if (fieldmatrix[i - q - 1][j].getBarrierBottom()) {
+                                if ((j - q - 1) >= 0) {
+                                    if (fieldmatrix[i][j  - q - 1].getBarrierBottom()) {
                                         flag = 1;
                                     }
-                                }
-
-                                if (fieldmatrix[i][j - q].getLaserVertical() == (v - 3)) {
-                                    q = q + 1;
-                                } else {
-                                    flag = 1;
+                                    
+                                    if (fieldmatrix[i][j - q].getLaserVertical() == (v - 3)) {
+                                        q = q + 1;
+                                    } else {
+                                        flag = 1;
+                                    }
                                 }
                             }
                             break;
@@ -832,12 +832,12 @@ public class Board {
                                     if (fieldmatrix[i + q + 1][j].getBarrierLeft()) {
                                         flag = 1;
                                     }
-                                }
-
-                                if (fieldmatrix[i + q][j].getLaserHorizontal() == (h - 3)) { 
-                                    q = q + 1;
-                                } else {
-                                    flag = 1;
+                                    
+                                    if (fieldmatrix[i + q][j].getLaserHorizontal() == (h - 3)) { 
+                                        q = q + 1;
+                                    } else {
+                                        flag = 1;
+                                    }
                                 }
                             }
                             break;
@@ -866,16 +866,16 @@ public class Board {
                                     flag = 1;
                                 }
                                 
-                                if ((i - q - 1) == 0) {
+                                if ((i - q - 1) >= 0) {
                                     if (fieldmatrix[i - q - 1][j].getBarrierRight()) {
                                         flag = 1;
                                     }
-                                }
-                                
-                                if (fieldmatrix[i - q][j].getLaserHorizontal() == (h - 3)) {
-                                    q = q + 1;
-                                } else {
-                                    flag = 1;
+                                    
+                                    if (fieldmatrix[i - q][j].getLaserHorizontal() == (h - 3)) {
+                                        q = q + 1;
+                                    } else {
+                                        flag = 1;
+                                    }
                                 }
                             }
                             break;
