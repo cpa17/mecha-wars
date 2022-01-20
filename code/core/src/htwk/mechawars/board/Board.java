@@ -24,6 +24,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
@@ -362,6 +363,50 @@ public class Board {
                 int c = (row + 1) * t; //the current height in the loop
                 int r = b - c; //the result of the board height minus the current height
                 batch.draw(board.fieldmatrix[cell][row].getTile(), x, r, t, t);
+                x = x + (Gdx.graphics.getHeight() / board.fieldmatrix[0].length);
+            }
+        }
+    }
+
+    /**
+     * Method that draws the barriers as textures.
+     *
+     * @param batch SpriteBatch to draw the barrier textures
+     * @param board Board whose matrix is to be converted into a string
+     */
+    public static void barriersToAsset(SpriteBatch batch, Board board) {
+        Texture currentTile;
+        for (int row = 0; row < board.fieldmatrix[0].length; row++) {
+            int x = 0;
+            for (int cell = 0; cell < board.fieldmatrix.length; cell++) {
+                int t = Gdx.graphics.getHeight() / board.fieldmatrix[0].length; //height of one tile
+                int b = Gdx.graphics.getHeight(); //height of the entire board
+                int c = (row + 1) * t; //the current height in the loop
+                int r = b - c; //the result of the board height minus the current height
+                // if there is a barrier on the left of the current field
+                if (board.fieldmatrix[cell][row].getBarrierLeft()) {
+                    currentTile = new Texture(Gdx.files.internal(
+                            "mapAssets/barriers/BarrierSide1.png"));
+                    batch.draw(currentTile, x, r, t, t);
+                }
+                // if there is a barrier on the top of the current field
+                if (board.fieldmatrix[cell][row].getBarrierTop()) {
+                    currentTile = new Texture(Gdx.files.internal(
+                            "mapAssets/barriers/BarrierSide2.png"));
+                    batch.draw(currentTile, x, r, t, t);
+                }
+                // if there is a barrier on the right of the current field
+                if (board.fieldmatrix[cell][row].getBarrierRight()) {
+                    currentTile = new Texture(Gdx.files.internal(
+                            "mapAssets/barriers/BarrierSide3.png"));
+                    batch.draw(currentTile, x, r, t, t);
+                }
+                // if there is a barrier on the bottom of the current field
+                if (board.fieldmatrix[cell][row].getBarrierBottom()) {
+                    currentTile = new Texture(Gdx.files.internal(
+                            "mapAssets/barriers/BarrierSide4.png"));
+                    batch.draw(currentTile, x, r, t, t);
+                }
                 x = x + (Gdx.graphics.getHeight() / board.fieldmatrix[0].length);
             }
         }
@@ -967,7 +1012,6 @@ public class Board {
                         }
                     }
                     break;
-
 
                 case WEST:
 
