@@ -2,8 +2,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import htwk.mechawars.board.Board;
 
-import htwk.mechawars.fields.BarrierCorner;
-import htwk.mechawars.fields.BarrierSide;
 import htwk.mechawars.fields.BlackHole;
 import htwk.mechawars.fields.Pusher;
 import htwk.mechawars.fields.Checkpoint;
@@ -11,7 +9,6 @@ import htwk.mechawars.fields.ConveyorBelt;
 import htwk.mechawars.fields.ExpressConveyorBelt;
 import htwk.mechawars.fields.Field;
 import htwk.mechawars.fields.Gear;
-import htwk.mechawars.fields.Laser;
 import htwk.mechawars.fields.RepairSite;
 import htwk.mechawars.fields.StandardField;
 import htwk.mechawars.fields.StartField;

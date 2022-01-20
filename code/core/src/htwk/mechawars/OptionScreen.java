@@ -132,8 +132,8 @@ public class OptionScreen implements Screen {
                     mapNotFound = false; 
                     pathChoice = false;
                     start.setText("Starten");
-                } else {                  
-                    MechaWars.setMap("test.txt");
+                } else {
+                    MechaWars.setMap("chopshopchallenge.txt");
                     toGameScreen(); 
                 }
             }
