@@ -420,14 +420,14 @@ public class Board {
      */
     public static void lasersToAsset(SpriteBatch batch, Board board) {
         Texture currentTile;
-    int v;
-    int h;
+        int v;
+        int h;
     
         for (int row = 0; row < board.fieldmatrix[0].length; row++) {
             int x = 0;
             for (int cell = 0; cell < board.fieldmatrix.length; cell++) {
-        v = board.fieldmatrix[cell][row].getLaserVertical();
-        h = board.fieldmatrix[cell][row].getLaserHorizontal();
+                v = board.fieldmatrix[cell][row].getLaserVertical();
+                h = board.fieldmatrix[cell][row].getLaserHorizontal();
         
                 int t = Gdx.graphics.getHeight() / board.fieldmatrix[0].length; //height of one tile
                 int b = Gdx.graphics.getHeight(); //height of the entire board
@@ -436,40 +436,44 @@ public class Board {
                 // if there is a vertical laser
                 if (v == 1 || v == 2 || v == 3) {
                     currentTile = new Texture(Gdx.files.internal(
-                            "mapAssets/barriers/LaserV" + v + ".png"));
+                            "mapAssets/laser/LaserV" + v + ".png"));
                     batch.draw(currentTile, x, r, t, t);
                 }
                 // if there is a horizontal laser
                 if (h == 1 || h == 2 || h == 3) {
                     currentTile = new Texture(Gdx.files.internal(
-                            "mapAssets/barriers/LaserH" + h + ".png"));
+                            "mapAssets/laser/LaserH" + h + ".png"));
                     batch.draw(currentTile, x, r, t, t);
                 }
-        //if there is a start of one or more vertical laser
-        //0 - BarrierTop, 1 - BarrierBottom
-        if (v == 4 || v == 5 || v == 6) {
-            if (board.fieldmatrix[cell][row].getBarrierTop()) {
+                //if there is a start of one or more vertical laser
+                //0 - BarrierTop, 1 - BarrierBottom
+                if (v == 4 || v == 5 || v == 6) {
+                    if (board.fieldmatrix[cell][row].getBarrierTop()) {
                         currentTile = new Texture(Gdx.files.internal(
-                                "mapAssets/barriers/LaserSV" + v + "0.png"));
-                        batch.draw(currentTile, x, r, t, t); }
+                                "mapAssets/laser/LaserSV" + v + "0.png"));
+                        batch.draw(currentTile, x, r, t, t);
+                    }
 
-            if (board.fieldmatrix[cell][row].getBarrierBottom()) {
+                    if (board.fieldmatrix[cell][row].getBarrierBottom()) {
                         currentTile = new Texture(Gdx.files.internal(
-                                "mapAssets/barriers/LaserSV" + v + "1.png"));
-                        batch.draw(currentTile, x, r, t, t); }
+                                "mapAssets/laser/LaserSV" + v + "1.png"));
+                        batch.draw(currentTile, x, r, t, t); 
+                    }
                 }
-        //if there is a start of one or more horizontal laser
-        //0 - BarrierLeft, 1 - BarrierRight
-        if (h == 4 || h == 5 || h == 6) {
-            if (board.fieldmatrix[cell][row].getBarrierLeft()) {
+                //if there is a start of one or more horizontal laser
+                //0 - BarrierLeft, 1 - BarrierRight
+                if (h == 4 || h == 5 || h == 6) {
+                    if (board.fieldmatrix[cell][row].getBarrierLeft()) {
                         currentTile = new Texture(Gdx.files.internal(
-                                "mapAssets/barriers/LaserSH" + h + "0.png"));
-                        batch.draw(currentTile, x, r, t, t); }
+                                "mapAssets/laser/LaserSH" + h + "0.png"));
+                        batch.draw(currentTile, x, r, t, t); 
+                    }
 
-            if (board.fieldmatrix[cell][row].getBarrierRight()) {
+                    if (board.fieldmatrix[cell][row].getBarrierRight()) {
                         currentTile = new Texture(Gdx.files.internal(
-                                "mapAssets/barriers/LaserSH" + h + "1.png"));
-                        batch.draw(currentTile, x, r, t, t); }
+                                "mapAssets/laser/LaserSH" + h + "1.png"));
+                        batch.draw(currentTile, x, r, t, t); 
+                    }
                 }
                 x = x + (Gdx.graphics.getHeight() / board.fieldmatrix[0].length);
             }
@@ -826,25 +830,26 @@ public class Board {
                                     for (int z = 3; z < v; z++) {
                                         players[s].damageUp();
                                     }
-                                    flag = 1;
-                                }
-                                
-                                if ((j + q + 1) < fieldmatrix[0].length) {
-                                    if (fieldmatrix[i][j  + q + 1].getBarrierTop()) {
+                                    
+                                    if (fieldmatrix[i][j + q - 1].getBarrierBottom()) {
                                         flag = 1;
                                     }
                                     
-                                    if (fieldmatrix[i][j + q].getLaserVertical() == (v - 3)) {
-                                        q = q + 1;
-                                    } else {
-                                        flag = 1;
-                                    }
+                                    flag = 1;
+                                }
                             }
-
-                            if (fieldmatrix[i][j + q - 1].getBarrierBottom()) {
-                                flag = 1;
+                                
+                            if ((j + q + 1) < fieldmatrix[0].length) {
+                                if (fieldmatrix[i][j  + q + 1].getBarrierTop()) {
+                                    flag = 1;
+                                }
+                                
+                                if (fieldmatrix[i][j + q].getLaserVertical() == (v - 3)) {
+                                    q = q + 1;
+                                } else {
+                                    flag = 1;
+                                }
                             }
-                        }
                         }
 
                     // BarrierBottom
@@ -863,23 +868,25 @@ public class Board {
                                     for (int z = 3; z < v; z++) {
                                         players[s].damageUp();
                                     }
-                                    flag = 1;
-                                }
-                                
-                                if ((j - q - 1) >= 0) {
-                                    if (fieldmatrix[i][j  - q - 1].getBarrierBottom()) {
+                                    
+                                    if (fieldmatrix[i][j - q + 1].getBarrierTop()) {
                                         flag = 1;
                                     }
                                     
-                                    if (fieldmatrix[i][j - q].getLaserVertical() == (v - 3)) {
-                                        q = q + 1;
-                                    } else {
-                                        flag = 1;
-                                    }
+                                    flag = 1;
+                                }
                             }
-
-                            if (fieldmatrix[i][j - q + 1].getBarrierTop()) {
-                                flag = 1;
+                                
+                            if ((j - q - 1) >= 0) {
+                                if (fieldmatrix[i][j  - q - 1].getBarrierBottom()) {
+                                    flag = 1;
+                                }
+                                
+                                if (fieldmatrix[i][j - q].getLaserVertical() == (v - 3)) {
+                                    q = q + 1;
+                                } else {
+                                    flag = 1;
+                                }
                             }
                         }
                     }
@@ -903,25 +910,26 @@ public class Board {
                                     for (int z = 3; z < h; z++) {
                                         players[s].damageUp();
                                     }
+                                    
+                                    if (fieldmatrix[i + q - 1][j].getBarrierRight()) {
+                                        flag = 1;
+                                    }  
+                                    
+                                    flag = 1;
+                                }
+                            }
+                                
+                            if ((i + q + 1) < fieldmatrix.length) {
+                                if (fieldmatrix[i + q + 1][j].getBarrierLeft()) {
                                     flag = 1;
                                 }
                                 
-                                if ((i + q + 1) < fieldmatrix.length) {
-                                    if (fieldmatrix[i + q + 1][j].getBarrierLeft()) {
-                                        flag = 1;
-                                    }
-                                    
-                                    if (fieldmatrix[i + q][j].getLaserHorizontal() == (h - 3)) { 
-                                        q = q + 1;
-                                    } else {
-                                        flag = 1;
-                                    }
-                            }
-
-                            if (fieldmatrix[i + q - 1][j].getBarrierRight()) {
-                                flag = 1;
-                            }
-                        }
+                                if (fieldmatrix[i + q][j].getLaserHorizontal() == (h - 3)) { 
+                                    q = q + 1;
+                                } else {
+                                    flag = 1;
+                                }
+                            }                   
                         }
 
                     // BarrierRight
@@ -940,31 +948,31 @@ public class Board {
                                     for (int z = 3; z < h; z++) {
                                         players[s].damageUp();
                                     }
+                                    
+                                    if (fieldmatrix[i - q + 1][j].getBarrierLeft()) {
+                                        flag = 1;
+                                    }
+                                    
                                     flag = 1;
                                 }
                             }
                                 
-                                if ((i - q - 1) >= 0) {
-                                    if (fieldmatrix[i - q - 1][j].getBarrierRight()) {
-                                        flag = 1;
-                                    }
-                                    
-                                    if (fieldmatrix[i - q][j].getLaserHorizontal() == (h - 3)) {
-                                        q = q + 1;
-                                    } else {
-                                        flag = 1;
-                                    }
-                            }
-
-                            if (fieldmatrix[i - q + 1][j].getBarrierLeft()) {
-                                flag = 1;
+                            if ((i - q - 1) >= 0) {
+                                if (fieldmatrix[i - q - 1][j].getBarrierRight()) {
+                                    flag = 1;
+                                }
+                                
+                                if (fieldmatrix[i - q][j].getLaserHorizontal() == (h - 3)) {
+                                    q = q + 1;
+                                } else {
+                                    flag = 1;
+                                }
                             }
                         }
                     }
                 }
             }
         }
-    }
     }
                 
     /**
