@@ -411,6 +411,70 @@ public class Board {
             }
         }
     }
+    
+    /**
+     * Method that draws the laser as textures.
+     *
+     * @param batch SpriteBatch to draw the laser textures
+     * @param board Board whose matrix is to be converted into a string
+     */
+    public static void lasersToAsset(SpriteBatch batch, Board board) {
+        Texture currentTile;
+    int v;
+    int h;
+    
+        for (int row = 0; row < board.fieldmatrix[0].length; row++) {
+            int x = 0;
+            for (int cell = 0; cell < board.fieldmatrix.length; cell++) {
+        v = board.fieldmatrix[cell][row].getLaserVertical();
+        h = board.fieldmatrix[cell][row].getLaserHorizontal();
+        
+                int t = Gdx.graphics.getHeight() / board.fieldmatrix[0].length; //height of one tile
+                int b = Gdx.graphics.getHeight(); //height of the entire board
+                int c = (row + 1) * t; //the current height in the loop
+                int r = b - c; //the result of the board height minus the current height
+                // if there is a vertical laser
+                if (v == 1 || v == 2 || v == 3) {
+                    currentTile = new Texture(Gdx.files.internal(
+                            "mapAssets/barriers/LaserV" + v + ".png"));
+                    batch.draw(currentTile, x, r, t, t);
+                }
+                // if there is a horizontal laser
+                if (h == 1 || h == 2 || h == 3) {
+                    currentTile = new Texture(Gdx.files.internal(
+                            "mapAssets/barriers/LaserH" + h + ".png"));
+                    batch.draw(currentTile, x, r, t, t);
+                }
+        //if there is a start of one or more vertical laser
+        //0 - BarrierTop, 1 - BarrierBottom
+        if (v == 4 || v == 5 || v == 6) {
+            if (board.fieldmatrix[cell][row].getBarrierTop()) {
+                        currentTile = new Texture(Gdx.files.internal(
+                                "mapAssets/barriers/LaserSV" + v + "0.png"));
+                        batch.draw(currentTile, x, r, t, t); }
+
+            if (board.fieldmatrix[cell][row].getBarrierBottom()) {
+                        currentTile = new Texture(Gdx.files.internal(
+                                "mapAssets/barriers/LaserSV" + v + "1.png"));
+                        batch.draw(currentTile, x, r, t, t); }
+                }
+        //if there is a start of one or more horizontal laser
+        //0 - BarrierLeft, 1 - BarrierRight
+        if (h == 4 || h == 5 || h == 6) {
+            if (board.fieldmatrix[cell][row].getBarrierLeft()) {
+                        currentTile = new Texture(Gdx.files.internal(
+                                "mapAssets/barriers/LaserSH" + h + "0.png"));
+                        batch.draw(currentTile, x, r, t, t); }
+
+            if (board.fieldmatrix[cell][row].getBarrierRight()) {
+                        currentTile = new Texture(Gdx.files.internal(
+                                "mapAssets/barriers/LaserSH" + h + "1.png"));
+                        batch.draw(currentTile, x, r, t, t); }
+                }
+                x = x + (Gdx.graphics.getHeight() / board.fieldmatrix[0].length);
+            }
+        }
+    }
 
     /**
      * Method that places a robot in the matrix --> starting position.
@@ -781,6 +845,7 @@ public class Board {
                                 flag = 1;
                             }
                         }
+                        }
 
                     // BarrierBottom
                     } else {
@@ -857,6 +922,7 @@ public class Board {
                                 flag = 1;
                             }
                         }
+                        }
 
                     // BarrierRight
                     } else {
@@ -876,6 +942,7 @@ public class Board {
                                     }
                                     flag = 1;
                                 }
+                            }
                                 
                                 if ((i - q - 1) >= 0) {
                                     if (fieldmatrix[i - q - 1][j].getBarrierRight()) {
@@ -898,7 +965,8 @@ public class Board {
             }
         }
     }
-
+    }
+                
     /**
      * Method that checks if a robot got hit by a Laser of another robot.
      *
