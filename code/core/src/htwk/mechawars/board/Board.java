@@ -28,6 +28,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
@@ -542,6 +543,14 @@ public class Board {
 
                     @Override
                     public void run() {
+                        String regex = "(.*)";
+                        int xyz = card.getCardAttributePriority();
+                        for (int index = 0; index < ScrollPanel.buttons.length; index += 1) {
+                            String zyx = ScrollPanel.buttons[index].toString();
+                            if (zyx.matches(regex + "" + xyz + "" + regex)) {
+                                ScrollPanel.buttons[index].setColor(Color.GOLD);
+                            }
+                        }
                         robotMovement(card, robots[card.getCardPlayerNumber()], robots);
                     }
                 }, i);
