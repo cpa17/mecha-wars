@@ -135,7 +135,6 @@ public class Board {
         this.fieldmatrix = new Field[matrix.length][matrix[0].length];
 
         int[] allowed;
-        int[] notAllowed;
 
         boolean barrierLeft;
         boolean barrierTop;
@@ -147,16 +146,16 @@ public class Board {
 
                 // Takes the 1st digit, which represents the attribute laserVertical
                 int laserVertical = matrix[col][cell] / 100000000;
-                notAllowed = new int[]{1, 2, 3, 4, 5, 6, 9};
-                if (Arrays.stream(notAllowed).noneMatch(x -> x == laserVertical)) {
+                allowed = new int[]{1, 2, 3, 4, 5, 6, 9};
+                if (Arrays.stream(allowed).noneMatch(x -> x == laserVertical)) {
                     System.out.println("Codierung " + laserVertical
                             + " beschreibt keinen gültigen Wert für das Attribut laserVertical");
                 }
 
                 // Takes the 2nd digit, which represents the attribute laserHorizontal
                 int laserHorizontal = (matrix[col][cell] / 10000000) % 10;
-                notAllowed = new int[]{1, 2, 3, 4, 5, 6, 9};
-                if (Arrays.stream(notAllowed).noneMatch(x -> x == laserHorizontal)) {
+                allowed = new int[]{1, 2, 3, 4, 5, 6, 9};
+                if (Arrays.stream(allowed).noneMatch(x -> x == laserHorizontal)) {
                     System.out.println("Codierung " + laserVertical
                             + " beschreibt keinen gültigen Wert für das Attribut laserHorizontal");
                 }
