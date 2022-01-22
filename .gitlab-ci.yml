@@ -34,10 +34,10 @@ test:
   script: gradle check
   after_script:
     - cd code
-    - test -f core/build/reports/spotbugs/main.html && elinks -dump /builds/weicker/mecha-wars/code/core/build/reports/spotbugs/main.html
-    - test -f core/build/reports/spotbugs/test.html && elinks -dump /builds/weicker/mecha-wars/code/core/build/reports/spotbugs/test.html
-    - test -f desktop/build/reports/spotbugs/main.html && elinks -dump /builds/weicker/mecha-wars/code/desktop/build/reports/spotbugs/main.html
-    - test -f desktop/build/reports/spotbugs/test.html && elinks -dump /builds/weicker/mecha-wars/code/desktop/build/reports/spotbugs/test.html
+    - test -f core/build/reports/spotbugs/main.html && elinks -dump core/build/reports/spotbugs/main.html
+    - test -f core/build/reports/spotbugs/test.html && elinks -dump core/build/reports/spotbugs/test.html
+    - test -f desktop/build/reports/spotbugs/main.html && elinks -dump desktop/build/reports/spotbugs/main.html
+    - test -f desktop/build/reports/spotbugs/test.html && elinks -dump desktop/build/reports/spotbugs/test.html
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: pull

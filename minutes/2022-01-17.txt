@@ -1,0 +1,27 @@
+Protokoll 17.01.2022 17:00
+von Christoph Pascal Ahlner
+
+Planning
+
+Anwesenheit:
+Marc, Antonia , Bernhard, Marc, Mark, Pascal, Tim, Lukas, Felix, Till
+
+Felix geht Tickets, die noch bearbeitet werden durch.
+
+Bugticket bleibt.
+Wandticket, sollte bis zum Kick-Off fertig werden.
+Handbuch, in den nächsten Sprint.
+MW-105, fertig.
+Offene Tickets werden übernommen.
+
+
+8.Sprint
+Ziel: Alles einbringen, was verlangt ist und fertige Version haben.
+
+Tickets aus Backlog zum Sprint hinzugefügt.
+Neue Tickets schätzen.
+
+
+
+
+

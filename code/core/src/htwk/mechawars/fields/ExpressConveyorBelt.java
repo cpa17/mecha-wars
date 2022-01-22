@@ -14,8 +14,8 @@ public class ExpressConveyorBelt extends Field {
     // attribute which represents the start and the end of an express conveyorbelt
     // 1 = left, 2 = top, 3 = right, 4 = bottom, 5 = left and right, 6 = top and bottom,
     // 7 = right and top, 8 = left and top, 9 = right and bottom, 0 = left and bottom
-    private int start;
-    private int end;
+    final int start;
+    final int end;
     private Texture tile;
 
     /**
@@ -40,7 +40,7 @@ public class ExpressConveyorBelt extends Field {
         this.start = start;
         this.end = end;
         if (!isTest) {
-            this.tile = new Texture(Gdx.files.internal("mapAssets/" + "expressconveyorBelt/"
+            this.tile = new Texture(Gdx.files.internal("mapAssets/" + "expressconveyorbelt/"
                     + "ExpressConveyorBelt" + String.valueOf(start) + String.valueOf(end)
                     + ".png"));
         }

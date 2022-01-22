@@ -14,7 +14,7 @@ public class Pusher extends Field {
     // attribute which represents the type of the pusher
     // 1 = horizontal with the numbers 2 and 4, 2 = horizontal with the numbers 1, 3 and 5
     // 3 = vertical with the numbers 2 and 4, 4 = vertical with the numbers 1, 3 and 5
-    private int type;
+    final int type;
     private Texture tile;
 
     /**

@@ -1,7 +1,7 @@
 package htwk.mechawars.board;
 
 import htwk.mechawars.ConfigReader;
-import htwk.mechawars.cards.AiCardGeneration;
+import htwk.mechawars.ai.AiManager;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.Deck;
 import htwk.mechawars.cards.Type;
@@ -15,6 +15,7 @@ import htwk.mechawars.fields.Gear;
 import htwk.mechawars.fields.RepairSite;
 import htwk.mechawars.fields.StandardField;
 import htwk.mechawars.fields.StartField;
+import htwk.mechawars.game.ScrollPanel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +29,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
+import htwk.mechawars.game.GameScreen;
+
+//import ai.AiCardGeneration;
 
 /**
  * Class that presents the game board.
@@ -35,6 +39,7 @@ import com.badlogic.gdx.utils.Timer.Task;
 public class Board {
     public Field[][] fieldmatrix;
     private Field robotPosition;
+    private static int checkpoint;
 
     /**
      * Method that reads the game plan as a int matrix from a file and constructs the game board
@@ -71,7 +76,7 @@ public class Board {
                 Integer.parseInt(s); 
             } catch (NumberFormatException z) {
                 System.out.println("The map obtains elements which are not integer!");
-                Gdx.app.exit();
+                //Gdx.app.exit();
             }
         }
 
@@ -82,7 +87,7 @@ public class Board {
             for (String string : values) {
                 if (values.length > 16) {
                     System.out.println("The map has too many columns, only 16 are allowed!");
-                    Gdx.app.exit();
+                    //Gdx.app.exit();
                 }
                 if (!string.isEmpty()) {
                     int id = Integer.parseInt(string);
@@ -100,7 +105,7 @@ public class Board {
         
         if (height > 16) {
             System.out.println("The map has too many rows, only 16 are allowed!");
-            Gdx.app.exit();
+            //Gdx.app.exit();
         }
 
         int[][] matrix = new int[width][height];
@@ -220,6 +225,7 @@ public class Board {
                             this.fieldmatrix[col][cell] = new Checkpoint(col, cell, numberC,
                                     laserVertical, laserHorizontal, barrierLeft, barrierTop,
                                     barrierRight, barrierBottom, isTest);
+                            checkpoint++;
                         } else {
                             System.out.println("Codierung " + matrix[col][cell]
                                     + " beschreibt kein gueltiges Attribut fuer dieses Feldobjekt");
@@ -517,9 +523,9 @@ public class Board {
         }
 
         robot.setXcoor(x);
-        robot.setStartX(x);
+        robot.setbackupCopyX(x);
         robot.setYcoor(y);
-        robot.setStartY(y);
+        robot.setbackupCopyY(y);
         robot.setDir(dir);
     }
 
@@ -548,10 +554,12 @@ public class Board {
                                                             each List for one Players cards*/
                 maxCardCount = players[0].getSelectedCards().size();
             } else {
-                if (ConfigReader.getAimodes()[i]) {
-
+                if (ConfigReader.getAimodes()[i] != 0) {
+                    AiManager m = new AiManager();
                     LinkedList<Card> generatedCards =
-                            AiCardGeneration.generateRandomAiCardsfromDeck(i);
+                            m.getAi(ConfigReader.getAimodes()[i])
+                            .generateCards(ScrollPanel.getDeck().getDeck(), 
+                                    i, getNumberOfChoosableCards(players[i].getDamagePoints()));
                     // Random Cards generation for the AI-Players
                     allCards.add(generatedCards);
                     maxCardCount = Integer.max(generatedCards.size(), maxCardCount);
@@ -565,21 +573,24 @@ public class Board {
                                                                of lists of cards for each turn*/
 
         final LinkedList<LinkedList<Card>> allCard = allCards;
-        if (!isTest) {
-            Timer.schedule(new Task() {
-                int turnCounter = 0;
 
-                @Override
-                public void run() {
-                    moveSingleTurn(allCard.get(turnCounter), players, false);
-                    turnCounter++;
+        if (players.length != 1 || allCard.size() != 0) {
+            if (!isTest) {
+                Timer.schedule(new Task() {
+                    int turnCounter = 0;
+
+                    @Override
+                    public void run() {
+                        moveSingleTurn(allCard.get(turnCounter), players, false);
+                        turnCounter++;
+                        }
+                    }, 0, ConfigReader.getPlayerNumber() + 1,
+                        allCards.size() - 1);
+
+            } else {
+                for (int i = 0; i < allCards.size(); i++) {
+                    moveSingleTurn(allCard.get(i), players, true);
                 }
-            }, 0, ConfigReader.getPlayerNumber() + 1,
-                    allCards.size() - 1);
-            
-        } else {
-            for (int i = 0; i < allCards.size(); i++) {
-                moveSingleTurn(allCard.get(i), players, true);
             }
         }
 
@@ -592,6 +603,7 @@ public class Board {
                     state(players);
                     checkDoubleDamage(players);
                     checkShutDown(players);
+                    checkGameOver(players);
                 }
             }, (ConfigReader.getPlayerNumber() * 5) + 5);
 
@@ -641,19 +653,24 @@ public class Board {
                         checkRobotsOnBoard(players);
 
                         Robot.setPlayers(players);
+                        checkDestroyed(players);
                         checkRobotLaser(players);
                         checkBoardLaser(players);
+                        checkDestroyed(players);
                     }
                 }, i);
             }
         } else {
 
             // No delay if this is a test
+            checkDestroyed(players);
             checkRobotLaser(players);
             checkBoardLaser(players);
+            checkDestroyed(players);
             state(players);
             checkDoubleDamage(players);
             checkShutDown(players);
+            checkGameOver(players);
         }
     }
 
@@ -695,6 +712,10 @@ public class Board {
      * @param players array of all players
      */
     public void robotMovement(Card card, Robot robot, Robot[] players) {
+        if (robot.getDestroyed()) {
+            return;
+        }
+
         if (card.getCardAttributeType() == Type.mov) {
             robot.moveInDirectionByCard(fieldmatrix, card.getCardAttributeMovCount(), players);
         } else {
@@ -753,8 +774,9 @@ public class Board {
             if (player.getXcoor() >= fieldmatrix.length
                     || player.getYcoor() >= fieldmatrix[0].length
                     || player.getXcoor() < 0 || player.getYcoor() < 0) {
-                player.setXcoor(player.getStartX());
-                player.setYcoor(player.getStartY());
+                player.setDamage(10);
+                player.setXcoor(player.getbackupCopyX());
+                player.setYcoor(player.getbackupCopyY());
             }
         }
     }
@@ -768,12 +790,13 @@ public class Board {
         for (Robot player : players) {
             if ((!player.getShutDown() && player.getLastRound()) || player.getDestroyed()) {
 
-                player.damageUp();
-                player.damageUp();
-
                 if (player.getDestroyed()) {
+                    player.lifeDown();
                     player.setDestroyed(false);
+                    player.damageReset();
                 }
+                player.damageUp();
+                player.damageUp();
             }
         }
     }
@@ -792,7 +815,41 @@ public class Board {
     }
     
     /**
-     * Method that checks whether the robot is being shot at by a vertical laser.
+     * Method that checks whether the robot is destroyed.
+     *
+     * @param players array of all players
+     */
+    private void checkDestroyed(Robot[] players) {
+        for (Robot player : players) {
+            if (player.getDamagePoints() >= 10) {
+                player.setDestroyed(true);
+                player.setXcoor(player.getbackupCopyX());
+                player.setYcoor(player.getbackupCopyY());
+            }
+        }
+    }
+
+    /**
+     * Method that checks whether the robot is destroyed.
+     *
+     * @param players array of all players
+     */
+    private void checkGameOver(Robot[] players) {
+        for (Robot player : players) {
+            if (player.getLifePoints() <= 0) {
+                player.setDamage(10);
+            }
+        }
+
+        Robot player = players[0];
+
+        if (player.getLifePoints() <= 0) {
+            GameScreen.setLoseCondition(true);
+        }
+    }
+
+    /**
+     * Method that checks whether the robot is being shot at by a laser.
      *
      * @param players A array of robots
      */
@@ -830,11 +887,9 @@ public class Board {
                                     for (int z = 3; z < v; z++) {
                                         players[s].damageUp();
                                     }
-                                    
                                     if (fieldmatrix[i][j + q - 1].getBarrierBottom()) {
                                         flag = 1;
                                     }
-                                    
                                     flag = 1;
                                 }
                             }
@@ -843,7 +898,6 @@ public class Board {
                                 if (fieldmatrix[i][j  + q + 1].getBarrierTop()) {
                                     flag = 1;
                                 }
-                                
                                 if (fieldmatrix[i][j + q].getLaserVertical() == (v - 3)) {
                                     q = q + 1;
                                 } else {
@@ -868,11 +922,9 @@ public class Board {
                                     for (int z = 3; z < v; z++) {
                                         players[s].damageUp();
                                     }
-                                    
                                     if (fieldmatrix[i][j - q + 1].getBarrierTop()) {
                                         flag = 1;
                                     }
-                                    
                                     flag = 1;
                                 }
                             }
@@ -881,7 +933,6 @@ public class Board {
                                 if (fieldmatrix[i][j  - q - 1].getBarrierBottom()) {
                                     flag = 1;
                                 }
-                                
                                 if (fieldmatrix[i][j - q].getLaserVertical() == (v - 3)) {
                                     q = q + 1;
                                 } else {
@@ -910,11 +961,9 @@ public class Board {
                                     for (int z = 3; z < h; z++) {
                                         players[s].damageUp();
                                     }
-                                    
                                     if (fieldmatrix[i + q - 1][j].getBarrierRight()) {
                                         flag = 1;
-                                    }  
-                                    
+                                    }
                                     flag = 1;
                                 }
                             }
@@ -923,7 +972,6 @@ public class Board {
                                 if (fieldmatrix[i + q + 1][j].getBarrierLeft()) {
                                     flag = 1;
                                 }
-                                
                                 if (fieldmatrix[i + q][j].getLaserHorizontal() == (h - 3)) { 
                                     q = q + 1;
                                 } else {
@@ -948,11 +996,9 @@ public class Board {
                                     for (int z = 3; z < h; z++) {
                                         players[s].damageUp();
                                     }
-                                    
                                     if (fieldmatrix[i - q + 1][j].getBarrierLeft()) {
                                         flag = 1;
                                     }
-                                    
                                     flag = 1;
                                 }
                             }
@@ -961,7 +1007,6 @@ public class Board {
                                 if (fieldmatrix[i - q - 1][j].getBarrierRight()) {
                                     flag = 1;
                                 }
-                                
                                 if (fieldmatrix[i - q][j].getLaserHorizontal() == (h - 3)) {
                                     q = q + 1;
                                 } else {
@@ -983,142 +1028,155 @@ public class Board {
     public void checkRobotLaser(Robot[] players) {
 
         for (Robot player : players) {
+            if (player.getLifePoints() > 0 && !player.getDestroyed() && !player.getShutDown()) {
 
-            int x = player.getXcoor();
-            int y = player.getYcoor();
+                int x = player.getXcoor();
+                int y = player.getYcoor();
 
-            //the variable z, checks if a player or a wall already have been hit
-            int z = 0;
+                //the variable z, checks if a player or a wall already have been hit
+                int z = 0;
 
-            switch (player.getDir()) {
+                switch (player.getDir()) {
 
-                case NORTH:
+                    case NORTH:
 
-                    if (this.fieldmatrix[x][y].getBarrierTop()) {
-                        break;
-                    }
-
-                    //i is the next tile the robot is facing
-                    for (int i = (y - 1); i >= 0 && (z == 0); i--) {
-
-                        if (this.fieldmatrix[x][i].getBarrierBottom()) {
-                            break;
-                        }
-                        if (this.fieldmatrix[x][i].getBarrierTop()) {
-                            z++;
-                        }
-
-                        /* checks if one of the players is on the current field [x][i2], if yes
-                        gets damage and z becomes 1, so the loop breaks */
-                        for (Robot robot : players) {
-
-                            int x2 = robot.getXcoor();
-                            int y2 = robot.getYcoor();
-
-                            if (x2 == x && y2 == i) {
-                                robot.damageUp();
-                                z++;
-                            }
-                        }
-                    }
-                    break;
-
-                case SOUTH:
-
-                    if (this.fieldmatrix[x][y].getBarrierBottom()) {
-                        break;
-                    }
-
-                    //i is the next tile the robot is facing
-                    for (int i = (y + 1); i < this.fieldmatrix[0].length && (z == 0); i++) {
-
-                        if (this.fieldmatrix[x][i].getBarrierBottom()) {
-                            z++;
-                        }
-                        if (this.fieldmatrix[x][i].getBarrierTop()) {
+                        if (this.fieldmatrix[x][y].getBarrierTop()) {
                             break;
                         }
 
-                        /* checks if one of the players is on the current field [x][i2], if yes
-                        gets damage and z becomes 1, so the loop breaks */
-                        for (Robot robot : players) {
+                        //i is the next tile the robot is facing
+                        for (int i = (y - 1); i >= 0 && (z == 0); i--) {
 
-                            int x2 = robot.getXcoor();
-                            int y2 = robot.getYcoor();
-
-                            if (x2 == x && y2 == i) {
-                                robot.damageUp();
+                            if (this.fieldmatrix[x][i].getBarrierBottom()) {
+                                break;
+                            }
+                            if (this.fieldmatrix[x][i].getBarrierTop()) {
                                 z++;
                             }
+
+                            /* checks if one of the players is on the current field [x][i2], if yes
+                            gets damage and z becomes 1, so the loop breaks */
+                            for (Robot robot : players) {
+
+                                int x2 = robot.getXcoor();
+                                int y2 = robot.getYcoor();
+
+                                if (x2 == x && y2 == i) {
+                                    robot.damageUp();
+                                    z++;
+                                }
+                            }
                         }
-                    }
-                    break;
-
-                case EAST:
-
-                    if (this.fieldmatrix[x][y].getBarrierRight()) {
                         break;
-                    }
 
-                    //i is the next tile the robot is facing
-                    for (int i = (x + 1); i < this.fieldmatrix.length && (z == 0); i++) {
+                    case SOUTH:
 
-                        if (this.fieldmatrix[i][y].getBarrierRight()) {
-                            z++;
-                        }
-                        if (this.fieldmatrix[i][y].getBarrierLeft()) {
+                        if (this.fieldmatrix[x][y].getBarrierBottom()) {
                             break;
                         }
 
-                        /* checks if one of the players is on the current field [x][i2], if yes
-                        gets damage and z becomes 1, so the loop breaks */
-                        for (Robot robot : players) {
+                        //i is the next tile the robot is facing
+                        for (int i = (y + 1); i < this.fieldmatrix[0].length && (z == 0); i++) {
 
-                            int x2 = robot.getXcoor();
-                            int y2 = robot.getYcoor();
-
-                            if (x2 == i && y2 == y) {
-                                robot.damageUp();
+                            if (this.fieldmatrix[x][i].getBarrierBottom()) {
                                 z++;
                             }
+                            if (this.fieldmatrix[x][i].getBarrierTop()) {
+                                break;
+                            }
+
+                            /* checks if one of the players is on the current field [x][i2], if yes
+                            gets damage and z becomes 1, so the loop breaks */
+                            for (Robot robot : players) {
+
+                                int x2 = robot.getXcoor();
+                                int y2 = robot.getYcoor();
+
+                                if (x2 == x && y2 == i) {
+                                    robot.damageUp();
+                                    z++;
+                                }
+                            }
                         }
-                    }
-                    break;
-
-                case WEST:
-
-                    if (this.fieldmatrix[x][y].getBarrierLeft()) {
                         break;
-                    }
 
-                    //i is the next tile the robot is facing
-                    for (int i = (x - 1); i >= 0 && (z == 0); i--) {
+                    case EAST:
 
-                        if (this.fieldmatrix[i][y].getBarrierRight()) {
+                        if (this.fieldmatrix[x][y].getBarrierRight()) {
                             break;
                         }
-                        if (this.fieldmatrix[i][y].getBarrierLeft()) {
-                            z++;
-                        }
 
-                        /* checks if one of the players is on the current field [x][i2], if yes
-                        gets damage and z becomes 1, so the loop breaks */
-                        for (Robot robot : players) {
+                        //i is the next tile the robot is facing
+                        for (int i = (x + 1); i < this.fieldmatrix.length && (z == 0); i++) {
 
-                            int x2 = robot.getXcoor();
-                            int y2 = robot.getYcoor();
-
-                            if (x2 == i && y2 == y) {
-                                robot.damageUp();
+                            if (this.fieldmatrix[i][y].getBarrierRight()) {
                                 z++;
                             }
-                        }
-                    }
-                    break;
+                            if (this.fieldmatrix[i][y].getBarrierLeft()) {
+                                break;
+                            }
 
-                default:
-                    break;
+                            /* checks if one of the players is on the current field [x][i2], if yes
+                            gets damage and z becomes 1, so the loop breaks */
+                            for (Robot robot : players) {
+
+                                int x2 = robot.getXcoor();
+                                int y2 = robot.getYcoor();
+
+                                if (x2 == i && y2 == y) {
+                                    robot.damageUp();
+                                    z++;
+                                }
+                            }
+                        }
+                        break;
+
+                    case WEST:
+
+                        if (this.fieldmatrix[x][y].getBarrierLeft()) {
+                            break;
+                        }
+
+                        //i is the next tile the robot is facing
+                        for (int i = (x - 1); i >= 0 && (z == 0); i--) {
+
+                            if (this.fieldmatrix[i][y].getBarrierRight()) {
+                                break;
+                            }
+                            if (this.fieldmatrix[i][y].getBarrierLeft()) {
+                                z++;
+                            }
+
+                            /* checks if one of the players is on the current field [x][i2], if yes
+                            gets damage and z becomes 1, so the loop breaks */
+                            for (Robot robot : players) {
+
+                                int x2 = robot.getXcoor();
+                                int y2 = robot.getYcoor();
+
+                                if (x2 == i && y2 == y) {
+                                    robot.damageUp();
+                                    z++;
+                                }
+                            }
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
             }
-        } 
+        }
+    }
+    
+    private static int getNumberOfChoosableCards(int damage) {
+        if (damage < 5) {
+            return 5;
+        }
+        return 9 - damage;  
+    }
+
+    public static int getCheckpoint() {
+        return checkpoint;
     }
 }
