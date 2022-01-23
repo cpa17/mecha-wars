@@ -16,7 +16,7 @@ public class Checkpoint extends Field {
     private Texture tile;
 
     /**
-     * Constructor of a Checkpoint.
+     * Constructor of a Checkpoint with no lasers or barriers.
      */
     public Checkpoint(int xcoor, int ycoor, int number) {
         super(xcoor, ycoor);
@@ -25,7 +25,7 @@ public class Checkpoint extends Field {
     }
 
     /**
-     * Constructor of a Checkpoint which can skip creating the assets.
+     * Constructor of a Checkpoint with no lasers or barriers which can skip creating the assets.
      *
      * @param isTest indicates that this is a test
      */
@@ -38,10 +38,66 @@ public class Checkpoint extends Field {
         }
     }
 
+    /**
+     * Constructor of a Checkpoint with barrier- and laser-attributes.
+     */
+    public Checkpoint(int xcoor, int ycoor, int number, int laserVertical, int laserHorizontal,
+                     boolean barrierLeft, boolean barrierTop, boolean barrierRight,
+                     boolean barrierBottom) {
+
+        super(xcoor, ycoor, laserVertical, laserHorizontal,
+                barrierLeft, barrierTop, barrierRight, barrierBottom);
+
+        this.number = number;
+        setCheckpoint();
+    }
+
+    /**
+     * Constructor of a Checkpoint with barrier- and laser-attributes
+     * which can skip creating the assets.
+     *
+     * @param isTest indicates that this is a test
+     */
+    public Checkpoint(int xcoor, int ycoor, int number, int laserVertical, int laserHorizontal,
+                     boolean barrierLeft, boolean barrierTop, boolean barrierRight,
+                     boolean barrierBottom, boolean isTest) {
+
+        super(xcoor, ycoor, laserVertical, laserHorizontal,
+                barrierLeft, barrierTop, barrierRight, barrierBottom, isTest);
+
+        this.number = number;
+
+        if (!isTest) {
+            setCheckpoint();
+        }
+    }
+
     @Override
     public String toString() {
-        return "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor
+        String attributes = "";
+        attributes = attributes + "xcoor: " + this.xcoor + ", ycoor: " + this.ycoor
                 + ", number: " + this.number;
+
+        if (this.laserVertical != 9) {
+            attributes = attributes + ", laserVertical: " + this.laserVertical;
+        }
+        if (this.laserHorizontal != 9) {
+            attributes = attributes + ", laserHorizontal: " + this.laserHorizontal;
+        }
+        if (this.barrierLeft) {
+            attributes = attributes + ", barrierLeft: " + this.barrierLeft;
+        }
+        if (this.barrierTop) {
+            attributes = attributes + ", barrierTop: " + this.barrierTop;
+        }
+        if (this.barrierRight) {
+            attributes = attributes + ", barrierRight: " + this.barrierRight;
+        }
+        if (this.barrierBottom) {
+            attributes = attributes + ", barrierBottom: " + this.barrierBottom;
+        }
+
+        return attributes;
     }
 
     public int getNumber() {
@@ -87,6 +143,8 @@ public class Checkpoint extends Field {
     
     @Override
     public Robot cardAction(Robot robot) {
+        robot.setbackupCopyX(robot.getXcoor());
+        robot.setbackupCopyY(robot.getYcoor());
         checkPointChoice(robot);
         return robot;       
     }
@@ -127,6 +185,24 @@ public class Checkpoint extends Field {
             return false;
         }
         if (number != other.number) {
+            return false;
+        }
+        if (laserVertical != other.laserVertical) {
+            return false;
+        }
+        if (laserHorizontal != other.laserHorizontal) {
+            return false;
+        }
+        if (barrierLeft != other.barrierLeft) {
+            return false;
+        }
+        if (barrierTop != other.barrierTop) {
+            return false;
+        }
+        if (barrierRight != other.barrierRight) {
+            return false;
+        }
+        if (barrierBottom != other.barrierBottom) {
             return false;
         }
 

@@ -332,25 +332,25 @@ public class BarrierTest {
 
     /**
      * Method that generates a String for the board constructor.
-     * Corner barrier at Field(1,1) at the upper right corner
-     * Corner barrier at Field(1,3) at the upper left corner
-     * Corner barrier at Field(1,5) at the lower left corner
-     * Corner barrier at Field(3,1) at the lower right corner
-     * Side barrier at Field(3,3) at the left.
-     * Side barrier at Field(3,5) at the top.
-     * Side barrier at Field(5,1) at the right.
-     * Side barrier at Field(5,3) at the bottom.
+     * StandardField(1,1): barrier at the top and left
+     * StandardField(1,3): barrier at the top and right
+     * StandardField(1,5): barrier at the bottom and right
+     * StandardField(3,1): barrier at the bottom and left
+     * StandardField(3,3): barrier at the left
+     * StandardField(3,5): barrier at the top
+     * StandardField(5,1): barrier at the right
+     * StandardField(5,3): barrier at the bottom
      */
     private String createBoardString() {
         String dummyVar = "";
         String boardString = dummyVar +
-                "11000 11000 11000 11000 11000 11000 11000 \n" +
-                "11000 10001 11000 10004 11000 10103 11000 \n" +
-                "11000 11000 11000 11000 11000 11000 11000 \n" +
-                "11000 10002 11000 10101 11000 10104 11000 \n" +
-                "11000 11000 11000 11000 11000 11000 11000 \n" +
-                "11000 10003 11000 10102 11000 11000 11000 \n" +
-                "11000 11000 11000 11000 11000 11000 11000";
+                "990000700 990000700 990000700 990000700 990000700 990000700 990000700 \n" +
+                "990000700 991100700 990000700 991001700 990000700 990010700 990000700 \n" +
+                "990000700 990000700 990000700 990000700 990000700 990000700 990000700 \n" +
+                "990000700 990110700 990000700 991000700 990000700 990001700 990000700 \n" +
+                "990000700 990000700 990000700 990000700 990000700 990000700 990000700 \n" +
+                "990000700 990011700 990000700 990100700 990000700 990000700 990000700 \n" +
+                "990000700 990000700 990000700 990000700 990000700 990000700 990000700";
         return boardString;
     }
 }

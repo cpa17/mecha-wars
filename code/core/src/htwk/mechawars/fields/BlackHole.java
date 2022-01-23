@@ -12,7 +12,7 @@ public class BlackHole extends Field {
     private Texture tile;
 
     /**
-     * Constructor of a Black Hole.
+     * Constructor of a Black Hole with no lasers or barriers.
      */
     public BlackHole(int xcoor, int ycoor) {
         super(xcoor, ycoor);
@@ -20,12 +20,43 @@ public class BlackHole extends Field {
     }
 
     /**
-     * Constructor of a Black Hole which can skip creating the assets.
+     * Constructor of a Black Hole with no lasers or barriers which can skip creating the assets.
      *
      * @param isTest indicates that this is a test
      */
     public BlackHole(int xcoor, int ycoor, boolean isTest) {
         super(xcoor, ycoor, isTest);
+        if (!isTest) {
+            this.tile = new Texture("mapAssets/BlackHole.png");
+        }
+    }
+
+    /**
+     * Constructor of a Black Hole with barrier- and laser-attributes.
+     */
+    public BlackHole(int xcoor, int ycoor, int laserVertical, int laserHorizontal,
+                     boolean barrierLeft, boolean barrierTop, boolean barrierRight,
+                     boolean barrierBottom) {
+
+        super(xcoor, ycoor, laserVertical, laserHorizontal,
+                barrierLeft, barrierTop, barrierRight, barrierBottom);
+
+        this.tile = new Texture("mapAssets/BlackHole.png");
+    }
+
+    /**
+     * Constructor of a Black Hole with barrier- and laser-attributes
+     * which can skip creating the assets.
+     *
+     * @param isTest indicates that this is a test
+     */
+    public BlackHole(int xcoor, int ycoor, int laserVertical, int laserHorizontal,
+                     boolean barrierLeft, boolean barrierTop, boolean barrierRight,
+                     boolean barrierBottom, boolean isTest) {
+
+        super(xcoor, ycoor, laserVertical, laserHorizontal,
+                barrierLeft, barrierTop, barrierRight, barrierBottom, isTest);
+
         if (!isTest) {
             this.tile = new Texture("mapAssets/BlackHole.png");
         }
@@ -60,6 +91,24 @@ public class BlackHole extends Field {
             return false;
         }
         if (ycoor != other.ycoor) {
+            return false;
+        }
+        if (laserVertical != other.laserVertical) {
+            return false;
+        }
+        if (laserHorizontal != other.laserHorizontal) {
+            return false;
+        }
+        if (barrierLeft != other.barrierLeft) {
+            return false;
+        }
+        if (barrierTop != other.barrierTop) {
+            return false;
+        }
+        if (barrierRight != other.barrierRight) {
+            return false;
+        }
+        if (barrierBottom != other.barrierBottom) {
             return false;
         }
 
