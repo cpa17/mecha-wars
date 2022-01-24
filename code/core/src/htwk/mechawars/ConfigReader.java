@@ -112,11 +112,11 @@ public class ConfigReader {
         FileHandle file = Gdx.files.local("configs/Startupconfig.txt");
         file.writeString("playerNumber: " + player, false);
 
-        for (int current = 0; current < playerNumber; current++) {
+        /*for (int current = 0; current < playerNumber; current++) {
             file.writeString("\nplayerposition: "
-                    + current + "-" + 3 + "-" + (3 + current) + "-" + "2", true);
+                    + current + "-" + 3 + "-" + (3 + current) + "-" + aiModes[current], true);
         }
-        file.writeString("\nAiImport: AiCardGeneration", true);
+        file.writeString("\nAiImport: aic2", true);*/
 
     }
 
