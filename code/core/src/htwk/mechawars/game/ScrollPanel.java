@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Timer;
 import htwk.mechawars.board.Robot;
 import htwk.mechawars.cards.Card;
 import htwk.mechawars.cards.Deck;
@@ -182,6 +183,7 @@ public class ScrollPanel {
     }
 
     static void clearScrollPanel(Skin skin) {
+        pressCounter = 0;
         table.clear();
         if (!Robot.getPlayers()[0].getShutDown()) {
             scrollPanel(skin);
@@ -202,7 +204,7 @@ public class ScrollPanel {
      * @return --> all cards chosen
      */
     public static boolean allChosen() {
-        return pressCounter == 5;
+        return pressCounter >= 5;
     }
 
 }
