@@ -1,105 +1,124 @@
-Klasse			    Spezifikation                           Codierung
+Ziffer 1 steht für die vertikalen Laser
+Ziffer 2 steht für die horizontalen Laser
+Ziffer 3 steht für die Wand links
+Ziffer 4 steht für die Wand oben
+Ziffer 5 steht für die Wand rechts
+Ziffer 6 steht für die Wand unten
+Ziffer 7 steht für die Unterklasse
+Ziffer 8 und 9 stehen für die Attribute der Unterklasse
 
-BarrierCorner	    links oben				                10001
-			        rechts oben				                10002
-			        rechts unten			                10003
-			        links unten				                10004
+(x ist ein Platzhalter für eine Ziffer, für die Bedeutung dieser siehe weiter unten)
 
-BarrierSide		    links					                10101
-			        oben					                10102
-			        rechts					                10103
-			        unten					                10104
 
-BlackHole		    -					                    10200
+Attribut/Klasse     Spezifikation                           Codierung
 
-Pusher	            horizontale mit Ziffern 2 und 4		    10301
-			        horizontale mit Ziffern 1, 3 und 5	    10302
-			        vertikal mit Ziffern 2 und 4		    10303
-			        vertikal mit Ziffern 1, 3 und 5		    10304
+laserVertical       1 vertikaler Laser                      1xxxxxxxx
+                    2 vertikale Laser                       2xxxxxxxx
+                    3 vertikale Laser                       3xxxxxxxx
+                    Laserbeginn, 1 vertikaler               4xxxxxxxx
+                    Laserbeginn, 2 vertikale                5xxxxxxxx
+                    Laserbeginn, 3 vertikale                6xxxxxxxx
+                    0 vertikaler Laser                      9xxxxxxxx
 
-Checkpoint		   	Nummer 1				                10401
-			        Nummer 2				                10402
-			        Nummer 3				                10403
-			        Nummer 4				                10404
-			        Nummer 5				                10405
-			        Nummer 6				                10406
-			        Nummer 7				                10407
-			        Nummer 8				                10408
+laserHorizontal     1 horizontaler Laser                    x1xxxxxxx
+                    2 horizontale Laser                     x2xxxxxxx
+                    3 horizontale Laser                     x3xxxxxxx
+                    Laserbeginn, 1 horizontaler             x4xxxxxxx
+                    Laserbeginn, 2 horizontale              x5xxxxxxx
+                    Laserbeginn, 3 horizontale              x6xxxxxxx
+                    0 horizontaler Laser                    x9xxxxxxx
 
-ConveyorBelt		von oben nach links			            10521
-			        von rechts nach links			        10531
-			        von unten nach links			        10541
-			        von oben und unten nach links		    10561
-			        von rechts und oben nach links		    10571
-			        von rechts und unten nach links		    10591
-			        von links und unten nach oben		    10502
-			        von links nach oben			            10512
-			        von rechts nach oben			        10532
-			        von unten nach oben			            10542
-			        von links und rechts nach oben		    10552
-			        von rechts und unten nach oben		    10592
-			        von links und unten nach rechts		    10503
-			        von links nach rechts			        10513
-			        von oben nach rechts			        10523
-			        von unten nach rechts			        10543
-			        von oben und unten nach rechts		    10563
-			        von links und oben nach rechts		    10583
-			        von links nach unten			        10514
-			        von oben nach unten			            10524
-			        von rechts nach unten			        10534
-			        von links und rechts nach unten		    10554
-			        von rechts und oben nach unten		    10574
-			        von links und oben nach unten		    10584
+barrierLeft         false                                   xx0xxxxxx
+                    true                                    xx1xxxxxx
 
-ExpressConveyorBelt	von oben nach links			            10621
-			        von rechts nach links			        10631
-			        von unten nach links			        10641
-			        von oben und unten nach links		    10661
-			        von rechts und oben nach links		    10671
-			        von rechts und unten nach links		    10691
-			        von links und unten nach oben		    10602
-			        von links nach oben			            10612
-			        von rechts nach oben			        10632
-			        von unten nach oben			            10642
-			        von links und rechts nach oben		    10652
-			        von rechts und unten nach oben		    10692
-			        von links und unten nach rechts		    10603
-			        von links nach rechts			        10613
-			        von oben nach rechts			        10623
-			        von unten nach rechts			        10643
-			        von oben und unten nach rechts		    10663
-			        von links und oben nach rechts		    10683
-			        von links nach unten			        10614
-			        von oben nach unten			            10624
-			        von rechts nach unten			        10634
-			        von links und rechts nach unten		    10654
-			        von rechts und oben nach unten		    10674
-			        von links und oben nach unten		    10684
+barrierTop          false                                   xxx0xxxxx
+                    true                                    xxx1xxxxx
 
-Gear			    rechtsrum				                10701
-			        linksrum				                10702
+barrierRight        false                                   xxxx0xxxx
+                    true                                    xxxx1xxxx
 
-Laser			    Beginn links				            10800
-			        Beginn oben				                10801
-			        Beginn rechts				            10802
-			        Beginn unten				            10803
-			        Mittelteil horizontal			        10804
-			        Mittelteil vertikal			            10805
-			        Ende links				                10806
-			        Ende oben				                10807
-			        Ende rechts				                10808
-			        Ende unten				                10809
+barrierBottom       false                                   xxxxx0xxx
+                    true                                    xxxxx1xxx
 
-RepairSite		    einfaches Reparaturfeld			        10901
-			        doppeltes Reparaturfeld			        10902
+BlackHole		    -					                    xxxxxx000
 
-StandardField		-					                    11000
+Pusher	            horizontale mit Ziffern 2 und 4		    xxxxxx101
+			        horizontale mit Ziffern 1, 3 und 5	    xxxxxx102
+			        vertikal mit Ziffern 2 und 4		    xxxxxx103
+			        vertikal mit Ziffern 1, 3 und 5		    xxxxxx104
 
-StartField		    Nummer 1				                11101
-			        Nummer 2				                11102
-			        Nummer 3				                11103
-			        Nummer 4				                11104
-			        Nummer 5				                11105
-			        Nummer 6				                11106
-			        Nummer 7				                11107
-			        Nummer 8				                11108
+Checkpoint		   	Nummer 1				                xxxxxx201
+			        Nummer 2				                xxxxxx202
+			        Nummer 3				                xxxxxx203
+			        Nummer 4				                xxxxxx204
+			        Nummer 5				                xxxxxx205
+			        Nummer 6				                xxxxxx206
+			        Nummer 7				                xxxxxx207
+			        Nummer 8				                xxxxxx208
+
+ConveyorBelt		von oben nach links			            xxxxxx321
+			        von rechts nach links			        xxxxxx331
+			        von unten nach links			        xxxxxx341
+			        von oben und unten nach links		    xxxxxx361
+			        von rechts und oben nach links		    xxxxxx371
+			        von rechts und unten nach links		    xxxxxx391
+			        von links und unten nach oben		    xxxxxx302
+			        von links nach oben			            xxxxxx312
+			        von rechts nach oben			        xxxxxx332
+			        von unten nach oben			            xxxxxx342
+			        von links und rechts nach oben		    xxxxxx352
+			        von rechts und unten nach oben		    xxxxxx392
+			        von links und unten nach rechts		    xxxxxx303
+			        von links nach rechts			        xxxxxx313
+			        von oben nach rechts			        xxxxxx323
+			        von unten nach rechts			        xxxxxx343
+			        von oben und unten nach rechts		    xxxxxx363
+			        von links und oben nach rechts		    xxxxxx383
+			        von links nach unten			        xxxxxx314
+			        von oben nach unten			            xxxxxx324
+			        von rechts nach unten			        xxxxxx334
+			        von links und rechts nach unten		    xxxxxx354
+			        von rechts und oben nach unten		    xxxxxx374
+			        von links und oben nach unten		    xxxxxx384
+
+ExpressConveyorBelt	von oben nach links			            xxxxxx421
+			        von rechts nach links			        xxxxxx431
+			        von unten nach links			        xxxxxx441
+			        von oben und unten nach links		    xxxxxx461
+			        von rechts und oben nach links		    xxxxxx471
+			        von rechts und unten nach links		    xxxxxx491
+			        von links und unten nach oben		    xxxxxx402
+			        von links nach oben			            xxxxxx412
+			        von rechts nach oben			        xxxxxx432
+			        von unten nach oben			            xxxxxx442
+			        von links und rechts nach oben		    xxxxxx452
+			        von rechts und unten nach oben		    xxxxxx492
+			        von links und unten nach rechts		    xxxxxx403
+			        von links nach rechts			        xxxxxx413
+			        von oben nach rechts			        xxxxxx423
+			        von unten nach rechts			        xxxxxx443
+			        von oben und unten nach rechts		    xxxxxx463
+			        von links und oben nach rechts		    xxxxxx483
+			        von links nach unten			        xxxxxx414
+			        von oben nach unten			            xxxxxx424
+			        von rechts nach unten			        xxxxxx434
+			        von links und rechts nach unten		    xxxxxx454
+			        von rechts und oben nach unten		    xxxxxx474
+			        von links und oben nach unten		    xxxxxx484
+
+Gear			    rechtsrum				                xxxxxx501
+			        linksrum				                xxxxxx502
+
+RepairSite		    einfaches Reparaturfeld			        xxxxxx601
+			        doppeltes Reparaturfeld			        xxxxxx602
+
+StandardField		-					                    xxxxxx700
+
+StartField		    Nummer 1				                xxxxxx801
+			        Nummer 2				                xxxxxx802
+			        Nummer 3				                xxxxxx803
+			        Nummer 4				                xxxxxx804
+			        Nummer 5				                xxxxxx805
+			        Nummer 6				                xxxxxx806
+			        Nummer 7				                xxxxxx807
+			        Nummer 8				                xxxxxx808
