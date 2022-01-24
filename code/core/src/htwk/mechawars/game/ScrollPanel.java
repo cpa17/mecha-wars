@@ -42,9 +42,6 @@ public class ScrollPanel {
 
             for (int i = 5; i > (4 - (Robot.getPlayers()[0].getDamagePoints() - 5)); i -= 1) {
                 Card currentCard = cardOrder[i - 1];
-                for (int k = 0; k < 5; k++) {
-                    System.out.println(cardOrder[k]);
-                }
 
                 buttons[i - 1] = new TextButton(currentCard.getCardAttributePriority()
                     + " - " + currentCard + " | Nr. " + (i), skin);
@@ -183,7 +180,6 @@ public class ScrollPanel {
     }
 
     static void clearScrollPanel(Skin skin) {
-        pressCounter = 0;
         table.clear();
         if (!Robot.getPlayers()[0].getShutDown()) {
             scrollPanel(skin);

@@ -50,8 +50,8 @@ public class Buttons {
                                 players[0].resetList();
                                 startExecutionButton.setColor(Color.LIGHT_GRAY);
                                 ScrollPanel.cardOrderClear();
-                                setButtons(players);
                                 activateButtons();
+                                setButtons(players);
                                 ScrollPanel.clearScrollPanel(skin);
                             }
                         }, (ConfigReader.getPlayerNumber() * 5) + 6);
@@ -71,8 +71,8 @@ public class Buttons {
                             players[0].resetList();
                             startExecutionButton.setColor(Color.LIGHT_GRAY);
                             ScrollPanel.cardOrderClear();
-                            setButtons(players);
                             activateButtons();
+                            setButtons(players);
                             ScrollPanel.clearScrollPanel(skin);
                         }
                     }, (ConfigReader.getPlayerNumber() * 5) + 6);
