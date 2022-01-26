@@ -55,6 +55,7 @@ public class GameScreen implements Screen {
         Gdx.input.setInputProcessor(getStage());
 
         Robot.create();
+        Board.create();
 
         addButtonsToStage(skin);
         Buttons.setButtons(Robot.getPlayers());
@@ -146,7 +147,6 @@ public class GameScreen implements Screen {
 
         getStage().addActor(Buttons.shutDownButton(Robot.getPlayers()[0], shutDownButton));
         getStage().addActor(Buttons.wakeUpButton(Robot.getPlayers()[0], wakeUpButton));
-
     }
     
     public static void setWinCondition(boolean win) {

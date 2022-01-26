@@ -1,5 +1,6 @@
 package htwk.mechawars.board;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import htwk.mechawars.ConfigReader;
 import htwk.mechawars.ai.AiManager;
 import htwk.mechawars.cards.Card;
@@ -40,50 +41,78 @@ public class Board {
     public Field[][] fieldmatrix;
     private Field robotPosition;
     private static int checkpoint;
-    private static final Texture side1 = new Texture(Gdx.files.internal(
-            "mapAssets/barriers/BarrierSide1.png"));
-    private static final Texture side2 = new Texture(Gdx.files.internal(
-            "mapAssets/barriers/BarrierSide2.png"));
-    private static final Texture side3 = new Texture(Gdx.files.internal(
-            "mapAssets/barriers/BarrierSide3.png"));
-    private static final Texture side4 = new Texture(Gdx.files.internal(
-            "mapAssets/barriers/BarrierSide4.png"));
-    private static final Texture laserH1 = new Texture(Gdx.files.internal(
-            "mapAssets/laser/LaserH1.png"));
-    private static final Texture laserH2 = new Texture(Gdx.files.internal(
-            "mapAssets/laser/LaserH2.png"));
-    private static final Texture laserH3 = new Texture(Gdx.files.internal(
-            "mapAssets/laser/LaserH3.png"));
-    private static final Texture laserV1 = new Texture(Gdx.files.internal(
-            "mapAssets/laser/LaserV1.png"));
-    private static final Texture laserV2 = new Texture(Gdx.files.internal(
-            "mapAssets/laser/LaserV2.png"));
-    private static final Texture laserV3 = new Texture(Gdx.files.internal(
-            "mapAssets/laser/LaserV3.png"));
-    private static final Texture laserSV1 = new Texture(Gdx.files.internal(
-            "mapAssets/laser/LaserSV40.png"));
-    private static final Texture laserSV2 = new Texture(Gdx.files.internal(
-            "mapAssets/laser/LaserSV50.png"));
-    private static final Texture laserSV3 = new Texture(Gdx.files.internal(
-            "mapAssets/laser/LaserSV60.png"));
-    private static final Texture laserSV4 = new Texture(Gdx.files.internal(
-            "mapAssets/laser/LaserSV41.png"));
-    private static final Texture laserSV5 = new Texture(Gdx.files.internal(
-            "mapAssets/laser/LaserSV51.png"));
-    private static final Texture laserSV6 = new Texture(Gdx.files.internal(
-            "mapAssets/laser/LaserSV61.png"));
-    private static final Texture laserSH1 = new Texture(Gdx.files.internal(
-            "mapAssets/laser/LaserSH40.png"));
-    private static final Texture laserSH2 = new Texture(Gdx.files.internal(
-            "mapAssets/laser/LaserSH50.png"));
-    private static final Texture laserSH3 = new Texture(Gdx.files.internal(
-            "mapAssets/laser/LaserSH60.png"));
-    private static final Texture laserSH4 = new Texture(Gdx.files.internal(
-            "mapAssets/laser/LaserSH41.png"));
-    private static final Texture laserSH5 = new Texture(Gdx.files.internal(
-            "mapAssets/laser/LaserSH51.png"));
-    private static final Texture laserSH6 = new Texture(Gdx.files.internal(
-            "mapAssets/laser/LaserSH61.png"));
+    private static Texture side1;
+    private static Texture side2;
+    private static Texture side3;
+    private static Texture side4;
+    private static Texture laserH1;
+    private static Texture laserH2;
+    private static Texture laserH3;
+    private static Texture laserV1;
+    private static Texture laserV2;
+    private static Texture laserV3;
+    private static Texture laserSV1;
+    private static Texture laserSV2;
+    private static Texture laserSV3;
+    private static Texture laserSV4;
+    private static Texture laserSV5;
+    private static Texture laserSV6;
+    private static Texture laserSH1;
+    private static Texture laserSH2;
+    private static Texture laserSH3;
+    private static Texture laserSH4;
+    private static Texture laserSH5;
+    private static Texture laserSH6;
+
+    /**
+     * Method that creates the sprites for The Board.
+     */
+    public static void create() {
+        side1 = new Texture(Gdx.files.internal(
+                "mapAssets/barriers/BarrierSide1.png"));
+        side2 = new Texture(Gdx.files.internal(
+                "mapAssets/barriers/BarrierSide2.png"));
+        side3 = new Texture(Gdx.files.internal(
+                "mapAssets/barriers/BarrierSide3.png"));
+        side4 = new Texture(Gdx.files.internal(
+                "mapAssets/barriers/BarrierSide4.png"));
+        laserH1 = new Texture(Gdx.files.internal(
+                "mapAssets/laser/LaserH1.png"));
+        laserH2 = new Texture(Gdx.files.internal(
+                "mapAssets/laser/LaserH2.png"));
+        laserH3 = new Texture(Gdx.files.internal(
+                "mapAssets/laser/LaserH3.png"));
+        laserV1 = new Texture(Gdx.files.internal(
+                "mapAssets/laser/LaserV1.png"));
+        laserV2 = new Texture(Gdx.files.internal(
+                "mapAssets/laser/LaserV2.png"));
+        laserV3 = new Texture(Gdx.files.internal(
+                "mapAssets/laser/LaserV3.png"));
+        laserSV1 = new Texture(Gdx.files.internal(
+                "mapAssets/laser/LaserSV40.png"));
+        laserSV2 = new Texture(Gdx.files.internal(
+                "mapAssets/laser/LaserSV50.png"));
+        laserSV3 = new Texture(Gdx.files.internal(
+                "mapAssets/laser/LaserSV60.png"));
+        laserSV4 = new Texture(Gdx.files.internal(
+                "mapAssets/laser/LaserSV41.png"));
+        laserSV5 = new Texture(Gdx.files.internal(
+                "mapAssets/laser/LaserSV51.png"));
+        laserSV6 = new Texture(Gdx.files.internal(
+                "mapAssets/laser/LaserSV61.png"));
+        laserSH1 = new Texture(Gdx.files.internal(
+                "mapAssets/laser/LaserSH40.png"));
+        laserSH2 = new Texture(Gdx.files.internal(
+                "mapAssets/laser/LaserSH50.png"));
+        laserSH3 = new Texture(Gdx.files.internal(
+                "mapAssets/laser/LaserSH60.png"));
+        laserSH4 = new Texture(Gdx.files.internal(
+                "mapAssets/laser/LaserSH41.png"));
+        laserSH5 = new Texture(Gdx.files.internal(
+                "mapAssets/laser/LaserSH51.png"));
+        laserSH6 = new Texture(Gdx.files.internal(
+                "mapAssets/laser/LaserSH61.png"));
+    }
 
     /**
      * Method that reads the game plan as a int matrix from a file and constructs the game board
