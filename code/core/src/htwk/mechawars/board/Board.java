@@ -40,6 +40,50 @@ public class Board {
     public Field[][] fieldmatrix;
     private Field robotPosition;
     private static int checkpoint;
+    private static final Texture side1 = new Texture(Gdx.files.internal(
+            "mapAssets/barriers/BarrierSide1.png"));
+    private static final Texture side2 = new Texture(Gdx.files.internal(
+            "mapAssets/barriers/BarrierSide2.png"));
+    private static final Texture side3 = new Texture(Gdx.files.internal(
+            "mapAssets/barriers/BarrierSide3.png"));
+    private static final Texture side4 = new Texture(Gdx.files.internal(
+            "mapAssets/barriers/BarrierSide4.png"));
+    private static final Texture laserH1 = new Texture(Gdx.files.internal(
+            "mapAssets/laser/LaserH1.png"));
+    private static final Texture laserH2 = new Texture(Gdx.files.internal(
+            "mapAssets/laser/LaserH2.png"));
+    private static final Texture laserH3 = new Texture(Gdx.files.internal(
+            "mapAssets/laser/LaserH3.png"));
+    private static final Texture laserV1 = new Texture(Gdx.files.internal(
+            "mapAssets/laser/LaserV1.png"));
+    private static final Texture laserV2 = new Texture(Gdx.files.internal(
+            "mapAssets/laser/LaserV2.png"));
+    private static final Texture laserV3 = new Texture(Gdx.files.internal(
+            "mapAssets/laser/LaserV3.png"));
+    private static final Texture laserSV1 = new Texture(Gdx.files.internal(
+            "mapAssets/laser/LaserSV40.png"));
+    private static final Texture laserSV2 = new Texture(Gdx.files.internal(
+            "mapAssets/laser/LaserSV50.png"));
+    private static final Texture laserSV3 = new Texture(Gdx.files.internal(
+            "mapAssets/laser/LaserSV60.png"));
+    private static final Texture laserSV4 = new Texture(Gdx.files.internal(
+            "mapAssets/laser/LaserSV41.png"));
+    private static final Texture laserSV5 = new Texture(Gdx.files.internal(
+            "mapAssets/laser/LaserSV51.png"));
+    private static final Texture laserSV6 = new Texture(Gdx.files.internal(
+            "mapAssets/laser/LaserSV61.png"));
+    private static final Texture laserSH1 = new Texture(Gdx.files.internal(
+            "mapAssets/laser/LaserSH40.png"));
+    private static final Texture laserSH2 = new Texture(Gdx.files.internal(
+            "mapAssets/laser/LaserSH50.png"));
+    private static final Texture laserSH3 = new Texture(Gdx.files.internal(
+            "mapAssets/laser/LaserSH60.png"));
+    private static final Texture laserSH4 = new Texture(Gdx.files.internal(
+            "mapAssets/laser/LaserSH41.png"));
+    private static final Texture laserSH5 = new Texture(Gdx.files.internal(
+            "mapAssets/laser/LaserSH51.png"));
+    private static final Texture laserSH6 = new Texture(Gdx.files.internal(
+            "mapAssets/laser/LaserSH61.png"));
 
     /**
      * Method that reads the game plan as a int matrix from a file and constructs the game board
@@ -390,26 +434,22 @@ public class Board {
                 int r = b - c; //the result of the board height minus the current height
                 // if there is a barrier on the left of the current field
                 if (board.fieldmatrix[cell][row].getBarrierLeft()) {
-                    currentTile = new Texture(Gdx.files.internal(
-                            "mapAssets/barriers/BarrierSide1.png"));
+                    currentTile = side1;
                     batch.draw(currentTile, x, r, t, t);
                 }
                 // if there is a barrier on the top of the current field
                 if (board.fieldmatrix[cell][row].getBarrierTop()) {
-                    currentTile = new Texture(Gdx.files.internal(
-                            "mapAssets/barriers/BarrierSide2.png"));
+                    currentTile = side2;
                     batch.draw(currentTile, x, r, t, t);
                 }
                 // if there is a barrier on the right of the current field
                 if (board.fieldmatrix[cell][row].getBarrierRight()) {
-                    currentTile = new Texture(Gdx.files.internal(
-                            "mapAssets/barriers/BarrierSide3.png"));
+                    currentTile = side3;
                     batch.draw(currentTile, x, r, t, t);
                 }
                 // if there is a barrier on the bottom of the current field
                 if (board.fieldmatrix[cell][row].getBarrierBottom()) {
-                    currentTile = new Texture(Gdx.files.internal(
-                            "mapAssets/barriers/BarrierSide4.png"));
+                    currentTile = side4;
                     batch.draw(currentTile, x, r, t, t);
                 }
                 x = x + (Gdx.graphics.getHeight() / board.fieldmatrix[0].length);
@@ -424,7 +464,7 @@ public class Board {
      * @param board Board whose matrix is to be converted into a string
      */
     public static void lasersToAsset(SpriteBatch batch, Board board) {
-        Texture currentTile;
+        Texture currentTile = null;
         int v;
         int h;
     
@@ -440,28 +480,73 @@ public class Board {
                 int r = b - c; //the result of the board height minus the current height
                 // if there is a vertical laser
                 if (v == 1 || v == 2 || v == 3) {
-                    currentTile = new Texture(Gdx.files.internal(
-                            "mapAssets/laser/LaserV" + v + ".png"));
+                    switch(v){
+                        case 1:
+                            currentTile = laserV1;
+                            break;
+                        case 2:
+                            currentTile = laserV2;
+                            break;
+                        case 3:
+                            currentTile = laserV3;
+                            break;
+                        default:
+                            break;
+                    }
                     batch.draw(currentTile, x, r, t, t);
                 }
                 // if there is a horizontal laser
                 if (h == 1 || h == 2 || h == 3) {
-                    currentTile = new Texture(Gdx.files.internal(
-                            "mapAssets/laser/LaserH" + h + ".png"));
+                    switch(h){
+                        case 1:
+                            currentTile = laserH1;
+                            break;
+                        case 2:
+                            currentTile = laserH2;
+                            break;
+                        case 3:
+                            currentTile = laserH3;
+                            break;
+                        default:
+                            break;
+                    }
+                    
                     batch.draw(currentTile, x, r, t, t);
                 }
                 //if there is a start of one or more vertical laser
                 //0 - BarrierTop, 1 - BarrierBottom
                 if (v == 4 || v == 5 || v == 6) {
                     if (board.fieldmatrix[cell][row].getBarrierTop()) {
-                        currentTile = new Texture(Gdx.files.internal(
-                                "mapAssets/laser/LaserSV" + v + "0.png"));
+                        switch(v){
+                            case 4:
+                                currentTile = laserSV1;
+                                break;
+                            case 5:
+                                currentTile = laserSV2;
+                                break;
+                            case 6:
+                                currentTile = laserSV3;
+                                break;
+                            default:
+                                break;
+                        }
                         batch.draw(currentTile, x, r, t, t);
                     }
 
                     if (board.fieldmatrix[cell][row].getBarrierBottom()) {
-                        currentTile = new Texture(Gdx.files.internal(
-                                "mapAssets/laser/LaserSV" + v + "1.png"));
+                        switch(v){
+                            case 4:
+                                currentTile = laserSV4;
+                                break;
+                            case 5:
+                                currentTile = laserSV5;
+                                break;
+                            case 6:
+                                currentTile = laserSV6;
+                                break;
+                            default:
+                                break;
+                        }
                         batch.draw(currentTile, x, r, t, t); 
                     }
                 }
@@ -469,14 +554,36 @@ public class Board {
                 //0 - BarrierLeft, 1 - BarrierRight
                 if (h == 4 || h == 5 || h == 6) {
                     if (board.fieldmatrix[cell][row].getBarrierLeft()) {
-                        currentTile = new Texture(Gdx.files.internal(
-                                "mapAssets/laser/LaserSH" + h + "0.png"));
+                        switch(h){
+                            case 4:
+                                currentTile = laserSH1;
+                                break;
+                            case 5:
+                                currentTile = laserSH2;
+                                break;
+                            case 6:
+                                currentTile = laserSH3;
+                                break;
+                            default:
+                                break;
+                        }
                         batch.draw(currentTile, x, r, t, t); 
                     }
 
                     if (board.fieldmatrix[cell][row].getBarrierRight()) {
-                        currentTile = new Texture(Gdx.files.internal(
-                                "mapAssets/laser/LaserSH" + h + "1.png"));
+                        switch(h){
+                            case 4:
+                                currentTile = laserSH4;
+                                break;
+                            case 5:
+                                currentTile = laserSH5;
+                                break;
+                            case 6:
+                                currentTile = laserSH6;
+                                break;
+                            default:
+                                break;
+                        }
                         batch.draw(currentTile, x, r, t, t); 
                     }
                 }

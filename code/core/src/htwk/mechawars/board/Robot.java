@@ -24,16 +24,32 @@ public class Robot {
     private int backupCopyY;
     private int checkPointNumber;
     private boolean shutDownMark;
-    private boolean backupDraw;
     private boolean lastRound;
     private boolean nextRound;
     private boolean destroyed;
     private boolean lastMovementByConveyor;
     private Field lastConveyorField;
-    private Texture life;
-    private Texture damage;
-    private Texture shutDown;
-    private Texture hud;
+    private static Sprite life;
+    private static Sprite damage;
+    private static Sprite shutDown;
+    private static Sprite hud;
+    private static Sprite sleep;
+    private static Sprite wakeup;
+    private static Sprite life0;
+    private static Sprite life1;
+    private static Sprite life2;
+    private static Sprite life3;
+    private static Sprite damage0;
+    private static Sprite damage1;
+    private static Sprite damage2;
+    private static Sprite damage3;
+    private static Sprite damage4;
+    private static Sprite damage5;
+    private static Sprite damage6;
+    private static Sprite damage7;
+    private static Sprite damage8;
+    private static Sprite damage9;
+    private static Sprite damage10;
     private static Robot[] players = createRobots(ConfigReader.getPlayerNumber());
     private LinkedList<Card> selectedCards = new LinkedList<Card>();
 
@@ -50,6 +66,27 @@ public class Robot {
         checkPointNumber = 1;
         lastMovementByConveyor = false;
         lastConveyorField = null;
+    }
+
+    public static void create() {
+        hud = new Sprite(new Texture(Gdx.files.internal("parameters/hud.png")));
+        sleep = new Sprite(new Texture(Gdx.files.internal("parameters/sleep.png")));
+        wakeup = new Sprite(new Texture(Gdx.files.internal("parameters/wakeup.png")));
+        life0 = new Sprite(new Texture(Gdx.files.internal("parameters/hp0.png")));
+        life1 = new Sprite(new Texture(Gdx.files.internal("parameters/hp1.png")));
+        life2 = new Sprite(new Texture(Gdx.files.internal("parameters/hp2.png")));
+        life3 = new Sprite(new Texture(Gdx.files.internal("parameters/hp3.png")));
+        damage0 = new Sprite(new Texture(Gdx.files.internal("parameters/damage0.png")));
+        damage1 = new Sprite(new Texture(Gdx.files.internal("parameters/damage1.png")));
+        damage2 = new Sprite(new Texture(Gdx.files.internal("parameters/damage2.png")));
+        damage3 = new Sprite(new Texture(Gdx.files.internal("parameters/damage3.png")));
+        damage4 = new Sprite(new Texture(Gdx.files.internal("parameters/damage4.png")));
+        damage5 = new Sprite(new Texture(Gdx.files.internal("parameters/damage5.png")));
+        damage6 = new Sprite(new Texture(Gdx.files.internal("parameters/damage6.png")));
+        damage7 = new Sprite(new Texture(Gdx.files.internal("parameters/damage7.png")));
+        damage8 = new Sprite(new Texture(Gdx.files.internal("parameters/damage8.png")));
+        damage9 = new Sprite(new Texture(Gdx.files.internal("parameters/damage9.png")));
+        damage10 = new Sprite(new Texture(Gdx.files.internal("parameters/damage10.png")));
     }
 
     /**
@@ -578,16 +615,16 @@ public class Robot {
      */
     private void updateLife() {
         switch (lifePoints) {
-            case 0 :    life = new Texture(Gdx.files.internal("parameters/hp0.png"));
+            case 0 :    life = life0;
                         break;
                         
-            case 1 :    life = new Texture(Gdx.files.internal("parameters/hp1.png"));
+            case 1 :    life = life1;
                         break;
                         
-            case 2 :    life = new Texture(Gdx.files.internal("parameters/hp2.png"));
+            case 2 :    life = life2;
                         break;
                         
-            case 3 :    life = new Texture(Gdx.files.internal("parameters/hp3.png"));
+            case 3 :    life = life3;
                         break;
                         
             default:    break;
@@ -599,37 +636,37 @@ public class Robot {
      */
     private void updateDamage() {
         switch (damagePoints) {
-            case 0 :    damage = new Texture(Gdx.files.internal("parameters/damage0.png"));
+            case 0 :    damage = damage0;
                         break;
                         
-            case 1 :    damage = new Texture(Gdx.files.internal("parameters/damage1.png"));
+            case 1 :    damage = damage1;
                         break;
                         
-            case 2 :    damage = new Texture(Gdx.files.internal("parameters/damage2.png"));
+            case 2 :    damage = damage2;
                         break;
                         
-            case 3 :    damage = new Texture(Gdx.files.internal("parameters/damage3.png"));
+            case 3 :    damage = damage3;
                         break;
                         
-            case 4 :    damage = new Texture(Gdx.files.internal("parameters/damage4.png"));
+            case 4 :    damage = damage4;
                         break;
                         
-            case 5 :    damage = new Texture(Gdx.files.internal("parameters/damage5.png"));
+            case 5 :    damage = damage5;
                         break;
                         
-            case 6 :    damage = new Texture(Gdx.files.internal("parameters/damage6.png"));
+            case 6 :    damage = damage6;
                         break;
                         
-            case 7 :    damage = new Texture(Gdx.files.internal("parameters/damage7.png"));
+            case 7 :    damage = damage7;
                         break;
                         
-            case 8 :    damage = new Texture(Gdx.files.internal("parameters/damage8.png"));
+            case 8 :    damage = damage8;
                         break;
                         
-            case 9 :    damage = new Texture(Gdx.files.internal("parameters/damage9.png"));
+            case 9 :    damage = damage9;
                         break;
 
-            case 10:    damage = new Texture(Gdx.files.internal("parameters/damage10.png"));
+            case 10:    damage = damage10;
                         break;
 
             default:    break;
@@ -641,36 +678,29 @@ public class Robot {
      */
     private void updateShutDown() {
         if (shutDownMark) {
-            shutDown = new Texture(Gdx.files.internal("parameters/sleep.png"));
+            shutDown = sleep;
         } else {
-            shutDown = new Texture(Gdx.files.internal("parameters/wakeup.png"));
+            shutDown = wakeup;
         }
-    }
-
-    /**
-     * Updates the shutDown texture depending on the amout of players.
-     */
-    private void createHud() {
-        hud = new Texture(Gdx.files.internal("parameters/hud.png"));
     }
 
     /**
      * Draws the parameter textures. 
      */
     public void drawParameters(SpriteBatch batch) {
-        createHud();
         updateLife();
         updateDamage();
         updateShutDown();
-        updateShutDown();
-        if (backupDraw) {
-            backupDraw = false;
-            batch.draw(new Texture(Gdx.files.internal("robot.png")), backupCopyX, backupCopyY);
-        }
-        batch.draw(hud, 754, 15);
-        batch.draw(life, 763, 23);
-        batch.draw(damage, 838, 23);
-        batch.draw(shutDown, 914, 23);
+
+        hud.setPosition(754, 15);
+        life.setPosition(763, 23);
+        damage.setPosition(838,23);
+        shutDown.setPosition(914,23);
+
+        hud.draw(batch);
+        shutDown.draw(batch);
+        life.draw(batch);
+        damage.draw(batch);
     }
 
     /**
