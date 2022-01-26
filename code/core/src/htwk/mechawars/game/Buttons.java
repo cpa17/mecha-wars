@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.Timer;
 
 import htwk.mechawars.ConfigReader;
 import htwk.mechawars.board.Robot;
+import htwk.mechawars.cards.Card;
 
 import static htwk.mechawars.game.GameScreen.board;
 import static htwk.mechawars.game.GameScreen.stage;
@@ -268,6 +269,40 @@ public class Buttons {
         });
 
         return shutDownButton;
+    }
+    
+    public static Button currentCardShowButton(Robot player, TextButton currentCardShowButton) {
+        
+        currentCardShowButton.setSize(160, 86);
+        
+        int buttonX = Gdx.graphics.getHeight()
+                + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
+        int buttonY = Gdx.graphics.getHeight() - 300;
+        
+        currentCardShowButton.setPosition(buttonX, buttonY);
+        
+        currentCardShowButton.setTouchable(Touchable.disabled);
+        
+        currentCardShowButton.setText("aktuelle Karte");
+        
+        return currentCardShowButton;
+    }
+    
+    public static Button currentCardShowButton(Robot player, TextButton currentCardShowButton, Card card) {
+        
+        currentCardShowButton.setSize(160, 86);
+        
+        int buttonX = Gdx.graphics.getHeight()
+                + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
+        int buttonY = Gdx.graphics.getHeight() - 300;
+        
+        currentCardShowButton.setPosition(buttonX, buttonY);
+        
+        currentCardShowButton.setTouchable(Touchable.disabled);
+        
+        currentCardShowButton.setText(card.getCardAttributePriority()+ " - " + card + "");
+        
+        return currentCardShowButton;
     }
 
     /**

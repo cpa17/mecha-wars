@@ -28,8 +28,11 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
+
+import htwk.mechawars.game.Buttons;
 import htwk.mechawars.game.GameScreen;
 
 //import ai.AiCardGeneration;
@@ -696,14 +699,7 @@ public class Board {
 
                     @Override
                     public void run() {
-                        String regex = "(.*)";
-                        int xyz = card.getCardAttributePriority();
-                        for (int index = 0; index < ScrollPanel.buttons.length; index += 1) {
-                            String zyx = ScrollPanel.buttons[index].toString();
-                            if (zyx.matches(regex + "" + xyz + "" + regex)) {
-                                ScrollPanel.buttons[index].setColor(Color.GOLD);
-                            }
-                        }
+                        Buttons.currentCardShowButton(robots[card.getCardPlayerNumber()], GameScreen.currentCardShowButton, card);
                         robotMovement(card, robots[card.getCardPlayerNumber()], robots);
                     }
                 }, i);

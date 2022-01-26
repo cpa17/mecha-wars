@@ -38,6 +38,7 @@ public class GameScreen implements Screen {
     static Button startExecutionButton = new TextButton("Ausfuehrung starten", skin);
     static Button wakeUpButton = new TextButton("WakeUp", skin);
     static Button shutDownButton = new TextButton("ShutDown", skin);
+    public static TextButton currentCardShowButton = new TextButton("aktuelle Karte", skin);
 
     static Board board;
 
@@ -149,6 +150,7 @@ public class GameScreen implements Screen {
 
         getStage().addActor(Buttons.shutDownButton(Robot.getPlayers()[0], shutDownButton));
         getStage().addActor(Buttons.wakeUpButton(Robot.getPlayers()[0], wakeUpButton));
+        getStage().addActor(Buttons.currentCardShowButton(Robot.getPlayers()[0], currentCardShowButton));
 
     }
     
