@@ -68,6 +68,9 @@ public class Robot {
         lastConveyorField = null;
     }
 
+    /**
+     * Method that creates the sprites for The robot parameters.
+     */
     public static void create() {
         hud = new Sprite(new Texture(Gdx.files.internal("parameters/hud.png")));
         sleep = new Sprite(new Texture(Gdx.files.internal("parameters/sleep.png")));
@@ -694,8 +697,8 @@ public class Robot {
 
         hud.setPosition(754, 15);
         life.setPosition(763, 23);
-        damage.setPosition(838,23);
-        shutDown.setPosition(914,23);
+        damage.setPosition(838, 23);
+        shutDown.setPosition(914, 23);
 
         hud.draw(batch);
         shutDown.draw(batch);

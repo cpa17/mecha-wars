@@ -1,4 +1,3 @@
-playerNumber: 2
+playerNumber: 1
 playerposition: 0-3-3-2
-playerposition: 1-3-4-2
 AiImport: AiCardGeneration

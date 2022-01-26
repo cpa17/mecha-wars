@@ -480,7 +480,7 @@ public class Board {
                 int r = b - c; //the result of the board height minus the current height
                 // if there is a vertical laser
                 if (v == 1 || v == 2 || v == 3) {
-                    switch(v){
+                    switch (v) {
                         case 1:
                             currentTile = laserV1;
                             break;
@@ -497,7 +497,7 @@ public class Board {
                 }
                 // if there is a horizontal laser
                 if (h == 1 || h == 2 || h == 3) {
-                    switch(h){
+                    switch (h) {
                         case 1:
                             currentTile = laserH1;
                             break;
@@ -517,7 +517,7 @@ public class Board {
                 //0 - BarrierTop, 1 - BarrierBottom
                 if (v == 4 || v == 5 || v == 6) {
                     if (board.fieldmatrix[cell][row].getBarrierTop()) {
-                        switch(v){
+                        switch (v) {
                             case 4:
                                 currentTile = laserSV1;
                                 break;
@@ -534,7 +534,7 @@ public class Board {
                     }
 
                     if (board.fieldmatrix[cell][row].getBarrierBottom()) {
-                        switch(v){
+                        switch (v) {
                             case 4:
                                 currentTile = laserSV4;
                                 break;
@@ -554,7 +554,7 @@ public class Board {
                 //0 - BarrierLeft, 1 - BarrierRight
                 if (h == 4 || h == 5 || h == 6) {
                     if (board.fieldmatrix[cell][row].getBarrierLeft()) {
-                        switch(h){
+                        switch (h) {
                             case 4:
                                 currentTile = laserSH1;
                                 break;
@@ -571,7 +571,7 @@ public class Board {
                     }
 
                     if (board.fieldmatrix[cell][row].getBarrierRight()) {
-                        switch(h){
+                        switch (h) {
                             case 4:
                                 currentTile = laserSH4;
                                 break;
