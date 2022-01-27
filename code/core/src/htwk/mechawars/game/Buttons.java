@@ -271,6 +271,12 @@ public class Buttons {
         return shutDownButton;
     }
     
+    /**
+     * Function, to initialize the button.
+     * 
+     * @param currentCardShowButton -> give the Button, that should be initialized
+     * @return the Button
+     */
     public static Button currentCardShowButton(TextButton currentCardShowButton) {
         
         currentCardShowButton.setSize(160, 86);
@@ -288,6 +294,13 @@ public class Buttons {
         return currentCardShowButton;
     }
     
+    /**
+     * Function, that update the button.
+     * 
+     * @param currentCardShowButton -> give the Button, that should be updated
+     * @param card -> card, to get the text, that now should be shown
+     * @return the Button
+     */
     public static Button currentCardShowButton(TextButton currentCardShowButton, Card card) {
         
         currentCardShowButton.setSize(160, 86);
