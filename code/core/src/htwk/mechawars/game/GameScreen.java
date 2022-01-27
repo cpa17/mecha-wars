@@ -150,7 +150,7 @@ public class GameScreen implements Screen {
 
         getStage().addActor(Buttons.shutDownButton(Robot.getPlayers()[0], shutDownButton));
         getStage().addActor(Buttons.wakeUpButton(Robot.getPlayers()[0], wakeUpButton));
-        getStage().addActor(Buttons.currentCardShowButton(Robot.getPlayers()[0], currentCardShowButton));
+        getStage().addActor(Buttons.currentCardShowButton(currentCardShowButton));
 
     }
     

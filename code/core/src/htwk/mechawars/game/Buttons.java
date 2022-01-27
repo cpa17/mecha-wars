@@ -271,7 +271,7 @@ public class Buttons {
         return shutDownButton;
     }
     
-    public static Button currentCardShowButton(Robot player, TextButton currentCardShowButton) {
+    public static Button currentCardShowButton(TextButton currentCardShowButton) {
         
         currentCardShowButton.setSize(160, 86);
         
@@ -288,7 +288,7 @@ public class Buttons {
         return currentCardShowButton;
     }
     
-    public static Button currentCardShowButton(Robot player, TextButton currentCardShowButton, Card card) {
+    public static Button currentCardShowButton(TextButton currentCardShowButton, Card card) {
         
         currentCardShowButton.setSize(160, 86);
         
