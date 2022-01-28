@@ -246,6 +246,7 @@ public class Buttons {
      * @return shutDownButton.
      */
     protected static Button shutDownButton(Robot player, Button shutDownButton) {
+        
         shutDownButton.setSize(160, 43);
 
         int shutDownButtonX = Gdx.graphics.getHeight()
@@ -277,19 +278,19 @@ public class Buttons {
      * @param currentCardShowButton -> give the Button, that should be initialized
      * @return the Button
      */
-    public static Button currentCardShowButton(TextButton currentCardShowButton) {
+    protected static Button currentCardShowButton(Button currentCardShowButton) {
         
         currentCardShowButton.setSize(160, 86);
         
         int buttonX = Gdx.graphics.getHeight()
                 + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
-        int buttonY = Gdx.graphics.getHeight() - 300;
+        int buttonY = Gdx.graphics.getHeight() - 405;
         
         currentCardShowButton.setPosition(buttonX, buttonY);
         
         currentCardShowButton.setTouchable(Touchable.disabled);
         
-        currentCardShowButton.setText("aktuelle Karte");
+        //currentCardShowButton.setText("aktuelle Karte");
         
         return currentCardShowButton;
     }
@@ -301,7 +302,7 @@ public class Buttons {
      * @param card -> card, to get the text, that now should be shown
      * @return the Button
      */
-    public static Button currentCardShowButton(TextButton currentCardShowButton, Card card) {
+    public static Button currentCardShowButton(Button currentCardShowButton, Card card) {
         
         currentCardShowButton.setSize(160, 86);
         
@@ -313,7 +314,7 @@ public class Buttons {
         
         currentCardShowButton.setTouchable(Touchable.disabled);
         
-        currentCardShowButton.setText(card.getCardAttributePriority()+ " - " + card + "");
+        //currentCardShowButton.setText(card.getCardAttributePriority()+ " - " + card + "");
         
         return currentCardShowButton;
     }
