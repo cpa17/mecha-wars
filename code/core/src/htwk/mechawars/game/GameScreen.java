@@ -38,7 +38,7 @@ public class GameScreen implements Screen {
     static Button startExecutionButton = new TextButton("Ausfuehrung starten", skin);
     static Button wakeUpButton = new TextButton("WakeUp", skin);
     static Button shutDownButton = new TextButton("ShutDown", skin);
-    static Button currentCardShowButton = new TextButton("aktuelle Karte", skin);
+    public static Button currentCardShowButton = new TextButton("aktuelle Karte", skin);
 
     static Board board;
 

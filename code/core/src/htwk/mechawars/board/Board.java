@@ -27,6 +27,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
@@ -697,7 +698,7 @@ public class Board {
 
                     @Override
                     public void run() {
-                        Buttons.currentCardShowButton(GameScreen.currentCardShowButton, card);
+                        GameScreen.currentCardShowButton = Buttons.currentCardShowButtonUpdate((TextButton) GameScreen.currentCardShowButton, card);
                         robotMovement(card, robots[card.getCardPlayerNumber()], robots);
                     }
                 }, i);

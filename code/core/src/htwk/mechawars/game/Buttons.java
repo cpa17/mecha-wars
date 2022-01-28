@@ -284,7 +284,7 @@ public class Buttons {
         
         int buttonX = Gdx.graphics.getHeight()
                 + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
-        int buttonY = Gdx.graphics.getHeight() - 405;
+        int buttonY = Gdx.graphics.getHeight() - 300;
         
         currentCardShowButton.setPosition(buttonX, buttonY);
         
@@ -302,7 +302,7 @@ public class Buttons {
      * @param card -> card, to get the text, that now should be shown
      * @return the Button
      */
-    public static Button currentCardShowButton(Button currentCardShowButton, Card card) {
+    public static TextButton currentCardShowButtonUpdate(TextButton currentCardShowButton, Card card) {
         
         currentCardShowButton.setSize(160, 86);
         
@@ -314,7 +314,7 @@ public class Buttons {
         
         currentCardShowButton.setTouchable(Touchable.disabled);
         
-        //currentCardShowButton.setText(card.getCardAttributePriority()+ " - " + card + "");
+        currentCardShowButton.setText(card.getCardAttributePriority()+ " - " + card + "");
         
         return currentCardShowButton;
     }
