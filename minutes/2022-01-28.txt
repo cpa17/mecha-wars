@@ -1,0 +1,31 @@
+Protokoll 28.01.2022 16:00
+von Christoph Pascal Ahlner
+
+Daily
+
+Anwesenheit:
+Antonia , Marc, Mark, Pascal, Tim, Lukas, Felix, Till, Konstantin
+
+
+Jeder 1h zur Messe.
+Bis Montag Gruppen finden.
+Link zur Messe im Discord.
+
+Tim: Problem mit Buttons
+Pascal: BUG behoben, schon gemerged.
+Konstantin: hat Tim geholfen, noch keine Lösung gefunden.
+Marc: Muss noch richtig mit dem Master mergen, hat ein paar Klassen doppelt. Pusher sind fertig.
+Mark: Gibt noch ein BUG mit den Wänden, Arbeitet am Fullscreen.
+Antonia: Hat das Ticket noch nicht Fertig, wird am Wochenende Fertig.
+
+Wiki noch machen!!!!
+
+
+
+
+
+
+
+
+
+
