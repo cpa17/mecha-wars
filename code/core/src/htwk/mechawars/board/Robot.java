@@ -35,10 +35,10 @@ public class Robot {
     private static Sprite hud;
     private static Sprite sleep;
     private static Sprite wakeup;
-    private static Sprite life0;
-    private static Sprite life1;
-    private static Sprite life2;
-    private static Sprite life3;
+    //private static Sprite life0;
+    //private static Sprite life1;
+    //private static Sprite life2;
+    //private static Sprite life3;
     private static Sprite damage0;
     private static Sprite damage1;
     private static Sprite damage2;
@@ -75,10 +75,10 @@ public class Robot {
         hud = new Sprite(new Texture(Gdx.files.internal("parameters/hud.png")));
         sleep = new Sprite(new Texture(Gdx.files.internal("parameters/sleep.png")));
         wakeup = new Sprite(new Texture(Gdx.files.internal("parameters/wakeup.png")));
-        life0 = new Sprite(new Texture(Gdx.files.internal("parameters/hp0.png")));
-        life1 = new Sprite(new Texture(Gdx.files.internal("parameters/hp1.png")));
-        life2 = new Sprite(new Texture(Gdx.files.internal("parameters/hp2.png")));
-        life3 = new Sprite(new Texture(Gdx.files.internal("parameters/hp3.png")));
+        //life0 = new Sprite(new Texture(Gdx.files.internal("parameters/hp0.png")));
+        //life1 = new Sprite(new Texture(Gdx.files.internal("parameters/hp1.png")));
+        //life2 = new Sprite(new Texture(Gdx.files.internal("parameters/hp2.png")));
+        //life3 = new Sprite(new Texture(Gdx.files.internal("parameters/hp3.png")));
         damage0 = new Sprite(new Texture(Gdx.files.internal("parameters/damage0.png")));
         damage1 = new Sprite(new Texture(Gdx.files.internal("parameters/damage1.png")));
         damage2 = new Sprite(new Texture(Gdx.files.internal("parameters/damage2.png")));
@@ -587,13 +587,6 @@ public class Robot {
     public void setDamage(int damage) {
         damagePoints = damage;
     }
-    
-    /**
-     * Reset damagePoints (to 0).
-     */
-    public void damageReset() {
-        damagePoints = 0;
-    }
 
     /**
      * Decrease lifePoints by 1.
@@ -607,31 +600,11 @@ public class Robot {
     }
 
     /**
-     * Function to repair the Robot (only 1 Point).
-     */
-    public void onRepairField() {
-        damagePoints -= 1;
-    }
-
-    /**
      * Updates the life texture depening on the current lifePoints of the robot.
      */
     private void updateLife() {
-        switch (lifePoints) {
-            case 0 :    life = life0;
-                        break;
-                        
-            case 1 :    life = life1;
-                        break;
-                        
-            case 2 :    life = life2;
-                        break;
-                        
-            case 3 :    life = life3;
-                        break;
-                        
-            default:    break;
-        }
+        String path =  "parameters/hp" + lifePoints + ".png";
+        life = new Sprite(new Texture(Gdx.files.internal(path)));
     }
     
     /**

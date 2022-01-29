@@ -1,6 +1,5 @@
 package htwk.mechawars.board;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import htwk.mechawars.ConfigReader;
 import htwk.mechawars.ai.AiManager;
 import htwk.mechawars.cards.Card;
@@ -31,8 +30,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import htwk.mechawars.game.GameScreen;
-
-//import ai.AiCardGeneration;
 
 /**
  * Class that presents the game board.
@@ -928,7 +925,7 @@ public class Board {
                 if (player.getDestroyed()) {
                     player.lifeDown();
                     player.setDestroyed(false);
-                    player.damageReset();
+                    player.setDamage(0);
                 }
                 player.damageUp();
                 player.damageUp();
@@ -944,7 +941,7 @@ public class Board {
     private void checkShutDown(Robot[] players) {
         for (Robot player : players) {
             if (player.getShutDown() || player.getNextRound()) {
-                player.damageReset();
+                player.setDamage(0);
             }
         }
     }
