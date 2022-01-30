@@ -39,11 +39,11 @@ public class Board {
     public Field[][] fieldmatrix;
     private Field robotPosition;
     private static int checkpoint;
-    private static Texture[] barrier = new Texture[4];
-    private static Texture[] laserH = new Texture[3];
-    private static Texture[] laserV = new Texture[3];
-    private static Texture[] laserSV = new Texture[6];
-    private static Texture[] laserSH = new Texture[6];
+    private static final Texture[] barrier = new Texture[4];
+    private static final Texture[] laserH = new Texture[3];
+    private static final Texture[] laserV = new Texture[3];
+    private static final Texture[] laserSV = new Texture[6];
+    private static final Texture[] laserSH = new Texture[6];
 
     /**
      * Method that creates the sprites for The Board.
@@ -469,11 +469,11 @@ public class Board {
         int min = 1;
         int max = 0;
 
-        for (int i = 0; i < fieldmatrix.length; i++) {
-            for (int j = 0; j < fieldmatrix[i].length; j++) {
-                if (fieldmatrix[i][j] instanceof StartField &&
-                        ((StartField) fieldmatrix[i][j]).getNumber() >= max) {
-                    max = ((StartField) fieldmatrix[i][j]).getNumber();
+        for (Field[] fields : fieldmatrix) {
+            for (Field field : fields) {
+                if (field instanceof StartField &&
+                        ((StartField) field).getNumber() >= max) {
+                    max = ((StartField) field).getNumber();
                 }
             }
         }
@@ -481,12 +481,12 @@ public class Board {
         int randomNumber =  ThreadLocalRandom.current().nextInt(min, max + 1);
 
         if (!isTest) {
-            for (int i = 0; i < fieldmatrix.length; i++) {
-                for (int j = 0; j < fieldmatrix[i].length; j++) {
-                    if (fieldmatrix[i][j] instanceof StartField &&
-                            ((StartField) fieldmatrix[i][j]).getNumber() == randomNumber) {
-                        x = fieldmatrix[i][j].getXcoor();
-                        y = fieldmatrix[i][j].getYcoor();
+            for (Field[] fields : fieldmatrix) {
+                for (Field field : fields) {
+                    if (field instanceof StartField &&
+                            ((StartField) field).getNumber() == randomNumber) {
+                        x = field.getXcoor();
+                        y = field.getYcoor();
                     }
                 }
             }
@@ -571,9 +571,6 @@ public class Board {
                 @Override
                 public void run() {
                     state(players);
-                    checkDoubleDamage(players);
-                    checkShutDown(players);
-                    checkGameOver(players);
                 }
             }, (ConfigReader.getPlayerNumber() * 5) + 5);
 
@@ -638,9 +635,6 @@ public class Board {
             checkBoardLaser(players);
             checkDestroyed(players);
             state(players);
-            checkDoubleDamage(players);
-            checkShutDown(players);
-            checkGameOver(players);
         }
     }
 
@@ -705,6 +699,9 @@ public class Board {
             player.setLastRound(player.getShutDown());
             player.setShutDown(player.getNextRound());
         }
+        checkDoubleDamage(players);
+        checkShutDown(players);
+        checkGameOver(players);
     }
 
     /**

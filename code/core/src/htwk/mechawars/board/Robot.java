@@ -29,13 +29,13 @@ public class Robot {
     private boolean destroyed;
     private boolean lastMovementByConveyor;
     private Field lastConveyorField;
-    private static Sprite[] life = new Sprite[4];
-    private static Sprite[] damage = new Sprite[11];
+    private static final Sprite[] life = new Sprite[4];
+    private static final Sprite[] damage = new Sprite[11];
     private static Sprite shutDown;
     private static Sprite sleep;
     private static Sprite wakeup;
     private static Sprite hud;
-    private static Robot[] players = createRobots(ConfigReader.getPlayerNumber());
+    private static final Robot[] players = createRobots(ConfigReader.getPlayerNumber());
     private LinkedList<Card> selectedCards = new LinkedList<Card>();
 
     /**
