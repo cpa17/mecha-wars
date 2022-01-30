@@ -304,12 +304,13 @@ public class Buttons {
      * @param card -> card, to get the text, that now should be shown
      * @return the Button
      */
-    public static TextButton currentCardShowButtonUpdate(TextButton currentCardShowButton, Card card) {
+    public static TextButton currentCardShowButtonUpdate(TextButton currentCardShowButton, 
+    		Card card) {
         
         currentCardShowButton.setSize(160, 86);
         
         int buttonX = Gdx.graphics.getHeight()
-                + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
+        		+ (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
         int buttonY = Gdx.graphics.getHeight() - 300;
         
         currentCardShowButton.setPosition(buttonX, buttonY);
