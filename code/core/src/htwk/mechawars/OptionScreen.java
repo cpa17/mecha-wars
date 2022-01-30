@@ -227,7 +227,10 @@ public class OptionScreen implements Screen {
 
     @Override
     public void dispose() {
-        
+        stage.dispose();
+        batch.dispose();
+        img.dispose();
+        skin.dispose();
     }
     
     /**

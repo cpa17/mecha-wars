@@ -27,8 +27,7 @@ public class GameScreen implements Screen {
     private Game game;
     private static boolean winCondition = false;
     private static boolean loseCondition = false;
-    private Texture industrialTile;
-    private Texture robot;
+
     static Stage stage;
     private SpriteBatch batch;
     private Sprite[] robotSprites;
@@ -50,15 +49,14 @@ public class GameScreen implements Screen {
         initBoard(fileName);
         
         setStage(new Stage());
-        
-        industrialTile = new Texture("mapAssets/StandardField.png");
-        
-        robot = new Texture("robot.png");
 
         batch = new SpriteBatch();
         robotSprites = createSprites(ConfigReader.getPlayerNumber());
 
         Gdx.input.setInputProcessor(getStage());
+
+        Robot.create();
+        Board.create();
 
         addButtonsToStage(skin);
         Buttons.setButtons(Robot.getPlayers());
@@ -152,7 +150,6 @@ public class GameScreen implements Screen {
 
         getStage().addActor(Buttons.shutDownButton(Robot.getPlayers()[0], shutDownButton));
         getStage().addActor(Buttons.wakeUpButton(Robot.getPlayers()[0], wakeUpButton));
-
     }
     
     public static void setWinCondition(boolean win) {
@@ -220,8 +217,9 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-        industrialTile.dispose();
-        robot.dispose();
+        batch.dispose();
+        stage.dispose();
+        skin.dispose();
     }
 
     @Override
