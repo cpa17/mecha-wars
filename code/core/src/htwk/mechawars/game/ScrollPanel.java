@@ -21,7 +21,7 @@ public class ScrollPanel {
     private static Card[] cardOrder = {null, null, null, null, null};
     private static int pressCounter = 0;
     protected static final int damagePoints = 0;
-    public static final TextButton[] buttons = new TextButton[9];
+    protected static final TextButton[] buttons = new TextButton[9];
     private static Deck deck = new Deck();
 
     private static Table table = new Table();
