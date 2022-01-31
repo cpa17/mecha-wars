@@ -305,12 +305,12 @@ public class Buttons {
      * @return the Button
      */
     public static TextButton currentCardShowButtonUpdate(TextButton currentCardShowButton, 
-    		Card card) {
+            Card card) {
         
         currentCardShowButton.setSize(160, 86);
         
         int buttonX = Gdx.graphics.getHeight()
-        		+ (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
+                + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
         int buttonY = Gdx.graphics.getHeight() - 300;
         
         currentCardShowButton.setPosition(buttonX, buttonY);
