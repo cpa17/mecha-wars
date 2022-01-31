@@ -317,7 +317,7 @@ public class Buttons {
         
         currentCardShowButton.setTouchable(Touchable.disabled);
         
-        currentCardShowButton.setText(card.getCardAttributePriority()+ " - " + card + "");
+        currentCardShowButton.setText(card.getCardAttributePriority() + " - " + card + "");
         
         return currentCardShowButton;
     }
