@@ -1,5 +1,7 @@
 package htwk.mechawars.desktop;
 
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.lang.management.ManagementFactory;
@@ -8,6 +10,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics;
+import com.badlogic.gdx.Graphics.DisplayMode;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 
@@ -61,7 +67,10 @@ public class DesktopLauncher implements Runnable {
         MechaWars.setMap(fileName);
         MechaWars.setPlayerNumber(player);
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
+        
         config.setWindowedMode(1280, 720);
+        config.setDecorated(true);
+        
         new Lwjgl3Application(new MechaWars(), config);
     }
 

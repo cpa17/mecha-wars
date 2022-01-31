@@ -1,7 +1,12 @@
 package htwk.mechawars.game;
 
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -177,6 +182,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
         batch.begin();
         Board.toAsset(batch, board);
@@ -197,7 +203,7 @@ public class GameScreen implements Screen {
             GameScreen.setLoseCondition(false);
         }
         getStage().act();
-        getStage().draw();
+        getStage().draw();  
     }
 
     @Override
