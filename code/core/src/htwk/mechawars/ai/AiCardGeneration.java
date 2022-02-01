@@ -35,6 +35,7 @@ public class AiCardGeneration implements AiInterface {
             System.out.println(card.toString() + "    Card number" + 1); 
         }
         System.out.println("*************************************************************");
+        System.out.println("KI1");
         return cards;
         
         

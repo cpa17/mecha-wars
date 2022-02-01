@@ -51,7 +51,7 @@ public class AiManager {
      */
     public AiInterface getAi(int aiNumber) { 
         if (aiNumber < aiList.size()) {
-            return aiList.get(aiNumber - 1);
+            return aiList.get(aiNumber );
         }
         return aiList.get(0);     
     }

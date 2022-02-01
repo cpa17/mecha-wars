@@ -122,7 +122,7 @@ public class ConfigReader {
             file.writeString("\nplayerposition: "
                     + current + "-" + 3 + "-" + (3 + current) + "-" + aiModes[current], true);
         }
-        file.writeString("\nAiImport: aic2", true);
+        file.writeString("\nAiImport: AiC2", true);
 
     }
 
