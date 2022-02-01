@@ -3,7 +3,6 @@ package htwk.mechawars.game;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -204,7 +203,13 @@ public class ScrollPanel {
     }
     
     public static TextButton[] getButtons() {
-        return buttons;
+        TextButton[] buttons2 = new TextButton[9];
+        
+        for (int i = 0; i < buttons2.length; i++) {
+            buttons2[i] = buttons[i];
+        }
+        
+        return buttons2;
     }
 
 }
