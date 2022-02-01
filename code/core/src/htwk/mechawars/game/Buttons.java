@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.Timer;
 
 import htwk.mechawars.ConfigReader;
 import htwk.mechawars.board.Robot;
+import htwk.mechawars.cards.Card;
 
 import static htwk.mechawars.game.GameScreen.board;
 import static htwk.mechawars.game.GameScreen.stage;
@@ -155,7 +156,7 @@ public class Buttons {
      * Deactivate the buttons.
      */
     protected static void deactivateButtons() {
-        for (TextButton button : ScrollPanel.buttons) {
+        for (TextButton button : ScrollPanel.getButtons()) {
             if  (button != null) {
                 button.setTouchable(Touchable.disabled);
             }
@@ -170,7 +171,7 @@ public class Buttons {
      * Activate the buttons.
      */
     protected static void activateButtons() {
-        for (TextButton button : ScrollPanel.buttons) {
+        for (TextButton button : ScrollPanel.getButtons()) {
             if (button != null) {
                 button.setTouchable(Touchable.enabled);
             }
@@ -243,6 +244,7 @@ public class Buttons {
      * @return shutDownButton.
      */
     protected static Button shutDownButton(Robot player, Button shutDownButton) {
+        
         shutDownButton.setSize(160, 43);
 
         int shutDownButtonX = Gdx.graphics.getHeight()
@@ -266,6 +268,54 @@ public class Buttons {
         });
 
         return shutDownButton;
+    }
+    
+    /**
+     * Function, to initialize the button.
+     * 
+     * @param currentCardShowButton -> give the Button, that should be initialized
+     * @return the Button
+     */
+    protected static Button currentCardShowButton(Button currentCardShowButton) {
+        
+        currentCardShowButton.setSize(160, 86);
+        
+        int buttonX = Gdx.graphics.getHeight()
+                + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
+        int buttonY = Gdx.graphics.getHeight() - 300;
+        
+        currentCardShowButton.setPosition(buttonX, buttonY);
+        
+        currentCardShowButton.setTouchable(Touchable.disabled);
+        
+        //currentCardShowButton.setText("aktuelle Karte");
+        
+        return currentCardShowButton;
+    }
+    
+    /**
+     * Function, that update the button.
+     * 
+     * @param currentCardShowButton -> give the Button, that should be updated
+     * @param card -> card, to get the text, that now should be shown
+     * @return the Button
+     */
+    public static TextButton currentCardShowButtonUpdate(TextButton currentCardShowButton, 
+            Card card) {
+        
+        currentCardShowButton.setSize(160, 86);
+        
+        int buttonX = Gdx.graphics.getHeight()
+                + (Gdx.graphics.getWidth() - Gdx.graphics.getHeight()) / 3 - 64;
+        int buttonY = Gdx.graphics.getHeight() - 300;
+        
+        currentCardShowButton.setPosition(buttonX, buttonY);
+        
+        currentCardShowButton.setTouchable(Touchable.disabled);
+        
+        currentCardShowButton.setText(card.getCardAttributePriority() + " - " + card + "");
+        
+        return currentCardShowButton;
     }
 
     /**

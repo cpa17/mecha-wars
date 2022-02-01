@@ -28,8 +28,11 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
+
+import htwk.mechawars.game.Buttons;
 import htwk.mechawars.game.GameScreen;
 
 /**
@@ -660,6 +663,8 @@ public class Board {
 
                     @Override
                     public void run() {
+                        GameScreen.setCurrentCardShowButton(Buttons.currentCardShowButtonUpdate(
+                                (TextButton) GameScreen.getCurrentCardShowButton(), card));
                         robotMovement(card, robots[card.getCardPlayerNumber()], robots);
                     }
                 }, i);
