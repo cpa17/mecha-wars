@@ -834,8 +834,8 @@ public class Board {
 
                     @Override
                     public void run() {
-                        GameScreen.currentCardShowButton = Buttons.currentCardShowButtonUpdate(
-                                (TextButton) GameScreen.currentCardShowButton, card);
+                        GameScreen.setCurrentCardShowButton(Buttons.currentCardShowButtonUpdate(
+                                (TextButton) GameScreen.getCurrentCardShowButton(), card));
                         robotMovement(card, robots[card.getCardPlayerNumber()], robots);
                     }
                 }, i);
