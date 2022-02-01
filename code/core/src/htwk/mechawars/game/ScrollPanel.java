@@ -3,6 +3,7 @@ package htwk.mechawars.game;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -21,7 +22,7 @@ public class ScrollPanel {
     private static Card[] cardOrder = {null, null, null, null, null};
     private static int pressCounter = 0;
     protected static final int damagePoints = 0;
-    protected static final TextButton[] buttons = new TextButton[9];
+    private static final TextButton[] buttons = new TextButton[9];
     private static Deck deck = new Deck();
 
     private static Table table = new Table();
@@ -200,6 +201,10 @@ public class ScrollPanel {
      */
     public static boolean allChosen() {
         return pressCounter >= 5;
+    }
+    
+    public static TextButton[] getButtons() {
+        return buttons;
     }
 
 }

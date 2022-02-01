@@ -39,18 +39,6 @@ public class GameScreen implements Screen {
     static Button shutDownButton = new TextButton("ShutDown", skin);
     private static Button currentCardShowButton = new TextButton("aktuelle Karte", skin);
     
-    public static TextButton getCurrentCardShowButton() {
-        return (TextButton) currentCardShowButton;
-    }
-
-
-
-    public static void setCurrentCardShowButton(Button currentCardShowButton) {
-        GameScreen.currentCardShowButton = currentCardShowButton;
-    }
-
-
-
     static Board board;
 
     /**
@@ -252,9 +240,16 @@ public class GameScreen implements Screen {
     }
 
 
-
     public static void setBoard(Board board) {
         GameScreen.board = board;
+    }
+    
+    public static TextButton getCurrentCardShowButton() {
+        return (TextButton) currentCardShowButton;
+    }
+
+    public static void setCurrentCardShowButton(Button currentCardShowButton) {
+        GameScreen.currentCardShowButton = currentCardShowButton;
     }
 
 }
