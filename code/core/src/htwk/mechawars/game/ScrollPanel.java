@@ -202,6 +202,11 @@ public class ScrollPanel {
         return pressCounter >= 5;
     }
     
+    /**
+     * Returns the buttons with the Cards.
+     * 
+     * @return a array of TextButtons.
+     */
     public static TextButton[] getButtons() {
         TextButton[] buttons2 = new TextButton[9];
         
