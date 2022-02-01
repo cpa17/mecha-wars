@@ -24,7 +24,6 @@ import static htwk.mechawars.game.GameScreen.stage;
  */
 public class Buttons {
 
-
     /**
      * Creates the startButton.
      * @param players Array of all the Players.
@@ -43,7 +42,7 @@ public class Buttons {
                     //If All Cards are chosen
                     if (ScrollPanel.allChosen()) {
                         deactivateButtons();
-                        board.move(players, false);
+                        board.move(players);
 
                         Timer.schedule(new Timer.Task() {
                             @Override
@@ -64,7 +63,7 @@ public class Buttons {
 
                     System.out.println(players[0].getShutDown());
                     deactivateButtons();
-                    board.move(players, false);
+                    board.move(players);
 
                     Timer.schedule(new Timer.Task() {
                         @Override
@@ -77,15 +76,12 @@ public class Buttons {
                             ScrollPanel.clearScrollPanel(skin);
                         }
                     }, (ConfigReader.getPlayerNumber() * 5) + 6);
-
                 }
             }
         });
-     
+
         return startExecutionButton;
     }
-
-
 
     /**
      * Creates the endButton.
@@ -126,7 +122,7 @@ public class Buttons {
                 dialogCloseOption.button("Beenden", true);
                 dialogCloseOption.button("Abbruch", false);
                 dialogCloseOption.key(Input.Keys.ENTER, true);
-                dialogCloseOption.key(Input.Keys.ESCAPE, false);                
+                dialogCloseOption.key(Input.Keys.ESCAPE, false);
             }
         });
 

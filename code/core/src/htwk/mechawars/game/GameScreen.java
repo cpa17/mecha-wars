@@ -180,8 +180,6 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
         batch.begin();
         Board.toAsset(batch, board);
-        Board.barriersToAsset(batch, board);
-        Board.lasersToAsset(batch, board);
         Robot.getPlayers()[0].drawParameters(batch);
         for (int i = 0; i < Robot.getPlayers().length; i++) {
             Robot.getPlayers()[i].drawRobot(robotSprites[i], board);
