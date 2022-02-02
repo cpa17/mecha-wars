@@ -83,7 +83,8 @@ public class DesktopLauncher implements Runnable {
             config.setWindowedMode(1280, 720); 
         } else {
             Graphics.DisplayMode displayMode = Lwjgl3ApplicationConfiguration.getDisplayMode();
-            config.setWindowedMode(displayMode.width, displayMode.height);
+            //config.setWindowedMode(displayMode.width, displayMode.height);
+            config.setFullscreenMode(displayMode);
         }
         
         //config.setWindowedMode(1280, 720);
