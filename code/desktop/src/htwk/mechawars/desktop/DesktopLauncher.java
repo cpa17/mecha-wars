@@ -29,7 +29,7 @@ import picocli.CommandLine.Option;
  * One can find the jar-file under mecha-wars -> code -> desktop -> build -> libs.
  * you should rename it to mw
  * Execute the file in your shell with the command
- * java -jar mw.jar, get all options with the command java -jar mw.jar -h.  java -jar mw.jar --board=chopshopchallenge
+ * java -jar mw.jar, get all options with the command java -jar mw.jar -h
  */
 
 @Command(
@@ -79,7 +79,7 @@ public class DesktopLauncher implements Runnable {
         //config.setWindowedMode(displayMode.width, displayMode.height);
         //config.setDecorated(false);
         
-        if(windowedscreen == true) {
+        if (windowedscreen == true) {
             config.setWindowedMode(1280, 720); 
         } else {
             Graphics.DisplayMode displayMode = Lwjgl3ApplicationConfiguration.getDisplayMode();
@@ -87,7 +87,7 @@ public class DesktopLauncher implements Runnable {
         }
         
         //config.setWindowedMode(1280, 720);
-        config.setDecorated(true);
+        config.setDecorated(false);
         
         new Lwjgl3Application(new MechaWars(), config);
     }
