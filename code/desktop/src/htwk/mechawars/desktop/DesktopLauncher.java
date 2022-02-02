@@ -27,8 +27,9 @@ import picocli.CommandLine.Option;
  * Write .\gradlew.bat desktop:dist in your console,
  * in the writer code in order to provide the jar-file.
  * One can find the jar-file under mecha-wars -> code -> desktop -> build -> libs.
+ * you should rename it to mw
  * Execute the file in your shell with the command
- * java -jar mw.jar, get all options with the command java -jar mw.jar -h.
+ * java -jar mw.jar, get all options with the command java -jar mw.jar -h.  java -jar mw.jar --board=chopshopchallenge
  */
 
 @Command(
@@ -40,6 +41,10 @@ public class DesktopLauncher implements Runnable {
     @Option(names = { "-s", "--skip" },
             description = "Starts the Game, without showing the MainMenu at first.")
     boolean skip;
+    
+    @Option(names = { "-w", "--windowed" },
+            description = "In case you want to start the game in a windowed screen.")
+    boolean windowedscreen;
 
     @Option(names = { "-b", "--board" },
             description = "Choose a Gameboard (chopshopchallenge.txt, vaultassault.txt)")
@@ -66,9 +71,22 @@ public class DesktopLauncher implements Runnable {
         MechaWars.setSkip(skip);
         MechaWars.setMap(fileName);
         MechaWars.setPlayerNumber(player);
+        MechaWars.setScreen(windowedscreen);
+        
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
         
-        config.setWindowedMode(1280, 720);
+        //Graphics.DisplayMode displayMode = Lwjgl3ApplicationConfiguration.getDisplayMode();
+        //config.setWindowedMode(displayMode.width, displayMode.height);
+        //config.setDecorated(false);
+        
+        if(windowedscreen == true) {
+            config.setWindowedMode(1280, 720); 
+        } else {
+            Graphics.DisplayMode displayMode = Lwjgl3ApplicationConfiguration.getDisplayMode();
+            config.setWindowedMode(displayMode.width, displayMode.height);
+        }
+        
+        //config.setWindowedMode(1280, 720);
         config.setDecorated(true);
         
         new Lwjgl3Application(new MechaWars(), config);
