@@ -27,9 +27,8 @@ import picocli.CommandLine.Option;
  * Write .\gradlew.bat desktop:dist in your console,
  * in the writer code in order to provide the jar-file.
  * One can find the jar-file under mecha-wars -> code -> desktop -> build -> libs.
- * you should rename it to mw
  * Execute the file in your shell with the command
- * java -jar mw.jar, get all options with the command java -jar mw.jar -h
+ * java -jar mw.jar, get all options with the command java -jar desktop-1.0.jar -h
  */
 
 @Command(
@@ -79,7 +78,7 @@ public class DesktopLauncher implements Runnable {
         //config.setWindowedMode(displayMode.width, displayMode.height);
         //config.setDecorated(false);
         
-        if (windowedscreen == true) {
+        if (windowedscreen == false) {
             config.setWindowedMode(1280, 720); 
         } else {
             Graphics.DisplayMode displayMode = Lwjgl3ApplicationConfiguration.getDisplayMode();

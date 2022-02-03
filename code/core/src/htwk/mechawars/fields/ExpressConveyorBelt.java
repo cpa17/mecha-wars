@@ -58,7 +58,7 @@ public class ExpressConveyorBelt extends Field {
 
         this.start = start;
         this.end = end;
-        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "expressconveyorBelt/"
+        this.tile = new Texture(Gdx.files.internal("mapAssets/" + "expressconveyorbelt/"
                 + "ExpressConveyorBelt" + String.valueOf(start) + String.valueOf(end) + ".png"));
     }
 
