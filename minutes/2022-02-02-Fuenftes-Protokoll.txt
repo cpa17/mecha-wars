@@ -1,0 +1,28 @@
+Protokoll vom 02.02.2022
+
+Protokollführer: Konstantin Blechschmidt
+Anwesenheit:
+	Till Mahlburg entschuldigt
+	sonst Alle ausser
+		Bernhard Oesen
+		Antonia Swiridow
+	da
+
+13:00 Mark Fiedler:
+	Vollbild bei verschiedenen Aufloesungen Problem
+		--> über Commandline
+		--> Expressconveyor 31 not found
+		Pascal Ahlner: fix ist einen Gross- zu einem Kleinbuchstaben zu machen
+
+13:06 Marc Uxa:
+	MW-105 braucht noch kleinen Fix
+
+13:10 Tim Kretzschmar:
+	Spotbugfixes in MW-102, Branch gemerged
+	Fieldeditor angefangen wieder zu reparieren
+
+13:11 Pascal Ahlner:
+	BUG mit conveyor-beld (nach rechts schieben) gefixt, Mergerequest gestellt
+
+13:12 Konstantin Blechschmidt:
+	BUG branch - Mergerequest leider nicht mehr auf Stand, da andere komplexere Tickets erst gemerged wurden.

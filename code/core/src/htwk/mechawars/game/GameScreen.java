@@ -37,7 +37,8 @@ public class GameScreen implements Screen {
     static Button startExecutionButton = new TextButton("Ausfuehrung starten", skin);
     static Button wakeUpButton = new TextButton("WakeUp", skin);
     static Button shutDownButton = new TextButton("ShutDown", skin);
-
+    private static Button currentCardShowButton = new TextButton("aktuelle Karte", skin);
+    
     static Board board;
 
     /**
@@ -144,6 +145,8 @@ public class GameScreen implements Screen {
         getStage().addActor(Buttons.removeButton(removeCardOrder));
 
         getStage().addActor(Buttons.infoButton(skin));
+        
+        getStage().addActor(Buttons.currentCardShowButton(currentCardShowButton));
 
         getStage().addActor(Buttons.shutDownButton(Robot.getPlayers()[0], shutDownButton));
         getStage().addActor(Buttons.wakeUpButton(Robot.getPlayers()[0], wakeUpButton));
@@ -177,8 +180,6 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
         batch.begin();
         Board.toAsset(batch, board);
-        Board.barriersToAsset(batch, board);
-        Board.lasersToAsset(batch, board);
         Robot.getPlayers()[0].drawParameters(batch);
         for (int i = 0; i < Robot.getPlayers().length; i++) {
             Robot.getPlayers()[i].drawRobot(robotSprites[i], board);
@@ -237,9 +238,16 @@ public class GameScreen implements Screen {
     }
 
 
-
     public static void setBoard(Board board) {
         GameScreen.board = board;
+    }
+    
+    public static TextButton getCurrentCardShowButton() {
+        return (TextButton) currentCardShowButton;
+    }
+
+    public static void setCurrentCardShowButton(Button currentCardShowButton) {
+        GameScreen.currentCardShowButton = currentCardShowButton;
     }
 
 }
