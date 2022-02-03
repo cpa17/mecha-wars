@@ -42,7 +42,7 @@ public class DesktopLauncher implements Runnable {
     boolean skip;
     
     @Option(names = { "-w", "--windowed" },
-            description = "In case you want to start the game in a windowed screen.")
+            description = "In case you want to start the game in fullscreen.")
     boolean windowedscreen;
 
     @Option(names = { "-b", "--board" },
