@@ -1,0 +1,16 @@
+Protokoll 31.01.2022
+Daily
+Anwesenheit: alle
+Besprechnung der Messe, Vortrag von Felix fertig.
+Bernhard: MW-116 soweit fertig
+Marc: MW-105, Probleme mit der  übergabe der Kartenliste der KI, MW-95 soll ausgegliedert werden
+Tim: 102 fertig(noch SpotBugs Probleme), Handbuch fertig.
+Konstantin: Testen im Master - Bugsuche, neue Bugtickets bei der Kartenauswahl
+Mark: Fullscreen-Probleme
+Antonia: MW-104 fertig und Merge Request steht
+Besprechung der morgigen Messe
+Aufteilung der Leute:
+9:30-10:35 Pascal, Bernhard
+10:35-11:40 Marc, Konstantin, Tim
+11:40-12:45 Antonia, Mark
+
