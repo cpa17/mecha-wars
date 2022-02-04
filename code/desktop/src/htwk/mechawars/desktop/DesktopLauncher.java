@@ -1,5 +1,7 @@
 package htwk.mechawars.desktop;
 
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.lang.management.ManagementFactory;
@@ -8,6 +10,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics;
+import com.badlogic.gdx.Graphics.DisplayMode;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 
@@ -22,7 +28,7 @@ import picocli.CommandLine.Option;
  * in the writer code in order to provide the jar-file.
  * One can find the jar-file under mecha-wars -> code -> desktop -> build -> libs.
  * Execute the file in your shell with the command
- * java -jar mw.jar, get all options with the command java -jar mw.jar -h.
+ * java -jar mw.jar, get all options with the command java -jar desktop-1.0.jar -h
  */
 
 @Command(
@@ -34,6 +40,10 @@ public class DesktopLauncher implements Runnable {
     @Option(names = { "-s", "--skip" },
             description = "Starts the Game, without showing the MainMenu at first.")
     boolean skip;
+    
+    @Option(names = { "-w", "--windowed" },
+            description = "In case you want to start the game in fullscreen.")
+    boolean windowedscreen;
 
     @Option(names = { "-b", "--board" },
             description = "Choose a Gameboard (chopshopchallenge.txt, vaultassault.txt)")
@@ -60,8 +70,25 @@ public class DesktopLauncher implements Runnable {
         MechaWars.setSkip(skip);
         MechaWars.setMap(fileName);
         MechaWars.setPlayerNumber(player);
+        MechaWars.setScreen(windowedscreen);
+        
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-        config.setWindowedMode(1280, 720);
+        
+        //Graphics.DisplayMode displayMode = Lwjgl3ApplicationConfiguration.getDisplayMode();
+        //config.setWindowedMode(displayMode.width, displayMode.height);
+        //config.setDecorated(false);
+        
+        if (windowedscreen == false) {
+            config.setWindowedMode(1280, 720); 
+        } else {
+            Graphics.DisplayMode displayMode = Lwjgl3ApplicationConfiguration.getDisplayMode();
+            //config.setWindowedMode(displayMode.width, displayMode.height);
+            config.setFullscreenMode(displayMode);
+        }
+        
+        //config.setWindowedMode(1280, 720);
+        config.setDecorated(false);
+        
         new Lwjgl3Application(new MechaWars(), config);
     }
 
