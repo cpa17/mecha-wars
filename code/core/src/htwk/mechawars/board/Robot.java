@@ -85,7 +85,7 @@ public class Robot {
                 this.ycoor = this.ycoor + mov;
                 return;
             case EAST:
-                this.ycoor = this.xcoor + mov;
+                this.xcoor = this.xcoor + mov;
                 return;
             case WEST:
                 this.xcoor = this.xcoor - mov;
