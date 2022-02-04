@@ -32,8 +32,7 @@ public class GameScreen implements Screen {
     private Game game;
     private static boolean winCondition = false;
     private static boolean loseCondition = false;
-    private Texture industrialTile;
-    private Texture robot;
+
     static Stage stage;
     private SpriteBatch batch;
     private Sprite[] robotSprites;
@@ -43,7 +42,8 @@ public class GameScreen implements Screen {
     static Button startExecutionButton = new TextButton("Ausfuehrung starten", skin);
     static Button wakeUpButton = new TextButton("WakeUp", skin);
     static Button shutDownButton = new TextButton("ShutDown", skin);
-
+    private static Button currentCardShowButton = new TextButton("aktuelle Karte", skin);
+    
     static Board board;
 
     /**
@@ -54,15 +54,14 @@ public class GameScreen implements Screen {
         initBoard(fileName);
         
         setStage(new Stage());
-        
-        industrialTile = new Texture("mapAssets/StandardField.png");
-        
-        robot = new Texture("robot.png");
 
         batch = new SpriteBatch();
         robotSprites = createSprites(ConfigReader.getPlayerNumber());
 
         Gdx.input.setInputProcessor(getStage());
+
+        Robot.create();
+        Board.create();
 
         addButtonsToStage(skin);
         Buttons.setButtons(Robot.getPlayers());
@@ -151,10 +150,11 @@ public class GameScreen implements Screen {
         getStage().addActor(Buttons.removeButton(removeCardOrder));
 
         getStage().addActor(Buttons.infoButton(skin));
+        
+        getStage().addActor(Buttons.currentCardShowButton(currentCardShowButton));
 
         getStage().addActor(Buttons.shutDownButton(Robot.getPlayers()[0], shutDownButton));
         getStage().addActor(Buttons.wakeUpButton(Robot.getPlayers()[0], wakeUpButton));
-
     }
     
     public static void setWinCondition(boolean win) {
@@ -186,8 +186,6 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1);
         batch.begin();
         Board.toAsset(batch, board);
-        Board.barriersToAsset(batch, board);
-        Board.lasersToAsset(batch, board);
         Robot.getPlayers()[0].drawParameters(batch);
         for (int i = 0; i < Robot.getPlayers().length; i++) {
             Robot.getPlayers()[i].drawRobot(robotSprites[i], board);
@@ -223,8 +221,9 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-        industrialTile.dispose();
-        robot.dispose();
+        batch.dispose();
+        stage.dispose();
+        skin.dispose();
     }
 
     @Override
@@ -245,9 +244,16 @@ public class GameScreen implements Screen {
     }
 
 
-
     public static void setBoard(Board board) {
         GameScreen.board = board;
+    }
+    
+    public static TextButton getCurrentCardShowButton() {
+        return (TextButton) currentCardShowButton;
+    }
+
+    public static void setCurrentCardShowButton(Button currentCardShowButton) {
+        GameScreen.currentCardShowButton = currentCardShowButton;
     }
 
 }

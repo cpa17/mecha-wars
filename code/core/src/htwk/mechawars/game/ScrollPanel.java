@@ -21,7 +21,7 @@ public class ScrollPanel {
     private static Card[] cardOrder = {null, null, null, null, null};
     private static int pressCounter = 0;
     protected static final int damagePoints = 0;
-    static final TextButton[] buttons = new TextButton[9];
+    private static final TextButton[] buttons = new TextButton[9];
     private static Deck deck = new Deck();
 
     private static Table table = new Table();
@@ -41,9 +41,6 @@ public class ScrollPanel {
 
             for (int i = 5; i > (4 - (Robot.getPlayers()[0].getDamagePoints() - 5)); i -= 1) {
                 Card currentCard = cardOrder[i - 1];
-                for (int k = 0; k < 5; k++) {
-                    System.out.println(cardOrder[k]);
-                }
 
                 buttons[i - 1] = new TextButton(currentCard.getCardAttributePriority()
                     + " - " + currentCard + " | Nr. " + (i), skin);
@@ -202,7 +199,22 @@ public class ScrollPanel {
      * @return --> all cards chosen
      */
     public static boolean allChosen() {
-        return pressCounter == 5;
+        return pressCounter >= 5;
+    }
+    
+    /**
+     * Returns the buttons with the Cards.
+     * 
+     * @return a array of TextButtons.
+     */
+    public static TextButton[] getButtons() {
+        TextButton[] buttons2 = new TextButton[9];
+        
+        for (int i = 0; i < buttons2.length; i++) {
+            buttons2[i] = buttons[i];
+        }
+        
+        return buttons2;
     }
 
 }

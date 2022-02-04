@@ -1,0 +1,15 @@
+# 26.1.2022 - 13:00 - Daily
+
+Entschuldigt: Till
+Anwesend: Alle anderen
+Fehlend: 
+Protokollführung: Lukas Brüggemann
+
+## Runde
+- Marc: pusher fertig, 105 gemerged, Fehler gefunden aicardgeneration klasse doppelt
+- Tim: button anzeigen rendern Fehler fast fertig 
+- Pascal: problem bei 5 schaden crash gelöst
+- Konstantin: aktuelle karten anzeige fast fertig
+- Mark: test auf volles spiel, bug fixes
+- Antonia: 104 angefangen
+- Bernhard: config ticket fast fertig

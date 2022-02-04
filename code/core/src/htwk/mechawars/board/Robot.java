@@ -24,17 +24,18 @@ public class Robot {
     private int backupCopyY;
     private int checkPointNumber;
     private boolean shutDownMark;
-    private boolean backupDraw;
     private boolean lastRound;
     private boolean nextRound;
     private boolean destroyed;
     private boolean lastMovementByConveyor;
     private Field lastConveyorField;
-    private Texture life;
-    private Texture damage;
-    private Texture shutDown;
-    private Texture hud;
-    private static Robot[] players = createRobots(ConfigReader.getPlayerNumber());
+    private static final Sprite[] life = new Sprite[4];
+    private static final Sprite[] damage = new Sprite[11];
+    private static Sprite shutDown;
+    private static Sprite sleep;
+    private static Sprite wakeup;
+    private static Sprite hud;
+    private static final Robot[] players = createRobots(ConfigReader.getPlayerNumber());
     private LinkedList<Card> selectedCards = new LinkedList<Card>();
 
     /**
@@ -50,6 +51,23 @@ public class Robot {
         checkPointNumber = 1;
         lastMovementByConveyor = false;
         lastConveyorField = null;
+    }
+
+    /**
+     * Method that creates the sprites for The robot parameters.
+     */
+    public static void create() {
+        hud = new Sprite(new Texture(Gdx.files.internal("parameters/hud.png")));
+        sleep = new Sprite(new Texture(Gdx.files.internal("parameters/sleep.png")));
+        wakeup = new Sprite(new Texture(Gdx.files.internal("parameters/wakeup.png")));
+        for (int i = 0; i < life.length; i++) {
+            life[i] = new Sprite(
+                    new Texture(Gdx.files.internal("parameters/hp" + i + ".png")));
+        }
+        for (int i = 0; i < damage.length; i++) {
+            damage[i] = new Sprite(
+                    new Texture(Gdx.files.internal("parameters/damage" + i + ".png")));
+        }
     }
 
     /**
@@ -547,13 +565,6 @@ public class Robot {
     public void setDamage(int damage) {
         damagePoints = damage;
     }
-    
-    /**
-     * Reset damagePoints (to 0).
-     */
-    public void damageReset() {
-        damagePoints = 0;
-    }
 
     /**
      * Decrease lifePoints by 1.
@@ -565,112 +576,33 @@ public class Robot {
     public void incCheckPointNumber() {
         checkPointNumber++;
     }
-
-    /**
-     * Function to repair the Robot (only 1 Point).
-     */
-    public void onRepairField() {
-        damagePoints -= 1;
-    }
-
-    /**
-     * Updates the life texture depening on the current lifePoints of the robot.
-     */
-    private void updateLife() {
-        switch (lifePoints) {
-            case 0 :    life = new Texture(Gdx.files.internal("parameters/hp0.png"));
-                        break;
-                        
-            case 1 :    life = new Texture(Gdx.files.internal("parameters/hp1.png"));
-                        break;
-                        
-            case 2 :    life = new Texture(Gdx.files.internal("parameters/hp2.png"));
-                        break;
-                        
-            case 3 :    life = new Texture(Gdx.files.internal("parameters/hp3.png"));
-                        break;
-                        
-            default:    break;
-        }
-    }
-    
-    /**
-     * Updates the damage texture depening on the current damagePoints of the robot.
-     */
-    private void updateDamage() {
-        switch (damagePoints) {
-            case 0 :    damage = new Texture(Gdx.files.internal("parameters/damage0.png"));
-                        break;
-                        
-            case 1 :    damage = new Texture(Gdx.files.internal("parameters/damage1.png"));
-                        break;
-                        
-            case 2 :    damage = new Texture(Gdx.files.internal("parameters/damage2.png"));
-                        break;
-                        
-            case 3 :    damage = new Texture(Gdx.files.internal("parameters/damage3.png"));
-                        break;
-                        
-            case 4 :    damage = new Texture(Gdx.files.internal("parameters/damage4.png"));
-                        break;
-                        
-            case 5 :    damage = new Texture(Gdx.files.internal("parameters/damage5.png"));
-                        break;
-                        
-            case 6 :    damage = new Texture(Gdx.files.internal("parameters/damage6.png"));
-                        break;
-                        
-            case 7 :    damage = new Texture(Gdx.files.internal("parameters/damage7.png"));
-                        break;
-                        
-            case 8 :    damage = new Texture(Gdx.files.internal("parameters/damage8.png"));
-                        break;
-                        
-            case 9 :    damage = new Texture(Gdx.files.internal("parameters/damage9.png"));
-                        break;
-
-            case 10:    damage = new Texture(Gdx.files.internal("parameters/damage10.png"));
-                        break;
-
-            default:    break;
-        }
-    }
     
     /**
      * Updates the shutDown texture depending on the state of the shutDownMark.
      */
     private void updateShutDown() {
         if (shutDownMark) {
-            shutDown = new Texture(Gdx.files.internal("parameters/sleep.png"));
+            shutDown = sleep;
         } else {
-            shutDown = new Texture(Gdx.files.internal("parameters/wakeup.png"));
+            shutDown = wakeup;
         }
-    }
-
-    /**
-     * Updates the shutDown texture depending on the amout of players.
-     */
-    private void createHud() {
-        hud = new Texture(Gdx.files.internal("parameters/hud.png"));
     }
 
     /**
      * Draws the parameter textures. 
      */
     public void drawParameters(SpriteBatch batch) {
-        createHud();
-        updateLife();
-        updateDamage();
         updateShutDown();
-        updateShutDown();
-        if (backupDraw) {
-            backupDraw = false;
-            batch.draw(new Texture(Gdx.files.internal("robot.png")), backupCopyX, backupCopyY);
-        }
-        batch.draw(hud, 754, 15);
-        batch.draw(life, 763, 23);
-        batch.draw(damage, 838, 23);
-        batch.draw(shutDown, 914, 23);
+
+        hud.setPosition(754, 15);
+        shutDown.setPosition(914, 23);
+        life[lifePoints].setPosition(763, 23);
+        damage[damagePoints].setPosition(838, 23);
+
+        hud.draw(batch);
+        shutDown.draw(batch);
+        life[lifePoints].draw(batch);
+        damage[damagePoints].draw(batch);
     }
 
     /**
@@ -681,25 +613,17 @@ public class Robot {
         int x = xcoor;
         int y = Math.abs(ycoor - (board.fieldmatrix[0].length - 1));
 
+        sprite.setPosition(tileSize * x, tileSize * y);
+        sprite.setSize(tileSize, tileSize);
+        sprite.setOriginCenter();
+
         if (dir == Dir.NORTH) {
-            sprite.setPosition(tileSize * x, tileSize * y);
-            sprite.setSize(tileSize, tileSize);
-            sprite.setOriginCenter();
             sprite.setRotation(0);
         } else if (dir == Dir.EAST) {
-            sprite.setPosition(tileSize * x, tileSize * y);
-            sprite.setSize(tileSize, tileSize);
-            sprite.setOriginCenter();
             sprite.setRotation(270);
         } else if (dir == Dir.SOUTH) {
-            sprite.setPosition(tileSize * x, tileSize * y);
-            sprite.setSize(tileSize, tileSize);
-            sprite.setOriginCenter();
             sprite.setRotation(180);
         } else if (dir == Dir.WEST) {
-            sprite.setPosition(tileSize * x, tileSize * y);
-            sprite.setSize(tileSize, tileSize);
-            sprite.setOriginCenter();
             sprite.setRotation(90);
         }
     }
@@ -727,9 +651,8 @@ public class Robot {
      */
     public static void setPlayers(Robot[] players2) {
         for (int i = 0; i < players.length; i++) {
-            players[i] = players2[i]; 
+            players[i] = players2[i];
         }
-        
     }
     
     public LinkedList<Card> getSelectedCards() {
@@ -744,6 +667,4 @@ public class Robot {
         card.setCardPlayerNumber(playerNumber);
         this.getSelectedCards().add(card);
     }
-
-
 }

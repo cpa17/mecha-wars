@@ -26,12 +26,14 @@ import java.util.concurrent.ThreadLocalRandom;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
-import htwk.mechawars.game.GameScreen;
 
-//import ai.AiCardGeneration;
+import htwk.mechawars.game.Buttons;
+import htwk.mechawars.game.GameScreen;
 
 /**
  * Class that presents the game board.
@@ -40,6 +42,37 @@ public class Board {
     public Field[][] fieldmatrix;
     private Field robotPosition;
     private static int checkpoint;
+    private static final Texture[] barrier = new Texture[4];
+    private static final Texture[] laserH = new Texture[3];
+    private static final Texture[] laserV = new Texture[3];
+    private static final Texture[] laserSV = new Texture[6];
+    private static final Texture[] laserSH = new Texture[6];
+
+    /**
+     * Method that creates the sprites for The Board.
+     */
+    public static void create() {
+        for (int i = 0; i < barrier.length; i++) {
+            barrier[i] = new Texture(Gdx.files.internal(
+                    "mapAssets/barriers/BarrierSide" + (i + 1) + ".png"));
+        }
+        for (int i = 0; i < laserH.length; i++) {
+            laserH[i] = new Texture(Gdx.files.internal(
+                    "mapAssets/laser/LaserH" + (i + 1) + ".png"));
+        }
+        for (int i = 0; i < laserSH.length; i++) {
+            laserSH[i] = new Texture(Gdx.files.internal(
+                    "mapAssets/laser/LaserSH" + (i + 1) + ".png"));
+        }
+        for (int i = 0; i < laserSV.length; i++) {
+            laserSV[i] = new Texture(Gdx.files.internal(
+                    "mapAssets/laser/LaserSV" + (i + 1) + ".png"));
+        }
+        for (int i = 0; i < laserV.length; i++) {
+            laserV[i] = new Texture(Gdx.files.internal(
+                    "mapAssets/laser/LaserV" + (i + 1) + ".png"));
+        }
+    }
 
     /**
      * Method that reads the game plan as a int matrix from a file and constructs the game board
@@ -368,118 +401,59 @@ public class Board {
                 int c = (row + 1) * t; //the current height in the loop
                 int r = b - c; //the result of the board height minus the current height
                 batch.draw(board.fieldmatrix[cell][row].getTile(), x, r, t, t);
-                x = x + (Gdx.graphics.getHeight() / board.fieldmatrix[0].length);
-            }
-        }
-    }
 
-    /**
-     * Method that draws the barriers as textures.
-     *
-     * @param batch SpriteBatch to draw the barrier textures
-     * @param board Board whose matrix is to be converted into a string
-     */
-    public static void barriersToAsset(SpriteBatch batch, Board board) {
-        Texture currentTile;
-        for (int row = 0; row < board.fieldmatrix[0].length; row++) {
-            int x = 0;
-            for (int cell = 0; cell < board.fieldmatrix.length; cell++) {
-                int t = Gdx.graphics.getHeight() / board.fieldmatrix[0].length; //height of one tile
-                int b = Gdx.graphics.getHeight(); //height of the entire board
-                int c = (row + 1) * t; //the current height in the loop
-                int r = b - c; //the result of the board height minus the current height
+                // Barriers
                 // if there is a barrier on the left of the current field
                 if (board.fieldmatrix[cell][row].getBarrierLeft()) {
-                    currentTile = new Texture(Gdx.files.internal(
-                            "mapAssets/barriers/BarrierSide1.png"));
-                    batch.draw(currentTile, x, r, t, t);
+                    batch.draw(barrier[0], x, r, t, t);
                 }
                 // if there is a barrier on the top of the current field
                 if (board.fieldmatrix[cell][row].getBarrierTop()) {
-                    currentTile = new Texture(Gdx.files.internal(
-                            "mapAssets/barriers/BarrierSide2.png"));
-                    batch.draw(currentTile, x, r, t, t);
+                    batch.draw(barrier[1], x, r, t, t);
                 }
                 // if there is a barrier on the right of the current field
                 if (board.fieldmatrix[cell][row].getBarrierRight()) {
-                    currentTile = new Texture(Gdx.files.internal(
-                            "mapAssets/barriers/BarrierSide3.png"));
-                    batch.draw(currentTile, x, r, t, t);
+                    batch.draw(barrier[2], x, r, t, t);
                 }
                 // if there is a barrier on the bottom of the current field
                 if (board.fieldmatrix[cell][row].getBarrierBottom()) {
-                    currentTile = new Texture(Gdx.files.internal(
-                            "mapAssets/barriers/BarrierSide4.png"));
-                    batch.draw(currentTile, x, r, t, t);
+                    batch.draw(barrier[3], x, r, t, t);
                 }
-                x = x + (Gdx.graphics.getHeight() / board.fieldmatrix[0].length);
-            }
-        }
-    }
-    
-    /**
-     * Method that draws the laser as textures.
-     *
-     * @param batch SpriteBatch to draw the laser textures
-     * @param board Board whose matrix is to be converted into a string
-     */
-    public static void lasersToAsset(SpriteBatch batch, Board board) {
-        Texture currentTile;
-        int v;
-        int h;
-    
-        for (int row = 0; row < board.fieldmatrix[0].length; row++) {
-            int x = 0;
-            for (int cell = 0; cell < board.fieldmatrix.length; cell++) {
-                v = board.fieldmatrix[cell][row].getLaserVertical();
-                h = board.fieldmatrix[cell][row].getLaserHorizontal();
-        
-                int t = Gdx.graphics.getHeight() / board.fieldmatrix[0].length; //height of one tile
-                int b = Gdx.graphics.getHeight(); //height of the entire board
-                int c = (row + 1) * t; //the current height in the loop
-                int r = b - c; //the result of the board height minus the current height
+
+                // Laser
+                int v = board.fieldmatrix[cell][row].getLaserVertical();
+                int h = board.fieldmatrix[cell][row].getLaserHorizontal();
                 // if there is a vertical laser
                 if (v == 1 || v == 2 || v == 3) {
-                    currentTile = new Texture(Gdx.files.internal(
-                            "mapAssets/laser/LaserV" + v + ".png"));
-                    batch.draw(currentTile, x, r, t, t);
+                    // LaserV1, LaserV2, LaserV3
+                    batch.draw(laserV[v - 1], x, r, t, t);
                 }
                 // if there is a horizontal laser
                 if (h == 1 || h == 2 || h == 3) {
-                    currentTile = new Texture(Gdx.files.internal(
-                            "mapAssets/laser/LaserH" + h + ".png"));
-                    batch.draw(currentTile, x, r, t, t);
+                    // LaserH1, LaserH2, LaserH3
+                    batch.draw(laserH[h - 1], x, r, t, t);
                 }
-                //if there is a start of one or more vertical laser
-                //0 - BarrierTop, 1 - BarrierBottom
+                // if there is a start of one or more vertical laser
                 if (v == 4 || v == 5 || v == 6) {
                     if (board.fieldmatrix[cell][row].getBarrierTop()) {
-                        currentTile = new Texture(Gdx.files.internal(
-                                "mapAssets/laser/LaserSV" + v + "0.png"));
-                        batch.draw(currentTile, x, r, t, t);
-                    }
-
-                    if (board.fieldmatrix[cell][row].getBarrierBottom()) {
-                        currentTile = new Texture(Gdx.files.internal(
-                                "mapAssets/laser/LaserSV" + v + "1.png"));
-                        batch.draw(currentTile, x, r, t, t); 
+                        // LaserSV1, LaserSV2, LaserSV3
+                        batch.draw(laserSV[v - 4], x, r, t, t);
+                    } else if (board.fieldmatrix[cell][row].getBarrierBottom()) {
+                        // LaserSV4, LaserSV5, LaserSV6
+                        batch.draw(laserSV[v - 1], x, r, t, t);
                     }
                 }
-                //if there is a start of one or more horizontal laser
-                //0 - BarrierLeft, 1 - BarrierRight
+                // if there is a start of one or more horizontal laser
                 if (h == 4 || h == 5 || h == 6) {
                     if (board.fieldmatrix[cell][row].getBarrierLeft()) {
-                        currentTile = new Texture(Gdx.files.internal(
-                                "mapAssets/laser/LaserSH" + h + "0.png"));
-                        batch.draw(currentTile, x, r, t, t); 
-                    }
-
-                    if (board.fieldmatrix[cell][row].getBarrierRight()) {
-                        currentTile = new Texture(Gdx.files.internal(
-                                "mapAssets/laser/LaserSH" + h + "1.png"));
-                        batch.draw(currentTile, x, r, t, t); 
+                        // LaserSH1, LaserSH2, LaserSH3
+                        batch.draw(laserSH[h - 4], x, r, t, t);
+                    } else if (board.fieldmatrix[cell][row].getBarrierRight()) {
+                        // LaserSH4, LaserSH5, LaserSH6
+                        batch.draw(laserSH[h - 1], x, r, t, t);
                     }
                 }
+
                 x = x + (Gdx.graphics.getHeight() / board.fieldmatrix[0].length);
             }
         }
@@ -498,11 +472,11 @@ public class Board {
         int min = 1;
         int max = 0;
 
-        for (int i = 0; i < fieldmatrix.length; i++) {
-            for (int j = 0; j < fieldmatrix[i].length; j++) {
-                if (fieldmatrix[i][j] instanceof StartField &&
-                        ((StartField) fieldmatrix[i][j]).getNumber() >= max) {
-                    max = ((StartField) fieldmatrix[i][j]).getNumber();
+        for (Field[] fields : fieldmatrix) {
+            for (Field field : fields) {
+                if (field instanceof StartField &&
+                        ((StartField) field).getNumber() >= max) {
+                    max = ((StartField) field).getNumber();
                 }
             }
         }
@@ -510,12 +484,12 @@ public class Board {
         int randomNumber =  ThreadLocalRandom.current().nextInt(min, max + 1);
 
         if (!isTest) {
-            for (int i = 0; i < fieldmatrix.length; i++) {
-                for (int j = 0; j < fieldmatrix[i].length; j++) {
-                    if (fieldmatrix[i][j] instanceof StartField &&
-                            ((StartField) fieldmatrix[i][j]).getNumber() == randomNumber) {
-                        x = fieldmatrix[i][j].getXcoor();
-                        y = fieldmatrix[i][j].getYcoor();
+            for (Field[] fields : fieldmatrix) {
+                for (Field field : fields) {
+                    if (field instanceof StartField &&
+                            ((StartField) field).getNumber() == randomNumber) {
+                        x = field.getXcoor();
+                        y = field.getYcoor();
                     }
                 }
             }
@@ -600,9 +574,6 @@ public class Board {
                 @Override
                 public void run() {
                     state(players);
-                    checkDoubleDamage(players);
-                    checkShutDown(players);
-                    checkGameOver(players);
                 }
             }, (ConfigReader.getPlayerNumber() * 5) + 5);
 
@@ -667,9 +638,6 @@ public class Board {
             checkBoardLaser(players);
             checkDestroyed(players);
             state(players);
-            checkDoubleDamage(players);
-            checkShutDown(players);
-            checkGameOver(players);
         }
     }
 
@@ -695,6 +663,8 @@ public class Board {
 
                     @Override
                     public void run() {
+                        GameScreen.setCurrentCardShowButton(Buttons.currentCardShowButtonUpdate(
+                                (TextButton) GameScreen.getCurrentCardShowButton(), card));
                         robotMovement(card, robots[card.getCardPlayerNumber()], robots);
                     }
                 }, i);
@@ -734,6 +704,9 @@ public class Board {
             player.setLastRound(player.getShutDown());
             player.setShutDown(player.getNextRound());
         }
+        checkDoubleDamage(players);
+        checkShutDown(players);
+        checkGameOver(players);
     }
 
     /**
@@ -792,7 +765,7 @@ public class Board {
                 if (player.getDestroyed()) {
                     player.lifeDown();
                     player.setDestroyed(false);
-                    player.damageReset();
+                    player.setDamage(0);
                 }
                 player.damageUp();
                 player.damageUp();
@@ -808,7 +781,7 @@ public class Board {
     private void checkShutDown(Robot[] players) {
         for (Robot player : players) {
             if (player.getShutDown() || player.getNextRound()) {
-                player.damageReset();
+                player.setDamage(0);
             }
         }
     }
