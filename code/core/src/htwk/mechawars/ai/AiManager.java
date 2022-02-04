@@ -50,9 +50,10 @@ public class AiManager {
      * @return Object of the chosen AI-Class
      */
     public AiInterface getAi(int aiNumber) { 
-        if (aiNumber < aiList.size()) {
+        if (aiNumber <= aiList.size()) {
             return aiList.get(aiNumber - 1);
         }
+        
         return aiList.get(0);     
     }
     

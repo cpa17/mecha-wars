@@ -108,15 +108,21 @@ public class ConfigReader {
      */
     public static void writePlayerNumber(int playerNumber) {
         String player = String.valueOf(playerNumber);
+        try {
+            readConfigs();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
         FileHandle file = Gdx.files.local("configs/Startupconfig.txt");
         file.writeString("playerNumber: " + player, false);
 
         for (int current = 0; current < playerNumber; current++) {
             file.writeString("\nplayerposition: "
-                    + current + "-" + 3 + "-" + (3 + current) + "-" + "2", true);
+                    + current + "-" + 3 + "-" + (3 + current) + "-" + aiModes[current], true);
         }
-        file.writeString("\nAiImport: AiCardGeneration", true);
+        file.writeString("\nAiImport: AiC2", true);
 
     }
 
