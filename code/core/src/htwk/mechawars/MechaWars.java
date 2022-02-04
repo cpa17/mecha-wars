@@ -14,11 +14,17 @@ public class MechaWars extends Game {
      * Method & Attribute for skipping the MainMenu when executing the Program.
      */
     private static boolean isSkip = false;
+    
+    private static boolean isWindowed = false;
 
     private static int playerNumber;
 
     public static void setSkip(boolean skip) {
         isSkip = skip;
+    }
+    
+    public static void setScreen(boolean windowedscreen) {
+        isWindowed = windowedscreen;
     }
 
 
