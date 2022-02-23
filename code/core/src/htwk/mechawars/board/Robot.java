@@ -667,4 +667,5 @@ public class Robot {
         card.setCardPlayerNumber(playerNumber);
         this.getSelectedCards().add(card);
     }
+    
 }

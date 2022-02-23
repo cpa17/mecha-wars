@@ -593,9 +593,7 @@ public class Board {
                                 robotPosition.cardAction(robot);
                             }
                         }
-
-                        checkRobotsOnBoard(players);
-                        checkRobotsOnSamePosition(players);
+                        movementChecks(players);
 
                         // Then the ExpressConveyorBelts an ConveyorBelts move the robot
                         // forward one field
@@ -607,8 +605,7 @@ public class Board {
                             }
                         }
 
-                        checkRobotsOnBoard(players);
-                        checkRobotsOnSamePosition(players);
+                        movementChecks(players);
 
                         // Then all remaining cardActions are called
                         for (Robot robot : players) {
@@ -619,12 +616,11 @@ public class Board {
                             }
                         }
 
-                        checkRobotsOnBoard(players);
+                        movementChecks(players);
 
                         Robot.setPlayers(players);
                         checkDestroyed(players);
-                        checkRobotLaser(players);
-                        checkBoardLaser(players);
+                        laserChecks(players);
                         checkDestroyed(players);
                     }
                 }, i);
@@ -633,8 +629,7 @@ public class Board {
 
             // No delay if this is a test
             checkDestroyed(players);
-            checkRobotLaser(players);
-            checkBoardLaser(players);
+            laserChecks(players);
             checkDestroyed(players);
             state(players);
         }
@@ -720,16 +715,8 @@ public class Board {
             for (Robot robotB : players) {
                 if (robotA != robotB && robotA.getXcoor() == robotB.getXcoor()
                         && robotA.getYcoor() == robotB.getYcoor()) {
-                    if (robotA.getLastMovementByConveyor()) {
-                        robotA.setXcoor(robotA.getLastConveyorField().getXcoor());
-                        robotA.setYcoor(robotA.getLastConveyorField().getYcoor());
-                        robotA.setLastMovementByConveyor(false);
-                    }
-                    if (robotB.getLastMovementByConveyor()) {
-                        robotB.setXcoor(robotB.getLastConveyorField().getXcoor());
-                        robotB.setYcoor(robotB.getLastConveyorField().getYcoor());
-                        robotB.setLastMovementByConveyor(false);
-                    }
+                    checkLastConveyorPosition(robotA);
+                    checkLastConveyorPosition(robotB);
                 }
             }
         }
@@ -1149,5 +1136,28 @@ public class Board {
 
     public static int getCheckpoint() {
         return checkpoint;
+    }
+    
+    public void movementChecks(Robot[] players) {
+        checkRobotsOnBoard(players);
+        checkRobotsOnSamePosition(players);        
+    }
+    
+    public void laserChecks(Robot[] players) {
+        checkRobotLaser(players);
+        checkBoardLaser(players);       
+    }
+    
+    /**Method that checks and resets the position of the player in case of collision.
+     * 
+     * @param player that has to be set to his last position because he collided
+     *      with another on a conveyor belt.
+     */
+    public void checkLastConveyorPosition(Robot player) {
+        if (player.getLastMovementByConveyor()) {
+            player.setXcoor(player.getLastConveyorField().getXcoor());
+            player.setYcoor(player.getLastConveyorField().getYcoor());
+            player.setLastMovementByConveyor(false);
+        }
     }
 }
