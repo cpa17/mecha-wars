@@ -1,9 +1,0 @@
-Daily 12.01.2022
-Besprechnung des Code-Walkthrough
-Anwesenheit: alle außer Felix, Pascal, 
-Marc: MW-105 fast fertig
-Tim: Handbuch wird gemerged, neue Klassenstruktur für Editor
-Konstantin: Editor gemerged
-Mark/Antonia: ersetzen von Lasern/Wänden durch attribute; zeichnen noch problematisch
-Bernhard: 106/85 fertig, aber Code noch zu besprechen
-
