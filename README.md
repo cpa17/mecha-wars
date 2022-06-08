@@ -5,7 +5,7 @@ Aufgabe war es das Spiel Robo Rally als Computer Version in Java zu programmiere
 
 Alle Informationen zum Quellcode: [MechaWars.pdf](https://github.com/cpa17/mecha-wars/files/8861135/MechaWars.pdf)
 
-<img width="480" alt="Menu" src="https://user-images.githubusercontent.com/82649637/172608634-a514ab80-e1e5-4e92-98f2-145a6690197b.png"> <img width="480" alt="Options" src="https://user-images.githubusercontent.com/82649637/172608769-f75ee2cf-e5a0-4cb2-a396-dbf10366bd78.png"> <img width="480" alt="Gamescreen" src="https://user-images.githubusercontent.com/82649637/172608840-b8b70b12-0e05-4f02-8ded-b738e1066423.png">
+<img width="400" alt="Menu" src="https://user-images.githubusercontent.com/82649637/172608634-a514ab80-e1e5-4e92-98f2-145a6690197b.png"> <img width="400" alt="Options" src="https://user-images.githubusercontent.com/82649637/172608769-f75ee2cf-e5a0-4cb2-a396-dbf10366bd78.png"> <img width="400" alt="Gamescreen" src="https://user-images.githubusercontent.com/82649637/172608840-b8b70b12-0e05-4f02-8ded-b738e1066423.png">
 
 
 ## Bedienung
